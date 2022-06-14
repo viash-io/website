@@ -394,7 +394,7 @@ const Plugin = {
 function betterTrim(snippetEl) {
 	// Helper functions
 	function trimLeft(val) {
-		// Adapted from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim#Polyfill
+		// Adapted from https://developer.mozilla.org/en-US/documentation/Web/JavaScript/Reference/Global_Objects/String/Trim#Polyfill
 		return val.replace(/^[\s\uFEFF\xA0]+/g, '');
 	}
 	function trimLineBreaks(input) {

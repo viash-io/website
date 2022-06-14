@@ -5,7 +5,7 @@ We'll cover rendering documents in multiple formats and show you how to add comp
 
 ## Output Formats
 
-Quarto supports rendering notebooks to dozens of different [output formats](/docs/output-formats/all-formats.qmd).
+Quarto supports rendering notebooks to dozens of different [output formats](/documentation/output-formats/all-formats.qmd).
 By default, the `html` format is used, but you can specify an alternate format (or formats) within document options.
 
 ### Format Options
@@ -169,7 +169,7 @@ Here's what this document looks like when rendered to HTML.
 ![](images/sections-render.png){.border}
 
 There are lots of options available for controlling how the table of contents and section numbering behave.
-See the output format documentation (e.g. [HTML](/docs/output-formats/html-basics.qmd), [PDF](/docs/output-formats/pdf-basics.qmd), [MS Word](/docs/output-formats/ms-word.qmd)) for additional details.
+See the output format documentation (e.g. [HTML](/documentation/output-formats/html-basics.qmd), [PDF](/documentation/output-formats/pdf-basics.qmd), [MS Word](/documentation/output-formats/ms-word.qmd)) for additional details.
 
 ## Equations
 
@@ -191,7 +191,7 @@ $E = mc^{2}$
 
 Inline equations are delimited with `$…$`.
 To create equations in a new line (display equation) use `$$…$$`.
-See the documentation on [markdown equations](/docs/authoring/markdown-basics.html#equations) for additional details.
+See the documentation on [markdown equations](/documentation/authoring/markdown-basics.html#equations) for additional details.
 
 ## Citations
 
@@ -230,11 +230,11 @@ References will be included at the end of the document, so we include a `## Refe
 
 Here is what this document looks like when rendered.
 
-![](/docs/get-started/authoring/images/citations-render.png){.border width="600"}
+![](/documentation/get-started/authoring/images/citations-render.png){.border width="600"}
 
 \
 The `@` citation syntax is very flexible and includes support for prefixes, suffixes, locators, and in-text citations.
-See the documentation on [Citations and Footnotes](/docs/authoring/footnotes-and-citations.qmd) to learn more.
+See the documentation on [Citations and Footnotes](/documentation/authoring/footnotes-and-citations.qmd) to learn more.
 
 ## Cross References
 
@@ -303,9 +303,9 @@ The table below shows how we expressed each of these.
 
 And finally, here is what this document looks like when rendered.
 
-![](/docs/get-started/authoring/images/crossref-render.png){.border width="600"}
+![](/documentation/get-started/authoring/images/crossref-render.png){.border width="600"}
 
-See the article on [Cross References](/docs/authoring/cross-references.qmd) to learn more, including how to customize caption and reference text (e.g. use "Fig." rather than "Figure").
+See the article on [Cross References](/documentation/authoring/cross-references.qmd) to learn more, including how to customize caption and reference text (e.g. use "Fig." rather than "Figure").
 
 ## Callouts
 
@@ -327,7 +327,7 @@ This appears as follows when rendered.
 Note that there are five types of callouts, including `note`, `tip`, `warning`, `caution`, and `important`.
 :::
 
-You can learn more about the different types of callouts and options for their appearance in the [Callouts](/docs/authoring/callouts.qmd) documentation.
+You can learn more about the different types of callouts and options for their appearance in the [Callouts](/documentation/authoring/callouts.qmd) documentation.
 
 ## Article Layout
 
@@ -379,9 +379,9 @@ Here is what this document looks like when rendered.
 
 ![](images/layout-render.png){.border}
 
-You can locate citations, footnotes, and [asides](https://quarto.org/docs/authoring/article-layout.html#asides) in the margin.
+You can locate citations, footnotes, and [asides](https://quarto.org/documentation/authoring/article-layout.html#asides) in the margin.
 You can also define custom column spans for figures, tables, or other content.
-See the documentation on [Article Layout](/docs/authoring/article-layout.qmd) for additional details.
+See the documentation on [Article Layout](/documentation/authoring/article-layout.qmd) for additional details.
 
 ``` include
 _footer.md

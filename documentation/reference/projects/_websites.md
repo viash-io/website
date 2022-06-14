@@ -203,7 +203,7 @@ website:
 
 ## Listings
 
-[Listings](/docs/websites/website-listings.qmd) enable you to automatically generate the contents of a page (or region of a page) from a list of Quarto documents or other custom data. You can enable listings on a page using the `listing` option in the document front matter, for example:
+[Listings](/documentation/websites/website-listings.qmd) enable you to automatically generate the contents of a page (or region of a page) from a list of Quarto documents or other custom data. You can enable listings on a page using the `listing` option in the document front matter, for example:
 
 ``` yaml
 ---
@@ -224,7 +224,7 @@ Enable an RSS feed for your listing by including the `feed` option.
 
 ## About
 
-Layout a simple about page for an individual or organization. For more, see the [About Pages](/docs/websites/website-about.qmd) documentation.
+Layout a simple about page for an individual or organization. For more, see the [About Pages](/documentation/websites/website-about.qmd) documentation.
 
 ::: {#table-about}
 :::

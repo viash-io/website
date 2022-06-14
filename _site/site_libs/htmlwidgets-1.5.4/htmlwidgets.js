@@ -168,7 +168,7 @@
 
   // Translate array of values to top/right/bottom/left, as usual with
   // the "padding" CSS property
-  // https://developer.mozilla.org/en-US/docs/Web/CSS/padding
+  // https://developer.mozilla.org/en-US/documentation/Web/CSS/padding
   function unpackPadding(value) {
     if (typeof(value) === "number")
       value = [value];

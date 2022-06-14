@@ -144,19 +144,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="nav-link" href="../../../index.html">Overview</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../docs/get-started/index.qmd">Get Started</a>
+    <a class="nav-link" href="../../../documentation/get-started/index.html">Get Started</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../docs/guide/index.qmd">Guide</a>
+    <a class="nav-link" href="../../../documentation/guide/index.html">Guide</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../docs/reference/index.qmd">API</a>
+    <a class="nav-link" href="../../../documentation/reference/index.html">API</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../docs/gallery/index.qmd">Gallery</a>
+    <a class="nav-link" href="../../../documentation/gallery/index.html">Gallery</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../docs/blog/index.qmd">Blog</a>
+    <a class="nav-link" href="../../../documentation/blog/index.html">Blog</a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false">Help</a>
@@ -172,7 +172,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="dropdown-text">Quarto Discussions</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../docs/faq/index.qmd"><i class="bi bi-question-circle" role="img">
+    <a class="dropdown-item" href="../../../documentation/faq/index.html"><i class="bi bi-question-circle" role="img">
 </i> 
  <span class="dropdown-text">FAQ</span></a>
   </li>  
@@ -235,7 +235,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output-dir</span><span class="kw">:</span><span class="at"> _output</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <div id="table-project">
-
+<table class="table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 70%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>type</code></td>
+<td style="text-align: left;"><p>Project type (<code>default</code>, <code>website</code>, or <code>book</code>)</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>render</code></td>
+<td style="text-align: left;"><p>Files to render (defaults to all files)</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>execute-dir</code></td>
+<td style="text-align: left;"><p>Control the working directory for computations.</p>
+<ul>
+<li><code>file</code>: Use the directory of the file that is currently executing.</li>
+<li><code>project</code>: Use the root directory of the project.</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>output-dir</code></td>
+<td style="text-align: left;"><p>Output directory</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>lib-dir</code></td>
+<td style="text-align: left;"><p>HTML library (JS/CSS/etc.) directory</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>resources</code></td>
+<td style="text-align: left;"><p>Additional file resources to be copied to output directory</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>preview</code></td>
+<td style="text-align: left;"><p>Options for <code>quarto preview</code> (see <a href="#preview">Preview</a>)</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <section id="preview" class="level3">
 <h3 class="anchored" data-anchor-id="preview">Preview</h3>
@@ -250,7 +289,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p>Available <code>preview</code> options include:</p>
 <div id="table-preview">
-
+<table class="table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 70%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>port</code></td>
+<td style="text-align: left;"><p>Port to listen on (defaults to random value between 3000 and 8000)</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>host</code></td>
+<td style="text-align: left;"><p>Hostname to bind to (defaults to 127.0.0.1)</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>browser</code></td>
+<td style="text-align: left;"><p>Open a web browser to view the preview (defaults to true)</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>watch-inputs</code></td>
+<td style="text-align: left;"><p>Re-render input files when they change (defaults to true)</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>navigate</code></td>
+<td style="text-align: left;"><p>Navigate the browser automatically when outputs are updated (defaults to true)</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>timeout</code></td>
+<td style="text-align: left;"><p>Time (in seconds) after which to exit if there are no active clients</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
@@ -337,7 +407,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <a class="nav-link" href="../../../about.html">About</a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="../../../docs/faq/index.qmd">FAQ</a>
+    <a class="nav-link" href="../../../documentation/faq/index.html">FAQ</a>
   </li>  
     <li class="nav-item">
     <a class="nav-link" href="../../../license.html">License</a>

@@ -2,7 +2,7 @@
 
 text = require 'text'
 
-local isProject = pandoc.system.get_working_directory():find("docs/reference/projects")
+local isProject = pandoc.system.get_working_directory():find("documentation/reference/projects")
 
 function Div(el)
   -- only process divs for projects

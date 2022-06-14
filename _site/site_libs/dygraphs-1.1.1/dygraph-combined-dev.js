@@ -7029,7 +7029,7 @@ Dygraph.parseFloat_ = function(x, opt_line_no, opt_line) {
  * interface for a GViz (aka Google Visualization API) visualization.
  * It is designed to be a drop-in replacement for Google's AnnotatedTimeline,
  * so the documentation at
- * http://code.google.com/apis/chart/interactive/docs/gallery/annotatedtimeline.html
+ * http://code.google.com/apis/chart/interactive/documentation/gallery/annotatedtimeline.html
  * translates over directly.
  *
  * For a full demo, see:
