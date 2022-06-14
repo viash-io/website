@@ -1,0 +1,190 @@
+---
+title: VDSL3 Basics
+search: true
+---
+
+## Introduction
+
+At one point, we (at Data Intuitive) thought about what would make for
+an “ideal” Nextflow module (cfr.
+[DIFlow](https://github.com/data-intuitive/diflow/blob/master/diflow.md)
+by Toni Verbeiren). We found out that, in order for the Nextflow module
+to have the properties that we wanted, the component would need to
+contain a lot of boilerplate code.
+
+Luckily, Viash can be used to generate the boilerplate code for you. To
+do so, we just need to take our script and add some metadata to it.
+
+<img src="images/300-viash.png" id="fig-viash" />  
+Viash allows easy prototyping of reusable pipeline components. From
+Cannoodt et al. 2021
+[arXiv:2110.11494](https://arxiv.org/abs/2110.11494).
+
+In this section, we will use Viash to generate Nextflow modules that
+behave similarly to the ones created in the previous section, but with
+some distinct advantages. Since we believe that these Nextflow modules
+are so different from the original Nextflow DSL2 processes and
+workflows, we named them Viash DSL3 modules, or VDSL3 modules for short.
+
+
+## How to create and use a VDSL3 module
+
+Below shows a comparison of the original `remove_comments` process and a Viash component that has the same functionality.
+
+TODO: ask to create these and explain
+
+**VDSL3 Viash component**
+
+<details>
+<summary>`config.vsh.yaml`</summary>
+
+``` yaml
+functionality:
+  name: remove_comments
+  namespace: vdsl3_tutorial
+  arguments:
+    - name: "--input"
+      alternatives: [ "-i" ]
+      type: file
+      required: true
+      example: "file.tsv"
+    - name: "--output"
+      alternatives: [ "-o" ]
+      type: file
+      required: true
+      direction: output
+      example: "file.tsv"
+  resources:
+  - type: bash_script
+    path: ./script.sh
+platforms:
+  - type: nextflow
+    variant: vdsl3
+    directives:
+      container: ubuntu:20.04
+```
+</details>
+
+<details>
+<summary>`script.sh`</summary>
+
+``` sh
+#!/bin/bash
+
+grep -v '^#' "$par_input" > "$par_output"
+```
+</details>
+
+### Generating a VDSL3 module from a Viash config
+
+There are definitely some similarities between the original Nextflow
+process and the Viash component. To actually make use of the new
+component inside of our Nextflow pipeline, we first need to export the
+Viash component into a VDSL3 module by running the following command:
+
+``` bash
+viash build src/vdsl3_tutorial/remove_comments/config.vsh.yaml \
+  -o target/nextflow/vdsl3_tutorial/remove_comments
+```
+
+This results in the creation of the following files:
+
+``` bash
+tree target/nextflow/vdsl3_tutorial/remove_comments
+```
+
+```
+target/nextflow/vdsl3_tutorial/remove_comments
+├── main.nf
+└── nextflow.config
+
+0 directories, 2 files
+```
+
+### Run module as a standalone
+
+A VDSL3 module can actually already be used as a standalone Nextflow
+pipeline (albeit a very small one).
+
+You can display the documentation using the help argument:
+
+```bash
+nextflow run target/nextflow/vdsl3_tutorial/remove_comments/main.nf --help
+```
+
+```bash
+N E X T F L O W  ~  version 22.04.3
+Launching `target/nextflow/vdsl3_tutorial/remove_comments/main.nf` [distracted_stallman] DSL2 - revision: 8de4c7c8eb
+remove_comments
+
+Options:
+    --input
+        type: file, required parameter
+        example: file.tsv
+
+    --output
+        type: file, required parameter, output
+        example: file.tsv
+```
+
+Running the component results in the following output:
+
+``` bash
+nextflow run target/nextflow/vdsl3_tutorial/remove_comments/main.nf \
+  --input "data/file1.tsv" \
+  --publishDir output/
+```
+
+```
+N E X T F L O W  ~  version 22.04.3
+Launching `target/nextflow/vdsl3_tutorial/remove_comments/main.nf` [wise_jang] DSL2 - revision: 8de4c7c8eb
+WARN: Key for module 'remove_comments' is duplicated.
+
+input: [run, [input:/home/runner/work/viash_nxf_course/viash_nxf_course/data/file1.tsv]]
+[7e/8cd91f] Submitted process > remove_comments:remove_comments_process1
+output: [run, /home/runner/work/viash_nxf_course/viash_nxf_course/work/7e/8cd91f5274d3e46188ec62106d8ecc/run.remove_comments.output.tsv]
+```
+
+### Use module in a pipeline
+
+More importantly, a VDSL3 module can be included as part of a Nextflow
+pipeline as follows:
+
+Contents of `workflows/300-first_vdsl_pipeline/main.nf`:
+
+``` groovy
+nextflow.enable.dsl=2
+
+targetDir = "../../target/nextflow"
+
+include { remove_comments } from "$targetDir/vdsl3_tutorial/remove_comments/main.nf"
+
+workflow {
+  Channel.fromPath(params.input)
+    | map{ file -> [ file.baseName, file ] }
+    | view{ file -> "Input: $file" }
+    | remove_comments
+    | view{ file -> "Output: $file" }
+}
+```
+
+:::{.callout-note}
+The ability to include a module is part of the [Nextflow
+DSL2](https://www.nextflow.io/docs/latest/dsl2.html#modules)
+functionality.
+:::
+
+``` bash
+nextflow run workflows/300-first_vdsl_pipeline/main.nf \
+  --input "data/file?.tsv" --publishDir output
+```
+
+    N E X T F L O W  ~  version 22.04.3
+    Launching `workflows/300-first_vdsl_pipeline/main.nf` [lethal_mandelbrot] DSL2 - revision: 1c8e8aacbe
+    Input: [file1, /home/runner/work/viash_nxf_course/viash_nxf_course/data/file1.tsv]
+    Input: [file2, /home/runner/work/viash_nxf_course/viash_nxf_course/data/file2.tsv]
+    [9c/505943] Submitted process > remove_comments:remove_comments_process (1)
+    [f4/540a13] Submitted process > remove_comments:remove_comments_process (2)
+    Output: [file1, /home/runner/work/viash_nxf_course/viash_nxf_course/work/9c/505943f6280fd9d054b9937d2ca13e/file1.remove_comments.output.tsv]
+    Output: [file2, /home/runner/work/viash_nxf_course/viash_nxf_course/work/f4/540a13f599819c7681550901544ac9/file2.remove_comments.output.tsv]
+

@@ -1,0 +1,110 @@
+---
+title: DSL2 Pipeline
+search: true
+---
+
+## Overview
+
+Nextflow DSL2 borrows some elements from event-driven functional
+programming. As a matter of fact, one could argue that Nextflow’s
+[`Channel`](https://www.nextflow.io/docs/latest/channel.html) concept
+being strictly speaking an example of the [DataFlow Programming
+Model](https://en.wikipedia.org/wiki/Dataflow_programming) can in fact
+be regarded as an implementation of a (albeit limited) [Functional
+Reactive
+Programming](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
+library.
+
+Contents of `workflows/200-first_nextflow_pipeline/main.nf`:
+
+``` groovy
+workflow {
+  Channel.fromList( [" a ", "   b", "  c", "d  "] )
+    | map{ elem -> elem.trim() }
+    | view
+}
+```
+
+This workflow consists of three steps:
+
+-   An `channel` is created containing 4 strings
+-   A `map` which removes spaces around the strings (`.trim()`).
+-   A view which displays the contents of the events to the user
+
+The pipe operator (`|`) allows connecting steps (which might generate
+and/or consume events) together.
+
+Quite a lot is going on in these 3 lines of code. Before we dissect this
+in detail, let us first explore the `Channel` or usually called
+(reactive) stream concept.
+
+### Channel and data flow
+
+Below you can see an illustration of how an empty `channel` can be
+created and how events can be *put* on that `channel`. The technical
+term for *putting* events on the `channel` is `bind`.
+
+``` groovy
+workflow {
+  ch = Channel.empty()
+
+  ch << " a "
+  ch << "   b"
+  ch << "  c"
+  ch << "d "
+
+  ch
+    | map{ elem -> elem.trim() }
+    | subscribe{ print "$it" }
+}
+```
+
+This pipeline definition does exactly the same as our previous example
+and just aims to describe what is happening under the hood. The
+`Channel.fromList()` used in the first example is an illustration of a
+[`Channel` factory
+method](https://www.nextflow.io/docs/latest/channel.html#channel-factory).
+
+The data flow of channels (and later processes) can be visualised as
+shown in [Figure 1](#fig-dataflow).
+
+<figure>
+<img src="images/dataflow.svg" id="fig-dataflow"
+alt="Figure 1: The data flow of workflows/200-first_nextflow_pipeline/main.nf." />
+<figcaption aria-hidden="true">Figure 1: The data flow of
+<code>workflows/200-first_nextflow_pipeline/main.nf</code>.</figcaption>
+</figure>
+
+### A note on Nextflow / Groovy syntax
+
+Nextflow is a DSL on top of the Groovy programming language, so you can
+use whatever Groovy code to manipulate `Channel` events in however way
+you like[^2].
+
+-   `[ 1, 2, 3 ]`: A list of integers
+-   `[ a: 1, b: 2, c: 3 ]`: A hash map (dictionary, named list)
+-   `{ elem -> elem.trim() }`: An anonymous function, aka *closure*
+-   `{ it.trim() }`: The same anonymous function with the implicit
+    variable `it`
+-   `a ? b : c`: If `a` then `b` else `c`
+
+Here is a [cheat
+sheet](http://www.cheat-sheets.org/saved-copy/rc015-groovy_online.pdf)
+on Groovy syntax.
+
+### Running the pipeline
+
+Let’s see what happens when we run the pipeline above using Nextflow:
+
+```bash
+nextflow run workflows/200-first_nextflow_pipeline/main.nf
+```
+
+```bash
+N E X T F L O W  ~  version 22.04.3
+Launching `workflows/200-first_nextflow_pipeline/main.nf` [evil_pare] DSL2 - revision: cfd75d221a
+a
+b
+c
+d
+```

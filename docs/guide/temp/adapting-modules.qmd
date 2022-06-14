@@ -1,0 +1,73 @@
+---
+title: Adapting Modules
+search: true
+---
+
+## Overview
+
+One major benefit of VDSL3 modules in comparison to standard Nextflow
+processes is that the directives (e.g. whether or not to publish output
+files) can be defined dynamically using the `.run()` function.
+
+### Modifying directives
+
+To actually publish the results, we need to define a `publishDir`
+directive. Additionally, we also set specific memory and cpu usage
+requirements per process.
+
+
+#### Fixed directives
+
+``` groovy
+<...>
+  // Concatenate TSVs into one
+  //   (String, {input: List[File]}) -> (String, File)
+  | combine_columns
+```
+
+
+#### Flexible directives with <code>.run()</code>
+
+``` groovy
+<...>
+  // Concatenate TSVs into one
+  //   (String, {input: List[File]}) -> (String, File)
+  | combine_columns.run(
+    directives: [
+      publishDir: params.publishDir,
+      cpus: 4,
+      memory: "10G"
+    ]
+  )
+```
+
+
+
+### Overriding parameters
+
+The `.run()` function also provides some functionality for modifying
+incoming events. For example, you can change the value of a parameter by
+passing a map to `args`. More complicated modifications can be found in
+the appendix.
+
+
+#### Fixed params
+
+``` groovy
+<...>
+  // Extract single column from TSV
+  //   (String, File) -> (String, File)
+  | take_column
+```
+
+
+#### Dynamic params
+
+``` groovy
+<...>
+  // Extract single column from TSV
+  //   (String, File) -> (String, File)
+  | take_column.run(
+    args: [ column: 1 ]
+  )
+```

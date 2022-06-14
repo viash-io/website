@@ -1,0 +1,40 @@
+---
+title: Output Naming
+search: true
+---
+
+## Overview
+
+The default naming convention of output files is `'$id.$key.$arg.$ext'`,
+where:
+
+-   `$id` is the first element of the event tuple.
+-   `$key` is the name of the component (e.g. `remove_comments`). This
+    can be overridden using `.run(key: "foo")`.
+-   `$arg` is the name of the output argument (e.g. `output`).
+-   `$ext` is an extension extracted from the `example` or `default` of
+    the argument, if it exists.
+
+You can manually specify the output file names by adding it as an
+argument.
+
+Example:
+
+``` groovy
+  // Concatenate TSVs into one
+  //   (String, {input: List[File]}) -> (String, File)
+  | combine_columns.run(
+    args: [ output: "output.tsv" ]
+  )
+```
+
+You can use a `map` to ensure that the output name does make use of the
+id:
+
+``` groovy
+  // Remove comments from TSV
+  //   (String, File) -> (String, File)
+  | remove_comments.run(
+    map: { tup -> [ tup[0], [ input: tup[1], output: "output_${tup[0]}.tsv" ] ] }
+  )
+```

@@ -1,0 +1,55 @@
+---
+title: Modifying Tuples
+search: true
+---
+
+## Overview
+
+Viash offers sugar syntax to modify incoming arguments in various ways:
+
+Manual map:
+
+``` groovy
+  // Assign unique ID to each event
+  //   File -> (String, File)
+  | map{ file -> [ file.baseName, file ] }
+  
+  // Remove comments from TSV
+  //   (String, File) -> (String, File)
+  | remove_comments
+```
+
+Map included in `.run()`:
+
+``` groovy
+  // Remove comments from TSV
+  // Inner map adds unique ID to tuple
+  //   File -> (String, File)
+  | remove_comments.run(
+    map: { file -> [ file.baseName, file ] }
+  )
+```
+
+
+Possible tuple modification arguments:
+
+-   `map`: Apply a map over the incoming tuple.
+-   `mapId`: Apply a map over the ID element of a tuple (i.e. the first
+    element).
+-   `mapData`: Apply a map over the data element of a tuple (i.e. the
+    second element).
+-   `mapPassthrough`: Apply a map over the passthrough elements of a
+    tuple (i.e. the tuple excl. the first two elements).
+-   `renameKeys`: Rename keys in the data field of the tuple (i.e. the
+    second element).
+-   `args`: Fixed argument values which will be added to each tuple in
+    the channel.
+-   `debug`: Whether or not to print debug messages.
+
+Setting `debug: true` will help you understand how events are modified
+at any stage of your pipeline. Effectively, it triggers a few `view()`
+statements throughout the execution of the module.
+
+    process 'take_column' input tuple: [file1, work/46/6bffd3749913149f7fcbbe2d1af7c6/file1.remove_comments.output.tsv]
+    process 'take_column' processed tuple: [file1, [input:work/46/6bffd3749913149f7fcbbe2d1af7c6/file1.remove_comments.output.tsv]]
+    process 'take_column' output tuple: [file1, work/44/c3f2d7dd291ea394b3334f3117b45b/file1.take_column.output]

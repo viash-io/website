@@ -1,0 +1,277 @@
+project:
+  type: website
+  output-dir: _site
+  preview:
+    port: 8000
+    browser: false
+  resources:
+    - "/docs/download/_download.json"
+    - "/_redirects"
+
+website:
+  title: "Viash"
+  image: "quarto.png"
+  favicon: "favicon.png"
+  # google-analytics: "G-FV9Z7SDZ0M"
+  open-graph: true
+  twitter-card: true
+  site-url: https://viash.io
+  repo-url: https://github.com/viash-io/viash_web
+  # repo-actions: [edit, issue]
+  page-navigation: true
+  # search:
+  #   algolia:
+  #     index-name: prod_QUARTO
+  #     application-id: ZPJB5I1QN7
+  #     search-only-api-key: 41be6c1e0a7fea4a51b107810facf577
+  #     analytics-events: true
+  #     show-logo: true
+  page-footer:
+    left: |
+      Left footer
+    center:
+      - text: "About"
+        href: about.qmd
+      - text: "FAQ"
+        href: docs/faq/index.qmd
+      - text: "License"
+        href: license.qmd
+      - text: "Trademark"
+        href: trademark.qmd
+    right:
+      - icon: twitter
+        href: https://twitter.com/quarto_pub
+        aria-label: Quarto Twitter
+      - icon: github
+        href: https://github.com/quarto-dev/quarto-cli
+        aria-label: Quarto GitHub
+  navbar:
+    background: light
+    logo: quarto.png
+    title: false
+    collapse-below: lg
+    left:
+      - text: "Overview"
+        href: index.qmd
+      - text: "Get Started"
+        href: docs/get-started/index.qmd
+      - text: "Guide"
+        href: docs/guide/index.qmd
+      - text: "API"
+        href: docs/reference/index.qmd
+      - text: "Gallery"
+        href: docs/gallery/index.qmd
+      - text: "Blog"
+        href: docs/blog/index.qmd
+      - text: "Help"
+        menu:
+          - text: "Report an Issue"
+            icon: "bug"
+            href: "https://github.com/quarto-dev/quarto-cli/issues"
+          - text: "Quarto Discussions"
+            icon: "chat-right-text"
+            href: "https://github.com/quarto-dev/quarto-cli/discussions"
+          - text: "FAQ"
+            icon: "question-circle"
+            href:  docs/faq/index.qmd
+    right:
+      - icon: twitter
+        href: https://twitter.com/quarto_pub
+        aria-label: Quarto Twitter
+      - icon: github
+        href: https://github.com/quarto-dev/quarto-cli
+        aria-label: Quarto GitHub
+
+  sidebar:
+    - id: get-started
+      title: "Get Started"
+      style: "floating"
+      collapse-level: 2
+      align: left
+      contents:
+        - docs/get-started/index.qmd
+        - text: "Tutorial: Hello, Quarto"
+          href: docs/get-started/hello/
+        - text: "Tutorial: Computations"
+          href: docs/get-started/computations/
+        - text: "Tutorial: Authoring"
+          href: docs/get-started/authoring/
+
+
+
+
+    - id: guide
+      collapse-level: 1
+      contents:
+        - text: "Guide"
+          href: docs/guide/index.qmd
+        - section: "Component"
+          contents:
+            - section: "Creation"
+              contents:
+                - docs/guide/component/creation/native.qmd
+                - docs/guide/component/creation/docker.qmd
+                - docs/guide/component/creation/nextflow.qmd
+        - section: "Building Block"
+          contents:
+            - section: "Native Executable"
+            - section: "Docker Backend Executable"
+            - section: "Nextflow Module"
+              contents:
+                - docs/guide/building-block/nextflow/building-running.qmd
+        - section: "Data Workflow"
+          contents:
+            - section: "Scripted Pipeline"
+            - section: "Nextflow Pipeline"
+        - section: "Project"
+          contents:
+            - section: "Setup"
+            - section: "Customizing"
+
+
+        - section: "No Category"
+          contents:
+          - docs/guide/temp/docker-build-run.qmd
+          - docs/guide/temp/docker-volume-creation.qmd
+          - docs/guide/temp/language-csharp.qmd
+          - docs/guide/temp/language-r.qmd
+          - docs/guide/temp/namespace.qmd
+          - docs/guide/temp/project-ci-cd.qmd
+          - docs/guide/temp/project-unit-testing.qmd
+          - docs/guide/temp/docker-print-config.qmd
+          - docs/guide/temp/external-resources.qmd
+          - docs/guide/temp/language-javascript.qmd
+          - docs/guide/temp/language-scala.qmd
+          - docs/guide/temp/project-customizing.qmd
+          - docs/guide/temp/scripted-pipeline.qmd
+          - docs/guide/temp/docker-setup-strategies.qmd
+          - docs/guide/temp/language-bash.qmd
+          - docs/guide/temp/language-python.qmd
+          - docs/guide/temp/migrating-from-native.qmd
+          - docs/guide/temp/project-build-run.qmd
+          - docs/guide/temp/project-setup.qmd
+          - docs/guide/temp/unit-testing.qmd
+
+
+
+
+
+
+
+
+
+
+
+    - id: reference
+      title: "API"
+      contents:
+        - text: "API"
+          href: docs/reference/index.qmd
+        - section: "Formats"
+          contents:
+            - text: "HTML"
+              href: docs/reference/formats/html.qmd
+            - text: "PDF"
+              href: docs/reference/formats/pdf.qmd
+            - text: "MS Word"
+              href: docs/reference/formats/docx.qmd
+            - text: "OpenOffice"
+              href: docs/reference/formats/odt.qmd
+            - text: "ePub"
+              href: docs/reference/formats/epub.qmd
+            - section: "Presentations"
+              contents:
+                - text: "Revealjs"
+                  href: docs/reference/formats/presentations/revealjs.qmd
+                - text: "PowerPoint"
+                  href: docs/reference/formats/presentations/pptx.qmd
+                - text: "Beamer"
+                  href: docs/reference/formats/presentations/beamer.qmd
+            - section: "Markdown"
+              contents:
+                - text: "GitHub"
+                  href: docs/reference/formats/markdown/gfm.qmd
+                - text: "CommonMark"
+                  href: docs/reference/formats/markdown/commonmark.qmd
+                - text: "Hugo"
+                  href: docs/reference/formats/markdown/hugo.qmd
+                - text: "Markua"
+                  href: docs/reference/formats/markdown/markua.qmd
+            - section: "Wikis"
+              contents:
+                - text: "MediaWiki"
+                  href: docs/reference/formats/wiki/mediawiki.qmd
+                - text: "DokuWiki"
+                  href: docs/reference/formats/wiki/dokuwiki.qmd
+                - text: "ZimWiki"
+                  href: docs/reference/formats/wiki/zimwiki.qmd
+                - text: "Jira Wiki"
+                  href: docs/reference/formats/wiki/jira.qmd
+                - text: "XWiki"
+                  href: docs/reference/formats/wiki/xwiki.qmd
+            - section: "More Formats"
+              contents:
+                - text: "JATS"
+                  href: docs/reference/formats/jats.qmd
+                - text: "Jupyter"
+                  href: docs/reference/formats/ipynb.qmd
+                - text: "ConTeXt"
+                  href: docs/reference/formats/context.qmd
+                - text: "RTF"
+                  href: docs/reference/formats/rtf.qmd
+                - text: "reST"
+                  href: docs/reference/formats/rst.qmd
+                - text: "AsciiDoc"
+                  href: docs/reference/formats/asciidoc.qmd
+                - text: "Org-Mode"
+                  href: docs/reference/formats/org.qmd
+                - text: "Muse"
+                  href: docs/reference/formats/muse.qmd
+                - text: "GNU TexInfo"
+                  href: docs/reference/formats/texinfo.qmd
+                - text: "Groff Man Page"
+                  href: docs/reference/formats/man.qmd
+                - text: "Groff Manuscript"
+                  href: docs/reference/formats/ms.qmd
+                - text: "Haddock markup"
+                  href: docs/reference/formats/haddock.qmd
+                - text: "OPML"
+                  href: docs/reference/formats/opml.qmd
+                - text: "Textile"
+                  href: docs/reference/formats/textile.qmd
+                - text: "DocBook"
+                  href: docs/reference/formats/docbook.qmd
+                - text: "InDesign"
+                  href: docs/reference/formats/icml.qmd
+                - text: "TEI Simple"
+                  href: docs/reference/formats/tei.qmd
+                - text: "FictionBook"
+                  href: docs/reference/formats/fb2.qmd
+        - section: "Code Cells"
+          contents:
+            - text: "Jupyter"
+              href: docs/reference/cells/cells-jupyter.qmd
+            - text: "Knitr"
+              href: docs/reference/cells/cells-knitr.qmd
+            - text: "Observable"
+              href: docs/reference/cells/cells-ojs.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    toc: true
+    theme:
+      light: [cosmo, theme.scss]
+    code-copy: true
+    code-overflow: wrap
+    css: styles.css
+    include-after-body: js.html
+
+filters:
+  - filters/include-files.lua
+  - quarto
+
+freeze: true
+
+editor: visual

@@ -1,0 +1,65 @@
+---
+title: Building and Running
+search: true
+---
+
+## Overview
+
+You can build a Nextflow module to use in your pipeline
+To start with, [create a Viash component that targets the Nextflow platform](/docs/guide/component/creation/nextflow.html).
+
+## Building a Nextflow VDSL3 module
+
+
+
+```bash
+viash build remove_comments/config.vsh.yaml -o target/remove_comments
+```   
+
+This will generate two files in the target/remove_comments directory: **main.nf** and **nextflow.config**.
+
+## Run module as a standalone pipeline
+
+A VDSL3 module can be run as a small, standalone Nextflow pipeline.  
+
+### Show documentation
+
+To display the documentation for a module, run the module with just the `--help` argument:
+
+```bash
+nextflow run target/remove_comments/main.nf --help
+```
+
+This will result in output that looks similar to this:
+
+```
+N E X T F L O W  ~  version 22.04.3
+Launching `target/remove_comments/main.nf` [admiring_carlsson] DSL2 - revision: 8de4c7c8eb
+remove_comments
+
+Options:
+    --input
+        type: file, required parameter
+        example: file.tsv
+
+    --output
+        type: file, required parameter, output
+        example: file.tsv
+```
+
+### Run module
+
+```
+# this is a header		
+# this is also a header		
+one	0.11	123
+two	0.23	456
+three	0.35	789
+four	0.47	123
+```
+
+```bash
+nextflow run target/remove_comments/main.nf \
+   --input "data/file1.tsv" \
+   --publishDir output/
+```
