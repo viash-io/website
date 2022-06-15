@@ -417,10 +417,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#building-a-nextflow-vdsl3-module" id="toc-building-a-nextflow-vdsl3-module" class="nav-link" data-scroll-target="#building-a-nextflow-vdsl3-module">Building a Nextflow VDSL3 module</a></li>
-  <li><a href="#run-module-as-a-standalone-pipeline" id="toc-run-module-as-a-standalone-pipeline" class="nav-link" data-scroll-target="#run-module-as-a-standalone-pipeline">Run module as a standalone pipeline</a>
+  <li><a href="#runing-a-standalone-pipeline" id="toc-runing-a-standalone-pipeline" class="nav-link" data-scroll-target="#runing-a-standalone-pipeline">Runing a standalone pipeline</a>
   <ul class="collapse">
-  <li><a href="#show-documentation" id="toc-show-documentation" class="nav-link" data-scroll-target="#show-documentation">Show documentation</a></li>
-  <li><a href="#run-module" id="toc-run-module" class="nav-link" data-scroll-target="#run-module">Run module</a></li>
+  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation">Documentation</a></li>
+  <li><a href="#running-the-module" id="toc-running-the-module" class="nav-link" data-scroll-target="#running-the-module">Running the module</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -446,19 +446,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>You can build a Nextflow module to use in your pipeline To start with, <a href="../../../../documentation//guide/component/creation/nextflow.html">create a Viash component that targets the Nextflow platform</a>.</p>
+<p>This guide covers how you can can build a Nextflow module to use in your pipeline.</p>
 </section>
 <section id="building-a-nextflow-vdsl3-module" class="level2">
 <h2 class="anchored" data-anchor-id="building-a-nextflow-vdsl3-module">Building a Nextflow VDSL3 module</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build remove_comments/config.vsh.yaml <span class="at">-o</span> target/remove_comments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To start with, create a Viash component that targets the Nextflow platform as explained in <a href="../../../../documentation/guide/component/creation/nextflow.html">this guide</a>.<br>
+Next, use the <a href="#">viash build</a> command to generate a Nextflow module inside of a <strong>target/remove_comments</strong> directory:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build src/remove_comments/config.vsh.yaml <span class="at">-o</span> target/remove_comments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This will generate two files in the <strong>target/remove_comments</strong> directory: <strong>main.nf</strong> and <strong>nextflow.config</strong>.</p>
 </section>
-<section id="run-module-as-a-standalone-pipeline" class="level2">
-<h2 class="anchored" data-anchor-id="run-module-as-a-standalone-pipeline">Run module as a standalone pipeline</h2>
+<section id="runing-a-standalone-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="runing-a-standalone-pipeline">Runing a standalone pipeline</h2>
 <p>A VDSL3 module can be run as a small, standalone Nextflow pipeline.</p>
-<section id="show-documentation" class="level3">
-<h3 class="anchored" data-anchor-id="show-documentation">Show documentation</h3>
-<p>To display the documentation for a module, run the module with just the <code>--help</code> argument:</p>
+<section id="documentation" class="level3">
+<h3 class="anchored" data-anchor-id="documentation">Documentation</h3>
+<p>It’s often useful to know what arguments a module expects before trying to run it. To display the documentation for a module, run the module with just the <code>--help</code> argument:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/remove_comments/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This will result in output that looks similar to this:</p>
 <pre><code>N E X T F L O W  ~  version 22.04.3
@@ -475,14 +477,31 @@ Options:
         example: file.tsv</code></pre>
 <p>As you can see, this module needs a <strong>tsv file</strong> as its <code>input</code> and it will write the updated file away to a given <code>output</code> path.</p>
 </section>
-<section id="run-module" class="level3">
-<h3 class="anchored" data-anchor-id="run-module">Run module</h3>
-<p>To test out the module by itself, you need a tsv file to remove the comments from. You download a sample file we provided here:</p>
-<p>ewqeq</p>
-<p>Place it in a new directory named <strong>data</strong>, alongside the <strong>src</strong> and <strong>target</strong> directories.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/remove_comments/main.nf <span class="dt">\</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">--input</span> <span class="st">"data/file1.tsv"</span> <span class="dt">\</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">--publishDir</span> output/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="running-the-module" class="level3">
+<h3 class="anchored" data-anchor-id="running-the-module">Running the module</h3>
+<p>To test out the module by itself, you need a tsv file to remove the comments from.</p>
+<p>You download a sample file we provided here:</p>
+<p><a href="#" id="btn-guide" class="btn-action btn btn-info btn-lg" role="button">Download sample.tsv</a></p>
+<p>Here are its contents:</p>
+<pre><code># this is a header      
+# this is also a header     
+one     0.11    123
+two     0.23    456
+three   0.35    789
+four    0.47    123</code></pre>
+<p>Place <strong>sample.tsv</strong> file in a new directory named <strong>data</strong>, alongside the <strong>src</strong> and <strong>target</strong> directories. Now run the module along with the required arguments:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/remove_comments/main.nf <span class="dt">\</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">--input</span> <span class="st">"data/sample.tsv"</span> <span class="dt">\</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">--publishDir</span> output/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Below is the result:</p>
+<pre><code>N E X T F L O W  ~  version 22.04.3
+Launching `target/remove_comments/main.nf` [jovial_waddington] DSL2 - revision: 8de4c7c8eb
+WARN: Key for module 'remove_comments' is duplicated.
+
+input: [run, [input:/home/runner/work/viash_nxf_course/viash_nxf_course/data/sample.tsv]]
+[0d/f56604] Submitted process &gt; remove_comments:remove_comments_process1
+output: [run, /home/runner/work/viash_nxf_course/viash_nxf_course/work/0d/f56604df86c95c8cee3656fae27de5/run.remove_comments.output.tsv]</code></pre>
+<p>A new tsv file should’ve been generated now in the <strong>output</strong> folder.</p>
 
 
 </section>

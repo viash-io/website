@@ -9,41 +9,71 @@ _tool-chooser.md
 
 ## Overview
 
-::: {.panel-tabset}
-## Bash
+This guide explains how to create a Viash component from scratch that targets the Nextflow platform. For a general overview of Viash components, take a look at the [Viash Basics](#) guide.
+
+## Creating a Viash component
+
+### Adding a Viash config
+
+create folder named nextflow_component, add src/remove_comments dir
+create config.vsh.yaml and add to src/remove_comments  
+add this
+
+```yaml
+functionality:
+  name: remove_comments
+  arguments:
+    - name: "--input"
+      alternatives: [ "-i" ]
+      type: file
+      required: true
+      example: "file.tsv"
+    - name: "--output"
+      alternatives: [ "-o" ]
+      type: file
+      required: true
+      direction: output
+      example: "file.tsv"
+  resources:
+  - type: bash_script
+    path: ./script.sh
+platforms:
+  - type: nextflow
+    variant: vdsl3
+    directives:
+      container: ubuntu:20.04
+```
+  
+short description of what this does  
+focus on platforms section, explain vdsl3 and directives  
+single resource needed, a script
+
+### Writing the script
+
+add simple script
 
 ```bash
-echo "Hello Bash"
+#!/bin/bash
+
+grep -v '^#' "$par_input" > "$par_output"
 ```
 
-## C\#
+## Running the Viash component
 
-```csharp
-echo "Hello C#"
+run = a Nextflow module is created that is ran  
+execute command
+
+```bash
+viash run src/remove_comments/config.vsh.yaml
+```  
+  
+show output
+
+```
+...
 ```
 
-## Javascript
+## What's next?
 
-```javascript
-echo "Hello Javascript"
-```
-
-## Python
-
-```python
-echo "Hello Python"
-```
-
-## Scala
-
-```scala
-echo "Hello Scala"
-```
-
-## R
-
-```r
-echo "Hello R"
-```
-
-:::
+link to [building and running nextflow](/documentation/guide/building-block/nextflow/building-running.html)  
+that guide will explain how to create a nextflow module that can be used in piplines

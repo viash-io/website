@@ -95,7 +95,7 @@
     "href": "documentation/guide/component/creation/nextflow.html",
     "title": "Nextflow",
     "section": "",
-    "text": "BashC#JavascriptPythonScalaR\n\n\necho \"Hello Bash\"\n\n\necho \"Hello C#\"\n\n\necho \"Hello Javascript\"\n\n\necho \"Hello Python\"\n\n\necho \"Hello Scala\"\n\n\necho \"Hello R\""
+    "text": "This guide explains how to create a Viash component from scratch that targets the Nextflow platform. For a general overview of Viash components, take a look at the Viash Basics guide."
   },
   {
     "objectID": "documentation/guide/component/creation/native.html",
@@ -116,21 +116,21 @@
     "href": "documentation/guide/building-block/nextflow/building-running.html",
     "title": "Building and Running",
     "section": "",
-    "text": "You can build a Nextflow module to use in your pipeline To start with, create a Viash component that targets the Nextflow platform."
+    "text": "This guide covers how you can can build a Nextflow module to use in your pipeline."
   },
   {
     "objectID": "documentation/guide/building-block/nextflow/building-running.html#building-a-nextflow-vdsl3-module",
     "href": "documentation/guide/building-block/nextflow/building-running.html#building-a-nextflow-vdsl3-module",
     "title": "Building and Running",
     "section": "Building a Nextflow VDSL3 module",
-    "text": "Building a Nextflow VDSL3 module\nviash build remove_comments/config.vsh.yaml -o target/remove_comments\nThis will generate two files in the target/remove_comments directory: main.nf and nextflow.config."
+    "text": "Building a Nextflow VDSL3 module\nTo start with, create a Viash component that targets the Nextflow platform as explained in this guide.\nNext, use the viash build command to generate a Nextflow module inside of a target/remove_comments directory:\nviash build src/remove_comments/config.vsh.yaml -o target/remove_comments\nThis will generate two files in the target/remove_comments directory: main.nf and nextflow.config."
   },
   {
     "objectID": "documentation/guide/building-block/nextflow/building-running.html#run-module-as-a-standalone-pipeline",
     "href": "documentation/guide/building-block/nextflow/building-running.html#run-module-as-a-standalone-pipeline",
     "title": "Building and Running",
     "section": "Run module as a standalone pipeline",
-    "text": "Run module as a standalone pipeline\nA VDSL3 module can be run as a small, standalone Nextflow pipeline.\n\nShow documentation\nTo display the documentation for a module, run the module with just the --help argument:\nnextflow run target/remove_comments/main.nf --help\nThis will result in output that looks similar to this:\nN E X T F L O W  ~  version 22.04.3\nLaunching `target/remove_comments/main.nf` [admiring_carlsson] DSL2 - revision: 8de4c7c8eb\nremove_comments\n\nOptions:\n    --input\n        type: file, required parameter\n        example: file.tsv\n\n    --output\n        type: file, required parameter, output\n        example: file.tsv\nAs you can see, this module needs a tsv file as its input and it will write the updated file away to a given output path.\n\n\nRun module\nTo test out the module by itself, you need a tsv file to remove the comments from. You download a sample file we provided here:\newqeq\nPlace it in a new directory named data, alongside the src and target directories.\nnextflow run target/remove_comments/main.nf \\\n   --input \"data/file1.tsv\" \\\n   --publishDir output/"
+    "text": "Run module as a standalone pipeline\nA VDSL3 module can be run as a small, standalone Nextflow pipeline.\n\nShow documentation\nIt’s often useful to know what arguments a module expects before trying to run it. To display the documentation for a module, run the module with just the --help argument:\nnextflow run target/remove_comments/main.nf --help\nThis will result in output that looks similar to this:\nN E X T F L O W  ~  version 22.04.3\nLaunching `target/remove_comments/main.nf` [admiring_carlsson] DSL2 - revision: 8de4c7c8eb\nremove_comments\n\nOptions:\n    --input\n        type: file, required parameter\n        example: file.tsv\n\n    --output\n        type: file, required parameter, output\n        example: file.tsv\nAs you can see, this module needs a tsv file as its input and it will write the updated file away to a given output path.\n\n\nRun module\nTo test out the module by itself, you need a tsv file to remove the comments from. You download a sample file we provided here:\nDownload sample.tsv\nPlace it in a new directory named data, alongside the src and target directories. Now run the module along with the required arguments:\nnextflow run target/remove_comments/main.nf \\\n   --input \"data/sample.tsv\" \\\n   --publishDir output/\nBelow is the result:\nN E X T F L O W  ~  version 22.04.3\nLaunching `target/remove_comments/main.nf` [jovial_waddington] DSL2 - revision: 8de4c7c8eb\nWARN: Key for module 'remove_comments' is duplicated.\n\ninput: [run, [input:/home/runner/work/viash_nxf_course/viash_nxf_course/data/sample.tsv]]\n[0d/f56604] Submitted process > remove_comments:remove_comments_process1\noutput: [run, /home/runner/work/viash_nxf_course/viash_nxf_course/work/0d/f56604df86c95c8cee3656fae27de5/run.remove_comments.output.tsv]\nA new tsv file should’ve been generated now in the output folder."
   },
   {
     "objectID": "documentation/reference/globs.html",
@@ -208,5 +208,82 @@
     "title": "Trademark Policy",
     "section": "Examples",
     "text": "Examples\nA consulting company can describe its business as “123 Publishing Services, offering Quarto consulting for publishers,” but cannot call its business “The Quarto Consulting Company.” Similarly, a business related to Quarto extensions can describe itself as “XYZ Extensions, the world’s best Quarto extensions,” but cannot call itself “The Quarto Extension Portal.”\nSimilarly, it’s OK to use the Quarto logo as part of a page that describes your products or services, but it is not OK to use it as part of your company or product logo or branding itself. Under no circumstances is it permitted to use Quarto as part of a domain name or top-level domain name.\nWhen in doubt about your use of the Quarto name or logo, please contact RStudio at permissions@rstudio.com for clarification."
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow.html#section",
+    "href": "documentation/guide/component/creation/nextflow.html#section",
+    "title": "Nextflow",
+    "section": "",
+    "text": "functionality:\n  name: remove_comments\n  namespace: vdsl3_tutorial\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      required: true\n      example: \"file.tsv\"\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n      example: \"file.tsv\"\n  resources:\n  - type: bash_script\n    path: ./script.sh\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: ubuntu:20.04\n#!/bin/bash\n\ngrep -v '^#' \"$par_input\" > \"$par_output\""
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow.html#creating-a-viash-config",
+    "href": "documentation/guide/component/creation/nextflow.html#creating-a-viash-config",
+    "title": "Nextflow",
+    "section": "Creating a Viash config",
+    "text": "Creating a Viash config\ncreate folder named nextflow_component, add src/remove_comments dir create config.vsh.yaml and add to src/remove_comments\nadd this\nfunctionality:\n  name: remove_comments\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      required: true\n      example: \"file.tsv\"\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n      example: \"file.tsv\"\n  resources:\n  - type: bash_script\n    path: ./script.sh\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: ubuntu:20.04\nshort description of what this does\nfocus on platforms section, explain vdsl3 and directives\nsingle resource needed, a script"
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow.html#adding-a-script",
+    "href": "documentation/guide/component/creation/nextflow.html#adding-a-script",
+    "title": "Nextflow",
+    "section": "Adding a script",
+    "text": "Adding a script\nadd simple script\n#!/bin/bash\n\ngrep -v '^#' \"$par_input\" > \"$par_output\""
+  },
+  {
+    "objectID": "documentation/guide/building-block/nextflow/building-running.html#runing-a-module-as-a-standalone-pipeline",
+    "href": "documentation/guide/building-block/nextflow/building-running.html#runing-a-module-as-a-standalone-pipeline",
+    "title": "Building and Running",
+    "section": "Runing a module as a standalone pipeline",
+    "text": "Runing a module as a standalone pipeline\nA VDSL3 module can be run as a small, standalone Nextflow pipeline.\n\nShow documentation\nIt’s often useful to know what arguments a module expects before trying to run it. To display the documentation for a module, run the module with just the --help argument:\nnextflow run target/remove_comments/main.nf --help\nThis will result in output that looks similar to this:\nN E X T F L O W  ~  version 22.04.3\nLaunching `target/remove_comments/main.nf` [admiring_carlsson] DSL2 - revision: 8de4c7c8eb\nremove_comments\n\nOptions:\n    --input\n        type: file, required parameter\n        example: file.tsv\n\n    --output\n        type: file, required parameter, output\n        example: file.tsv\nAs you can see, this module needs a tsv file as its input and it will write the updated file away to a given output path.\n\n\nRun module\nTo test out the module by itself, you need a tsv file to remove the comments from. You download a sample file we provided here:\nDownload sample.tsv\nPlace it in a new directory named data, alongside the src and target directories. Now run the module along with the required arguments:\nnextflow run target/remove_comments/main.nf \\\n   --input \"data/sample.tsv\" \\\n   --publishDir output/\nBelow is the result:\nN E X T F L O W  ~  version 22.04.3\nLaunching `target/remove_comments/main.nf` [jovial_waddington] DSL2 - revision: 8de4c7c8eb\nWARN: Key for module 'remove_comments' is duplicated.\n\ninput: [run, [input:/home/runner/work/viash_nxf_course/viash_nxf_course/data/sample.tsv]]\n[0d/f56604] Submitted process > remove_comments:remove_comments_process1\noutput: [run, /home/runner/work/viash_nxf_course/viash_nxf_course/work/0d/f56604df86c95c8cee3656fae27de5/run.remove_comments.output.tsv]\nA new tsv file should’ve been generated now in the output folder."
+  },
+  {
+    "objectID": "documentation/guide/building-block/nextflow/building-running.html#runing-the-module-as-a-standalone-pipeline",
+    "href": "documentation/guide/building-block/nextflow/building-running.html#runing-the-module-as-a-standalone-pipeline",
+    "title": "Building and Running",
+    "section": "Runing the module as a standalone pipeline",
+    "text": "Runing the module as a standalone pipeline\nA VDSL3 module can be run as a small, standalone Nextflow pipeline.\n\nDocumentation\nIt’s often useful to know what arguments a module expects before trying to run it. To display the documentation for a module, run the module with just the --help argument:\nnextflow run target/remove_comments/main.nf --help\nThis will result in output that looks similar to this:\nN E X T F L O W  ~  version 22.04.3\nLaunching `target/remove_comments/main.nf` [admiring_carlsson] DSL2 - revision: 8de4c7c8eb\nremove_comments\n\nOptions:\n    --input\n        type: file, required parameter\n        example: file.tsv\n\n    --output\n        type: file, required parameter, output\n        example: file.tsv\nAs you can see, this module needs a tsv file as its input and it will write the updated file away to a given output path.\n\n\nRunning the module\nTo test out the module by itself, you need a tsv file to remove the comments from. You download a sample file we provided here:\nDownload sample.tsv\nPlace it in a new directory named data, alongside the src and target directories. Now run the module along with the required arguments:\nnextflow run target/remove_comments/main.nf \\\n   --input \"data/sample.tsv\" \\\n   --publishDir output/\nBelow is the result:\nN E X T F L O W  ~  version 22.04.3\nLaunching `target/remove_comments/main.nf` [jovial_waddington] DSL2 - revision: 8de4c7c8eb\nWARN: Key for module 'remove_comments' is duplicated.\n\ninput: [run, [input:/home/runner/work/viash_nxf_course/viash_nxf_course/data/sample.tsv]]\n[0d/f56604] Submitted process > remove_comments:remove_comments_process1\noutput: [run, /home/runner/work/viash_nxf_course/viash_nxf_course/work/0d/f56604df86c95c8cee3656fae27de5/run.remove_comments.output.tsv]\nA new tsv file should’ve been generated now in the output folder."
+  },
+  {
+    "objectID": "documentation/guide/building-block/nextflow/building-running.html#runing-a-standalone-pipeline",
+    "href": "documentation/guide/building-block/nextflow/building-running.html#runing-a-standalone-pipeline",
+    "title": "Building and Running",
+    "section": "Runing a standalone pipeline",
+    "text": "Runing a standalone pipeline\nA VDSL3 module can be run as a small, standalone Nextflow pipeline.\n\nDocumentation\nIt’s often useful to know what arguments a module expects before trying to run it. To display the documentation for a module, run the module with just the --help argument:\nnextflow run target/remove_comments/main.nf --help\nThis will result in output that looks similar to this:\nN E X T F L O W  ~  version 22.04.3\nLaunching `target/remove_comments/main.nf` [admiring_carlsson] DSL2 - revision: 8de4c7c8eb\nremove_comments\n\nOptions:\n    --input\n        type: file, required parameter\n        example: file.tsv\n\n    --output\n        type: file, required parameter, output\n        example: file.tsv\nAs you can see, this module needs a tsv file as its input and it will write the updated file away to a given output path.\n\n\nRunning the module\nTo test out the module by itself, you need a tsv file to remove the comments from.\nYou download a sample file we provided here:\nDownload sample.tsv\nHere are its contents:\n# this is a header      \n# this is also a header     \none     0.11    123\ntwo     0.23    456\nthree   0.35    789\nfour    0.47    123\nPlace sample.tsv file in a new directory named data, alongside the src and target directories. Now run the module along with the required arguments:\nnextflow run target/remove_comments/main.nf \\\n   --input \"data/sample.tsv\" \\\n   --publishDir output/\nBelow is the result:\nN E X T F L O W  ~  version 22.04.3\nLaunching `target/remove_comments/main.nf` [jovial_waddington] DSL2 - revision: 8de4c7c8eb\nWARN: Key for module 'remove_comments' is duplicated.\n\ninput: [run, [input:/home/runner/work/viash_nxf_course/viash_nxf_course/data/sample.tsv]]\n[0d/f56604] Submitted process > remove_comments:remove_comments_process1\noutput: [run, /home/runner/work/viash_nxf_course/viash_nxf_course/work/0d/f56604df86c95c8cee3656fae27de5/run.remove_comments.output.tsv]\nA new tsv file should’ve been generated now in the output folder."
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow.html#running-the-component",
+    "href": "documentation/guide/component/creation/nextflow.html#running-the-component",
+    "title": "Nextflow",
+    "section": "Running the component",
+    "text": "Running the component\nrun = a Nextflow module is created that is ran\nexecute command\nviash run src/remove_comments/config.vsh.yaml\nshow output\n..."
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow.html#whats-next",
+    "href": "documentation/guide/component/creation/nextflow.html#whats-next",
+    "title": "Nextflow",
+    "section": "What’s next?",
+    "text": "What’s next?\nlink to building and running nextflow\nthat guide will explain how to create a nextflow module that can be used in piplines"
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow.html#creating-a-component",
+    "href": "documentation/guide/component/creation/nextflow.html#creating-a-component",
+    "title": "Nextflow",
+    "section": "Creating a component",
+    "text": "Creating a component\n\nAdding a Viash config\ncreate folder named nextflow_component, add src/remove_comments dir create config.vsh.yaml and add to src/remove_comments\nadd this\nfunctionality:\n  name: remove_comments\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      required: true\n      example: \"file.tsv\"\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n      example: \"file.tsv\"\n  resources:\n  - type: bash_script\n    path: ./script.sh\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: ubuntu:20.04\nshort description of what this does\nfocus on platforms section, explain vdsl3 and directives\nsingle resource needed, a script\n\n\nWriting the script\nadd simple script\n#!/bin/bash\n\ngrep -v '^#' \"$par_input\" > \"$par_output\""
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow.html#creating-a-viash-component",
+    "href": "documentation/guide/component/creation/nextflow.html#creating-a-viash-component",
+    "title": "Nextflow",
+    "section": "Creating a Viash component",
+    "text": "Creating a Viash component\n\nAdding a Viash config\ncreate folder named nextflow_component, add src/remove_comments dir create config.vsh.yaml and add to src/remove_comments\nadd this\nfunctionality:\n  name: remove_comments\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      required: true\n      example: \"file.tsv\"\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n      example: \"file.tsv\"\n  resources:\n  - type: bash_script\n    path: ./script.sh\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: ubuntu:20.04\nshort description of what this does\nfocus on platforms section, explain vdsl3 and directives\nsingle resource needed, a script\n\n\nWriting the script\nadd simple script\n#!/bin/bash\n\ngrep -v '^#' \"$par_input\" > \"$par_output\""
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow.html#running-the-viash-component",
+    "href": "documentation/guide/component/creation/nextflow.html#running-the-viash-component",
+    "title": "Nextflow",
+    "section": "Running the Viash component",
+    "text": "Running the Viash component\nrun = a Nextflow module is created that is ran\nexecute command\nviash run src/remove_comments/config.vsh.yaml\nshow output\n..."
   }
 ]
