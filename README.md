@@ -11,13 +11,6 @@ You'll probably need some R and Python prerequisite for the command above to wor
 
 ## Updating
 
-The main .qmd files live in the **documentation** folder, while the **docs** folder contains the files to display the website in a web browser like HTML, JS and CSS.
-To create a new version of the website, make your changes, then execute this from the root of the project:
-
-```
-quarto render
-```
-
-This will generate html files in the **docs** directory. Next, push the changes to the main branch.
-After pushing the changes to main, the website will be rebuilt and published via gh pages. After a few minutes the changes should be visible on https://viash-io.github.io/new_website/.
-
+The main .qmd files live in the **documentation** folder.
+To create a new version of the website, make your changes and push them to the `main` branch. This will start up a Github action that will build the website to the `gh-pages` branch.
+After about 15 minutes the changes should be visible on https://viash-io.github.io/new_website/.
