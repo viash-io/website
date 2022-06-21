@@ -284,6 +284,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </a>
     </div>
     <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">Nextflow Pipeline</a>
+      <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html" class="sidebar-item-text sidebar-link">Pipeline Basics</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html" class="sidebar-item-text sidebar-link">Advanced Pipeline</a>
+  </div>
+</li>
+    </ul>
+  </li>
     </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -422,7 +442,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#writing-the-script" id="toc-writing-the-script" class="nav-link" data-scroll-target="#writing-the-script">Writing the script</a></li>
   </ul></li>
   <li><a href="#running-the-viash-component" id="toc-running-the-viash-component" class="nav-link" data-scroll-target="#running-the-viash-component">Running the Viash component</a></li>
-  <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next">What’s next?</a></li>
   </ul>
 </nav>
     </div>
@@ -487,20 +506,33 @@ single resource needed, a script</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-v</span> <span class="st">'^#'</span> <span class="st">"</span><span class="va">$par_input</span><span class="st">"</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$par_output</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>you now have this structure which makes up a component</p>
+<pre><code>nextflow_component
+└── src
+    └── remove_comments
+        ├── config.vsh.yaml
+        └── script.sh</code></pre>
 </section>
 </section>
 <section id="running-the-viash-component" class="level2">
 <h2 class="anchored" data-anchor-id="running-the-viash-component">Running the Viash component</h2>
-<p>run = a Nextflow module is created that is ran<br>
-execute command</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run src/remove_comments/config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>show output</p>
-<pre><code>...</code></pre>
-</section>
-<section id="whats-next" class="level2">
-<h2 class="anchored" data-anchor-id="whats-next">What’s next?</h2>
-<p>link to <a href="../../../../documentation/guide/building-block/nextflow/building-running.html">building and running nextflow</a><br>
-that guide will explain how to create a nextflow module that can be used in piplines</p>
+<p>In contrast to native and Docker based components, a Nextflow based component cannot be ran by using the <a href="#"><code>viash run</code></a> command. These types of components require you to use <a href="#"><code>viash build</code></a> first to generate a Nextflow module and run that module using <code>nextflow run</code>. See <a href="../../../../documentation/guide/building-block/nextflow/building-running.html">Building and Running Nextflow</a> for more information.</p>
+<!-- run = a Nextflow module is created that is ran  
+execute command
+
+```bash
+viash run src/remove_comments/config.vsh.yaml
+```  
+  
+show output
+
+```
+...
+``` -->
+<!-- ## What's next?
+
+link to [building and running nextflow](/documentation/guide/building-block/nextflow/building-running.html)  
+that guide will explain how to create a nextflow module that can be used in piplines -->
 
 
 </section>
@@ -595,6 +627,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return popup.innerHTML;
     });
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/https:\/\/viash\.io/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
 });
 </script>
 <nav class="page-navigation">

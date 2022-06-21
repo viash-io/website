@@ -109,7 +109,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../../">
-<link href="../../../../documentation/guide/temp/docker-build-run.html" rel="next">
+<link href="../../../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html" rel="next">
 <link href="../../../../documentation/guide/component/creation/nextflow.html" rel="prev">
 <link href="../../../../favicon.png" rel="icon" type="image/png">
 <script src="../../../../site_libs/quarto-html/quarto.js"></script>
@@ -284,6 +284,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </a>
     </div>
     <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">Nextflow Pipeline</a>
+      <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html" class="sidebar-item-text sidebar-link">Pipeline Basics</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html" class="sidebar-item-text sidebar-link">Advanced Pipeline</a>
+  </div>
+</li>
+    </ul>
+  </li>
     </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -422,6 +442,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation">Documentation</a></li>
   <li><a href="#running-the-module" id="toc-running-the-module" class="nav-link" data-scroll-target="#running-the-module">Running the module</a></li>
   </ul></li>
+  <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next">What’s next?</a></li>
   </ul>
 </nav>
     </div>
@@ -454,6 +475,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Next, use the <a href="#">viash build</a> command to generate a Nextflow module inside of a <strong>target/remove_comments</strong> directory:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build src/remove_comments/config.vsh.yaml <span class="at">-o</span> target/remove_comments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This will generate two files in the <strong>target/remove_comments</strong> directory: <strong>main.nf</strong> and <strong>nextflow.config</strong>.</p>
+<pre><code>nextflow_component
+├── src
+│   └── remove_comments
+│       ├── config.vsh.yaml
+│       └── script.sh
+└── target
+    └── remove_comments
+        ├── main.nf
+        └── nextflow.config
+
+</code></pre>
 </section>
 <section id="runing-a-standalone-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="runing-a-standalone-pipeline">Runing a standalone pipeline</h2>
@@ -461,7 +493,7 @@ Next, use the <a href="#">viash build</a> command to generate a Nextflow module 
 <section id="documentation" class="level3">
 <h3 class="anchored" data-anchor-id="documentation">Documentation</h3>
 <p>It’s often useful to know what arguments a module expects before trying to run it. To display the documentation for a module, run the module with just the <code>--help</code> argument:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/remove_comments/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/remove_comments/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This will result in output that looks similar to this:</p>
 <pre><code>N E X T F L O W  ~  version 22.04.3
 Launching `target/remove_comments/main.nf` [admiring_carlsson] DSL2 - revision: 8de4c7c8eb
@@ -479,9 +511,9 @@ Options:
 </section>
 <section id="running-the-module" class="level3">
 <h3 class="anchored" data-anchor-id="running-the-module">Running the module</h3>
-<p>To test out the module by itself, you need a tsv file to remove the comments from.</p>
-<p>You download a sample file we provided here:</p>
-<p><a href="#" id="btn-guide" class="btn-action btn btn-info btn-lg" role="button">Download sample.tsv</a></p>
+<p>To test out the module by itself, you need a tsv file to remove the comments from. You can download a sample file we provided here:</p>
+<!-- [Download sample.tsv](/download/remove_comments/sample.tsv "download"){#btn-download .btn-action .btn .btn-info .btn-lg role="button"} -->
+<p><a href="../../../../download/remove_comments/sample.tsv" id="btn-download" class="btn btn-info btn-md" role="button" download="">Download sample.tsv</a></p>
 <p>Here are its contents:</p>
 <pre><code># this is a header      
 # this is also a header     
@@ -489,22 +521,39 @@ one     0.11    123
 two     0.23    456
 three   0.35    789
 four    0.47    123</code></pre>
-<p>Place <strong>sample.tsv</strong> file in a new directory named <strong>data</strong>, alongside the <strong>src</strong> and <strong>target</strong> directories. Now run the module along with the required arguments:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/remove_comments/main.nf <span class="dt">\</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">--input</span> <span class="st">"data/sample.tsv"</span> <span class="dt">\</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">--publishDir</span> output/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Place <strong>sample.tsv</strong> file in a new directory named <strong>data</strong>, alongside the <strong>src</strong> and <strong>target</strong> directories.</p>
+<pre><code>nextflow_component
+├── data
+│   └── sample.tsv
+├── src
+│   └── remove_comments
+│       ├── config.vsh.yaml
+│       └── script.sh
+└── target
+    └── remove_comments
+        ├── main.nf
+        └── nextflow.config</code></pre>
+<p>Now run the module along with the required arguments:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/remove_comments/main.nf <span class="dt">\</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">--input</span> <span class="st">"data/sample.tsv"</span> <span class="dt">\</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">--publishDir</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Below is the result:</p>
 <pre><code>N E X T F L O W  ~  version 22.04.3
-Launching `target/remove_comments/main.nf` [jovial_waddington] DSL2 - revision: 8de4c7c8eb
+Launching `target/remove_comments/main.nf` [desperate_fermat] DSL2 - revision: 8de4c7c8eb
 WARN: Key for module 'remove_comments' is duplicated.
 
-input: [run, [input:/home/runner/work/viash_nxf_course/viash_nxf_course/data/sample.tsv]]
-[0d/f56604] Submitted process &gt; remove_comments:remove_comments_process1
-output: [run, /home/runner/work/viash_nxf_course/viash_nxf_course/work/0d/f56604df86c95c8cee3656fae27de5/run.remove_comments.output.tsv]</code></pre>
-<p>A new tsv file should’ve been generated now in the <strong>output</strong> folder.</p>
-
-
+executor &gt;  local (1)
+[2b/17d7a5] process &gt; remove_comments:remove_comments_process1 [100%] 1 of 1 ✔
+input: [run, [input:/home/user/nextflow_component/data/sample.tsv]]
+output: [run, /home/user/nextflow_component/work/2b/17d7a50e74d27bc8fd39f098ba06fc/run.remove_comments.output.tsv]</code></pre>
+<p>A new tsv file should’ve been generated now in the <strong>output</strong> folder named <strong>run.remove_comments.output.tsv</strong>.</p>
 </section>
+</section>
+<section id="whats-next" class="level2">
+<h2 class="anchored" data-anchor-id="whats-next">What’s next?</h2>
+<p>to use generated modules inside an actual Nextflow pipeline, see <a href="../../../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html">Pipeline Basics</a></p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -597,6 +646,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return popup.innerHTML;
     });
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/https:\/\/viash\.io/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
 });
 </script>
 <nav class="page-navigation">
@@ -606,8 +671,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../../documentation/guide/temp/docker-build-run.html" class="pagination-link">
-        <span class="nav-page-text">Building and Running</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html" class="pagination-link">
+        <span class="nav-page-text">Pipeline Basics</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -58,9 +58,21 @@ add simple script
 grep -v '^#' "$par_input" > "$par_output"
 ```
 
+you now have this structure which makes up a component
+
+```
+nextflow_component
+└── src
+    └── remove_comments
+        ├── config.vsh.yaml
+        └── script.sh
+```
+
 ## Running the Viash component
 
-run = a Nextflow module is created that is ran  
+In contrast to native and Docker based components, a Nextflow based component cannot be ran by using the [`viash run`](#) command. These types of components require you to use [`viash build`](#) first to generate a Nextflow module and run that module using `nextflow run`. See [Building and Running Nextflow](/documentation/guide/building-block/nextflow/building-running.html) for more information.
+
+<!-- run = a Nextflow module is created that is ran  
 execute command
 
 ```bash
@@ -71,9 +83,9 @@ show output
 
 ```
 ...
-```
+``` -->
 
-## What's next?
+<!-- ## What's next?
 
 link to [building and running nextflow](/documentation/guide/building-block/nextflow/building-running.html)  
-that guide will explain how to create a nextflow module that can be used in piplines
+that guide will explain how to create a nextflow module that can be used in piplines -->

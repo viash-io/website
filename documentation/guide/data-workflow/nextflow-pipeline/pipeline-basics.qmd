@@ -1,0 +1,86 @@
+---
+title: Pipeline Basics
+search: true
+---
+
+## Overview
+
+explain this guide will go over the basics of VDSL3 and how to use modules inside of a Nextflow pipeline
+reference to the nextflow website for the basics of nextflow's Groovy syntax
+
+## VDSL3
+
+explain what VDSL3 is and how it builds upon
+
+
+## Creating the module
+
+Nextflow works with modules to run scripts and handle their input and output, so the first step is generating a Nextflow module from a Viash component
+
+### Creating the component
+
+create a new folder named basic_pipeline, add a new folder to it named src
+download the remove_comments component files and add them to src
+
+<a href="/download/remove_comments/bash/config.vsh.yaml" id="btn-download" class="btn btn-info btn-md" role="button" download>Download config.vsh.yaml</a>    
+
+<a href="/download/remove_comments/bash/script.sh" id="btn-download" class="btn btn-info btn-md" role="button" download>Download script.sh</a>  
+
+### Building the Nextflow module
+
+```bash
+viash build src/remove_comments/config.vsh.yaml -o target/remove_comments
+```
+
+## Creating the pipeline
+
+Add main.nf:
+
+```groovy
+targetDir = "./target" // 1
+
+include { remove_comments } from "$targetDir/remove_comments/main.nf" // 2
+
+workflow {
+  Channel.fromPath(params.input) // 3
+    | map{ file -> [ file.baseName, file ] } // 4
+    | view{ file -> "Input: $file" } // 5
+    | remove_comments.run( // 6
+      auto: [ publish: true ]
+      )
+    | view{ file -> "Output: $file" } // 7
+}
+```
+
+Here's an overview of this Nextflow script:
+
+1. target dir where the modules are located
+2. include the `remove_comments` module from the `remove_comments/main.nf` script
+3. Create a channel based on the `input` parameter's path
+4. Take the tuple list and map it to the `[ file.baseName, file ]` fornmat
+5. Print the `input` tuple to the console
+6. [`Run`](#) the `remove_comments` module with [auto publishing](#) enabled using the `auto` directive
+7. Print the `output` tuple to the console
+
+
+run the pipeline
+
+```bash
+nextflow run main.nf --input "data/sample.tsv" --publishDir output
+```
+
+```
+N E X T F L O W  ~  version 22.04.3
+Launching `main.nf` [curious_gates] DSL2 - revision: 3e22e3038c
+executor >  local (1)
+[2a/5df658] process > remove_comments:remove_comments_process (1) [100%] 1 of 1 ✔
+Input: [sample, /home/blackdragonbe/GitHub/new_website/basic_pipeline/data/sample.tsv]
+Output: [sample, /home/blackdragonbe/GitHub/new_website/basic_pipeline/work/2a/5df6584524e26995953a4eaec97136/sample.remove_comments.output.tsv]
+```
+
+## What's next?
+
+the pipeline in this guide was the bare minimum
+to learn more about 
+
+[Advanced Pipeline](/documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html)
