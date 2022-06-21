@@ -1,7 +1,43 @@
 ---
 title: Advanced Pipeline
 search: true
+execute:
+  echo: false
+  output: asis
 ---
+
+```{python}
+# Imports
+import git, os
+
+# Get root dir of repo
+repo = git.Repo('.', search_parent_directories=True)
+repo_root = repo.working_tree_dir
+
+def print_file_contents(path, language = "default", folded = False):
+    filepath = repo_root + path
+    basename = os.path.basename(filepath)
+    f = open(filepath)
+    file_contents = f.read()
+
+    if folded:
+        print("<details>")
+        print(f"<summary>Contents of {basename}</summary>")
+
+    print(f"```{language}  ")
+    print(file_contents)
+    print("```  ")
+
+    if folded:
+        print("</details>")
+
+def create_download_button(path):
+    basename = os.path.basename(path)
+    print(f"<a href=\"{path}\" id=\"btn-download\" class=\"btn btn-info btn-md\" role=\"button\" download>Download {basename}</a>  ")
+```
+
+
+
 
 ## Overview
 
@@ -20,35 +56,55 @@ create a new folder named
 
 ### Creating the `remove_comments` component
 
-<a href="/download/remove_comments/bash/config.vsh.yaml" id="btn-download" class="btn btn-info btn-md" role="button" download>Download config.vsh.yaml</a>    
+This component removes all comments (lines starting with a hashtag) from a **tsv** file.
 
-<a href="/download/remove_comments/bash/script.sh" id="btn-download" class="btn btn-info btn-md" role="button" download>Download script.sh</a>  
+```{python}
+create_download_button("/download/remove_comments/bash/config.vsh.yaml")
+print_file_contents("/download/remove_comments/bash/config.vsh.yaml", "yaml", True)
+```
+
+
+```{python}
+create_download_button("/download/remove_comments/bash/script.sh")
+print_file_contents("/download/remove_comments/bash/script.sh", "bash", True)
+```
 
 ### Creating the `take_column` component
 
 This component subsets an incoming **tsv** file by extracting a certain column from the file. 
 
-<a href="/download/take_column/python/config.vsh.yaml" id="btn-download" class="btn btn-info btn-md" role="button" download>Download config.vsh.yaml</a>    
+```{python}
+create_download_button("/download/take_column/python/config.vsh.yaml")
+print_file_contents("/download/take_column/python/config.vsh.yaml", "yaml", True)
+```
 
-<a href="/download/take_column/python/script.py" id="btn-download" class="btn btn-info btn-md" role="button" download>Download script.py</a>  
+
+```{python}
+create_download_button("/download/take_column/python/script.py")
+print_file_contents("/download/take_column/python/script.py", "python", True)
+```
+
 
 ### Creating the `combine_columns` component
 
+This component combines multiple **tsv** files into one by concatenating all of the columns together. It assumes each incoming **tsv** file has an equal number of rows.
 
-<a href="/download/combine_columns/R/config.vsh.yaml" id="btn-download" class="btn btn-info btn-md" role="button" download>Download config.vsh.yaml</a>    
+```{python}
+create_download_button("/download/combine_columns/R/config.vsh.yaml")
+print_file_contents("/download/combine_columns/R/config.vsh.yaml", "yaml", True)
+```
 
-<details>
-  <summary>Contents of config.vsh.yaml</summary>
-</details>
 
-
-<a href="/download/combine_columns/R/script.R" id="btn-download" class="btn btn-info btn-md" role="button" download>Download script.py</a>  
-
-<details>
-  <summary>Contents of script.R</summary>
-</details>
+```{python}
+create_download_button("/download/combine_columns/R/script.R")
+print_file_contents("/download/combine_columns/R/script.R", "r", True)
+```
 
 
 ## Building the modules
 
 The [basic pipeline guide](#) describes how to generate an individual VDSL3 Nextflow module using the [`viash build`](#) command, but there's a better way when it comes to building multiple modules at once: [`viash ns build`](#).  
+
+```bash
+viash ns build
+```
