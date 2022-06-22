@@ -65,7 +65,7 @@ jobs:
       - name: Install Py dependencies
         run: |
           source renv/python/virtualenvs/renv-python-3.8/bin/activate
-          pip install pandas jupyter
+          pip install pandas nbformat jupyter
           
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/install-quarto@v1
@@ -75,6 +75,7 @@ jobs:
       - name: Render book to all formats
         shell: bash -l {0}  
         run: |
+          source renv/python/virtualenvs/renv-python-3.8/bin/activate
           docker -v # check whether podman is correctly detected
           quarto render
 
