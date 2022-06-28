@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.617">
+<meta name="generator" content="quarto-0.9.626">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -322,6 +322,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#building-the-nextflow-module" id="toc-building-the-nextflow-module" class="nav-link" data-scroll-target="#building-the-nextflow-module">Building the Nextflow module</a></li>
   </ul></li>
   <li><a href="#creating-the-pipeline" id="toc-creating-the-pipeline" class="nav-link" data-scroll-target="#creating-the-pipeline">Creating the pipeline</a></li>
+  <li><a href="#eunning-the-pipeline" id="toc-eunning-the-pipeline" class="nav-link" data-scroll-target="#eunning-the-pipeline">Eunning the pipeline</a></li>
   <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next">What’s next?</a></li>
   </ul>
 </nav>
@@ -388,12 +389,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>target dir where the modules are located</li>
 <li>include the <code>remove_comments</code> module from the <code>remove_comments/main.nf</code> script</li>
 <li>Create a channel based on the <code>input</code> parameter’s path</li>
-<li>Take the tuple list and map it to the <code>[ file.baseName, file ]</code> fornmat</li>
+<li>Take the tuple list and map it to the <code>[ file.baseName, file ]</code> format</li>
 <li>Print the <code>input</code> tuple to the console</li>
 <li><a href="#"><code>Run</code></a> the <code>remove_comments</code> module with <a href="#">auto publishing</a> enabled using the <code>auto</code> directive</li>
 <li>Print the <code>output</code> tuple to the console</li>
 </ol>
-<p>run the pipeline</p>
+</section>
+<section id="eunning-the-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="eunning-the-pipeline">Eunning the pipeline</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run main.nf <span class="at">--input</span> <span class="st">"data/sample.tsv"</span> <span class="at">--publishDir</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>N E X T F L O W  ~  version 22.04.3
 Launching `main.nf` [curious_gates] DSL2 - revision: 3e22e3038c
