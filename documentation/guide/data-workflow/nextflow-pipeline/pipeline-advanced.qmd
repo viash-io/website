@@ -6,50 +6,8 @@ execute:
   output: asis
 ---
 
-```{python}
-# TODO: make the python script act as a module and reference that
+{{< include ../../../../includes/_python_helper.qmd >}}
 
-# # Imports
-# import git, sys
-
-# # Get root dir of repo
-# repo = git.Repo('.', search_parent_directories=True)
-# module_folder = repo.working_tree_dir + "/bin/python_modules"
-
-# print(module_folder)
-# os.system(module_folder + "/qmd_helper.py")
-
-# Imports
-import git, os
-
-# Get root dir of repo
-repo = git.Repo('.', search_parent_directories=True)
-repo_root = repo.working_tree_dir
-
-# Run `quarto pandoc --list-highlight-languages` for full list of supported languages
-def print_file_contents(path, language = "default", folded = False):
-    filepath = repo_root + path
-    basename = os.path.basename(filepath)
-    f = open(filepath)
-    file_contents = f.read()
-
-    if folded:
-        print("<details>")
-        print(f"<summary>Contents of {basename}</summary>")
-
-    print(f"```{language}  ")
-    print(file_contents)
-    print("```  ")
-
-    if folded:
-        print("</details>")
-
-def create_download_button(path):
-    basename = os.path.basename(path)
-    download_path = path
-    print(f"<a href=\"{download_path}\" id=\"btn-download\" class=\"btn btn-info btn-md\" role=\"button\" download>Download {basename}</a>  ")
-```
- 
 ## Overview
 
 explain this pipeline is a more realistic example of a typical use-case of a Nextflow bioinformatics pipeline as it has a mixture of scripting languages used and a `join` is used to merge all events  
