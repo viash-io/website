@@ -1,0 +1,62 @@
+```{=html}
+<script type="text/javascript">
+let langDict = {
+  'bash': "Bash",
+  'csharp': "C#",
+  'js': "Javascript",
+  'python': "Python",
+  'scala': "Scala",
+  'r': "R",
+};
+
+let invertedLangDict = invertDictionary(langDict);
+
+document.addEventListener("DOMContentLoaded", function() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    let lang = 'bash';
+
+    if (urlParams.has('lang')){
+        lang = urlParams.get('lang');
+    }
+
+    changeTabSelections(lang);
+
+    var elements = document.querySelectorAll('[role="tab"]');
+    
+    for(var i = 0; i < elements.length; i++) {
+        tab = elements[i];
+        if (tab.textContent in invertedLangDict) {
+            tab.addEventListener('click', onTabClicked);
+        }
+    }
+
+    });
+
+    function changeTabSelections(language) {
+        var elements = document.querySelectorAll('[role="tab"]');
+
+        for(var i = 0; i < elements.length; i++) {
+            tab = elements[i];
+
+            if (tab.textContent == langDict[language]) {
+                tab.click();
+            }
+        }
+    }
+
+    function onTabClicked(event) {
+        changeTabSelections(invertedLangDict[event.srcElement.textContent]);
+    }
+
+    function invertDictionary(dict){
+        var ret = {};
+        for(var key in dict){
+            ret[dict[key]] = key;
+        }
+        return ret;
+    }
+
+</script>
+```
