@@ -1,0 +1,663 @@
+{
+    "functionality" : [
+      {
+        "name" : "__this__",
+        "type" : "com.dataintuitive.viash.functionality.Functionality",
+        "description" : "\"The functionality-part of the config file describes the behaviour of the script in terms of arguments and resources.\\nBy specifying a few restrictions (e.g. mandatory arguments) and adding some descriptions, Viash will automatically generate a stylish command-line interface for you.\\n\"",
+        "example" : [
+        ]
+      },
+      {
+        "name" : "tests",
+        "type" : "List[com.dataintuitive.viash.functionality.resources.Resource]",
+        "description" : "One or more Bash/R/Python scripts to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.",
+        "example" : [
+        ],
+        "deprecated" : {
+          "message" : "Use `test_resources` instead. No functional difference.",
+          "since" : "Viash 0.5.13"
+        }
+      },
+      {
+        "name" : "add_resources_to_path",
+        "type" : "Boolean",
+        "description" : "Adds the resources directory to the PATH variable when set to true. This is set to false by default.",
+        "example" : [
+        ],
+        "since" : "Viash 0.5.5",
+        "removed" : {
+          "message" : "Extending the PATH turned out to be not desirable.",
+          "since" : "Viash 0.5.11"
+        }
+      },
+      {
+        "name" : "enabled",
+        "type" : "Boolean",
+        "description" : "Setting this to false with disable this component when using namespaces.",
+        "example" : [
+        ],
+        "since" : "Viash 0.5.13"
+      },
+      {
+        "name" : "info",
+        "type" : "Map[String,String]",
+        "description" : "A map for storing custom annotation.",
+        "example" : [
+        ],
+        "since" : "Viash 0.4.0"
+      },
+      {
+        "name" : "test_resources",
+        "type" : "List[com.dataintuitive.viash.functionality.resources.Resource]",
+        "description" : "One or more Bash/R/Python scripts to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.",
+        "example" : [
+          {
+            "example" : "\"tests:\\n  - type: bash_script\\n    path: tests/test1.sh\\n  - type: r_script\\n    path: tests/test2.R\\n  - path: resource1.txt\\n\"",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "usage",
+        "type" : "Option[String]",
+        "description" : "A description of the component. This will be displayed with --help under the 'Usage:' section.",
+        "example" : [
+        ]
+      },
+      {
+        "name" : "description",
+        "type" : "Option[String]",
+        "description" : "A description of the component. This will be displayed with --help.",
+        "example" : [
+          {
+            "example" : "\"description: |\\nThis component performs function Y and Z.\\nIt is possible to make this a multiline string.\\n\"",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "resources",
+        "type" : "List[com.dataintuitive.viash.functionality.resources.Resource]",
+        "description" : "\"The first resource should be a script (bash_script, r_script, python_script, javascript_script, scala_script) which is what will be executed when the functionality is run. Additional resources will be copied to the same directory.\\n\\nCommon properties:\\n\\n * type: file/r_script/python_script/bash_script/javascript_script/scala_script, the type of resource. The first resource cannot be of type file. When the type is not specified, the default type is simply file. For more information regarding how to write a script in Bash, R or Python with Viash, check out the guides for the respective languages on the left.\\n * name: filename, the resulting name of the resource.\\n * path: path/to/file, the path of the input file. Can be a relative or an absolute path, or a URI.\\n * text: ...multiline text..., the raw content of the input file. Exactly one of path or text must be defined, the other undefined.\\n * is_executable: true/false, whether the resulting file is made executable.\\n\"",
+        "example" : [
+          {
+            "example" : "\"resources:\\n  - type: r_script\\n    path: script.R\\n  - type: file\\n    path: resource1.txt\\n\"",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "argument_groups",
+        "type" : "List[com.dataintuitive.viash.functionality.ArgumentGroup]",
+        "example" : [
+        ],
+        "since" : "Viash 0.5.14"
+      },
+      {
+        "name" : "arguments",
+        "type" : "List[com.dataintuitive.viash.functionality.arguments.Argument[_]]",
+        "description" : "\"A list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. Common properties for all argument types are the following.\\n - `type: string/file/integer/double/boolean/boolean_true/boolean_false`, the type of argument determining to what object type the value will be cast in the downstream scripts.\\n - `direction: input/output`, the directionality of the argument. Only needs to be specified for output files. Default: “input”.\\n - `name: --foo`, the name of the argument. Can also be `-foo` or `foo`. The number of dashes determines how values can be passed:\\n   - with `--foo`: long option, e.g. `exe --foo=bar` or exe `--foo bar`\\n   - with `-foo`: short option, e.g. `exe -foo bar`\\n   - with `foo`: argument, e.g. `exe bar`\\n - `alternatives: [-f]`, list of alternative names. Typically only used to provide a short alternative option.\\n - `description: Description of foo`, a description of the argument. Multiline descriptions are supported.\\n - `default: bar`, the default value when no argument value is provided. Not allowed when `required: true`.\\n - `required: true/false`, whether the argument is required. If true and the functionality is executed, an error will be produced if no value is provided. Default = false.\\n - `multiple: true/false`, whether to treat the argument value as an array or not. Arrays can be passed using the delimiter `--foo=1:2:3` or by providing the same argument multiple times `--foo 1 --foo 2`. Default = false.\\n - `multiple_sep: \\\":\\\"`, the delimiter for providing multiple values. Default = “:”.\\nOn types: \\n * `type: string`, The value passed through an argument of this type is converted to an ‘str’ object in Python, and to a ‘character’ object in R.\\n * `type: integer`, The resulting value is an ‘int’ in Python and an ‘integer’ in R.\\n * `type: double`, The resulting value is a ‘float’ in Python and an ‘double’ in R.\\n * `type: boolean`, The resulting value is a ‘bool’ in Python and a ‘logical’ in R.\\n * `type: boolean_true/boolean_false`, Arguments of this type can only be used by providing a flag `--foo` or not. The resulting value is a ‘bool’ in Python and a ‘logical’ in R. These properties cannot be altered: required is false, default is undefined, multiple is false.\\n * `type: file`, The resulting value is still an ‘str’ in Python and a ‘character’ in R. In order to correctly pass files in some platforms (e.g. Docker and Nextflow), Viash needs to know which arguments are input/output files.\\nAdditional property values:\\n - `must_exist: true/false`, denotes whether the file or folder should exist at the start of the execution.\\n\"",
+        "example" : [
+          {
+            "example" : "\"- name: --foo                           \\n  type: file\\n  alternatives: [-f]\\n  description: Description of foo\\n  default: \\\"/foo/bar\\\"\\n  must_exist: true\\n  required: false\\n  multiple: true\\n  multiple_sep: \\\",\\\"\\n\"",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "outputs",
+        "type" : "List[com.dataintuitive.viash.functionality.arguments.Argument[_]]",
+        "example" : [
+        ],
+        "since" : "Viash 0.5.11"
+      },
+      {
+        "name" : "inputs",
+        "type" : "List[com.dataintuitive.viash.functionality.arguments.Argument[_]]",
+        "example" : [
+        ],
+        "since" : "Viash 0.5.11"
+      },
+      {
+        "name" : "authors",
+        "type" : "List[com.dataintuitive.viash.functionality.Author]",
+        "description" : "\"A list of authors. An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.\\n\\nSuggested values for roles are:\\n| Role | Abbrev. | Description |\\n|------|---------|-------------|\\n| maintainer | mnt | for the maintainer of the code. Ideally, exactly one maintainer is specified. |\\n| author | aut | for persons who have made substantial contributions to the software. |\\n| contributor | ctb| for persons who have made smaller contributions (such as code patches).\\n| datacontributor | dtc | for persons or organisations that contributed data sets for the software\\n| copyrightholder | cph | for all copyright holders. This is a legal concept so should use the legal name of an institution or corporate body.\\n| funder | fnd | for persons or organizations that furnished financial support for the development of the software\\n\\nThe [full list of roles](https://www.loc.gov/marc/relators/relaterm.html) is extremely comprehensive.\\n\"",
+        "example" : [
+        ],
+        "since" : "Viash 0.3.1"
+      },
+      {
+        "name" : "version",
+        "type" : "Option[com.dataintuitive.viash.config.Version]",
+        "description" : "Version of the component. This field will be used to version the executable and the Docker container.",
+        "example" : [
+        ]
+      },
+      {
+        "name" : "namespace",
+        "type" : "Option[String]",
+        "description" : "Namespace this component is a part of. This is required when grouping components together in a pipeline and building multiple components at once using viash `ns build`.",
+        "example" : [
+          {
+            "example" : "namespace: fancy_components",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "name",
+        "type" : "String",
+        "description" : "Name of the component and the filename of the executable when built with `viash build`.",
+        "example" : [
+          {
+            "example" : "name: exe",
+            "format" : "yaml"
+          }
+        ]
+      }
+    ],
+    "nativePlatform" : [
+      {
+        "name" : "__this__",
+        "type" : "com.dataintuitive.viash.platforms.NativePlatform",
+        "description" : "\"Running a Viash component on a native platform means that the script will be executed in your current environment.\\nAny dependencies are assumed to have been installed by the user, so the native platform is meant for developers (who know what they’re doing) or for simple bash scripts (which have no extra dependencies).\\n\"",
+        "example" : [
+        ]
+      },
+      {
+        "name" : "id",
+        "type" : "String",
+        "description" : "As with all platforms, you can give a platform a different name. By specifying `id: foo`, you can target this platform (only) by specifying `-p foo` in any of the Viash commands.",
+        "example" : [
+          {
+            "example" : "id: foo",
+            "format" : "yaml"
+          }
+        ]
+      }
+    ],
+    "dockerPlatform" : [
+      {
+        "name" : "__this__",
+        "type" : "com.dataintuitive.viash.platforms.DockerPlatform",
+        "description" : "\"Run a Viash component on a Docker backend platform.\\nBy specifying which dependencies your component needs, users will be able to build a docker container from scratch using the setup flag, or pull it from a docker repository.\\n\"",
+        "example" : [
+        ]
+      },
+      {
+        "name" : "docker",
+        "type" : "Option[com.dataintuitive.viash.platforms.requirements.DockerRequirements]",
+        "description" : "Specify which Docker commands should be run during setup.",
+        "example" : [
+          {
+            "example" : "\"setup:\\n  - type: docker\\n    build_args: [ GITHUB_PAT=hello_world ]\\n    run: [ git clone ... ]\\n    add: [ \\\"http://foo.bar .\\\" ]\\n    copy: [ \\\"http://foo.bar .\\\" ]\\n    resources: \\n      - resource.txt /path/to/resource.txt\\n\"",
+            "format" : "yaml"
+          }
+        ],
+        "deprecated" : {
+          "message" : "Use `setup` instead.",
+          "since" : "Viash 0.5.15"
+        }
+      },
+      {
+        "name" : "python",
+        "type" : "Option[com.dataintuitive.viash.platforms.requirements.PythonRequirements]",
+        "description" : "Specify which Python packages should be available in order to run the component.",
+        "example" : [
+          {
+            "example" : "\"setup:\\n  - type: python\\n    pip: [ numpy ]\\n    git: [ https://some.git.repository/org/repo ]\\n    github: [ jkbr/httpie ]\\n    gitlab: [ foo/bar ]\\n    mercurial: [ http://... ]\\n    svn: [ http://...]\\n    bazaar: [ http://... ]\\n    url: [ http://... ]\\n\"",
+            "format" : "yaml"
+          }
+        ],
+        "deprecated" : {
+          "message" : "Use `setup` instead.",
+          "since" : "Viash 0.5.15"
+        }
+      },
+      {
+        "name" : "r",
+        "type" : "Option[com.dataintuitive.viash.platforms.requirements.RRequirements]",
+        "description" : "Specify which R packages should be available in order to run the component.",
+        "example" : [
+          {
+            "example" : "\"setup: \\n  - type: r\\n    cran: [ dynutils ]\\n    bioc: [ AnnotationDbi ]\\n    git: [ https://some.git.repository/org/repo ]\\n    github: [ rcannood/SCORPIUS ]\\n    gitlab: [ org/package ]\\n    svn: [ https://path.to.svn/group/repo ]\\n    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]\\n    script: [ \\'devtools::install(\\\".\\\")\\' ]\\n\"",
+            "format" : "yaml"
+          }
+        ],
+        "deprecated" : {
+          "message" : "Use `setup` instead.",
+          "since" : "Viash 0.5.15"
+        }
+      },
+      {
+        "name" : "yum",
+        "type" : "Option[com.dataintuitive.viash.platforms.requirements.YumRequirements]",
+        "description" : "Specify which yum packages should be available in order to run the component.",
+        "example" : [
+          {
+            "example" : "\"setup:\\n  - type: yum\\n    packages: [ sl ]\\n\"",
+            "format" : "yaml"
+          }
+        ],
+        "deprecated" : {
+          "message" : "Use `setup` instead.",
+          "since" : "Viash 0.5.15"
+        }
+      },
+      {
+        "name" : "apt",
+        "type" : "Option[com.dataintuitive.viash.platforms.requirements.AptRequirements]",
+        "description" : "Specify which apt packages should be available in order to run the component.",
+        "example" : [
+          {
+            "example" : "\"setup:\\n  - type: apt\\n    packages: [ sl ]\\n\"",
+            "format" : "yaml"
+          }
+        ],
+        "deprecated" : {
+          "message" : "Use `setup` instead.",
+          "since" : "Viash 0.5.15"
+        }
+      },
+      {
+        "name" : "apk",
+        "type" : "Option[com.dataintuitive.viash.platforms.requirements.ApkRequirements]",
+        "description" : "Specify which apk packages should be available in order to run the component.",
+        "example" : [
+          {
+            "example" : "\"setup:\\n  - type: apk\\n    packages: [ sl ]\\n\"",
+            "format" : "yaml"
+          }
+        ],
+        "deprecated" : {
+          "message" : "Use `setup` instead.",
+          "since" : "Viash 0.5.15"
+        }
+      },
+      {
+        "name" : "setup",
+        "type" : "List[com.dataintuitive.viash.platforms.requirements.Requirements]",
+        "description" : "\"A list of requirements for installing the following types of packages:\\n - apt\\n - apk\\n - yum\\n - R\\n - Python\\n - JavaScript\\n - Docker setup instructions\\nThe order in which these dependencies are specified determines the order in which they will be installed.\\n\"",
+        "example" : [
+        ]
+      },
+      {
+        "name" : "target_image_source",
+        "type" : "Option[String]",
+        "description" : "The source of the target image. This is used for defining labels in the dockerfile.",
+        "example" : [
+          {
+            "example" : "target_image_source: https://github.com/foo/bar",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "run_args",
+        "type" : "com.dataintuitive.viash.helpers.Circe.OneOrMore[String]",
+        "description" : "Add [docker run](https://docs.docker.com/engine/api/commandline/run/) arguments.",
+        "example" : [
+        ]
+      },
+      {
+        "name" : "workdir",
+        "type" : "Option[String]",
+        "description" : "The working directory when starting the container. This doesn’t change the Dockerfile but gets added as a command-line argument at runtime.",
+        "example" : [
+          {
+            "example" : "workdir: /home/user",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "port",
+        "type" : "com.dataintuitive.viash.helpers.Circe.OneOrMore[String]",
+        "description" : "A list of enabled ports. This doesn’t change the Dockerfile but gets added as a command-line argument at runtime.",
+        "example" : [
+          {
+            "example" : "\"port:\\n  - 80\\n  - 8080\\n\"",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "chown",
+        "type" : "Boolean",
+        "description" : "In Linux, files created by a Docker container will be owned by `root`. With `chown: true`, Viash will automatically change the ownership of output files (arguments with `type: file` and `direction: output`) to the user running the Viash command after execution of the component. Default value: `true`.",
+        "example" : [
+          {
+            "example" : "chown: false",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "namespace_separator",
+        "type" : "String",
+        "description" : "The default namespace separator is \"_\".",
+        "example" : [
+          {
+            "example" : "namespace_separator: \"+\"",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "target_tag",
+        "type" : "Option[com.dataintuitive.viash.config.Version]",
+        "description" : "The tag the resulting image gets.",
+        "example" : [
+          {
+            "example" : "target_tag: 0.5.0",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "target_registry",
+        "type" : "Option[String]",
+        "description" : "The URL where the resulting image will be pushed to.",
+        "example" : [
+          {
+            "example" : "target_registry: https://my-docker-registry.org",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "target_image",
+        "type" : "Option[String]",
+        "description" : "If anything is specified in the setup section, running the `---setup` will result in an image with the name of `<target_image>:<version>`. If nothing is specified in the `setup` section, simply `image` will be used.",
+        "example" : [
+          {
+            "example" : "target_image: myfoo",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "tag",
+        "type" : "Option[com.dataintuitive.viash.config.Version]",
+        "description" : "Specify a Docker image based on its tag.",
+        "example" : [
+          {
+            "example" : "tag: 4.0",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "registry",
+        "type" : "Option[String]",
+        "description" : "The URL to the a [custom Docker registry](https://docs.docker.com/registry/)",
+        "example" : [
+          {
+            "example" : "registry: https://my-docker-registry.org",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "organization",
+        "type" : "Option[String]",
+        "description" : "Name of a container’s [organization](https://docs.docker.com/docker-hub/orgs/).",
+        "example" : [
+        ]
+      },
+      {
+        "name" : "image",
+        "type" : "String",
+        "description" : "The base container to start from. You can also add the tag here if you wish.",
+        "example" : [
+          {
+            "example" : "image: \"bash:4.0\"",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "id",
+        "type" : "String",
+        "description" : "As with all platforms, you can give a platform a different name. By specifying `id: foo`, you can target this platform (only) by specifying `-p foo` in any of the Viash commands.",
+        "example" : [
+          {
+            "example" : "id: foo",
+            "format" : "yaml"
+          }
+        ]
+      }
+    ],
+    "nextflowLegacyPlatform" : [
+      {
+        "name" : "__this__",
+        "type" : "com.dataintuitive.viash.platforms.NextflowLegacyPlatform",
+        "description" : "Run a Viash component as a Nextflow module.",
+        "example" : [
+        ]
+      },
+      {
+        "name" : "stageInMode",
+        "type" : "Option[String]",
+        "description" : "\"By default NextFlow will create a symbolic link to the inputs for a process/module and run the tool at hand using those symbolic links. Some applications do not cope well with this strategy, in that case the files should effectively be copied rather than linked to. This can be achieved by using `stageInMode: copy`.\\nThis attribute is optional, the default is `symlink`.\\n\"",
+        "example" : [
+          {
+            "example" : "stageInMode: copy",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "labels",
+        "type" : "com.dataintuitive.viash.helpers.Circe.OneOrMore[String]",
+        "description" : "\"When running the module in a cluster context and depending on the cluster type, [NextFlow allows for attaching labels](https://www.nextflow.io/docs/latest/process.html#label) to the process that can later be used as selectors for associating resources to this process.\\n\\nIn order to attach one label to a process/component, one can use the `label: ...` attribute, multiple labels can be added using `labels: [ ..., ... ]` and the two can even be mixed.\\n\\nIn the main `nextflow.config`, one can now use this label:\\n\\nprocess {\\n  ...\\n  withLabel: bigmem {\\n     maxForks = 5\\n     ...\\n  }\\n}\\n\"",
+        "example" : [
+          {
+            "example" : "label: highmem labels: [ highmem, highcpu ]",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "label",
+        "type" : "Option[String]",
+        "description" : "\"When running the module in a cluster context and depending on the cluster type, [NextFlow allows for attaching labels](https://www.nextflow.io/docs/latest/process.html#label) to the process that can later be used as selectors for associating resources to this process.\\n\\nIn order to attach one label to a process/component, one can use the `label: ...` attribute, multiple labels can be added using `labels: [ ..., ... ]` and the two can even be mixed.\\n\\nIn the main `nextflow.config`, one can now use this label:\\n\\nprocess {\\n  ...\\n  withLabel: bigmem {\\n     maxForks = 5\\n     ...\\n  }\\n}\\n\"",
+        "example" : [
+          {
+            "example" : "label: highmem labels: [ highmem, highcpu ]",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "path",
+        "type" : "Option[String]",
+        "description" : "When `publish: true`, this attribute defines where the output is written relative to the `params.publishDir` setting. For example, `path: processed` in combination with `--output s3://some_bucket/` will store the output of this component under\n                 |```\n                 |s3://some_bucket/processed/\n                 |```\n                 |This attribute gives control over the directory structure of the output. For example:\n                 |```\n                 |path: raw_data\n                 |```\n                 |Or even:\n                 |```\n                 |path: raw_data/bcl\n                 |```\n                 |Please note that `per_id` and `path` can be combined.",
+        "example" : [
+        ]
+      },
+      {
+        "name" : "separate_multiple_outputs",
+        "type" : "Boolean",
+        "description" : "Separates the outputs generated by a Nextflow component with multiple outputs as separate events on the channel. Default value: `true`.",
+        "example" : [
+          {
+            "example" : "separate_multiple_outputs: false",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "per_id",
+        "type" : "Option[Boolean]",
+        "description" : "\"By default, a subdirectory is created corresponding to the unique ID that is passed in the triplet. Let us illustrate this with an example. The following code snippet uses the value of `--input` as an input of a workflow. The input can include a wildcard so that multiple samples can run in parallel. We use the parent directory name (`.getParent().baseName`) as an identifier for the sample. We pass this as the first entry of the triplet:\\n\\n```\\nChannel.fromPath(params.input) \\\\\\n    | map{ it -> [ it.getParent().baseName , it ] } \\\\\\n    | map{ it -> [ it[0] , it[1], params ] }\\n    | ...\\n```\\nSay the resulting sample names are `SAMPLE1` and `SAMPLE2`. The next step in the pipeline will be published (at least by default) under:\\n```\\n<publishDir>/SAMPLE1/\\n<publishDir>/SAMPLE2/\\n```\\nThese per-ID subdirectories can be avoided by setting:\\n```\\nper_id: false\\n```\\n\"",
+        "example" : [
+        ]
+      },
+      {
+        "name" : "publish",
+        "type" : "Option[Boolean]",
+        "description" : "\"NextFlow uses the autogenerated `work` dirs to manage process IO under the hood. In order effectively output something one can publish the results a module or step in the pipeline. In order to do this, add `publish: true` to the config:\\n\\n - publish is optional\\n - Default value is false\\nThis attribute simply defines if output of a component should be published yes or no. The output location has to be provided at pipeline launch by means of the option `--publishDir ...` or as `params.publishDir` in `nextflow.config`:\\n```\\nparams.publishDir = \\\"...\\\"\\n```\\n\"",
+        "example" : [
+        ]
+      },
+      {
+        "name" : "namespace_separator",
+        "type" : "String",
+        "description" : "The default namespace separator is \"_\".",
+        "example" : [
+          {
+            "example" : "namespace_separator: \"+\"",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "organization",
+        "type" : "Option[String]",
+        "description" : "Name of a container’s [organization](https://docs.docker.com/docker-hub/orgs/).",
+        "example" : [
+          {
+            "example" : "organization: viash-io",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "registry",
+        "type" : "Option[String]",
+        "description" : "The URL to the a [custom Docker registry](https://docs.docker.com/registry/).",
+        "example" : [
+          {
+            "example" : "registry: https://my-docker-registry.org",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "tag",
+        "type" : "Option[com.dataintuitive.viash.config.Version]",
+        "description" : "Specify a Docker image based on its tag.",
+        "example" : [
+          {
+            "example" : "tag: 4.0",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "image",
+        "type" : "Option[String]",
+        "description" : "\"If no image attributes are configured, Viash will use the auto-generated image name from the Docker platform:\\n\\n```\\n[<namespace>/]<name>:<version>\\n```\\nIt’s possible to specify the container image explicitly with which to run the module in different ways:\\n\\n```\\nimage: dataintuitive/viash:0.4.0\\n```\\nExactly the same can be obtained with\\n\\n```\\nimage: dataintuitive/viash\\nregistry: index.docker.io/v1/\\ntag: 0.4.0\\n```\\nSpecifying the attribute(s) like this will use the container `dataintuitive/viash:0.4.0` from Docker hub (registry).\\n\\nIf no tag is specified Viash will use `functionality.version` as the tag.\\n\\nIf no registry is specified, Viash (and NextFlow) will assume the image is available locally or on Docker Hub. In other words, the `registry: ...` attribute above is superfluous. No other registry is checked automatically due to a limitation from Docker itself.\\n\"",
+        "example" : [
+        ]
+      },
+      {
+        "name" : "id",
+        "type" : "String",
+        "description" : "Every platform can be given a specific id that can later be referred to explicitly when running or building the Viash component.",
+        "example" : [
+        ]
+      }
+    ],
+    "apkRequirements" : [
+      {
+        "name" : "__this__",
+        "type" : "com.dataintuitive.viash.platforms.requirements.ApkRequirements",
+        "description" : "Specify which apk packages should be available in order to run the component.",
+        "example" : [
+          {
+            "example" : "\"setup:\\n  - type: apk\\n    packages: [ sl ]\\n\"",
+            "format" : "yaml"
+          }
+        ]
+      }
+    ],
+    "aptRequirements" : [
+      {
+        "name" : "__this__",
+        "type" : "com.dataintuitive.viash.platforms.requirements.AptRequirements",
+        "description" : "Specify which apt packages should be available in order to run the component.",
+        "example" : [
+          {
+            "example" : "\"setup:\\n  - type: apt\\n    packages: [ sl ]\\n\"",
+            "format" : "yaml"
+          }
+        ]
+      }
+    ],
+    "dockerRequirements" : [
+      {
+        "name" : "__this__",
+        "type" : "com.dataintuitive.viash.platforms.requirements.DockerRequirements",
+        "description" : "Specify which Docker commands should be run during setup.",
+        "example" : [
+          {
+            "example" : "\"setup:\\n  - type: docker\\n    build_args: [ GITHUB_PAT=hello_world ]\\n    run: [ git clone ... ]\\n    add: [ \\\"http://foo.bar .\\\" ]\\n    copy: [ \\\"http://foo.bar .\\\" ]\\n    resources: \\n      - resource.txt /path/to/resource.txt\\n\"",
+            "format" : "yaml"
+          }
+        ]
+      }
+    ],
+    "javascriptRequirements" : [
+      {
+        "name" : "__this__",
+        "type" : "com.dataintuitive.viash.platforms.requirements.JavaScriptRequirements",
+        "description" : "Specify which JavaScript packages should be available in order to run the component.",
+        "example" : [
+          {
+            "example" : "\"setup:\\n  - type: javascript\\n    npm: [ packagename ]\\n    git: [ https://... ]\\n    github: [ owner/repository ]\\n    url: [ https://... ]\\n\"",
+            "format" : "yaml"
+          }
+        ]
+      }
+    ],
+    "pythonRequirements" : [
+      {
+        "name" : "__this__",
+        "type" : "com.dataintuitive.viash.platforms.requirements.PythonRequirements",
+        "description" : "Specify which Python packages should be available in order to run the component.",
+        "example" : [
+          {
+            "example" : "\"setup:\\n  - type: python\\n    pip: [ numpy ]\\n    git: [ https://some.git.repository/org/repo ]\\n    github: [ jkbr/httpie ]\\n    gitlab: [ foo/bar ]\\n    mercurial: [ http://... ]\\n    svn: [ http://...]\\n    bazaar: [ http://... ]\\n    url: [ http://... ]\\n\"",
+            "format" : "yaml"
+          }
+        ]
+      }
+    ],
+    "rRequirements" : [
+      {
+        "name" : "__this__",
+        "type" : "com.dataintuitive.viash.platforms.requirements.RRequirements",
+        "description" : "Specify which R packages should be available in order to run the component.",
+        "example" : [
+          {
+            "example" : "\"setup: \\n  - type: r\\n    cran: [ dynutils ]\\n    bioc: [ AnnotationDbi ]\\n    git: [ https://some.git.repository/org/repo ]\\n    github: [ rcannood/SCORPIUS ]\\n    gitlab: [ org/package ]\\n    svn: [ https://path.to.svn/group/repo ]\\n    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]\\n    script: [ \\'devtools::install(\\\".\\\")\\' ]\\n\"",
+            "format" : "yaml"
+          }
+        ]
+      }
+    ],
+    "rubyRequirements" : [
+      {
+        "name" : "__this__",
+        "type" : "com.dataintuitive.viash.platforms.requirements.RubyRequirements",
+        "description" : "Specify which Ruby packages should be available in order to run the component.",
+        "example" : [
+        ]
+      }
+    ],
+    "yumRequirements" : [
+      {
+        "name" : "__this__",
+        "type" : "com.dataintuitive.viash.platforms.requirements.YumRequirements",
+        "description" : "Specify which yum packages should be available in order to run the component.",
+        "example" : [
+          {
+            "example" : "\"setup:\\n  - type: yum\\n    packages: [ sl ]\\n\"",
+            "format" : "yaml"
+          }
+        ]
+      }
+    ]
+  }

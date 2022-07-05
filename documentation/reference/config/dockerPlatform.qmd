@@ -1,0 +1,238 @@
+---
+title: "Docker Platform"
+---
+
+Run a Viash component on a Docker backend platform.\nBy specifying which dependencies your component needs, users will be able to build a docker container from scratch using the setup flag, or pull it from a docker repository.\n
+
+## docker
+
+Specify which Docker commands should be run during setup.
+
+### Example(s)
+
+```yaml
+"setup:
+  - type: docker
+    build_args: [ GITHUB_PAT=hello_world ]
+    run: [ git clone ... ]
+    add: [ \"http://foo.bar .\" ]
+    copy: [ \"http://foo.bar .\" ]
+    resources: 
+      - resource.txt /path/to/resource.txt
+"
+```
+
+## python
+
+Specify which Python packages should be available in order to run the component.
+
+### Example(s)
+
+```yaml
+"setup:
+  - type: python
+    pip: [ numpy ]
+    git: [ https://some.git.repository/org/repo ]
+    github: [ jkbr/httpie ]
+    gitlab: [ foo/bar ]
+    mercurial: [ http://... ]
+    svn: [ http://...]
+    bazaar: [ http://... ]
+    url: [ http://... ]
+"
+```
+
+## r
+
+Specify which R packages should be available in order to run the component.
+
+### Example(s)
+
+```yaml
+"setup: 
+  - type: r
+    cran: [ dynutils ]
+    bioc: [ AnnotationDbi ]
+    git: [ https://some.git.repository/org/repo ]
+    github: [ rcannood/SCORPIUS ]
+    gitlab: [ org/package ]
+    svn: [ https://path.to.svn/group/repo ]
+    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]
+    script: [ \'devtools::install(\".\")\' ]
+"
+```
+
+## yum
+
+Specify which yum packages should be available in order to run the component.
+
+### Example(s)
+
+```yaml
+"setup:
+  - type: yum
+    packages: [ sl ]
+"
+```
+
+## apt
+
+Specify which apt packages should be available in order to run the component.
+
+### Example(s)
+
+```yaml
+"setup:
+  - type: apt
+    packages: [ sl ]
+"
+```
+
+## apk
+
+Specify which apk packages should be available in order to run the component.
+
+### Example(s)
+
+```yaml
+"setup:
+  - type: apk
+    packages: [ sl ]
+"
+```
+
+## setup
+
+"A list of requirements for installing the following types of packages:\n - apt\n - apk\n - yum\n - R\n - Python\n - JavaScript\n - Docker setup instructions\nThe order in which these dependencies are specified determines the order in which they will be installed.\n"
+
+## target_image_source
+
+The source of the target image. This is used for defining labels in the dockerfile.
+
+### Example(s)
+
+```yaml
+target_image_source: https://github.com/foo/bar
+```
+
+## run_args
+
+Add [docker run](https://docs.docker.com/engine/api/commandline/run/) arguments.
+
+## workdir
+
+The working directory when starting the container. This doesn’t change the Dockerfile but gets added as a command-line argument at runtime.
+
+### Example(s)
+
+```yaml
+workdir: /home/user
+```
+
+## port
+
+A list of enabled ports. This doesn’t change the Dockerfile but gets added as a command-line argument at runtime.
+
+### Example(s)
+
+```yaml
+"port:
+  - 80
+  - 8080
+"
+```
+
+## chown
+
+In Linux, files created by a Docker container will be owned by `root`. With `chown: true`, Viash will automatically change the ownership of output files (arguments with `type: file` and `direction: output`) to the user running the Viash command after execution of the component. Default value: `true`.
+
+### Example(s)
+
+```yaml
+chown: false
+```
+
+## namespace_separator
+
+The default namespace separator is "_".
+
+### Example(s)
+
+```yaml
+namespace_separator: "+"
+```
+
+## target_tag
+
+The tag the resulting image gets.
+
+### Example(s)
+
+```yaml
+target_tag: 0.5.0
+```
+
+## target_registry
+
+The URL where the resulting image will be pushed to.
+
+### Example(s)
+
+```yaml
+target_registry: https://my-docker-registry.org
+```
+
+## target_image
+
+If anything is specified in the setup section, running the `---setup` will result in an image with the name of `<target_image>:<version>`. If nothing is specified in the `setup` section, simply `image` will be used.
+
+### Example(s)
+
+```yaml
+target_image: myfoo
+```
+
+## tag
+
+Specify a Docker image based on its tag.
+
+### Example(s)
+
+```yaml
+tag: 4.0
+```
+
+## registry
+
+The URL to the a [custom Docker registry](https://docs.docker.com/registry/)
+
+### Example(s)
+
+```yaml
+registry: https://my-docker-registry.org
+```
+
+## organization
+
+Name of a container’s [organization](https://docs.docker.com/docker-hub/orgs/).
+
+## image
+
+The base container to start from. You can also add the tag here if you wish.
+
+### Example(s)
+
+```yaml
+image: "bash:4.0"
+```
+
+## id
+
+As with all platforms, you can give a platform a different name. By specifying `id: foo`, you can target this platform (only) by specifying `-p foo` in any of the Viash commands.
+
+### Example(s)
+
+```yaml
+id: foo
+```
+
