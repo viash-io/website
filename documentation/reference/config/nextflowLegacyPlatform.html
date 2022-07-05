@@ -331,7 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Run a Viash component as a Nextflow module.</p>
 <section id="stageinmode" class="level2">
 <h2 class="anchored" data-anchor-id="stageinmode">stageInMode</h2>
-<p>“By default NextFlow will create a symbolic link to the inputs for a process/module and run the tool at hand using those symbolic links. Some applications do not cope well with this strategy, in that case the files should effectively be copied rather than linked to. This can be achieved by using <code>stageInMode: copy</code>.attribute is optional, the default is <code>symlink</code>.”</p>
+<p>By default NextFlow will create a symbolic link to the inputs for a process/module and run the tool at hand using those symbolic links. Some applications do not cope well with this strategy, in that case the files should effectively be copied rather than linked to. This can be achieved by using <code>stageInMode: copy</code>. This attribute is optional, the default is <code>symlink</code>.</p>
 <section id="examples" class="level3">
 <h3 class="anchored" data-anchor-id="examples">Example(s)</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stageInMode</span><span class="kw">:</span><span class="at"> copy</span></span></code></pre></div>
@@ -339,7 +339,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="labels" class="level2">
 <h2 class="anchored" data-anchor-id="labels">labels</h2>
-<p>“When running the module in a cluster context and depending on the cluster type, <a href="https://www.nextflow.io/docs/latest/process.html#label">NextFlow allows for attaching labels</a> to the process that can later be used as selectors for associating resources to this process.order to attach one label to a process/component, one can use the <code>label: ...</code> attribute, multiple labels can be added using <code>labels: [ ..., ... ]</code> and the two can even be mixed.the main <code>nextflow.config</code>, one can now use this label:”</p>
+<p>When running the module in a cluster context and depending on the cluster type, <a href="https://www.nextflow.io/docs/latest/process.html#label">NextFlow allows for attaching labels</a> to the process that can later be used as selectors for associating resources to this process.</p>
+<p>In order to attach one label to a process/component, one can use the <code>label: ...</code> attribute, multiple labels can be added using <code>labels: [ ..., ... ]</code> and the two can even be mixed.</p>
+<p>In the main <code>nextflow.config</code>, one can now use this label:</p>
+<p>process { … withLabel: bigmem { maxForks = 5 … } }</p>
 <section id="examples-1" class="level3">
 <h3 class="anchored" data-anchor-id="examples-1">Example(s)</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span><span class="kw">:</span><span class="at"> highmem labels: [ highmem, highcpu ]</span></span></code></pre></div>
@@ -347,7 +350,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="label" class="level2">
 <h2 class="anchored" data-anchor-id="label">label</h2>
-<p>“When running the module in a cluster context and depending on the cluster type, <a href="https://www.nextflow.io/docs/latest/process.html#label">NextFlow allows for attaching labels</a> to the process that can later be used as selectors for associating resources to this process.order to attach one label to a process/component, one can use the <code>label: ...</code> attribute, multiple labels can be added using <code>labels: [ ..., ... ]</code> and the two can even be mixed.the main <code>nextflow.config</code>, one can now use this label:”</p>
+<p>When running the module in a cluster context and depending on the cluster type, <a href="https://www.nextflow.io/docs/latest/process.html#label">NextFlow allows for attaching labels</a> to the process that can later be used as selectors for associating resources to this process.</p>
+<p>In order to attach one label to a process/component, one can use the <code>label: ...</code> attribute, multiple labels can be added using <code>labels: [ ..., ... ]</code> and the two can even be mixed.</p>
+<p>In the main <code>nextflow.config</code>, one can now use this label:</p>
+<p>process { … withLabel: bigmem { maxForks = 5 … } }</p>
 <section id="examples-2" class="level3">
 <h3 class="anchored" data-anchor-id="examples-2">Example(s)</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span><span class="kw">:</span><span class="at"> highmem labels: [ highmem, highcpu ]</span></span></code></pre></div>
@@ -367,18 +373,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="per_id" class="level2">
 <h2 class="anchored" data-anchor-id="per_id">per_id</h2>
-<p>“By default, a subdirectory is created corresponding to the unique ID that is passed in the triplet. Let us illustrate this with an example. The following code snippet uses the value of <code>--input</code> as an input of a workflow. The input can include a wildcard so that multiple samples can run in parallel. We use the parent directory name (<code>.getParent().baseName</code>) as an identifier for the sample. We pass this as the first entry of the triplet:<code>\nChannel.fromPath(params.input) \\\n    | map{ it -&gt; [ it.getParent().baseName , it ] } \\\n    | map{ it -&gt; [ it[0] , it[1], params ] }\n    | ...\n</code>the resulting sample names are <code>SAMPLE1</code> and <code>SAMPLE2</code>. The next step in the pipeline will be published (at least by default) under:<code>\n&lt;publishDir&gt;/SAMPLE1/\n&lt;publishDir&gt;/SAMPLE2/\n</code>per-ID subdirectories can be avoided by setting:<code>\nper_id: false\n</code>”</p>
+<p>By default, a subdirectory is created corresponding to the unique ID that is passed in the triplet. Let us illustrate this with an example. The following code snippet uses the value of <code>--input</code> as an input of a workflow. The input can include a wildcard so that multiple samples can run in parallel. We use the parent directory name (<code>.getParent().baseName</code>) as an identifier for the sample. We pass this as the first entry of the triplet:</p>
+<pre><code>Channel.fromPath(params.input) \
+    | map{ it -&gt; [ it.getParent().baseName , it ] } \
+    | map{ it -&gt; [ it[0] , it[1], params ] }
+    | ...</code></pre>
+<p>Say the resulting sample names are <code>SAMPLE1</code> and <code>SAMPLE2</code>. The next step in the pipeline will be published (at least by default) under:</p>
+<pre><code>&lt;publishDir&gt;/SAMPLE1/
+&lt;publishDir&gt;/SAMPLE2/</code></pre>
+<p>These per-ID subdirectories can be avoided by setting:</p>
+<pre><code>per_id: false</code></pre>
 </section>
 <section id="publish" class="level2">
 <h2 class="anchored" data-anchor-id="publish">publish</h2>
-<p>“NextFlow uses the autogenerated <code>work</code> dirs to manage process IO under the hood. In order effectively output something one can publish the results a module or step in the pipeline. In order to do this, add <code>publish: true</code> to the config:- publish is optional- Default value is falseattribute simply defines if output of a component should be published yes or no. The output location has to be provided at pipeline launch by means of the option <code>--publishDir ...</code> or as <code>params.publishDir</code> in <code>nextflow.config</code>:<code>\nparams.publishDir = \"...\"\n</code>”</p>
+<p>NextFlow uses the autogenerated <code>work</code> dirs to manage process IO under the hood. In order effectively output something one can publish the results a module or step in the pipeline. In order to do this, add <code>publish: true</code> to the config:</p>
+<ul>
+<li>publish is optional</li>
+<li>Default value is false This attribute simply defines if output of a component should be published yes or no. The output location has to be provided at pipeline launch by means of the option <code>--publishDir ...</code> or as <code>params.publishDir</code> in <code>nextflow.config</code>:</li>
+</ul>
+<pre><code>params.publishDir = "..."</code></pre>
 </section>
 <section id="namespace_separator" class="level2">
 <h2 class="anchored" data-anchor-id="namespace_separator">namespace_separator</h2>
 <p>The default namespace separator is “_“.</p>
 <section id="examples-4" class="level3">
 <h3 class="anchored" data-anchor-id="examples-4">Example(s)</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">namespace_separator</span><span class="kw">:</span><span class="at"> </span><span class="st">"+"</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">namespace_separator</span><span class="kw">:</span><span class="at"> </span><span class="st">"+"</span></span></code></pre></div>
 </section>
 </section>
 <section id="organization" class="level2">
@@ -386,7 +406,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Name of a container’s <a href="https://docs.docker.com/docker-hub/orgs/">organization</a>.</p>
 <section id="examples-5" class="level3">
 <h3 class="anchored" data-anchor-id="examples-5">Example(s)</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">organization</span><span class="kw">:</span><span class="at"> viash-io</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">organization</span><span class="kw">:</span><span class="at"> viash-io</span></span></code></pre></div>
 </section>
 </section>
 <section id="registry" class="level2">
@@ -394,7 +414,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The URL to the a <a href="https://docs.docker.com/registry/">custom Docker registry</a>.</p>
 <section id="examples-6" class="level3">
 <h3 class="anchored" data-anchor-id="examples-6">Example(s)</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">registry</span><span class="kw">:</span><span class="at"> https://my-docker-registry.org</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">registry</span><span class="kw">:</span><span class="at"> https://my-docker-registry.org</span></span></code></pre></div>
 </section>
 </section>
 <section id="tag" class="level2">
@@ -402,12 +422,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Specify a Docker image based on its tag.</p>
 <section id="examples-7" class="level3">
 <h3 class="anchored" data-anchor-id="examples-7">Example(s)</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tag</span><span class="kw">:</span><span class="at"> </span><span class="fl">4.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tag</span><span class="kw">:</span><span class="at"> </span><span class="fl">4.0</span></span></code></pre></div>
 </section>
 </section>
 <section id="image" class="level2">
 <h2 class="anchored" data-anchor-id="image">image</h2>
-<p>“If no image attributes are configured, Viash will use the auto-generated image name from the Docker platform:<code>\n[&lt;namespace&gt;/]&lt;name&gt;:&lt;version&gt;\n</code>’s possible to specify the container image explicitly with which to run the module in different ways:<code>\nimage: dataintuitive/viash:0.4.0\n</code>the same can be obtained with<code>\nimage: dataintuitive/viash\nregistry: index.docker.io/v1/\ntag: 0.4.0\n</code>the attribute(s) like this will use the container <code>dataintuitive/viash:0.4.0</code> from Docker hub (registry).no tag is specified Viash will use <code>functionality.version</code> as the tag.no registry is specified, Viash (and NextFlow) will assume the image is available locally or on Docker Hub. In other words, the <code>registry: ...</code> attribute above is superfluous. No other registry is checked automatically due to a limitation from Docker itself.”</p>
+<p>If no image attributes are configured, Viash will use the auto-generated image name from the Docker platform:</p>
+<pre><code>[&lt;namespace&gt;/]&lt;name&gt;:&lt;version&gt;</code></pre>
+<p>It’s possible to specify the container image explicitly with which to run the module in different ways:</p>
+<pre><code>image: dataintuitive/viash:0.4.0</code></pre>
+<p>Exactly the same can be obtained with</p>
+<pre><code>image: dataintuitive/viash
+registry: index.docker.io/v1/
+tag: 0.4.0</code></pre>
+<p>Specifying the attribute(s) like this will use the container <code>dataintuitive/viash:0.4.0</code> from Docker hub (registry).</p>
+<p>If no tag is specified Viash will use <code>functionality.version</code> as the tag.</p>
+<p>If no registry is specified, Viash (and NextFlow) will assume the image is available locally or on Docker Hub. In other words, the <code>registry: ...</code> attribute above is superfluous. No other registry is checked automatically due to a limitation from Docker itself.</p>
 </section>
 <section id="id" class="level2">
 <h2 class="anchored" data-anchor-id="id">id</h2>
