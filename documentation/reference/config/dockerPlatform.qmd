@@ -2,7 +2,9 @@
 title: "Docker Platform"
 ---
 
-Run a Viash component on a Docker backend platform.\nBy specifying which dependencies your component needs, users will be able to build a docker container from scratch using the setup flag, or pull it from a docker repository.\n
+Run a Viash component on a Docker backend platform.
+By specifying which dependencies your component needs, users will be able to build a docker container from scratch using the setup flag, or pull it from a docker repository.
+
 
 ## docker
 
@@ -11,15 +13,15 @@ Specify which Docker commands should be run during setup.
 ### Example(s)
 
 ```yaml
-"setup:
+setup:
   - type: docker
     build_args: [ GITHUB_PAT=hello_world ]
     run: [ git clone ... ]
-    add: [ \"http://foo.bar .\" ]
-    copy: [ \"http://foo.bar .\" ]
+    add: [ "http://foo.bar ." ]
+    copy: [ "http://foo.bar ." ]
     resources: 
       - resource.txt /path/to/resource.txt
-"
+
 ```
 
 ## python
@@ -29,7 +31,7 @@ Specify which Python packages should be available in order to run the component.
 ### Example(s)
 
 ```yaml
-"setup:
+setup:
   - type: python
     pip: [ numpy ]
     git: [ https://some.git.repository/org/repo ]
@@ -39,7 +41,7 @@ Specify which Python packages should be available in order to run the component.
     svn: [ http://...]
     bazaar: [ http://... ]
     url: [ http://... ]
-"
+
 ```
 
 ## r
@@ -49,7 +51,7 @@ Specify which R packages should be available in order to run the component.
 ### Example(s)
 
 ```yaml
-"setup: 
+setup: 
   - type: r
     cran: [ dynutils ]
     bioc: [ AnnotationDbi ]
@@ -58,8 +60,8 @@ Specify which R packages should be available in order to run the component.
     gitlab: [ org/package ]
     svn: [ https://path.to.svn/group/repo ]
     url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]
-    script: [ \'devtools::install(\".\")\' ]
-"
+    script: [ 'devtools::install(".")' ]
+
 ```
 
 ## yum
@@ -69,10 +71,10 @@ Specify which yum packages should be available in order to run the component.
 ### Example(s)
 
 ```yaml
-"setup:
+setup:
   - type: yum
     packages: [ sl ]
-"
+
 ```
 
 ## apt
@@ -82,10 +84,10 @@ Specify which apt packages should be available in order to run the component.
 ### Example(s)
 
 ```yaml
-"setup:
+setup:
   - type: apt
     packages: [ sl ]
-"
+
 ```
 
 ## apk
@@ -95,15 +97,24 @@ Specify which apk packages should be available in order to run the component.
 ### Example(s)
 
 ```yaml
-"setup:
+setup:
   - type: apk
     packages: [ sl ]
-"
+
 ```
 
 ## setup
 
-"A list of requirements for installing the following types of packages:\n - apt\n - apk\n - yum\n - R\n - Python\n - JavaScript\n - Docker setup instructions\nThe order in which these dependencies are specified determines the order in which they will be installed.\n"
+A list of requirements for installing the following types of packages:
+ - apt
+ - apk
+ - yum
+ - R
+ - Python
+ - JavaScript
+ - Docker setup instructions
+The order in which these dependencies are specified determines the order in which they will be installed.
+
 
 ## target_image_source
 
@@ -136,10 +147,10 @@ A list of enabled ports. This doesn’t change the Dockerfile but gets added as 
 ### Example(s)
 
 ```yaml
-"port:
+port:
   - 80
   - 8080
-"
+
 ```
 
 ## chown
