@@ -112,11 +112,11 @@
     "text": "Creating the pipeline\nAdd main.nf:\ntargetDir = \"./target\" // 1\n\ninclude { remove_comments } from \"$targetDir/remove_comments/main.nf\" // 2\n\nworkflow {\n  Channel.fromPath(params.input) // 3\n    | map{ file -> [ file.baseName, file ] } // 4\n    | view{ file -> \"Input: $file\" } // 5\n    | remove_comments.run( // 6\n      auto: [ publish: true ]\n      )\n    | view{ file -> \"Output: $file\" } // 7\n}\nHere’s an overview of this Nextflow script:\n\ntarget dir where the modules are located\ninclude the remove_comments module from the remove_comments/main.nf script\nCreate a channel based on the input parameter’s path\nTake the tuple list and map it to the [ file.baseName, file ] format\nPrint the input tuple to the console\nRun the remove_comments module with auto publishing enabled using the auto directive\nPrint the output tuple to the console"
   },
   {
-    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#eunning-the-pipeline",
-    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#eunning-the-pipeline",
+    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#running-the-pipeline",
+    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#running-the-pipeline",
     "title": "Pipeline Basics",
-    "section": "Eunning the pipeline",
-    "text": "Eunning the pipeline\nnextflow run main.nf --input \"data/sample.tsv\" --publishDir output\nN E X T F L O W  ~  version 22.04.3\nLaunching `main.nf` [curious_gates] DSL2 - revision: 3e22e3038c\nexecutor >  local (1)\n[2a/5df658] process > remove_comments:remove_comments_process (1) [100%] 1 of 1 ✔\nInput: [sample, /home/blackdragonbe/GitHub/new_website/basic_pipeline/data/sample.tsv]\nOutput: [sample, /home/blackdragonbe/GitHub/new_website/basic_pipeline/work/2a/5df6584524e26995953a4eaec97136/sample.remove_comments.output.tsv]"
+    "section": "Running the pipeline",
+    "text": "Running the pipeline\nnextflow run main.nf --input \"data/sample.tsv\" --publishDir output\nN E X T F L O W  ~  version 22.04.3\nLaunching `main.nf` [curious_gates] DSL2 - revision: 3e22e3038c\nexecutor >  local (1)\n[2a/5df658] process > remove_comments:remove_comments_process (1) [100%] 1 of 1 ✔\nInput: [sample, /home/blackdragonbe/GitHub/new_website/basic_pipeline/data/sample.tsv]\nOutput: [sample, /home/blackdragonbe/GitHub/new_website/basic_pipeline/work/2a/5df6584524e26995953a4eaec97136/sample.remove_comments.output.tsv]"
   },
   {
     "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#whats-next",
