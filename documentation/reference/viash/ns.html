@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Viash - Viash (Python)</title>
+<title>Viash - viash ns</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,8 +25,8 @@ ul.task-list{list-style: none;}
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../documentation/reference/config/overview.html" rel="next">
-<link href="../../../documentation/reference/viash/viash.html" rel="prev">
+<link href="../../../documentation/reference/viash/run.html" rel="next">
+<link href="../../../documentation/reference/viash/config.html" rel="prev">
 <link href="../../../favicon.png" rel="icon" type="image/png">
 <script src="../../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
@@ -60,11 +60,11 @@ ul.task-list{list-style: none;}
 
 <link rel="stylesheet" href="../../../styles.css">
 <link rel="stylesheet" href="../reference.css">
-<meta property="og:title" content="Viash - Viash (Python)">
-<meta property="og:description" content="Executes a viash component from the provided viash config file. viash generates a temporary executable and immediately executes it with the given parameters.">
+<meta property="og:title" content="Viash - viash ns">
+<meta property="og:description" content="Build a namespace from many viash config files.">
 <meta property="og:site-name" content="Viash">
-<meta name="twitter:title" content="Viash - Viash (Python)">
-<meta name="twitter:description" content="Executes a viash component from the provided viash config file. viash generates a temporary executable and immediately executes it with the given parameters.">
+<meta name="twitter:title" content="Viash - viash ns">
+<meta name="twitter:description" content="Build a namespace from many viash config files.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -125,7 +125,7 @@ ul.task-list{list-style: none;}
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Viash (Python)</h1>
+      <h1 class="quarto-secondary-nav-title">viash ns</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -153,12 +153,27 @@ ul.task-list{list-style: none;}
     <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../documentation/reference/viash/viash.html" class="sidebar-item-text sidebar-link">viash (lua)</a>
+  <a href="../../../documentation/reference/viash/build.html" class="sidebar-item-text sidebar-link">viash build</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../documentation/reference/viash/viash_python.html" class="sidebar-item-text sidebar-link active">viash (py)</a>
+  <a href="../../../documentation/reference/viash/config.html" class="sidebar-item-text sidebar-link">viash config</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../documentation/reference/viash/ns.html" class="sidebar-item-text sidebar-link active">viash ns</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../documentation/reference/viash/run.html" class="sidebar-item-text sidebar-link">viash run</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../documentation/reference/viash/test.html" class="sidebar-item-text sidebar-link">viash test</a>
   </div>
 </li>
     </ul>
@@ -207,14 +222,9 @@ ul.task-list{list-style: none;}
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#viash-run" id="toc-viash-run" class="nav-link active" data-scroll-target="#viash-run">viash run</a></li>
-  <li><a href="#viash-build" id="toc-viash-build" class="nav-link" data-scroll-target="#viash-build">viash build</a></li>
-  <li><a href="#viash-test" id="toc-viash-test" class="nav-link" data-scroll-target="#viash-test">viash test</a></li>
-  <li><a href="#viash-ns-build" id="toc-viash-ns-build" class="nav-link" data-scroll-target="#viash-ns-build">viash ns build</a></li>
+  <li><a href="#viash-ns-build" id="toc-viash-ns-build" class="nav-link active" data-scroll-target="#viash-ns-build">viash ns build</a></li>
   <li><a href="#viash-ns-test" id="toc-viash-ns-test" class="nav-link" data-scroll-target="#viash-ns-test">viash ns test</a></li>
   <li><a href="#viash-ns-list" id="toc-viash-ns-list" class="nav-link" data-scroll-target="#viash-ns-list">viash ns list</a></li>
-  <li><a href="#viash-config-view" id="toc-viash-config-view" class="nav-link" data-scroll-target="#viash-config-view">viash config view</a></li>
-  <li><a href="#viash-config-inject" id="toc-viash-config-inject" class="nav-link" data-scroll-target="#viash-config-inject">viash config inject</a></li>
   </ul>
 </nav>
     </div>
@@ -223,7 +233,7 @@ ul.task-list{list-style: none;}
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Viash (Python)</h1>
+<h1 class="title d-none d-lg-block">viash ns</h1>
 </div>
 
 
@@ -237,152 +247,6 @@ ul.task-list{list-style: none;}
 
 </header>
 
-<section id="viash-run" class="level2">
-<h2 class="anchored" data-anchor-id="viash-run">viash run</h2>
-<p>Executes a viash component from the provided viash config file. viash generates a temporary executable and immediately executes it with the given parameters.</p>
-<p><strong>Usage:</strong></p>
-<p><code>viash run config.vsh.yaml [-p docker] [-k true/false]  -- [arguments for script]</code></p>
-<table class="table">
-<colgroup>
-<col style="width: 12%">
-<col style="width: 62%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Argument</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: right;">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>--platform</code>, <code>-p</code></td>
-<td style="text-align: left;">Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.</td>
-<td style="text-align: right;">String</td>
-</tr>
-<tr class="even">
-<td><code>--config</code></td>
-<td style="text-align: left;">A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.</td>
-<td style="text-align: right;">String</td>
-</tr>
-<tr class="odd">
-<td><code>--config_mod</code>, <code>-c</code></td>
-<td style="text-align: left;">Modify a viash config at runtime using a custom DSL. For more information, see the online documentation.</td>
-<td style="text-align: right;">List[String]</td>
-</tr>
-<tr class="even">
-<td><code>--keep</code>, <code>-k</code></td>
-<td style="text-align: left;">Whether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.</td>
-<td style="text-align: right;">String</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="viash-build" class="level2">
-<h2 class="anchored" data-anchor-id="viash-build">viash build</h2>
-<p>Build an executable from the provided viash config file.</p>
-<p><strong>Usage:</strong></p>
-<p><code>viash build config.vsh.yaml -o output [-p docker] [-m] [-s]</code></p>
-<table class="table">
-<colgroup>
-<col style="width: 12%">
-<col style="width: 62%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Argument</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: right;">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>--platform</code>, <code>-p</code></td>
-<td style="text-align: left;">Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.</td>
-<td style="text-align: right;">String</td>
-</tr>
-<tr class="even">
-<td><code>--config</code></td>
-<td style="text-align: left;">A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.</td>
-<td style="text-align: right;">String</td>
-</tr>
-<tr class="odd">
-<td><code>--config_mod</code>, <code>-c</code></td>
-<td style="text-align: left;">Modify a viash config at runtime using a custom DSL. For more information, see the online documentation.</td>
-<td style="text-align: right;">List[String]</td>
-</tr>
-<tr class="even">
-<td><code>--meta</code>, <code>-m</code></td>
-<td style="text-align: left;">Print out some meta information at the end.</td>
-<td style="text-align: right;">Boolean</td>
-</tr>
-<tr class="odd">
-<td><code>--write_meta</code>, <code>-w</code></td>
-<td style="text-align: left;">Write out some meta information to RESOURCES_DIR/viash.yaml at the end.</td>
-<td style="text-align: right;">Boolean</td>
-</tr>
-<tr class="even">
-<td><code>--output</code></td>
-<td style="text-align: left;">Path to directory in which the executable and any resources is built to. Default: “output/”.</td>
-<td style="text-align: right;">String</td>
-</tr>
-<tr class="odd">
-<td><code>--setup</code></td>
-<td style="text-align: left;">Which setup strategy for creating the container to use [Docker Platform only].</td>
-<td style="text-align: right;">String</td>
-</tr>
-<tr class="even">
-<td><code>--push</code></td>
-<td style="text-align: left;">Whether or not to push the container to a Docker registry [Docker Platform only].</td>
-<td style="text-align: right;">Boolean</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="viash-test" class="level2">
-<h2 class="anchored" data-anchor-id="viash-test">viash test</h2>
-<p>Test the component using the tests defined in the viash config file.</p>
-<p><strong>Usage:</strong></p>
-<p><code>viash test config.vsh.yaml [-p docker] [-k true/false]</code></p>
-<table class="table">
-<colgroup>
-<col style="width: 12%">
-<col style="width: 62%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Argument</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: right;">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>--platform</code>, <code>-p</code></td>
-<td style="text-align: left;">Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.</td>
-<td style="text-align: right;">String</td>
-</tr>
-<tr class="even">
-<td><code>--config</code></td>
-<td style="text-align: left;">A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.</td>
-<td style="text-align: right;">String</td>
-</tr>
-<tr class="odd">
-<td><code>--config_mod</code>, <code>-c</code></td>
-<td style="text-align: left;">Modify a viash config at runtime using a custom DSL. For more information, see the online documentation.</td>
-<td style="text-align: right;">List[String]</td>
-</tr>
-<tr class="even">
-<td><code>--keep</code>, <code>-k</code></td>
-<td style="text-align: left;">Whether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.</td>
-<td style="text-align: right;">String</td>
-</tr>
-</tbody>
-</table>
-</section>
 <section id="viash-ns-build" class="level2">
 <h2 class="anchored" data-anchor-id="viash-ns-build">viash ns build</h2>
 <p>Build a namespace from many viash config files.</p>
@@ -598,85 +462,6 @@ ul.task-list{list-style: none;}
 </tr>
 </tbody>
 </table>
-</section>
-<section id="viash-config-view" class="level2">
-<h2 class="anchored" data-anchor-id="viash-config-view">viash config view</h2>
-<p>View the config file after parsing.</p>
-<p><strong>Usage:</strong></p>
-<p><code>viash config view config.vsh.yaml</code></p>
-<table class="table">
-<colgroup>
-<col style="width: 12%">
-<col style="width: 62%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Argument</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: right;">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>--platform</code>, <code>-p</code></td>
-<td style="text-align: left;">Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.</td>
-<td style="text-align: right;">String</td>
-</tr>
-<tr class="even">
-<td><code>--config</code></td>
-<td style="text-align: left;">A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.</td>
-<td style="text-align: right;">String</td>
-</tr>
-<tr class="odd">
-<td><code>--config_mod</code>, <code>-c</code></td>
-<td style="text-align: left;">Modify a viash config at runtime using a custom DSL. For more information, see the online documentation.</td>
-<td style="text-align: right;">List[String]</td>
-</tr>
-<tr class="even">
-<td><code>--format</code>, <code>-f</code></td>
-<td style="text-align: left;">Which output format to use.</td>
-<td style="text-align: right;">String</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="viash-config-inject" class="level2">
-<h2 class="anchored" data-anchor-id="viash-config-inject">viash config inject</h2>
-<p>Inject a Viash header into the main script of a Viash component.</p>
-<p><strong>Usage:</strong></p>
-<p><code>viash config inject config.vsh.yaml</code></p>
-<table class="table">
-<colgroup>
-<col style="width: 12%">
-<col style="width: 62%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Argument</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: right;">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>--platform</code>, <code>-p</code></td>
-<td style="text-align: left;">Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.</td>
-<td style="text-align: right;">String</td>
-</tr>
-<tr class="even">
-<td><code>--config</code></td>
-<td style="text-align: left;">A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.</td>
-<td style="text-align: right;">String</td>
-</tr>
-<tr class="odd">
-<td><code>--config_mod</code>, <code>-c</code></td>
-<td style="text-align: left;">Modify a viash config at runtime using a custom DSL. For more information, see the online documentation.</td>
-<td style="text-align: right;">List[String]</td>
-</tr>
-</tbody>
-</table>
 
 
 </section>
@@ -768,13 +553,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../documentation/reference/viash/viash.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">viash (lua)</span>
+      <a href="../../../documentation/reference/viash/config.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">viash config</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../documentation/reference/config/overview.html" class="pagination-link">
-        <span class="nav-page-text">Overview</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../documentation/reference/viash/run.html" class="pagination-link">
+        <span class="nav-page-text">viash run</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

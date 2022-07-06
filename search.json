@@ -231,6 +231,447 @@
     "text": "What’s next?\nTo learn how to use Viash to build an executable and run it, see Native Executable Building and Running."
   },
   {
+    "objectID": "documentation/reference/config/dockerPlatform.html",
+    "href": "documentation/reference/config/dockerPlatform.html",
+    "title": "Docker Platform",
+    "section": "",
+    "text": "Run a Viash component on a Docker backend platform. By specifying which dependencies your component needs, users will be able to build a docker container from scratch using the setup flag, or pull it from a docker repository."
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#apk",
+    "href": "documentation/reference/config/dockerPlatform.html#apk",
+    "title": "Docker Platform",
+    "section": "apk",
+    "text": "apk\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which apk packages should be available in order to run the component.\n\nExample(s)\nsetup:\n  - type: apk\n    packages: [ sl ]"
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#apt",
+    "href": "documentation/reference/config/dockerPlatform.html#apt",
+    "title": "Docker Platform",
+    "section": "apt",
+    "text": "apt\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which apt packages should be available in order to run the component.\n\nExample(s)\nsetup:\n  - type: apt\n    packages: [ sl ]"
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#chown",
+    "href": "documentation/reference/config/dockerPlatform.html#chown",
+    "title": "Docker Platform",
+    "section": "chown",
+    "text": "chown\nIn Linux, files created by a Docker container will be owned by root. With chown: true, Viash will automatically change the ownership of output files (arguments with type: file and direction: output) to the user running the Viash command after execution of the component. Default value: true.\n\nExample(s)\nchown: false"
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#docker",
+    "href": "documentation/reference/config/dockerPlatform.html#docker",
+    "title": "Docker Platform",
+    "section": "docker",
+    "text": "docker\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which Docker commands should be run during setup.\n\nExample(s)\nsetup:\n  - type: docker\n    build_args: [ GITHUB_PAT=hello_world ]\n    run: [ git clone ... ]\n    add: [ \"http://foo.bar .\" ]\n    copy: [ \"http://foo.bar .\" ]\n    resources: \n      - resource.txt /path/to/resource.txt"
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#id",
+    "href": "documentation/reference/config/dockerPlatform.html#id",
+    "title": "Docker Platform",
+    "section": "id",
+    "text": "id\nAs with all platforms, you can give a platform a different name. By specifying id: foo, you can target this platform (only) by specifying -p foo in any of the Viash commands.\n\nExample(s)\nid: foo"
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#image",
+    "href": "documentation/reference/config/dockerPlatform.html#image",
+    "title": "Docker Platform",
+    "section": "image",
+    "text": "image\nThe base container to start from. You can also add the tag here if you wish.\n\nExample(s)\nimage: \"bash:4.0\""
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#namespace_separator",
+    "href": "documentation/reference/config/dockerPlatform.html#namespace_separator",
+    "title": "Docker Platform",
+    "section": "namespace_separator",
+    "text": "namespace_separator\nThe default namespace separator is “_“.\n\nExample(s)\nnamespace_separator: \"+\""
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#organization",
+    "href": "documentation/reference/config/dockerPlatform.html#organization",
+    "title": "Docker Platform",
+    "section": "organization",
+    "text": "organization\nName of a container’s organization."
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#port",
+    "href": "documentation/reference/config/dockerPlatform.html#port",
+    "title": "Docker Platform",
+    "section": "port",
+    "text": "port\nA list of enabled ports. This doesn’t change the Dockerfile but gets added as a command-line argument at runtime.\n\nExample(s)\nport:\n  - 80\n  - 8080"
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#python",
+    "href": "documentation/reference/config/dockerPlatform.html#python",
+    "title": "Docker Platform",
+    "section": "python",
+    "text": "python\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which Python packages should be available in order to run the component.\n\nExample(s)\nsetup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ jkbr/httpie ]\n    gitlab: [ foo/bar ]\n    mercurial: [ http://... ]\n    svn: [ http://...]\n    bazaar: [ http://... ]\n    url: [ http://... ]"
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#r",
+    "href": "documentation/reference/config/dockerPlatform.html#r",
+    "title": "Docker Platform",
+    "section": "r",
+    "text": "r\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which R packages should be available in order to run the component.\n\nExample(s)\nsetup: \n  - type: r\n    cran: [ dynutils ]\n    bioc: [ AnnotationDbi ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ rcannood/SCORPIUS ]\n    gitlab: [ org/package ]\n    svn: [ https://path.to.svn/group/repo ]\n    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]\n    script: [ 'devtools::install(\".\")' ]"
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#registry",
+    "href": "documentation/reference/config/dockerPlatform.html#registry",
+    "title": "Docker Platform",
+    "section": "registry",
+    "text": "registry\nThe URL to the a custom Docker registry\n\nExample(s)\nregistry: https://my-docker-registry.org"
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#run_args",
+    "href": "documentation/reference/config/dockerPlatform.html#run_args",
+    "title": "Docker Platform",
+    "section": "run_args",
+    "text": "run_args\nAdd docker run arguments."
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#setup",
+    "href": "documentation/reference/config/dockerPlatform.html#setup",
+    "title": "Docker Platform",
+    "section": "setup",
+    "text": "setup\nA list of requirements for installing the following types of packages:\n\napt\napk\nyum\nR\nPython\nJavaScript\nDocker setup instructions\n\nThe order in which these dependencies are specified determines the order in which they will be installed."
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#tag",
+    "href": "documentation/reference/config/dockerPlatform.html#tag",
+    "title": "Docker Platform",
+    "section": "tag",
+    "text": "tag\nSpecify a Docker image based on its tag.\n\nExample(s)\ntag: 4.0"
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#target_image",
+    "href": "documentation/reference/config/dockerPlatform.html#target_image",
+    "title": "Docker Platform",
+    "section": "target_image",
+    "text": "target_image\nIf anything is specified in the setup section, running the ---setup will result in an image with the name of <target_image>:<version>. If nothing is specified in the setup section, simply image will be used.\n\nExample(s)\ntarget_image: myfoo"
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#target_image_source",
+    "href": "documentation/reference/config/dockerPlatform.html#target_image_source",
+    "title": "Docker Platform",
+    "section": "target_image_source",
+    "text": "target_image_source\nThe source of the target image. This is used for defining labels in the dockerfile.\n\nExample(s)\ntarget_image_source: https://github.com/foo/bar"
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#target_registry",
+    "href": "documentation/reference/config/dockerPlatform.html#target_registry",
+    "title": "Docker Platform",
+    "section": "target_registry",
+    "text": "target_registry\nThe URL where the resulting image will be pushed to.\n\nExample(s)\ntarget_registry: https://my-docker-registry.org"
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#target_tag",
+    "href": "documentation/reference/config/dockerPlatform.html#target_tag",
+    "title": "Docker Platform",
+    "section": "target_tag",
+    "text": "target_tag\nThe tag the resulting image gets.\n\nExample(s)\ntarget_tag: 0.5.0"
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#workdir",
+    "href": "documentation/reference/config/dockerPlatform.html#workdir",
+    "title": "Docker Platform",
+    "section": "workdir",
+    "text": "workdir\nThe working directory when starting the container. This doesn’t change the Dockerfile but gets added as a command-line argument at runtime.\n\nExample(s)\nworkdir: /home/user"
+  },
+  {
+    "objectID": "documentation/reference/config/dockerPlatform.html#yum",
+    "href": "documentation/reference/config/dockerPlatform.html#yum",
+    "title": "Docker Platform",
+    "section": "yum",
+    "text": "yum\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which yum packages should be available in order to run the component.\n\nExample(s)\nsetup:\n  - type: yum\n    packages: [ sl ]"
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html",
+    "title": "Nextflow Legacy Platform",
+    "section": "",
+    "text": "Run a Viash component as a Nextflow module."
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#id",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#id",
+    "title": "Nextflow Legacy Platform",
+    "section": "id",
+    "text": "id\nEvery platform can be given a specific id that can later be referred to explicitly when running or building the Viash component."
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#image",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#image",
+    "title": "Nextflow Legacy Platform",
+    "section": "image",
+    "text": "image\nIf no image attributes are configured, Viash will use the auto-generated image name from the Docker platform:\n[<namespace>/]<name>:<version>\nIt’s possible to specify the container image explicitly with which to run the module in different ways:\nimage: dataintuitive/viash:0.4.0\nExactly the same can be obtained with\nimage: dataintuitive/viash\nregistry: index.docker.io/v1/\ntag: 0.4.0\nSpecifying the attribute(s) like this will use the container dataintuitive/viash:0.4.0 from Docker hub (registry).\nIf no tag is specified Viash will use functionality.version as the tag.\nIf no registry is specified, Viash (and NextFlow) will assume the image is available locally or on Docker Hub. In other words, the registry: ... attribute above is superfluous. No other registry is checked automatically due to a limitation from Docker itself."
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#label",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#label",
+    "title": "Nextflow Legacy Platform",
+    "section": "label",
+    "text": "label\nWhen running the module in a cluster context and depending on the cluster type, NextFlow allows for attaching labels to the process that can later be used as selectors for associating resources to this process.\nIn order to attach one label to a process/component, one can use the label: ... attribute, multiple labels can be added using labels: [ ..., ... ] and the two can even be mixed.\nIn the main nextflow.config, one can now use this label:\nprocess { … withLabel: bigmem { maxForks = 5 … } }\n\nExample(s)\nlabel: highmem labels: [ highmem, highcpu ]"
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#labels",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#labels",
+    "title": "Nextflow Legacy Platform",
+    "section": "labels",
+    "text": "labels\nWhen running the module in a cluster context and depending on the cluster type, NextFlow allows for attaching labels to the process that can later be used as selectors for associating resources to this process.\nIn order to attach one label to a process/component, one can use the label: ... attribute, multiple labels can be added using labels: [ ..., ... ] and the two can even be mixed.\nIn the main nextflow.config, one can now use this label:\nprocess { … withLabel: bigmem { maxForks = 5 … } }\n\nExample(s)\nlabel: highmem labels: [ highmem, highcpu ]"
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#namespace_separator",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#namespace_separator",
+    "title": "Nextflow Legacy Platform",
+    "section": "namespace_separator",
+    "text": "namespace_separator\nThe default namespace separator is “_“.\n\nExample(s)\nnamespace_separator: \"+\""
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#organization",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#organization",
+    "title": "Nextflow Legacy Platform",
+    "section": "organization",
+    "text": "organization\nName of a container’s organization.\n\nExample(s)\norganization: viash-io"
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#path",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#path",
+    "title": "Nextflow Legacy Platform",
+    "section": "path",
+    "text": "path\nWhen publish: true, this attribute defines where the output is written relative to the params.publishDir setting. For example, path: processed in combination with --output s3://some_bucket/ will store the output of this component under\ns3://some_bucket/processed/\nThis attribute gives control over the directory structure of the output. For example:\npath: raw_data\nOr even:\npath: raw_data/bcl\nPlease note that per_id and path can be combined."
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#per_id",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#per_id",
+    "title": "Nextflow Legacy Platform",
+    "section": "per_id",
+    "text": "per_id\nBy default, a subdirectory is created corresponding to the unique ID that is passed in the triplet. Let us illustrate this with an example. The following code snippet uses the value of --input as an input of a workflow. The input can include a wildcard so that multiple samples can run in parallel. We use the parent directory name (.getParent().baseName) as an identifier for the sample. We pass this as the first entry of the triplet:\nChannel.fromPath(params.input) \\\n    | map{ it -> [ it.getParent().baseName , it ] } \\\n    | map{ it -> [ it[0] , it[1], params ] }\n    | ...\nSay the resulting sample names are SAMPLE1 and SAMPLE2. The next step in the pipeline will be published (at least by default) under:\n<publishDir>/SAMPLE1/\n<publishDir>/SAMPLE2/\nThese per-ID subdirectories can be avoided by setting:\nper_id: false"
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#publish",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#publish",
+    "title": "Nextflow Legacy Platform",
+    "section": "publish",
+    "text": "publish\nNextFlow uses the autogenerated work dirs to manage process IO under the hood. In order effectively output something one can publish the results a module or step in the pipeline. In order to do this, add publish: true to the config:\n\npublish is optional\nDefault value is false\n\nThis attribute simply defines if output of a component should be published yes or no. The output location has to be provided at pipeline launch by means of the option --publishDir ... or as params.publishDir in nextflow.config:\nparams.publishDir = \"...\""
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#registry",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#registry",
+    "title": "Nextflow Legacy Platform",
+    "section": "registry",
+    "text": "registry\nThe URL to the a custom Docker registry.\n\nExample(s)\nregistry: https://my-docker-registry.org"
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#separate_multiple_outputs",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#separate_multiple_outputs",
+    "title": "Nextflow Legacy Platform",
+    "section": "separate_multiple_outputs",
+    "text": "separate_multiple_outputs\nSeparates the outputs generated by a Nextflow component with multiple outputs as separate events on the channel. Default value: true.\n\nExample(s)\nseparate_multiple_outputs: false"
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#stageinmode",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#stageinmode",
+    "title": "Nextflow Legacy Platform",
+    "section": "stageInMode",
+    "text": "stageInMode\nBy default NextFlow will create a symbolic link to the inputs for a process/module and run the tool at hand using those symbolic links. Some applications do not cope well with this strategy, in that case the files should effectively be copied rather than linked to. This can be achieved by using stageInMode: copy. This attribute is optional, the default is symlink.\n\nExample(s)\nstageInMode: copy"
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#tag",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#tag",
+    "title": "Nextflow Legacy Platform",
+    "section": "tag",
+    "text": "tag\nSpecify a Docker image based on its tag.\n\nExample(s)\ntag: 4.0"
+  },
+  {
+    "objectID": "documentation/reference/config/nativePlatform.html",
+    "href": "documentation/reference/config/nativePlatform.html",
+    "title": "Native Platform",
+    "section": "",
+    "text": "Running a Viash component on a native platform means that the script will be executed in your current environment. Any dependencies are assumed to have been installed by the user, so the native platform is meant for developers (who know what they’re doing) or for simple bash scripts (which have no extra dependencies)."
+  },
+  {
+    "objectID": "documentation/reference/config/nativePlatform.html#id",
+    "href": "documentation/reference/config/nativePlatform.html#id",
+    "title": "Native Platform",
+    "section": "id",
+    "text": "id\nAs with all platforms, you can give a platform a different name. By specifying id: foo, you can target this platform (only) by specifying -p foo in any of the Viash commands.\n\nExample(s)\nid: foo"
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html",
+    "href": "documentation/reference/config/functionality.html",
+    "title": "Functionality",
+    "section": "",
+    "text": "The functionality-part of the config file describes the behaviour of the script in terms of arguments and resources. By specifying a few restrictions (e.g. mandatory arguments) and adding some descriptions, Viash will automatically generate a stylish command-line interface for you."
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#add_resources_to_path",
+    "href": "documentation/reference/config/functionality.html#add_resources_to_path",
+    "title": "Functionality",
+    "section": "add_resources_to_path",
+    "text": "add_resources_to_path\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since Viash 0.5.11. Extending the PATH turned out to be not desirable.\n\n\nAdds the resources directory to the PATH variable when set to true. This is set to false by default."
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#argument_groups",
+    "href": "documentation/reference/config/functionality.html#argument_groups",
+    "title": "Functionality",
+    "section": "argument_groups",
+    "text": "argument_groups"
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#arguments",
+    "href": "documentation/reference/config/functionality.html#arguments",
+    "title": "Functionality",
+    "section": "arguments",
+    "text": "arguments\nA list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. Common properties for all argument types are the following.\n\ntype: string/file/integer/double/boolean/boolean_true/boolean_false, the type of argument determining to what object type the value will be cast in the downstream scripts.\ndirection: input/output, the directionality of the argument. Only needs to be specified for output files. Default: “input”.\nname: --foo, the name of the argument. Can also be -foo or foo. The number of dashes determines how values can be passed:\n\nwith --foo: long option, e.g. exe --foo=bar or exe --foo bar\nwith -foo: short option, e.g. exe -foo bar\nwith foo: argument, e.g. exe bar\n\nalternatives: [-f], list of alternative names. Typically only used to provide a short alternative option.\ndescription: Description of foo, a description of the argument. Multiline descriptions are supported.\ndefault: bar, the default value when no argument value is provided. Not allowed when required: true.\nrequired: true/false, whether the argument is required. If true and the functionality is executed, an error will be produced if no value is provided. Default = false.\nmultiple: true/false, whether to treat the argument value as an array or not. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. Default = false.\nmultiple_sep: \":\", the delimiter for providing multiple values. Default = “:”.\n\nOn types:\n\ntype: string, The value passed through an argument of this type is converted to an ‘str’ object in Python, and to a ‘character’ object in R.\ntype: integer, The resulting value is an ‘int’ in Python and an ‘integer’ in R.\ntype: double, The resulting value is a ‘float’ in Python and an ‘double’ in R.\ntype: boolean, The resulting value is a ‘bool’ in Python and a ‘logical’ in R.\ntype: boolean_true/boolean_false, Arguments of this type can only be used by providing a flag --foo or not. The resulting value is a ‘bool’ in Python and a ‘logical’ in R. These properties cannot be altered: required is false, default is undefined, multiple is false.\ntype: file, The resulting value is still an ‘str’ in Python and a ‘character’ in R. In order to correctly pass files in some platforms (e.g. Docker and Nextflow), Viash needs to know which arguments are input/output files.\n\nAdditional property values:\n\nmust_exist: true/false, denotes whether the file or folder should exist at the start of the execution.\n\n\nExample(s)\n- name: --foo                           \n  type: file\n  alternatives: [-f]\n  description: Description of foo\n  default: \"/foo/bar\"\n  must_exist: true\n  required: false\n  multiple: true\n  multiple_sep: \",\""
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#authors",
+    "href": "documentation/reference/config/functionality.html#authors",
+    "title": "Functionality",
+    "section": "authors",
+    "text": "authors\nA list of authors. An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.\nSuggested values for roles are:\n\n\n\n\n\n\n\n\nRole\nAbbrev.\nDescription\n\n\n\n\nmaintainer\nmnt\nfor the maintainer of the code. Ideally, exactly one maintainer is specified.\n\n\nauthor\naut\nfor persons who have made substantial contributions to the software.\n\n\ncontributor\nctb\nfor persons who have made smaller contributions (such as code patches).\n\n\ndatacontributor\ndtc\nfor persons or organisations that contributed data sets for the software\n\n\ncopyrightholder\ncph\nfor all copyright holders. This is a legal concept so should use the legal name of an institution or corporate body.\n\n\nfunder\nfnd\nfor persons or organizations that furnished financial support for the development of the software\n\n\n\nThe full list of roles is extremely comprehensive."
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#description",
+    "href": "documentation/reference/config/functionality.html#description",
+    "title": "Functionality",
+    "section": "description",
+    "text": "description\nA description of the component. This will be displayed with –help.\n\nExample(s)\ndescription: |\n  This component performs function Y and Z.\n  It is possible to make this a multiline string."
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#enabled",
+    "href": "documentation/reference/config/functionality.html#enabled",
+    "title": "Functionality",
+    "section": "enabled",
+    "text": "enabled\nSetting this to false with disable this component when using namespaces."
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#info",
+    "href": "documentation/reference/config/functionality.html#info",
+    "title": "Functionality",
+    "section": "info",
+    "text": "info\nA map for storing custom annotation."
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#inputs",
+    "href": "documentation/reference/config/functionality.html#inputs",
+    "title": "Functionality",
+    "section": "inputs",
+    "text": "inputs"
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#name",
+    "href": "documentation/reference/config/functionality.html#name",
+    "title": "Functionality",
+    "section": "name",
+    "text": "name\nName of the component and the filename of the executable when built with viash build.\n\nExample(s)\nname: exe"
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#namespace",
+    "href": "documentation/reference/config/functionality.html#namespace",
+    "title": "Functionality",
+    "section": "namespace",
+    "text": "namespace\nNamespace this component is a part of. This is required when grouping components together in a pipeline and building multiple components at once using viash ns build.\n\nExample(s)\nnamespace: fancy_components"
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#outputs",
+    "href": "documentation/reference/config/functionality.html#outputs",
+    "title": "Functionality",
+    "section": "outputs",
+    "text": "outputs"
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#resources",
+    "href": "documentation/reference/config/functionality.html#resources",
+    "title": "Functionality",
+    "section": "resources",
+    "text": "resources\nThe first resource should be a script (bash_script, r_script, python_script, javascript_script, scala_script) which is what will be executed when the functionality is run. Additional resources will be copied to the same directory.\nCommon properties:\n\ntype: file/r_script/python_script/bash_script/javascript_script/scala_script, the type of resource. The first resource cannot be of type file. When the type is not specified, the default type is simply file. For more information regarding how to write a script in Bash, R or Python with Viash, check out the guides for the respective languages on the left.\nname: filename, the resulting name of the resource.\npath: path/to/file, the path of the input file. Can be a relative or an absolute path, or a URI.\ntext: …multiline text…, the raw content of the input file. Exactly one of path or text must be defined, the other undefined.\nis_executable: true/false, whether the resulting file is made executable.\n\n\nExample(s)\nresources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt"
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#test_resources",
+    "href": "documentation/reference/config/functionality.html#test_resources",
+    "title": "Functionality",
+    "section": "test_resources",
+    "text": "test_resources\nOne or more Bash/R/Python scripts to be used to test the component behaviour when viash test is invoked. Additional files of type file will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.\n\nExample(s)\ntests:\n  - type: bash_script\n    path: tests/test1.sh\n  - type: r_script\n    path: tests/test2.R\n  - path: resource1.txt"
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#tests",
+    "href": "documentation/reference/config/functionality.html#tests",
+    "title": "Functionality",
+    "section": "tests",
+    "text": "tests\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.13. Use test_resources instead. No functional difference.\n\n\nOne or more Bash/R/Python scripts to be used to test the component behaviour when viash test is invoked. Additional files of type file will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing."
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#usage",
+    "href": "documentation/reference/config/functionality.html#usage",
+    "title": "Functionality",
+    "section": "usage",
+    "text": "usage\nA description of the component. This will be displayed with –help under the ‘Usage:’ section."
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#version",
+    "href": "documentation/reference/config/functionality.html#version",
+    "title": "Functionality",
+    "section": "version",
+    "text": "version\nVersion of the component. This field will be used to version the executable and the Docker container."
+  },
+  {
+    "objectID": "documentation/reference/viash/run.html",
+    "href": "documentation/reference/viash/run.html",
+    "title": "viash run",
+    "section": "",
+    "text": "Executes a viash component from the provided viash config file. viash generates a temporary executable and immediately executes it with the given parameters.\nUsage:\nviash run config.vsh.yaml [-p docker] [-k true/false]  -- [arguments for script]\n\n\n\n\n\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--config\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL. For more information, see the online documentation.\nList[String]\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString"
+  },
+  {
+    "objectID": "documentation/reference/viash/build.html",
+    "href": "documentation/reference/viash/build.html",
+    "title": "viash build",
+    "section": "",
+    "text": "Build an executable from the provided viash config file.\nUsage:\nviash build config.vsh.yaml -o output [-p docker] [-m] [-s]\n\n\n\n\n\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--config\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL. For more information, see the online documentation.\nList[String]\n\n\n--meta, -m\nPrint out some meta information at the end.\nBoolean\n\n\n--write_meta, -w\nWrite out some meta information to RESOURCES_DIR/viash.yaml at the end.\nBoolean\n\n\n--output\nPath to directory in which the executable and any resources is built to. Default: “output/”.\nString\n\n\n--setup\nWhich setup strategy for creating the container to use [Docker Platform only].\nString\n\n\n--push\nWhether or not to push the container to a Docker registry [Docker Platform only].\nBoolean"
+  },
+  {
+    "objectID": "documentation/reference/viash/ns.html",
+    "href": "documentation/reference/viash/ns.html",
+    "title": "viash ns",
+    "section": "",
+    "text": "Build a namespace from many viash config files.\nUsage:\nviash ns build [-n nmspc] [-s src] [-t target] [-p docker] [--setup] [---push] [--parallel] [--flatten]\n\n\n\n\n\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--query, -q\nFilter which components get selected by name and namespace. Can be a regex. Example: “^mynamespace/component1$”.\nString\n\n\n--query_namespace, -n\nFilter which namespaces get selected by namespace. Can be a regex. Example: “^mynamespace$”.\nString\n\n\n--query_name\nFilter which components get selected by name. Can be a regex. Example: “^component1”.\nString\n\n\n--src, -s\nA source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.\nString\n\n\n--platform, -p\nActs as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--parallel, -l\nWhether or not to run the process in parallel.\nBoolean\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL. For more information, see the online documentation.\nList[String]\n\n\n--target, -t\nA target directory to build the executables into. Default: target/.\nString\n\n\n--setup\nWhich setup strategy for creating the container to use [Docker Platform only].\nString\n\n\n--push\nWhether or not to push the container to a Docker registry [Docker Platform only].\nBoolean\n\n\n--write_meta, -w\nWrite out some meta information to RESOURCES_DIR/viash.yaml at the end.\nBoolean\n\n\n--flatten, -f\nFlatten the target builds, handy for building one platform to a bin directory.\nBoolean"
+  },
+  {
+    "objectID": "documentation/reference/viash/ns.html#viash-ns-test",
+    "href": "documentation/reference/viash/ns.html#viash-ns-test",
+    "title": "viash ns",
+    "section": "viash ns test",
+    "text": "viash ns test\nTest a namespace containing many viash config files.\nUsage:\nviash ns test [-n nmspc] [-s src] [-p docker] [--parallel] [--tsv file.tsv] [--append]\n\n\n\n\n\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--query, -q\nFilter which components get selected by name and namespace. Can be a regex. Example: “^mynamespace/component1$”.\nString\n\n\n--query_namespace, -n\nFilter which namespaces get selected by namespace. Can be a regex. Example: “^mynamespace$”.\nString\n\n\n--query_name\nFilter which components get selected by name. Can be a regex. Example: “^component1”.\nString\n\n\n--src, -s\nA source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.\nString\n\n\n--platform, -p\nActs as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--parallel, -l\nWhether or not to run the process in parallel.\nBoolean\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL. For more information, see the online documentation.\nList[String]\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--tsv, -t\nPath to write a summary of the test results to.\nString\n\n\n--append, -a\nAppend to tsv instead of overwrite\nBoolean"
+  },
+  {
+    "objectID": "documentation/reference/viash/ns.html#viash-ns-list",
+    "href": "documentation/reference/viash/ns.html#viash-ns-list",
+    "title": "viash ns",
+    "section": "viash ns list",
+    "text": "viash ns list\nList a namespace containing many viash config files.\nUsage:\nviash ns list [-n nmspc] [-s src] [-p docker]\n\n\n\n\n\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--query, -q\nFilter which components get selected by name and namespace. Can be a regex. Example: “^mynamespace/component1$”.\nString\n\n\n--query_namespace, -n\nFilter which namespaces get selected by namespace. Can be a regex. Example: “^mynamespace$”.\nString\n\n\n--query_name\nFilter which components get selected by name. Can be a regex. Example: “^component1”.\nString\n\n\n--src, -s\nA source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.\nString\n\n\n--platform, -p\nActs as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--parallel, -l\nWhether or not to run the process in parallel.\nBoolean\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL. For more information, see the online documentation.\nList[String]\n\n\n--format, -f\nWhich output format to use.\nString"
+  },
+  {
+    "objectID": "documentation/reference/viash/test.html",
+    "href": "documentation/reference/viash/test.html",
+    "title": "viash test",
+    "section": "",
+    "text": "Test the component using the tests defined in the viash config file.\nUsage:\nviash test config.vsh.yaml [-p docker] [-k true/false]\n\n\n\n\n\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--config\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL. For more information, see the online documentation.\nList[String]\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString"
+  },
+  {
+    "objectID": "documentation/reference/viash/config.html",
+    "href": "documentation/reference/viash/config.html",
+    "title": "viash config",
+    "section": "",
+    "text": "View the config file after parsing.\nUsage:\nviash config view config.vsh.yaml\n\n\n\n\n\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--config\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL. For more information, see the online documentation.\nList[String]\n\n\n--format, -f\nWhich output format to use.\nString"
+  },
+  {
+    "objectID": "documentation/reference/viash/config.html#viash-config-inject",
+    "href": "documentation/reference/viash/config.html#viash-config-inject",
+    "title": "viash config",
+    "section": "viash config inject",
+    "text": "viash config inject\nInject a Viash header into the main script of a Viash component.\nUsage:\nviash config inject config.vsh.yaml\n\n\n\n\n\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--config\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL. For more information, see the online documentation.\nList[String]"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About Quarto",
