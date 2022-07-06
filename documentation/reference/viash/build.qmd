@@ -6,27 +6,21 @@ execute:
   output: asis
 ---
 
-`viash build`  
+Build an executable from the provided viash config file.
 
-Build an executable from the provided viash config file.  
+**Usage:**
 
-  
-
-**Usage:**  
-
-`viash build config.vsh.yaml -o output [-p docker] [-m] [-s]`  
-
-  
+`viash build config.vsh.yaml -o output [-p docker] [-m] [-s]`
 
 | Argument | Description | Type |
 |-|:----|-:
-| `--platform`, `-p` | Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified. | String |
-| `--config` | A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. | String |
-| `--config_mod`, `-c` | Modify a viash config at runtime using a custom DSL. For more information, see the online documentation. | List[String] |
-| `--meta`, `-m` | Print out some meta information at the end. | Boolean |
-| `--write_meta`, `-w` | Write out some meta information to RESOURCES_DIR/viash.yaml at the end. | Boolean |
-| `--output` | Path to directory in which the executable and any resources is built to. Default: "output/". | String |
-| `--setup` | Which setup strategy for creating the container to use [Docker Platform only]. | String |
-| `--push` | Whether or not to push the container to a Docker registry [Docker Platform only]. | Boolean |
+| `--config` | A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. **This is a required argument.** | `String` |
+| `--config_mod`, `-c` | Modify a viash config at runtime using a custom DSL. For more information, see the online documentation. | `List[String]` |
+| `--meta`, `-m` | Print out some meta information at the end. | `Boolean` |
+| `--output` | Path to directory in which the executable and any resources is built to. Default: "output/". **This is a required argument.** | `String` |
+| `--platform`, `-p` | Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified. | `String` |
+| `--push` | Whether or not to push the container to a Docker registry [Docker Platform only]. | `Boolean` |
+| `--setup` | Which setup strategy for creating the container to use [Docker Platform only]. | `String` |
+| `--write_meta`, `-w` | Write out some meta information to RESOURCES_DIR/viash.yaml at the end. | `Boolean` |
 
 

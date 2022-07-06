@@ -4,7 +4,7 @@ import git, subprocess, json
 # Get root dir of repo
 repo = git.Repo(".", search_parent_directories=True)
 repo_root = repo.working_tree_dir
-json_export = "viash_ref.json"
+json_export = "cli_export.json"
 reference_dir = ""
 
 
@@ -13,14 +13,14 @@ def generate_json():
     global reference_dir
     reference_dir = repo_root + "/documentation/reference/"
 
-    json = subprocess.run(
-        [bin + "viash", "--cli_export"], stdout=subprocess.PIPE
-    ).stdout.decode("utf-8")
-    f = open(reference_dir + json_export, "w")
-    f.write(json)
-    f.close()
+    # TODO: Remove comments below once viash has --cli_export
 
-    print(f"Generated {reference_dir}/{json_export}")
+    # json = subprocess.run([bin + "viash", "--cli_export"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+    # f = open(reference_dir + json_export, "w")
+    # f.write(json)
+    # f.close()
+
+    # print(f"Generated {reference_dir}/{json_export}")
 
 
 def create_qmd():
@@ -37,11 +37,12 @@ def create_page(full_json, name, json_entry):
     qmd = ""
     qmd += header(f"viash {name}")
 
-    if "banner" in json_entry:  # Info is in top level command
+    if "bannerCommand" in json_entry:  # Info is in top level command
         qmd += add_command(json_entry)
     else:  # Info is in subcommands
         for subcommand in json_entry["subcommands"]:
             qmd += add_command(subcommand)
+
 
     qmd_file = open(reference_dir + f"viash/{name}.qmd", "w")
     qmd_file.write(qmd)
@@ -49,31 +50,24 @@ def create_page(full_json, name, json_entry):
 
 
 def add_command(command):
-    md = ""
+    name = "viash " + command["name"]
+    qmd = ""
+    
+    if name != command["bannerCommand"]:
+        qmd += "## " + command["bannerCommand"] + "\n\n"
 
-    split_banner = command["banner"].split("\n")
-    for i in range(len(split_banner)):
-        line = split_banner[i].strip()
-        name = "viash " + command["name"]
+    # qmd += "Command: `" +  command["bannerCommand"] + "`\n\n"
+    qmd += command["bannerDescription"] + "\n\n"
+    qmd += "**Usage:**\n\n"
+    qmd += "`" + command["bannerUsage"] + "`\n\n"
 
-        if i == 0 and line != name:
-            md += f"## {line}\n\n"
-            continue
+    # if "footer" in command:
+    #     qmd += callout("note", command["footer"])
 
-        if line == "Arguments:":
-            continue
 
-        if line.endswith(":"):
-            md += "**" + line + "**  \n\n"
+    qmd += create_opts_table(command["opts"])
 
-        elif line.startswith("viash"):
-            md += "`" + line + "`  \n\n"
-        else:
-            md += line + "  \n\n"
-
-    md += create_opts_table(command["opts"])
-
-    return md
+    return qmd
 
 
 def header(title):
@@ -86,13 +80,19 @@ def header(title):
     qmd += "---\n\n"
     return qmd
 
+def callout(type, content):
+    return "::: {" + f".callout-{type}" + "}\n" + content + "\n:::\n"
+
 
 def create_opts_table(opts):
-    md = ""
-    md += "| Argument | Description | Type |\n"
-    md += "|-|:----|-:\n"
+    qmd = ""
+    qmd += "| Argument | Description | Type |\n"
+    qmd += "|-|:----|-:\n"
 
-    for opt in opts:
+    sorted_opts = sorted(opts, key=lambda x: x["name"], reverse=False)
+
+
+    for opt in sorted_opts:
         argument = f"`--{opt['name']}`"
         if "short" in opt:
             argument += f", `-{opt['short']}`"
@@ -100,10 +100,14 @@ def create_opts_table(opts):
         description = opt["descr"].replace(
             "$", "\$"
         )  # Prevents dollar sign being detected as LaTeX start
-        md += f"| {argument} | {description} | {opt['type']} |\n"
 
-    md += "\n\n"
-    return md
+        if opt["required"]:
+            description += " **This is a required argument.**"
+
+        qmd += f"| {argument} | {description} | `{opt['type']}` |\n"
+
+    qmd += "\n\n"
+    return qmd
 
 
 if __name__ == "__main__":

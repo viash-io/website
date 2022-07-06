@@ -1,0 +1,696 @@
+[
+    {
+      "name" : "run",
+      "bannerCommand" : "viash run",
+      "bannerDescription" : "Executes a viash component from the provided viash config file. viash generates a temporary executable and immediately executes it with the given parameters.",
+      "bannerUsage" : "viash run config.vsh.yaml [-p docker] [-k true/false]  -- [arguments for script]",
+      "footer" : "  -- param1 param2 ...    Extra parameters to be passed to the component itself.\n                          -- is used to separate viash arguments from the arguments\n                          of the component.\n\nThe temporary directory can be altered by setting the VIASH_TEMP directory. Example:\n  export VIASH_TEMP=/home/myuser/.viash_temp\n  viash run config.vsh.yaml",
+      "subcommands" : [
+      ],
+      "opts" : [
+        {
+          "name" : "platform",
+          "short" : "p",
+          "descr" : "Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.",
+          "required" : false,
+          "argName" : "arg",
+          "hidden" : false,
+          "noshort" : false,
+          "type" : "String",
+          "optType" : "opt"
+        },
+        {
+          "name" : "config",
+          "descr" : "A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.",
+          "default" : "config.vsh.yaml",
+          "required" : true,
+          "hidden" : false,
+          "type" : "String",
+          "optType" : "trailArgs"
+        },
+        {
+          "name" : "config_mod",
+          "short" : "c",
+          "descr" : "Modify a viash config at runtime using a custom DSL. For more information, see the online documentation.",
+          "default" : "List()",
+          "required" : false,
+          "argName" : "arg",
+          "hidden" : false,
+          "noshort" : false,
+          "type" : "List[String]",
+          "optType" : "opt"
+        },
+        {
+          "name" : "keep",
+          "short" : "k",
+          "descr" : "Whether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying --keep true, the temporary files will always be retained, whereas --keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.",
+          "required" : false,
+          "argName" : "arg",
+          "hidden" : false,
+          "noshort" : false,
+          "type" : "String",
+          "optType" : "opt"
+        }
+      ]
+    },
+    {
+      "name" : "build",
+      "bannerCommand" : "viash build",
+      "bannerDescription" : "Build an executable from the provided viash config file.",
+      "bannerUsage" : "viash build config.vsh.yaml -o output [-p docker] [-m] [-s]",
+      "subcommands" : [
+      ],
+      "opts" : [
+        {
+          "name" : "platform",
+          "short" : "p",
+          "descr" : "Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.",
+          "required" : false,
+          "argName" : "arg",
+          "hidden" : false,
+          "noshort" : false,
+          "type" : "String",
+          "optType" : "opt"
+        },
+        {
+          "name" : "config",
+          "descr" : "A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.",
+          "default" : "config.vsh.yaml",
+          "required" : true,
+          "hidden" : false,
+          "type" : "String",
+          "optType" : "trailArgs"
+        },
+        {
+          "name" : "config_mod",
+          "short" : "c",
+          "descr" : "Modify a viash config at runtime using a custom DSL. For more information, see the online documentation.",
+          "default" : "List()",
+          "required" : false,
+          "argName" : "arg",
+          "hidden" : false,
+          "noshort" : false,
+          "type" : "List[String]",
+          "optType" : "opt"
+        },
+        {
+          "name" : "meta",
+          "short" : "m",
+          "descr" : "Print out some meta information at the end.",
+          "default" : "false",
+          "required" : false,
+          "argName" : "arg",
+          "hidden" : false,
+          "noshort" : false,
+          "type" : "Boolean",
+          "optType" : "opt"
+        },
+        {
+          "name" : "write_meta",
+          "short" : "w",
+          "descr" : "Write out some meta information to RESOURCES_DIR/viash.yaml at the end.",
+          "default" : "false",
+          "required" : false,
+          "argName" : "arg",
+          "hidden" : false,
+          "noshort" : false,
+          "type" : "Boolean",
+          "optType" : "opt"
+        },
+        {
+          "name" : "output",
+          "descr" : "Path to directory in which the executable and any resources is built to. Default: \"output/\".",
+          "default" : "output/",
+          "required" : true,
+          "argName" : "arg",
+          "hidden" : false,
+          "noshort" : false,
+          "type" : "String",
+          "optType" : "opt"
+        },
+        {
+          "name" : "setup",
+          "descr" : "Which setup strategy for creating the container to use [Docker Platform only].",
+          "required" : false,
+          "argName" : "arg",
+          "hidden" : false,
+          "noshort" : false,
+          "type" : "String",
+          "optType" : "opt"
+        },
+        {
+          "name" : "push",
+          "descr" : "Whether or not to push the container to a Docker registry [Docker Platform only].",
+          "default" : "false",
+          "required" : false,
+          "argName" : "arg",
+          "hidden" : false,
+          "noshort" : false,
+          "type" : "Boolean",
+          "optType" : "opt"
+        }
+      ]
+    },
+    {
+      "name" : "test",
+      "bannerCommand" : "viash test",
+      "bannerDescription" : "Test the component using the tests defined in the viash config file.",
+      "bannerUsage" : "viash test config.vsh.yaml [-p docker] [-k true/false]",
+      "footer" : "\nThe temporary directory can be altered by setting the VIASH_TEMP directory. Example:\n  export VIASH_TEMP=/home/myuser/.viash_temp\n  viash run meta.vsh.yaml",
+      "subcommands" : [
+      ],
+      "opts" : [
+        {
+          "name" : "platform",
+          "short" : "p",
+          "descr" : "Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.",
+          "required" : false,
+          "argName" : "arg",
+          "hidden" : false,
+          "noshort" : false,
+          "type" : "String",
+          "optType" : "opt"
+        },
+        {
+          "name" : "config",
+          "descr" : "A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.",
+          "default" : "config.vsh.yaml",
+          "required" : true,
+          "hidden" : false,
+          "type" : "String",
+          "optType" : "trailArgs"
+        },
+        {
+          "name" : "config_mod",
+          "short" : "c",
+          "descr" : "Modify a viash config at runtime using a custom DSL. For more information, see the online documentation.",
+          "default" : "List()",
+          "required" : false,
+          "argName" : "arg",
+          "hidden" : false,
+          "noshort" : false,
+          "type" : "List[String]",
+          "optType" : "opt"
+        },
+        {
+          "name" : "keep",
+          "short" : "k",
+          "descr" : "Whether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying --keep true, the temporary files will always be retained, whereas --keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.",
+          "required" : false,
+          "argName" : "arg",
+          "hidden" : false,
+          "noshort" : false,
+          "type" : "String",
+          "optType" : "opt"
+        }
+      ]
+    },
+    {
+      "name" : "ns",
+      "subcommands" : [
+        {
+          "name" : "build",
+          "bannerCommand" : "viash ns build",
+          "bannerDescription" : "Build a namespace from many viash config files.",
+          "bannerUsage" : "viash ns build [-n nmspc] [-s src] [-t target] [-p docker] [--setup] [---push] [--parallel] [--flatten]",
+          "subcommands" : [
+          ],
+          "opts" : [
+            {
+              "name" : "query",
+              "short" : "q",
+              "descr" : "Filter which components get selected by name and namespace. Can be a regex. Example: \"^mynamespace/component1$\".",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "query_namespace",
+              "short" : "n",
+              "descr" : "Filter which namespaces get selected by namespace. Can be a regex. Example: \"^mynamespace$\".",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "query_name",
+              "descr" : "Filter which components get selected by name. Can be a regex. Example: \"^component1\".",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "src",
+              "short" : "s",
+              "descr" : " A source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.",
+              "default" : "src",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "platform",
+              "short" : "p",
+              "descr" : "Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "parallel",
+              "short" : "l",
+              "descr" : "Whether or not to run the process in parallel.",
+              "default" : "false",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "Boolean",
+              "optType" : "opt"
+            },
+            {
+              "name" : "config_mod",
+              "short" : "c",
+              "descr" : "Modify a viash config at runtime using a custom DSL. For more information, see the online documentation.",
+              "default" : "List()",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "List[String]",
+              "optType" : "opt"
+            },
+            {
+              "name" : "target",
+              "short" : "t",
+              "descr" : "A target directory to build the executables into. Default: target/.",
+              "default" : "target",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "setup",
+              "descr" : "Which setup strategy for creating the container to use [Docker Platform only].",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "push",
+              "descr" : "Whether or not to push the container to a Docker registry [Docker Platform only].",
+              "default" : "false",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "Boolean",
+              "optType" : "opt"
+            },
+            {
+              "name" : "write_meta",
+              "short" : "w",
+              "descr" : "Write out some meta information to RESOURCES_DIR/viash.yaml at the end.",
+              "default" : "false",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "Boolean",
+              "optType" : "opt"
+            },
+            {
+              "name" : "flatten",
+              "short" : "f",
+              "descr" : "Flatten the target builds, handy for building one platform to a bin directory.",
+              "default" : "false",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "Boolean",
+              "optType" : "opt"
+            }
+          ]
+        },
+        {
+          "name" : "test",
+          "bannerCommand" : "viash ns test",
+          "bannerDescription" : "Test a namespace containing many viash config files.",
+          "bannerUsage" : "viash ns test [-n nmspc] [-s src] [-p docker] [--parallel] [--tsv file.tsv] [--append]",
+          "subcommands" : [
+          ],
+          "opts" : [
+            {
+              "name" : "query",
+              "short" : "q",
+              "descr" : "Filter which components get selected by name and namespace. Can be a regex. Example: \"^mynamespace/component1$\".",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "query_namespace",
+              "short" : "n",
+              "descr" : "Filter which namespaces get selected by namespace. Can be a regex. Example: \"^mynamespace$\".",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "query_name",
+              "descr" : "Filter which components get selected by name. Can be a regex. Example: \"^component1\".",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "src",
+              "short" : "s",
+              "descr" : " A source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.",
+              "default" : "src",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "platform",
+              "short" : "p",
+              "descr" : "Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "parallel",
+              "short" : "l",
+              "descr" : "Whether or not to run the process in parallel.",
+              "default" : "false",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "Boolean",
+              "optType" : "opt"
+            },
+            {
+              "name" : "config_mod",
+              "short" : "c",
+              "descr" : "Modify a viash config at runtime using a custom DSL. For more information, see the online documentation.",
+              "default" : "List()",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "List[String]",
+              "optType" : "opt"
+            },
+            {
+              "name" : "keep",
+              "short" : "k",
+              "descr" : "Whether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying --keep true, the temporary files will always be retained, whereas --keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "tsv",
+              "short" : "t",
+              "descr" : "Path to write a summary of the test results to.",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "append",
+              "short" : "a",
+              "descr" : "Append to tsv instead of overwrite",
+              "default" : "false",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "Boolean",
+              "optType" : "opt"
+            }
+          ]
+        },
+        {
+          "name" : "list",
+          "bannerCommand" : "viash ns list",
+          "bannerDescription" : "List a namespace containing many viash config files.",
+          "bannerUsage" : "viash ns list [-n nmspc] [-s src] [-p docker]",
+          "subcommands" : [
+          ],
+          "opts" : [
+            {
+              "name" : "query",
+              "short" : "q",
+              "descr" : "Filter which components get selected by name and namespace. Can be a regex. Example: \"^mynamespace/component1$\".",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "query_namespace",
+              "short" : "n",
+              "descr" : "Filter which namespaces get selected by namespace. Can be a regex. Example: \"^mynamespace$\".",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "query_name",
+              "descr" : "Filter which components get selected by name. Can be a regex. Example: \"^component1\".",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "src",
+              "short" : "s",
+              "descr" : " A source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.",
+              "default" : "src",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "platform",
+              "short" : "p",
+              "descr" : "Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "parallel",
+              "short" : "l",
+              "descr" : "Whether or not to run the process in parallel.",
+              "default" : "false",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "Boolean",
+              "optType" : "opt"
+            },
+            {
+              "name" : "config_mod",
+              "short" : "c",
+              "descr" : "Modify a viash config at runtime using a custom DSL. For more information, see the online documentation.",
+              "default" : "List()",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "List[String]",
+              "optType" : "opt"
+            },
+            {
+              "name" : "format",
+              "short" : "f",
+              "descr" : "Which output format to use.",
+              "default" : "yaml",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "choices" : [
+                "yaml",
+                "json"
+              ],
+              "type" : "String",
+              "optType" : "choice"
+            }
+          ]
+        }
+      ],
+      "opts" : [
+      ]
+    },
+    {
+      "name" : "config",
+      "subcommands" : [
+        {
+          "name" : "view",
+          "bannerCommand" : "viash config view",
+          "bannerDescription" : "View the config file after parsing.",
+          "bannerUsage" : "viash config view config.vsh.yaml",
+          "subcommands" : [
+          ],
+          "opts" : [
+            {
+              "name" : "platform",
+              "short" : "p",
+              "descr" : "Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "config",
+              "descr" : "A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.",
+              "default" : "config.vsh.yaml",
+              "required" : true,
+              "hidden" : false,
+              "type" : "String",
+              "optType" : "trailArgs"
+            },
+            {
+              "name" : "config_mod",
+              "short" : "c",
+              "descr" : "Modify a viash config at runtime using a custom DSL. For more information, see the online documentation.",
+              "default" : "List()",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "List[String]",
+              "optType" : "opt"
+            },
+            {
+              "name" : "format",
+              "short" : "f",
+              "descr" : "Which output format to use.",
+              "default" : "yaml",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "choices" : [
+                "yaml",
+                "json"
+              ],
+              "type" : "String",
+              "optType" : "choice"
+            }
+          ]
+        },
+        {
+          "name" : "inject",
+          "bannerCommand" : "viash config inject",
+          "bannerDescription" : "Inject a Viash header into the main script of a Viash component.",
+          "bannerUsage" : "viash config inject config.vsh.yaml",
+          "subcommands" : [
+          ],
+          "opts" : [
+            {
+              "name" : "platform",
+              "short" : "p",
+              "descr" : "Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "String",
+              "optType" : "opt"
+            },
+            {
+              "name" : "config",
+              "descr" : "A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.",
+              "default" : "config.vsh.yaml",
+              "required" : true,
+              "hidden" : false,
+              "type" : "String",
+              "optType" : "trailArgs"
+            },
+            {
+              "name" : "config_mod",
+              "short" : "c",
+              "descr" : "Modify a viash config at runtime using a custom DSL. For more information, see the online documentation.",
+              "default" : "List()",
+              "required" : false,
+              "argName" : "arg",
+              "hidden" : false,
+              "noshort" : false,
+              "type" : "List[String]",
+              "optType" : "opt"
+            }
+          ]
+        }
+      ],
+      "opts" : [
+      ]
+    }
+  ]
