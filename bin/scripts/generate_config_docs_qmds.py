@@ -55,15 +55,24 @@ def create_page(full_json, name, json_entry):
             qmd += "### Example(s)" + "\n\n"
             for example in sorted_dict[i]["example"]:
                 qmd += "```" + example["format"] + "\n"  + example["example"].replace('\\n','\n') + "\n```\n\n"
-        if ('since' in sorted_dict[i]):
-            qmd += "Introduced in " + sorted_dict[i]["since"] + "\n\n"
+        # if ('since' in sorted_dict[i]):
+        #     qmd += pill("Introduced: " + sorted_dict[i]["since"])
+        if ('removed' in sorted_dict[i]):
+            qmd += callout("warning","Removed since " + sorted_dict[i]["removed"]["since"] + ".\n" + sorted_dict[i]["removed"]["message"])
 
-        
+    qmd += "\n\n"
+       
 
     qmd_file = open(reference_dir + f"config/{name}.qmd", "w")
     qmd_file.write(qmd)
     qmd_file.close()
 
+
+def pill(content):
+    return "::: {.smallpill}\n" + content + "\n:::\n"
+
+def callout(type, content):
+    return "::: {"+ f".callout-{type}" + "}\n" + content + "\n:::\n"
 
 if __name__ == "__main__":
     generate_json()
