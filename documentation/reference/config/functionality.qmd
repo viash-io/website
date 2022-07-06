@@ -1,5 +1,9 @@
 ---
-title: "Functionality"
+title: Functionality
+search: true
+execute:
+  echo: false
+  output: asis
 ---
 
 The functionality-part of the config file describes the behaviour of the script in terms of arguments and resources.
@@ -8,12 +12,11 @@ By specifying a few restrictions (e.g. mandatory arguments) and adding some desc
 
 ## add_resources_to_path
 
+::: {.callout-warning}
+Removed since Viash 0.5.11. Extending the PATH turned out to be not desirable.
+:::
 Adds the resources directory to the PATH variable when set to true. This is set to false by default.
 
-::: {.callout-warning}
-Removed since Viash 0.5.11.
-Extending the PATH turned out to be not desirable.
-:::
 ## argument_groups
 
 ## arguments
@@ -168,6 +171,9 @@ tests:
 
 ## tests
 
+::: {.callout-warning}
+Deprecated since Viash 0.5.13. Use `test_resources` instead. No functional difference.
+:::
 One or more Bash/R/Python scripts to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.
 
 ## usage
