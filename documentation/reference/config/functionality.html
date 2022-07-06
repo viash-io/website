@@ -270,40 +270,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tests" id="toc-tests" class="nav-link active" data-scroll-target="#tests">tests</a></li>
-  <li><a href="#add_resources_to_path" id="toc-add_resources_to_path" class="nav-link" data-scroll-target="#add_resources_to_path">add_resources_to_path</a></li>
-  <li><a href="#enabled" id="toc-enabled" class="nav-link" data-scroll-target="#enabled">enabled</a></li>
-  <li><a href="#info" id="toc-info" class="nav-link" data-scroll-target="#info">info</a></li>
-  <li><a href="#test_resources" id="toc-test_resources" class="nav-link" data-scroll-target="#test_resources">test_resources</a>
+  <li><a href="#add_resources_to_path" id="toc-add_resources_to_path" class="nav-link active" data-scroll-target="#add_resources_to_path">add_resources_to_path</a></li>
+  <li><a href="#argument_groups" id="toc-argument_groups" class="nav-link" data-scroll-target="#argument_groups">argument_groups</a></li>
+  <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">arguments</a>
   <ul class="collapse">
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Example(s)</a></li>
   </ul></li>
-  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">usage</a></li>
+  <li><a href="#authors" id="toc-authors" class="nav-link" data-scroll-target="#authors">authors</a></li>
   <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">description</a>
   <ul class="collapse">
   <li><a href="#examples-1" id="toc-examples-1" class="nav-link" data-scroll-target="#examples-1">Example(s)</a></li>
   </ul></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">resources</a>
+  <li><a href="#enabled" id="toc-enabled" class="nav-link" data-scroll-target="#enabled">enabled</a></li>
+  <li><a href="#info" id="toc-info" class="nav-link" data-scroll-target="#info">info</a></li>
+  <li><a href="#inputs" id="toc-inputs" class="nav-link" data-scroll-target="#inputs">inputs</a></li>
+  <li><a href="#name" id="toc-name" class="nav-link" data-scroll-target="#name">name</a>
   <ul class="collapse">
   <li><a href="#examples-2" id="toc-examples-2" class="nav-link" data-scroll-target="#examples-2">Example(s)</a></li>
   </ul></li>
-  <li><a href="#argument_groups" id="toc-argument_groups" class="nav-link" data-scroll-target="#argument_groups">argument_groups</a></li>
-  <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">arguments</a>
+  <li><a href="#namespace" id="toc-namespace" class="nav-link" data-scroll-target="#namespace">namespace</a>
   <ul class="collapse">
   <li><a href="#examples-3" id="toc-examples-3" class="nav-link" data-scroll-target="#examples-3">Example(s)</a></li>
   </ul></li>
   <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs">outputs</a></li>
-  <li><a href="#inputs" id="toc-inputs" class="nav-link" data-scroll-target="#inputs">inputs</a></li>
-  <li><a href="#authors" id="toc-authors" class="nav-link" data-scroll-target="#authors">authors</a></li>
-  <li><a href="#version" id="toc-version" class="nav-link" data-scroll-target="#version">version</a></li>
-  <li><a href="#namespace" id="toc-namespace" class="nav-link" data-scroll-target="#namespace">namespace</a>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">resources</a>
   <ul class="collapse">
   <li><a href="#examples-4" id="toc-examples-4" class="nav-link" data-scroll-target="#examples-4">Example(s)</a></li>
   </ul></li>
-  <li><a href="#name" id="toc-name" class="nav-link" data-scroll-target="#name">name</a>
+  <li><a href="#test_resources" id="toc-test_resources" class="nav-link" data-scroll-target="#test_resources">test_resources</a>
   <ul class="collapse">
   <li><a href="#examples-5" id="toc-examples-5" class="nav-link" data-scroll-target="#examples-5">Example(s)</a></li>
   </ul></li>
+  <li><a href="#tests" id="toc-tests" class="nav-link" data-scroll-target="#tests">tests</a></li>
+  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">usage</a></li>
+  <li><a href="#version" id="toc-version" class="nav-link" data-scroll-target="#version">version</a></li>
   </ul>
 </nav>
     </div>
@@ -327,41 +327,122 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <p>The functionality-part of the config file describes the behaviour of the script in terms of arguments and resources. By specifying a few restrictions (e.g.&nbsp;mandatory arguments) and adding some descriptions, Viash will automatically generate a stylish command-line interface for you.</p>
-<section id="tests" class="level2">
-<h2 class="anchored" data-anchor-id="tests">tests</h2>
-<p>One or more Bash/R/Python scripts to be used to test the component behaviour when <code>viash test</code> is invoked. Additional files of type <code>file</code> will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code &gt;0 when unexpected behaviour occurs during testing.</p>
-</section>
 <section id="add_resources_to_path" class="level2">
 <h2 class="anchored" data-anchor-id="add_resources_to_path">add_resources_to_path</h2>
 <p>Adds the resources directory to the PATH variable when set to true. This is set to false by default.</p>
-<p>Introduced in Viash 0.5.5</p>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Removed since Viash 0.5.11. Extending the PATH turned out to be not desirable.</p>
+</div>
+</div>
 </section>
-<section id="enabled" class="level2">
-<h2 class="anchored" data-anchor-id="enabled">enabled</h2>
-<p>Setting this to false with disable this component when using namespaces.</p>
-<p>Introduced in Viash 0.5.13</p>
+<section id="argument_groups" class="level2">
+<h2 class="anchored" data-anchor-id="argument_groups">argument_groups</h2>
 </section>
-<section id="info" class="level2">
-<h2 class="anchored" data-anchor-id="info">info</h2>
-<p>A map for storing custom annotation.</p>
-<p>Introduced in Viash 0.4.0</p>
-</section>
-<section id="test_resources" class="level2">
-<h2 class="anchored" data-anchor-id="test_resources">test_resources</h2>
-<p>One or more Bash/R/Python scripts to be used to test the component behaviour when <code>viash test</code> is invoked. Additional files of type <code>file</code> will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code &gt;0 when unexpected behaviour occurs during testing.</p>
+<section id="arguments" class="level2">
+<h2 class="anchored" data-anchor-id="arguments">arguments</h2>
+<p>A list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. Common properties for all argument types are the following.</p>
+<ul>
+<li><code>type: string/file/integer/double/boolean/boolean_true/boolean_false</code>, the type of argument determining to what object type the value will be cast in the downstream scripts.</li>
+<li><code>direction: input/output</code>, the directionality of the argument. Only needs to be specified for output files. Default: “input”.</li>
+<li><code>name: --foo</code>, the name of the argument. Can also be <code>-foo</code> or <code>foo</code>. The number of dashes determines how values can be passed:
+<ul>
+<li>with <code>--foo</code>: long option, e.g.&nbsp;<code>exe --foo=bar</code> or exe <code>--foo bar</code></li>
+<li>with <code>-foo</code>: short option, e.g.&nbsp;<code>exe -foo bar</code></li>
+<li>with <code>foo</code>: argument, e.g.&nbsp;<code>exe bar</code></li>
+</ul></li>
+<li><code>alternatives: [-f]</code>, list of alternative names. Typically only used to provide a short alternative option.</li>
+<li><code>description: Description of foo</code>, a description of the argument. Multiline descriptions are supported.</li>
+<li><code>default: bar</code>, the default value when no argument value is provided. Not allowed when <code>required: true</code>.</li>
+<li><code>required: true/false</code>, whether the argument is required. If true and the functionality is executed, an error will be produced if no value is provided. Default = false.</li>
+<li><code>multiple: true/false</code>, whether to treat the argument value as an array or not. Arrays can be passed using the delimiter <code>--foo=1:2:3</code> or by providing the same argument multiple times <code>--foo 1 --foo 2</code>. Default = false.</li>
+<li><code>multiple_sep: ":"</code>, the delimiter for providing multiple values. Default = “:”.</li>
+</ul>
+<p>On types:</p>
+<ul>
+<li><code>type: string</code>, The value passed through an argument of this type is converted to an ‘str’ object in Python, and to a ‘character’ object in R.</li>
+<li><code>type: integer</code>, The resulting value is an ‘int’ in Python and an ‘integer’ in R.</li>
+<li><code>type: double</code>, The resulting value is a ‘float’ in Python and an ‘double’ in R.</li>
+<li><code>type: boolean</code>, The resulting value is a ‘bool’ in Python and a ‘logical’ in R.</li>
+<li><code>type: boolean_true/boolean_false</code>, Arguments of this type can only be used by providing a flag <code>--foo</code> or not. The resulting value is a ‘bool’ in Python and a ‘logical’ in R. These properties cannot be altered: required is false, default is undefined, multiple is false.</li>
+<li><code>type: file</code>, The resulting value is still an ‘str’ in Python and a ‘character’ in R. In order to correctly pass files in some platforms (e.g.&nbsp;Docker and Nextflow), Viash needs to know which arguments are input/output files.</li>
+</ul>
+<p>Additional property values:</p>
+<ul>
+<li><code>must_exist: true/false</code>, denotes whether the file or folder should exist at the start of the execution.</li>
+</ul>
 <section id="examples" class="level3">
 <h3 class="anchored" data-anchor-id="examples">Example(s)</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tests</span><span class="kw">:</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> bash_script</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> tests/test1.sh</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> r_script</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> tests/test2.R</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">path</span><span class="kw">:</span><span class="at"> resource1.txt</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --foo                           </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">alternatives</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">-f</span><span class="kw">]</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">description</span><span class="kw">:</span><span class="at"> Description of foo</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">default</span><span class="kw">:</span><span class="at"> </span><span class="st">"/foo/bar"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">must_exist</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">multiple</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">multiple_sep</span><span class="kw">:</span><span class="at"> </span><span class="st">","</span></span></code></pre></div>
 </section>
 </section>
-<section id="usage" class="level2">
-<h2 class="anchored" data-anchor-id="usage">usage</h2>
-<p>A description of the component. This will be displayed with –help under the ‘Usage:’ section.</p>
+<section id="authors" class="level2">
+<h2 class="anchored" data-anchor-id="authors">authors</h2>
+<p>A list of authors. An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.</p>
+<p>Suggested values for roles are:</p>
+<table class="table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 32%">
+<col style="width: 46%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Role</th>
+<th>Abbrev.</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>maintainer</td>
+<td>mnt</td>
+<td>for the maintainer of the code. Ideally, exactly one maintainer is specified.</td>
+</tr>
+<tr class="even">
+<td>author</td>
+<td>aut</td>
+<td>for persons who have made substantial contributions to the software.</td>
+</tr>
+<tr class="odd">
+<td>contributor</td>
+<td>ctb</td>
+<td>for persons who have made smaller contributions (such as code patches).</td>
+</tr>
+<tr class="even">
+<td>datacontributor</td>
+<td>dtc</td>
+<td>for persons or organisations that contributed data sets for the software</td>
+</tr>
+<tr class="odd">
+<td>copyrightholder</td>
+<td>cph</td>
+<td>for all copyright holders. This is a legal concept so should use the legal name of an institution or corporate body.</td>
+</tr>
+<tr class="even">
+<td>funder</td>
+<td>fnd</td>
+<td>for persons or organizations that furnished financial support for the development of the software</td>
+</tr>
+</tbody>
+</table>
+<p>The <a href="https://www.loc.gov/marc/relators/relaterm.html">full list of roles</a> is extremely comprehensive.</p>
 </section>
 <section id="description" class="level2">
 <h2 class="anchored" data-anchor-id="description">description</h2>
@@ -369,9 +450,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="examples-1" class="level3">
 <h3 class="anchored" data-anchor-id="examples-1">Example(s)</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">This component performs function Y and Z.</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">It is possible to make this a multiline string.</span></span></code></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  This component performs function Y and Z.</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  It is possible to make this a multiline string.</span></code></pre></div>
 </section>
+</section>
+<section id="enabled" class="level2">
+<h2 class="anchored" data-anchor-id="enabled">enabled</h2>
+<p>Setting this to false with disable this component when using namespaces.</p>
+</section>
+<section id="info" class="level2">
+<h2 class="anchored" data-anchor-id="info">info</h2>
+<p>A map for storing custom annotation.</p>
+</section>
+<section id="inputs" class="level2">
+<h2 class="anchored" data-anchor-id="inputs">inputs</h2>
+</section>
+<section id="name" class="level2">
+<h2 class="anchored" data-anchor-id="name">name</h2>
+<p>Name of the component and the filename of the executable when built with <code>viash build</code>.</p>
+<section id="examples-2" class="level3">
+<h3 class="anchored" data-anchor-id="examples-2">Example(s)</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> exe</span></span></code></pre></div>
+</section>
+</section>
+<section id="namespace" class="level2">
+<h2 class="anchored" data-anchor-id="namespace">namespace</h2>
+<p>Namespace this component is a part of. This is required when grouping components together in a pipeline and building multiple components at once using viash <code>ns build</code>.</p>
+<section id="examples-3" class="level3">
+<h3 class="anchored" data-anchor-id="examples-3">Example(s)</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">namespace</span><span class="kw">:</span><span class="at"> fancy_components</span></span></code></pre></div>
+</section>
+</section>
+<section id="outputs" class="level2">
+<h2 class="anchored" data-anchor-id="outputs">outputs</h2>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">resources</h2>
@@ -384,71 +495,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>text: …multiline text…, the raw content of the input file. Exactly one of path or text must be defined, the other undefined.</li>
 <li>is_executable: true/false, whether the resulting file is made executable.</li>
 </ul>
-<section id="examples-2" class="level3">
-<h3 class="anchored" data-anchor-id="examples-2">Example(s)</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resources</span><span class="kw">:</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> r_script</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.R</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> resource1.txt</span></span></code></pre></div>
+<section id="examples-4" class="level3">
+<h3 class="anchored" data-anchor-id="examples-4">Example(s)</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> r_script</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.R</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> resource1.txt</span></span></code></pre></div>
 </section>
 </section>
-<section id="argument_groups" class="level2">
-<h2 class="anchored" data-anchor-id="argument_groups">argument_groups</h2>
-<p>Introduced in Viash 0.5.14</p>
-</section>
-<section id="arguments" class="level2">
-<h2 class="anchored" data-anchor-id="arguments">arguments</h2>
-<p>A list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. Common properties for all argument types are the following. - <code>type: string/file/integer/double/boolean/boolean_true/boolean_false</code>, the type of argument determining to what object type the value will be cast in the downstream scripts. - <code>direction: input/output</code>, the directionality of the argument. Only needs to be specified for output files. Default: “input”. - <code>name: --foo</code>, the name of the argument. Can also be <code>-foo</code> or <code>foo</code>. The number of dashes determines how values can be passed: - with <code>--foo</code>: long option, e.g.&nbsp;<code>exe --foo=bar</code> or exe <code>--foo bar</code> - with <code>-foo</code>: short option, e.g.&nbsp;<code>exe -foo bar</code> - with <code>foo</code>: argument, e.g.&nbsp;<code>exe bar</code> - <code>alternatives: [-f]</code>, list of alternative names. Typically only used to provide a short alternative option. - <code>description: Description of foo</code>, a description of the argument. Multiline descriptions are supported. - <code>default: bar</code>, the default value when no argument value is provided. Not allowed when <code>required: true</code>. - <code>required: true/false</code>, whether the argument is required. If true and the functionality is executed, an error will be produced if no value is provided. Default = false. - <code>multiple: true/false</code>, whether to treat the argument value as an array or not. Arrays can be passed using the delimiter <code>--foo=1:2:3</code> or by providing the same argument multiple times <code>--foo 1 --foo 2</code>. Default = false. - <code>multiple_sep: ":"</code>, the delimiter for providing multiple values. Default = “:”. On types: * <code>type: string</code>, The value passed through an argument of this type is converted to an ‘str’ object in Python, and to a ‘character’ object in R. * <code>type: integer</code>, The resulting value is an ‘int’ in Python and an ‘integer’ in R. * <code>type: double</code>, The resulting value is a ‘float’ in Python and an ‘double’ in R. * <code>type: boolean</code>, The resulting value is a ‘bool’ in Python and a ‘logical’ in R. * <code>type: boolean_true/boolean_false</code>, Arguments of this type can only be used by providing a flag <code>--foo</code> or not. The resulting value is a ‘bool’ in Python and a ‘logical’ in R. These properties cannot be altered: required is false, default is undefined, multiple is false. * <code>type: file</code>, The resulting value is still an ‘str’ in Python and a ‘character’ in R. In order to correctly pass files in some platforms (e.g.&nbsp;Docker and Nextflow), Viash needs to know which arguments are input/output files. Additional property values: - <code>must_exist: true/false</code>, denotes whether the file or folder should exist at the start of the execution.</p>
-<section id="examples-3" class="level3">
-<h3 class="anchored" data-anchor-id="examples-3">Example(s)</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --foo                           </span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">alternatives</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">-f</span><span class="kw">]</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">description</span><span class="kw">:</span><span class="at"> Description of foo</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">default</span><span class="kw">:</span><span class="at"> </span><span class="st">"/foo/bar"</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">must_exist</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">multiple</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">multiple_sep</span><span class="kw">:</span><span class="at"> </span><span class="st">","</span></span></code></pre></div>
+<section id="test_resources" class="level2">
+<h2 class="anchored" data-anchor-id="test_resources">test_resources</h2>
+<p>One or more Bash/R/Python scripts to be used to test the component behaviour when <code>viash test</code> is invoked. Additional files of type <code>file</code> will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code &gt;0 when unexpected behaviour occurs during testing.</p>
+<section id="examples-5" class="level3">
+<h3 class="anchored" data-anchor-id="examples-5">Example(s)</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tests</span><span class="kw">:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> bash_script</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> tests/test1.sh</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> r_script</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> tests/test2.R</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">path</span><span class="kw">:</span><span class="at"> resource1.txt</span></span></code></pre></div>
 </section>
 </section>
-<section id="outputs" class="level2">
-<h2 class="anchored" data-anchor-id="outputs">outputs</h2>
-<p>Introduced in Viash 0.5.11</p>
+<section id="tests" class="level2">
+<h2 class="anchored" data-anchor-id="tests">tests</h2>
+<p>One or more Bash/R/Python scripts to be used to test the component behaviour when <code>viash test</code> is invoked. Additional files of type <code>file</code> will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code &gt;0 when unexpected behaviour occurs during testing.</p>
 </section>
-<section id="inputs" class="level2">
-<h2 class="anchored" data-anchor-id="inputs">inputs</h2>
-<p>Introduced in Viash 0.5.11</p>
-</section>
-<section id="authors" class="level2">
-<h2 class="anchored" data-anchor-id="authors">authors</h2>
-<p>A list of authors. An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.</p>
-<p>Suggested values for roles are: | Role | Abbrev. | Description | |——|———|————-| | maintainer | mnt | for the maintainer of the code. Ideally, exactly one maintainer is specified. | | author | aut | for persons who have made substantial contributions to the software. | | contributor | ctb| for persons who have made smaller contributions (such as code patches). | datacontributor | dtc | for persons or organisations that contributed data sets for the software | copyrightholder | cph | for all copyright holders. This is a legal concept so should use the legal name of an institution or corporate body. | funder | fnd | for persons or organizations that furnished financial support for the development of the software</p>
-<p>The <a href="https://www.loc.gov/marc/relators/relaterm.html">full list of roles</a> is extremely comprehensive.</p>
-<p>Introduced in Viash 0.3.1</p>
+<section id="usage" class="level2">
+<h2 class="anchored" data-anchor-id="usage">usage</h2>
+<p>A description of the component. This will be displayed with –help under the ‘Usage:’ section.</p>
 </section>
 <section id="version" class="level2">
 <h2 class="anchored" data-anchor-id="version">version</h2>
 <p>Version of the component. This field will be used to version the executable and the Docker container.</p>
-</section>
-<section id="namespace" class="level2">
-<h2 class="anchored" data-anchor-id="namespace">namespace</h2>
-<p>Namespace this component is a part of. This is required when grouping components together in a pipeline and building multiple components at once using viash <code>ns build</code>.</p>
-<section id="examples-4" class="level3">
-<h3 class="anchored" data-anchor-id="examples-4">Example(s)</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">namespace</span><span class="kw">:</span><span class="at"> fancy_components</span></span></code></pre></div>
-</section>
-</section>
-<section id="name" class="level2">
-<h2 class="anchored" data-anchor-id="name">name</h2>
-<p>Name of the component and the filename of the executable when built with <code>viash build</code>.</p>
-<section id="examples-5" class="level3">
-<h3 class="anchored" data-anchor-id="examples-5">Example(s)</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> exe</span></span></code></pre></div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
