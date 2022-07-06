@@ -6,84 +6,11 @@ The functionality-part of the config file describes the behaviour of the script 
 By specifying a few restrictions (e.g. mandatory arguments) and adding some descriptions, Viash will automatically generate a stylish command-line interface for you.
 
 
-## tests
-
-One or more Bash/R/Python scripts to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.
-
 ## add_resources_to_path
 
 Adds the resources directory to the PATH variable when set to true. This is set to false by default.
 
 Introduced in Viash 0.5.5
-
-## enabled
-
-Setting this to false with disable this component when using namespaces.
-
-Introduced in Viash 0.5.13
-
-## info
-
-A map for storing custom annotation.
-
-Introduced in Viash 0.4.0
-
-## test_resources
-
-One or more Bash/R/Python scripts to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.
-
-### Example(s)
-
-```yaml
-tests:
-  - type: bash_script
-    path: tests/test1.sh
-  - type: r_script
-    path: tests/test2.R
-  - path: resource1.txt
-
-```
-
-## usage
-
-A description of the component. This will be displayed with --help under the 'Usage:' section.
-
-## description
-
-A description of the component. This will be displayed with --help.
-
-### Example(s)
-
-```yaml
-description: |
-This component performs function Y and Z.
-It is possible to make this a multiline string.
-
-```
-
-## resources
-
-The first resource should be a script (bash_script, r_script, python_script, javascript_script, scala_script) which is what will be executed when the functionality is run. Additional resources will be copied to the same directory.
-
-Common properties:
-
- * type: file/r_script/python_script/bash_script/javascript_script/scala_script, the type of resource. The first resource cannot be of type file. When the type is not specified, the default type is simply file. For more information regarding how to write a script in Bash, R or Python with Viash, check out the guides for the respective languages on the left.
- * name: filename, the resulting name of the resource.
- * path: path/to/file, the path of the input file. Can be a relative or an absolute path, or a URI.
- * text: ...multiline text..., the raw content of the input file. Exactly one of path or text must be defined, the other undefined.
- * is_executable: true/false, whether the resulting file is made executable.
-
-
-### Example(s)
-
-```yaml
-resources:
-  - type: r_script
-    path: script.R
-  - type: file
-    path: resource1.txt
-
-```
 
 ## argument_groups
 
@@ -130,14 +57,6 @@ Additional property values:
 
 ```
 
-## outputs
-
-Introduced in Viash 0.5.11
-
-## inputs
-
-Introduced in Viash 0.5.11
-
 ## authors
 
 A list of authors. An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.
@@ -157,9 +76,44 @@ The [full list of roles](https://www.loc.gov/marc/relators/relaterm.html) is ext
 
 Introduced in Viash 0.3.1
 
-## version
+## description
 
-Version of the component. This field will be used to version the executable and the Docker container.
+A description of the component. This will be displayed with --help.
+
+### Example(s)
+
+```yaml
+description: |
+This component performs function Y and Z.
+It is possible to make this a multiline string.
+
+```
+
+## enabled
+
+Setting this to false with disable this component when using namespaces.
+
+Introduced in Viash 0.5.13
+
+## info
+
+A map for storing custom annotation.
+
+Introduced in Viash 0.4.0
+
+## inputs
+
+Introduced in Viash 0.5.11
+
+## name
+
+Name of the component and the filename of the executable when built with `viash build`.
+
+### Example(s)
+
+```yaml
+name: exe
+```
 
 ## namespace
 
@@ -171,13 +125,59 @@ Namespace this component is a part of. This is required when grouping components
 namespace: fancy_components
 ```
 
-## name
+## outputs
 
-Name of the component and the filename of the executable when built with `viash build`.
+Introduced in Viash 0.5.11
+
+## resources
+
+The first resource should be a script (bash_script, r_script, python_script, javascript_script, scala_script) which is what will be executed when the functionality is run. Additional resources will be copied to the same directory.
+
+Common properties:
+
+ * type: file/r_script/python_script/bash_script/javascript_script/scala_script, the type of resource. The first resource cannot be of type file. When the type is not specified, the default type is simply file. For more information regarding how to write a script in Bash, R or Python with Viash, check out the guides for the respective languages on the left.
+ * name: filename, the resulting name of the resource.
+ * path: path/to/file, the path of the input file. Can be a relative or an absolute path, or a URI.
+ * text: ...multiline text..., the raw content of the input file. Exactly one of path or text must be defined, the other undefined.
+ * is_executable: true/false, whether the resulting file is made executable.
+
 
 ### Example(s)
 
 ```yaml
-name: exe
+resources:
+  - type: r_script
+    path: script.R
+  - type: file
+    path: resource1.txt
+
 ```
+
+## test_resources
+
+One or more Bash/R/Python scripts to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.
+
+### Example(s)
+
+```yaml
+tests:
+  - type: bash_script
+    path: tests/test1.sh
+  - type: r_script
+    path: tests/test2.R
+  - path: resource1.txt
+
+```
+
+## tests
+
+One or more Bash/R/Python scripts to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.
+
+## usage
+
+A description of the component. This will be displayed with --help under the 'Usage:' section.
+
+## version
+
+Version of the component. This field will be used to version the executable and the Docker container.
 

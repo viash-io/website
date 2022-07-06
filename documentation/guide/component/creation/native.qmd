@@ -196,6 +196,13 @@ print_file_contents("/download/hello_viash/r/config.vsh.yaml", "yaml", False)
 
 :::
 
+Here's a breakdown of the different sections:
+
+- `functionality` describes what the component does and the resources it needs. It contains the `name`, a short `description` and more importantly, the `arguments` and `resources` the component uses.
+  - `arguments` contains all arguments the component accepts and will be passed to the script. In this case, a single `string` named `--input` resides here with a default value of `Viash`. 
+  - `resources` holds references to all necessary files and folders to make the component work. For this example, a single script is all that's needed.
+- `platforms` lists what platforms the component can target. This example targets the [`native`]() platform, which will generate an executable that's run using the system resources.
+
 ### Running
 
 With the two necessary files present to create a component, you can call upon Viash to generate a temporary executable and run it:

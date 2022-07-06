@@ -41,20 +41,22 @@ def create_page(full_json, name, json_entry):
     title = title.replace("Legacy"," Legacy")
     qmd += f"---\ntitle: \"{title.title()}\"\n---\n\n"
 
-    for i in range(len(json_entry)):
-        if (json_entry[i]["name"] == "__this__"):
-            qmd += json_entry[i]["description"].replace('"','') + "\n\n"
+    sorted_dict = sorted(json_entry, key=lambda x: x["name"], reverse=False)
+
+    for i in range(len(sorted_dict)):
+        if (sorted_dict[i]["name"] == "__this__"):
+            qmd += sorted_dict[i]["description"].replace('"','') + "\n\n"
             continue
     
-        qmd += "## " + json_entry[i]["name"] + "\n\n"
-        if ('description' in json_entry[i]):
-            qmd += json_entry[i]["description"] + "\n\n"
-        if ('example' in json_entry[i] and len(json_entry[i]["example"]) > 0):
+        qmd += "## " + sorted_dict[i]["name"] + "\n\n"
+        if ('description' in sorted_dict[i]):
+            qmd += sorted_dict[i]["description"] + "\n\n"
+        if ('example' in sorted_dict[i] and len(sorted_dict[i]["example"]) > 0):
             qmd += "### Example(s)" + "\n\n"
-            for example in json_entry[i]["example"]:
+            for example in sorted_dict[i]["example"]:
                 qmd += "```" + example["format"] + "\n"  + example["example"].replace('\\n','\n') + "\n```\n\n"
-        if ('since' in json_entry[i]):
-            qmd += "Introduced in " + json_entry[i]["since"] + "\n\n"
+        if ('since' in sorted_dict[i]):
+            qmd += "Introduced in " + sorted_dict[i]["since"] + "\n\n"
 
         
 
