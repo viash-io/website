@@ -34,10 +34,10 @@ def create_qmd():
             create_page(viash_json, key, viash_json[key])
 
 
-def create_page(full_json, name, json_entry):
+def create_page(full_json, page_name, json_entry):
     qmd = ""
 
-    title = name.replace("Platform", " Platform")
+    title = page_name.replace("Platform", " Platform")
     title = title.replace("Legacy", " Legacy")
     # qmd += f"---\ntitle: \"{title.title()}\"\n---\n\n"
     qmd += header(title.title())
@@ -49,41 +49,75 @@ def create_page(full_json, name, json_entry):
             qmd += sorted_dict[i]["description"].replace('"', "") + "\n\n"
             continue
 
-        qmd += "## " + sorted_dict[i]["name"] + "\n\n"
-        if "removed" in sorted_dict[i]:
+        name = sorted_dict[i]["name"]
+        qmd += "## " + name + "\n\n"
+
+        if "removed" in  sorted_dict[i]:
+            removed = sorted_dict[i]["removed"]
+        else:
+            removed = None
+
+        if "deprecated" in  sorted_dict[i]:
+            deprecated = sorted_dict[i]["deprecated"]
+        else:
+            deprecated = None
+
+        if "type" in  sorted_dict[i]:
+            type = sorted_dict[i]["type"]
+        else:
+            type = None
+
+        if "description" in  sorted_dict[i]:
+            description = sorted_dict[i]["description"]
+        else:
+            description = None
+
+        if "example" in sorted_dict[i] and len(sorted_dict[i]["example"]) > 0:
+            example = sorted_dict[i]["example"]
+        else:
+            example = None            
+
+        if "since" in sorted_dict[i]:
+            since = sorted_dict[i]["since"]
+        else:
+            since = None   
+
+        if removed is not None:
             qmd += callout(
                 "warning",
                 "Removed since "
-                + sorted_dict[i]["removed"]["since"]
+                + removed["since"]
                 + ". "
-                + sorted_dict[i]["removed"]["message"],
+                + removed["message"],
             )
-        if "deprecated" in sorted_dict[i]:
+        if deprecated is not None:
             qmd += callout(
                 "warning",
                 "Deprecated since "
-                + sorted_dict[i]["deprecated"]["since"]
+                + deprecated["since"]
                 + ". "
-                + sorted_dict[i]["deprecated"]["message"],
+                + deprecated["message"],
             )
-        if "description" in sorted_dict[i]:
-            qmd += sorted_dict[i]["description"] + "\n\n"
-        if "example" in sorted_dict[i] and len(sorted_dict[i]["example"]) > 0:
+        if type is not None:
+            qmd += parse_type(type)
+        if description is not None:
+            qmd += description + "\n\n"
+        if example is not None:
             qmd += "### Example(s)" + "\n\n"
-            for example in sorted_dict[i]["example"]:
+            for ex in example:
                 qmd += (
                     "```"
-                    + example["format"]
+                    + ex["format"]
                     + "\n"
-                    + example["example"].replace("\\n", "\n")
+                    + ex["example"].replace("\\n", "\n")
                     + "\n```\n\n"
                 )
-        # if ('since' in sorted_dict[i]):
-        #     qmd += pill("Introduced: " + sorted_dict[i]["since"])
+        # if since is not None:
+        #     qmd += pill("Introduced: " + since)
 
     qmd += "\n\n"
 
-    qmd_file = open(reference_dir + f"config/{name}.qmd", "w")
+    qmd_file = open(reference_dir + f"config/{page_name}.qmd", "w")
     qmd_file.write(qmd)
     qmd_file.close()
 
@@ -105,6 +139,21 @@ def pill(content):
 
 def callout(type, content):
     return "::: {" + f".callout-{type}" + "}\n" + content + "\n:::\n"
+
+def parse_type(type_string):
+    qmd ="**Type**: "
+
+    if type_string.startswith("Option of"):
+        type = type_string.replace("Option of","").strip()
+        qmd += f"`{type}`"
+    elif type_string.startswith("OneOrMore of"):
+        type = type_string.replace("OneOrMore of","").strip()
+        qmd += f"`{type}` / `List of {type}`"
+    else:
+        qmd += f"`{type_string}`"
+    
+    qmd += "\n\n"
+    return qmd
 
 
 if __name__ == "__main__":

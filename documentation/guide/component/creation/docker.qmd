@@ -11,7 +11,7 @@ execute:
 
 ## Overview
 
-A Viash component can target one or more platforms. When targetting the docker platform, a single executable is generated that will build and run a docker image.  
+A Viash component can target one or more platforms. When targetting the docker platform, a single executable is generated that will build and run a docker container.  
 
 ## Requirements
 
@@ -181,9 +181,13 @@ The [-platform](#) argument is passed to [`viash run`](#) so **Docker** will be 
 No arguments are passed to the component, so it will use the default value for `--input`, which is `Viash`. This results in the following output:
 
 ```
+[notice] Checking if Docker image is available at 'hello_viash:latest'
+[warning] Could not pull from 'hello_viash:latest'. Docker image doesn't exist or is not accessible.
+[notice] Building container 'hello_viash:latest' with Dockerfile
 Hello Viash
 ```
 
+As you can see, Viash checks first if an image has been generated before continuing. If the image already exists, Viash will run a contained based on the image. In this case, no image was found for this component, so Viash generates the image before building and running the container.  
 By providing the a value for `--input`, you can customize the greeting: 
 
 ```bash

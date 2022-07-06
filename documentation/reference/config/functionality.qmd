@@ -15,11 +15,17 @@ By specifying a few restrictions (e.g. mandatory arguments) and adding some desc
 ::: {.callout-warning}
 Removed since Viash 0.5.11. Extending the PATH turned out to be not desirable.
 :::
+**Type**: `Boolean`
+
 Adds the resources directory to the PATH variable when set to true. This is set to false by default.
 
 ## argument_groups
 
+**Type**: `List of ArgumentGroup`
+
 ## arguments
+
+**Type**: `List of Argument`
 
 A list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. Common properties for all argument types are the following.
 
@@ -68,6 +74,8 @@ Additional property values:
 
 ## authors
 
+**Type**: `List of Author`
+
 A list of authors. An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.
 
 Suggested values for roles are:
@@ -86,6 +94,8 @@ The [full list of roles](https://www.loc.gov/marc/relators/relaterm.html) is ext
 
 ## description
 
+**Type**: `String`
+
 A description of the component. This will be displayed with --help.
 
 ### Example(s)
@@ -99,15 +109,23 @@ description: |
 
 ## enabled
 
+**Type**: `Boolean`
+
 Setting this to false with disable this component when using namespaces.
 
 ## info
+
+**Type**: `Map of String,String`
 
 A map for storing custom annotation.
 
 ## inputs
 
+**Type**: `List of Argument`
+
 ## name
+
+**Type**: `String`
 
 Name of the component and the filename of the executable when built with `viash build`.
 
@@ -119,6 +137,8 @@ name: exe
 
 ## namespace
 
+**Type**: `String`
+
 Namespace this component is a part of. This is required when grouping components together in a pipeline and building multiple components at once using viash `ns build`.
 
 ### Example(s)
@@ -129,7 +149,11 @@ namespace: fancy_components
 
 ## outputs
 
+**Type**: `List of Argument`
+
 ## resources
+
+**Type**: `List of Resource`
 
 The first resource should be a script (bash_script, r_script, python_script, javascript_script, scala_script) which is what will be executed when the functionality is run. Additional resources will be copied to the same directory.
 
@@ -155,6 +179,8 @@ resources:
 
 ## test_resources
 
+**Type**: `List of Resource`
+
 One or more Bash/R/Python scripts to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.
 
 ### Example(s)
@@ -174,13 +200,19 @@ tests:
 ::: {.callout-warning}
 Deprecated since Viash 0.5.13. Use `test_resources` instead. No functional difference.
 :::
+**Type**: `List of Resource`
+
 One or more Bash/R/Python scripts to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.
 
 ## usage
 
+**Type**: `String`
+
 A description of the component. This will be displayed with --help under the 'Usage:' section.
 
 ## version
+
+**Type**: `Version`
 
 Version of the component. This field will be used to version the executable and the Docker container.
 
