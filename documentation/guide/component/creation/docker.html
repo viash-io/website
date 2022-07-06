@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.644">
+<meta name="generator" content="quarto-0.9.646">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -123,10 +123,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <link rel="stylesheet" href="../../../../styles.css">
 <meta property="og:title" content="Viash - Docker">
-<meta property="og:description" content="A Viash component can target one or more platforms. When targetting the docker platform, a single executable is generated that will build and run a docker image.">
+<meta property="og:description" content="A Viash component can target one or more platforms. When targetting the docker platform, a single executable is generated that will build and run a docker container.">
 <meta property="og:site-name" content="Viash">
 <meta name="twitter:title" content="Viash - Docker">
-<meta name="twitter:description" content="A Viash component can target one or more platforms. When targetting the docker platform, a single executable is generated that will build and run a docker image.">
+<meta name="twitter:description" content="A Viash component can target one or more platforms. When targetting the docker platform, a single executable is generated that will build and run a docker container.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -411,7 +411,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>A Viash component can target one or more platforms. When targetting the docker platform, a single executable is generated that will build and run a docker image.</p>
+<p>A Viash component can target one or more platforms. When targetting the docker platform, a single executable is generated that will build and run a docker container.</p>
 </section>
 <section id="requirements" class="level2">
 <h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
@@ -667,8 +667,12 @@ Note
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">-platform</span> docker</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <a href="#">-platform</a> argument is passed to <a href="#"><code>viash run</code></a> so <strong>Docker</strong> will be chosen as the build target. If the platform isn’t specified, the first one in the <code>platforms</code> list is picked.<br>
 No arguments are passed to the component, so it will use the default value for <code>--input</code>, which is <code>Viash</code>. This results in the following output:</p>
-<pre><code>Hello Viash</code></pre>
-<p>By providing the a value for <code>--input</code>, you can customize the greeting:</p>
+<pre><code>[notice] Checking if Docker image is available at 'hello_viash:latest'
+[warning] Could not pull from 'hello_viash:latest'. Docker image doesn't exist or is not accessible.
+[notice] Building container 'hello_viash:latest' with Dockerfile
+Hello Viash</code></pre>
+<p>As you can see, Viash checks first if an image has been generated before continuing. If the image already exists, Viash will run a contained based on the image. In this case, no image was found for this component, so Viash generates the image before building and running the container.<br>
+By providing the a value for <code>--input</code>, you can customize the greeting:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">--</span> <span class="at">--input</span> World</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">

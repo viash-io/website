@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.644">
+<meta name="generator" content="quarto-0.9.646">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -357,13 +357,16 @@ Warning
 <p>Removed since Viash 0.5.11. Extending the PATH turned out to be not desirable.</p>
 </div>
 </div>
+<p><strong>Type</strong>: <code>Boolean</code></p>
 <p>Adds the resources directory to the PATH variable when set to true. This is set to false by default.</p>
 </section>
 <section id="argument_groups" class="level2">
 <h2 class="anchored" data-anchor-id="argument_groups">argument_groups</h2>
+<p><strong>Type</strong>: <code>List of ArgumentGroup</code></p>
 </section>
 <section id="arguments" class="level2">
 <h2 class="anchored" data-anchor-id="arguments">arguments</h2>
+<p><strong>Type</strong>: <code>List of Argument</code></p>
 <p>A list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. Common properties for all argument types are the following.</p>
 <ul>
 <li><code>type: string/file/integer/double/boolean/boolean_true/boolean_false</code>, the type of argument determining to what object type the value will be cast in the downstream scripts.</li>
@@ -409,6 +412,7 @@ Warning
 </section>
 <section id="authors" class="level2">
 <h2 class="anchored" data-anchor-id="authors">authors</h2>
+<p><strong>Type</strong>: <code>List of Author</code></p>
 <p>A list of authors. An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.</p>
 <p>Suggested values for roles are:</p>
 <table class="table">
@@ -461,6 +465,7 @@ Warning
 </section>
 <section id="description" class="level2">
 <h2 class="anchored" data-anchor-id="description">description</h2>
+<p><strong>Type</strong>: <code>String</code></p>
 <p>A description of the component. This will be displayed with –help.</p>
 <section id="examples-1" class="level3">
 <h3 class="anchored" data-anchor-id="examples-1">Example(s)</h3>
@@ -471,17 +476,21 @@ Warning
 </section>
 <section id="enabled" class="level2">
 <h2 class="anchored" data-anchor-id="enabled">enabled</h2>
+<p><strong>Type</strong>: <code>Boolean</code></p>
 <p>Setting this to false with disable this component when using namespaces.</p>
 </section>
 <section id="info" class="level2">
 <h2 class="anchored" data-anchor-id="info">info</h2>
+<p><strong>Type</strong>: <code>Map of String,String</code></p>
 <p>A map for storing custom annotation.</p>
 </section>
 <section id="inputs" class="level2">
 <h2 class="anchored" data-anchor-id="inputs">inputs</h2>
+<p><strong>Type</strong>: <code>List of Argument</code></p>
 </section>
 <section id="name" class="level2">
 <h2 class="anchored" data-anchor-id="name">name</h2>
+<p><strong>Type</strong>: <code>String</code></p>
 <p>Name of the component and the filename of the executable when built with <code>viash build</code>.</p>
 <section id="examples-2" class="level3">
 <h3 class="anchored" data-anchor-id="examples-2">Example(s)</h3>
@@ -490,6 +499,7 @@ Warning
 </section>
 <section id="namespace" class="level2">
 <h2 class="anchored" data-anchor-id="namespace">namespace</h2>
+<p><strong>Type</strong>: <code>String</code></p>
 <p>Namespace this component is a part of. This is required when grouping components together in a pipeline and building multiple components at once using viash <code>ns build</code>.</p>
 <section id="examples-3" class="level3">
 <h3 class="anchored" data-anchor-id="examples-3">Example(s)</h3>
@@ -498,9 +508,11 @@ Warning
 </section>
 <section id="outputs" class="level2">
 <h2 class="anchored" data-anchor-id="outputs">outputs</h2>
+<p><strong>Type</strong>: <code>List of Argument</code></p>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">resources</h2>
+<p><strong>Type</strong>: <code>List of Resource</code></p>
 <p>The first resource should be a script (bash_script, r_script, python_script, javascript_script, scala_script) which is what will be executed when the functionality is run. Additional resources will be copied to the same directory.</p>
 <p>Common properties:</p>
 <ul>
@@ -521,6 +533,7 @@ Warning
 </section>
 <section id="test_resources" class="level2">
 <h2 class="anchored" data-anchor-id="test_resources">test_resources</h2>
+<p><strong>Type</strong>: <code>List of Resource</code></p>
 <p>One or more Bash/R/Python scripts to be used to test the component behaviour when <code>viash test</code> is invoked. Additional files of type <code>file</code> will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code &gt;0 when unexpected behaviour occurs during testing.</p>
 <section id="examples-5" class="level3">
 <h3 class="anchored" data-anchor-id="examples-5">Example(s)</h3>
@@ -547,14 +560,17 @@ Warning
 <p>Deprecated since Viash 0.5.13. Use <code>test_resources</code> instead. No functional difference.</p>
 </div>
 </div>
+<p><strong>Type</strong>: <code>List of Resource</code></p>
 <p>One or more Bash/R/Python scripts to be used to test the component behaviour when <code>viash test</code> is invoked. Additional files of type <code>file</code> will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code &gt;0 when unexpected behaviour occurs during testing.</p>
 </section>
 <section id="usage" class="level2">
 <h2 class="anchored" data-anchor-id="usage">usage</h2>
+<p><strong>Type</strong>: <code>String</code></p>
 <p>A description of the component. This will be displayed with –help under the ‘Usage:’ section.</p>
 </section>
 <section id="version" class="level2">
 <h2 class="anchored" data-anchor-id="version">version</h2>
+<p><strong>Type</strong>: <code>Version</code></p>
 <p>Version of the component. This field will be used to version the executable and the Docker container.</p>
 
 

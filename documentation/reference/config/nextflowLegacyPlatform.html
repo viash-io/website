@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.644">
+<meta name="generator" content="quarto-0.9.646">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -346,10 +346,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Run a Viash component as a Nextflow module.</p>
 <section id="id" class="level2">
 <h2 class="anchored" data-anchor-id="id">id</h2>
+<p><strong>Type</strong>: <code>String</code></p>
 <p>Every platform can be given a specific id that can later be referred to explicitly when running or building the Viash component.</p>
 </section>
 <section id="image" class="level2">
 <h2 class="anchored" data-anchor-id="image">image</h2>
+<p><strong>Type</strong>: <code>String</code></p>
 <p>If no image attributes are configured, Viash will use the auto-generated image name from the Docker platform:</p>
 <pre><code>[&lt;namespace&gt;/]&lt;name&gt;:&lt;version&gt;</code></pre>
 <p>It’s possible to specify the container image explicitly with which to run the module in different ways:</p>
@@ -364,6 +366,7 @@ tag: 0.4.0</code></pre>
 </section>
 <section id="label" class="level2">
 <h2 class="anchored" data-anchor-id="label">label</h2>
+<p><strong>Type</strong>: <code>String</code></p>
 <p>When running the module in a cluster context and depending on the cluster type, <a href="https://www.nextflow.io/docs/latest/process.html#label">NextFlow allows for attaching labels</a> to the process that can later be used as selectors for associating resources to this process.</p>
 <p>In order to attach one label to a process/component, one can use the <code>label: ...</code> attribute, multiple labels can be added using <code>labels: [ ..., ... ]</code> and the two can even be mixed.</p>
 <p>In the main <code>nextflow.config</code>, one can now use this label:</p>
@@ -375,6 +378,7 @@ tag: 0.4.0</code></pre>
 </section>
 <section id="labels" class="level2">
 <h2 class="anchored" data-anchor-id="labels">labels</h2>
+<p><strong>Type</strong>: <code>String</code> / <code>List of String</code></p>
 <p>When running the module in a cluster context and depending on the cluster type, <a href="https://www.nextflow.io/docs/latest/process.html#label">NextFlow allows for attaching labels</a> to the process that can later be used as selectors for associating resources to this process.</p>
 <p>In order to attach one label to a process/component, one can use the <code>label: ...</code> attribute, multiple labels can be added using <code>labels: [ ..., ... ]</code> and the two can even be mixed.</p>
 <p>In the main <code>nextflow.config</code>, one can now use this label:</p>
@@ -386,6 +390,7 @@ tag: 0.4.0</code></pre>
 </section>
 <section id="namespace_separator" class="level2">
 <h2 class="anchored" data-anchor-id="namespace_separator">namespace_separator</h2>
+<p><strong>Type</strong>: <code>String</code></p>
 <p>The default namespace separator is “_“.</p>
 <section id="examples-2" class="level3">
 <h3 class="anchored" data-anchor-id="examples-2">Example(s)</h3>
@@ -394,6 +399,7 @@ tag: 0.4.0</code></pre>
 </section>
 <section id="organization" class="level2">
 <h2 class="anchored" data-anchor-id="organization">organization</h2>
+<p><strong>Type</strong>: <code>String</code></p>
 <p>Name of a container’s <a href="https://docs.docker.com/docker-hub/orgs/">organization</a>.</p>
 <section id="examples-3" class="level3">
 <h3 class="anchored" data-anchor-id="examples-3">Example(s)</h3>
@@ -402,6 +408,7 @@ tag: 0.4.0</code></pre>
 </section>
 <section id="path" class="level2">
 <h2 class="anchored" data-anchor-id="path">path</h2>
+<p><strong>Type</strong>: <code>String</code></p>
 <p>When <code>publish: true</code>, this attribute defines where the output is written relative to the <code>params.publishDir</code> setting. For example, <code>path: processed</code> in combination with <code>--output s3://some_bucket/</code> will store the output of this component under</p>
 <pre><code>s3://some_bucket/processed/</code></pre>
 <p>This attribute gives control over the directory structure of the output. For example:</p>
@@ -412,6 +419,7 @@ tag: 0.4.0</code></pre>
 </section>
 <section id="per_id" class="level2">
 <h2 class="anchored" data-anchor-id="per_id">per_id</h2>
+<p><strong>Type</strong>: <code>Boolean</code></p>
 <p>By default, a subdirectory is created corresponding to the unique ID that is passed in the triplet. Let us illustrate this with an example. The following code snippet uses the value of <code>--input</code> as an input of a workflow. The input can include a wildcard so that multiple samples can run in parallel. We use the parent directory name (<code>.getParent().baseName</code>) as an identifier for the sample. We pass this as the first entry of the triplet:</p>
 <pre><code>Channel.fromPath(params.input) \
     | map{ it -&gt; [ it.getParent().baseName , it ] } \
@@ -425,6 +433,7 @@ tag: 0.4.0</code></pre>
 </section>
 <section id="publish" class="level2">
 <h2 class="anchored" data-anchor-id="publish">publish</h2>
+<p><strong>Type</strong>: <code>Boolean</code></p>
 <p>NextFlow uses the autogenerated <code>work</code> dirs to manage process IO under the hood. In order effectively output something one can publish the results a module or step in the pipeline. In order to do this, add <code>publish: true</code> to the config:</p>
 <ul>
 <li>publish is optional</li>
@@ -435,6 +444,7 @@ tag: 0.4.0</code></pre>
 </section>
 <section id="registry" class="level2">
 <h2 class="anchored" data-anchor-id="registry">registry</h2>
+<p><strong>Type</strong>: <code>String</code></p>
 <p>The URL to the a <a href="https://docs.docker.com/registry/">custom Docker registry</a>.</p>
 <section id="examples-4" class="level3">
 <h3 class="anchored" data-anchor-id="examples-4">Example(s)</h3>
@@ -443,6 +453,7 @@ tag: 0.4.0</code></pre>
 </section>
 <section id="separate_multiple_outputs" class="level2">
 <h2 class="anchored" data-anchor-id="separate_multiple_outputs">separate_multiple_outputs</h2>
+<p><strong>Type</strong>: <code>Boolean</code></p>
 <p>Separates the outputs generated by a Nextflow component with multiple outputs as separate events on the channel. Default value: <code>true</code>.</p>
 <section id="examples-5" class="level3">
 <h3 class="anchored" data-anchor-id="examples-5">Example(s)</h3>
@@ -451,6 +462,7 @@ tag: 0.4.0</code></pre>
 </section>
 <section id="stageinmode" class="level2">
 <h2 class="anchored" data-anchor-id="stageinmode">stageInMode</h2>
+<p><strong>Type</strong>: <code>String</code></p>
 <p>By default NextFlow will create a symbolic link to the inputs for a process/module and run the tool at hand using those symbolic links. Some applications do not cope well with this strategy, in that case the files should effectively be copied rather than linked to. This can be achieved by using <code>stageInMode: copy</code>. This attribute is optional, the default is <code>symlink</code>.</p>
 <section id="examples-6" class="level3">
 <h3 class="anchored" data-anchor-id="examples-6">Example(s)</h3>
@@ -459,6 +471,7 @@ tag: 0.4.0</code></pre>
 </section>
 <section id="tag" class="level2">
 <h2 class="anchored" data-anchor-id="tag">tag</h2>
+<p><strong>Type</strong>: <code>Version</code></p>
 <p>Specify a Docker image based on its tag.</p>
 <section id="examples-7" class="level3">
 <h3 class="anchored" data-anchor-id="examples-7">Example(s)</h3>
