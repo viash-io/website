@@ -2,10 +2,11 @@ import json
 import git, subprocess, json
 
 # Get root dir of repo
-repo = git.Repo('.', search_parent_directories=True)
+repo = git.Repo(".", search_parent_directories=True)
 repo_root = repo.working_tree_dir
 json_export = "schema_export.json"
 reference_dir = ""
+
 
 def generate_json():
     bin = repo_root + "/bin/"
@@ -20,7 +21,7 @@ def generate_json():
     # f.close()
 
     # print(f"Generated {reference_dir}/{json_export}")
-    
+
 
 def create_qmd():
     reference_dir = repo_root + "/documentation/reference/"
@@ -29,50 +30,82 @@ def create_qmd():
     json_file.close()
 
     for key in viash_json:
-        if (not key.endswith("Requirements")):
+        if not key.endswith("Requirements"):
             create_page(viash_json, key, viash_json[key])
-
 
 
 def create_page(full_json, name, json_entry):
     qmd = ""
 
-    title = name.replace("Platform"," Platform")
-    title = title.replace("Legacy"," Legacy")
-    qmd += f"---\ntitle: \"{title.title()}\"\n---\n\n"
+    title = name.replace("Platform", " Platform")
+    title = title.replace("Legacy", " Legacy")
+    # qmd += f"---\ntitle: \"{title.title()}\"\n---\n\n"
+    qmd += header(title.title())
 
     sorted_dict = sorted(json_entry, key=lambda x: x["name"], reverse=False)
 
     for i in range(len(sorted_dict)):
-        if (sorted_dict[i]["name"] == "__this__"):
-            qmd += sorted_dict[i]["description"].replace('"','') + "\n\n"
+        if sorted_dict[i]["name"] == "__this__":
+            qmd += sorted_dict[i]["description"].replace('"', "") + "\n\n"
             continue
-    
+
         qmd += "## " + sorted_dict[i]["name"] + "\n\n"
-        if ('description' in sorted_dict[i]):
+        if "removed" in sorted_dict[i]:
+            qmd += callout(
+                "warning",
+                "Removed since "
+                + sorted_dict[i]["removed"]["since"]
+                + ". "
+                + sorted_dict[i]["removed"]["message"],
+            )
+        if "deprecated" in sorted_dict[i]:
+            qmd += callout(
+                "warning",
+                "Deprecated since "
+                + sorted_dict[i]["deprecated"]["since"]
+                + ". "
+                + sorted_dict[i]["deprecated"]["message"],
+            )
+        if "description" in sorted_dict[i]:
             qmd += sorted_dict[i]["description"] + "\n\n"
-        if ('example' in sorted_dict[i] and len(sorted_dict[i]["example"]) > 0):
+        if "example" in sorted_dict[i] and len(sorted_dict[i]["example"]) > 0:
             qmd += "### Example(s)" + "\n\n"
             for example in sorted_dict[i]["example"]:
-                qmd += "```" + example["format"] + "\n"  + example["example"].replace('\\n','\n') + "\n```\n\n"
+                qmd += (
+                    "```"
+                    + example["format"]
+                    + "\n"
+                    + example["example"].replace("\\n", "\n")
+                    + "\n```\n\n"
+                )
         # if ('since' in sorted_dict[i]):
         #     qmd += pill("Introduced: " + sorted_dict[i]["since"])
-        if ('removed' in sorted_dict[i]):
-            qmd += callout("warning","Removed since " + sorted_dict[i]["removed"]["since"] + ".\n" + sorted_dict[i]["removed"]["message"])
 
     qmd += "\n\n"
-       
 
     qmd_file = open(reference_dir + f"config/{name}.qmd", "w")
     qmd_file.write(qmd)
     qmd_file.close()
 
 
+def header(title):
+    qmd = ""
+    qmd += f"---\ntitle: {title}\n"
+    qmd += "search: true\n"
+    qmd += "execute:\n"
+    qmd += "  echo: false\n"
+    qmd += "  output: asis\n"
+    qmd += "---\n\n"
+    return qmd
+
+
 def pill(content):
     return "::: {.smallpill}\n" + content + "\n:::\n"
 
+
 def callout(type, content):
-    return "::: {"+ f".callout-{type}" + "}\n" + content + "\n:::\n"
+    return "::: {" + f".callout-{type}" + "}\n" + content + "\n:::\n"
+
 
 if __name__ == "__main__":
     generate_json()
