@@ -123,10 +123,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <link rel="stylesheet" href="../../../../styles.css">
 <meta property="og:title" content="Viash - Nextflow">
-<meta property="og:description" content="This guide explains how to create a Viash component from scratch that targets the Nextflow platform. For a general overview of Viash components, take a look at the Viash Basics guide.">
+<meta property="og:description" content="When targetting the nextflow platform, a NextFlow module is generated that can run standalone or used in a pipeline.">
 <meta property="og:site-name" content="Viash">
 <meta name="twitter:title" content="Viash - Nextflow">
-<meta name="twitter:description" content="This guide explains how to create a Viash component from scratch that targets the Nextflow platform. For a general overview of Viash components, take a look at the Viash Basics guide.">
+<meta name="twitter:description" content="When targetting the nextflow platform, a NextFlow module is generated that can run standalone or used in a pipeline.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -320,12 +320,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#requirements" id="toc-requirements" class="nav-link" data-scroll-target="#requirements">Requirements</a></li>
   <li><a href="#creating-a-viash-component" id="toc-creating-a-viash-component" class="nav-link" data-scroll-target="#creating-a-viash-component">Creating a Viash component</a>
   <ul class="collapse">
-  <li><a href="#adding-a-viash-config" id="toc-adding-a-viash-config" class="nav-link" data-scroll-target="#adding-a-viash-config">Adding a Viash config</a></li>
   <li><a href="#writing-the-script" id="toc-writing-the-script" class="nav-link" data-scroll-target="#writing-the-script">Writing the script</a></li>
+  <li><a href="#adding-the-config" id="toc-adding-the-config" class="nav-link" data-scroll-target="#adding-the-config">Adding the config</a></li>
+  <li><a href="#running" id="toc-running" class="nav-link" data-scroll-target="#running">Running</a></li>
   </ul></li>
-  <li><a href="#running-the-viash-component" id="toc-running-the-viash-component" class="nav-link" data-scroll-target="#running-the-viash-component">Running the Viash component</a></li>
   </ul>
 </nav>
     </div>
@@ -348,52 +349,169 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<!-- ``` include
-_tool-chooser.md
-``` -->
+<script type="text/javascript">
+let langDict = {
+  'bash': "Bash",
+  'csharp': "C#",
+  'js': "Javascript",
+  'python': "Python",
+  'scala': "Scala",
+  'r': "R",
+};
+
+let invertedLangDict = invertDictionary(langDict);
+
+document.addEventListener("DOMContentLoaded", function() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    let lang = 'bash';
+
+    if (urlParams.has('lang')){
+        lang = urlParams.get('lang');
+    }
+
+    changeTabSelections(lang);
+
+    var elements = document.querySelectorAll('[role="tab"]');
+    
+    for(var i = 0; i < elements.length; i++) {
+        tab = elements[i];
+        if (tab.textContent in invertedLangDict) {
+            tab.addEventListener('click', onTabClicked);
+        }
+    }
+
+    });
+
+    function changeTabSelections(language) {
+        var elements = document.querySelectorAll('[role="tab"]');
+
+        for(var i = 0; i < elements.length; i++) {
+            tab = elements[i];
+
+            if (tab.textContent == langDict[language]) {
+                tab.click();
+            }
+        }
+    }
+
+    function onTabClicked(event) {
+        changeTabSelections(invertedLangDict[event.srcElement.textContent]);
+    }
+
+    function invertDictionary(dict){
+        var ret = {};
+        for(var key in dict){
+            ret[dict[key]] = key;
+        }
+        return ret;
+    }
+
+</script>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This guide explains how to create a Viash component from scratch that targets the Nextflow platform. For a general overview of Viash components, take a look at the <a href="#">Viash Basics</a> guide.</p>
+<p>When targetting the nextflow platform, a NextFlow module is generated that can run standalone or used in a pipeline.</p>
+</section>
+<section id="requirements" class="level2">
+<h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
+<p>This example targets the <a href="">Nextflow platform</a>, which requires you to install Nextflow and Docker. Follow the instructions on <a href="https://www.nextflow.io/">NextFlow’s homepage</a> to install it on your system if you haven’t done so already. You can find instructions on how to install Docker for your OS on the <a href="../../../../documentation/get-started/">Viash installation page</a>.</p>
 </section>
 <section id="creating-a-viash-component" class="level2">
 <h2 class="anchored" data-anchor-id="creating-a-viash-component">Creating a Viash component</h2>
-<section id="adding-a-viash-config" class="level3">
-<h3 class="anchored" data-anchor-id="adding-a-viash-config">Adding a Viash config</h3>
-<p>create folder named nextflow_component, add src/remove_comments dir create config.vsh.yaml and add to src/remove_comments<br>
-add this</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> remove_comments</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">arguments</span><span class="kw">:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"--input"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">alternatives</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="st">"-i"</span><span class="at"> </span><span class="kw">]</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> </span><span class="st">"file.tsv"</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"--output"</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">alternatives</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="st">"-o"</span><span class="at"> </span><span class="kw">]</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> </span><span class="st">"file.tsv"</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> bash_script</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> ./script.sh</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> nextflow</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">variant</span><span class="kw">:</span><span class="at"> vdsl3</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">directives</span><span class="kw">:</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">container</span><span class="kw">:</span><span class="at"> ubuntu:20.04</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>short description of what this does<br>
-focus on platforms section, explain vdsl3 and directives<br>
-single resource needed, a script</p>
-</section>
+<p>To start off, create a folder named <strong>nextflow_component</strong> and create a <strong>src</strong> folder inside of it. Next, add another folder inside of the <strong>src</strong> folder and name it <strong>remove_comments</strong>. This is where the component will be placed, a minimal example that uses a bash script to remove comments from a TSV file.</p>
+<p>The directory structure should look like this:</p>
+<pre><code>nextflow_component
+└── src
+    └── remove_comments</code></pre>
 <section id="writing-the-script" class="level3">
 <h3 class="anchored" data-anchor-id="writing-the-script">Writing the script</h3>
-<p>add simple script</p>
+<p>Add the following small script to the <strong>remove_comments</strong> folder:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-v</span> <span class="st">'^#'</span> <span class="st">"</span><span class="va">$par_input</span><span class="st">"</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$par_output</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>you now have this structure which makes up a component</p>
+<p>As mentioned above, this script removes comments from a TSV file. It does so by removing all lines that start with a hashtag (#) from an <code>input</code> file and writing the result to the <code>output</code>.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every scripting language has its own way of using variables generated by Viash. Check out the <a href="">Bash page</a> for more information and examples.</p>
+</div>
+</div>
+</section>
+<section id="adding-the-config" class="level3">
+<h3 class="anchored" data-anchor-id="adding-the-config">Adding the config</h3>
+<p>A <a href="">Viash config file</a> is a YAML file that describes the functionality of a component and the platform(s) it targets. Create a file name <strong>config.vsh.yaml</strong> inside of the <strong>remove_comments</strong> folder and add the contents below.</p>
+<p><a href="../../../../download/remove_comments/bash/config.vsh.yaml" id="btn-download" class="btn btn-info btn-md" role="button" download="">Download config.vsh.yaml</a></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> remove_comments</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">description</span><span class="kw">:</span><span class="at"> Remove comments from a TSV file.</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> nextflow_modules</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">arguments</span><span class="kw">:</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"--input"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">alternatives</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="st">"-i"</span><span class="at"> </span><span class="kw">]</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> </span><span class="st">"file.tsv"</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"--output"</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">alternatives</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="st">"-o"</span><span class="at"> </span><span class="kw">]</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> </span><span class="st">"file.tsv"</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> bash_script</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> ./script.sh</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> nextflow</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">variant</span><span class="kw">:</span><span class="at"> vdsl3</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">directives</span><span class="kw">:</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">container</span><span class="kw">:</span><span class="at"> ubuntu:20.04</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here’s a breakdown of the different sections:</p>
+<section id="functionality" class="level4">
+<h4 class="anchored" data-anchor-id="functionality"><code>functionality</code></h4>
+<p>This section describes what the component does and the resources it needs. It contains the <code>name</code>, a short <code>description</code> and more importantly, the <code>arguments</code> and <code>resources</code> the component uses. This component is part of a <a href="">namespace</a> named <code>nextflow_modules</code>, which we’ll explore further in the <a href="../../../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html">pipeline guides</a>.</p>
+</section>
+<section id="arguments" class="level4">
+<h4 class="anchored" data-anchor-id="arguments"><code>arguments</code></h4>
+<p>The <a href="../../../../documentation/reference/config/functionality.html#arguments"><code>arguments</code></a> section contains all arguments the component accepts and will be passed to the script. In this case, an <code>input</code> and an <code>output</code> file path argument that are both <strong>required</strong>.</p>
+</section>
+<section id="resources" class="level4">
+<h4 class="anchored" data-anchor-id="resources"><code>resources</code></h4>
+<p>All references to the necessary files and folders to make the component work are added to this section. For this example, a single script is all that’s needed.</p>
+</section>
+<section id="platforms" class="level4">
+<h4 class="anchored" data-anchor-id="platforms"><code>platforms</code></h4>
+<p>This lists what platforms the component can target. For this example, the only platform is <code>nextflow</code>.</p>
+<ul>
+<li>The <a href=""><code>variant</code></a> property can be used to choose between our <a href="">legacy</a> NextFlow implementation or the next-generation VDSL3 variant. The latter is recommended as it has a lot of features to make creating modules more streamlined. You can read more about VDSL3 in <a href="">our guide</a>.</li>
+<li>The <a href=""><code>directives</code></a> dictionary contains optional settings that affect the execution of the module. For this example, a single directive is used: <code>container</code>. The <code>container</code> is the base Docker image that should be used to run the module.</li>
+</ul>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you specify a Docker platform in addition to NextFlow, the image in the docker platform section will be automatically used for NextFlow as well:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> ubuntu:20.04</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> nextflow</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">variant</span><span class="kw">:</span><span class="at"> vdsl3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>With the script and config added, the final directory should now look like this:</p>
 <pre><code>nextflow_component
 └── src
     └── remove_comments
@@ -401,27 +519,12 @@ single resource needed, a script</p>
         └── script.sh</code></pre>
 </section>
 </section>
-<section id="running-the-viash-component" class="level2">
-<h2 class="anchored" data-anchor-id="running-the-viash-component">Running the Viash component</h2>
-<p>In contrast to native and Docker based components, a Nextflow based component cannot be ran by using the <a href="#"><code>viash run</code></a> command. These types of components require you to use <a href="#"><code>viash build</code></a> first to generate a Nextflow module and run that module using <code>nextflow run</code>. See <a href="../../../../documentation/guide/building-block/nextflow/building-running.html">Building and Running Nextflow</a> for more information.</p>
-<!-- run = a Nextflow module is created that is ran  
-execute command
-
-```bash
-viash run src/remove_comments/config.vsh.yaml
-```  
-  
-show output
-
-```
-...
-``` -->
-<!-- ## What's next?
-
-link to [building and running nextflow](/documentation/guide/building-block/nextflow/building-running.html)  
-that guide will explain how to create a nextflow module that can be used in piplines -->
+<section id="running" class="level3">
+<h3 class="anchored" data-anchor-id="running">Running</h3>
+<p>In contrast to native and Docker based components, a Nextflow based component cannot be ran by using the <a href=""><code>viash run</code></a> command. These types of components require you to use <a href=""><code>viash build</code></a> first to generate a Nextflow module and run that module using <code>nextflow run</code>. See <a href="../../../../documentation/guide/building-block/nextflow/building-running.html">Building and Running Nextflow</a> for more information and an example of how to run a NextFlow module as a standalone pipeline.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
