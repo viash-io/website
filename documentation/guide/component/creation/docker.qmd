@@ -163,6 +163,14 @@ print_file_contents("/download/hello_viash_docker/r/config.vsh.yaml", "yaml", Fa
 
 :::
 
+Here's a breakdown of the different sections:
+
+- `functionality` describes what the component does and the resources it needs. It contains the `name`, a short `description` and more importantly, the `arguments` and `resources` the component uses.
+  - `arguments` contains all arguments the component accepts and will be passed to the script. In this case, a single `string` named `--input` resides here with a default value of `Viash`. 
+  - `resources` holds references to all necessary files and folders to make the component work. For this example, a single script is all that's needed.
+- `platforms` lists what platforms the component can target.
+
+
 The `platforms` list in the example contains two target platforms, `native` and `docker`.  The `docker` platform has an image property that points to a [Docker image](/documentation/reference/config/dockerPlatform.html#image) from [Docker Hub](https://hub.docker.com/) to use as a base. Depending on the language, a [setup](#) might be included that will install additional packages in the final image.
 
 
