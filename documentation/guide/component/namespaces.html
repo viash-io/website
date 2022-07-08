@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Viash - Unit Testing</title>
+<title>Viash - Namespaces</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -88,8 +88,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../documentation/guide/component/namespaces.html" rel="next">
-<link href="../../../documentation/guide/component/creation/nextflow.html" rel="prev">
+<link href="../../../documentation/guide/building-block/nextflow/building-running.html" rel="next">
+<link href="../../../documentation/guide/component/unit-testing.html" rel="prev">
 <link href="../../../favicon.png" rel="icon" type="image/png">
 <script src="../../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
@@ -122,11 +122,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <link rel="stylesheet" href="../../../styles.css">
-<meta property="og:title" content="Viash - Unit Testing">
-<meta property="og:description" content="To ensure that your components and namespaces works as expected during its development cycle, writing one or more tests is essential.">
+<meta property="og:title" content="Viash - Namespaces">
+<meta property="og:description" content="A namespace is a group of Viash components.">
 <meta property="og:site-name" content="Viash">
-<meta name="twitter:title" content="Viash - Unit Testing">
-<meta name="twitter:description" content="To ensure that your components and namespaces works as expected during its development cycle, writing one or more tests is essential.">
+<meta name="twitter:title" content="Viash - Namespaces">
+<meta name="twitter:description" content="A namespace is a group of Viash components.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -187,7 +187,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Unit Testing</h1>
+      <h1 class="quarto-secondary-nav-title">Namespaces</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -240,12 +240,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../documentation/guide/component/unit-testing.html" class="sidebar-item-text sidebar-link active">Unit Testing</a>
+  <a href="../../../documentation/guide/component/unit-testing.html" class="sidebar-item-text sidebar-link">Unit Testing</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../documentation/guide/component/namespaces.html" class="sidebar-item-text sidebar-link">Namespaces</a>
+  <a href="../../../documentation/guide/component/namespaces.html" class="sidebar-item-text sidebar-link active">Namespaces</a>
   </div>
 </li>
     </ul>
@@ -325,11 +325,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#unit-testing-a-single-component" id="toc-unit-testing-a-single-component" class="nav-link" data-scroll-target="#unit-testing-a-single-component">Unit testing a single component</a>
+  <li><a href="#adding-components-to-a-namespace" id="toc-adding-components-to-a-namespace" class="nav-link" data-scroll-target="#adding-components-to-a-namespace">Adding components to a namespace</a>
   <ul class="collapse">
-  <li><a href="#configuration" id="toc-configuration" class="nav-link" data-scroll-target="#configuration">Configuration</a></li>
-  <li><a href="#test-script" id="toc-test-script" class="nav-link" data-scroll-target="#test-script">Test script</a></li>
-  <li><a href="#running-a-test" id="toc-running-a-test" class="nav-link" data-scroll-target="#running-a-test">Running a test</a></li>
+  <li><a href="#namespace-property" id="toc-namespace-property" class="nav-link" data-scroll-target="#namespace-property">Namespace property</a></li>
+  <li><a href="#directory-structure" id="toc-directory-structure" class="nav-link" data-scroll-target="#directory-structure">Directory structure</a></li>
+  </ul></li>
+  <li><a href="#using-the-viash-ns-commands" id="toc-using-the-viash-ns-commands" class="nav-link" data-scroll-target="#using-the-viash-ns-commands">Using the viash ns commands</a>
+  <ul class="collapse">
+  <li><a href="#listing-namespaces-in-a-project" id="toc-listing-namespaces-in-a-project" class="nav-link" data-scroll-target="#listing-namespaces-in-a-project">Listing namespaces in a project</a></li>
+  <li><a href="#unit-testing-a-namespace" id="toc-unit-testing-a-namespace" class="nav-link" data-scroll-target="#unit-testing-a-namespace">Unit testing a namespace</a></li>
+  <li><a href="#building-a-namespace" id="toc-building-a-namespace" class="nav-link" data-scroll-target="#building-a-namespace">Building a namespace</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -339,7 +344,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Unit Testing</h1>
+<h1 class="title d-none d-lg-block">Namespaces</h1>
 </div>
 
 
@@ -355,114 +360,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>To ensure that your components and namespaces works as expected during its development cycle, writing one or more tests is essential.<br>
-Viash supports <strong>unit testing</strong>, which is a software testing method by which individual units of source code are tested to determine whether they output data as expected.</p>
-</section>
-<section id="unit-testing-a-single-component" class="level2">
-<h2 class="anchored" data-anchor-id="unit-testing-a-single-component">Unit testing a single component</h2>
-<p>To write a unit test for a component, you need two things: a definition in the <a href="../../../documentation/reference/config/basics.html">config file</a> and a script that runs the executable and verifies its output.</p>
-<p>This tutorial uses a sample component named <strong>md_url_checker</strong> to explain how to write a unit test for Viash. To follow along, create a new folder named “<strong>testing</strong>” on your machine, download the files below and move them to the folder you just created.</p>
-<p><a href="../../../download/md_url_checker/bash/Testfile.html" id="btn-download" class="btn btn-info btn-md" role="button" download="">Download Testfile.md</a></p>
-<p><a href="../../../download/md_url_checker/bash/config.vsh.yaml" id="btn-download" class="btn btn-info btn-md" role="button" download="">Download config.vsh.yaml</a></p>
-<p><a href="../../../download/md_url_checker/bash/script.sh" id="btn-download" class="btn btn-info btn-md" role="button" download="">Download script.sh</a></p>
-<section id="configuration" class="level3">
-<h3 class="anchored" data-anchor-id="configuration">Configuration</h3>
-<p>To get started, open up <strong>config.vsh.yaml</strong> file and take a look at the end of the <a href="">functionality</a> dictionary, between the <code>path: script.sh</code> and <code>platforms:</code> lines:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">tests</span><span class="kw">:</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> bash_script</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> test.sh</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">path</span><span class="kw">:</span><span class="at"> Testfile.md</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The <a href=""><code>tests</code></a> dictionary contains a reference to a test script and all of the files that need to be copied over in order to complete a test:</p>
+<p>A namespace is a group of Viash components.</p>
+<p>Here are some benefits of grouping your components:</p>
 <ul>
-<li>The <code>type</code> signifies what <a href="">scripting language</a> is used for performing the unit test, which doesn’t need to be the same language as the main script. The <code>path</code> points to the test script.</li>
-<li>Every file <code>path</code> added straight into the <code>tests</code> dictionary will be copied over next to the temporary test directory. Any files that are necessary for the test to work correctly can be added here.</li>
+<li>Grouping components in namespaces allows for categorizing components.</li>
+<li>Each teams of developers can work on a different set of components in parallel, which improves the separation of concerns.</li>
+<li>Generating build targets and unit testing can be done in bulk, with optional filtering by namespace using the <a href="../../../documentation/reference/viash/ns.html"><code>viash ns</code> commands</a>.</li>
 </ul>
-<p>In the case of this example, <strong>test.sh</strong> will be the test script and <strong>Testfile.md</strong> is necessary as an input markdown file for the script to function.</p>
+<p>This guide will cover how to define a namespace and use it with Viash.</p>
 </section>
-<section id="test-script" class="level3">
-<h3 class="anchored" data-anchor-id="test-script">Test script</h3>
-<p>To write the test itself, create a new file named <strong>test.sh</strong> in the <strong>testing</strong> folder and add this as its content:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-ex</span> <span class="co"># Exit the script when one of the checks fail. Output all commands.</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check 1</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"&gt;&gt;&gt; Checking whether output is correct"</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Run md_url_checker component with its required inputs and output the results to test-output.txt</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">./md_url_checker</span> <span class="at">--inputfile</span> Testfile.md <span class="op">&gt;</span> test-output.txt</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span> <span class="ot">!</span> <span class="ot">-f</span> test-output.txt <span class="kw">]]</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">"Test output file could not be found!"</span> <span class="kw">&amp;&amp;</span> <span class="bu">exit</span> 1 <span class="co"># Check if test-output.txt exists</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-q</span> <span class="st">'1: https://www.google.com'</span> test-output.txt <span class="co"># Did the script find the URL?</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-q</span> <span class="st">'HTTP/2 404'</span> test-output.txt  <span class="co"># Did the web request return a 404 for the page that doesn't exist?</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Check 2</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"&gt;&gt;&gt; Checking whether an output file was created correctly"</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span> <span class="ot">!</span> <span class="ot">-f</span> output.txt <span class="kw">]]</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">"Output file could not be found!"</span> <span class="kw">&amp;&amp;</span> <span class="bu">exit</span> 1 <span class="co"># Check if output.txt exists</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-q</span> <span class="st">'URL: https://www.google.com'</span> output.txt <span class="co"># Was the URL written correctly in the report?</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-q</span> <span class="st">'Status: ERROR! URL cannot be reached. Status code: HTTP/2 404'</span> output.txt <span class="co"># Was the error written correctly in the report?</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-q</span> <span class="st">'Link name: install viash here'</span> output.txt <span class="co"># Was link name written correctly in the report?</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"&gt;&gt;&gt; Test finished successfully!"</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0 <span class="co"># Exit with a 0 code to note a success </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout-tip callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This script uses <a href="https://www.gnu.org/software/grep/manual/grep.html">grep</a> to search for files and strings. Make sure to read the comments to understand what is happening.</p>
-</div>
-</div>
-<p>The bash script above is just a minimal example of how you can write a test. You can use any of the <a href="">supported languages</a> and your favorite testing framework if that’s your preference. The most important part is the last line, which uses a 0 <a href="https://en.wikipedia.org/wiki/Exit_status">exit code</a> to signal a success.</p>
+<section id="adding-components-to-a-namespace" class="level2">
+<h2 class="anchored" data-anchor-id="adding-components-to-a-namespace">Adding components to a namespace</h2>
+<p>There are two ways of defining a namespace: either by adding the <code>namespace</code> property to the Viash config file or by creating a directory structure. You can use one or both of these methods in your projects.</p>
+<section id="namespace-property" class="level3">
+<h3 class="anchored" data-anchor-id="namespace-property">Namespace property</h3>
+<p>You can assign a component to a namespace by defining its namespace attribute in the <a href="../../../api/config/config">viash config file</a>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> some_component</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> my_namespace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="running-a-test" class="level3">
-<h3 class="anchored" data-anchor-id="running-a-test">Running a test</h3>
-<p>To run all tests defined in a config file, use the <a href=""><code>viash test</code></a> command:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Viash will now automatically build an executable and place it alongside the other defined resources in a temporary working directory. The output should look like this:</p>
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_md_url_checker5828773777380597444'
-====================================================================
-+/tmp/viash_test_md_url_checker5828773777380597444/build_executable/md_url_checker ---setup
-====================================================================
-+/tmp/viash_test_md_url_checker5828773777380597444/test_test.sh/test.sh
-&gt;&gt;&gt; Checking whether output is correct
-+ echo '&gt;&gt;&gt; Checking whether output is correct'
-+ ./md_url_checker --inputfile Testfile.md
-+ [[ ! -f test-output.txt ]]
-+ grep -q '1: https://www.google.com' test-output.txt
-+ grep -q 'HTTP/2 404' test-output.txt
-&gt;&gt;&gt; Checking whether an output file was created correctly
-+ echo '&gt;&gt;&gt; Checking whether an output file was created correctly'
-+ [[ ! -f output.txt ]]
-+ grep -q 'URL: https://www.google.com' output.txt
-+ grep -q 'Status: ERROR! URL cannot be reached. Status code: HTTP/2 404' output.txt
-+ grep -q 'Link name: install viash here' output.txt
-+ echo '&gt;&gt;&gt; Test finished successfully!'
-&gt;&gt;&gt; Test finished successfully!
-+ exit 0
-====================================================================
-[32mSUCCESS! All 1 out of 1 test scripts succeeded![0m
-Cleaning up temporary directory</code></pre>
-<p>If the test succeeds, Viash writes the full output to the shell and deletes the temporary files. If there are any issues, the script stops and an error message will appear in red. In this case, you can inspect the temporary files to troubleshoot.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>You can pass the <a href=""><code>--keep true</code></a> argument to <code>viash test</code> to prevent viash from automatically deleting the temporary files in case of a success: <code>viash test --keep true config.vsh.yaml</code>.</p>
-</div>
-</div>
-<!-- TODO: namespace testing -->
-<!-- ## Unit testing a namespace -->
+<section id="directory-structure" class="level3">
+<h3 class="anchored" data-anchor-id="directory-structure">Directory structure</h3>
+<p>Alternatively, the namespace can be automatically inferred by structuring the components hierarchically. In the example below, there are two namespaces: <strong>file_processing</strong> and <strong>network_tools</strong>. Each of these namespaces has one or more components assigned to them:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">src</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> file_processing</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── parse_images</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; ├── config.vsh.yaml</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; └── script.sh</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── render_mp4</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     ├── config.vsh.yaml</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     └── script.sh</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> network_tools</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> download_files</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="ex">├──</span> config.vsh.yaml</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="ex">├──</span> output</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="ex">│&nbsp;&nbsp;</span> └── download_files</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="ex">└──</span> script.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="using-the-viash-ns-commands" class="level2">
+<h2 class="anchored" data-anchor-id="using-the-viash-ns-commands">Using the viash ns commands</h2>
+<section id="listing-namespaces-in-a-project" class="level3">
+<h3 class="anchored" data-anchor-id="listing-namespaces-in-a-project">Listing namespaces in a project</h3>
+<p>ns list</p>
+</section>
+<section id="unit-testing-a-namespace" class="level3">
+<h3 class="anchored" data-anchor-id="unit-testing-a-namespace">Unit testing a namespace</h3>
+<p>ns test</p>
+</section>
+<section id="building-a-namespace" class="level3">
+<h3 class="anchored" data-anchor-id="building-a-namespace">Building a namespace</h3>
+<p>ns build</p>
 
 
 </section>
@@ -576,13 +524,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../documentation/guide/component/creation/nextflow.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Nextflow</span>
+      <a href="../../../documentation/guide/component/unit-testing.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Unit Testing</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../documentation/guide/component/namespaces.html" class="pagination-link">
-        <span class="nav-page-text">Namespaces</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../documentation/guide/building-block/nextflow/building-running.html" class="pagination-link">
+        <span class="nav-page-text">Building and Running</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
