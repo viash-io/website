@@ -330,9 +330,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#namespace-property" id="toc-namespace-property" class="nav-link" data-scroll-target="#namespace-property">Namespace property</a></li>
   <li><a href="#directory-structure" id="toc-directory-structure" class="nav-link" data-scroll-target="#directory-structure">Directory structure</a></li>
   </ul></li>
-  <li><a href="#using-the-viash-ns-commands" id="toc-using-the-viash-ns-commands" class="nav-link" data-scroll-target="#using-the-viash-ns-commands">Using the viash ns commands</a>
+  <li><a href="#using-the-viash-ns-subcommands" id="toc-using-the-viash-ns-subcommands" class="nav-link" data-scroll-target="#using-the-viash-ns-subcommands">Using the viash ns subcommands</a>
   <ul class="collapse">
-  <li><a href="#listing-namespaces-in-a-project" id="toc-listing-namespaces-in-a-project" class="nav-link" data-scroll-target="#listing-namespaces-in-a-project">Listing namespaces in a project</a></li>
+  <li><a href="#listing-components-and-namespaces" id="toc-listing-components-and-namespaces" class="nav-link" data-scroll-target="#listing-components-and-namespaces">Listing components and namespaces</a></li>
   <li><a href="#unit-testing-a-namespace" id="toc-unit-testing-a-namespace" class="nav-link" data-scroll-target="#unit-testing-a-namespace">Unit testing a namespace</a></li>
   <li><a href="#building-a-namespace" id="toc-building-a-namespace" class="nav-link" data-scroll-target="#building-a-namespace">Building a namespace</a></li>
   </ul></li>
@@ -358,6 +358,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<script type="text/javascript">
+let langDict = {
+  'bash': "Bash",
+  'csharp': "C#",
+  'js': "Javascript",
+  'python': "Python",
+  'scala': "Scala",
+  'r': "R",
+};
+
+let invertedLangDict = invertDictionary(langDict);
+
+document.addEventListener("DOMContentLoaded", function() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    let lang = 'bash';
+
+    if (urlParams.has('lang')){
+        lang = urlParams.get('lang');
+    }
+
+    changeTabSelections(lang);
+
+    var elements = document.querySelectorAll('[role="tab"]');
+    
+    for(var i = 0; i < elements.length; i++) {
+        tab = elements[i];
+        if (tab.textContent in invertedLangDict) {
+            tab.addEventListener('click', onTabClicked);
+        }
+    }
+
+    });
+
+    function changeTabSelections(language) {
+        var elements = document.querySelectorAll('[role="tab"]');
+
+        for(var i = 0; i < elements.length; i++) {
+            tab = elements[i];
+
+            if (tab.textContent == langDict[language]) {
+                tab.click();
+            }
+        }
+    }
+
+    function onTabClicked(event) {
+        changeTabSelections(invertedLangDict[event.srcElement.textContent]);
+    }
+
+    function invertDictionary(dict){
+        var ret = {};
+        for(var key in dict){
+            ret[dict[key]] = key;
+        }
+        return ret;
+    }
+
+</script>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>A namespace is a group of Viash components.</p>
@@ -374,43 +434,174 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>There are two ways of defining a namespace: either by adding the <code>namespace</code> property to the Viash config file or by creating a directory structure. You can use one or both of these methods in your projects.</p>
 <section id="namespace-property" class="level3">
 <h3 class="anchored" data-anchor-id="namespace-property">Namespace property</h3>
-<p>You can assign a component to a namespace by defining its namespace attribute in the <a href="../../../api/config/config">viash config file</a>:</p>
+<p>You can assign a component to a namespace by defining its <a href="../../../documentation/reference/config/functionality.html#namespace">namespace</a> attribute in the <a href="../../../documentation/reference/config/overview.html">viash config file</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> some_component</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> my_namespace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="directory-structure" class="level3">
 <h3 class="anchored" data-anchor-id="directory-structure">Directory structure</h3>
-<p>Alternatively, the namespace can be automatically inferred by structuring the components hierarchically. In the example below, there are two namespaces: <strong>file_processing</strong> and <strong>network_tools</strong>. Each of these namespaces has one or more components assigned to them:</p>
+<p>Viash can deduce namespaces automatically if you structure the components hierarchically. The namespace directories should be in the root of your (source) directory, with the component directories inside, grouped per namespace.<br>
+In the example below, there are two namespaces: <code>namespace_one</code> and <code>namespace_two</code>, each of these namespaces has one or more components assigned to them:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">src</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> file_processing</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── parse_images</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> namespace_one</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── component_one</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; ├── config.vsh.yaml</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; └── script.sh</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── render_mp4</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── component_two</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     ├── config.vsh.yaml</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     └── script.sh</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> network_tools</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> download_files</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> namespace_two</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> component_three</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="ex">├──</span> config.vsh.yaml</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="ex">├──</span> output</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="ex">│&nbsp;&nbsp;</span> └── download_files</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="ex">└──</span> script.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="ex">└──</span> script.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here, <code>namespace_one</code> groups <code>component_one</code> and <code>component_two</code> together while <code>namespace_two</code> only consists of a single component, <code>component_three</code>.</p>
 </section>
 </section>
-<section id="using-the-viash-ns-commands" class="level2">
-<h2 class="anchored" data-anchor-id="using-the-viash-ns-commands">Using the viash ns commands</h2>
-<section id="listing-namespaces-in-a-project" class="level3">
-<h3 class="anchored" data-anchor-id="listing-namespaces-in-a-project">Listing namespaces in a project</h3>
-<p>ns list</p>
+<section id="using-the-viash-ns-subcommands" class="level2">
+<h2 class="anchored" data-anchor-id="using-the-viash-ns-subcommands">Using the viash ns subcommands</h2>
+<p>Viash comes with a useful <code>viash ns</code> command to work with namespaces. This can be used to inspect, test and build the components that are part of a namespace.<br>
+We’ve provided a simple example project if you wish to test these commands. Its components use <code>bash</code> for some integer and string manipulation.</p>
+<p><a href="../../../download/projects/namespace_example.zip" id="btn-download" class="btn btn-info btn-md" role="button" download="">Download namespace_example.zip</a></p>
+<section id="listing-components-and-namespaces" class="level3">
+<h3 class="anchored" data-anchor-id="listing-components-and-namespaces">Listing components and namespaces</h3>
+<p>The <a href="../../../documentation/reference/viash/ns.html#viash-ns-list"><code>viash ns list</code></a> command is the namespace equivalent of <code>viash config view</code>, it outputs a <strong>parsed version</strong> of all config files found in a directory and their subdirectories:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns list <span class="at">-src</span> src</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This prints all fields to the terminal, even those not defined in the config files themselves. Here’s a part of the output:</p>
+<details>
+<summary>
+Output
+</summary>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">functionality</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"replace"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> </span><span class="st">"string_manipulation"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">authors</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">inputs</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">outputs</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">arguments</span><span class="kw">:</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"string"</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"--text"</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">alternatives</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">default</span><span class="kw">:</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"Hello world!"</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">values</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> </span><span class="st">"input"</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">multiple</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">multiple_sep</span><span class="kw">:</span><span class="at"> </span><span class="st">":"</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"string"</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"--search"</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">alternatives</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">default</span><span class="kw">:</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"Hello"</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">values</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> </span><span class="st">"input"</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">multiple</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">multiple_sep</span><span class="kw">:</span><span class="at"> </span><span class="st">":"</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"string"</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"--replace"</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">alternatives</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">default</span><span class="kw">:</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"Greetings"</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">values</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> </span><span class="st">"input"</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">multiple</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">multiple_sep</span><span class="kw">:</span><span class="at"> </span><span class="st">":"</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"bash_script"</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"script.sh"</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">is_executable</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">parent</span><span class="kw">:</span><span class="at"> </span><span class="st">"file:/.../namespace_example/src/string_manipulation/replace/config.vsh.yaml"</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Search for a substring in a string and replace it with another string"</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">tests</span><span class="kw">:</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"bash_script"</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"test.sh"</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">is_executable</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">parent</span><span class="kw">:</span><span class="at"> </span><span class="st">"file:/.../namespace_example/src/string_manipulation/replace/config.vsh.yaml"</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">info</span><span class="kw">:</span><span class="at"> </span><span class="kw">{}</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">dummy_arguments</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">set_wd_to_resources_dir</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">platform</span><span class="kw">:</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"native"</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">id</span><span class="kw">:</span><span class="at"> </span><span class="st">"native"</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">platforms</span><span class="kw">:</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"native"</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">id</span><span class="kw">:</span><span class="at"> </span><span class="st">"native"</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">info</span><span class="kw">:</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">config</span><span class="kw">:</span><span class="at"> </span><span class="st">"namespace_example/src/string_manipulation/replace/config.vsh.yaml"</span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">platform</span><span class="kw">:</span><span class="at"> </span><span class="st">"native"</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">viash_version</span><span class="kw">:</span><span class="at"> </span><span class="st">"0.5.12"</span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">git_commit</span><span class="kw">:</span><span class="at"> </span><span class="st">"d9d624de0264b1154d7eeb5dba3c1deb567311ac"</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">git_remote</span><span class="kw">:</span><span class="at"> </span><span class="st">"https://github.com/..."</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="co">...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </section>
 <section id="unit-testing-a-namespace" class="level3">
 <h3 class="anchored" data-anchor-id="unit-testing-a-namespace">Unit testing a namespace</h3>
-<p>ns test</p>
+<p>You can test multiple components using the <a href="../../../documentation/reference/viash/ns.html#viash-ns-test"><code>viash ns test</code></a> command.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns test <span class="at">--src</span> src</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To speed up the testing, you can use the <code>parallel</code> flag to test all components at once:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns test <span class="at">--src</span> src <span class="at">--parallel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>This will test each component <strong>in series</strong> and will output a tab separated output that contains the results:</p>
+<pre><code>The working directory for the namespace tests is /tmp/viash_ns_test2526740097581645786
+           namespace        functionality             platform            test_name exit_code duration               result
+ string_manipulation              replace               native                start                                        
+ string_manipulation              replace               native              test.sh         0        0              SUCCESS
+                math             subtract               native                start                                        
+                math             subtract               native              test.sh         0        0              SUCCESS
+                math                  add               native                start                                        
+                math                  add               native              test.sh         0        0              SUCCESS</code></pre>
 </section>
 <section id="building-a-namespace" class="level3">
 <h3 class="anchored" data-anchor-id="building-a-namespace">Building a namespace</h3>
-<p>ns build</p>
+<p>Multiple components can be build <strong>in series</strong> using the <a href="../../../documentation/reference/viash/ns.html#viash-ns-build"><code>viash ns build</code></a> command:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns build <span class="at">--src</span> src <span class="at">--target</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To speed up the building, you can use the <code>parallel</code> flag to build all components at once:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns build <span class="at">--src</span> src <span class="at">--target</span> target <span class="at">--parallel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>This will output the following to the console:</p>
+<pre><code>Exporting replace (string_manipulation) =native=&gt; target/native/string_manipulation/replace
+Exporting subtract (math) =native=&gt; target/native/math/subtract
+Exporting add (math) =native=&gt; target/native/math/add</code></pre>
+<p>An executable and/or module will be generated for every target platform defined in each of the component configs. These are grouped per platform and namespace in the <code>target</code> directory:</p>
+<pre><code>target
+└── native
+    ├── math
+    │   ├── add
+    │   │   └── add
+    │   └── subtract
+    │       └── subtract
+    └── string_manipulation
+        └── replace
+            └── replace</code></pre>
 
 
 </section>
