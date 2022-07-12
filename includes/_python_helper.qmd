@@ -3,7 +3,7 @@
 #| output: asis
 
 # Imports
-import git, os
+import git, os, shutil
 
 # Get root dir of repo
 repo = git.Repo('.', search_parent_directories=True)
@@ -35,4 +35,10 @@ def create_download_button(path):
     basename = os.path.basename(path)
     download_path = path
     print(f"<a href=\"{download_path}\" id=\"btn-download\" class=\"btn btn-info btn-md\" role=\"button\" download>Download {basename}</a>  ")
+
+# Example: create_zip(parent_dir = "/download/projects", zip_dir = "namespace_example")
+def create_zip(parent_dir, zip_dir):
+    work_dir = repo_root + parent_dir
+    os.chdir(work_dir)
+    shutil.make_archive(zip_dir, 'zip', zip_dir)
 ```
