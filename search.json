@@ -1,87 +1,31 @@
 [
   {
-    "objectID": "documentation/get-started/basics.html",
-    "href": "documentation/get-started/basics.html",
-    "title": "Viash Basics",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Quarto",
     "section": "",
-    "text": "This short tutorial will touch on the basic concepts of Viash. Before getting started, make sure you’ve installed Viash so you can follow along with the example."
+    "text": "The overarching goal of Quarto is to make the process of creating and collaborating on scientific and technical documents dramatically better. We hope to do this in several dimensions:\n\nCreate a writing and publishing environment with great integrated tools for technical content. We want to make authoring with embedded code, equations, figures, complex diagrams, interactive widgets, citations, cross references, and the myriad other special requirements of scientific discourse straightforward and productive for everyone.\nHelp authors take full advantage of the web as a connected, interactive platform for communications, while still providing the ability to create excellent printed output from the same document source. Researchers shouldn’t need to choose between LaTeX, MS Word, and HTML but rather be able to author documents that target all of them at the same time.\nMake reproducible research and publications the norm rather than the exception. Reproducibility requires that the code and data required to create a manuscript are an integrated part of it. However, this isn’t often straightforward in practice—Quarto aims to make it easier to adopt a reproducible workflow than not.\n\nQuarto is open source software licensed under the GNU GPL v2. We believe that it’s better for everyone if the tools used for research and science are free and open. Reproducibility, widespread sharing of knowledge and techniques, and the leveling of the playing field by eliminating cost barriers are but a few of the shared benefits of free software in science."
   },
   {
-    "objectID": "documentation/get-started/basics.html#what-is-viash",
-    "href": "documentation/get-started/basics.html#what-is-viash",
-    "title": "Viash Basics",
-    "section": "What is Viash?",
-    "text": "What is Viash?\nViash is … TODO: Add quick breakdown of the core of Viash"
+    "objectID": "about.html#project",
+    "href": "about.html#project",
+    "title": "About Quarto",
+    "section": "Project",
+    "text": "Project\nAt the core of Quarto is Pandoc, a powerful and flexible document processing tool. Quarto adds a number of facilities to Pandoc aimed at scientific and technical publishing, including:\n\nEmbedding code and output from Python, R, and JavaScript via integration with Jupyter, Knitr, and Observable.\nA variety of extensions to Pandoc markdown useful for technical writing including cross-references, sub-figures, layout panels, hoverable citations and footnotes, callouts, and more.\nA project system for rendering groups of documents at once, sharing options across documents, and producing aggregate output like websites and books.\n\nDevelopment of Quarto is sponsored by RStudio, PBC, where we previously created a similar system (R Markdown) that shared the same goals, but was targeted principally at users of the R language. The same core team works on both Quarto and R Markdown:\n\nJ.J. Allaire (@jjallaire)\nChristophe Dervieux (@cderv)\nCarlos Scheidegger (@cscheid)\nCharles Teague (@dragonstyle)\nYihui Xie (@yihui)\n\nWith Quarto, we are hoping to bring these tools to a much wider audience.\nQuarto is a registered trademark of RStudio. Please see our trademark policy for guidelines on usage of the Quarto trademark."
   },
   {
-    "objectID": "documentation/get-started/basics.html#hello-viash",
-    "href": "documentation/get-started/basics.html#hello-viash",
-    "title": "Viash Basics",
-    "section": "Hello Viash!",
-    "text": "Hello Viash!\nNow that you’re up to speed with what Viash is for, we have provided a quick example on how you can build and run a component. A minimal components consists of a script that holds the logic and a Viash config file to describe the component with metadata.\n\nRequirements\nThe example targets the Native platform, which means you will need to have the required packages installed on your system depending on your chosen scripting language. If you are using any of the languages on your system, there’s a good chance you already meet the requirements. To get up and running quickly, we recommend using Bash.\n\nBashC#JavascriptPythonScalaR\n\n\n\nA Bash Unix shell (built into Linux, macOS and WSL2)\n\n\n\n\nA Bash Unix shell (built into Linux, macOS and WSL2)\nDownload and install .NET Core.\nRun dotnet tool install -g dotnet-script to enable the C# scripting functionality.\n\n\n\n\nA Bash Unix shell (built into Linux, macOS and WSL2)\nDownload and install Node.js.\nExecute the following command to install the required npm packages: npm install --save needle markdown-link-extractor\n\n\n\n\nA Bash Unix shell (built into Linux, macOS and WSL2)\nInstall Python 3.8 or newer. You may have to install the python-is-python3 package on Ubuntu and its derivatives.\n\n\n\n\nA Bash Unix shell (built into Linux, macOS and WSL2)\nInstall Scala 2.\n\n\n\n\nA Bash Unix shell (built into Linux, macOS and WSL2)\nInstall the R software environment\n\n\n\n\n\n\nWriting the script\nFor this example, you’ll use a tiny script that simply outputs “Hello Viash”, with the “Viash” part being a variable. To start off, create a folder named hello_viash and follow the instructions below based on your preferred scripting language.\n\nBashC#JavascriptPythonScalaR\n\n\nCreate a new file named script.sh and copy the following content inside of it:\necho \"Hello $par_input\"\nThis outputs Hello to the console, followed by an input variable. Notice that this variable isn’t defined in the script itself as Viash will generate it for you based on the config file you’ll create in the next step.\n\n\n\n\n\n\nTip\n\n\n\nEvery scripting language has its own way of using variables generated by Viash. Check out the Bash page for more information and examples.\n\n\n\n\nCreate script.csx\nConsole.WriteLine(\"Hello \" + par.input);\nThis outputs Hello to the console, followed by an input variable. Notice that this variable isn’t defined in the script itself as Viash will generate it for you based on the config file you’ll create in the next step.\n\n\n\n\n\n\nTip\n\n\n\nEvery scripting language has its own way of using variables generated by Viash. Check out the C# page for more information and examples.\n\n\n\n\nCreate script.js\nconsole.log('Hello' + par['input']);\nThis outputs Hello to the console, followed by an input variable. Notice that this variable isn’t defined in the script itself as Viash will generate it for you based on the config file you’ll create in the next step.\n\n\n\n\n\n\nTip\n\n\n\nEvery scripting language has its own way of using variables generated by Viash. Check out the Javascript page for more information and examples.\n\n\n\n\nCreate script.py\nprint(\"Hello\", par[\"input\"])\nThis outputs Hello to the console, followed by an input variable. Notice that this variable isn’t defined in the script itself as Viash will generate it for you based on the config file you’ll create in the next step.\n\n\n\n\n\n\nTip\n\n\n\nEvery scripting language has its own way of using variables generated by Viash. Check out the Python page for more information and examples.\n\n\n\n\nCreate script.scala\nprintln(\"Hello \" + par.input.get)\nThis outputs Hello to the console, followed by an input variable. Notice that this variable isn’t defined in the script itself as Viash will generate it for you based on the config file you’ll create in the next step.\n\n\n\n\n\n\nTip\n\n\n\nEvery scripting language has its own way of using variables generated by Viash. Check out the Scala page for more information and examples.\n\n\n\n\nCreate script.R\ncat(\"Hello \", par$input)\nThis outputs Hello to the console, followed by an input variable. Notice that this variable isn’t defined in the script itself as Viash will generate it for you based on the config file you’ll create in the next step.\n\n\n\n\n\n\nTip\n\n\n\nEvery scripting language has its own way of using variables generated by Viash. Check out the R page for more information and examples.\n\n\n\n\n\n\n\nAdding the config\nA Viash config file is a YAML file that describes the functionality of a component and the platform(s) it targets. Create a file name config.vsh.yaml and add the contents below based on your chosen scripting language.\n\nBashC#JavascriptPythonScalaR\n\n\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_viash\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"Viash\"\n  resources:\n  - type: bash_script\n    path: script.sh\nplatforms:\n  - type: native\n\n\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_viash\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"Viash\"\n  resources:\n  - type: csharp_script\n    path: script.csx\nplatforms:\n  - type: native\n\n\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_viash\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"Viash\"\n  resources:\n  - type: javascript_script\n    path: script.js\nplatforms:\n  - type: native\n\n\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_viash\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"Viash\"\n  resources:\n  - type: python_script\n    path: script.py\nplatforms:\n  - type: native\n\n\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_viash\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"Viash\"\n  resources:\n  - type: scala_script\n    path: script.scala\nplatforms:\n  - type: native\n\n\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_viash\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"Viash\"\n  resources:\n  - type: r_script\n    path: script.R\nplatforms:\n  - type: native\n\n\n\nHere’s a breakdown of the different sections:\n\nfunctionality describes what the component does and the resources it needs. It contains the name, a short description and more importantly, the arguments and resources the component uses.\n\narguments contains all arguments the component accepts and will be passed to the script. In this case, a single string named --input resides here with a default value of Viash.\nresources holds references to all necessary files and folders to make the component work. For this example, a single script is all that’s needed.\n\nplatforms lists what platforms the component can target. This example targets the native platform, which will generate an executable that’s run using the system resources.\n\n\n\nRunning\nWith the two necessary files present to create a component, you can call upon Viash to generate a temporary executable and run it:\nviash run config.vsh.yaml\nWithout passing any arguments, this will use the default value for --input, which is Viash. This results in the following output:\nHello Viash\nBy providing the a value for --input, you can customize the greeting:\nviash run config.vsh.yaml -- --input World\n\n\n\n\n\n\nNote\n\n\n\nThe double dash (--) between the viash command and the arguments is used to signify the end of the arguments passed to viash and the start of those passed to the component. If you forgot to add these, you’ll get an error similar to this:\n[scallop] Error: Unknown option 'input'\n\n\nThe example above results in this output:\nHello World"
+    "objectID": "about.html#contribute",
+    "href": "about.html#contribute",
+    "title": "About Quarto",
+    "section": "Contribute",
+    "text": "Contribute\nYou can contribute to Quarto in many ways:\n\nBy opening issues to provide feedback and share ideas.\nBy submitting Pull Request (PR) to fix opened issues\nBy submitting Pull Request (PR) to suggest new features (it is considered good practice to open an issue for discussion before working on a pull request for a new feature).\n\nPlease be mindful of our code of conduct as you interact with other community members.\n\nPull Requests\nPull requests are very welcome! Here’s how to contribute via PR:\n\nFork the repository, clone it locally, and make your changes in a new branch specific to the PR. For example:\n# clone your fork\n$ git clone https://github.com/<username>/quarto-cli\n\n# configure for your platform (./configure-macos.sh, ./configure-linux.sh, or ./configure-windows.cmd)\n$ cd quarto-cli\n$ ./configure-macos.sh\n\n# checkout a new branch\n$ git checkout -b feature/newthing\nFor significant changes (e.g more than small bug fixes), ensure that you have signed the individual or corporate contributor agreement as appropriate. You can send the signed copy to jj@rstudio.com.\nSubmit the pull request. It is ok to submit as draft in your are still working on it but would like some feedback from us. It always good to share in the open that you are working on it.\n\nWe’ll try to be as responsive as possible in reviewing and accepting pull requests."
   },
   {
-    "objectID": "documentation/get-started/basics.html#whats-next",
-    "href": "documentation/get-started/basics.html#whats-next",
-    "title": "Viash Basics",
-    "section": "What’s next?",
-    "text": "What’s next?\nCheck out our guide for learning more about Viash. To learn more about the Viash commands and the config file, take a look at our API section."
-  },
-  {
-    "objectID": "documentation/get-started/terminology.html",
-    "href": "documentation/get-started/terminology.html",
-    "title": "Terminology",
+    "objectID": "download/components/md_url_checker/bash/Testfile.html",
+    "href": "download/components/md_url_checker/bash/Testfile.html",
+    "title": "Viash",
     "section": "",
-    "text": "The reference below serves as a reference for the terms used throughout the guides and other pages.\n\n\n\n\n\n\n\nTerm\nDescription\n\n\n\n\nViash\nA software package that can generate smart executables and Nextflow modules.\n\n\nComponent\nAt minimum, the combination of a script and a config file. This can also include any needed resources and unit tests.\n\n\nConfig\nA YAML based file that holds all of the parameters needed to create a component.\n\n\nResource\nTools, helper scripts, templates and other files the component depends on to work.\n\n\nUnit test\nA small block of code to test a component.\n\n\nTarget\nAn executable or a VDSL3 module that’s generated by Viash.\n\n\n(VDSL3) Module\nA Nextflow module generated by Viash.\n\n\n(Viash) Executable\nAn executable script generated for the Native or Docker platform.\n\n\n(Docker) Image\nA standard unit of software that packages up the OS, code and its dependencies so the application runs quickly and reliably from one computing environment to another.\n\n\n(Docker) Container\nAn instance of a Docker image.\n\n\nPlatform\nThis is target platform. We currently support Native, Docker and Nextflow."
-  },
-  {
-    "objectID": "documentation/faq/rmarkdown.html",
-    "href": "documentation/faq/rmarkdown.html",
-    "title": "FAQ for R Markdown Users",
-    "section": "",
-    "text": "Quarto sounds similar to R Markdown. What is the difference and why create a new project?\nAt its core, Quarto works the same way as R Markdown: \n\nThe goal of Quarto is to make the process of creating and collaborating on scientific and technical documents dramatically better. Quarto combines the functionality of R Markdown, bookdown, distill, xaringian, etc into a single consistent system with “batteries included” that reflects everything we’ve learned from R Markdown over the past 10 years.\nThe number of languages and runtimes used for scientific discourse is very broad (and the Jupyter ecosystem in particular is extraordinarily popular). Quarto is at its core multi-language and multi-engine (supporting Knitr, Jupyter, and Observable today and potentially other engines tomorrow).\nOn the other hand, R Markdown is fundamentally tied to R which severely limits the number of practitioners it can benefit. Quarto is RStudio’s attempt to bring R Markdown to everyone! Unlike R Markdown, Quarto doesn’t have a dependency or requirement for R. Quarto was developed to be multilingual, beginning with R, Python, Javascript, and Julia, with the idea that it will work even for languages that don’t yet exist.\nWhile it is a “new” system, it should also be noted that it is highly compatible with existing content: you can render most R Markdown documents and Jupyter notebooks unmodified with Quarto. The concept is to make a major, long term investment in reproducible research, while keeping it compatible with existing formats and adaptable to the various environments users work in.\n\n\nIs R Markdown going away? Will my R Markdown documents continue to work?\nR Markdown is not going away! R Markdown is used extensively and continues to work well. It will continue to be actively supported. We’re not leaving R Markdown, we’re expanding our scope. Over the years there have been many feature requests, and rather than implementing them all in R Markdown, for certain features we may refer you to Quarto. Everything that is currently in R Markdown will continue to work and be supported. There are no plans for deprecation.\nRead more about this in Yihui Xie’s blog post With Quarto Coming, is R Markdown Going Away? No.\n\n\nShould I switch from R Markdown to Quarto?\nIf you like using R Markdown, there’s no need to switch! R Markdown will continue to be supported and work as it always has been. You’re welcome to try Quarto if you like, but there’s no need to switch. Some new features may only exist in Quarto, so if you want to use those, then that’s where you would give those a try.  \nWe should emphasize that switching is not imperative. While we don’t plan on major feature initiatives in R Markdown and related packages, we are going to continue to maintain them (smaller improvements and bug fixes) for a long time to come. Furthermore, since Rmd files can in most cases be rendered without modification by Quarto, you can continue using R Markdown and the switching cost will still be minimal whenever you decide to do it. \n\n\nI use X (bookdown, blogdown, etc.). What is the Quarto equivalent?\nHere are the Quarto equivalents for various packages and features of the R Markdown ecosystem (in some cases Quarto equivalents are not yet available but will be later this year):\n\n\n\n\nFeature\nR Markdown\nQuarto\n\n\n\n\nBasic Formats\n\nhtml_document\npdf_document\nword_document\n\n\nhtml\npdf\ndocx\n\n\n\nBeamer\n\nbeamer_presentation\n\n\nbeamer\n\n\n\nPowerPoint\n\npowerpoint_presentation\n\n\npptx\n\n\n\nHTML Slides\n\nxaringan\nioslides\nrevealjs\n\n\nrevealjs\n\n\n\nAdvanced Layout\n\ntufte\ndistill\n\n\nQuarto Article Layout\n\n\n\nCross References\n\nhtml_document2\npdf_document2\nword_document2\n\n\nQuarto Crossrefs\n\n\n\nWebsites & Blogs\n\nblogdown\ndistill\n\n\nQuarto Websites\nQuarto Blogs\n\n\n\nBooks\n\nbookdown\n\n\nQuarto Books\n\n\n\nInteractivity\nShiny Documents\nQuarto Interactive Documents\n\n\nPaged HTML\npagedown\nSummer 2022\n\n\nJournal Articles\nrticles\nSummer 2022\n\n\nDashboards\nflexdashboard\nFall 2022\n\n\nInteractive Tutorials\nlearnr\nNo equivalent planned\n\n\n\n\n\n\nCan you create custom formats for Quarto like you can for R Markdown?\nNot currently, but we expect that this capability will be available in version 1.0 of Quarto (which will be available before rstudio::conf in July).\n\n\nWhen would be a good time to start new projects in Quarto rather than R Markdown?\nOur current plan is to announce Quarto v1.0 at rstudio::conf (end of July). This will be a stable release that will be an excellent foundation for starting new projects with Quarto or migrating existing R Markdown projects (if you are so inclined).\n\n\nDoes the RStudio IDE support Quarto?\nYes! You need to use the latest release of RStudio (v2022.02), which includes support for editing and preview of Quarto documents.\nYou can download RStudio v2022.02 from https://rstudio.com/products/rstudio/download/.\n\n\nDoes RStudio Connect support Quarto?\nYes! You can publish Quarto content to RStudio Connect v2021.08.0 or later. Quarto has to be enabled as documented in the RStudio Connect admin guide. Connect’s user documentation refers to Quarto.org docs on how to publish from the RStudio IDE. To publish Python-based Quarto content, you can use the rsconnect-python CLI from various locations, including VSCode, JupyterLab or the terminal."
-  },
-  {
-    "objectID": "documentation/faq/index.html",
-    "href": "documentation/faq/index.html",
-    "title": "Frequently Asked Questions",
-    "section": "",
-    "text": "What can I use Quarto for?\nQuarto® is an open-source scientific and technical publishing system built on Pandoc. You can weave together narrative text and code to produce elegantly formatted output as documents, web pages, blog posts, books and more. \n\n\n\nHow do I install Quarto?\nVisit the Quarto.org Get Started page, which provides installation instructions for Windows, Mac OS, and Linux. \n\n\n\nIs Quarto free to use?\nYes! Quarto is open source with a GPL-2 license. You can use or disseminate it any way that you would any GPL-2 licensed open source software. \n\n\nWhat output formats can Quarto create?\nThere are many output formats available in Quarto. This includes all of the built in Pandoc formats (e.g. HTML, PDF, MS Word, Revealjs, ePub, etc.) as well as various ways to publish multiple documents (websites, blogs, and books). Learn more at Quarto Formats. \n\n\nWhat editing tools can I use with Quarto?\nYou can use a wide variety of tools with Quarto. We have provided documentation for writing and editing Quarto documents in VSCode, JupyterLab, RStudio IDE, or any text editor. Visit the Get Started with Quarto page to install, and then choose your tool for a brief introductory guide.\n\n\nCan I use Jupyter notebooks with Quarto?\nYes! Quarto can render Jupyter notebooks and you can use Jupyter, JupyterLab or any other .ipynb notebook editor with Quarto. You can render existing .ipynb notebooks as-is with Quarto, but adding Quarto-specific output options or a YAML header can enhance the output. Visit theJupyterLab page for more information.\n\n\nWhat programming languages are supported in Quarto?\nThe principal languages supported by Quarto are Python, R, Julia, and Observable JavaScript. Integration with Jupyter also enables the use of many other languages. \nEach Quarto document can be optionally processed by a computational engine (the engine can be manually specified or automatically detected based on the code chunks within). Current engines include Knitr (which is also used by R Markdown and supports a variety of languages including R, Python, and Julia, etc.) and Jupyter (which supports many languages including Python, Julia, and R). See the documentation on Engine Binding for additional details.\n\n\nWhat human languages are supported in Quarto?\nYou can write your Quarto documentation in your human language of choice. The lang document option is used to identify the main language of the document using IETF language tags (following the BCP 47 standard), such as en or en-GB. \n\n\nHow can I share documents and have people comment on them?\nYou can publish Quarto content to various locations. See the user guides for publishing documents and publishing websites  for details on using GitHub Pages, Netlify, RStudio Connect, and other services. with Quarto. Once documents are published you can use  hypothes.is, Utterances, or Giscus for commenting. Learn more in the documentation on commenting.\n\n\nCan I do collaborative editing with Quarto?\nThere is not yet anything specific for collaborative editing in Quarto. You can collaborate on .qmd files in the same way you currently do for any text or code files. \nRStudio Workbench allows for Project Sharing for interactive editing and collaboration on the same document.\n\n\nWhere can I publish Quarto websites?\nThere are a wide variety of ways to publish Quarto websites. Website content is by default written to the _site sub-directory (you can customize this using the output-dir option). Publishing is simply a matter of copying the output directory to a web server or web hosting service.\nThe publishing documentation describes several convenient options for Quarto website deployment including RStudio Connect, Netlify, GitHub Pages, Firebase, Site44, and Amazon S3. We’ll mostly defer to the documentation provided by those various services, but will note any Quarto website specific configuration required.\n\n\nDoes RStudio Connect support Quarto?\nYes! You can publish Quarto content to RStudio Connect v2021.08.0 or later. Quarto has to be enabled as documented in the RStudio Connect admin guide. Connect’s user documentation refers to Quarto.org docs on how to publish from the RStudio IDE. To publish Python-based Quarto content, you can use the rsconnect-python CLI from various locations, including VSCode, JupyterLab or the terminal.\n\n\nWho are the developers of Quarto?\nDevelopment of Quarto is sponsored by RStudio, PBC. The same core team works on both Quarto and R Markdown:\n\nCarlos Scheidegger (@cscheid)\nCharles Teague (@dragonstyle)\nChristophe Dervieux (@cderv)\nJ.J. Allaire (@jjallaire)\nYihui Xie (@yihui)\n\nHere is the full contributors list. Quarto is open source and we welcome contributions in our github repository as well! https://github.com/quarto-dev/quarto-cli.\n\n\nWhy the name Quarto?\nWe wanted to use a name that had meaning in the history of publishing and landed on Quarto, which is the format of a book or pamphlet produced from full sheets printed with eight pages of text, four to a side, then folded twice to produce four leaves. The earliest known European printed book is a Quarto, the Sibyllenbuch, believed to have been printed by Johannes Gutenberg in 1452–53.\n\n\nWhere can I report bugs or request features?\nThanks for finding something and sharing with us! You can file an issue in the Quarto repository https://github.com/quarto-dev/quarto-cli/issues.\n\n\nWhere can I ask questions and discuss using Quarto with others?\nThe best place to ask questions and see what questions other people have is in Quarto discussions (https://github.com/quarto-dev/quarto-cli/discussions)."
-  },
-  {
-    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html",
-    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html",
-    "title": "Advanced Pipeline",
-    "section": "",
-    "text": "explain this pipeline is a more realistic example of a typical use-case of a Nextflow bioinformatics pipeline as it has a mixture of scripting languages used and a join is used to merge all events"
-  },
-  {
-    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#creating-the-modules",
-    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#creating-the-modules",
-    "title": "Advanced Pipeline",
-    "section": "Creating the modules",
-    "text": "Creating the modules\nThe sections below describe how to create the VDSL3 modules in preparation for creating the pipeline.\n\nPreparation\ncreate a new folder named advanced pipeline, add src folder with a nextflow_module folder inside. Now create three folders inside nextflow_module folder, one per component needed for the pipeline:\n\ncombine_columns\nremove_comments\ntake_columns\n\nThe folder structure should look like this now:\nadvanced_pipeline\n└── src\n    └── nextflow_modules\n        ├── combine_columns\n        ├── remove_comments\n        └── take_column\n\n\nCreating the remove_comments component\nThis component removes all comments (lines starting with a hashtag) from a tsv file.\nDownload or copy the contents of config.vsh.yaml and script.sh below into the remove_comments folder.\nDownload config.vsh.yaml\n\n\n\nContents of config.vsh.yaml\n\nfunctionality:\n  name: remove_comments\n  description: Remove comments from a TSV file.\n  namespace: nextflow_modules\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      required: true\n      example: \"file.tsv\"\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n      example: \"file.tsv\"\n  resources:\n  - type: bash_script\n    path: ./script.sh\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: ubuntu:20.04\n\nDownload script.sh\n\n\n\nContents of script.sh\n\n#!/bin/bash\n\ngrep -v '^#' \"$par_input\" > \"$par_output\"\n\n\n\nCreating the take_column component\nThis component subsets an incoming tsv file by extracting a certain column from the file.\nDownload or copy the contents of config.vsh.yaml and script.py below into the take_column folder.\nDownload config.vsh.yaml\n\n\n\nContents of config.vsh.yaml\n\nfunctionality:\n  name: take_column\n  namespace: nextflow_modules\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      required: true\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n    - name: \"--column\"\n      type: integer\n      required: false\n      default: 2\n  resources:\n  - type: python_script\n    path: ./script.py\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: amancevice/pandas:slim\n\nDownload script.py\n\n\n\nContents of script.py\n\nimport pandas as pd\n\n## VIASH START\npar = {\n    \"input\": \"data/file1.tsv\",\n    \"column\": 2,\n    \"output\": \"temp/foo\"\n}\n## VIASH END\n\n# read the tsv file\ntab = pd.read_csv(par[\"input\"], sep=\"\\t\", comment=\"#\")\n\n# subset a column\ntab_filt = tab.iloc[:, par[\"column\"]-1]\n\n# write to file\ntab_filt.to_csv(par[\"output\"], index=False)\n\n\n\nCreating the combine_columns component\nThis component combines multiple tsv files into one by concatenating all of the columns together. It assumes each incoming tsv file has an equal number of rows.\nDownload or copy the contents of config.vsh.yaml and script.R below into the combine_columns folder.\nDownload config.vsh.yaml\n\n\n\nContents of config.vsh.yaml\n\nfunctionality:\n  name: combine_columns\n  namespace: nextflow_modules\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      multiple: true\n      required: true\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n  resources:\n    - type: r_script\n      path: ./script.R\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: rocker/r-ver:4.1\n\nDownload script.R\n\n\n\nContents of script.R\n\n## VIASH START\npar <- list(\n    input = c(\"data/file1.tsv\", \"data/file2.tsv\"),\n    output = \"temp/foo.tsv\"\n)\n## VIASH END\n\nouts <- lapply(par$input, function(file) {\n  read.delim(file, comment.char = \"#\", sep = \"\\t\", header = FALSE)\n})\n\ntable <- do.call(cbind, outs)\n\nwrite.table(table, par$output, col.names = FALSE, sep = \"\\t\")"
-  },
-  {
-    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#building-the-modules",
-    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#building-the-modules",
-    "title": "Advanced Pipeline",
-    "section": "Building the modules",
-    "text": "Building the modules\nThe basic pipeline guide describes how to generate an individual VDSL3 Nextflow module using the viash build command, but there’s a better way when it comes to building multiple modules at once: viash ns build. Each one of the three components has its namespace defined as nextflow_modules inside of its config file. Execute this command from the root of the advanced_pipeline directory\nviash ns build\nThis will result in the following output:\nExporting take_column (nextflow_modules) =nextflow=> target/nextflow/nextflow_modules/take_column\nExporting combine_columns (nextflow_modules) =nextflow=> target/nextflow/nextflow_modules/combine_columns\nExporting remove_comments (nextflow_modules) =nextflow=> target/nextflow/nextflow_modules/remove_comments\nThe VDSL3 Nextflow modules were generated inside of a target folder. The directory structure now looks like this:\nadvanced_pipeline\n├── src\n│   └── nextflow_modules\n│       ├── combine_columns\n│       │   ├── config.vsh.yaml\n│       │   └── script.R\n│       ├── remove_comments\n│       │   ├── config.vsh.yaml\n│       │   └── script.sh\n│       └── take_column\n│           ├── config.vsh.yaml\n│           └── script.py\n└── target\n    └── nextflow\n        └── nextflow_modules\n            ├── combine_columns\n            │   ├── main.nf\n            │   └── nextflow.config\n            ├── remove_comments\n            │   ├── main.nf\n            │   └── nextflow.config\n            └── take_column\n                ├── main.nf\n                └── nextflow.config"
-  },
-  {
-    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#creating-the-pipeline",
-    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#creating-the-pipeline",
-    "title": "Advanced Pipeline",
-    "section": "Creating the pipeline",
-    "text": "Creating the pipeline\nCreate a new file named main.nf and add it to the root of the advanced_pipeline directory. Use the following as its contents:\ntargetDir = \"../../target/nextflow\" // 1\n\n// 2\ninclude { remove_comments } from \"$targetDir/nextflow_modules/remove_comments/main.nf\"\ninclude { take_column } from \"$targetDir/nextflow_modules/take_column/main.nf\"\ninclude { combine_columns } from \"$targetDir/nextflow_modules/combine_columns/main.nf\"\n\nworkflow {\n  Channel.fromPath(params.input) // 3\n  \n    // 4\n    // File -> (String, File)\n    | map{ file -> [ file.baseName, file ] }\n    \n    // 5\n    // (String, File) -> (String, File)\n    | remove_comments\n\n    // 6\n    // (String, File) -> (String, File)\n    | take_column\n\n    // 7\n    // (String, File)* -> List[(String, File)]\n    | toList()\n\n    // 8\n    // List[(String, File)] -> (String, {input: List[File]})\n    | map{ tups -> \n      files = tups.collect{id, file -> file}\n      [ \"combined\", [ input: files ] ] \n    }\n\n    // 9\n    // (String, {input: List[File]}) -> (String, File)\n    | combine_columns.run(\n      auto: [ publish: true ]\n      )\n\n    // 10\n    | view{ file -> \"Output: $file\" }\n}\n\ntarget dir where the modules are located\ninclude the modules from the target directory\nCreate a channel based on the input parameter’s path\nAssign a unique ID to each event using map{}\nRun remove_comments to remove the comments from the TSV\nExtract a single column from TSV by running take_column\nCombine all events into a single List event using toList()\nAdd unique ID to the tuple\nConcatenate the TSVs into one by running the combine_columns module with auto publishing enabled using the auto directive to\nView the channel contents bu printing it to the console using view()"
-  },
-  {
-    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#running-the-pipeline",
-    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#running-the-pipeline",
-    "title": "Advanced Pipeline",
-    "section": "Running the pipeline",
-    "text": "Running the pipeline\nbefore running, you need some TSV files to work with\nDownload file1.tsv\nDownload file2.tsv\nnow run the following command\nnextflow run main.nf --input \"data/file?.tsv\" --publishDir output\noutput\nN E X T F L O W  ~  version 22.04.3\nLaunching `workflows/310-realistic_pipeline/main.nf` [stupefied_saha] DSL2 - revision: 6669aefc6c\n[93/232aba] Submitted process > remove_comments:remove_comments_process (2)\n[ef/a28e89] Submitted process > remove_comments:remove_comments_process (1)\n[63/279f98] Submitted process > take_column:take_column_process (1)\n[50/2a17ef] Submitted process > take_column:take_column_process (2)\n[8d/6eeff5] Submitted process > combine_columns:combine_columns_process\nOutput: [combined, /home/runner/work/viash_nxf_course/viash_nxf_course/work/8d/6eeff571e9ff2c5389851c6ab3001c/combined.combine_columns.output]\na TSV file was generated in the output directory"
+    "text": "This is a simple markdown file with some hyperlinks to test if the check_if_URLS_reachable component works correctly. Some links to websites:\n\nGoogle\nReddit\nA broken link\n\nLinks that are relative to viash.io:\n\nYou can install viash here.\nIt all starts with a script and a config file for your components."
   },
   {
     "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html",
@@ -124,6 +68,41 @@
     "title": "Pipeline Basics",
     "section": "What’s next?",
     "text": "What’s next?\nthe pipeline in this guide was the bare minimum to learn more about\nAdvanced Pipeline"
+  },
+  {
+    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html",
+    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html",
+    "title": "Advanced Pipeline",
+    "section": "",
+    "text": "explain this pipeline is a more realistic example of a typical use-case of a Nextflow bioinformatics pipeline as it has a mixture of scripting languages used and a join is used to merge all events"
+  },
+  {
+    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#creating-the-modules",
+    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#creating-the-modules",
+    "title": "Advanced Pipeline",
+    "section": "Creating the modules",
+    "text": "Creating the modules\nThe sections below describe how to create the VDSL3 modules in preparation for creating the pipeline.\n\nPreparation\ncreate a new folder named advanced pipeline, add src folder with a nextflow_module folder inside. Now create three folders inside nextflow_module folder, one per component needed for the pipeline:\n\ncombine_columns\nremove_comments\ntake_columns\n\nThe folder structure should look like this now:\nadvanced_pipeline\n└── src\n    └── nextflow_modules\n        ├── combine_columns\n        ├── remove_comments\n        └── take_column\n\n\nCreating the remove_comments component\nThis component removes all comments (lines starting with a hashtag) from a tsv file.\nDownload or copy the contents of config.vsh.yaml and script.sh below into the remove_comments folder.\nDownload config.vsh.yaml\n\n\n\nContents of config.vsh.yaml\n\nfunctionality:\n  name: remove_comments\n  description: Remove comments from a TSV file.\n  namespace: nextflow_modules\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      required: true\n      example: \"file.tsv\"\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n      example: \"file.tsv\"\n  resources:\n  - type: bash_script\n    path: ./script.sh\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: ubuntu:20.04\n\nDownload script.sh\n\n\n\nContents of script.sh\n\n#!/bin/bash\n\ngrep -v '^#' \"$par_input\" > \"$par_output\"\n\n\n\nCreating the take_column component\nThis component subsets an incoming tsv file by extracting a certain column from the file.\nDownload or copy the contents of config.vsh.yaml and script.py below into the take_column folder.\nDownload config.vsh.yaml\n\n\n\nContents of config.vsh.yaml\n\nfunctionality:\n  name: take_column\n  namespace: nextflow_modules\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      required: true\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n    - name: \"--column\"\n      type: integer\n      required: false\n      default: 2\n  resources:\n  - type: python_script\n    path: ./script.py\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: amancevice/pandas:slim\n\nDownload script.py\n\n\n\nContents of script.py\n\nimport pandas as pd\n\n## VIASH START\npar = {\n    \"input\": \"data/file1.tsv\",\n    \"column\": 2,\n    \"output\": \"temp/foo\"\n}\n## VIASH END\n\n# read the tsv file\ntab = pd.read_csv(par[\"input\"], sep=\"\\t\", comment=\"#\")\n\n# subset a column\ntab_filt = tab.iloc[:, par[\"column\"]-1]\n\n# write to file\ntab_filt.to_csv(par[\"output\"], index=False)\n\n\n\nCreating the combine_columns component\nThis component combines multiple tsv files into one by concatenating all of the columns together. It assumes each incoming tsv file has an equal number of rows.\nDownload or copy the contents of config.vsh.yaml and script.R below into the combine_columns folder.\nDownload config.vsh.yaml\n\n\n\nContents of config.vsh.yaml\n\nfunctionality:\n  name: combine_columns\n  namespace: nextflow_modules\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      multiple: true\n      required: true\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n  resources:\n    - type: r_script\n      path: ./script.R\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: rocker/r-ver:4.1\n\nDownload script.R\n\n\n\nContents of script.R\n\n## VIASH START\npar <- list(\n    input = c(\"data/file1.tsv\", \"data/file2.tsv\"),\n    output = \"temp/foo.tsv\"\n)\n## VIASH END\n\nouts <- lapply(par$input, function(file) {\n  read.delim(file, comment.char = \"#\", sep = \"\\t\", header = FALSE)\n})\n\ntable <- do.call(cbind, outs)\n\nwrite.table(table, par$output, col.names = FALSE, sep = \"\\t\")"
+  },
+  {
+    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#building-the-modules",
+    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#building-the-modules",
+    "title": "Advanced Pipeline",
+    "section": "Building the modules",
+    "text": "Building the modules\nThe basic pipeline guide describes how to generate an individual VDSL3 Nextflow module using the viash build command, but there’s a better way when it comes to building multiple modules at once: viash ns build. Each one of the three components has its namespace defined as nextflow_modules inside of its config file. Execute this command from the root of the advanced_pipeline directory\nviash ns build\nThis will result in the following output:\nExporting take_column (nextflow_modules) =nextflow=> target/nextflow/nextflow_modules/take_column\nExporting combine_columns (nextflow_modules) =nextflow=> target/nextflow/nextflow_modules/combine_columns\nExporting remove_comments (nextflow_modules) =nextflow=> target/nextflow/nextflow_modules/remove_comments\nThe VDSL3 Nextflow modules were generated inside of a target folder. The directory structure now looks like this:\nadvanced_pipeline\n├── src\n│   └── nextflow_modules\n│       ├── combine_columns\n│       │   ├── config.vsh.yaml\n│       │   └── script.R\n│       ├── remove_comments\n│       │   ├── config.vsh.yaml\n│       │   └── script.sh\n│       └── take_column\n│           ├── config.vsh.yaml\n│           └── script.py\n└── target\n    └── nextflow\n        └── nextflow_modules\n            ├── combine_columns\n            │   ├── main.nf\n            │   └── nextflow.config\n            ├── remove_comments\n            │   ├── main.nf\n            │   └── nextflow.config\n            └── take_column\n                ├── main.nf\n                └── nextflow.config"
+  },
+  {
+    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#creating-the-pipeline",
+    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#creating-the-pipeline",
+    "title": "Advanced Pipeline",
+    "section": "Creating the pipeline",
+    "text": "Creating the pipeline\nCreate a new file named main.nf and add it to the root of the advanced_pipeline directory. Use the following as its contents:\ntargetDir = \"../../target/nextflow\" // 1\n\n// 2\ninclude { remove_comments } from \"$targetDir/nextflow_modules/remove_comments/main.nf\"\ninclude { take_column } from \"$targetDir/nextflow_modules/take_column/main.nf\"\ninclude { combine_columns } from \"$targetDir/nextflow_modules/combine_columns/main.nf\"\n\nworkflow {\n  Channel.fromPath(params.input) // 3\n  \n    // 4\n    // File -> (String, File)\n    | map{ file -> [ file.baseName, file ] }\n    \n    // 5\n    // (String, File) -> (String, File)\n    | remove_comments\n\n    // 6\n    // (String, File) -> (String, File)\n    | take_column\n\n    // 7\n    // (String, File)* -> List[(String, File)]\n    | toList()\n\n    // 8\n    // List[(String, File)] -> (String, {input: List[File]})\n    | map{ tups -> \n      files = tups.collect{id, file -> file}\n      [ \"combined\", [ input: files ] ] \n    }\n\n    // 9\n    // (String, {input: List[File]}) -> (String, File)\n    | combine_columns.run(\n      auto: [ publish: true ]\n      )\n\n    // 10\n    | view{ file -> \"Output: $file\" }\n}\n\ntarget dir where the modules are located\ninclude the modules from the target directory\nCreate a channel based on the input parameter’s path\nAssign a unique ID to each event using map{}\nRun remove_comments to remove the comments from the TSV\nExtract a single column from TSV by running take_column\nCombine all events into a single List event using toList()\nAdd unique ID to the tuple\nConcatenate the TSVs into one by running the combine_columns module with auto publishing enabled using the auto directive to\nView the channel contents bu printing it to the console using view()"
+  },
+  {
+    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#running-the-pipeline",
+    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#running-the-pipeline",
+    "title": "Advanced Pipeline",
+    "section": "Running the pipeline",
+    "text": "Running the pipeline\nbefore running, you need some TSV files to work with\nDownload file1.tsv\nDownload file2.tsv\nnow run the following command\nnextflow run main.nf --input \"data/file?.tsv\" --publishDir output\noutput\nN E X T F L O W  ~  version 22.04.3\nLaunching `workflows/310-realistic_pipeline/main.nf` [stupefied_saha] DSL2 - revision: 6669aefc6c\n[93/232aba] Submitted process > remove_comments:remove_comments_process (2)\n[ef/a28e89] Submitted process > remove_comments:remove_comments_process (1)\n[63/279f98] Submitted process > take_column:take_column_process (1)\n[50/2a17ef] Submitted process > take_column:take_column_process (2)\n[8d/6eeff5] Submitted process > combine_columns:combine_columns_process\nOutput: [combined, /home/runner/work/viash_nxf_course/viash_nxf_course/work/8d/6eeff571e9ff2c5389851c6ab3001c/combined.combine_columns.output]\na TSV file was generated in the output directory"
   },
   {
     "objectID": "documentation/guide/building-block/nextflow/building-running.html",
@@ -217,27 +196,6 @@
     "text": "What’s next?\nTo learn how to use Viash to build an executable and run it, see Native Executable Building and Running."
   },
   {
-    "objectID": "documentation/guide/component/creation/nextflow.html",
-    "href": "documentation/guide/component/creation/nextflow.html",
-    "title": "Nextflow",
-    "section": "",
-    "text": "When targeting the nextflow platform, a NextFlow module is generated that can run standalone or used in a pipeline."
-  },
-  {
-    "objectID": "documentation/guide/component/creation/nextflow.html#requirements",
-    "href": "documentation/guide/component/creation/nextflow.html#requirements",
-    "title": "Nextflow",
-    "section": "Requirements",
-    "text": "Requirements\nThis example targets the Nextflow platform, which requires you to install Nextflow and Docker. Follow the instructions on NextFlow’s homepage to install it on your system if you haven’t done so already. You can find instructions on how to install Docker for your OS on the Viash installation page."
-  },
-  {
-    "objectID": "documentation/guide/component/creation/nextflow.html#creating-a-viash-component",
-    "href": "documentation/guide/component/creation/nextflow.html#creating-a-viash-component",
-    "title": "Nextflow",
-    "section": "Creating a Viash component",
-    "text": "Creating a Viash component\nTo start off, create a folder named nextflow_component and create a src folder inside of it. Next, add another folder inside of the src folder and name it remove_comments. This is where the component will be placed, a minimal example that uses a bash script to remove comments from a TSV file.\nThe directory structure should look like this:\nnextflow_component\n└── src\n    └── remove_comments\n\nWriting the script\nAdd the following small script to the remove_comments folder:\n#!/bin/bash\n\ngrep -v '^#' \"$par_input\" > \"$par_output\"\nAs mentioned above, this script removes comments from a TSV file. It does so by removing all lines that start with a hashtag (#) from an input file and writing the result to the output.\n\n\n\n\n\n\nTip\n\n\n\nEvery scripting language has its own way of using variables generated by Viash. Check out the Bash page for more information and examples.\n\n\n\n\nAdding the config\nA Viash config file is a YAML file that describes the functionality of a component and the platform(s) it targets. Create a file name config.vsh.yaml inside of the remove_comments folder and add the contents below.\nDownload config.vsh.yaml\nfunctionality:\n  name: remove_comments\n  description: Remove comments from a TSV file.\n  namespace: nextflow_modules\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      required: true\n      example: \"file.tsv\"\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n      example: \"file.tsv\"\n  resources:\n  - type: bash_script\n    path: ./script.sh\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: ubuntu:20.04\nHere’s a breakdown of the different sections:\n\nfunctionality\nThis section describes what the component does and the resources it needs. It contains the name, a short description and more importantly, the arguments and resources the component uses. This component is part of a namespace named nextflow_modules, which we’ll explore further in the pipeline guides.\n\n\narguments\nThe arguments section contains all arguments the component accepts and will be passed to the script. In this case, an input and an output file path argument that are both required.\n\n\nresources\nAll references to the necessary files and folders to make the component work are added to this section. For this example, a single script is all that’s needed.\n\n\nplatforms\nThis lists what platforms the component can target. For this example, the only platform is nextflow.\n\nThe variant property can be used to choose between our legacy NextFlow implementation or the next-generation VDSL3 variant. The latter is recommended as it has a lot of features to make creating modules more streamlined. You can read more about VDSL3 in our guide.\nThe directives dictionary contains optional settings that affect the execution of the module. For this example, a single directive is used: container. The container is the base Docker image that should be used to run the module.\n\n\n\n\n\n\n\nTip\n\n\n\nIf you specify a Docker platform in addition to NextFlow, the image in the docker platform section will be automatically used for NextFlow as well:\nplatforms:\n  - type: docker\n    image: ubuntu:20.04\n  - type: nextflow\n    variant: vdsl3\n\n\nWith the script and config added, the final directory should now look like this:\nnextflow_component\n└── src\n    └── remove_comments\n        ├── config.vsh.yaml\n        └── script.sh\n\n\n\nRunning\nIn contrast to native and Docker based components, a Nextflow based component cannot be ran by using the viash run command. These types of components require you to use viash build first to generate a Nextflow module and run that module using nextflow run. See Building and Running Nextflow for more information and an example of how to run a NextFlow module as a standalone pipeline."
-  },
-  {
     "objectID": "documentation/guide/component/creation/docker.html",
     "href": "documentation/guide/component/creation/docker.html",
     "title": "Docker",
@@ -264,6 +222,307 @@
     "title": "Docker",
     "section": "What’s next?",
     "text": "What’s next?\nTo learn how to use Viash to build an executable and run it, see Native Executable Building and Running."
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow.html",
+    "href": "documentation/guide/component/creation/nextflow.html",
+    "title": "Nextflow",
+    "section": "",
+    "text": "When targeting the nextflow platform, a NextFlow module is generated that can run standalone or used in a pipeline."
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow.html#requirements",
+    "href": "documentation/guide/component/creation/nextflow.html#requirements",
+    "title": "Nextflow",
+    "section": "Requirements",
+    "text": "Requirements\nThis example targets the Nextflow platform, which requires you to install Nextflow and Docker. Follow the instructions on NextFlow’s homepage to install it on your system if you haven’t done so already. You can find instructions on how to install Docker for your OS on the Viash installation page."
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow.html#creating-a-viash-component",
+    "href": "documentation/guide/component/creation/nextflow.html#creating-a-viash-component",
+    "title": "Nextflow",
+    "section": "Creating a Viash component",
+    "text": "Creating a Viash component\nTo start off, create a folder named nextflow_component and create a src folder inside of it. Next, add another folder inside of the src folder and name it remove_comments. This is where the component will be placed, a minimal example that uses a bash script to remove comments from a TSV file.\nThe directory structure should look like this:\nnextflow_component\n└── src\n    └── remove_comments\n\nWriting the script\nAdd the following small script to the remove_comments folder:\n#!/bin/bash\n\ngrep -v '^#' \"$par_input\" > \"$par_output\"\nAs mentioned above, this script removes comments from a TSV file. It does so by removing all lines that start with a hashtag (#) from an input file and writing the result to the output.\n\n\n\n\n\n\nTip\n\n\n\nEvery scripting language has its own way of using variables generated by Viash. Check out the Bash page for more information and examples.\n\n\n\n\nAdding the config\nA Viash config file is a YAML file that describes the functionality of a component and the platform(s) it targets. Create a file name config.vsh.yaml inside of the remove_comments folder and add the contents below.\nDownload config.vsh.yaml\nfunctionality:\n  name: remove_comments\n  description: Remove comments from a TSV file.\n  namespace: nextflow_modules\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      required: true\n      example: \"file.tsv\"\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n      example: \"file.tsv\"\n  resources:\n  - type: bash_script\n    path: ./script.sh\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: ubuntu:20.04\nHere’s a breakdown of the different sections:\n\nfunctionality\nThis section describes what the component does and the resources it needs. It contains the name, a short description and more importantly, the arguments and resources the component uses. This component is part of a namespace named nextflow_modules, which we’ll explore further in the pipeline guides.\n\n\narguments\nThe arguments section contains all arguments the component accepts and will be passed to the script. In this case, an input and an output file path argument that are both required.\n\n\nresources\nAll references to the necessary files and folders to make the component work are added to this section. For this example, a single script is all that’s needed.\n\n\nplatforms\nThis lists what platforms the component can target. For this example, the only platform is nextflow.\n\nThe variant property can be used to choose between our legacy NextFlow implementation or the next-generation VDSL3 variant. The latter is recommended as it has a lot of features to make creating modules more streamlined. You can read more about VDSL3 in our guide.\nThe directives dictionary contains optional settings that affect the execution of the module. For this example, a single directive is used: container. The container is the base Docker image that should be used to run the module.\n\n\n\n\n\n\n\nTip\n\n\n\nIf you specify a Docker platform in addition to NextFlow, the image in the docker platform section will be automatically used for NextFlow as well:\nplatforms:\n  - type: docker\n    image: ubuntu:20.04\n  - type: nextflow\n    variant: vdsl3\n\n\nWith the script and config added, the final directory should now look like this:\nnextflow_component\n└── src\n    └── remove_comments\n        ├── config.vsh.yaml\n        └── script.sh\n\n\n\nRunning\nIn contrast to native and Docker based components, a Nextflow based component cannot be ran by using the viash run command. These types of components require you to use viash build first to generate a Nextflow module and run that module using nextflow run. See Building and Running Nextflow for more information and an example of how to run a NextFlow module as a standalone pipeline."
+  },
+  {
+    "objectID": "documentation/get-started/basics.html",
+    "href": "documentation/get-started/basics.html",
+    "title": "Viash Basics",
+    "section": "",
+    "text": "This short tutorial will touch on the basic concepts of Viash. Before getting started, make sure you’ve installed Viash so you can follow along with the example."
+  },
+  {
+    "objectID": "documentation/get-started/basics.html#what-is-viash",
+    "href": "documentation/get-started/basics.html#what-is-viash",
+    "title": "Viash Basics",
+    "section": "What is Viash?",
+    "text": "What is Viash?\nViash is … TODO: Add quick breakdown of the core of Viash"
+  },
+  {
+    "objectID": "documentation/get-started/basics.html#hello-viash",
+    "href": "documentation/get-started/basics.html#hello-viash",
+    "title": "Viash Basics",
+    "section": "Hello Viash!",
+    "text": "Hello Viash!\nNow that you’re up to speed with what Viash is for, we have provided a quick example on how you can build and run a component. A minimal components consists of a script that holds the logic and a Viash config file to describe the component with metadata.\n\nRequirements\nThe example targets the Native platform, which means you will need to have the required packages installed on your system depending on your chosen scripting language. If you are using any of the languages on your system, there’s a good chance you already meet the requirements. To get up and running quickly, we recommend using Bash.\n\nBashC#JavascriptPythonScalaR\n\n\n\nA Bash Unix shell (built into Linux, macOS and WSL2)\n\n\n\n\nA Bash Unix shell (built into Linux, macOS and WSL2)\nDownload and install .NET Core.\nRun dotnet tool install -g dotnet-script to enable the C# scripting functionality.\n\n\n\n\nA Bash Unix shell (built into Linux, macOS and WSL2)\nDownload and install Node.js.\nExecute the following command to install the required npm packages: npm install --save needle markdown-link-extractor\n\n\n\n\nA Bash Unix shell (built into Linux, macOS and WSL2)\nInstall Python 3.8 or newer. You may have to install the python-is-python3 package on Ubuntu and its derivatives.\n\n\n\n\nA Bash Unix shell (built into Linux, macOS and WSL2)\nInstall Scala 2.\n\n\n\n\nA Bash Unix shell (built into Linux, macOS and WSL2)\nInstall the R software environment\n\n\n\n\n\n\nWriting the script\nFor this example, you’ll use a tiny script that simply outputs “Hello Viash”, with the “Viash” part being a variable. To start off, create a folder named hello_viash and follow the instructions below based on your preferred scripting language.\n\nBashC#JavascriptPythonScalaR\n\n\nCreate a new file named script.sh and copy the following content inside of it:\necho \"Hello $par_input\"\nThis outputs Hello to the console, followed by an input variable. Notice that this variable isn’t defined in the script itself as Viash will generate it for you based on the config file you’ll create in the next step.\n\n\n\n\n\n\nTip\n\n\n\nEvery scripting language has its own way of using variables generated by Viash. Check out the Bash page for more information and examples.\n\n\n\n\nCreate script.csx\nConsole.WriteLine(\"Hello \" + par.input);\nThis outputs Hello to the console, followed by an input variable. Notice that this variable isn’t defined in the script itself as Viash will generate it for you based on the config file you’ll create in the next step.\n\n\n\n\n\n\nTip\n\n\n\nEvery scripting language has its own way of using variables generated by Viash. Check out the C# page for more information and examples.\n\n\n\n\nCreate script.js\nconsole.log('Hello' + par['input']);\nThis outputs Hello to the console, followed by an input variable. Notice that this variable isn’t defined in the script itself as Viash will generate it for you based on the config file you’ll create in the next step.\n\n\n\n\n\n\nTip\n\n\n\nEvery scripting language has its own way of using variables generated by Viash. Check out the Javascript page for more information and examples.\n\n\n\n\nCreate script.py\nprint(\"Hello\", par[\"input\"])\nThis outputs Hello to the console, followed by an input variable. Notice that this variable isn’t defined in the script itself as Viash will generate it for you based on the config file you’ll create in the next step.\n\n\n\n\n\n\nTip\n\n\n\nEvery scripting language has its own way of using variables generated by Viash. Check out the Python page for more information and examples.\n\n\n\n\nCreate script.scala\nprintln(\"Hello \" + par.input.get)\nThis outputs Hello to the console, followed by an input variable. Notice that this variable isn’t defined in the script itself as Viash will generate it for you based on the config file you’ll create in the next step.\n\n\n\n\n\n\nTip\n\n\n\nEvery scripting language has its own way of using variables generated by Viash. Check out the Scala page for more information and examples.\n\n\n\n\nCreate script.R\ncat(\"Hello \", par$input)\nThis outputs Hello to the console, followed by an input variable. Notice that this variable isn’t defined in the script itself as Viash will generate it for you based on the config file you’ll create in the next step.\n\n\n\n\n\n\nTip\n\n\n\nEvery scripting language has its own way of using variables generated by Viash. Check out the R page for more information and examples.\n\n\n\n\n\n\n\nAdding the config\nA Viash config file is a YAML file that describes the functionality of a component and the platform(s) it targets. Create a file name config.vsh.yaml and add the contents below based on your chosen scripting language.\n\nBashC#JavascriptPythonScalaR\n\n\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_viash\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"Viash\"\n  resources:\n  - type: bash_script\n    path: script.sh\nplatforms:\n  - type: native\n\n\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_viash\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"Viash\"\n  resources:\n  - type: csharp_script\n    path: script.csx\nplatforms:\n  - type: native\n\n\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_viash\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"Viash\"\n  resources:\n  - type: javascript_script\n    path: script.js\nplatforms:\n  - type: native\n\n\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_viash\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"Viash\"\n  resources:\n  - type: python_script\n    path: script.py\nplatforms:\n  - type: native\n\n\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_viash\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"Viash\"\n  resources:\n  - type: scala_script\n    path: script.scala\nplatforms:\n  - type: native\n\n\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_viash\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"Viash\"\n  resources:\n  - type: r_script\n    path: script.R\nplatforms:\n  - type: native\n\n\n\nHere’s a breakdown of the different sections:\n\nfunctionality describes what the component does and the resources it needs. It contains the name, a short description and more importantly, the arguments and resources the component uses.\n\narguments contains all arguments the component accepts and will be passed to the script. In this case, a single string named --input resides here with a default value of Viash.\nresources holds references to all necessary files and folders to make the component work. For this example, a single script is all that’s needed.\n\nplatforms lists what platforms the component can target. This example targets the native platform, which will generate an executable that’s run using the system resources.\n\n\n\nRunning\nWith the two necessary files present to create a component, you can call upon Viash to generate a temporary executable and run it:\nviash run config.vsh.yaml\nWithout passing any arguments, this will use the default value for --input, which is Viash. This results in the following output:\nHello Viash\nBy providing the a value for --input, you can customize the greeting:\nviash run config.vsh.yaml -- --input World\n\n\n\n\n\n\nNote\n\n\n\nThe double dash (--) between the viash command and the arguments is used to signify the end of the arguments passed to viash and the start of those passed to the component. If you forgot to add these, you’ll get an error similar to this:\n[scallop] Error: Unknown option 'input'\n\n\nThe example above results in this output:\nHello World"
+  },
+  {
+    "objectID": "documentation/get-started/basics.html#whats-next",
+    "href": "documentation/get-started/basics.html#whats-next",
+    "title": "Viash Basics",
+    "section": "What’s next?",
+    "text": "What’s next?\nCheck out our guide for learning more about Viash. To learn more about the Viash commands and the config file, take a look at our API section."
+  },
+  {
+    "objectID": "documentation/get-started/terminology.html",
+    "href": "documentation/get-started/terminology.html",
+    "title": "Terminology",
+    "section": "",
+    "text": "The reference below serves as a reference for the terms used throughout the guides and other pages.\n\n\n\n\n\n\n\nTerm\nDescription\n\n\n\n\nViash\nA software package that can generate smart executables and Nextflow modules.\n\n\nComponent\nAt minimum, the combination of a script and a config file. This can also include any needed resources and unit tests.\n\n\nConfig\nA YAML based file that holds all of the parameters needed to create a component.\n\n\nResource\nTools, helper scripts, templates and other files the component depends on to work.\n\n\nUnit test\nA small block of code to test a component.\n\n\nTarget\nAn executable or a VDSL3 module that’s generated by Viash.\n\n\n(VDSL3) Module\nA Nextflow module generated by Viash.\n\n\n(Viash) Executable\nAn executable script generated for the Native or Docker platform.\n\n\n(Docker) Image\nA standard unit of software that packages up the OS, code and its dependencies so the application runs quickly and reliably from one computing environment to another.\n\n\n(Docker) Container\nAn instance of a Docker image.\n\n\nPlatform\nThis is target platform. We currently support Native, Docker and Nextflow."
+  },
+  {
+    "objectID": "documentation/faq/rmarkdown.html",
+    "href": "documentation/faq/rmarkdown.html",
+    "title": "FAQ for R Markdown Users",
+    "section": "",
+    "text": "Quarto sounds similar to R Markdown. What is the difference and why create a new project?\nAt its core, Quarto works the same way as R Markdown: \n\nThe goal of Quarto is to make the process of creating and collaborating on scientific and technical documents dramatically better. Quarto combines the functionality of R Markdown, bookdown, distill, xaringian, etc into a single consistent system with “batteries included” that reflects everything we’ve learned from R Markdown over the past 10 years.\nThe number of languages and runtimes used for scientific discourse is very broad (and the Jupyter ecosystem in particular is extraordinarily popular). Quarto is at its core multi-language and multi-engine (supporting Knitr, Jupyter, and Observable today and potentially other engines tomorrow).\nOn the other hand, R Markdown is fundamentally tied to R which severely limits the number of practitioners it can benefit. Quarto is RStudio’s attempt to bring R Markdown to everyone! Unlike R Markdown, Quarto doesn’t have a dependency or requirement for R. Quarto was developed to be multilingual, beginning with R, Python, Javascript, and Julia, with the idea that it will work even for languages that don’t yet exist.\nWhile it is a “new” system, it should also be noted that it is highly compatible with existing content: you can render most R Markdown documents and Jupyter notebooks unmodified with Quarto. The concept is to make a major, long term investment in reproducible research, while keeping it compatible with existing formats and adaptable to the various environments users work in.\n\n\nIs R Markdown going away? Will my R Markdown documents continue to work?\nR Markdown is not going away! R Markdown is used extensively and continues to work well. It will continue to be actively supported. We’re not leaving R Markdown, we’re expanding our scope. Over the years there have been many feature requests, and rather than implementing them all in R Markdown, for certain features we may refer you to Quarto. Everything that is currently in R Markdown will continue to work and be supported. There are no plans for deprecation.\nRead more about this in Yihui Xie’s blog post With Quarto Coming, is R Markdown Going Away? No.\n\n\nShould I switch from R Markdown to Quarto?\nIf you like using R Markdown, there’s no need to switch! R Markdown will continue to be supported and work as it always has been. You’re welcome to try Quarto if you like, but there’s no need to switch. Some new features may only exist in Quarto, so if you want to use those, then that’s where you would give those a try.  \nWe should emphasize that switching is not imperative. While we don’t plan on major feature initiatives in R Markdown and related packages, we are going to continue to maintain them (smaller improvements and bug fixes) for a long time to come. Furthermore, since Rmd files can in most cases be rendered without modification by Quarto, you can continue using R Markdown and the switching cost will still be minimal whenever you decide to do it. \n\n\nI use X (bookdown, blogdown, etc.). What is the Quarto equivalent?\nHere are the Quarto equivalents for various packages and features of the R Markdown ecosystem (in some cases Quarto equivalents are not yet available but will be later this year):\n\n\n\n\nFeature\nR Markdown\nQuarto\n\n\n\n\nBasic Formats\n\nhtml_document\npdf_document\nword_document\n\n\nhtml\npdf\ndocx\n\n\n\nBeamer\n\nbeamer_presentation\n\n\nbeamer\n\n\n\nPowerPoint\n\npowerpoint_presentation\n\n\npptx\n\n\n\nHTML Slides\n\nxaringan\nioslides\nrevealjs\n\n\nrevealjs\n\n\n\nAdvanced Layout\n\ntufte\ndistill\n\n\nQuarto Article Layout\n\n\n\nCross References\n\nhtml_document2\npdf_document2\nword_document2\n\n\nQuarto Crossrefs\n\n\n\nWebsites & Blogs\n\nblogdown\ndistill\n\n\nQuarto Websites\nQuarto Blogs\n\n\n\nBooks\n\nbookdown\n\n\nQuarto Books\n\n\n\nInteractivity\nShiny Documents\nQuarto Interactive Documents\n\n\nPaged HTML\npagedown\nSummer 2022\n\n\nJournal Articles\nrticles\nSummer 2022\n\n\nDashboards\nflexdashboard\nFall 2022\n\n\nInteractive Tutorials\nlearnr\nNo equivalent planned\n\n\n\n\n\n\nCan you create custom formats for Quarto like you can for R Markdown?\nNot currently, but we expect that this capability will be available in version 1.0 of Quarto (which will be available before rstudio::conf in July).\n\n\nWhen would be a good time to start new projects in Quarto rather than R Markdown?\nOur current plan is to announce Quarto v1.0 at rstudio::conf (end of July). This will be a stable release that will be an excellent foundation for starting new projects with Quarto or migrating existing R Markdown projects (if you are so inclined).\n\n\nDoes the RStudio IDE support Quarto?\nYes! You need to use the latest release of RStudio (v2022.02), which includes support for editing and preview of Quarto documents.\nYou can download RStudio v2022.02 from https://rstudio.com/products/rstudio/download/.\n\n\nDoes RStudio Connect support Quarto?\nYes! You can publish Quarto content to RStudio Connect v2021.08.0 or later. Quarto has to be enabled as documented in the RStudio Connect admin guide. Connect’s user documentation refers to Quarto.org docs on how to publish from the RStudio IDE. To publish Python-based Quarto content, you can use the rsconnect-python CLI from various locations, including VSCode, JupyterLab or the terminal."
+  },
+  {
+    "objectID": "documentation/faq/index.html",
+    "href": "documentation/faq/index.html",
+    "title": "Frequently Asked Questions",
+    "section": "",
+    "text": "What can I use Quarto for?\nQuarto® is an open-source scientific and technical publishing system built on Pandoc. You can weave together narrative text and code to produce elegantly formatted output as documents, web pages, blog posts, books and more. \n\n\n\nHow do I install Quarto?\nVisit the Quarto.org Get Started page, which provides installation instructions for Windows, Mac OS, and Linux. \n\n\n\nIs Quarto free to use?\nYes! Quarto is open source with a GPL-2 license. You can use or disseminate it any way that you would any GPL-2 licensed open source software. \n\n\nWhat output formats can Quarto create?\nThere are many output formats available in Quarto. This includes all of the built in Pandoc formats (e.g. HTML, PDF, MS Word, Revealjs, ePub, etc.) as well as various ways to publish multiple documents (websites, blogs, and books). Learn more at Quarto Formats. \n\n\nWhat editing tools can I use with Quarto?\nYou can use a wide variety of tools with Quarto. We have provided documentation for writing and editing Quarto documents in VSCode, JupyterLab, RStudio IDE, or any text editor. Visit the Get Started with Quarto page to install, and then choose your tool for a brief introductory guide.\n\n\nCan I use Jupyter notebooks with Quarto?\nYes! Quarto can render Jupyter notebooks and you can use Jupyter, JupyterLab or any other .ipynb notebook editor with Quarto. You can render existing .ipynb notebooks as-is with Quarto, but adding Quarto-specific output options or a YAML header can enhance the output. Visit theJupyterLab page for more information.\n\n\nWhat programming languages are supported in Quarto?\nThe principal languages supported by Quarto are Python, R, Julia, and Observable JavaScript. Integration with Jupyter also enables the use of many other languages. \nEach Quarto document can be optionally processed by a computational engine (the engine can be manually specified or automatically detected based on the code chunks within). Current engines include Knitr (which is also used by R Markdown and supports a variety of languages including R, Python, and Julia, etc.) and Jupyter (which supports many languages including Python, Julia, and R). See the documentation on Engine Binding for additional details.\n\n\nWhat human languages are supported in Quarto?\nYou can write your Quarto documentation in your human language of choice. The lang document option is used to identify the main language of the document using IETF language tags (following the BCP 47 standard), such as en or en-GB. \n\n\nHow can I share documents and have people comment on them?\nYou can publish Quarto content to various locations. See the user guides for publishing documents and publishing websites  for details on using GitHub Pages, Netlify, RStudio Connect, and other services. with Quarto. Once documents are published you can use  hypothes.is, Utterances, or Giscus for commenting. Learn more in the documentation on commenting.\n\n\nCan I do collaborative editing with Quarto?\nThere is not yet anything specific for collaborative editing in Quarto. You can collaborate on .qmd files in the same way you currently do for any text or code files. \nRStudio Workbench allows for Project Sharing for interactive editing and collaboration on the same document.\n\n\nWhere can I publish Quarto websites?\nThere are a wide variety of ways to publish Quarto websites. Website content is by default written to the _site sub-directory (you can customize this using the output-dir option). Publishing is simply a matter of copying the output directory to a web server or web hosting service.\nThe publishing documentation describes several convenient options for Quarto website deployment including RStudio Connect, Netlify, GitHub Pages, Firebase, Site44, and Amazon S3. We’ll mostly defer to the documentation provided by those various services, but will note any Quarto website specific configuration required.\n\n\nDoes RStudio Connect support Quarto?\nYes! You can publish Quarto content to RStudio Connect v2021.08.0 or later. Quarto has to be enabled as documented in the RStudio Connect admin guide. Connect’s user documentation refers to Quarto.org docs on how to publish from the RStudio IDE. To publish Python-based Quarto content, you can use the rsconnect-python CLI from various locations, including VSCode, JupyterLab or the terminal.\n\n\nWho are the developers of Quarto?\nDevelopment of Quarto is sponsored by RStudio, PBC. The same core team works on both Quarto and R Markdown:\n\nCarlos Scheidegger (@cscheid)\nCharles Teague (@dragonstyle)\nChristophe Dervieux (@cderv)\nJ.J. Allaire (@jjallaire)\nYihui Xie (@yihui)\n\nHere is the full contributors list. Quarto is open source and we welcome contributions in our github repository as well! https://github.com/quarto-dev/quarto-cli.\n\n\nWhy the name Quarto?\nWe wanted to use a name that had meaning in the history of publishing and landed on Quarto, which is the format of a book or pamphlet produced from full sheets printed with eight pages of text, four to a side, then folded twice to produce four leaves. The earliest known European printed book is a Quarto, the Sibyllenbuch, believed to have been printed by Johannes Gutenberg in 1452–53.\n\n\nWhere can I report bugs or request features?\nThanks for finding something and sharing with us! You can file an issue in the Quarto repository https://github.com/quarto-dev/quarto-cli/issues.\n\n\nWhere can I ask questions and discuss using Quarto with others?\nThe best place to ask questions and see what questions other people have is in Quarto discussions (https://github.com/quarto-dev/quarto-cli/discussions)."
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html",
+    "title": "Nextflow Legacy Platform",
+    "section": "",
+    "text": "Run a Viash component as a Nextflow module."
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#id",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#id",
+    "title": "Nextflow Legacy Platform",
+    "section": "id",
+    "text": "id\nType: String\nEvery platform can be given a specific id that can later be referred to explicitly when running or building the Viash component."
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#image",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#image",
+    "title": "Nextflow Legacy Platform",
+    "section": "image",
+    "text": "image\nType: String\nIf no image attributes are configured, Viash will use the auto-generated image name from the Docker platform:\n[<namespace>/]<name>:<version>\nIt’s possible to specify the container image explicitly with which to run the module in different ways:\nimage: dataintuitive/viash:0.4.0\nExactly the same can be obtained with\nimage: dataintuitive/viash\nregistry: index.docker.io/v1/\ntag: 0.4.0\nSpecifying the attribute(s) like this will use the container dataintuitive/viash:0.4.0 from Docker hub (registry).\nIf no tag is specified Viash will use functionality.version as the tag.\nIf no registry is specified, Viash (and NextFlow) will assume the image is available locally or on Docker Hub. In other words, the registry: ... attribute above is superfluous. No other registry is checked automatically due to a limitation from Docker itself."
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#label",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#label",
+    "title": "Nextflow Legacy Platform",
+    "section": "label",
+    "text": "label\nType: String\nWhen running the module in a cluster context and depending on the cluster type, NextFlow allows for attaching labels to the process that can later be used as selectors for associating resources to this process.\nIn order to attach one label to a process/component, one can use the label: ... attribute, multiple labels can be added using labels: [ ..., ... ] and the two can even be mixed.\nIn the main nextflow.config, one can now use this label:\nprocess { … withLabel: bigmem { maxForks = 5 … } }\n\nExample(s)\nlabel: highmem labels: [ highmem, highcpu ]"
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#labels",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#labels",
+    "title": "Nextflow Legacy Platform",
+    "section": "labels",
+    "text": "labels\nType: String / List of String\nWhen running the module in a cluster context and depending on the cluster type, NextFlow allows for attaching labels to the process that can later be used as selectors for associating resources to this process.\nIn order to attach one label to a process/component, one can use the label: ... attribute, multiple labels can be added using labels: [ ..., ... ] and the two can even be mixed.\nIn the main nextflow.config, one can now use this label:\nprocess { … withLabel: bigmem { maxForks = 5 … } }\n\nExample(s)\nlabel: highmem labels: [ highmem, highcpu ]"
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#namespace_separator",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#namespace_separator",
+    "title": "Nextflow Legacy Platform",
+    "section": "namespace_separator",
+    "text": "namespace_separator\nType: String\nThe default namespace separator is “_“.\n\nExample(s)\nnamespace_separator: \"+\""
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#organization",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#organization",
+    "title": "Nextflow Legacy Platform",
+    "section": "organization",
+    "text": "organization\nType: String\nName of a container’s organization.\n\nExample(s)\norganization: viash-io"
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#path",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#path",
+    "title": "Nextflow Legacy Platform",
+    "section": "path",
+    "text": "path\nType: String\nWhen publish: true, this attribute defines where the output is written relative to the params.publishDir setting. For example, path: processed in combination with --output s3://some_bucket/ will store the output of this component under\ns3://some_bucket/processed/\nThis attribute gives control over the directory structure of the output. For example:\npath: raw_data\nOr even:\npath: raw_data/bcl\nPlease note that per_id and path can be combined."
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#per_id",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#per_id",
+    "title": "Nextflow Legacy Platform",
+    "section": "per_id",
+    "text": "per_id\nType: Boolean\nBy default, a subdirectory is created corresponding to the unique ID that is passed in the triplet. Let us illustrate this with an example. The following code snippet uses the value of --input as an input of a workflow. The input can include a wildcard so that multiple samples can run in parallel. We use the parent directory name (.getParent().baseName) as an identifier for the sample. We pass this as the first entry of the triplet:\nChannel.fromPath(params.input) \\\n    | map{ it -> [ it.getParent().baseName , it ] } \\\n    | map{ it -> [ it[0] , it[1], params ] }\n    | ...\nSay the resulting sample names are SAMPLE1 and SAMPLE2. The next step in the pipeline will be published (at least by default) under:\n<publishDir>/SAMPLE1/\n<publishDir>/SAMPLE2/\nThese per-ID subdirectories can be avoided by setting:\nper_id: false"
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#publish",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#publish",
+    "title": "Nextflow Legacy Platform",
+    "section": "publish",
+    "text": "publish\nType: Boolean\nNextFlow uses the autogenerated work dirs to manage process IO under the hood. In order effectively output something one can publish the results a module or step in the pipeline. In order to do this, add publish: true to the config:\n\npublish is optional\nDefault value is false\n\nThis attribute simply defines if output of a component should be published yes or no. The output location has to be provided at pipeline launch by means of the option --publishDir ... or as params.publishDir in nextflow.config:\nparams.publishDir = \"...\""
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#registry",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#registry",
+    "title": "Nextflow Legacy Platform",
+    "section": "registry",
+    "text": "registry\nType: String\nThe URL to the a custom Docker registry.\n\nExample(s)\nregistry: https://my-docker-registry.org"
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#separate_multiple_outputs",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#separate_multiple_outputs",
+    "title": "Nextflow Legacy Platform",
+    "section": "separate_multiple_outputs",
+    "text": "separate_multiple_outputs\nType: Boolean\nSeparates the outputs generated by a Nextflow component with multiple outputs as separate events on the channel. Default value: true.\n\nExample(s)\nseparate_multiple_outputs: false"
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#stageinmode",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#stageinmode",
+    "title": "Nextflow Legacy Platform",
+    "section": "stageInMode",
+    "text": "stageInMode\nType: String\nBy default NextFlow will create a symbolic link to the inputs for a process/module and run the tool at hand using those symbolic links. Some applications do not cope well with this strategy, in that case the files should effectively be copied rather than linked to. This can be achieved by using stageInMode: copy. This attribute is optional, the default is symlink.\n\nExample(s)\nstageInMode: copy"
+  },
+  {
+    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#tag",
+    "href": "documentation/reference/config/nextflowLegacyPlatform.html#tag",
+    "title": "Nextflow Legacy Platform",
+    "section": "tag",
+    "text": "tag\nType: Version\nSpecify a Docker image based on its tag.\n\nExample(s)\ntag: 4.0"
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html",
+    "href": "documentation/reference/config/functionality.html",
+    "title": "Functionality",
+    "section": "",
+    "text": "The functionality-part of the config file describes the behaviour of the script in terms of arguments and resources. By specifying a few restrictions (e.g. mandatory arguments) and adding some descriptions, Viash will automatically generate a stylish command-line interface for you."
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#add_resources_to_path",
+    "href": "documentation/reference/config/functionality.html#add_resources_to_path",
+    "title": "Functionality",
+    "section": "add_resources_to_path",
+    "text": "add_resources_to_path\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since Viash 0.5.11. Extending the PATH turned out to be not desirable.\n\n\nType: Boolean\nAdds the resources directory to the PATH variable when set to true. This is set to false by default."
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#argument_groups",
+    "href": "documentation/reference/config/functionality.html#argument_groups",
+    "title": "Functionality",
+    "section": "argument_groups",
+    "text": "argument_groups\nType: List of ArgumentGroup"
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#arguments",
+    "href": "documentation/reference/config/functionality.html#arguments",
+    "title": "Functionality",
+    "section": "arguments",
+    "text": "arguments\nType: List of Argument\nA list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. Common properties for all argument types are the following.\n\ntype: string/file/integer/double/boolean/boolean_true/boolean_false, the type of argument determining to what object type the value will be cast in the downstream scripts.\ndirection: input/output, the directionality of the argument. Only needs to be specified for output files. Default: “input”.\nname: --foo, the name of the argument. Can also be -foo or foo. The number of dashes determines how values can be passed:\n\nwith --foo: long option, e.g. exe --foo=bar or exe --foo bar\nwith -foo: short option, e.g. exe -foo bar\nwith foo: argument, e.g. exe bar\n\nalternatives: [-f], list of alternative names. Typically only used to provide a short alternative option.\ndescription: Description of foo, a description of the argument. Multiline descriptions are supported.\ndefault: bar, the default value when no argument value is provided. Not allowed when required: true.\nrequired: true/false, whether the argument is required. If true and the functionality is executed, an error will be produced if no value is provided. Default = false.\nmultiple: true/false, whether to treat the argument value as an array or not. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. Default = false.\nmultiple_sep: \":\", the delimiter for providing multiple values. Default = “:”.\n\nOn types:\n\ntype: string, The value passed through an argument of this type is converted to an ‘str’ object in Python, and to a ‘character’ object in R.\ntype: integer, The resulting value is an ‘int’ in Python and an ‘integer’ in R.\ntype: double, The resulting value is a ‘float’ in Python and an ‘double’ in R.\ntype: boolean, The resulting value is a ‘bool’ in Python and a ‘logical’ in R.\ntype: boolean_true/boolean_false, Arguments of this type can only be used by providing a flag --foo or not. The resulting value is a ‘bool’ in Python and a ‘logical’ in R. These properties cannot be altered: required is false, default is undefined, multiple is false.\ntype: file, The resulting value is still an ‘str’ in Python and a ‘character’ in R. In order to correctly pass files in some platforms (e.g. Docker and Nextflow), Viash needs to know which arguments are input/output files.\n\nAdditional property values:\n\nmust_exist: true/false, denotes whether the file or folder should exist at the start of the execution.\n\n\nExample(s)\n- name: --foo                           \n  type: file\n  alternatives: [-f]\n  description: Description of foo\n  default: \"/foo/bar\"\n  must_exist: true\n  required: false\n  multiple: true\n  multiple_sep: \",\""
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#authors",
+    "href": "documentation/reference/config/functionality.html#authors",
+    "title": "Functionality",
+    "section": "authors",
+    "text": "authors\nType: List of Author\nA list of authors. An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.\nSuggested values for roles are:\n\n\n\n\n\n\n\n\nRole\nAbbrev.\nDescription\n\n\n\n\nmaintainer\nmnt\nfor the maintainer of the code. Ideally, exactly one maintainer is specified.\n\n\nauthor\naut\nfor persons who have made substantial contributions to the software.\n\n\ncontributor\nctb\nfor persons who have made smaller contributions (such as code patches).\n\n\ndatacontributor\ndtc\nfor persons or organisations that contributed data sets for the software\n\n\ncopyrightholder\ncph\nfor all copyright holders. This is a legal concept so should use the legal name of an institution or corporate body.\n\n\nfunder\nfnd\nfor persons or organizations that furnished financial support for the development of the software\n\n\n\nThe full list of roles is extremely comprehensive."
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#description",
+    "href": "documentation/reference/config/functionality.html#description",
+    "title": "Functionality",
+    "section": "description",
+    "text": "description\nType: String\nA description of the component. This will be displayed with –help.\n\nExample(s)\ndescription: |\n  This component performs function Y and Z.\n  It is possible to make this a multiline string."
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#enabled",
+    "href": "documentation/reference/config/functionality.html#enabled",
+    "title": "Functionality",
+    "section": "enabled",
+    "text": "enabled\nType: Boolean\nSetting this to false with disable this component when using namespaces."
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#info",
+    "href": "documentation/reference/config/functionality.html#info",
+    "title": "Functionality",
+    "section": "info",
+    "text": "info\nType: Map of String,String\nA map for storing custom annotation."
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#inputs",
+    "href": "documentation/reference/config/functionality.html#inputs",
+    "title": "Functionality",
+    "section": "inputs",
+    "text": "inputs\nType: List of Argument"
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#name",
+    "href": "documentation/reference/config/functionality.html#name",
+    "title": "Functionality",
+    "section": "name",
+    "text": "name\nType: String\nName of the component and the filename of the executable when built with viash build.\n\nExample(s)\nname: exe"
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#namespace",
+    "href": "documentation/reference/config/functionality.html#namespace",
+    "title": "Functionality",
+    "section": "namespace",
+    "text": "namespace\nType: String\nNamespace this component is a part of. This is required when grouping components together in a pipeline and building multiple components at once using viash ns build.\n\nExample(s)\nnamespace: fancy_components"
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#outputs",
+    "href": "documentation/reference/config/functionality.html#outputs",
+    "title": "Functionality",
+    "section": "outputs",
+    "text": "outputs\nType: List of Argument"
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#resources",
+    "href": "documentation/reference/config/functionality.html#resources",
+    "title": "Functionality",
+    "section": "resources",
+    "text": "resources\nType: List of Resource\nThe first resource should be a script (bash_script, r_script, python_script, javascript_script, scala_script) which is what will be executed when the functionality is run. Additional resources will be copied to the same directory.\nCommon properties:\n\ntype: file/r_script/python_script/bash_script/javascript_script/scala_script, the type of resource. The first resource cannot be of type file. When the type is not specified, the default type is simply file. For more information regarding how to write a script in Bash, R or Python with Viash, check out the guides for the respective languages on the left.\nname: filename, the resulting name of the resource.\npath: path/to/file, the path of the input file. Can be a relative or an absolute path, or a URI.\ntext: …multiline text…, the raw content of the input file. Exactly one of path or text must be defined, the other undefined.\nis_executable: true/false, whether the resulting file is made executable.\n\n\nExample(s)\nresources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt"
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#test_resources",
+    "href": "documentation/reference/config/functionality.html#test_resources",
+    "title": "Functionality",
+    "section": "test_resources",
+    "text": "test_resources\nType: List of Resource\nOne or more Bash/R/Python scripts to be used to test the component behaviour when viash test is invoked. Additional files of type file will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.\n\nExample(s)\ntests:\n  - type: bash_script\n    path: tests/test1.sh\n  - type: r_script\n    path: tests/test2.R\n  - path: resource1.txt"
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#tests",
+    "href": "documentation/reference/config/functionality.html#tests",
+    "title": "Functionality",
+    "section": "tests",
+    "text": "tests\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.13. Use test_resources instead. No functional difference.\n\n\nType: List of Resource\nOne or more Bash/R/Python scripts to be used to test the component behaviour when viash test is invoked. Additional files of type file will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing."
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#usage",
+    "href": "documentation/reference/config/functionality.html#usage",
+    "title": "Functionality",
+    "section": "usage",
+    "text": "usage\nType: String\nA description of the component. This will be displayed with –help under the ‘Usage:’ section."
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#version",
+    "href": "documentation/reference/config/functionality.html#version",
+    "title": "Functionality",
+    "section": "version",
+    "text": "version\nType: Version\nVersion of the component. This field will be used to version the executable and the Docker container."
+  },
+  {
+    "objectID": "documentation/reference/config/nativePlatform.html",
+    "href": "documentation/reference/config/nativePlatform.html",
+    "title": "Native Platform",
+    "section": "",
+    "text": "Running a Viash component on a native platform means that the script will be executed in your current environment. Any dependencies are assumed to have been installed by the user, so the native platform is meant for developers (who know what they’re doing) or for simple bash scripts (which have no extra dependencies)."
+  },
+  {
+    "objectID": "documentation/reference/config/nativePlatform.html#id",
+    "href": "documentation/reference/config/nativePlatform.html#id",
+    "title": "Native Platform",
+    "section": "id",
+    "text": "id\nType: String\nAs with all platforms, you can give a platform a different name. By specifying id: foo, you can target this platform (only) by specifying -p foo in any of the Viash commands.\n\nExample(s)\nid: foo"
   },
   {
     "objectID": "documentation/reference/config/dockerPlatform.html",
@@ -420,249 +679,11 @@
     "text": "yum\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nType: YumRequirements\nSpecify which yum packages should be available in order to run the component.\n\nExample(s)\nsetup:\n  - type: yum\n    packages: [ sl ]"
   },
   {
-    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html",
-    "href": "documentation/reference/config/nextflowLegacyPlatform.html",
-    "title": "Nextflow Legacy Platform",
+    "objectID": "documentation/reference/viash/test.html",
+    "href": "documentation/reference/viash/test.html",
+    "title": "viash test",
     "section": "",
-    "text": "Run a Viash component as a Nextflow module."
-  },
-  {
-    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#id",
-    "href": "documentation/reference/config/nextflowLegacyPlatform.html#id",
-    "title": "Nextflow Legacy Platform",
-    "section": "id",
-    "text": "id\nType: String\nEvery platform can be given a specific id that can later be referred to explicitly when running or building the Viash component."
-  },
-  {
-    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#image",
-    "href": "documentation/reference/config/nextflowLegacyPlatform.html#image",
-    "title": "Nextflow Legacy Platform",
-    "section": "image",
-    "text": "image\nType: String\nIf no image attributes are configured, Viash will use the auto-generated image name from the Docker platform:\n[<namespace>/]<name>:<version>\nIt’s possible to specify the container image explicitly with which to run the module in different ways:\nimage: dataintuitive/viash:0.4.0\nExactly the same can be obtained with\nimage: dataintuitive/viash\nregistry: index.docker.io/v1/\ntag: 0.4.0\nSpecifying the attribute(s) like this will use the container dataintuitive/viash:0.4.0 from Docker hub (registry).\nIf no tag is specified Viash will use functionality.version as the tag.\nIf no registry is specified, Viash (and NextFlow) will assume the image is available locally or on Docker Hub. In other words, the registry: ... attribute above is superfluous. No other registry is checked automatically due to a limitation from Docker itself."
-  },
-  {
-    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#label",
-    "href": "documentation/reference/config/nextflowLegacyPlatform.html#label",
-    "title": "Nextflow Legacy Platform",
-    "section": "label",
-    "text": "label\nType: String\nWhen running the module in a cluster context and depending on the cluster type, NextFlow allows for attaching labels to the process that can later be used as selectors for associating resources to this process.\nIn order to attach one label to a process/component, one can use the label: ... attribute, multiple labels can be added using labels: [ ..., ... ] and the two can even be mixed.\nIn the main nextflow.config, one can now use this label:\nprocess { … withLabel: bigmem { maxForks = 5 … } }\n\nExample(s)\nlabel: highmem labels: [ highmem, highcpu ]"
-  },
-  {
-    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#labels",
-    "href": "documentation/reference/config/nextflowLegacyPlatform.html#labels",
-    "title": "Nextflow Legacy Platform",
-    "section": "labels",
-    "text": "labels\nType: String / List of String\nWhen running the module in a cluster context and depending on the cluster type, NextFlow allows for attaching labels to the process that can later be used as selectors for associating resources to this process.\nIn order to attach one label to a process/component, one can use the label: ... attribute, multiple labels can be added using labels: [ ..., ... ] and the two can even be mixed.\nIn the main nextflow.config, one can now use this label:\nprocess { … withLabel: bigmem { maxForks = 5 … } }\n\nExample(s)\nlabel: highmem labels: [ highmem, highcpu ]"
-  },
-  {
-    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#namespace_separator",
-    "href": "documentation/reference/config/nextflowLegacyPlatform.html#namespace_separator",
-    "title": "Nextflow Legacy Platform",
-    "section": "namespace_separator",
-    "text": "namespace_separator\nType: String\nThe default namespace separator is “_“.\n\nExample(s)\nnamespace_separator: \"+\""
-  },
-  {
-    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#organization",
-    "href": "documentation/reference/config/nextflowLegacyPlatform.html#organization",
-    "title": "Nextflow Legacy Platform",
-    "section": "organization",
-    "text": "organization\nType: String\nName of a container’s organization.\n\nExample(s)\norganization: viash-io"
-  },
-  {
-    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#path",
-    "href": "documentation/reference/config/nextflowLegacyPlatform.html#path",
-    "title": "Nextflow Legacy Platform",
-    "section": "path",
-    "text": "path\nType: String\nWhen publish: true, this attribute defines where the output is written relative to the params.publishDir setting. For example, path: processed in combination with --output s3://some_bucket/ will store the output of this component under\ns3://some_bucket/processed/\nThis attribute gives control over the directory structure of the output. For example:\npath: raw_data\nOr even:\npath: raw_data/bcl\nPlease note that per_id and path can be combined."
-  },
-  {
-    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#per_id",
-    "href": "documentation/reference/config/nextflowLegacyPlatform.html#per_id",
-    "title": "Nextflow Legacy Platform",
-    "section": "per_id",
-    "text": "per_id\nType: Boolean\nBy default, a subdirectory is created corresponding to the unique ID that is passed in the triplet. Let us illustrate this with an example. The following code snippet uses the value of --input as an input of a workflow. The input can include a wildcard so that multiple samples can run in parallel. We use the parent directory name (.getParent().baseName) as an identifier for the sample. We pass this as the first entry of the triplet:\nChannel.fromPath(params.input) \\\n    | map{ it -> [ it.getParent().baseName , it ] } \\\n    | map{ it -> [ it[0] , it[1], params ] }\n    | ...\nSay the resulting sample names are SAMPLE1 and SAMPLE2. The next step in the pipeline will be published (at least by default) under:\n<publishDir>/SAMPLE1/\n<publishDir>/SAMPLE2/\nThese per-ID subdirectories can be avoided by setting:\nper_id: false"
-  },
-  {
-    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#publish",
-    "href": "documentation/reference/config/nextflowLegacyPlatform.html#publish",
-    "title": "Nextflow Legacy Platform",
-    "section": "publish",
-    "text": "publish\nType: Boolean\nNextFlow uses the autogenerated work dirs to manage process IO under the hood. In order effectively output something one can publish the results a module or step in the pipeline. In order to do this, add publish: true to the config:\n\npublish is optional\nDefault value is false\n\nThis attribute simply defines if output of a component should be published yes or no. The output location has to be provided at pipeline launch by means of the option --publishDir ... or as params.publishDir in nextflow.config:\nparams.publishDir = \"...\""
-  },
-  {
-    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#registry",
-    "href": "documentation/reference/config/nextflowLegacyPlatform.html#registry",
-    "title": "Nextflow Legacy Platform",
-    "section": "registry",
-    "text": "registry\nType: String\nThe URL to the a custom Docker registry.\n\nExample(s)\nregistry: https://my-docker-registry.org"
-  },
-  {
-    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#separate_multiple_outputs",
-    "href": "documentation/reference/config/nextflowLegacyPlatform.html#separate_multiple_outputs",
-    "title": "Nextflow Legacy Platform",
-    "section": "separate_multiple_outputs",
-    "text": "separate_multiple_outputs\nType: Boolean\nSeparates the outputs generated by a Nextflow component with multiple outputs as separate events on the channel. Default value: true.\n\nExample(s)\nseparate_multiple_outputs: false"
-  },
-  {
-    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#stageinmode",
-    "href": "documentation/reference/config/nextflowLegacyPlatform.html#stageinmode",
-    "title": "Nextflow Legacy Platform",
-    "section": "stageInMode",
-    "text": "stageInMode\nType: String\nBy default NextFlow will create a symbolic link to the inputs for a process/module and run the tool at hand using those symbolic links. Some applications do not cope well with this strategy, in that case the files should effectively be copied rather than linked to. This can be achieved by using stageInMode: copy. This attribute is optional, the default is symlink.\n\nExample(s)\nstageInMode: copy"
-  },
-  {
-    "objectID": "documentation/reference/config/nextflowLegacyPlatform.html#tag",
-    "href": "documentation/reference/config/nextflowLegacyPlatform.html#tag",
-    "title": "Nextflow Legacy Platform",
-    "section": "tag",
-    "text": "tag\nType: Version\nSpecify a Docker image based on its tag.\n\nExample(s)\ntag: 4.0"
-  },
-  {
-    "objectID": "documentation/reference/config/nativePlatform.html",
-    "href": "documentation/reference/config/nativePlatform.html",
-    "title": "Native Platform",
-    "section": "",
-    "text": "Running a Viash component on a native platform means that the script will be executed in your current environment. Any dependencies are assumed to have been installed by the user, so the native platform is meant for developers (who know what they’re doing) or for simple bash scripts (which have no extra dependencies)."
-  },
-  {
-    "objectID": "documentation/reference/config/nativePlatform.html#id",
-    "href": "documentation/reference/config/nativePlatform.html#id",
-    "title": "Native Platform",
-    "section": "id",
-    "text": "id\nType: String\nAs with all platforms, you can give a platform a different name. By specifying id: foo, you can target this platform (only) by specifying -p foo in any of the Viash commands.\n\nExample(s)\nid: foo"
-  },
-  {
-    "objectID": "documentation/reference/config/functionality.html",
-    "href": "documentation/reference/config/functionality.html",
-    "title": "Functionality",
-    "section": "",
-    "text": "The functionality-part of the config file describes the behaviour of the script in terms of arguments and resources. By specifying a few restrictions (e.g. mandatory arguments) and adding some descriptions, Viash will automatically generate a stylish command-line interface for you."
-  },
-  {
-    "objectID": "documentation/reference/config/functionality.html#add_resources_to_path",
-    "href": "documentation/reference/config/functionality.html#add_resources_to_path",
-    "title": "Functionality",
-    "section": "add_resources_to_path",
-    "text": "add_resources_to_path\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since Viash 0.5.11. Extending the PATH turned out to be not desirable.\n\n\nType: Boolean\nAdds the resources directory to the PATH variable when set to true. This is set to false by default."
-  },
-  {
-    "objectID": "documentation/reference/config/functionality.html#argument_groups",
-    "href": "documentation/reference/config/functionality.html#argument_groups",
-    "title": "Functionality",
-    "section": "argument_groups",
-    "text": "argument_groups\nType: List of ArgumentGroup"
-  },
-  {
-    "objectID": "documentation/reference/config/functionality.html#arguments",
-    "href": "documentation/reference/config/functionality.html#arguments",
-    "title": "Functionality",
-    "section": "arguments",
-    "text": "arguments\nType: List of Argument\nA list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. Common properties for all argument types are the following.\n\ntype: string/file/integer/double/boolean/boolean_true/boolean_false, the type of argument determining to what object type the value will be cast in the downstream scripts.\ndirection: input/output, the directionality of the argument. Only needs to be specified for output files. Default: “input”.\nname: --foo, the name of the argument. Can also be -foo or foo. The number of dashes determines how values can be passed:\n\nwith --foo: long option, e.g. exe --foo=bar or exe --foo bar\nwith -foo: short option, e.g. exe -foo bar\nwith foo: argument, e.g. exe bar\n\nalternatives: [-f], list of alternative names. Typically only used to provide a short alternative option.\ndescription: Description of foo, a description of the argument. Multiline descriptions are supported.\ndefault: bar, the default value when no argument value is provided. Not allowed when required: true.\nrequired: true/false, whether the argument is required. If true and the functionality is executed, an error will be produced if no value is provided. Default = false.\nmultiple: true/false, whether to treat the argument value as an array or not. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. Default = false.\nmultiple_sep: \":\", the delimiter for providing multiple values. Default = “:”.\n\nOn types:\n\ntype: string, The value passed through an argument of this type is converted to an ‘str’ object in Python, and to a ‘character’ object in R.\ntype: integer, The resulting value is an ‘int’ in Python and an ‘integer’ in R.\ntype: double, The resulting value is a ‘float’ in Python and an ‘double’ in R.\ntype: boolean, The resulting value is a ‘bool’ in Python and a ‘logical’ in R.\ntype: boolean_true/boolean_false, Arguments of this type can only be used by providing a flag --foo or not. The resulting value is a ‘bool’ in Python and a ‘logical’ in R. These properties cannot be altered: required is false, default is undefined, multiple is false.\ntype: file, The resulting value is still an ‘str’ in Python and a ‘character’ in R. In order to correctly pass files in some platforms (e.g. Docker and Nextflow), Viash needs to know which arguments are input/output files.\n\nAdditional property values:\n\nmust_exist: true/false, denotes whether the file or folder should exist at the start of the execution.\n\n\nExample(s)\n- name: --foo                           \n  type: file\n  alternatives: [-f]\n  description: Description of foo\n  default: \"/foo/bar\"\n  must_exist: true\n  required: false\n  multiple: true\n  multiple_sep: \",\""
-  },
-  {
-    "objectID": "documentation/reference/config/functionality.html#authors",
-    "href": "documentation/reference/config/functionality.html#authors",
-    "title": "Functionality",
-    "section": "authors",
-    "text": "authors\nType: List of Author\nA list of authors. An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.\nSuggested values for roles are:\n\n\n\n\n\n\n\n\nRole\nAbbrev.\nDescription\n\n\n\n\nmaintainer\nmnt\nfor the maintainer of the code. Ideally, exactly one maintainer is specified.\n\n\nauthor\naut\nfor persons who have made substantial contributions to the software.\n\n\ncontributor\nctb\nfor persons who have made smaller contributions (such as code patches).\n\n\ndatacontributor\ndtc\nfor persons or organisations that contributed data sets for the software\n\n\ncopyrightholder\ncph\nfor all copyright holders. This is a legal concept so should use the legal name of an institution or corporate body.\n\n\nfunder\nfnd\nfor persons or organizations that furnished financial support for the development of the software\n\n\n\nThe full list of roles is extremely comprehensive."
-  },
-  {
-    "objectID": "documentation/reference/config/functionality.html#description",
-    "href": "documentation/reference/config/functionality.html#description",
-    "title": "Functionality",
-    "section": "description",
-    "text": "description\nType: String\nA description of the component. This will be displayed with –help.\n\nExample(s)\ndescription: |\n  This component performs function Y and Z.\n  It is possible to make this a multiline string."
-  },
-  {
-    "objectID": "documentation/reference/config/functionality.html#enabled",
-    "href": "documentation/reference/config/functionality.html#enabled",
-    "title": "Functionality",
-    "section": "enabled",
-    "text": "enabled\nType: Boolean\nSetting this to false with disable this component when using namespaces."
-  },
-  {
-    "objectID": "documentation/reference/config/functionality.html#info",
-    "href": "documentation/reference/config/functionality.html#info",
-    "title": "Functionality",
-    "section": "info",
-    "text": "info\nType: Map of String,String\nA map for storing custom annotation."
-  },
-  {
-    "objectID": "documentation/reference/config/functionality.html#inputs",
-    "href": "documentation/reference/config/functionality.html#inputs",
-    "title": "Functionality",
-    "section": "inputs",
-    "text": "inputs\nType: List of Argument"
-  },
-  {
-    "objectID": "documentation/reference/config/functionality.html#name",
-    "href": "documentation/reference/config/functionality.html#name",
-    "title": "Functionality",
-    "section": "name",
-    "text": "name\nType: String\nName of the component and the filename of the executable when built with viash build.\n\nExample(s)\nname: exe"
-  },
-  {
-    "objectID": "documentation/reference/config/functionality.html#namespace",
-    "href": "documentation/reference/config/functionality.html#namespace",
-    "title": "Functionality",
-    "section": "namespace",
-    "text": "namespace\nType: String\nNamespace this component is a part of. This is required when grouping components together in a pipeline and building multiple components at once using viash ns build.\n\nExample(s)\nnamespace: fancy_components"
-  },
-  {
-    "objectID": "documentation/reference/config/functionality.html#outputs",
-    "href": "documentation/reference/config/functionality.html#outputs",
-    "title": "Functionality",
-    "section": "outputs",
-    "text": "outputs\nType: List of Argument"
-  },
-  {
-    "objectID": "documentation/reference/config/functionality.html#resources",
-    "href": "documentation/reference/config/functionality.html#resources",
-    "title": "Functionality",
-    "section": "resources",
-    "text": "resources\nType: List of Resource\nThe first resource should be a script (bash_script, r_script, python_script, javascript_script, scala_script) which is what will be executed when the functionality is run. Additional resources will be copied to the same directory.\nCommon properties:\n\ntype: file/r_script/python_script/bash_script/javascript_script/scala_script, the type of resource. The first resource cannot be of type file. When the type is not specified, the default type is simply file. For more information regarding how to write a script in Bash, R or Python with Viash, check out the guides for the respective languages on the left.\nname: filename, the resulting name of the resource.\npath: path/to/file, the path of the input file. Can be a relative or an absolute path, or a URI.\ntext: …multiline text…, the raw content of the input file. Exactly one of path or text must be defined, the other undefined.\nis_executable: true/false, whether the resulting file is made executable.\n\n\nExample(s)\nresources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt"
-  },
-  {
-    "objectID": "documentation/reference/config/functionality.html#test_resources",
-    "href": "documentation/reference/config/functionality.html#test_resources",
-    "title": "Functionality",
-    "section": "test_resources",
-    "text": "test_resources\nType: List of Resource\nOne or more Bash/R/Python scripts to be used to test the component behaviour when viash test is invoked. Additional files of type file will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.\n\nExample(s)\ntests:\n  - type: bash_script\n    path: tests/test1.sh\n  - type: r_script\n    path: tests/test2.R\n  - path: resource1.txt"
-  },
-  {
-    "objectID": "documentation/reference/config/functionality.html#tests",
-    "href": "documentation/reference/config/functionality.html#tests",
-    "title": "Functionality",
-    "section": "tests",
-    "text": "tests\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.13. Use test_resources instead. No functional difference.\n\n\nType: List of Resource\nOne or more Bash/R/Python scripts to be used to test the component behaviour when viash test is invoked. Additional files of type file will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing."
-  },
-  {
-    "objectID": "documentation/reference/config/functionality.html#usage",
-    "href": "documentation/reference/config/functionality.html#usage",
-    "title": "Functionality",
-    "section": "usage",
-    "text": "usage\nType: String\nA description of the component. This will be displayed with –help under the ‘Usage:’ section."
-  },
-  {
-    "objectID": "documentation/reference/config/functionality.html#version",
-    "href": "documentation/reference/config/functionality.html#version",
-    "title": "Functionality",
-    "section": "version",
-    "text": "version\nType: Version\nVersion of the component. This field will be used to version the executable and the Docker container."
-  },
-  {
-    "objectID": "documentation/reference/viash/run.html",
-    "href": "documentation/reference/viash/run.html",
-    "title": "viash run",
-    "section": "",
-    "text": "Usage:\nviash run config.vsh.yaml [-p docker] [-k true/false]  -- [arguments for script]\n\n\n\n\n\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--config\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL. For more information, see the online documentation.\nList[String]\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString"
-  },
-  {
-    "objectID": "documentation/reference/viash/build.html",
-    "href": "documentation/reference/viash/build.html",
-    "title": "viash build",
-    "section": "",
-    "text": "Usage:\nviash build config.vsh.yaml -o output [-p docker] [-m] [-s]\n\n\n\n\n\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--config\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL. For more information, see the online documentation.\nList[String]\n\n\n--meta, -m\nPrint out some meta information at the end.\nBoolean\n\n\n--output\nPath to directory in which the executable and any resources is built to. Default: “output/”. This is a required argument.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--push\nWhether or not to push the container to a Docker registry [Docker Platform only].\nBoolean\n\n\n--setup\nWhich setup strategy for creating the container to use [Docker Platform only].\nString\n\n\n--write_meta, -w\nWrite out some meta information to RESOURCES_DIR/viash.yaml at the end.\nBoolean"
+    "text": "Usage:\nviash test config.vsh.yaml [-p docker] [-k true/false]\n\n\n\n\n\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--config\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL. For more information, see the online documentation.\nList[String]\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString"
   },
   {
     "objectID": "documentation/reference/viash/ns.html",
@@ -686,11 +707,18 @@
     "text": "viash ns list\nList a namespace containing many viash config files.\nUsage:\nviash ns list [-n nmspc] [-s src] [-p docker]\n\n\n\n\n\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL. For more information, see the online documentation.\nList[String]\n\n\n--format, -f\nWhich output format to use.\nString\n\n\n--parallel, -l\nWhether or not to run the process in parallel.\nBoolean\n\n\n--platform, -p\nActs as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--query, -q\nFilter which components get selected by name and namespace. Can be a regex. Example: “^mynamespace/component1$”.\nString\n\n\n--query_name\nFilter which components get selected by name. Can be a regex. Example: “^component1”.\nString\n\n\n--query_namespace, -n\nFilter which namespaces get selected by namespace. Can be a regex. Example: “^mynamespace$”.\nString\n\n\n--src, -s\nA source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.\nString"
   },
   {
-    "objectID": "documentation/reference/viash/test.html",
-    "href": "documentation/reference/viash/test.html",
-    "title": "viash test",
+    "objectID": "documentation/reference/viash/run.html",
+    "href": "documentation/reference/viash/run.html",
+    "title": "viash run",
     "section": "",
-    "text": "Usage:\nviash test config.vsh.yaml [-p docker] [-k true/false]\n\n\n\n\n\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--config\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL. For more information, see the online documentation.\nList[String]\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString"
+    "text": "Usage:\nviash run config.vsh.yaml [-p docker] [-k true/false]  -- [arguments for script]\n\n\n\n\n\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--config\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL. For more information, see the online documentation.\nList[String]\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString"
+  },
+  {
+    "objectID": "documentation/reference/viash/build.html",
+    "href": "documentation/reference/viash/build.html",
+    "title": "viash build",
+    "section": "",
+    "text": "Usage:\nviash build config.vsh.yaml -o output [-p docker] [-m] [-s]\n\n\n\n\n\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--config\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL. For more information, see the online documentation.\nList[String]\n\n\n--meta, -m\nPrint out some meta information at the end.\nBoolean\n\n\n--output\nPath to directory in which the executable and any resources is built to. Default: “output/”. This is a required argument.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--push\nWhether or not to push the container to a Docker registry [Docker Platform only].\nBoolean\n\n\n--setup\nWhich setup strategy for creating the container to use [Docker Platform only].\nString\n\n\n--write_meta, -w\nWrite out some meta information to RESOURCES_DIR/viash.yaml at the end.\nBoolean"
   },
   {
     "objectID": "documentation/reference/viash/config.html",
@@ -705,27 +733,6 @@
     "title": "viash config",
     "section": "viash config inject",
     "text": "viash config inject\nInject a Viash header into the main script of a Viash component.\nUsage:\nviash config inject config.vsh.yaml\n\n\n\n\n\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--config\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL. For more information, see the online documentation.\nList[String]\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About Quarto",
-    "section": "",
-    "text": "The overarching goal of Quarto is to make the process of creating and collaborating on scientific and technical documents dramatically better. We hope to do this in several dimensions:\n\nCreate a writing and publishing environment with great integrated tools for technical content. We want to make authoring with embedded code, equations, figures, complex diagrams, interactive widgets, citations, cross references, and the myriad other special requirements of scientific discourse straightforward and productive for everyone.\nHelp authors take full advantage of the web as a connected, interactive platform for communications, while still providing the ability to create excellent printed output from the same document source. Researchers shouldn’t need to choose between LaTeX, MS Word, and HTML but rather be able to author documents that target all of them at the same time.\nMake reproducible research and publications the norm rather than the exception. Reproducibility requires that the code and data required to create a manuscript are an integrated part of it. However, this isn’t often straightforward in practice—Quarto aims to make it easier to adopt a reproducible workflow than not.\n\nQuarto is open source software licensed under the GNU GPL v2. We believe that it’s better for everyone if the tools used for research and science are free and open. Reproducibility, widespread sharing of knowledge and techniques, and the leveling of the playing field by eliminating cost barriers are but a few of the shared benefits of free software in science."
-  },
-  {
-    "objectID": "about.html#project",
-    "href": "about.html#project",
-    "title": "About Quarto",
-    "section": "Project",
-    "text": "Project\nAt the core of Quarto is Pandoc, a powerful and flexible document processing tool. Quarto adds a number of facilities to Pandoc aimed at scientific and technical publishing, including:\n\nEmbedding code and output from Python, R, and JavaScript via integration with Jupyter, Knitr, and Observable.\nA variety of extensions to Pandoc markdown useful for technical writing including cross-references, sub-figures, layout panels, hoverable citations and footnotes, callouts, and more.\nA project system for rendering groups of documents at once, sharing options across documents, and producing aggregate output like websites and books.\n\nDevelopment of Quarto is sponsored by RStudio, PBC, where we previously created a similar system (R Markdown) that shared the same goals, but was targeted principally at users of the R language. The same core team works on both Quarto and R Markdown:\n\nJ.J. Allaire (@jjallaire)\nChristophe Dervieux (@cderv)\nCarlos Scheidegger (@cscheid)\nCharles Teague (@dragonstyle)\nYihui Xie (@yihui)\n\nWith Quarto, we are hoping to bring these tools to a much wider audience.\nQuarto is a registered trademark of RStudio. Please see our trademark policy for guidelines on usage of the Quarto trademark."
-  },
-  {
-    "objectID": "about.html#contribute",
-    "href": "about.html#contribute",
-    "title": "About Quarto",
-    "section": "Contribute",
-    "text": "Contribute\nYou can contribute to Quarto in many ways:\n\nBy opening issues to provide feedback and share ideas.\nBy submitting Pull Request (PR) to fix opened issues\nBy submitting Pull Request (PR) to suggest new features (it is considered good practice to open an issue for discussion before working on a pull request for a new feature).\n\nPlease be mindful of our code of conduct as you interact with other community members.\n\nPull Requests\nPull requests are very welcome! Here’s how to contribute via PR:\n\nFork the repository, clone it locally, and make your changes in a new branch specific to the PR. For example:\n# clone your fork\n$ git clone https://github.com/<username>/quarto-cli\n\n# configure for your platform (./configure-macos.sh, ./configure-linux.sh, or ./configure-windows.cmd)\n$ cd quarto-cli\n$ ./configure-macos.sh\n\n# checkout a new branch\n$ git checkout -b feature/newthing\nFor significant changes (e.g more than small bug fixes), ensure that you have signed the individual or corporate contributor agreement as appropriate. You can send the signed copy to jj@rstudio.com.\nSubmit the pull request. It is ok to submit as draft in your are still working on it but would like some feedback from us. It always good to share in the open that you are working on it.\n\nWe’ll try to be as responsive as possible in reviewing and accepting pull requests."
   },
   {
     "objectID": "license.html",
@@ -761,12 +768,5 @@
     "title": "Trademark Policy",
     "section": "Examples",
     "text": "Examples\nA consulting company can describe its business as “123 Publishing Services, offering Quarto consulting for publishers,” but cannot call its business “The Quarto Consulting Company.” Similarly, a business related to Quarto extensions can describe itself as “XYZ Extensions, the world’s best Quarto extensions,” but cannot call itself “The Quarto Extension Portal.”\nSimilarly, it’s OK to use the Quarto logo as part of a page that describes your products or services, but it is not OK to use it as part of your company or product logo or branding itself. Under no circumstances is it permitted to use Quarto as part of a domain name or top-level domain name.\nWhen in doubt about your use of the Quarto name or logo, please contact RStudio at permissions@rstudio.com for clarification."
-  },
-  {
-    "objectID": "download/components/md_url_checker/bash/Testfile.html",
-    "href": "download/components/md_url_checker/bash/Testfile.html",
-    "title": "Viash",
-    "section": "",
-    "text": "This is a simple markdown file with some hyperlinks to test if the check_if_URLS_reachable component works correctly. Some links to websites:\n\nGoogle\nReddit\nA broken link\n\nLinks that are relative to viash.io:\n\nYou can install viash here.\nIt all starts with a script and a config file for your components."
   }
 ]
