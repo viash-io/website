@@ -388,7 +388,7 @@ Viash supports <strong>unit testing</strong>, which is a software testing method
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"&gt;&gt;&gt; Checking whether output is correct"</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Run md_url_checker component with its required inputs and output the results to test-output.txt</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">./md_url_checker</span> <span class="at">--inputfile</span> Testfile.md <span class="op">&gt;</span> test-output.txt</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">"./</span><span class="va">$meta_functionality_name</span><span class="st">"</span> <span class="at">--inputfile</span> Testfile.md <span class="op">&gt;</span> test-output.txt</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span> <span class="ot">!</span> <span class="ot">-f</span> test-output.txt <span class="kw">]]</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">"Test output file could not be found!"</span> <span class="kw">&amp;&amp;</span> <span class="bu">exit</span> 1 <span class="co"># Check if test-output.txt exists</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-q</span> <span class="st">'1: https://www.google.com'</span> test-output.txt <span class="co"># Did the script find the URL?</span></span>
@@ -404,6 +404,19 @@ Viash supports <strong>unit testing</strong>, which is a software testing method
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"&gt;&gt;&gt; Test finished successfully!"</span></span>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0 <span class="co"># Exit with a 0 code to note a success </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As you can see above, you can use the <a href="">meta variable</a> <code>$meta_functionality_name</code> to automatically get the name of the component (and the generated executable). This way, you can more reuse parts of your test scripts.</p>
+</div>
+</div>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
