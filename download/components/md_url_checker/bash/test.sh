@@ -4,7 +4,7 @@ set -ex # Exit the script when one of the checks fail. Output all commands.
 echo ">>> Checking whether output is correct"
 
 # Run md_url_checker component with its required inputs and output the results to test-output.txt
-./md_url_checker --inputfile Testfile.md > test-output.txt
+"./$meta_functionality_name" --inputfile Testfile.md > test-output.txt
 
 [[ ! -f test-output.txt ]] && echo "Test output file could not be found!" && exit 1 # Check if test-output.txt exists
 grep -q '1: https://www.google.com' test-output.txt # Did the script find the URL?
