@@ -15,6 +15,69 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -60,8 +123,10 @@ ul.task-list{list-style: none;}
 
 <link rel="stylesheet" href="../../../../styles.css">
 <meta property="og:title" content="Viash - C#">
+<meta property="og:description" content="C# is a general-purpose programming language designed by Microsoft. Viash supports .NET Core C# scripting by utilizing the cross platform dotnet-script tool.">
 <meta property="og:site-name" content="Viash">
 <meta name="twitter:title" content="Viash - C#">
+<meta name="twitter:description" content="C# is a general-purpose programming language designed by Microsoft. Viash supports .NET Core C# scripting by utilizing the cross platform dotnet-script tool.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -300,7 +365,30 @@ ul.task-list{list-style: none;}
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#dependencies" id="toc-dependencies" class="nav-link" data-scroll-target="#dependencies">Dependencies</a></li>
+  <li><a href="#referencing-c-scripts-in-a-viash-config-file" id="toc-referencing-c-scripts-in-a-viash-config-file" class="nav-link" data-scroll-target="#referencing-c-scripts-in-a-viash-config-file">Referencing C# scripts in a Viash config file</a></li>
+  <li><a href="#executing-scripts" id="toc-executing-scripts" class="nav-link" data-scroll-target="#executing-scripts">Executing scripts</a></li>
+  <li><a href="#script-examples" id="toc-script-examples" class="nav-link" data-scroll-target="#script-examples">Script examples</a>
+  <ul class="collapse">
+  <li><a href="#hello-world" id="toc-hello-world" class="nav-link" data-scroll-target="#hello-world">Hello World</a></li>
+  <li><a href="#using-variables" id="toc-using-variables" class="nav-link" data-scroll-target="#using-variables">Using variables</a></li>
+  <li><a href="#using-viash-arguments-as-variables" id="toc-using-viash-arguments-as-variables" class="nav-link" data-scroll-target="#using-viash-arguments-as-variables">Using Viash arguments as variables</a></li>
+  <li><a href="#using-viash-placeholder-variables" id="toc-using-viash-placeholder-variables" class="nav-link" data-scroll-target="#using-viash-placeholder-variables">Using Viash placeholder variables</a></li>
+  <li><a href="#using-nuget-packages" id="toc-using-nuget-packages" class="nav-link" data-scroll-target="#using-nuget-packages">Using NuGet packages</a></li>
+  </ul></li>
+  <li><a href="#meta-variables" id="toc-meta-variables" class="nav-link" data-scroll-target="#meta-variables">Meta variables</a>
+  <ul class="collapse">
+  <li><a href="#functionality-name" id="toc-functionality-name" class="nav-link" data-scroll-target="#functionality-name">Functionality name</a></li>
+  <li><a href="#resources-directory" id="toc-resources-directory" class="nav-link" data-scroll-target="#resources-directory">Resources directory</a></li>
+  <li><a href="#temp-directory" id="toc-temp-directory" class="nav-link" data-scroll-target="#temp-directory">Temp directory</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -381,8 +469,178 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 </script>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>C# is a general-purpose programming language designed by Microsoft. Viash supports .NET Core C# scripting by utilizing the cross platform <a href="https://github.com/filipw/dotnet-script">dotnet-script</a> tool.</p>
+</section>
+<section id="dependencies" class="level2">
+<h2 class="anchored" data-anchor-id="dependencies">Dependencies</h2>
+<p>To get started with C# scripting, you need to download and install the <a href="https://dotnet.microsoft.com/en-us/download">.NET 6.0 SDK</a>.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you’re using WSL2, make sure to follow the Linux instructions and execute the commands in a WSL2 terminal.</p>
+</div>
+</div>
+<p>After installing the SDK, run this command to install the <code>dotnet-script</code> tool:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> tool install <span class="at">-g</span> dotnet-script</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To verify that dotnet-script was installed successfully, run this command to get a list of installed tools:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> tool list <span class="at">-g</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The output should look something like this:</p>
+<pre><code>Package Id         Version      Commands     
+---------------------------------------------
+dotnet-script      1.3.1        dotnet-script</code></pre>
+</section>
+<section id="referencing-c-scripts-in-a-viash-config-file" class="level2">
+<h2 class="anchored" data-anchor-id="referencing-c-scripts-in-a-viash-config-file">Referencing C# scripts in a Viash config file</h2>
+<p>When referencing a C# script in the <a href="../../../../documentation/reference/config/functionality.html#resources"><code>resources</code></a> of the <code>functionality</code> section your <a href="../../../../documentation/reference/config/overview.html">Viash config</a>, use <code>csharp_script</code> as its type:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my_component</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> csharp_script</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.csx</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="executing-scripts" class="level2">
+<h2 class="anchored" data-anchor-id="executing-scripts">Executing scripts</h2>
+<p>C# scripts end with the <strong>.csx</strong> extension. They can be run locally by using the <code>dotnet script</code> command:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> script script.csx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="script-examples" class="level2">
+<h2 class="anchored" data-anchor-id="script-examples">Script examples</h2>
+<p>These examples will briefly show to use C# in the context of Viash. Each example shows the source code and the output after running it.</p>
+<section id="hello-world" class="level3">
+<h3 class="anchored" data-anchor-id="hello-world">Hello World</h3>
+<p>Here’s the classic Hello World written in C#:</p>
+<p><strong>HelloWorld.csx</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode csharp code-with-copy"><code class="sourceCode cs"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>#<span class="op">!/</span>usr<span class="op">/</span>bin<span class="op">/</span>env dotnet<span class="op">-</span>script</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Console<span class="op">.</span><span class="fu">WriteLine</span><span class="op">(</span><span class="st">"Hello World!"</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output</strong></p>
+<pre><code>Hello World!</code></pre>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The first line with the <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a> is optional but recommended as it indicates what interpreter should be used for execution.</p>
+</div>
+</div>
+</section>
+<section id="using-variables" class="level3">
+<h3 class="anchored" data-anchor-id="using-variables">Using variables</h3>
+<p><strong>Variables.csx</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode csharp code-with-copy"><code class="sourceCode cs"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>#<span class="op">!/</span>usr<span class="op">/</span>bin<span class="op">/</span>env dotnet<span class="op">-</span>script</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="dt">string</span> hello <span class="op">=</span> <span class="st">"Hello World!"</span><span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>Console<span class="op">.</span><span class="fu">WriteLine</span><span class="op">(</span>hello<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output</strong></p>
+<pre><code>Hello World!</code></pre>
+</section>
+<section id="using-viash-arguments-as-variables" class="level3">
+<h3 class="anchored" data-anchor-id="using-viash-arguments-as-variables">Using Viash arguments as variables</h3>
+<p>Viash generates variables based on the arguments defined in the <a href="../../../../documentation/reference/config/overview.html">Viash config file</a> and injects them at the top of your script. In the case of C#, these variables are grouped inside an anonymous <code>par</code> class and can be referenced by name.</p>
+<p><strong>config.vsh.yaml</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> hello_world</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">arguments</span><span class="kw">:</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> string</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --hello</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">default</span><span class="kw">:</span><span class="at"> </span><span class="st">"Hello World!"</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> csharp_script</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.csx</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>ViashVariables.csx</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode csharp code-with-copy"><code class="sourceCode cs"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>#<span class="op">!/</span>usr<span class="op">/</span>bin<span class="op">/</span>env dotnet<span class="op">-</span>script</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>Console<span class="op">.</span><span class="fu">WriteLine</span><span class="op">(</span>par<span class="op">.</span><span class="fu">hello</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output</strong></p>
+<pre><code>Hello World!</code></pre>
+</section>
+<section id="using-viash-placeholder-variables" class="level3">
+<h3 class="anchored" data-anchor-id="using-viash-placeholder-variables">Using Viash placeholder variables</h3>
+<p>In some cases, you want to be able to write or adapt a script and test it out before creating a component. While you can write your script as normal and switch out the variables later on with their Viash variants, we supply a useful method of adding Viash variables beforehand in the form of a comment section.</p>
+<p><strong>PlaceholderVariables.csx</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode csharp code-with-copy"><code class="sourceCode cs"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>#<span class="op">!/</span>usr<span class="op">/</span>bin<span class="op">/</span>env dotnet<span class="op">-</span>script</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">// VIASH START</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="dt">var</span> par <span class="op">=</span> <span class="kw">new</span> <span class="op">{</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  hello <span class="op">=</span> <span class="st">"Hello World!"</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">// VIASH </span><span class="re">END</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>Console<span class="op">.</span><span class="fu">WriteLine</span><span class="op">(</span>par<span class="op">.</span><span class="fu">hello</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output</strong></p>
+<pre><code>Hello World!</code></pre>
+<p>Anything between <code>// VIASH START</code> and <code>// VIASH END</code> will be replaced by the injected variables Viash generates once the script is executed as part of a component. This allows you to easily troubleshoot your script while being compatible with Viash.</p>
+</section>
+<section id="using-nuget-packages" class="level3">
+<h3 class="anchored" data-anchor-id="using-nuget-packages">Using NuGet packages</h3>
+<p>With <code>dotnet-script</code>, you can reference <a href="https://www.nuget.org/">NuGet</a> packages directly from within the script. In the example below, we add a reference to <a href="https://www.nuget.org/packages/Newtonsoft.Json">Newtonsoft.Json</a> to convert a dictionary to JSON and output it to the console.</p>
+<p><strong>script.csx</strong></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode csharp code-with-copy"><code class="sourceCode cs"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>#<span class="op">!/</span>usr<span class="op">/</span>bin<span class="op">/</span>env dotnet<span class="op">-</span>script</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>#r <span class="st">"nuget: Newtonsoft.Json, 13.0.1"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>Dictionary<span class="op">&lt;</span><span class="dt">string</span><span class="op">,</span> <span class="dt">int</span><span class="op">&gt;</span> downloads <span class="op">=</span> <span class="kw">new</span> Dictionary<span class="op">&lt;</span><span class="dt">string</span><span class="op">,</span> <span class="dt">int</span><span class="op">&gt;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="st">"v1.0"</span><span class="op">,</span> <span class="dv">501</span> <span class="op">},</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="st">"v1.1"</span><span class="op">,</span> <span class="dv">802</span> <span class="op">},</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="st">"v2.0"</span><span class="op">,</span> <span class="dv">2857</span> <span class="op">}</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="dt">string</span> json <span class="op">=</span> JsonConvert<span class="op">.</span><span class="fu">SerializeObject</span><span class="op">(</span>downloads<span class="op">,</span> Formatting<span class="op">.</span><span class="fu">Indented</span><span class="op">);</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>Console<span class="op">.</span><span class="fu">WriteLine</span><span class="op">(</span>json<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Running <code>script.csx</code> results in the following output:</p>
+<pre><code>{
+  "v1.0": 501,
+  "v1.1": 802,
+  "v2.0": 2857
+}</code></pre>
+</section>
+</section>
+<section id="meta-variables" class="level2">
+<h2 class="anchored" data-anchor-id="meta-variables">Meta variables</h2>
+<p>Viash offers hidden variables to use in your scripts that can be used to get meta information about your component.</p>
+<section id="functionality-name" class="level3">
+<h3 class="anchored" data-anchor-id="functionality-name">Functionality name</h3>
+<p>Name of the component found in the <a href="../../../../documentation/reference/config/functionality.html"><code>functionality</code></a> section of the <a href="../../../../documentation/reference/config/overview.html">Viash config</a>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my_component</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This can be referenced in your script using <code>meta.functionality_name</code>:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode csharp code-with-copy"><code class="sourceCode cs"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Console<span class="op">.</span><span class="fu">WriteLine</span><span class="op">(</span>meta<span class="op">.</span><span class="fu">functionality_name</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output</strong></p>
+<pre><code>my_component</code></pre>
+</section>
+<section id="resources-directory" class="level3">
+<h3 class="anchored" data-anchor-id="resources-directory">Resources directory</h3>
+<p>Path where the <a href="../../../../documentation/reference/config/functionality.html#resources">resources</a> as defined in the <a href="../../../../documentation/reference/config/overview.html">Viash config file</a> are stored. You can access this value using <code>meta.resources_dir</code>:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode csharp code-with-copy"><code class="sourceCode cs"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Console<span class="op">.</span><span class="fu">WriteLine</span><span class="op">(</span>meta<span class="op">.</span><span class="fu">resources_dir</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>When using <a href="../../../../documentation/reference/viash/run.html"><code>viash run</code></a> to create a temporary build target and execute it, this will point to the temporary path where the executable was generated:</p>
+<pre><code>/tmp/viash_my_component9560481446119256265</code></pre>
+<p>After building a component using <a href="../../../../documentation/reference/viash/build.html"><code>viash build</code></a> and running the generated executable, it points to the directory where the executable and the other resources reside in:</p>
+<pre><code>/home/user/components/my_component_target_dir</code></pre>
+</section>
+<section id="temp-directory" class="level3">
+<h3 class="anchored" data-anchor-id="temp-directory">Temp directory</h3>
+<p>Path to the directory supplied by the host system where you can write temporary files to. This can be referenced in your script using <code>meta.temp_dir</code>:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode csharp code-with-copy"><code class="sourceCode cs"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Console<span class="op">.</span><span class="fu">WriteLine</span><span class="op">(</span>meta<span class="op">.</span><span class="fu">temp_dir</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output</strong></p>
+<pre><code>/tmp</code></pre>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script type="text/javascript">
