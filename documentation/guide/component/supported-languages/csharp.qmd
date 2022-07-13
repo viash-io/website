@@ -8,3 +8,234 @@ execute:
 
 {{< include ../../../../includes/_language_chooser.qmd >}}
 {{< include ../../../../includes/_python_helper.qmd >}}
+
+## Overview
+
+C# is a general-purpose programming language designed by Microsoft. Viash supports .NET Core C# scripting by utilizing the cross platform [dotnet-script](https://github.com/filipw/dotnet-script) tool.
+
+## Dependencies
+
+To get started with C# scripting, you need to download and install the [.NET 6.0 SDK](https://dotnet.microsoft.com/en-us/download). 
+
+:::{.callout-note}
+If you're using WSL2, make sure to follow the Linux instructions and execute the commands in a WSL2 terminal.  
+:::
+
+After installing the SDK, run this command to install the `dotnet-script` tool:
+
+```bash
+dotnet tool install -g dotnet-script
+```
+
+To verify that dotnet-script was installed successfully, run this command to get a list of installed tools:
+
+```bash
+dotnet tool list -g
+```
+
+The output should look something like this:
+
+```
+Package Id         Version      Commands     
+---------------------------------------------
+dotnet-script      1.3.1        dotnet-script
+```
+
+## Referencing C# scripts in a Viash config file
+
+When referencing a C# script in the [`resources`](/documentation/reference/config/functionality.html#resources) of the `functionality` section your [Viash config](/documentation/reference/config/overview.html), use `csharp_script` as its type:
+
+```yaml
+functionality:
+  name: my_component
+  resources:
+  - type: csharp_script
+    path: script.csx
+```
+
+## Executing scripts
+
+C# scripts end with the **.csx** extension. They can be run locally by using the `dotnet script` command:
+
+```bash
+dotnet script script.csx
+```
+
+## Script examples
+
+These examples will briefly show to use C# in the context of Viash. Each example shows the source code and the output after running it.
+
+### Hello World
+
+Here's the classic Hello World written in C#:
+
+**HelloWorld.csx**
+```csharp
+#!/usr/bin/env dotnet-script
+
+Console.WriteLine("Hello World!");
+```
+
+**Output**
+```
+Hello World!
+```
+
+:::{.callout-note}
+The first line with the [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) is optional but recommended as it indicates what interpreter should be used for execution.
+:::
+
+### Using variables
+
+**Variables.csx**
+```csharp
+#!/usr/bin/env dotnet-script
+
+string hello = "Hello World!";
+Console.WriteLine(hello);
+```
+
+**Output**
+```
+Hello World!
+```
+
+### Using Viash arguments as variables
+
+Viash generates variables based on the arguments defined in the [Viash config file](/documentation/reference/config/overview.html) and injects them at the top of your script. In the case of C#, these variables are grouped inside an anonymous `par` class and can be referenced by name.
+
+**config.vsh.yaml**
+```yaml
+functionality:
+  name: hello_world
+  arguments:
+  - type: string
+    name: --hello
+    default: "Hello World!"
+  resources:
+  - type: csharp_script
+    path: script.csx
+```
+
+**ViashVariables.csx**
+```csharp
+#!/usr/bin/env dotnet-script
+
+Console.WriteLine(par.hello);
+```
+
+**Output**
+```
+Hello World!
+```
+
+### Using Viash placeholder variables
+
+In some cases, you want to be able to write or adapt a script and test it out before creating a component. While you can write your script as normal and switch out the variables later on with their Viash variants, we supply a useful method of adding Viash variables beforehand in the form of a comment section.
+
+**PlaceholderVariables.csx**
+```csharp
+#!/usr/bin/env dotnet-script
+
+// VIASH START
+var par = new {
+  hello = "Hello World!"
+};
+// VIASH END
+
+Console.WriteLine(par.hello);
+```
+
+**Output**
+```
+Hello World!
+```
+
+Anything between `// VIASH START` and `// VIASH END` will be replaced by the injected variables Viash generates once the script is executed as part of a component. This allows you to easily troubleshoot your script while being compatible with Viash.  
+
+### Using NuGet packages
+
+With `dotnet-script`, you can reference [NuGet](https://www.nuget.org/) packages directly from within the script. In the example below, we add a reference to [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json) to convert a dictionary to JSON and output it to the console.
+
+**script.csx**
+```csharp
+#!/usr/bin/env dotnet-script
+#r "nuget: Newtonsoft.Json, 13.0.1"
+
+Dictionary<string, int> downloads = new Dictionary<string, int>
+{
+    { "v1.0", 501 },
+    { "v1.1", 802 },
+    { "v2.0", 2857 }
+};
+
+string json = JsonConvert.SerializeObject(downloads, Formatting.Indented);
+Console.WriteLine(json);
+```
+
+Running `script.csx` results in the following output:
+
+```
+{
+  "v1.0": 501,
+  "v1.1": 802,
+  "v2.0": 2857
+}
+```
+
+## Meta variables
+
+Viash offers hidden variables to use in your scripts that can be used to get meta information about your component.
+
+### Functionality name
+
+Name of the component found in the [`functionality`](/documentation/reference/config/functionality.html) section of the [Viash config](/documentation/reference/config/overview.html):
+
+```yaml
+functionality:
+  name: my_component
+```
+
+This can be referenced in your script using `meta.functionality_name`:
+
+```csharp
+Console.WriteLine(meta.functionality_name);
+```
+
+**Output**
+```
+my_component
+```
+
+### Resources directory
+
+Path where the [resources](/documentation/reference/config/functionality.html#resources) as defined in the [Viash config file](/documentation/reference/config/overview.html) are stored. You can access this value using `meta.resources_dir`:
+
+```csharp
+Console.WriteLine(meta.resources_dir);
+```
+
+When using [`viash run`](/documentation/reference/viash/run.html) to create a temporary build target and execute it, this will point to the temporary path where the executable was generated:
+
+```
+/tmp/viash_my_component9560481446119256265
+```
+
+After building a component using [`viash build`](/documentation/reference/viash/build.html) and running the generated executable, it points to the directory where the executable and the other resources reside in:
+
+```
+/home/user/components/my_component_target_dir
+```
+
+### Temp directory
+
+Path to the directory supplied by the host system where you can write temporary files to. This can be referenced in your script using `meta.temp_dir`:
+
+```csharp
+Console.WriteLine(meta.temp_dir);
+```
+
+**Output**
+```
+/tmp
+```
