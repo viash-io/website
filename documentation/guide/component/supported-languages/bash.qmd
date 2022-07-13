@@ -128,6 +128,48 @@ Hello World!
 
 Anything between `## VIASH START` and `## VIASH END` will be replaced by the injected variables Viash generates once the script is executed as part of a component. This allows you to easily troubleshoot your script while being compatible with Viash.  
 
+### Sourcing other scripts
+
+With bash, you can include other bash scripts to share content and functionality by using the `source` command.  
+By writing two scripts and adding them to the same directory, one can reference the other:
+
+**script.sh**
+```bash
+#!/bin/bash
+
+source include_me.sh
+echo "Hello from the main script!"
+```
+
+**include_me.sh**
+```bash
+#!/bin/bash
+
+echo "Hi from the included script!"
+```
+
+Running `script.sh` results in the following output:
+
+```
+Hi from the included script!
+Hello from the main script!
+```
+
+Viash supports the sourcing of scripts by adding them as a [resource](/documentation/guide/component/resources.html):
+
+**config.vsh.yaml**
+```yaml
+functionality:
+  name: source_example
+  resources:
+  - type: bash_script
+    path: script.sh
+  - type: bash_script
+    path: include_me.sh
+```
+
+Doing this will ensure any needed scripts will be included with the build target.
+
 ## Meta variables
 
 Viash offers hidden variables to use in your scripts that can be used to get meta information about your component.
