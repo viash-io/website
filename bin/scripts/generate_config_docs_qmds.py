@@ -1,11 +1,13 @@
 import json
 import git, subprocess, json
+from pathlib import Path
 
 # Get root dir of repo
 repo = git.Repo(".", search_parent_directories=True)
 repo_root = repo.working_tree_dir
 json_export = "schema_export.json"
 reference_dir = ""
+child_dir = "config"
 
 
 def generate_json():
@@ -29,12 +31,16 @@ def create_qmd():
     viash_json = json.load(json_file)
     json_file.close()
 
-    for key in viash_json:
-        if not key.endswith("Requirements"):
-            create_page(viash_json, key, viash_json[key])
+    for topic in viash_json:
+        if topic == "functionality":
+            create_page(viash_json, topic, viash_json[topic], child_dir)
+        else:
+            for subtopic in viash_json[topic]:
+                if not subtopic.endswith("Requirements"):
+                    create_page(viash_json, subtopic, viash_json[topic][subtopic], child_dir + "/" + topic)
 
 
-def create_page(full_json, page_name, json_entry):
+def create_page(full_json, page_name, json_entry, directory):
     qmd = ""
 
     title = page_name.replace("Platform", " Platform")
@@ -117,7 +123,8 @@ def create_page(full_json, page_name, json_entry):
 
     qmd += "\n\n"
 
-    qmd_file = open(reference_dir + f"config/{page_name}.qmd", "w")
+    Path(reference_dir + f"{directory}/").mkdir(parents=True, exist_ok=True)
+    qmd_file = open(reference_dir + f"{directory}/{page_name}.qmd", "w")
     qmd_file.write(qmd)
     qmd_file.close()
 
