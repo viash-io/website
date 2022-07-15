@@ -1,5 +1,5 @@
 ---
-title: Javascript
+title: JavaScript
 search: true
 execute:
   echo: false
@@ -8,3 +8,181 @@ execute:
 
 {{< include ../../../../includes/_language_chooser.qmd >}}
 {{< include ../../../../includes/_python_helper.qmd >}}
+
+## Overview
+
+Viash supports JavaScript as a scripting language via [Node.js](https://nodejs.org/), a runtime build on [Chrome's V8 JavaScript engine](https://v8.dev/).
+
+## Dependencies
+
+To run JavaScript on your system, you'll need to download and install [Node.js](https://nodejs.org/) from their homepage.
+
+## Referencing JavaScript scripts in a Viash config file
+
+When referencing a JavaScript script in the [`resources`](/documentation/reference/config/functionality.html#resources) of the `functionality` section your [Viash config](/documentation/reference/config/overview.html), use `javascript_script` as its type:
+
+```yaml
+functionality:
+  name: my_component
+  resources:
+  - type: javascript_script
+    path: script.js
+```
+
+## Executing scripts
+
+JavaScript scripts end with the **.js** extension. They can be run locally by using the `node` command:
+
+```js
+node script.js
+```
+
+## Script examples
+
+These examples will briefly show to use JavaScript in the context of Viash. Each example shows the source code and the output after running it.
+
+### Hello World
+
+Here's the classic Hello World written in JavaScript:
+
+**HelloWorld.js**
+```js
+#!/usr/bin/env node
+
+console.log('Hello World!')
+```
+
+**Output**
+```
+Hello World!
+```
+
+:::{.callout-note}
+The first line with the [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) is optional but recommended as it indicates what interpreter should be used for execution.
+:::
+
+### Using variables
+
+**Variables.js**
+```js
+#!/usr/bin/env node
+
+let hello = 'Hello World!'
+console.log(hello)
+```
+
+**Output**
+```
+Hello World!
+```
+
+### Using Viash arguments as variables
+
+Viash generates variables based on the arguments defined in the [Viash config file](/documentation/reference/config/overview.html) and injects them at the top of your script.  In the case of JavaScript, these variables are grouped inside a dictionary named `par` and can be referenced by name.
+
+**config.vsh.yaml**
+```yaml
+functionality:
+  name: hello_world
+  arguments:
+  - type: string
+    name: --hello
+    default: "Hello World!"
+  resources:
+  - type: javascript_script
+    path: script.js
+```
+
+**ViashVariables.js**
+```js
+#!/usr/bin/env node
+
+console.log(par['hello'])
+```
+
+**Output**
+```
+Hello World!
+```
+
+### Using Viash placeholder variables
+
+In some cases, you want to be able to write or adapt a script and test it out before creating a component. While you can write your script as normal and switch out the variables later on with their Viash variants, we supply a useful method of adding Viash variables beforehand in the form of a comment section.
+
+**PlaceholderVariables.js**
+```js
+#!/usr/bin/env node
+
+// VIASH START
+let par = {
+    'hello': 'Hello World!'
+  }
+// VIASH END
+
+console.log(par['hello'])
+```
+
+**Output**
+```
+Hello World!
+```
+
+Anything between `// VIASH START` and `// VIASH END` will be replaced by the injected variables Viash generates once the script is executed as part of a component. This allows you to easily troubleshoot your script while being compatible with Viash.  
+
+## Meta variables
+
+Viash offers hidden variables to use in your scripts that can be used to get meta information about your component.
+
+### Functionality name
+
+Name of the component found in the [`functionality`](/documentation/reference/config/functionality.html) section of the [Viash config](/documentation/reference/config/overview.html):
+
+```yaml
+functionality:
+  name: my_component
+```
+
+This can be referenced in your script using `meta['functionality_name']`:
+
+```js
+console.log(meta['functionality_name']);
+```
+
+**Output**
+```
+my_component
+```
+
+### Resources directory
+
+Path where the [resources](/documentation/reference/config/functionality.html#resources) as defined in the [Viash config file](/documentation/reference/config/overview.html) are stored. You can access this value using `meta['resources_dir']`:
+
+```js
+console.log(meta['resources_dir']);
+```
+
+When using [`viash run`](/documentation/reference/viash/run.html) to create a temporary build target and execute it, this will point to the temporary path where the executable was generated:
+
+```
+/tmp/viash_my_component9560481446119256265
+```
+
+After building a component using [`viash build`](/documentation/reference/viash/build.html) and running the generated executable, it points to the directory where the executable and the other resources reside in:
+
+```
+/home/user/components/my_component_target_dir
+```
+
+### Temp directory
+
+Path to the directory supplied by the host system where you can write temporary files to. This can be referenced in your script using `meta['temp_dir']`:
+
+```js
+console.log(meta['temp_dir']);
+```
+
+**Output**
+```
+/tmp
+```
+
