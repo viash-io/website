@@ -231,6 +231,48 @@
     "text": "Meta variables\nViash offers hidden variables to use in your scripts that can be used to get meta information about your component.\n\nFunctionality name\nName of the component found in the functionality section of the Viash config:\nfunctionality:\n  name: my_component\nThis can be referenced in your script using meta['functionality_name']:\nconsole.log(meta['functionality_name']);\nOutput\nmy_component\n\n\nResources directory\nPath where the resources as defined in the Viash config file are stored. You can access this value using meta['resources_dir']:\nconsole.log(meta['resources_dir']);\nWhen using viash run to create a temporary build target and execute it, this will point to the temporary path where the executable was generated:\n/tmp/viash_my_component9560481446119256265\nAfter building a component using viash build and running the generated executable, it points to the directory where the executable and the other resources reside in:\n/home/user/components/my_component_target_dir\n\n\nTemp directory\nPath to the directory supplied by the host system where you can write temporary files to. This can be referenced in your script using meta['temp_dir']:\nconsole.log(meta['temp_dir']);\nOutput\n/tmp"
   },
   {
+    "objectID": "documentation/guide/component/supported-languages/python.html",
+    "href": "documentation/guide/component/supported-languages/python.html",
+    "title": "Python",
+    "section": "",
+    "text": "Python is a popular programming language"
+  },
+  {
+    "objectID": "documentation/guide/component/supported-languages/python.html#dependencies",
+    "href": "documentation/guide/component/supported-languages/python.html#dependencies",
+    "title": "Python",
+    "section": "Dependencies",
+    "text": "Dependencies\nTo run Python scripts on your system, download and install Python. Most package managers include a python package as well. Make sure to install a version of Python that’s at least version 3.8 or newer."
+  },
+  {
+    "objectID": "documentation/guide/component/supported-languages/python.html#referencing-python-scripts-in-a-viash-config-file",
+    "href": "documentation/guide/component/supported-languages/python.html#referencing-python-scripts-in-a-viash-config-file",
+    "title": "Python",
+    "section": "Referencing Python scripts in a Viash config file",
+    "text": "Referencing Python scripts in a Viash config file\nWhen referencing a Python script in the resources of the functionality section your Viash config, use python_script as its type:\nfunctionality:\n  name: my_component\n  resources:\n  - type: python_script\n    path: script.py"
+  },
+  {
+    "objectID": "documentation/guide/component/supported-languages/python.html#executing-scripts",
+    "href": "documentation/guide/component/supported-languages/python.html#executing-scripts",
+    "title": "Python",
+    "section": "Executing scripts",
+    "text": "Executing scripts\nPython scripts end with the .py extension. They can be run locally by using the python command:\npython script.py"
+  },
+  {
+    "objectID": "documentation/guide/component/supported-languages/python.html#script-examples",
+    "href": "documentation/guide/component/supported-languages/python.html#script-examples",
+    "title": "Python",
+    "section": "Script examples",
+    "text": "Script examples\nThese examples will briefly show to use Python in the context of Viash. Each example shows the source code and the output after running it.\n\nHello World\nHere’s the classic Hello World written in Python:\nHelloWorld.py\n#!/usr/bin/env python3\n\nprint(\"Hello World!\")\nOutput\nHello World!\n\n\n\n\n\n\nNote\n\n\n\nThe first line with the shebang is optional but recommended as it indicates what interpreter should be used for execution.\n\n\n\n\nUsing variables\nVariables.py\n#!/usr/bin/env python3\n\nhello = \"Hello World!\"\nprint(hello)\nOutput\nHello World!\n\n\nUsing Viash arguments as variables\nViash generates variables based on the arguments defined in the Viash config file and injects them at the top of your script. In the case of Python, these variables are grouped inside a dictionary named par and can be referenced by name.\nconfig.vsh.yaml\nfunctionality:\n  name: hello_world\n  arguments:\n  - type: string\n    name: --hello\n    default: \"Hello World!\"\n  resources:\n  - type: python_script\n    path: script.py\nViashVariables.py\n#!/usr/bin/env python3\n\nhello = \"Hello World!\"\nprint(par[\"hello\"])\nOutput\nHello World!\n\n\nUsing Viash placeholder variables\nIn some cases, you want to be able to write or adapt a script and test it out before creating a component. While you can write your script as normal and switch out the variables later on with their Viash variants, we supply a useful method of adding Viash variables beforehand in the form of a comment section.\nPlaceholderVariables.py\n#!/usr/bin/env python3\n\n## VIASH START\npar = {\n  \"hello\": \"Hello World!\"\n}\n## VIASH END\n\nprint(par[\"hello\"])\nOutput\nHello World!\nAnything between ## VIASH START and ## VIASH END will be replaced by the injected variables Viash generates once the script is executed as part of a component. This allows you to easily troubleshoot your script while being compatible with Viash."
+  },
+  {
+    "objectID": "documentation/guide/component/supported-languages/python.html#meta-variables",
+    "href": "documentation/guide/component/supported-languages/python.html#meta-variables",
+    "title": "Python",
+    "section": "Meta variables",
+    "text": "Meta variables\nViash offers hidden variables to use in your scripts that can be used to get meta information about your component.\n\nFunctionality name\nName of the component found in the functionality section of the Viash config:\nfunctionality:\n  name: my_component\nThis can be referenced in your script using meta[\"functionality_name\"]:\nprint(meta[\"functionality_name\"])\nOutput\nmy_component\n\n\nResources directory\nPath where the resources as defined in the Viash config file are stored. You can access this value using meta[\"resources_dir\"]:\nprint(meta[\"resources_dir\"])\nWhen using viash run to create a temporary build target and execute it, this will point to the temporary path where the executable was generated:\n/tmp/viash_my_component9560481446119256265\nAfter building a component using viash build and running the generated executable, it points to the directory where the executable and the other resources reside in:\n/home/user/components/my_component_target_dir\n\n\nTemp directory\nPath to the directory supplied by the host system where you can write temporary files to. This can be referenced in your script using meta[\"temp_dir\"]:\nprint(meta[\"temp_dir\"])\nOutput\n/tmp"
+  },
+  {
     "objectID": "documentation/guide/component/supported-languages/bash.html",
     "href": "documentation/guide/component/supported-languages/bash.html",
     "title": "Bash",
