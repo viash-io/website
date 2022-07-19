@@ -68,20 +68,19 @@ All references to the necessary files and folders to make the component work are
 
 #### `platforms`
 
-This lists what platforms the component can target. For this example, the only platform is `nextflow`.  
+This lists what platforms the component can target. For this example, the only platform is `nextflow`. The [`variant`]() property can be used to choose between our [legacy]() NextFlow implementation or the next-generation VDSL3 variant. The latter is recommended as it has a lot of features to make creating modules more streamlined. You can read more about VDSL3 in [our guide](). If you specify a Docker platform in addition to NextFlow, the image in the docker platform section will be automatically used for NextFlow.
 
-- The [`variant`]() property can be used to choose between our [legacy]() NextFlow implementation or the next-generation VDSL3 variant. The latter is recommended as it has a lot of features to make creating modules more streamlined. You can read more about VDSL3 in [our guide]().
-- The [`directives`]() dictionary contains optional settings that affect the execution of the module. For this example, a single directive is used: `container`. The `container` is the base Docker image that should be used to run the module.
 
 :::{.callout-tip}
-If you specify a Docker platform in addition to NextFlow, the image in the docker platform section will be automatically used for NextFlow as well:
+
+If you don't add `docker` as a build target, you can use the [`directives`]() dictionary to specify a base image to use:
 
 ```yaml
 platforms:
-  - type: docker
-    image: ubuntu:20.04
   - type: nextflow
     variant: vdsl3
+    directives:
+      container: ubuntu:20.04
 ```
 :::
 
