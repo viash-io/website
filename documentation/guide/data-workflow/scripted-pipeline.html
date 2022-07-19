@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Viash - Guide</title>
+<title>Viash - Scripted Pipeline</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,25 +18,25 @@ ul.task-list{list-style: none;}
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../documentation/guide/component/creation/native.html" rel="next">
-<link href="../../favicon.png" rel="icon" type="image/png">
-<script src="../../site_libs/quarto-listing/list.min.js"></script>
-<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html" rel="next">
+<link href="../../../documentation/guide/building-block/nextflow/building-running.html" rel="prev">
+<link href="../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -56,44 +56,12 @@ ul.task-list{list-style: none;}
     "search-submit-button-title": "Submit"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-guide-links .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-title','listing-subtitle','listing-links',{ data: ['index'] },{ data: ['categories'] }],
-      
-      searchColumns: ["listing-title","listing-subtitle","listing-links"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-guide-links'] = new List('listing-guide-links', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Viash - Guide">
-<meta property="og:description" content="Comprehensive guide to using Viash. If you are just starting out, you may want to explore the tutorials to learn the basics.">
+<link rel="stylesheet" href="../../../styles.css">
+<meta property="og:title" content="Viash - Scripted Pipeline">
 <meta property="og:site-name" content="Viash">
-<meta name="twitter:title" content="Viash - Guide">
-<meta name="twitter:description" content="Comprehensive guide to using Viash. If you are just starting out, you may want to explore the tutorials to learn the basics.">
+<meta name="twitter:title" content="Viash - Scripted Pipeline">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -110,16 +78,16 @@ ul.task-list{list-style: none;}
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html">Overview</a>
+    <a class="nav-link" href="../../../index.html">Overview</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../documentation/get-started/index.html">Get Started</a>
+    <a class="nav-link" href="../../../documentation/get-started/index.html">Get Started</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../documentation/guide/index.html" aria-current="page">Guide</a>
+    <a class="nav-link active" href="../../../documentation/guide/index.html" aria-current="page">Guide</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../documentation/reference/index.html">Reference</a>
+    <a class="nav-link" href="../../../documentation/reference/index.html">Reference</a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false">Help</a>
@@ -155,7 +123,7 @@ ul.task-list{list-style: none;}
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Guide</h1>
+      <h1 class="quarto-secondary-nav-title">Scripted Pipeline</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -170,7 +138,7 @@ ul.task-list{list-style: none;}
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/index.html" class="sidebar-item-text sidebar-link active">Guide</a>
+  <a href="../../../documentation/guide/index.html" class="sidebar-item-text sidebar-link">Guide</a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -191,17 +159,17 @@ ul.task-list{list-style: none;}
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/component/creation/native.html" class="sidebar-item-text sidebar-link">Native</a>
+  <a href="../../../documentation/guide/component/creation/native.html" class="sidebar-item-text sidebar-link">Native</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/component/creation/docker.html" class="sidebar-item-text sidebar-link">Docker</a>
+  <a href="../../../documentation/guide/component/creation/docker.html" class="sidebar-item-text sidebar-link">Docker</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/component/creation/nextflow.html" class="sidebar-item-text sidebar-link">Nextflow</a>
+  <a href="../../../documentation/guide/component/creation/nextflow.html" class="sidebar-item-text sidebar-link">Nextflow</a>
   </div>
 </li>
       </ul>
@@ -216,49 +184,49 @@ ul.task-list{list-style: none;}
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/component/supported-languages/bash.html" class="sidebar-item-text sidebar-link">Bash</a>
+  <a href="../../../documentation/guide/component/supported-languages/bash.html" class="sidebar-item-text sidebar-link">Bash</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/component/supported-languages/csharp.html" class="sidebar-item-text sidebar-link">C#</a>
+  <a href="../../../documentation/guide/component/supported-languages/csharp.html" class="sidebar-item-text sidebar-link">C#</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/component/supported-languages/javascript.html" class="sidebar-item-text sidebar-link">JavaScript</a>
+  <a href="../../../documentation/guide/component/supported-languages/javascript.html" class="sidebar-item-text sidebar-link">JavaScript</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/component/supported-languages/python.html" class="sidebar-item-text sidebar-link">Python</a>
+  <a href="../../../documentation/guide/component/supported-languages/python.html" class="sidebar-item-text sidebar-link">Python</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/component/supported-languages/r.html" class="sidebar-item-text sidebar-link">R</a>
+  <a href="../../../documentation/guide/component/supported-languages/r.html" class="sidebar-item-text sidebar-link">R</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/component/supported-languages/scala.html" class="sidebar-item-text sidebar-link">Scala</a>
+  <a href="../../../documentation/guide/component/supported-languages/scala.html" class="sidebar-item-text sidebar-link">Scala</a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/component/unit-testing.html" class="sidebar-item-text sidebar-link">Unit Testing</a>
+  <a href="../../../documentation/guide/component/unit-testing.html" class="sidebar-item-text sidebar-link">Unit Testing</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/component/namespaces.html" class="sidebar-item-text sidebar-link">Namespaces</a>
+  <a href="../../../documentation/guide/component/namespaces.html" class="sidebar-item-text sidebar-link">Namespaces</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/component/resources.html" class="sidebar-item-text sidebar-link">External Resources</a>
+  <a href="../../../documentation/guide/component/resources.html" class="sidebar-item-text sidebar-link">External Resources</a>
   </div>
 </li>
       </ul>
@@ -281,7 +249,7 @@ ul.task-list{list-style: none;}
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/building-block/native/building-running.html" class="sidebar-item-text sidebar-link">Building and Running</a>
+  <a href="../../../documentation/guide/building-block/native/building-running.html" class="sidebar-item-text sidebar-link">Building and Running</a>
   </div>
 </li>
       </ul>
@@ -296,7 +264,7 @@ ul.task-list{list-style: none;}
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/building-block/docker/building-running.html" class="sidebar-item-text sidebar-link">Building and Running</a>
+  <a href="../../../documentation/guide/building-block/docker/building-running.html" class="sidebar-item-text sidebar-link">Building and Running</a>
   </div>
 </li>
       </ul>
@@ -311,7 +279,7 @@ ul.task-list{list-style: none;}
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/building-block/nextflow/building-running.html" class="sidebar-item-text sidebar-link">Building and Running</a>
+  <a href="../../../documentation/guide/building-block/nextflow/building-running.html" class="sidebar-item-text sidebar-link">Building and Running</a>
   </div>
 </li>
       </ul>
@@ -328,7 +296,7 @@ ul.task-list{list-style: none;}
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/data-workflow/scripted-pipeline.html" class="sidebar-item-text sidebar-link">Scripted Pipeline</a>
+  <a href="../../../documentation/guide/data-workflow/scripted-pipeline.html" class="sidebar-item-text sidebar-link active">Scripted Pipeline</a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
@@ -341,12 +309,12 @@ ul.task-list{list-style: none;}
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html" class="sidebar-item-text sidebar-link">Pipeline Basics</a>
+  <a href="../../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html" class="sidebar-item-text sidebar-link">Pipeline Basics</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html" class="sidebar-item-text sidebar-link">Advanced Pipeline</a>
+  <a href="../../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html" class="sidebar-item-text sidebar-link">Advanced Pipeline</a>
   </div>
 </li>
       </ul>
@@ -374,15 +342,20 @@ ul.task-list{list-style: none;}
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Guide</h1>
-<p class="subtitle lead">Comprehensive guide to using Viash. If you are just starting out, you may want to explore the <a href="../../documentation/get-started/index.html">tutorials</a> to learn the basics.</p>
+<h1 class="title d-none d-lg-block">Scripted Pipeline</h1>
 </div>
 
 
@@ -396,30 +369,71 @@ ul.task-list{list-style: none;}
 
 </header>
 
-<div id="listing-guide-links" class="column-screen-inset-right quarto-listing quarto-listing-container-custom" style="max-width: 850px;">
-<div class="link-cards">
-<div class="card">
-<div class="card-body">
-<section id="example-title" class="level4 card-title">
-<h4 data-anchor-id="example-title">Example title</h4>
-<section id="subtitle" class="level6 card-subtitle text-muted">
-<h6 data-anchor-id="subtitle">Subtitle</h6>
+<script type="text/javascript">
+let langDict = {
+  'bash': "Bash",
+  'csharp': "C#",
+  'js': "JavaScript",
+  'python': "Python",
+  'scala': "Scala",
+  'r': "R",
+};
+
+let invertedLangDict = invertDictionary(langDict);
+
+document.addEventListener("DOMContentLoaded", function() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    let lang = 'bash';
+
+    if (urlParams.has('lang')){
+        lang = urlParams.get('lang');
+    }
+
+    changeTabSelections(lang);
+
+    var elements = document.querySelectorAll('[role="tab"]');
+    
+    for(var i = 0; i < elements.length; i++) {
+        tab = elements[i];
+        if (tab.textContent in invertedLangDict) {
+            tab.addEventListener('click', onTabClicked);
+        }
+    }
+
+    });
+
+    function changeTabSelections(language) {
+        var elements = document.querySelectorAll('[role="tab"]');
+
+        for(var i = 0; i < elements.length; i++) {
+            tab = elements[i];
+
+            if (tab.textContent == langDict[language]) {
+                tab.click();
+            }
+        }
+    }
+
+    function onTabClicked(event) {
+        changeTabSelections(invertedLangDict[event.srcElement.textContent]);
+    }
+
+    function invertDictionary(dict){
+        var ret = {};
+        for(var key in dict){
+            ret[dict[key]] = key;
+        }
+        return ret;
+    }
+
+</script>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+
+
 </section>
-</section>
-<ul>
-<li><a href="../../documentation/guide/component/creation/native.html">Link 1</a></li>
-<li><a href="../../documentation/guide/component/creation/docker.html">Link 2</a></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div>
-
-
-
 
 </main> <!-- /main -->
 <script type="text/javascript">
@@ -454,6 +468,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const clipboard = new window.ClipboardJS('.code-copy-button', {
     target: function(trigger) {
       return trigger.previousElementSibling;
@@ -540,10 +561,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../../../documentation/guide/building-block/nextflow/building-running.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Building and Running</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../documentation/guide/component/creation/native.html" class="pagination-link">
-        <span class="nav-page-text">Native</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html" class="pagination-link">
+        <span class="nav-page-text">Pipeline Basics</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -554,16 +578,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       <div class="nav-footer-center">
         <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="../../about.html">About</a>
+    <a class="nav-link" href="../../../about.html">About</a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="../../documentation/faq/index.html">FAQ</a>
+    <a class="nav-link" href="../../../documentation/faq/index.html">FAQ</a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="../../license.html">License</a>
+    <a class="nav-link" href="../../../license.html">License</a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="../../trademark.html">Trademark</a>
+    <a class="nav-link" href="../../../trademark.html">Trademark</a>
   </li>  
 </ul>
       </div>
