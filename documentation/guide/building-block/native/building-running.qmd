@@ -1,0 +1,73 @@
+---
+title: Building and Running
+search: true
+---
+
+## Overview
+
+This guide covers how you can can build and run a native executable.
+
+## Building a native executable
+
+To start with, create a Viash component that targets the native platform as explained in [this guide](/documentation/guide/component/creation/native.html).  
+Next, use the [viash build]() command to generate an executable inside of a **bin** directory:
+
+```bash
+viash build config.vsh.yaml -o bin
+```   
+
+This will generate an executable named the same as your component in the **bin** directory:
+
+## Documentation
+
+It's often useful to know what arguments an executable expects before trying to run it. To display its documentation, run the executable with just the `--help` argument:
+
+```bash
+bin/hello_world --help
+```
+
+This will result in output that looks like this:
+
+```
+hello_world
+
+A minimal example component.
+
+Options:
+    --input
+        type: string
+        default: World
+```
+
+This example takes a single optional string named `--input` as an argument. 
+
+## Running the executable
+
+Running a native executable is the same as any other executable on your system. Simply call it as a command in your terminal:
+
+```bash
+bin/hello_world
+```
+
+This results in the following output:
+
+```
+Hello World
+```
+
+You can pass arguments to it directly, which differs from using the [viash run](/documentation/guide/component/creation/native.html#running) command as Viash itself isn't called:
+
+```bash
+bin/hello_world --input "everyone!"
+```
+
+This outputs:
+
+```
+Hello everyone!
+```
+
+## What's next?
+
+Native executables can be used in a scripted pipeline, to read more about that use case see the [Scripted Pipeline](/documentation/guide/data-workflow/scripted-pipeline.html) guide.  
+Now you know how to build and run native executables, you might also be interested in learning more about [executables with a Docker backend](/documentation/guide/building-block/docker/building-running.html).
