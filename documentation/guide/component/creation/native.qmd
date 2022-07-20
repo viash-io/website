@@ -170,7 +170,7 @@ print_file_contents("/download/components/hello_world/r/config.vsh.yaml", "yaml"
 Here's a breakdown of the different sections:
 
 - `functionality` describes what the component does and the resources it needs. It contains the `name`, a short `description` and more importantly, the `arguments` and `resources` the component uses.
-  - `arguments` contains all arguments the component accepts and will be passed to the script. In this case, a single `string` named `--input` resides here with a default value of `Viash`. 
+  - `arguments` contains all arguments the component accepts and will be passed to the script. In this case, a single `string` named `--input` resides here with a default value of `World`. 
   - `resources` holds references to all necessary files and folders to make the component work. For this example, a single script is all that's needed.
 - `platforms` lists what platforms the component can target. This example targets the [`native`]() platform, which will generate an executable that's run using the system resources.
 
@@ -182,7 +182,7 @@ With the two necessary files present to create a component, you can call upon Vi
 viash run config.vsh.yaml
 ```
 
-Without passing any arguments, this will use the default value for `--input`, which is `Viash`. This results in the following output:
+Without passing any arguments, this will use the default value for `--input`, which is `World`. This results in the following output:
 
 ```
 Hello World
@@ -191,7 +191,7 @@ Hello World
 By providing the a value for `--input`, you can customize the greeting: 
 
 ```bash
-viash run config.vsh.yaml -- --input World
+viash run config.vsh.yaml -- --input Galaxy
 ```
 
 :::{.callout-note}
@@ -205,7 +205,7 @@ The double dash (`--`) between the viash command and the arguments is used to si
 The example above results in this output:
 
 ```
-Hello World
+Hello Galaxy
 ```
 
 ## What's next?
