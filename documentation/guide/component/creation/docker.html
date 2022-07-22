@@ -495,7 +495,7 @@ function invertDictionary(dict){
 <h2 class="anchored" data-anchor-id="preparing-a-component-for-docker">Preparing a component for Docker</h2>
 <section id="creating-a-component" class="level3">
 <h3 class="anchored" data-anchor-id="creating-a-component">Creating a component</h3>
-<p>For this example, you’ll use the same <code>hello_world</code> component the <a href="../../../../documentation/guide/component/creation/native.html">native component creation guide</a> uses. You can either follow with that guide first or simply download the component below that contains the component in all <a href="../../../../documentation/guide/component/languages.html">supported languages</a>.</p>
+<p>For this example, you’ll use the same <code>hello_world</code> component the <a href="../../../../documentation/guide/component/creation/native.html">native component creation guide</a> uses. You can either follow with that guide first or simply download the component below that contains the component in all <a href="../../../../documentation/guide/component/languages.html">supported languages</a>. Simply rename the language folder you want to use to <code>hello_world</code> and use that as your working directory.</p>
 <p><a href="../../../../download/components/hello_world.zip" id="btn-download" class="btn btn-info btn-md" role="button" download="">Download hello_world.zip</a></p>
 </section>
 <section id="adjusting-the-config" class="level3">
@@ -630,8 +630,8 @@ Note
 <section id="running" class="level2">
 <h2 class="anchored" data-anchor-id="running">Running</h2>
 <p>You can now call upon Viash to generate a temporary executable and run it:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">-platform</span> docker</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The <a href="">-platform</a> argument is passed to <a href=""><code>viash run</code></a> so <strong>Docker</strong> will be chosen as the build target. If the platform isn’t specified, the first one in the <code>platforms</code> list is picked.<br>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">--platform</span> docker</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>--platform</code> argument is passed to <a href="../../../../documentation/reference/viash/run.html"><code>viash run</code></a> so <strong>Docker</strong> will be chosen as the build target. If the platform isn’t specified, the first one in the <code>platforms</code> list is picked.<br>
 This results in the following output:</p>
 <pre><code>[notice] Checking if Docker image is available at 'hello_world:latest'
 [warning] Could not pull from 'hello_world:latest'. Docker image doesn't exist or is not accessible.
