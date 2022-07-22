@@ -16,7 +16,7 @@ Viash can generate a Docker image and final container for you based on a compone
 ## Requirements
 
 As this example targets the [Docker platform](/documentation/reference/config/platforms/dockerPlatform.html), the only requirement is to have Docker installed on your system. This is one of the biggest benefits of targeting the Docker platform. You can find instructions on how to install Docker for your OS on the [Viash installation page](/documentation/installation/).
-
+ 
 ## Preparing a component for Docker
 
 ### Creating a component
@@ -38,12 +38,33 @@ Depending on the scripting language you're using, a [setup section](/documentati
 ::: {.panel-tabset}
 ## Bash
 
+Add this snippet to the bottom of your config file to add Docker as a build target and add a [bash base image](https://hub.docker.com/_/bash):
+
+```yaml
+- type: docker
+  image: bash:4.0
+```
+
+Here's the full config after making this change:
+
 ```{python}
 create_download_button("/download/components/hello_world_docker/bash/config.vsh.yaml")
 print_file_contents("/download/components/hello_world_docker/bash/config.vsh.yaml", "yaml", False)
 ```
 
 ## C\#
+
+Add this snippet to the bottom of your config file to add Docker as a build target and [our dotnet-script base image](https://hub.docker.com/r/dataintuitive/dotnet-script):
+
+```yaml
+- type: docker
+  image: "dataintuitive/dotnet-script:1.2.1"
+  setup:
+    - type: apk
+      packages: [ bash ]
+```
+
+Here's the full config after making this change:
 
 ```{python}
 create_download_button("/download/components/hello_world_docker/csharp/config.vsh.yaml")
@@ -52,12 +73,30 @@ print_file_contents("/download/components/hello_world_docker/csharp/config.vsh.y
 
 ## JavaScript
 
+Add this snippet to the bottom of your config file to add Docker as a build target and a [Node.js base image](https://hub.docker.com/_/node):
+
+```yaml
+- type: docker
+  image: node:15-buster
+```
+
+Here's the full config after making this change:
+
 ```{python}
 create_download_button("/download/components/hello_world_docker/js/config.vsh.yaml")
 print_file_contents("/download/components/hello_world_docker/js/config.vsh.yaml", "yaml", False)
 ```
 
 ## Python
+
+Add this snippet to the bottom of your config file to add Docker as a build target and a [Python base image](https://hub.docker.com/_/python):
+
+```yaml
+- type: docker
+  image: "python:3.8"
+```
+
+Here's the full config after making this change:
 
 ```{python}
 create_download_button("/download/components/hello_world_docker/python/config.vsh.yaml")
@@ -66,12 +105,30 @@ print_file_contents("/download/components/hello_world_docker/python/config.vsh.y
 
 ## Scala
 
+Add this snippet to the bottom of your config file to add Docker as a build target and a [base image containing Scala and sbt](https://hub.docker.com/r/hseeberger/scala-sbt):
+
+```yaml
+- type: docker
+  image: hseeberger/scala-sbt
+```
+
+Here's the full config after making this change:
+
 ```{python}
 create_download_button("/download/components/hello_world_docker/scala/config.vsh.yaml")
 print_file_contents("/download/components/hello_world_docker/scala/config.vsh.yaml", "yaml", False)
 ```
 
 ## R
+
+Add this snippet to the bottom of your config file to add Docker as a build target and a [base image containing R, rstudio and R packages](https://hub.docker.com/r/rocker/tidyverse):
+
+```yaml
+- type: docker
+  image: "rocker/tidyverse:4.0.4"
+```
+
+Here's the full config after making this change:
 
 ```{python}
 create_download_button("/download/components/hello_world_docker/r/config.vsh.yaml")
