@@ -474,40 +474,58 @@ document.addEventListener("DOMContentLoaded", function() {
 
     changeTabSelections(lang);
 
-    var elements = document.querySelectorAll('[role="tab"]');
+    var tabs = document.querySelectorAll('[role="tab"]');
     
-    for(var i = 0; i < elements.length; i++) {
-        tab = elements[i];
+    for(var i = 0; i < tabs.length; i++) {
+        tab = tabs[i];
         if (tab.textContent in invertedLangDict) {
             tab.addEventListener('click', onTabClicked);
         }
     }
 
-    });
+});
 
-    function changeTabSelections(language) {
-        var elements = document.querySelectorAll('[role="tab"]');
+function changeTabSelections(language) {
+    var tabs = document.querySelectorAll('[role="tab"]');
+    var tab_panels = document.querySelectorAll('[role="tabpanel"]');
 
-        for(var i = 0; i < elements.length; i++) {
-            tab = elements[i];
+    // Disable all tab panels
+    for(var i = 0; i < tab_panels.length; i++) {
+        panel = tab_panels[i];
+        panel.classList.remove('active')
+    }
 
-            if (tab.textContent == langDict[language]) {
-                tab.click();
-            }
+    // Iterate over all tabs
+    for(var i = 0; i < tabs.length; i++) {
+        tab = tabs[i];
+
+        // Disable all tabs
+        tab.classList.remove('active');
+
+        // If the tab is the chosen language
+        if (tab.textContent == langDict[language]) {
+            // Mark it active
+            tab.classList.add('active');
+            // Find the linked tab panel and make it active
+            var linked_panel = tab.getAttribute('aria-controls')
+            var panel = document.getElementById(linked_panel);
+            panel.classList.add('active');
         }
     }
 
-    function onTabClicked(event) {
-        changeTabSelections(invertedLangDict[event.srcElement.textContent]);
-    }
+}
 
-    function invertDictionary(dict){
-        var ret = {};
-        for(var key in dict){
-            ret[dict[key]] = key;
-        }
-        return ret;
+function onTabClicked(event) {
+    changeTabSelections(invertedLangDict[event.srcElement.textContent]);
+}
+
+function invertDictionary(dict){
+    var ret = {};
+    for(var key in dict){
+        ret[dict[key]] = key;
     }
+    return ret;
+}
 
 </script>
 <section id="overview" class="level2">
