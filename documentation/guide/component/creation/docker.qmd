@@ -21,7 +21,7 @@ As this example targets the [Docker platform](/documentation/reference/config/pl
 
 ### Creating a component
 
-For this example, you'll use the same `hello_world` component the [native component creation guide](/documentation/guide/component/creation/native.html) uses. You can either follow with that guide first or simply download the component below that contains the component in all [supported languages](/documentation/guide/component/languages.html).
+For this example, you'll use the same `hello_world` component the [native component creation guide](/documentation/guide/component/creation/native.html) uses. You can either follow with that guide first or simply download the component below that contains the component in all [supported languages](/documentation/guide/component/languages.html). Simply rename the language folder you want to use to `hello_world` and use that as your working directory.
 
 ```{python}
 create_zip(parent_dir = "/download/components/", zip_dir = "hello_world")
@@ -89,10 +89,10 @@ When building your own components that only target Docker or Nextflow, adding th
 You can now call upon Viash to generate a temporary executable and run it:
 
 ```bash
-viash run config.vsh.yaml -platform docker
+viash run config.vsh.yaml --platform docker
 ```
 
-The [-platform]() argument is passed to [`viash run`]() so **Docker** will be chosen as the build target. If the platform isn't specified, the first one in the `platforms` list is picked.  
+The `--platform` argument is passed to [`viash run`](/documentation/reference/viash/run.html) so **Docker** will be chosen as the build target. If the platform isn't specified, the first one in the `platforms` list is picked.  
 This results in the following output:
 
 ```
