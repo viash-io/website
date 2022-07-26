@@ -1,0 +1,1 @@
+cat("Hello ", par$input)
