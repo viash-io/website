@@ -1,0 +1,1 @@
+cat("Hello", par$input, file=par$output, sep=" ", append=TRUE)
