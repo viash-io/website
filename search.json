@@ -35,30 +35,58 @@
     "text": "What’s next?\nNow you know how to build and run executables with a Docker backend, you may be interested in building and running Nextflow modules.\nIf you prefer to use executables in a simple pipeline, check out the Scripted Pipeline guide."
   },
   {
-    "objectID": "documentation/guide/building-block/nextflow/building-running.html",
-    "href": "documentation/guide/building-block/nextflow/building-running.html",
-    "title": "Building and Running",
+    "objectID": "documentation/guide/building-block/nextflow/building-running-advanced.html",
+    "href": "documentation/guide/building-block/nextflow/building-running-advanced.html",
+    "title": "Building and Running Advanced",
     "section": "",
     "text": "This guide covers how you can can build a Nextflow module to use in your pipeline."
   },
   {
-    "objectID": "documentation/guide/building-block/nextflow/building-running.html#building-a-nextflow-vdsl3-module",
-    "href": "documentation/guide/building-block/nextflow/building-running.html#building-a-nextflow-vdsl3-module",
-    "title": "Building and Running",
+    "objectID": "documentation/guide/building-block/nextflow/building-running-advanced.html#building-a-nextflow-vdsl3-module",
+    "href": "documentation/guide/building-block/nextflow/building-running-advanced.html#building-a-nextflow-vdsl3-module",
+    "title": "Building and Running Advanced",
     "section": "Building a Nextflow VDSL3 module",
     "text": "Building a Nextflow VDSL3 module\nTo start with, create a Viash component that targets the Nextflow platform as explained in this guide.\nNext, use the viash build command to generate a Nextflow module inside of a target/remove_comments directory:\nviash build src/remove_comments/config.vsh.yaml -p nextflow -o target/remove_comments\nThis will generate two files in the target/remove_comments directory: main.nf and nextflow.config.\nnextflow_component\n├── src\n│   └── remove_comments\n│       ├── config.vsh.yaml\n│       └── script.sh\n└── target\n    └── remove_comments\n        ├── main.nf\n        └── nextflow.config"
   },
   {
-    "objectID": "documentation/guide/building-block/nextflow/building-running.html#runing-a-standalone-pipeline",
-    "href": "documentation/guide/building-block/nextflow/building-running.html#runing-a-standalone-pipeline",
-    "title": "Building and Running",
-    "section": "Runing a standalone pipeline",
-    "text": "Runing a standalone pipeline\nA VDSL3 module can be run as a small, standalone Nextflow pipeline.\n\nDocumentation\nIt’s often useful to know what arguments a module expects before trying to run it. To display the documentation for a module, run the module with just the --help argument:\nnextflow run target/remove_comments/main.nf --help\nThis will result in output that looks similar to this:\nN E X T F L O W  ~  version 22.04.3\nLaunching `target/remove_comments/main.nf` [admiring_carlsson] DSL2 - revision: 8de4c7c8eb\nremove_comments\n\nOptions:\n    --input\n        type: file, required parameter\n        example: file.tsv\n\n    --output\n        type: file, required parameter, output\n        example: file.tsv\nAs you can see, this module needs a tsv file as its input and it will write the updated file away to a given output path.\n\n\nRunning the module\nTo test out the module by itself, you need a tsv file to remove the comments from. You can download a sample file we provided here:\n\nDownload sample.tsv\nHere are its contents:\n# this is a header      \n# this is also a header     \none     0.11    123\ntwo     0.23    456\nthree   0.35    789\nfour    0.47    123\nPlace sample.tsv file in a new directory named data, alongside the src and target directories.\nnextflow_component\n├── data\n│   └── sample.tsv\n├── src\n│   └── remove_comments\n│       ├── config.vsh.yaml\n│       └── script.sh\n└── target\n    └── remove_comments\n        ├── main.nf\n        └── nextflow.config\nNow run the module along with the required arguments:\nnextflow run target/remove_comments/main.nf \\\n   --input \"data/sample.tsv\" \\\n   --publishDir output\nBelow is the result:\nN E X T F L O W  ~  version 22.04.3\nLaunching `target/remove_comments/main.nf` [desperate_fermat] DSL2 - revision: 8de4c7c8eb\nWARN: Key for module 'remove_comments' is duplicated.\n\nexecutor >  local (1)\n[2b/17d7a5] process > remove_comments:remove_comments_process1 [100%] 1 of 1 ✔\ninput: [run, [input:/home/user/nextflow_component/data/sample.tsv]]\noutput: [run, /home/user/nextflow_component/work/2b/17d7a50e74d27bc8fd39f098ba06fc/run.remove_comments.output.tsv]\nA new tsv file should’ve been generated now in the output folder named run.remove_comments.output.tsv."
+    "objectID": "documentation/guide/building-block/nextflow/building-running-advanced.html#running-a-standalone-pipeline",
+    "href": "documentation/guide/building-block/nextflow/building-running-advanced.html#running-a-standalone-pipeline",
+    "title": "Building and Running Advanced",
+    "section": "Running a standalone pipeline",
+    "text": "Running a standalone pipeline\nA VDSL3 module can be run as a small, standalone Nextflow pipeline.\n\nDocumentation\nIt’s often useful to know what arguments a module expects before trying to run it. To display the documentation for a module, run the module with just the --help argument:\nnextflow run target/remove_comments/main.nf --help\nThis will result in output that looks similar to this:\nN E X T F L O W  ~  version 22.04.3\nLaunching `target/remove_comments/main.nf` [admiring_carlsson] DSL2 - revision: 8de4c7c8eb\nremove_comments\n\nOptions:\n    --input\n        type: file, required parameter\n        example: file.tsv\n\n    --output\n        type: file, required parameter, output\n        example: file.tsv\nAs you can see, this module needs a tsv file as its input and it will write the updated file away to a given output path.\n\n\nRunning the module\nTo test out the module by itself, you need a tsv file to remove the comments from. You can download a sample file we provided here:\n\nDownload sample.tsv\nHere are its contents:\n# this is a header      \n# this is also a header     \none     0.11    123\ntwo     0.23    456\nthree   0.35    789\nfour    0.47    123\nPlace sample.tsv file in a new directory named data, alongside the src and target directories.\nnextflow_component\n├── data\n│   └── sample.tsv\n├── src\n│   └── remove_comments\n│       ├── config.vsh.yaml\n│       └── script.sh\n└── target\n    └── remove_comments\n        ├── main.nf\n        └── nextflow.config\nNow run the module along with the required arguments:\nnextflow run target/remove_comments/main.nf \\\n   --input \"data/sample.tsv\" \\\n   --publishDir output\nBelow is the result:\nN E X T F L O W  ~  version 22.04.3\nLaunching `target/remove_comments/main.nf` [desperate_fermat] DSL2 - revision: 8de4c7c8eb\nWARN: Key for module 'remove_comments' is duplicated.\n\nexecutor >  local (1)\n[2b/17d7a5] process > remove_comments:remove_comments_process1 [100%] 1 of 1 ✔\ninput: [run, [input:/home/user/nextflow_component/data/sample.tsv]]\noutput: [run, /home/user/nextflow_component/work/2b/17d7a50e74d27bc8fd39f098ba06fc/run.remove_comments.output.tsv]\nA new tsv file should’ve been generated now in the output folder named run.remove_comments.output.tsv."
   },
   {
-    "objectID": "documentation/guide/building-block/nextflow/building-running.html#whats-next",
-    "href": "documentation/guide/building-block/nextflow/building-running.html#whats-next",
-    "title": "Building and Running",
+    "objectID": "documentation/guide/building-block/nextflow/building-running-advanced.html#whats-next",
+    "href": "documentation/guide/building-block/nextflow/building-running-advanced.html#whats-next",
+    "title": "Building and Running Advanced",
+    "section": "What’s next?",
+    "text": "What’s next?\nTo use generated modules inside an actual Nextflow pipeline, take a look at our Pipeline Basics guide."
+  },
+  {
+    "objectID": "documentation/guide/building-block/nextflow/building-running-basic.html",
+    "href": "documentation/guide/building-block/nextflow/building-running-basic.html",
+    "title": "Building and Running Basic",
+    "section": "",
+    "text": "This guide covers how you can can build a Nextflow module and run it as a standalone pipeline."
+  },
+  {
+    "objectID": "documentation/guide/building-block/nextflow/building-running-basic.html#building-a-nextflow-vdsl3-module",
+    "href": "documentation/guide/building-block/nextflow/building-running-basic.html#building-a-nextflow-vdsl3-module",
+    "title": "Building and Running Basic",
+    "section": "Building a Nextflow VDSL3 module",
+    "text": "Building a Nextflow VDSL3 module\nTo start off, either follow along with the basic Nextflow component creation guide to create a simple hello_world component that targets Nextflow or download the zip below containing the component in all supported languages.\nDownload hello_world_nextflow.zip\nIf you downloaded the zip above, rename the language folder you want to use to hello_world and use that as your working directory.\nTo let Viash generate a Nextflow module from your component, use the viash build command:\nviash build src/config.vsh.yaml --platform nextflow --output target\nThis will generate two files in the target directory: a pipeline script named main.nf and a Nextflow config file named nextflow.config. Your directory structure should now look like this:\nhello_world\n├── src\n│   ├── config.vsh.yaml\n│   └── script.sh\n└── target\n    ├── main.nf\n    └── nextflow.config"
+  },
+  {
+    "objectID": "documentation/guide/building-block/nextflow/building-running-basic.html#running-a-standalone-pipeline",
+    "href": "documentation/guide/building-block/nextflow/building-running-basic.html#running-a-standalone-pipeline",
+    "title": "Building and Running Basic",
+    "section": "Running a standalone pipeline",
+    "text": "Running a standalone pipeline\nWith the module built, you can now call the pipeline script from nextflow to run it standalone. Now run the module along with the required arguments:\nnextflow run target/main.nf\nBelow is the result:\nN E X T F L O W  ~  version 22.04.3\nLaunching `target/remove_comments/main.nf` [desperate_fermat] DSL2 - revision: 8de4c7c8eb\nWARN: Key for module 'remove_comments' is duplicated.\n\nexecutor >  local (1)\n[2b/17d7a5] process > remove_comments:remove_comments_process1 [100%] 1 of 1 ✔\ninput: [run, [input:/home/user/nextflow_component/data/sample.tsv]]\noutput: [run, /home/user/nextflow_component/work/2b/17d7a50e74d27bc8fd39f098ba06fc/run.remove_comments.output.tsv]"
+  },
+  {
+    "objectID": "documentation/guide/building-block/nextflow/building-running-basic.html#whats-next",
+    "href": "documentation/guide/building-block/nextflow/building-running-basic.html#whats-next",
+    "title": "Building and Running Basic",
     "section": "What’s next?",
     "text": "What’s next?\nTo use generated modules inside an actual Nextflow pipeline, take a look at our Pipeline Basics guide."
   },
@@ -98,34 +126,6 @@
     "text": "What’s next?\nExecutables can be used in a scripted pipeline, to read more about that use case see the Scripted Pipeline guide.\nNow you know how to build and run native executables, you might also be interested in learning more about executables with a Docker backend."
   },
   {
-    "objectID": "documentation/guide/component/creation/nextflow.html",
-    "href": "documentation/guide/component/creation/nextflow.html",
-    "title": "Nextflow",
-    "section": "",
-    "text": "When targeting the nextflow platform, a NextFlow module is generated that can run standalone or used in a pipeline."
-  },
-  {
-    "objectID": "documentation/guide/component/creation/nextflow.html#requirements",
-    "href": "documentation/guide/component/creation/nextflow.html#requirements",
-    "title": "Nextflow",
-    "section": "Requirements",
-    "text": "Requirements\nThis example targets the Nextflow platform, which requires you to install Nextflow and Docker. Follow the instructions on NextFlow’s homepage to install it on your system if you haven’t done so already. You can find instructions on how to install Docker for your OS on the Viash installation page."
-  },
-  {
-    "objectID": "documentation/guide/component/creation/nextflow.html#creating-a-viash-component",
-    "href": "documentation/guide/component/creation/nextflow.html#creating-a-viash-component",
-    "title": "Nextflow",
-    "section": "Creating a Viash component",
-    "text": "Creating a Viash component\nTo start off, create a folder named nextflow_component and create a src folder inside of it. Next, add another folder inside of the src folder and name it remove_comments. This is where the component will be placed, a minimal example that uses a bash script to remove comments from a TSV file.\nThe directory structure should look like this:\nnextflow_component\n└── src\n    └── remove_comments\n\nWriting the script\nCreate a script named script.sh and add it to the remove_comments folder:\n#!/bin/bash\n\ngrep -v '^#' \"$par_input\" > \"$par_output\"\nAs mentioned above, this script removes comments from a TSV file. It does so by removing all lines that start with a hashtag (#) from an input file and writing the result to the output.\n\n\n\n\n\n\nTip\n\n\n\nEvery scripting language has its own way of using variables generated by Viash. Check out the Bash page for more information and examples.\n\n\n\n\nAdding the config\nA Viash config file is a YAML file that describes the functionality of a component and the platform(s) it targets. Create a file name config.vsh.yaml inside of the remove_comments folder and add the contents below.\nDownload config.vsh.yaml\nfunctionality:\n  name: remove_comments\n  description: Remove comments from a TSV file.\n  namespace: nextflow_modules\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      required: true\n      example: \"file.tsv\"\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n      example: \"file.tsv\"\n  resources:\n  - type: bash_script\n    path: ./script.sh\nplatforms:\n  - type: docker\n    image: ubuntu:20.04\n  - type: nextflow\n    variant: vdsl3\nHere’s a breakdown of the different sections:\n\nfunctionality\nThis section describes what the component does and the resources it needs. It contains the name, a short description and more importantly, the arguments and resources the component uses. This component is part of a namespace named nextflow_modules, which we’ll explore further in the pipeline guides.\n\n\narguments\nThe arguments section contains all arguments the component accepts and will be passed to the script. In this case, an input and an output file path argument that are both required.\n\n\nresources\nAll references to the necessary files and folders to make the component work are added to this section. For this example, a single script is all that’s needed.\n\n\nplatforms\nThis lists what platforms the component can target. For this example, the only platform is nextflow. The variant property can be used to choose between our legacy NextFlow implementation or the next-generation VDSL3 variant. The latter is recommended as it has a lot of features to make creating modules more streamlined. You can read more about VDSL3 in our guide. If you specify a Docker platform in addition to NextFlow, the image in the docker platform section will be automatically used for NextFlow.\n\n\n\n\n\n\nTip\n\n\n\nIf you don’t add docker as a build target, you can use the directives dictionary to specify a base image to use:\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: ubuntu:20.04\n\n\nWith the script and config added, the final directory should now look like this:\nnextflow_component\n└── src\n    └── remove_comments\n        ├── config.vsh.yaml\n        └── script.sh"
-  },
-  {
-    "objectID": "documentation/guide/component/creation/nextflow.html#running",
-    "href": "documentation/guide/component/creation/nextflow.html#running",
-    "title": "Nextflow",
-    "section": "Running",
-    "text": "Running\nIn contrast to native and Docker based components, a Nextflow based component cannot be ran by using the viash run command. These types of components require you to use viash build first to generate a Nextflow module and run that module using nextflow run. See Building and Running Nextflow for more information and an example of how to run a NextFlow module as a standalone pipeline."
-  },
-  {
     "objectID": "documentation/guide/component/creation/native.html",
     "href": "documentation/guide/component/creation/native.html",
     "title": "Native",
@@ -161,6 +161,48 @@
     "text": "What’s next?\nTo learn how to use Viash to build an executable and run it, see Native Executable Building and Running."
   },
   {
+    "objectID": "documentation/guide/component/creation/nextflow-basic.html",
+    "href": "documentation/guide/component/creation/nextflow-basic.html",
+    "title": "Nextflow Basic",
+    "section": "",
+    "text": "When targeting the nextflow platform, a NextFlow module is generated that can run standalone or used in a pipeline."
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow-basic.html#requirements",
+    "href": "documentation/guide/component/creation/nextflow-basic.html#requirements",
+    "title": "Nextflow Basic",
+    "section": "Requirements",
+    "text": "Requirements\nThis example targets the Nextflow platform, which requires you to install Nextflow and Docker. Follow the instructions on NextFlow’s homepage to install it on your system if you haven’t done so already. You can find instructions on how to install Docker for your OS on the Viash installation page."
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow-basic.html#preparing-a-component-for-nextflow",
+    "href": "documentation/guide/component/creation/nextflow-basic.html#preparing-a-component-for-nextflow",
+    "title": "Nextflow Basic",
+    "section": "Preparing a component for Nextflow",
+    "text": "Preparing a component for Nextflow\n\nCreating the component\nThis guide builds upon the hello_world component from the Docker component creation guide. You can either follow with that guide first or simply download the component below that contains the component in all supported languages. Simply rename the language folder you want to use to hello_world and use that as your working directory.\nDownload hello_world_docker.zip\nCreate a new folder named src and drag the component files inside of that, this is to keep your source and target files neatly separated. Your directory structure should look like this now:\nhello world\n└── src\n    └── config.vsh.yaml\n    └── script"
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow-basic.html#adapting-the-script",
+    "href": "documentation/guide/component/creation/nextflow-basic.html#adapting-the-script",
+    "title": "Nextflow Basic",
+    "section": "Adapting the script",
+    "text": "Adapting the script\nComponents that target the Nextflow platform don’t support writing to standard output when run in a pipeline. Instead, their output should be redirected to a file. To do that, change the contents of your script file as below:\n\nBashC#JavaScriptPythonScalaR\n\n\nChange this:\necho \"Hello $par_input\"\nTo this:\necho \"Hello $par_input\" > $par_output\n\n\nChange this:\nConsole.WriteLine(\"Hello \" + par.input);\nTo this:\nFile.WriteAllText(par.output, \"Hello \" + par.input);\n\n\nChange this:\nconsole.log('Hello' + par['input']);\nTo this:\nconst fs = require('fs');\nfs.writeFileSync(par['output'], 'Hello ' + par['input']);\n\n\nChange this:\nprint(\"Hello\", par[\"input\"])\nTo this:\nfile = open(par[\"output\"], 'a+')\nfile.write(\"Hello \" + par[\"input\"])\nfile.close()\n\n\nChange this:\nprintln(\"Hello \" + par.input.get)\nTo this:\nimport java.io._\n\nval writer = new FileWriter(par.output.get)\ntry { writer.append(\"Hello \" + par.input.get) }\nfinally { writer.close }        \n\n\nChange this:\ncat(\"Hello \", par$input)\nTo this:\ncat(\"Hello\", par$input, file=par$output, sep=\" \", append=TRUE)"
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow-basic.html#adjusting-the-config",
+    "href": "documentation/guide/component/creation/nextflow-basic.html#adjusting-the-config",
+    "title": "Nextflow Basic",
+    "section": "Adjusting the config",
+    "text": "Adjusting the config\n\nAdd --id argument\nNextflow modules need an --id argument in order to work, so add that to the config file below the --input argument:\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n...\n\n\nAdd a file output argument\nNow that the script outputs a file, its output path should be added as an argument to the config file. To do that, add yet another argument below the --id argument named --output:\n- type: file\n  name: --output\n  default: \"output\"\n\n\nAdd Nextflow platform\nTo add support for the Nextflow platform as a build target, you need to add nextflow to the platforms section of your Viash config file. To do this, add these lines to the bottom of your config file:\n- type: nextflow\n  variant: vdsl3\n\nBashC#JavaScriptPythonScalaR\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: bash_script\n    path: script.sh\nplatforms:\n  - type: native\n  - type: docker\n    image: bash:4.0\n  - type: nextflow\n    variant: vdsl3\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: csharp_script\n    path: script.csx\nplatforms:\n  - type: native\n  - type: docker\n    image: \"dataintuitive/dotnet-script:1.2.1\"\n    setup:\n      - type: apk\n        packages: [ bash ]\n  - type: nextflow\n    variant: vdsl3\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: javascript_script\n    path: script.js\nplatforms:\n  - type: native\n  - type: docker\n    image: node:15-buster\n  - type: nextflow\n    variant: vdsl3\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: python_script\n    path: script.py\nplatforms:\n  - type: native\n  - type: docker\n    image: \"python:3.8\"\n  - type: nextflow\n    variant: vdsl3\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: scala_script\n    path: script.scala\nplatforms:\n  - type: native\n  - type: docker\n    image: hseeberger/scala-sbt\n  - type: nextflow\n    variant: vdsl3\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: r_script\n    path: script.R\nplatforms:\n  - type: native\n  - type: docker\n    image: \"rocker/tidyverse:4.0.4\"\n  - type: nextflow\n    variant: vdsl3"
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow-basic.html#running",
+    "href": "documentation/guide/component/creation/nextflow-basic.html#running",
+    "title": "Nextflow Basic",
+    "section": "Running",
+    "text": "Running\nIn contrast to native and Docker based components, a Nextflow based component cannot be ran by using the viash run command. Components targeting Nextflow require you to use viash build first to generate a Nextflow module and run that module using nextflow run. See Building and Running Nextflow Basic for more information on how to generate a Nextflow module and run it as a standalone pipeline."
+  },
+  {
     "objectID": "documentation/guide/component/creation/docker.html",
     "href": "documentation/guide/component/creation/docker.html",
     "title": "Docker",
@@ -194,6 +236,34 @@
     "title": "Docker",
     "section": "What’s next?",
     "text": "What’s next?\nTo learn how to use Viash to build an executable with a Docker backend and run it, see Building and Running."
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow-advanced.html",
+    "href": "documentation/guide/component/creation/nextflow-advanced.html",
+    "title": "Nextflow Advanced",
+    "section": "",
+    "text": "When targeting the nextflow platform, a NextFlow module is generated that can run standalone or used in a pipeline."
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow-advanced.html#requirements",
+    "href": "documentation/guide/component/creation/nextflow-advanced.html#requirements",
+    "title": "Nextflow Advanced",
+    "section": "Requirements",
+    "text": "Requirements\nThis example targets the Nextflow platform, which requires you to install Nextflow and Docker. Follow the instructions on NextFlow’s homepage to install it on your system if you haven’t done so already. You can find instructions on how to install Docker for your OS on the Viash installation page."
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow-advanced.html#creating-a-viash-component",
+    "href": "documentation/guide/component/creation/nextflow-advanced.html#creating-a-viash-component",
+    "title": "Nextflow Advanced",
+    "section": "Creating a Viash component",
+    "text": "Creating a Viash component\nTo start off, create a folder named nextflow_component and create a src folder inside of it. Next, add another folder inside of the src folder and name it remove_comments. This is where the component will be placed, a minimal example that uses a bash script to remove comments from a TSV file.\nThe directory structure should look like this:\nnextflow_component\n└── src\n    └── remove_comments\n\nWriting the script\nCreate a script named script.sh and add it to the remove_comments folder:\n#!/bin/bash\n\ngrep -v '^#' \"$par_input\" > \"$par_output\"\nAs mentioned above, this script removes comments from a TSV file. It does so by removing all lines that start with a hashtag (#) from an input file and writing the result to the output.\n\n\n\n\n\n\nTip\n\n\n\nEvery scripting language has its own way of using variables generated by Viash. Check out the Bash page for more information and examples.\n\n\n\n\nAdding the config\nA Viash config file is a YAML file that describes the functionality of a component and the platform(s) it targets. Create a file name config.vsh.yaml inside of the remove_comments folder and add the contents below.\nDownload config.vsh.yaml\nfunctionality:\n  name: remove_comments\n  description: Remove comments from a TSV file.\n  namespace: nextflow_modules\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      required: true\n      example: \"file.tsv\"\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n      example: \"file.tsv\"\n  resources:\n  - type: bash_script\n    path: ./script.sh\nplatforms:\n  - type: docker\n    image: ubuntu:20.04\n  - type: nextflow\n    variant: vdsl3\nHere’s a breakdown of the different sections:\n\nfunctionality\nThis section describes what the component does and the resources it needs. It contains the name, a short description and more importantly, the arguments and resources the component uses. This component is part of a namespace named nextflow_modules, which we’ll explore further in the pipeline guides.\n\n\narguments\nThe arguments section contains all arguments the component accepts and will be passed to the script. In this case, an input and an output file path argument that are both required.\n\n\nresources\nAll references to the necessary files and folders to make the component work are added to this section. For this example, a single script is all that’s needed.\n\n\nplatforms\nThis lists what platforms the component can target. For this example, the only platform is nextflow. The variant property can be used to choose between our legacy NextFlow implementation or the next-generation VDSL3 variant. The latter is recommended as it has a lot of features to make creating modules more streamlined. You can read more about VDSL3 in our guide. If you specify a Docker platform in addition to NextFlow, the image in the docker platform section will be automatically used for NextFlow.\n\n\n\n\n\n\nTip\n\n\n\nIf you don’t add docker as a build target, you can use the directives dictionary to specify a base image to use:\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: ubuntu:20.04\n\n\nWith the script and config added, the final directory should now look like this:\nnextflow_component\n└── src\n    └── remove_comments\n        ├── config.vsh.yaml\n        └── script.sh"
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow-advanced.html#running",
+    "href": "documentation/guide/component/creation/nextflow-advanced.html#running",
+    "title": "Nextflow Advanced",
+    "section": "Running",
+    "text": "Running\nIn contrast to native and Docker based components, a Nextflow based component cannot be ran by using the viash run command. These types of components require you to use viash build first to generate a Nextflow module and run that module using nextflow run. See Building and Running Nextflow for more information and an example of how to run a NextFlow module as a standalone pipeline."
   },
   {
     "objectID": "documentation/guide/component/unit-testing.html",
