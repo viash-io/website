@@ -1,0 +1,69 @@
+---
+title: Building and Running Basic
+search: true
+execute:
+  echo: false
+  output: asis
+---
+
+{{< include ../../../../includes/_language_chooser.qmd >}}
+{{< include ../../../../includes/_python_helper.qmd >}}
+
+## Overview
+
+This guide covers how you can can build a Nextflow module and run it as a standalone pipeline.
+
+## Building a Nextflow VDSL3 module
+
+To start off, either follow along with the [basic Nextflow component creation guide](/documentation/guide/component/creation/nextflow-basic.html) to create a simple `hello_world` component that targets Nextflow or download the zip below containing the component in all [supported languages](/documentation/guide/component/languages.html).  
+
+```{python}
+create_zip(parent_dir = "/download/components/", zip_dir = "hello_world_nextflow")
+create_download_button("/download/components/hello_world_nextflow.zip")
+```
+
+If you downloaded the zip above, rename the language folder you want to use to `hello_world` and use that as your working directory.  
+  
+To let Viash generate a Nextflow module from your component, use the [viash build](/documentation/reference/viash/build.html) command:
+
+```bash
+viash build src/config.vsh.yaml --platform nextflow --output target
+```
+
+This will generate two files in the target directory: a pipeline script named **main.nf** and a Nextflow config file named **nextflow.config**. Your directory structure should now look like this:
+
+```
+hello_world
+├── src
+│   ├── config.vsh.yaml
+│   └── script.sh
+└── target
+    ├── main.nf
+    └── nextflow.config
+```
+
+## Running a standalone pipeline
+
+With the module built, you can now call the pipeline script from nextflow to run it standalone.
+Now run the module along with the required arguments:
+
+```bash
+nextflow run target/main.nf
+```
+
+Below is the result:
+
+```
+N E X T F L O W  ~  version 22.04.3
+Launching `target/remove_comments/main.nf` [desperate_fermat] DSL2 - revision: 8de4c7c8eb
+WARN: Key for module 'remove_comments' is duplicated.
+
+executor >  local (1)
+[2b/17d7a5] process > remove_comments:remove_comments_process1 [100%] 1 of 1 ✔
+input: [run, [input:/home/user/nextflow_component/data/sample.tsv]]
+output: [run, /home/user/nextflow_component/work/2b/17d7a50e74d27bc8fd39f098ba06fc/run.remove_comments.output.tsv]
+```
+
+## What's next?
+
+To use generated modules inside an actual Nextflow pipeline, take a look at our [Pipeline Basics](/documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html) guide.
