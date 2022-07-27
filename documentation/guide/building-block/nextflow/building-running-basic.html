@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Viash - Build &amp; Run Basic</title>
+<title>Viash - Building and Running Basic</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -122,10 +122,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <link rel="stylesheet" href="../../../../styles.css">
-<meta property="og:title" content="Viash - Build &amp; Run Basic">
+<meta property="og:title" content="Viash - Building and Running Basic">
 <meta property="og:description" content="This guide covers how you can can build a Nextflow module and run it as a standalone pipeline.">
 <meta property="og:site-name" content="Viash">
-<meta name="twitter:title" content="Viash - Build &amp; Run Basic">
+<meta name="twitter:title" content="Viash - Building and Running Basic">
 <meta name="twitter:description" content="This guide covers how you can can build a Nextflow module and run it as a standalone pipeline.">
 <meta name="twitter:card" content="summary">
 </head>
@@ -196,7 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Build &amp; Run Basic</h1>
+      <h1 class="quarto-secondary-nav-title">Building and Running Basic</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -297,7 +297,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../documentation/guide/building-block/docker/building-running.html" class="sidebar-item-text sidebar-link">Build &amp; Run</a>
+  <a href="../../../../documentation/guide/building-block/docker/building-running.html" class="sidebar-item-text sidebar-link">Building and Running</a>
   </div>
 </li>
       </ul>
@@ -312,12 +312,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../documentation/guide/building-block/nextflow/building-running-basic.html" class="sidebar-item-text sidebar-link active">Build &amp; Run Basic</a>
+  <a href="../../../../documentation/guide/building-block/nextflow/building-running-basic.html" class="sidebar-item-text sidebar-link active">Building and Running Basic</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../documentation/guide/building-block/nextflow/building-running-advanced.html" class="sidebar-item-text sidebar-link">Build &amp; Run Advanced</a>
+  <a href="../../../../documentation/guide/building-block/nextflow/building-running-advanced.html" class="sidebar-item-text sidebar-link">Building and Running Advanced</a>
   </div>
 </li>
       </ul>
@@ -396,7 +396,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Build &amp; Run Basic</h1>
+<h1 class="title d-none d-lg-block">Building and Running Basic</h1>
 </div>
 
 
@@ -510,22 +510,17 @@ function invertDictionary(dict){
 </section>
 <section id="running-a-standalone-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="running-a-standalone-pipeline">Running a standalone pipeline</h2>
-<p>With the module built, you can now call the pipeline script with nextflow to run it standalone:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/main.nf <span class="at">--publishDir</span> ./output <span class="at">--output</span> myFile.txt </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You might be wondering where the <code>--publishDir</code> argument comes from. This is required by Nextflow, it specifies the directory where the output from the module should be put. In this case, a new folder named <code>output</code>. The <code>--output</code> argument sets the filename, <code>myFile.txt</code>.</p>
-<p>Here’s what should be shown in the console:</p>
-<pre><code>N E X T F L O W  ~  version 22.04.5
-Launching `target/main.nf` [prickly_brattain] DSL2 - revision: 3c1902d86f
-WARN: Key for module 'hello_world' is duplicated.
+<p>With the module built, you can now call the pipeline script from nextflow to run it standalone. Now run the module along with the required arguments:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/main.nf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Below is the result:</p>
+<pre><code>N E X T F L O W  ~  version 22.04.3
+Launching `target/remove_comments/main.nf` [desperate_fermat] DSL2 - revision: 8de4c7c8eb
+WARN: Key for module 'remove_comments' is duplicated.
 
 executor &gt;  local (1)
-[90/735d3c] process &gt; hello_world:hello_world_process1 (1) [100%] 1 of 1 ✔
-input: [hello_world, [input:World, id:hello_world, output:myFile.txt]]
-output: [hello_world, /home/user/hello_world/work/90/735d3cc9396ce3aa5629eb9ede59b7/myFile.txt]</code></pre>
-<p>Nextflow will have generated several directories and files, but the one we’re interested in is the <strong>output</strong> directory. It should contain a file named <strong>myFile.txt</strong> with a single line of text: <code>Hello World</code>. You can check this by opening the file or printing its contents to the terminal like this:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> output/myFile.txt </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Which should result in:</p>
-<pre><code>Hello World</code></pre>
+[2b/17d7a5] process &gt; remove_comments:remove_comments_process1 [100%] 1 of 1 ✔
+input: [run, [input:/home/user/nextflow_component/data/sample.tsv]]
+output: [run, /home/user/nextflow_component/work/2b/17d7a50e74d27bc8fd39f098ba06fc/run.remove_comments.output.tsv]</code></pre>
 </section>
 <section id="whats-next" class="level2">
 <h2 class="anchored" data-anchor-id="whats-next">What’s next?</h2>
@@ -661,12 +656,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../../../../documentation/guide/building-block/docker/building-running.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Build &amp; Run</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Building and Running</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../../../../documentation/guide/building-block/nextflow/building-running-advanced.html" class="pagination-link">
-        <span class="nav-page-text">Build &amp; Run Advanced</span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text">Building and Running Advanced</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
