@@ -1,5 +1,5 @@
 ---
-title: Nextflow Basic
+title: Nextflow
 search: true
 execute:
   echo: false
@@ -11,7 +11,7 @@ execute:
 
 ## Overview
 
-When targeting the nextflow platform, a NextFlow module is generated that can run standalone or used in a pipeline.  
+When targeting the Nextflow platform, a module is generated that can be run standalone or used in a pipeline.  
 
 ## Requirements
 
@@ -112,6 +112,9 @@ print_file_contents("/download/components/hello_world_nextflow/r/src/script.R", 
 
 :::
 
+
+
+
 ## Adjusting the config
 
 ### Add `--id` argument
@@ -151,6 +154,31 @@ To add support for the [Nextflow platform](/documentation/reference/config/platf
 - type: nextflow
   variant: vdsl3
 ```
+
+This will add Nextflow as a build target, with [VDSL3]() set as the pipeline scripting variant, which adds new features and quality of life changes.
+
+:::{.callout-tip collapse="true"}
+
+## Specifying the Docker image
+
+By default, Nextflow will use the Docker image specified in the `docker` platform section. For example:
+
+```yaml
+platforms:
+  - type: docker
+    image: bash:4.0
+```
+
+If you don't add `docker` as a build target or want to override the image, you can use the [`directives`]() dictionary to specify a base image to use:
+
+```yaml
+platforms:
+  - type: nextflow
+    variant: vdsl3
+    directives:
+      container: ubuntu:20.04
+```
+:::
 
 ::: {.panel-tabset}
 ## Bash
