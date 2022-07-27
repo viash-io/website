@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Viash - Pipeline Basics</title>
+<title>Viash - Basic Pipeline</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -122,11 +122,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <link rel="stylesheet" href="../../../../styles.css">
-<meta property="og:title" content="Viash - Pipeline Basics">
-<meta property="og:description" content="explain this guide will go over the basics of VDSL3 and how to use modules inside of a Nextflow pipeline reference to the nextflow website for the basics of nextflow’s Groovy syntax">
+<meta property="og:title" content="Viash - Basic Pipeline">
+<meta property="og:description" content="This guide will explain how to create a basic Nextflow pipeline using a Viash component.">
 <meta property="og:site-name" content="Viash">
-<meta name="twitter:title" content="Viash - Pipeline Basics">
-<meta name="twitter:description" content="explain this guide will go over the basics of VDSL3 and how to use modules inside of a Nextflow pipeline reference to the nextflow website for the basics of nextflow’s Groovy syntax">
+<meta name="twitter:title" content="Viash - Basic Pipeline">
+<meta name="twitter:description" content="This guide will explain how to create a basic Nextflow pipeline using a Viash component.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -196,7 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Pipeline Basics</h1>
+      <h1 class="quarto-secondary-nav-title">Basic Pipeline</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -337,7 +337,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html" class="sidebar-item-text sidebar-link active">Pipeline Basics</a>
+  <a href="../../../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html" class="sidebar-item-text sidebar-link active">Basic Pipeline</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -375,10 +375,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#vdsl3" id="toc-vdsl3" class="nav-link" data-scroll-target="#vdsl3">VDSL3</a></li>
   <li><a href="#creating-the-module" id="toc-creating-the-module" class="nav-link" data-scroll-target="#creating-the-module">Creating the module</a>
   <ul class="collapse">
-  <li><a href="#creating-the-component" id="toc-creating-the-component" class="nav-link" data-scroll-target="#creating-the-component">Creating the component</a></li>
+  <li><a href="#download-the-source-files" id="toc-download-the-source-files" class="nav-link" data-scroll-target="#download-the-source-files">Download the source files</a></li>
   <li><a href="#building-the-nextflow-module" id="toc-building-the-nextflow-module" class="nav-link" data-scroll-target="#building-the-nextflow-module">Building the Nextflow module</a></li>
   </ul></li>
   <li><a href="#creating-the-pipeline" id="toc-creating-the-pipeline" class="nav-link" data-scroll-target="#creating-the-pipeline">Creating the pipeline</a></li>
@@ -392,7 +391,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Pipeline Basics</h1>
+<h1 class="title d-none d-lg-block">Basic Pipeline</h1>
 </div>
 
 
@@ -406,69 +405,195 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<script type="text/javascript">
+let langDict = {
+  'bash': "Bash",
+  'csharp': "C#",
+  'js': "JavaScript",
+  'python': "Python",
+  'scala': "Scala",
+  'r': "R",
+};
+
+let invertedLangDict = invertDictionary(langDict);
+
+document.addEventListener("DOMContentLoaded", function() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    let lang = 'bash';
+
+    if (urlParams.has('lang')){
+        lang = urlParams.get('lang');
+    }
+
+    changeTabSelections(lang);
+
+    var tabs = document.querySelectorAll('[role="tab"]');
+    
+    for(var i = 0; i < tabs.length; i++) {
+        tab = tabs[i];
+        if (tab.textContent in invertedLangDict) {
+            tab.addEventListener('click', onTabClicked);
+        }
+    }
+
+});
+
+function changeTabSelections(language) {
+    var tabs = document.querySelectorAll('[role="tab"]');
+    var tab_panels = document.querySelectorAll('[role="tabpanel"]');
+
+    // Disable all tab panels
+    for(var i = 0; i < tab_panels.length; i++) {
+        panel = tab_panels[i];
+        panel.classList.remove('active')
+    }
+
+    // Iterate over all tabs
+    for(var i = 0; i < tabs.length; i++) {
+        tab = tabs[i];
+
+        // Disable all tabs
+        tab.classList.remove('active');
+
+        // If the tab is the chosen language
+        if (tab.textContent == langDict[language]) {
+            // Mark it active
+            tab.classList.add('active');
+            // Find the linked tab panel and make it active
+            var linked_panel = tab.getAttribute('aria-controls')
+            var panel = document.getElementById(linked_panel);
+            panel.classList.add('active');
+        }
+    }
+
+}
+
+function onTabClicked(event) {
+    changeTabSelections(invertedLangDict[event.srcElement.textContent]);
+}
+
+function invertDictionary(dict){
+    var ret = {};
+    for(var key in dict){
+        ret[dict[key]] = key;
+    }
+    return ret;
+}
+
+</script>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>explain this guide will go over the basics of VDSL3 and how to use modules inside of a Nextflow pipeline reference to the nextflow website for the basics of nextflow’s Groovy syntax</p>
-</section>
-<section id="vdsl3" class="level2">
-<h2 class="anchored" data-anchor-id="vdsl3">VDSL3</h2>
-<p>explain what VDSL3 is and how it builds upon</p>
+<p>This guide will explain how to create a basic Nextflow pipeline using a Viash component. <!-- explain this guide will go over the basics of VDSL3 and how to use modules inside of a Nextflow pipeline
+reference to the nextflow website for the basics of nextflow's Groovy syntax --></p>
 </section>
 <section id="creating-the-module" class="level2">
 <h2 class="anchored" data-anchor-id="creating-the-module">Creating the module</h2>
-<p>Nextflow works with modules to run scripts and handle their input and output, so the first step is generating a Nextflow module from a Viash component</p>
-<section id="creating-the-component" class="level3">
-<h3 class="anchored" data-anchor-id="creating-the-component">Creating the component</h3>
-<p>create a new folder named basic_pipeline, add a new folder to it named src download the remove_comments component files and add them to src</p>
-<p><a href="../../../../download/remove_comments/bash/config.vsh.yaml" id="btn-download" class="btn btn-info btn-md" role="button" download="">Download config.vsh.yaml</a></p>
-<p><a href="../../../../download/remove_comments/bash/script.sh" id="btn-download" class="btn btn-info btn-md" role="button" download="">Download script.sh</a></p>
+<p>Nextflow works with modules to run scripts and handle their input and output, so the first step is generating a Nextflow module from a Viash component. This guide will use a small component named <code>remove_comments</code> that removes comments (lines starting with a hashtag) from a TSV file.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This guide won’t go in-depth about how to generate a Nextflow module from a Viash component. For more information on that topic, read the <a href="../../../../documentation/guide/component/creation/nextflow.html">Nextflow component creation</a> and the <a href="../../../../documentation/guide/building-block/nextflow/building-running.html">Nextflow Build &amp; Run</a> guides.</p>
+</div>
+</div>
+<section id="download-the-source-files" class="level3">
+<h3 class="anchored" data-anchor-id="download-the-source-files">Download the source files</h3>
+<p>Download the zip below and extract it to a directory of your choosing:</p>
+<p><a href="../../../../download/pipeline_workflow/basic_pipeline.zip" id="btn-download" class="btn btn-info btn-md" role="button" download="">Download basic_pipeline.zip</a></p>
+<p>Once extracted, the directory contains the <code>remove_comments</code> component in the <strong>src</strong> directory and a small TSV file in the <strong>data</strong> directory:</p>
+<pre><code>basic_pipeline
+├── data
+│   └── sample.tsv
+└── src
+    └── remove_comments
+        ├── config.vsh.yaml
+        └── script.sh</code></pre>
 </section>
 <section id="building-the-nextflow-module" class="level3">
 <h3 class="anchored" data-anchor-id="building-the-nextflow-module">Building the Nextflow module</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build src/remove_comments/config.vsh.yaml <span class="at">-o</span> target/remove_comments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>With the component ready, execute the <a href="../../../../documentation/reference/viash/build.html"><code>viash build</code></a> command below to generate the Nextflow module:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build src/remove_comments/config.vsh.yaml <span class="at">-p</span> nextflow <span class="at">-o</span> target/remove_comments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You should now have a <strong>target</strong> directory that contains the generated Nextflow module.</p>
+<pre><code>basic_pipeline
+├── data
+│   └── sample.tsv
+├── src
+│   └── remove_comments
+│       ├── config.vsh.yaml
+│       └── script.sh
+└── target
+    └── remove_comments
+        ├── main.nf
+        └── nextflow.config</code></pre>
 </section>
 </section>
 <section id="creating-the-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="creating-the-pipeline">Creating the pipeline</h2>
-<p>Add main.nf:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>targetDir <span class="op">=</span> <span class="st">"./target"</span> <span class="co">// 1</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> remove_comments <span class="op">}</span> from <span class="st">"</span><span class="ss">$targetDir</span><span class="st">/remove_comments/main.nf"</span> <span class="co">// 2</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>workflow <span class="op">{</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">Channel</span><span class="op">.</span><span class="fu">fromPath</span><span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> <span class="co">// 3</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> map<span class="op">{</span> file <span class="op">-&gt;</span> <span class="op">[</span> file<span class="op">.</span>baseName<span class="op">,</span> file <span class="op">]</span> <span class="op">}</span> <span class="co">// 4</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> view<span class="op">{</span> file <span class="op">-&gt;</span> <span class="st">"Input: </span><span class="ss">$file</span><span class="st">"</span> <span class="op">}</span> <span class="co">// 5</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> remove_comments<span class="op">.</span><span class="fu">run</span><span class="op">(</span> <span class="co">// 6</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>      auto<span class="op">:</span> <span class="op">[</span> publish<span class="op">:</span> <span class="kw">true</span> <span class="op">]</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      <span class="op">)</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> view<span class="op">{</span> file <span class="op">-&gt;</span> <span class="st">"Output: </span><span class="ss">$file</span><span class="st">"</span> <span class="op">}</span> <span class="co">// 7</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To use the module in a pipeline, create a new file in the root of the directory and name it <code>main.nf</code>, this will be the Nextflow pipeline script. Add this as its contents:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>targetDir <span class="op">=</span> <span class="st">"./target"</span> <span class="co">// 1</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> remove_comments <span class="op">}</span> from <span class="st">"</span><span class="ss">$targetDir</span><span class="st">/remove_comments/main.nf"</span> <span class="co">// 2</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>workflow <span class="op">{</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">Channel</span><span class="op">.</span><span class="fu">fromPath</span><span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> <span class="co">// 3</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> map<span class="op">{</span> file <span class="op">-&gt;</span> <span class="op">[</span> file<span class="op">.</span>baseName<span class="op">,</span> file <span class="op">]</span> <span class="op">}</span> <span class="co">// 4</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> view<span class="op">{</span> file <span class="op">-&gt;</span> <span class="st">"Input: </span><span class="ss">$file</span><span class="st">"</span> <span class="op">}</span> <span class="co">// 5</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> remove_comments<span class="op">.</span><span class="fu">run</span><span class="op">(</span> <span class="co">// 6</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      auto<span class="op">:</span> <span class="op">[</span> publish<span class="op">:</span> <span class="kw">true</span> <span class="op">]</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      <span class="op">)</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> view<span class="op">{</span> file <span class="op">-&gt;</span> <span class="st">"Output: </span><span class="ss">$file</span><span class="st">"</span> <span class="op">}</span> <span class="co">// 7</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here’s an overview of this Nextflow script:</p>
 <ol type="1">
-<li>target dir where the modules are located</li>
-<li>include the <code>remove_comments</code> module from the <code>remove_comments/main.nf</code> script</li>
+<li>Store the location of the <code>target</code> directory where the modules are located</li>
+<li>Include the <code>remove_comments</code> module from the <code>remove_comments/main.nf</code> script</li>
 <li>Create a channel based on the <code>input</code> parameter’s path</li>
 <li>Take the tuple list and map it to the <code>[ file.baseName, file ]</code> format</li>
 <li>Print the <code>input</code> tuple to the console</li>
-<li><a href=""><code>Run</code></a> the <code>remove_comments</code> module with <a href="">auto publishing</a> enabled using the <code>auto</code> directive</li>
+<li><a href=""><code>Run</code></a> the <code>remove_comments</code> module with <a href="">auto publishing</a> enabled using the <code>auto</code> directive, this makes sure that the output of this module is written to a directory based on its <code>id</code></li>
 <li>Print the <code>output</code> tuple to the console</li>
 </ol>
 </section>
 <section id="running-the-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="running-the-pipeline">Running the pipeline</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run main.nf <span class="at">--input</span> <span class="st">"data/sample.tsv"</span> <span class="at">--publishDir</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can now run the pipeline script above with Nextflow using the following command:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run main.nf <span class="at">--input</span> <span class="st">"data/sample.tsv"</span> <span class="at">--publishDir</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This results in a console output similar to this:</p>
 <pre><code>N E X T F L O W  ~  version 22.04.3
 Launching `main.nf` [curious_gates] DSL2 - revision: 3e22e3038c
 executor &gt;  local (1)
 [2a/5df658] process &gt; remove_comments:remove_comments_process (1) [100%] 1 of 1 ✔
-Input: [sample, /home/blackdragonbe/GitHub/new_website/basic_pipeline/data/sample.tsv]
-Output: [sample, /home/blackdragonbe/GitHub/new_website/basic_pipeline/work/2a/5df6584524e26995953a4eaec97136/sample.remove_comments.output.tsv]</code></pre>
+Input: [sample, basic_pipeline/data/sample.tsv]
+Output: [sample, basic_pipeline/work/2a/5df6584524e26995953a4eaec97136/sample.remove_comments.output.tsv]</code></pre>
+<p>After the pipeline has finished working, a new file named <code>sample.remove_comments.output.tsv</code> has been created in the output directory:</p>
+<pre><code>basic_pipeline
+└── output
+    └── sample.remove_comments.output.tsv</code></pre>
+<p>For comparison, here’s what the input and output files look like to show what changed:</p>
+<p><strong>sample.tsv</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this is a header      </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># this is also a header     </span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="at">one     0.11    123</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="at">two     0.23    456</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="at">three   0.35    789</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="at">four    0.47    123</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>sample.remove_comments.output.tsv</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="at">one     0.11    123</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="at">two     0.23    456</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="at">three   0.35    789</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="at">four    0.47    123</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="whats-next" class="level2">
 <h2 class="anchored" data-anchor-id="whats-next">What’s next?</h2>
-<p>the pipeline in this guide was the bare minimum to learn more about</p>
-<p><a href="../../../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html">Advanced Pipeline</a></p>
+<p>The pipeline in this guide was a bare minimum example, to learn more about creating Nextflow pipelines, take a look at the <a href="../../../../documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html">Advanced Pipeline</a> guide.</p>
 
 
 </section>
