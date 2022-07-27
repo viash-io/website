@@ -45,6 +45,7 @@ def create_page(full_json, page_name, json_entry, directory):
 
     title = page_name.replace("Platform", " Platform")
     title = title.replace("Legacy", " Legacy")
+    title = title.replace("Vdsl3", " Vdsl3")
     # qmd += f"---\ntitle: \"{title.title()}\"\n---\n\n"
     qmd += header(title.title())
 
@@ -130,6 +131,8 @@ def create_page(full_json, page_name, json_entry, directory):
 
 
 def header(title):
+    title = title.replace("Vdsl3", "VDSL3")
+
     qmd = ""
     qmd += f"---\ntitle: {title}\n"
     qmd += "search: true\n"
