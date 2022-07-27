@@ -1,5 +1,5 @@
 ---
-title: Building and Running Basic
+title: Build & Run Basic
 search: true
 execute:
   echo: false
@@ -41,27 +41,40 @@ hello_world
     ├── main.nf
     └── nextflow.config
 ```
-
+ 
 ## Running a standalone pipeline
 
-With the module built, you can now call the pipeline script from nextflow to run it standalone.
-Now run the module along with the required arguments:
+With the module built, you can now call the pipeline script with nextflow to run it standalone:
 
 ```bash
-nextflow run target/main.nf
+nextflow run target/main.nf --publishDir ./output --output myFile.txt 
 ```
 
-Below is the result:
+You might be wondering where the `--publishDir` argument comes from. This is required by Nextflow, it specifies the directory where the output from the module should be put. In this case, a new folder named `output`. The `--output` argument sets the filename, `myFile.txt`.  
+
+Here's what should be shown in the console:
 
 ```
-N E X T F L O W  ~  version 22.04.3
-Launching `target/remove_comments/main.nf` [desperate_fermat] DSL2 - revision: 8de4c7c8eb
-WARN: Key for module 'remove_comments' is duplicated.
+N E X T F L O W  ~  version 22.04.5
+Launching `target/main.nf` [prickly_brattain] DSL2 - revision: 3c1902d86f
+WARN: Key for module 'hello_world' is duplicated.
 
 executor >  local (1)
-[2b/17d7a5] process > remove_comments:remove_comments_process1 [100%] 1 of 1 ✔
-input: [run, [input:/home/user/nextflow_component/data/sample.tsv]]
-output: [run, /home/user/nextflow_component/work/2b/17d7a50e74d27bc8fd39f098ba06fc/run.remove_comments.output.tsv]
+[90/735d3c] process > hello_world:hello_world_process1 (1) [100%] 1 of 1 ✔
+input: [hello_world, [input:World, id:hello_world, output:myFile.txt]]
+output: [hello_world, /home/user/hello_world/work/90/735d3cc9396ce3aa5629eb9ede59b7/myFile.txt]
+```
+
+Nextflow will have generated several directories and files, but the one we're interested in is the **output** directory. It should contain a file named **myFile.txt** with a single line of text: `Hello World`. You can check this by opening the file or printing its contents to the terminal like this:
+
+```bash
+cat output/myFile.txt 
+```
+
+Which should result in:
+
+```
+Hello World
 ```
 
 ## What's next?
