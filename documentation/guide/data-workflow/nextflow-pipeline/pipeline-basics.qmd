@@ -1,40 +1,81 @@
 ---
-title: Pipeline Basics
+title: Basic Pipeline
 search: true
+execute:
+  echo: false
+  output: asis
 ---
+
+{{< include ../../../../includes/_language_chooser.qmd >}}
+{{< include ../../../../includes/_python_helper.qmd >}}
 
 ## Overview
 
-explain this guide will go over the basics of VDSL3 and how to use modules inside of a Nextflow pipeline
-reference to the nextflow website for the basics of nextflow's Groovy syntax
-
-## VDSL3
-
-explain what VDSL3 is and how it builds upon
-
+This guide will explain how to create a basic Nextflow pipeline using a Viash component.
+<!-- explain this guide will go over the basics of VDSL3 and how to use modules inside of a Nextflow pipeline
+reference to the nextflow website for the basics of nextflow's Groovy syntax -->
 
 ## Creating the module
 
-Nextflow works with modules to run scripts and handle their input and output, so the first step is generating a Nextflow module from a Viash component
+Nextflow works with modules to run scripts and handle their input and output, so the first step is generating a Nextflow module from a Viash component. This guide will use a small component named `remove_comments` that removes comments (lines starting with a hashtag) from a TSV file.
 
-### Creating the component
+:::{.callout-note}
 
-create a new folder named basic_pipeline, add a new folder to it named src
-download the remove_comments component files and add them to src
+This guide won't go in-depth about how to generate a Nextflow module from a Viash component. For more information on that topic, read the [Nextflow component creation](/documentation/guide/component/creation/nextflow.html) and the [Nextflow Build & Run](/documentation/guide/building-block/nextflow/building-running.html) guides.
 
-<a href="/download/remove_comments/bash/config.vsh.yaml" id="btn-download" class="btn btn-info btn-md" role="button" download>Download config.vsh.yaml</a>    
+:::
 
-<a href="/download/remove_comments/bash/script.sh" id="btn-download" class="btn btn-info btn-md" role="button" download>Download script.sh</a>  
+### Download the source files
+
+Download the zip below and extract it to a directory of your choosing:
+
+```{python}
+create_zip(parent_dir = "/download/pipeline_workflow", zip_dir = "basic_pipeline")
+```
+
+```{python}
+create_download_button("/download/pipeline_workflow/basic_pipeline.zip")
+```
+
+Once extracted, the directory contains the `remove_comments` component in the **src** directory and a small TSV file in the **data** directory:
+
+```
+basic_pipeline
+├── data
+│   └── sample.tsv
+└── src
+    └── remove_comments
+        ├── config.vsh.yaml
+        └── script.sh
+```
 
 ### Building the Nextflow module
 
+With the component ready, execute the [`viash build`](/documentation/reference/viash/build.html) command below to generate the Nextflow module: 
+
 ```bash
-viash build src/remove_comments/config.vsh.yaml -o target/remove_comments
+viash build src/remove_comments/config.vsh.yaml -p nextflow -o target/remove_comments
+```
+
+You should now have a **target** directory that contains the generated Nextflow module.
+
+```
+basic_pipeline
+├── data
+│   └── sample.tsv
+├── src
+│   └── remove_comments
+│       ├── config.vsh.yaml
+│       └── script.sh
+└── target
+    └── remove_comments
+        ├── main.nf
+        └── nextflow.config
 ```
 
 ## Creating the pipeline
 
-Add main.nf:
+To use the module in a pipeline, create a new file in the root of the directory and name it `main.nf`, this will be the Nextflow pipeline script. Add this as its contents:
 
 ```groovy
 targetDir = "./target" // 1
@@ -54,33 +95,53 @@ workflow {
 
 Here's an overview of this Nextflow script:
 
-1. target dir where the modules are located
-2. include the `remove_comments` module from the `remove_comments/main.nf` script
+1. Store the location of the `target` directory where the modules are located
+2. Include the `remove_comments` module from the `remove_comments/main.nf` script
 3. Create a channel based on the `input` parameter's path
 4. Take the tuple list and map it to the `[ file.baseName, file ]` format
 5. Print the `input` tuple to the console
-6. [`Run`]() the `remove_comments` module with [auto publishing]() enabled using the `auto` directive
+6. [`Run`]() the `remove_comments` module with [auto publishing]() enabled using the `auto` directive, this makes sure that the output of this module is written to a directory based on its `id`
 7. Print the `output` tuple to the console
 
-
 ## Running the pipeline
+
+You can now run the pipeline script above with Nextflow using the following command:
 
 ```bash
 nextflow run main.nf --input "data/sample.tsv" --publishDir output
 ```
+
+This results in a console output similar to this: 
 
 ```
 N E X T F L O W  ~  version 22.04.3
 Launching `main.nf` [curious_gates] DSL2 - revision: 3e22e3038c
 executor >  local (1)
 [2a/5df658] process > remove_comments:remove_comments_process (1) [100%] 1 of 1 ✔
-Input: [sample, /home/blackdragonbe/GitHub/new_website/basic_pipeline/data/sample.tsv]
-Output: [sample, /home/blackdragonbe/GitHub/new_website/basic_pipeline/work/2a/5df6584524e26995953a4eaec97136/sample.remove_comments.output.tsv]
+Input: [sample, basic_pipeline/data/sample.tsv]
+Output: [sample, basic_pipeline/work/2a/5df6584524e26995953a4eaec97136/sample.remove_comments.output.tsv]
+```
+
+After the pipeline has finished working, a new file named `sample.remove_comments.output.tsv` has been created in the output directory:
+
+```
+basic_pipeline
+└── output
+    └── sample.remove_comments.output.tsv
+```
+
+For comparison, here's what the input and output files look like to show what changed:
+
+**sample.tsv**
+```{python}
+print_file_contents("/download/pipeline_workflow/basic_pipeline_complete/data/sample.tsv", "yaml", False)
+```
+
+**sample.remove_comments.output.tsv**
+```{python}
+print_file_contents("/download/pipeline_workflow/basic_pipeline_complete/output/sample.remove_comments.output.tsv", "yaml", False)
 ```
 
 ## What's next?
 
-the pipeline in this guide was the bare minimum
-to learn more about 
-
-[Advanced Pipeline](/documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html)
+The pipeline in this guide was a bare minimum example, to learn more about creating Nextflow pipelines, take a look at the [Advanced Pipeline](/documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html) guide.
