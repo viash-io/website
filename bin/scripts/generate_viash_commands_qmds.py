@@ -93,7 +93,11 @@ def create_opts_table(opts):
 
 
     for opt in sorted_opts:
-        argument = f"`--{opt['name']}`"
+        if opt['name'] == "config":
+            argument = f"`{opt['name']}`"
+        else:
+            argument = f"`--{opt['name']}`"
+
         if "short" in opt:
             argument += f", `-{opt['short']}`"
 
