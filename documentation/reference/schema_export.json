@@ -27,22 +27,34 @@
     {
       "name" : "enabled",
       "type" : "Boolean",
-      "description" : "Setting this to false with disable this component when using namespaces.",
+      "description" : "Setting this to `false` will disable this component when using namespaces.",
+      "example" : [
+        {
+          "example" : "enabled: false",
+          "format" : "yaml"
+        }
+      ],
       "since" : "Viash 0.5.13"
     },
     {
       "name" : "info",
       "type" : "Map of String,String",
       "description" : "A map for storing custom annotation.",
+      "example" : [
+        {
+          "example" : "info: {twitter: wizzkid, appId: com.example.myApplication}",
+          "format" : "yaml"
+        }
+      ],
       "since" : "Viash 0.4.0"
     },
     {
       "name" : "test_resources",
       "type" : "List of Resource",
-      "description" : "One or more Bash/R/Python scripts to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.",
+      "description" : "One or more [scripts](/documentation/guide/component/languages.html) to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing. See the [Unit Testing guide](/documentation/guide/component/unit-testing.html) for more info.",
       "example" : [
         {
-          "example" : "tests:\n  - type: bash_script\n    path: tests/test1.sh\n  - type: r_script\n    path: tests/test2.R\n  - path: resource1.txt\n",
+          "example" : "test_resources:\n  - type: bash_script\n    path: tests/test1.sh\n  - type: r_script\n    path: tests/test2.R\n  - path: resource1.txt\n",
           "format" : "yaml"
         }
       ]
@@ -50,7 +62,13 @@
     {
       "name" : "usage",
       "type" : "Option of String",
-      "description" : "A description of the component. This will be displayed with --help under the 'Usage:' section."
+      "description" : "A description on how to use the component. This will be displayed with `--help` under the 'Usage:' section.",
+      "example" : [
+        {
+          "example" : "usage: Place the executable in a directory containing TSV files and run it",
+          "format" : "yaml"
+        }
+      ]
     },
     {
       "name" : "description",
@@ -66,7 +84,7 @@
     {
       "name" : "resources",
       "type" : "List of Resource",
-      "description" : "The first resource should be a script (bash_script, r_script, python_script, javascript_script, scala_script) which is what will be executed when the functionality is run. Additional resources will be copied to the same directory.\n\nCommon properties:\n\n * type: file/r_script/python_script/bash_script/javascript_script/scala_script, the type of resource. The first resource cannot be of type file. When the type is not specified, the default type is simply file. For more information regarding how to write a script in Bash, R or Python with Viash, check out the guides for the respective languages on the left.\n * name: filename, the resulting name of the resource.\n * path: path/to/file, the path of the input file. Can be a relative or an absolute path, or a URI.\n * text: ...multiline text..., the raw content of the input file. Exactly one of path or text must be defined, the other undefined.\n * is_executable: true/false, whether the resulting file is made executable.\n",
+      "description" : "[Resources](/documentation/guide/component/resources.html) are files that support the component. The first resource should be [the script](/documentation/guide/component/languages.html) that will be executed when the functionality is run. Additional resources will be copied to the same directory.\n\nCommon properties:\n\n * type: `file` / `r_script` / `python_script` / `bash_script` / `javascript_script` / `scala_script` / `csharp_script`, the type of resource. The first resource cannot be of type `file`. When the type is not specified, the default type is simply `file`.\n * name: filename, the resulting name of the resource.\n * path: `path/to/file`, the path of the input file. Can be a relative or an absolute path, or a URI.\n * text: ...multiline text..., the raw content of the input file. Exactly one of path or text must be defined, the other undefined.\n * is_executable: `true` / `false`, whether the resulting file is made executable.\n",
       "example" : [
         {
           "example" : "resources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt\n",
@@ -80,8 +98,13 @@
       "description" : "A grouping of the arguments, used to display the help message.\n\n - `name: foo`, the name of the argument group. \n - `description: Description of foo`, a description of the argument group. Multiline descriptions are supported.\n - `arguments: [arg1, arg2, ...]`, list of the arguments names.\n\n",
       "example" : [
         {
-          "example" : "- name: \"Input\"\n  arguments: [ id, input1, input2 ]\n- name: \"Output\"\n  arguments: [ output, optional_output ]\n- name: \"Foo\"\n  description: Arguments related to the foo functionality of this component.\n  arguments: [ foo, bar, zing, bork ]\n",
+          "example" : "argument_groups:\n  - name: \"Input\"\n    arguments: [ id, input1, input2 ]\n  - name: \"Output\"\n    arguments: [ output, optional_output ]\n  - name: \"Foo\"\n    description: Arguments related to the foo functionality of this component.\n    arguments: [ foo, bar, zing, bork ]\n",
           "format" : "yaml"
+        },
+        {
+          "example" : "component_name\n\n  Input:\n      --id\n          type: string\n\n      --input1\n          type: file\n\n      --input2\n          type: file\n\n  Output:\n      --output\n          type: file\n\n      --optional_output\n          type: file\n\n  Foo:\n      Arguments related to the foo functionality of this component.\n\n      --foo\n          type: integer\n\n      --bar\n          type: double\n\n      --zing\n          type: boolean\n\n      --bork\n          type: string\n",
+          "format" : "bash",
+          "description" : "This results in the following output when calling the component with the `--help` argument:"
         }
       ],
       "since" : "Viash 0.5.14"
@@ -89,10 +112,10 @@
     {
       "name" : "arguments",
       "type" : "List of Argument",
-      "description" : "A list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. Common properties for all argument types are the following.\n\n - `type: string/file/integer/double/boolean/boolean_true/boolean_false`, the type of argument determining to what object type the value will be cast in the downstream scripts.\n - `direction: input/output`, the directionality of the argument. Only needs to be specified for output files. Default: “input”.\n - `name: --foo`, the name of the argument. Can also be `-foo` or `foo`. The number of dashes determines how values can be passed:\n   - with `--foo`: long option, e.g. `exe --foo=bar` or exe `--foo bar`\n   - with `-foo`: short option, e.g. `exe -foo bar`\n   - with `foo`: argument, e.g. `exe bar`\n - `alternatives: [-f]`, list of alternative names. Typically only used to provide a short alternative option.\n - `description: Description of foo`, a description of the argument. Multiline descriptions are supported.\n - `default: bar`, the default value when no argument value is provided. Not allowed when `required: true`.\n - `required: true/false`, whether the argument is required. If true and the functionality is executed, an error will be produced if no value is provided. Default = false.\n - `multiple: true/false`, whether to treat the argument value as an array or not. Arrays can be passed using the delimiter `--foo=1:2:3` or by providing the same argument multiple times `--foo 1 --foo 2`. Default = false.\n - `multiple_sep: \":\"`, the delimiter for providing multiple values. Default = “:”.\n - `must_exist: true/false`, denotes whether the file or folder should exist at the start of the execution. Only when 'type' is 'file'.\n\nOn types: \n\n * `type: string`, The value passed through an argument of this type is converted to an ‘str’ object in Python, and to a ‘character’ object in R.\n * `type: integer`, The resulting value is an ‘int’ in Python and an ‘integer’ in R.\n * `type: double`, The resulting value is a ‘float’ in Python and an ‘double’ in R.\n * `type: boolean`, The resulting value is a ‘bool’ in Python and a ‘logical’ in R.\n * `type: boolean_true/boolean_false`, Arguments of this type can only be used by providing a flag `--foo` or not. The resulting value is a ‘bool’ in Python and a ‘logical’ in R. These properties cannot be altered: required is false, default is undefined, multiple is false.\n * `type: file`, The resulting value is still an ‘str’ in Python and a ‘character’ in R. In order to correctly pass files in some platforms (e.g. Docker and Nextflow), Viash needs to know which arguments are input/output files.\n\n",
+      "description" : "A list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:  \n\n - [string](/documentation/reference/config/arguments/string.html)\n - [file](/documentation/reference/config/arguments/file.html)\n - [integer](/documentation/reference/config/arguments/integer.html)\n - [double](/documentation/reference/config/arguments/double.html)\n - [boolean](/documentation/reference/config/arguments/boolean.html)\n - [boolean_true](/documentation/reference/config/arguments/boolean_true.html)\n - [boolean_false](/documentation/reference/config/arguments/boolean_false.html)\n",
       "example" : [
         {
-          "example" : "- name: --foo\n  type: file\n  alternatives: [-f]\n  description: Description of foo\n  default: \"/foo/bar\"\n  must_exist: true\n  required: false\n  multiple: true\n  multiple_sep: \",\"\n",
+          "example" : "arguments:\n   - name: --foo\n    type: file\n    alternatives: [-f]\n    description: Description of foo\n    default: \"/foo/bar\"\n    must_exist: true\n    required: false\n    multiple: true\n    multiple_sep: \",\"\n   - name: --bar\n    type: string\n  ",
           "format" : "yaml"
         }
       ]
@@ -100,28 +123,64 @@
     {
       "name" : "outputs",
       "type" : "List of Argument",
+      "description" : "A list of output arguments in addition to the `arguments` list. Any arguments specified here will have their `type` set to `file` and thr `direction` set to `output` by default.",
+      "example" : [
+        {
+          "example" : "outputs:\n  - name: output_file\n  - name: another_output",
+          "format" : "yaml"
+        },
+        {
+          "example" : "component_with_outputs\n  \n  Outputs:\n      output_file\n          type: file, output\n  \n      another_output\n          type: file, output",
+          "format" : "bash",
+          "description" : "This results in the following output when calling the component with the `--help` argument:"
+        }
+      ],
       "since" : "Viash 0.5.11"
     },
     {
       "name" : "inputs",
       "type" : "List of Argument",
+      "description" : "A list of input arguments in addition to the `arguments` list. Any arguments specified here will have their `type` set to `file` and the `direction` set to `input` by default.",
+      "example" : [
+        {
+          "example" : "inputs:\n  - name: input_file\n  - name: another_input",
+          "format" : "yaml"
+        },
+        {
+          "example" : "component_with_inputs\n  \n  Inputs:\n      input_file\n          type: file\n  \n      another_input\n          type: file",
+          "format" : "bash",
+          "description" : "This results in the following output when calling the component with the `--help` argument:"
+        }
+      ],
       "since" : "Viash 0.5.11"
     },
     {
       "name" : "authors",
       "type" : "List of Author",
       "description" : "A list of authors. An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.\n\nSuggested values for roles are:\n \n| Role | Abbrev. | Description |\n|------|---------|-------------|\n| maintainer | mnt | for the maintainer of the code. Ideally, exactly one maintainer is specified. |\n| author | aut | for persons who have made substantial contributions to the software. |\n| contributor | ctb| for persons who have made smaller contributions (such as code patches).\n| datacontributor | dtc | for persons or organisations that contributed data sets for the software\n| copyrightholder | cph | for all copyright holders. This is a legal concept so should use the legal name of an institution or corporate body.\n| funder | fnd | for persons or organizations that furnished financial support for the development of the software\n\nThe [full list of roles](https://www.loc.gov/marc/relators/relaterm.html) is extremely comprehensive.\n",
+      "example" : [
+        {
+          "example" : "authors:\n  - name: Bob Cando\n    roles: [maintainer, author]\n    email: bob@can.do\n    props: {github: bobcando, orcid: 0000-0001-0002-0003}\n  - name: Tim Farbe\n    roles: [author]\n    email: tim@far.be",
+          "format" : "yaml"
+        }
+      ],
       "since" : "Viash 0.3.1"
     },
     {
       "name" : "version",
       "type" : "Option of Version",
-      "description" : "Version of the component. This field will be used to version the executable and the Docker container."
+      "description" : "Version of the component. This field will be used to version the executable and the Docker container.",
+      "example" : [
+        {
+          "example" : "version: 0.8",
+          "format" : "yaml"
+        }
+      ]
     },
     {
       "name" : "namespace",
       "type" : "Option of String",
-      "description" : "Namespace this component is a part of. This is required when grouping components together in a pipeline and building multiple components at once using viash `ns build`.",
+      "description" : "Namespace this component is a part of. See the [Namespaces guide](/documentation/guide/component/namespaces.html) for more information on namespaces.",
       "example" : [
         {
           "example" : "namespace: fancy_components",
@@ -135,7 +194,7 @@
       "description" : "Name of the component and the filename of the executable when built with `viash build`.",
       "example" : [
         {
-          "example" : "name: exe",
+          "example" : "name: this_is_my_component",
           "format" : "yaml"
         }
       ]
@@ -165,6 +224,12 @@
         "name" : "__this__",
         "type" : "DockerPlatform",
         "description" : "Run a Viash component on a Docker backend platform.\nBy specifying which dependencies your component needs, users will be able to build a docker container from scratch using the setup flag, or pull it from a docker repository.\n"
+      },
+      {
+        "name" : "test_setup",
+        "type" : "List of Requirements",
+        "description" : "",
+        "since" : "Viash 0.5.13"
       },
       {
         "name" : "docker",
@@ -682,7 +747,27 @@
       {
         "name" : "example",
         "type" : "OneOrMore of String",
-        "description" : ""
+        "description" : "an example with examples! examples all the way down!",
+        "example" : [
+          {
+            "example" : "example1 without descr",
+            "format" : "yaml"
+          },
+          {
+            "example" : "example2 without descr",
+            "format" : "yaml"
+          },
+          {
+            "example" : "example3 with descr",
+            "format" : "yaml",
+            "description" : "whoa!"
+          },
+          {
+            "example" : "example4 with descr",
+            "format" : "bloop",
+            "description" : "nice!"
+          }
+        ]
       },
       {
         "name" : "description",
@@ -994,16 +1079,11 @@
       {
         "name" : "__this__",
         "type" : "BooleanTrueArgument",
-        "description" : ""
+        "description" : "\nAn argument of the `boolean_true` type acts like a `boolean` flag with a default value of `false`. When called as an argument it sets the `boolean` to `true`.  \n  \nExample:  \n  \n ```yaml  \narguments:\n  - name: --silent\n    type: boolean_true\n    description: Disable all console output\n    alternatives: [\"-s\"]\n```  \n  \n"
       },
       {
         "name" : "type",
         "type" : "String",
-        "description" : ""
-      },
-      {
-        "name" : "direction",
-        "type" : "Direction",
         "description" : ""
       },
       {
