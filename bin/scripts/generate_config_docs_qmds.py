@@ -47,7 +47,11 @@ def create_page(full_json, page_name, json_entry, directory):
     title = title.replace("Legacy", " Legacy")
     title = title.replace("Vdsl3", " Vdsl3")
     # qmd += f"---\ntitle: \"{title.title()}\"\n---\n\n"
-    qmd += header(title.title())
+
+    if directory == "config/arguments": # Don't capitalize the title of argument pages
+        qmd += header(page_name)
+    else:
+        qmd += header(title.title())
 
     sorted_dict = sorted(json_entry, key=lambda x: x["name"], reverse=False)
 
@@ -59,22 +63,22 @@ def create_page(full_json, page_name, json_entry, directory):
         name = sorted_dict[i]["name"]
         qmd += "## " + name + "\n\n"
 
-        if "removed" in  sorted_dict[i]:
+        if "removed" in sorted_dict[i]:
             removed = sorted_dict[i]["removed"]
         else:
             removed = None
 
-        if "deprecated" in  sorted_dict[i]:
+        if "deprecated" in sorted_dict[i]:
             deprecated = sorted_dict[i]["deprecated"]
         else:
             deprecated = None
 
-        if "type" in  sorted_dict[i]:
+        if "type" in sorted_dict[i]:
             type = sorted_dict[i]["type"]
         else:
             type = None
 
-        if "description" in  sorted_dict[i]:
+        if "description" in sorted_dict[i]:
             description = sorted_dict[i]["description"]
         else:
             description = None
@@ -112,6 +116,9 @@ def create_page(full_json, page_name, json_entry, directory):
         if example is not None:
             qmd += "### Example(s)" + "\n\n"
             for ex in example:
+                if "description" in ex:
+                    qmd += ex["description"] + "\n\n"
+
                 qmd += (
                     "```"
                     + ex["format"]
