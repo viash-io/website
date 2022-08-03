@@ -1208,21 +1208,21 @@
     "href": "documentation/reference/config/functionality.html#argument_groups",
     "title": "Functionality",
     "section": "argument_groups",
-    "text": "argument_groups\nType: List of ArgumentGroup\nA grouping of the arguments, used to display the help message.\n\nname: foo, the name of the argument group.\ndescription: Description of foo, a description of the argument group. Multiline descriptions are supported.\narguments: [arg1, arg2, ...], list of the arguments names.\n\n\nExample(s)\n- name: \"Input\"\n  arguments: [ id, input1, input2 ]\n- name: \"Output\"\n  arguments: [ output, optional_output ]\n- name: \"Foo\"\n  description: Arguments related to the foo functionality of this component.\n  arguments: [ foo, bar, zing, bork ]"
+    "text": "argument_groups\nType: List of ArgumentGroup\nA grouping of the arguments, used to display the help message.\n\nname: foo, the name of the argument group.\ndescription: Description of foo, a description of the argument group. Multiline descriptions are supported.\narguments: [arg1, arg2, ...], list of the arguments names.\n\n\nExample(s)\nargument_groups:\n  - name: \"Input\"\n    arguments: [ id, input1, input2 ]\n  - name: \"Output\"\n    arguments: [ output, optional_output ]\n  - name: \"Foo\"\n    description: Arguments related to the foo functionality of this component.\n    arguments: [ foo, bar, zing, bork ]\nThis results in the following output when calling the component with the --help argument:\ncomponent_name\n\n  Input:\n      --id\n          type: string\n\n      --input1\n          type: file\n\n      --input2\n          type: file\n\n  Output:\n      --output\n          type: file\n\n      --optional_output\n          type: file\n\n  Foo:\n      Arguments related to the foo functionality of this component.\n\n      --foo\n          type: integer\n\n      --bar\n          type: double\n\n      --zing\n          type: boolean\n\n      --bork\n          type: string"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#arguments",
     "href": "documentation/reference/config/functionality.html#arguments",
     "title": "Functionality",
     "section": "arguments",
-    "text": "arguments\nType: List of Argument\nA list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. Common properties for all argument types are the following.\n\ntype: string/file/integer/double/boolean/boolean_true/boolean_false, the type of argument determining to what object type the value will be cast in the downstream scripts.\ndirection: input/output, the directionality of the argument. Only needs to be specified for output files. Default: “input”.\nname: --foo, the name of the argument. Can also be -foo or foo. The number of dashes determines how values can be passed:\n\nwith --foo: long option, e.g. exe --foo=bar or exe --foo bar\nwith -foo: short option, e.g. exe -foo bar\nwith foo: argument, e.g. exe bar\n\nalternatives: [-f], list of alternative names. Typically only used to provide a short alternative option.\ndescription: Description of foo, a description of the argument. Multiline descriptions are supported.\ndefault: bar, the default value when no argument value is provided. Not allowed when required: true.\nrequired: true/false, whether the argument is required. If true and the functionality is executed, an error will be produced if no value is provided. Default = false.\nmultiple: true/false, whether to treat the argument value as an array or not. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. Default = false.\nmultiple_sep: \":\", the delimiter for providing multiple values. Default = “:”.\nmust_exist: true/false, denotes whether the file or folder should exist at the start of the execution. Only when ‘type’ is ‘file’.\n\nOn types:\n\ntype: string, The value passed through an argument of this type is converted to an ‘str’ object in Python, and to a ‘character’ object in R.\ntype: integer, The resulting value is an ‘int’ in Python and an ‘integer’ in R.\ntype: double, The resulting value is a ‘float’ in Python and an ‘double’ in R.\ntype: boolean, The resulting value is a ‘bool’ in Python and a ‘logical’ in R.\ntype: boolean_true/boolean_false, Arguments of this type can only be used by providing a flag --foo or not. The resulting value is a ‘bool’ in Python and a ‘logical’ in R. These properties cannot be altered: required is false, default is undefined, multiple is false.\ntype: file, The resulting value is still an ‘str’ in Python and a ‘character’ in R. In order to correctly pass files in some platforms (e.g. Docker and Nextflow), Viash needs to know which arguments are input/output files.\n\n\nExample(s)\n- name: --foo\n  type: file\n  alternatives: [-f]\n  description: Description of foo\n  default: \"/foo/bar\"\n  must_exist: true\n  required: false\n  multiple: true\n  multiple_sep: \",\""
+    "text": "arguments\nType: List of Argument\nA list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:\n\nstring\nfile\ninteger\ndouble\nboolean\nboolean_true\nboolean_false\n\n\nExample(s)\narguments:\n   - name: --foo\n    type: file\n    alternatives: [-f]\n    description: Description of foo\n    default: \"/foo/bar\"\n    must_exist: true\n    required: false\n    multiple: true\n    multiple_sep: \",\"\n   - name: --bar\n    type: string"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#authors",
     "href": "documentation/reference/config/functionality.html#authors",
     "title": "Functionality",
     "section": "authors",
-    "text": "authors\nType: List of Author\nA list of authors. An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.\nSuggested values for roles are:\n\n\n\n\n\n\n\n\nRole\nAbbrev.\nDescription\n\n\n\n\nmaintainer\nmnt\nfor the maintainer of the code. Ideally, exactly one maintainer is specified.\n\n\nauthor\naut\nfor persons who have made substantial contributions to the software.\n\n\ncontributor\nctb\nfor persons who have made smaller contributions (such as code patches).\n\n\ndatacontributor\ndtc\nfor persons or organisations that contributed data sets for the software\n\n\ncopyrightholder\ncph\nfor all copyright holders. This is a legal concept so should use the legal name of an institution or corporate body.\n\n\nfunder\nfnd\nfor persons or organizations that furnished financial support for the development of the software\n\n\n\nThe full list of roles is extremely comprehensive."
+    "text": "authors\nType: List of Author\nA list of authors. An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.\nSuggested values for roles are:\n\n\n\n\n\n\n\n\nRole\nAbbrev.\nDescription\n\n\n\n\nmaintainer\nmnt\nfor the maintainer of the code. Ideally, exactly one maintainer is specified.\n\n\nauthor\naut\nfor persons who have made substantial contributions to the software.\n\n\ncontributor\nctb\nfor persons who have made smaller contributions (such as code patches).\n\n\ndatacontributor\ndtc\nfor persons or organisations that contributed data sets for the software\n\n\ncopyrightholder\ncph\nfor all copyright holders. This is a legal concept so should use the legal name of an institution or corporate body.\n\n\nfunder\nfnd\nfor persons or organizations that furnished financial support for the development of the software\n\n\n\nThe full list of roles is extremely comprehensive.\n\nExample(s)\nauthors:\n  - name: Bob Cando\n    roles: [maintainer, author]\n    email: bob@can.do\n    props: {github: bobcando, orcid: 0000-0001-0002-0003}\n  - name: Tim Farbe\n    roles: [author]\n    email: tim@far.be"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#description",
@@ -1236,56 +1236,56 @@
     "href": "documentation/reference/config/functionality.html#enabled",
     "title": "Functionality",
     "section": "enabled",
-    "text": "enabled\nType: Boolean\nSetting this to false with disable this component when using namespaces."
+    "text": "enabled\nType: Boolean\nSetting this to false will disable this component when using namespaces.\n\nExample(s)\nenabled: false"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#info",
     "href": "documentation/reference/config/functionality.html#info",
     "title": "Functionality",
     "section": "info",
-    "text": "info\nType: Map of String,String\nA map for storing custom annotation."
+    "text": "info\nType: Map of String,String\nA map for storing custom annotation.\n\nExample(s)\ninfo: {twitter: wizzkid, appId: com.example.myApplication}"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#inputs",
     "href": "documentation/reference/config/functionality.html#inputs",
     "title": "Functionality",
     "section": "inputs",
-    "text": "inputs\nType: List of Argument"
+    "text": "inputs\nType: List of Argument\nA list of input arguments in addition to the arguments list. Any arguments specified here will have their type set to file and the direction set to input by default.\n\nExample(s)\ninputs:\n  - name: input_file\n  - name: another_input\nThis results in the following output when calling the component with the --help argument:\ncomponent_with_inputs\n  \n  Inputs:\n      input_file\n          type: file\n  \n      another_input\n          type: file"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#name",
     "href": "documentation/reference/config/functionality.html#name",
     "title": "Functionality",
     "section": "name",
-    "text": "name\nType: String\nName of the component and the filename of the executable when built with viash build.\n\nExample(s)\nname: exe"
+    "text": "name\nType: String\nName of the component and the filename of the executable when built with viash build.\n\nExample(s)\nname: this_is_my_component"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#namespace",
     "href": "documentation/reference/config/functionality.html#namespace",
     "title": "Functionality",
     "section": "namespace",
-    "text": "namespace\nType: String\nNamespace this component is a part of. This is required when grouping components together in a pipeline and building multiple components at once using viash ns build.\n\nExample(s)\nnamespace: fancy_components"
+    "text": "namespace\nType: String\nNamespace this component is a part of. See the Namespaces guide for more information on namespaces.\n\nExample(s)\nnamespace: fancy_components"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#outputs",
     "href": "documentation/reference/config/functionality.html#outputs",
     "title": "Functionality",
     "section": "outputs",
-    "text": "outputs\nType: List of Argument"
+    "text": "outputs\nType: List of Argument\nA list of output arguments in addition to the arguments list. Any arguments specified here will have their type set to file and thr direction set to output by default.\n\nExample(s)\noutputs:\n  - name: output_file\n  - name: another_output\nThis results in the following output when calling the component with the --help argument:\ncomponent_with_outputs\n  \n  Outputs:\n      output_file\n          type: file, output\n  \n      another_output\n          type: file, output"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#resources",
     "href": "documentation/reference/config/functionality.html#resources",
     "title": "Functionality",
     "section": "resources",
-    "text": "resources\nType: List of Resource\nThe first resource should be a script (bash_script, r_script, python_script, javascript_script, scala_script) which is what will be executed when the functionality is run. Additional resources will be copied to the same directory.\nCommon properties:\n\ntype: file/r_script/python_script/bash_script/javascript_script/scala_script, the type of resource. The first resource cannot be of type file. When the type is not specified, the default type is simply file. For more information regarding how to write a script in Bash, R or Python with Viash, check out the guides for the respective languages on the left.\nname: filename, the resulting name of the resource.\npath: path/to/file, the path of the input file. Can be a relative or an absolute path, or a URI.\ntext: …multiline text…, the raw content of the input file. Exactly one of path or text must be defined, the other undefined.\nis_executable: true/false, whether the resulting file is made executable.\n\n\nExample(s)\nresources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt"
+    "text": "resources\nType: List of Resource\nResources are files that support the component. The first resource should be the script that will be executed when the functionality is run. Additional resources will be copied to the same directory.\nCommon properties:\n\ntype: file / r_script / python_script / bash_script / javascript_script / scala_script / csharp_script, the type of resource. The first resource cannot be of type file. When the type is not specified, the default type is simply file.\nname: filename, the resulting name of the resource.\npath: path/to/file, the path of the input file. Can be a relative or an absolute path, or a URI.\ntext: …multiline text…, the raw content of the input file. Exactly one of path or text must be defined, the other undefined.\nis_executable: true / false, whether the resulting file is made executable.\n\n\nExample(s)\nresources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#test_resources",
     "href": "documentation/reference/config/functionality.html#test_resources",
     "title": "Functionality",
     "section": "test_resources",
-    "text": "test_resources\nType: List of Resource\nOne or more Bash/R/Python scripts to be used to test the component behaviour when viash test is invoked. Additional files of type file will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.\n\nExample(s)\ntests:\n  - type: bash_script\n    path: tests/test1.sh\n  - type: r_script\n    path: tests/test2.R\n  - path: resource1.txt"
+    "text": "test_resources\nType: List of Resource\nOne or more scripts to be used to test the component behaviour when viash test is invoked. Additional files of type file will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing. See the Unit Testing guide for more info.\n\nExample(s)\ntest_resources:\n  - type: bash_script\n    path: tests/test1.sh\n  - type: r_script\n    path: tests/test2.R\n  - path: resource1.txt"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#tests",
@@ -1299,14 +1299,14 @@
     "href": "documentation/reference/config/functionality.html#usage",
     "title": "Functionality",
     "section": "usage",
-    "text": "usage\nType: String\nA description of the component. This will be displayed with –help under the ‘Usage:’ section."
+    "text": "usage\nType: String\nA description on how to use the component. This will be displayed with --help under the ‘Usage:’ section.\n\nExample(s)\nusage: Place the executable in a directory containing TSV files and run it"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#version",
     "href": "documentation/reference/config/functionality.html#version",
     "title": "Functionality",
     "section": "version",
-    "text": "version\nType: Version\nVersion of the component. This field will be used to version the executable and the Docker container."
+    "text": "version\nType: Version\nVersion of the component. This field will be used to version the executable and the Docker container.\n\nExample(s)\nversion: 0.8"
   },
   {
     "objectID": "documentation/reference/viash/ns.html",
