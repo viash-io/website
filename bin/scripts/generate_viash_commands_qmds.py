@@ -106,6 +106,9 @@ def create_opts_table(opts):
 
         qmd += f"| {argument} | {description} | `{opt['type']}` |\n"
 
+    # Always add --help
+    qmd += f"| `--help`, `-h` | Show help message |  |\n"
+
     qmd += "\n\n"
     return qmd
 
