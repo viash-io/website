@@ -57,7 +57,7 @@ def create_page(full_json, page_name, json_entry, directory):
 
     for i in range(len(sorted_dict)):
         if sorted_dict[i]["name"] == "__this__":
-            qmd += sorted_dict[i]["description"].replace('"', "") + "\n\n"
+            qmd += sorted_dict[i]["description"] + "\n\n"
             continue
 
         name = sorted_dict[i]["name"]
