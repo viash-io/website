@@ -73,7 +73,7 @@
     {
       "name" : "description",
       "type" : "Option of String",
-      "description" : "A description of the component. This will be displayed with --help.",
+      "description" : "A description of the component. This will be displayed with `--help`.",
       "example" : [
         {
           "example" : "description: |\n  This component performs function Y and Z.\n  It is possible to make this a multiline string.\n",
@@ -707,82 +707,98 @@
       {
         "name" : "__this__",
         "type" : "StringArgument",
-        "description" : ""
-      },
-      {
-        "name" : "type",
-        "type" : "String",
-        "description" : ""
+        "description" : "\nA `string` type argument has a value made up of an ordered sequences of characters, like \"Hello\" or \"I'm a string\".\n  \nExample:  \n  \n ```yaml  \narguments:\n  - name: --search_query\n    type: string\n    default: \"meaning of life\"\n    description: The term to search for\n    alternatives: [\"-q\"]\n```  \n  \n"
       },
       {
         "name" : "multiple_sep",
         "type" : "Char",
-        "description" : ""
+        "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_string\n  type: string\n  multiple: true\n  multiple_sep: \",\"\n",
+            "format" : "yaml"
+          },
+          {
+            "example" : "my_component --my_string=Marc,Susan,Paul",
+            "format" : "bash",
+            "description" : "Here's an example of how to use this:"
+          }
+        ]
       },
       {
         "name" : "multiple",
         "type" : "Boolean",
-        "description" : ""
-      },
-      {
-        "name" : "direction",
-        "type" : "Direction",
-        "description" : ""
+        "description" : "Treat the argument value as an array. Arrays can be passed using the delimiter `--foo=1:2:3` or by providing the same argument multiple times `--foo 1 --foo 2`. You can use a custom delimiter by using the [`multiple_sep`](#multiple_sep) property. `false` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_string\n  type: string\n  multiple: true\n",
+            "format" : "yaml"
+          },
+          {
+            "example" : "my_component --my_string=Marc:Susan:Paul",
+            "format" : "bash",
+            "description" : "Here's an example of how to use this:"
+          }
+        ]
       },
       {
         "name" : "choices",
         "type" : "List of String",
-        "description" : ""
+        "description" : "Limit the amount of valid values for this argument to those set in this list. When set and a value not present in the list is provided, an error will be produced.",
+        "example" : [
+          {
+            "example" : "- name: --language\n  type: string\n  choices: [\"python\", \"r\", \"javascript\"]\n",
+            "format" : "yaml"
+          }
+        ]
       },
       {
         "name" : "required",
         "type" : "Boolean",
-        "description" : ""
+        "description" : "Make the value for this argument required. If set to `true`, an error will be produced if no value was provided. `false` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_string\n  type: string\n  required: true\n",
+            "format" : "yaml"
+          }
+        ]
       },
       {
         "name" : "default",
         "type" : "OneOrMore of String",
-        "description" : ""
+        "description" : "The default value when no argument value is provided. This will not work if the [`required`](#required) property is enabled.",
+        "example" : [
+          {
+            "example" : "- name: --my_string\n  type: string\n  default: \"The answer is 42\"\n",
+            "format" : "yaml"
+          }
+        ]
       },
       {
         "name" : "example",
         "type" : "OneOrMore of String",
-        "description" : "an example with examples! examples all the way down!",
+        "description" : "An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.",
         "example" : [
           {
-            "example" : "example1 without descr",
+            "example" : "- name: --my_string\n  type: string\n  example: \"Hello World\"\n",
             "format" : "yaml"
-          },
-          {
-            "example" : "example2 without descr",
-            "format" : "yaml"
-          },
-          {
-            "example" : "example3 with descr",
-            "format" : "yaml",
-            "description" : "whoa!"
-          },
-          {
-            "example" : "example4 with descr",
-            "format" : "bloop",
-            "description" : "nice!"
           }
         ]
       },
       {
         "name" : "description",
         "type" : "Option of String",
-        "description" : ""
+        "description" : "A description of the argument. This will be displayed with `--help`."
       },
       {
         "name" : "alternatives",
         "type" : "OneOrMore of String",
-        "description" : ""
+        "description" : "List of alternative format variations for this argument."
       },
       {
         "name" : "name",
         "type" : "String",
-        "description" : ""
+        "description" : "\nThe name of the argument. Can be in the formats `--foo`, `-f` or `foo`. The number of dashes determines how values can be passed:  \n\n  - `--foo` is a long option, which can be passed with `executable_name --foo=value` or `executable_name --foo value`\n  - `-f` is a short option, which can be passed with `executable_name -f value`\n  - `foo` is an argument, which can be passed with `executable_name value`  \n"
       }
     ],
     "double" : [
@@ -856,57 +872,87 @@
       {
         "name" : "__this__",
         "type" : "BooleanArgument",
-        "description" : ""
-      },
-      {
-        "name" : "type",
-        "type" : "String",
-        "description" : ""
+        "description" : "\nA `boolean` type argument has two possible values: `true` or `false`.\n  \nExample:  \n  \n ```yaml  \narguments:\n  - name: --trim\n    type: boolean\n    default: true\n    description: Trim whitespace from the final output\n    alternatives: [\"-t\"]\n```  \n  \n"
       },
       {
         "name" : "multiple_sep",
         "type" : "Char",
-        "description" : ""
+        "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_boolean\n  type: boolean\n  multiple: true\n  multiple_sep: \",\"\n",
+            "format" : "yaml"
+          },
+          {
+            "example" : "my_component --my_boolean=true,true,false",
+            "format" : "bash",
+            "description" : "Here's an example of how to use this:"
+          }
+        ]
       },
       {
         "name" : "multiple",
         "type" : "Boolean",
-        "description" : ""
-      },
-      {
-        "name" : "direction",
-        "type" : "Direction",
-        "description" : ""
+        "description" : "Treat the argument value as an array. Arrays can be passed using the delimiter `--foo=1:2:3` or by providing the same argument multiple times `--foo 1 --foo 2`. You can use a custom delimiter by using the [`multiple_sep`](#multiple_sep) property. `false` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_boolean\n  type: boolean\n  multiple: true\n",
+            "format" : "yaml"
+          },
+          {
+            "example" : "my_component --my_boolean=true:true:false",
+            "format" : "bash",
+            "description" : "Here's an example of how to use this:"
+          }
+        ]
       },
       {
         "name" : "required",
         "type" : "Boolean",
-        "description" : ""
+        "description" : "Make the value for this argument required. If set to `true`, an error will be produced if no value was provided. `false` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_boolean\n  type: boolean\n  required: true\n",
+            "format" : "yaml"
+          }
+        ]
       },
       {
         "name" : "default",
         "type" : "OneOrMore of Boolean",
-        "description" : ""
+        "description" : "The default value when no argument value is provided. This will not work if the [`required`](#required) property is enabled.",
+        "example" : [
+          {
+            "example" : "- name: --my_boolean\n  type: boolean\n  default: true\n",
+            "format" : "yaml"
+          }
+        ]
       },
       {
         "name" : "example",
         "type" : "OneOrMore of Boolean",
-        "description" : ""
+        "description" : "An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.",
+        "example" : [
+          {
+            "example" : "- name: --my_boolean\n  type: boolean\n  example: true\n",
+            "format" : "yaml"
+          }
+        ]
       },
       {
         "name" : "description",
         "type" : "Option of String",
-        "description" : ""
+        "description" : "A description of the argument. This will be displayed with `--help`."
       },
       {
         "name" : "alternatives",
         "type" : "OneOrMore of String",
-        "description" : ""
+        "description" : "List of alternative format variations for this argument."
       },
       {
         "name" : "name",
         "type" : "String",
-        "description" : ""
+        "description" : "\nThe name of the argument. Can be in the formats `--trim`, `-t` or `trim`. The number of dashes determines how values can be passed:  \n\n  - `--trim` is a long option, which can be passed with `executable_name --trim`\n  - `-t` is a short option, which can be passed with `executable_name -t`\n  - `trim` is an argument, which can be passed with `executable_name trim`  \n"
       }
     ],
     "file" : [
@@ -975,32 +1021,22 @@
       {
         "name" : "__this__",
         "type" : "BooleanFalseArgument",
-        "description" : ""
-      },
-      {
-        "name" : "type",
-        "type" : "String",
-        "description" : ""
-      },
-      {
-        "name" : "direction",
-        "type" : "Direction",
-        "description" : ""
+        "description" : "\nAn argument of the `boolean_false` type acts like an inverted `boolean` flag with a default value of `true`. When called as an argument it sets the `boolean` to `false`.  \n  \nExample:  \n  \n ```yaml  \narguments:\n  - name: --no-log\n    type: boolean_false\n    description: Disable logging\n    alternatives: [\"-nl\"]\n```  \n  \n"
       },
       {
         "name" : "description",
         "type" : "Option of String",
-        "description" : ""
+        "description" : "A description of the argument. This will be displayed with `--help`."
       },
       {
         "name" : "alternatives",
         "type" : "OneOrMore of String",
-        "description" : ""
+        "description" : "List of alternative format variations for this argument."
       },
       {
         "name" : "name",
         "type" : "String",
-        "description" : ""
+        "description" : "\nThe name of the argument. Can be in the formats `--no-log`, `-n` or `no-log`. The number of dashes determines how values can be passed:  \n\n  - `--no-log` is a long option, which can be passed with `executable_name --no-log`\n  - `-n` is a short option, which can be passed with `executable_name -n`\n  - `no-log` is an argument, which can be passed with `executable_name no-log`  \n"
       }
     ],
     "integer" : [
@@ -1079,27 +1115,22 @@
       {
         "name" : "__this__",
         "type" : "BooleanTrueArgument",
-        "description" : "\nAn argument of the `boolean_true` type acts like a `boolean` flag with a default value of `false`. When called as an argument it sets the `boolean` to `true`.  \n  \nExample:  \n  \n ```yaml  \narguments:\n  - name: --silent\n    type: boolean_true\n    description: Disable all console output\n    alternatives: [\"-s\"]\n```  \n  \n"
-      },
-      {
-        "name" : "type",
-        "type" : "String",
-        "description" : ""
+        "description" : "\nAn argument of the `boolean_true` type acts like a `boolean` flag with a default value of `false`. When called as an argument it sets the `boolean` to `true`.  \n  \nExample:  \n  \n ```yaml  \narguments:\n  - name: --silent\n    type: boolean_true\n    description: Ignore console output\n    alternatives: [\"-s\"]\n```  \n  \n"
       },
       {
         "name" : "description",
         "type" : "Option of String",
-        "description" : ""
+        "description" : "A description of the argument. This will be displayed with `--help`."
       },
       {
         "name" : "alternatives",
         "type" : "OneOrMore of String",
-        "description" : ""
+        "description" : "List of alternative format variations for this argument."
       },
       {
         "name" : "name",
         "type" : "String",
-        "description" : ""
+        "description" : "\nThe name of the argument. Can be in the formats `--silent`, `-s` or `silent`. The number of dashes determines how values can be passed:  \n\n  - `--silent` is a long option, which can be passed with `executable_name --silent`\n  - `-s` is a short option, which can be passed with `executable_name -s`\n  - `silent` is an argument, which can be passed with `executable_name silent`  \n"
       }
     ]
   }
