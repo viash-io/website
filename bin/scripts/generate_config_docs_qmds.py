@@ -114,7 +114,7 @@ def create_page(full_json, page_name, json_entry, directory):
         if description is not None:
             qmd += description + "\n\n"
         if example is not None:
-            qmd += "### Example(s)" + "\n\n"
+            qmd += "### Example" + "\n\n"
             for ex in example:
                 if "description" in ex:
                     qmd += ex["description"] + "\n\n"
