@@ -473,12 +473,45 @@
       {
         "name" : "__this__",
         "type" : "NextflowVdsl3Platform",
-        "description" : "Run a Viash component as a Nextflow module."
+        "description" : "Next-gen platform for generating NextFlow VDSL3 modules."
+      },
+      {
+        "name" : "debug",
+        "type" : "Boolean",
+        "description" : "Whether or not to print debug messages."
+      },
+      {
+        "name" : "auto",
+        "type" : "NextflowAuto",
+        "description" : "Automated processing flags which can be turned off:  \n\n - `simplifyInput`: If `true`, an input tuple only containing only a single File (e.g. `[\"foo\", file(\"in.h5ad\")]`) is automatically transformed to a map (i.e. `[\"foo\", [ input: file(\"in.h5ad\") ] ]`). Default is `true`.\n - `simplifyOutput`: If `true`, an output tuple containing a map with a File (e.g. `[\"foo\", [ output: file(\"out.h5ad\") ] ]`) is automatically transformed to a map (i.e. `[\"foo\", file(\"out.h5ad\")]`). Default is `true`.\n - `transcript`: If `true`, the module's transcripts from `work/` are automatically published to `params.transcriptDir`. If not defined, `params.publishDir + \"/_transcripts\"` will be used. Will throw an error if neither are defined. Default is `false`.\n - `publish`: If `true`, the module's outputs are automatically published to `params.publishDir`.  Will throw an error if `params.publishDir` is not defined. Default is `false`.",
+        "example" : [
+          {
+            "example" : "auto:\n    publish: true",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "directives",
+        "type" : "NextflowDirectives",
+        "description" : "Directives are optional settings that affect the execution of the process. These mostly match up with the Nextflow counterparts that are linked below:  \n\n - [`accelerator`](https://www.nextflow.io/docs/latest/process.html#accelerator)\n - [`afterScript`](https://www.nextflow.io/docs/latest/process.html#afterscript)\n - [`beforeScript`](https://www.nextflow.io/docs/latest/process.html#beforeScript)\n - [`cache`](https://www.nextflow.io/docs/latest/process.html#cache)\n - [`conda`](https://www.nextflow.io/docs/latest/process.html#conda)\n - [`container`](https://www.nextflow.io/docs/latest/process.html#container)\n - [`containerOptions`](https://www.nextflow.io/docs/latest/process.html#containeroptions)\n - [`cpus`](https://www.nextflow.io/docs/latest/process.html#cpus)\n - [`disk`](https://www.nextflow.io/docs/latest/process.html#disk)\n - [`echo`](https://www.nextflow.io/docs/latest/process.html#echo)\n - [`errorStrategy`](https://www.nextflow.io/docs/latest/process.html#errorstrategy)\n - [`executor`](https://www.nextflow.io/docs/latest/process.html#executor)\n - [`machineType`](https://www.nextflow.io/docs/latest/process.html#machinetype)\n - [`maxErrors`](https://www.nextflow.io/docs/latest/process.html#maxerrors)\n - [`maxForks`](https://www.nextflow.io/docs/latest/process.html#maxforks)\n - [`maxRetries`](https://www.nextflow.io/docs/latest/process.html#maxretries)\n - [`memory`](https://www.nextflow.io/docs/latest/process.html#memory)\n - [`module`](https://www.nextflow.io/docs/latest/process.html#module)\n - [`penv`](https://www.nextflow.io/docs/latest/process.html#penv)\n - [`publishDir`](https://www.nextflow.io/docs/latest/process.html#publishdir)\n - [`queue`](https://www.nextflow.io/docs/latest/process.html#queue)\n - [`scratch`](https://www.nextflow.io/docs/latest/process.html#scratch)\n - [`storeDir`](https://www.nextflow.io/docs/latest/process.html#storeDir)\n - [`stageInMode`](https://www.nextflow.io/docs/latest/process.html#stageinmode)\n - [`stageOutMode`](https://www.nextflow.io/docs/latest/process.html#stageoutmode)\n - [`tag`](https://www.nextflow.io/docs/latest/process.html#tag)\n - [`time`](https://www.nextflow.io/docs/latest/process.html#time)",
+        "example" : [
+          {
+            "example" : "directives:\n    container: rocker/r-ver:4.1\n    label: highcpu\n    cpus: 4\n    memory: 16 GB",
+            "format" : "yaml"
+          }
+        ]
       },
       {
         "name" : "id",
         "type" : "String",
-        "description" : "Every platform can be given a specific id that can later be referred to explicitly when running or building the Viash component."
+        "description" : "Every platform can be given a specific id that can later be referred to explicitly when running or building the Viash component.",
+        "example" : [
+          {
+            "example" : "id: foo",
+            "format" : "yaml"
+          }
+        ]
       }
     ],
     "nextflowLegacyPlatform" : [
@@ -1001,62 +1034,109 @@
       {
         "name" : "__this__",
         "type" : "FileArgument",
-        "description" : ""
-      },
-      {
-        "name" : "type",
-        "type" : "String",
-        "description" : ""
+        "description" : "\nA `file` type argument has a string value that points to a file or folder path.\n  \nExample:  \n  \n ```yaml  \narguments:\n  - name: --input_csv\n    type: file\n    must_exist: true\n    description: CSV file to read contents from\n    alternatives: [\"-i\"]\n```  \n  \n"
       },
       {
         "name" : "multiple_sep",
         "type" : "Char",
-        "description" : ""
+        "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_files\n  type: file\n  multiple: true\n  multiple_sep: \",\"\n",
+            "format" : "yaml"
+          },
+          {
+            "example" : "my_component --my_files=firstFile.csv,anotherFile.csv,yetAnother.csv",
+            "format" : "bash",
+            "description" : "Here's an example of how to use this:"
+          }
+        ]
       },
       {
         "name" : "multiple",
         "type" : "Boolean",
-        "description" : ""
+        "description" : "Treat the argument value as an array. Arrays can be passed using the delimiter `--foo=1:2:3` or by providing the same argument multiple times `--foo 1 --foo 2`. You can use a custom delimiter by using the [`multiple_sep`](#multiple_sep) property. `false` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_files\n  type: file\n  multiple: true\n",
+            "format" : "yaml"
+          },
+          {
+            "example" : "my_component --my_files=firstFile.csv:anotherFile.csv:yetAnother.csv",
+            "format" : "bash",
+            "description" : "Here's an example of how to use this:"
+          }
+        ]
       },
       {
         "name" : "direction",
         "type" : "Direction",
-        "description" : ""
+        "description" : "Makes this argument an `input` or an `output`, as in does the file/folder needs to be read or written. `input` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_output_file\n  type: file\n  direction: output\n",
+            "format" : "yaml"
+          }
+        ]
       },
       {
         "name" : "required",
         "type" : "Boolean",
-        "description" : ""
+        "description" : "Make the value for this argument required. If set to `true`, an error will be produced if no value was provided. `false` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_file\n  type: file\n  required: true\n",
+            "format" : "yaml"
+          }
+        ]
       },
       {
         "name" : "must_exist",
         "type" : "Boolean",
-        "description" : ""
+        "description" : "The file or folder should exist before the start of execution. If set to `true`, an error will be produced if the file or folder wasn't found.",
+        "example" : [
+          {
+            "example" : "- name: --my_file\n  type: file\n  must_exist: true\n",
+            "format" : "yaml"
+          }
+        ]
       },
       {
         "name" : "default",
         "type" : "OneOrMore of Path",
-        "description" : ""
+        "description" : "The default value when no argument value is provided. This will not work if the [`required`](#required) property is enabled.",
+        "example" : [
+          {
+            "example" : "- name: --my_file\n  type: file\n  default: data.csv\n",
+            "format" : "yaml"
+          }
+        ]
       },
       {
         "name" : "example",
         "type" : "OneOrMore of Path",
-        "description" : ""
+        "description" : "An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.",
+        "example" : [
+          {
+            "example" : "- name: --my_file\n  type: file\n  example: data.csv\n",
+            "format" : "yaml"
+          }
+        ]
       },
       {
         "name" : "description",
         "type" : "Option of String",
-        "description" : ""
+        "description" : "A description of the argument. This will be displayed with `--help`."
       },
       {
         "name" : "alternatives",
         "type" : "OneOrMore of String",
-        "description" : ""
+        "description" : "List of alternative format variations for this argument."
       },
       {
         "name" : "name",
         "type" : "String",
-        "description" : ""
+        "description" : "\nThe name of the argument. Can be in the formats `--foo`, `-f` or `foo`. The number of dashes determines how values can be passed:  \n\n  - `--foo` is a long option, which can be passed with `executable_name --foo=value` or `executable_name --foo value`\n  - `-f` is a short option, which can be passed with `executable_name -f value`\n  - `foo` is an argument, which can be passed with `executable_name value`  \n"
       }
     ],
     "boolean_false" : [
