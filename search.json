@@ -375,28 +375,112 @@
     "href": "documentation/quickstart/index.html",
     "title": "Quickstart",
     "section": "",
-    "text": "This short tutorial will touch on the basic concepts of Viash. Before getting started, make sure you’ve installed Viash so you can follow along with the example."
+    "text": "This tutorial will guide you through creating a Viash component, generating a Nextflow module and using that in a simple data pipeline. We will provide useful links to our Guide and Reference pages along the way if you want to delve deeper into certain topics.\nTODO: add links to docs throughout"
   },
   {
     "objectID": "documentation/quickstart/index.html#what-is-viash",
     "href": "documentation/quickstart/index.html#what-is-viash",
     "title": "Quickstart",
     "section": "What is Viash?",
-    "text": "What is Viash?\nViash is … TODO: Add quick breakdown of the core of Viash"
+    "text": "What is Viash?\nViash is a script code wrapper for building modular software components that serve as building blocks to develop (Nextflow) data pipelines. All you need is your script and a metadata file to get started.\nHere are a few of Viash’s key features:\n\nYou can use your preferred scripting language per component, and mix and match scripts between multiple components as you please. Supported languages include: Bash, Python, R, Scala, JS and C#.\nA custom Docker container is automatically generated based on your dependencies described in your metadata. No expert Docker knowledge is required.\nViash generates a Nextflow module from your script. No expert Nextflow knowledge is required.\nYou can simply script the nextflow modules to create and run your scalable and reproducible data pipeline.\nYou can test every single module on your local workstation through the built-in development kit."
   },
   {
-    "objectID": "documentation/quickstart/index.html#todo",
-    "href": "documentation/quickstart/index.html#todo",
+    "objectID": "documentation/quickstart/index.html#quickstart-example-project",
+    "href": "documentation/quickstart/index.html#quickstart-example-project",
     "title": "Quickstart",
-    "section": "TODO",
-    "text": "TODO\n\nBashC#JavaScriptPythonScalaR"
+    "section": "Quickstart example project",
+    "text": "Quickstart example project\nThe example in this Quickstart will take you from nothing to a scalable and reproducible data pipeline. Here’s the pipeline you’ll be building:\n\n\n\n\ngraph LR\n   A(data/file?.tsv) --> B[/remove_comments/]\n   B --> C[/take_column/]\n   C --> D[/combine_columns/]\n   D --> E(output)\n\n\n\n\n\n\n\n\nOne or more TSV files are taken as the input and will be processed through a series of modules. At the end, the output is written away to a folder."
+  },
+  {
+    "objectID": "documentation/quickstart/index.html#step-1-installation",
+    "href": "documentation/quickstart/index.html#step-1-installation",
+    "title": "Quickstart",
+    "section": "Step 1: Installation",
+    "text": "Step 1: Installation\nBefore getting started, make sure you’ve installed Viash, Docker and Nextflow on your system.\nIf you want to skip the directory structure component creation and start using Viash commands right away, download the zip below and skip to Step 6: Generating builds.\nTODO: ADD ZIP FILE AND DOWNLOAD BUTTON"
+  },
+  {
+    "objectID": "documentation/quickstart/index.html#step-2-prepare-the-directory-structure",
+    "href": "documentation/quickstart/index.html#step-2-prepare-the-directory-structure",
+    "title": "Quickstart",
+    "section": "Step 2: Prepare the directory structure",
+    "text": "Step 2: Prepare the directory structure\nTo keep the source code, input data and build targets separated, it’s good practice to make some dedicated directories. Create a directory structure that looks like this, either by hand or with the commands below:\nadvanced_pipeline\n├── data\n└── src\n    └── example\n        ├── combine_columns\n        ├── remove_comments\n        └── take_column\nmkdir advanced_pipeline\nmkdir advanced_pipeline/data\nmkdir advanced_pipeline/src\nmkdir advanced_pipeline/src/example\nmkdir advanced_pipeline/src/example/combine_columns\nmkdir advanced_pipeline/src/example/remove_comments\nmkdir advanced_pipeline/src/example/take_column"
+  },
+  {
+    "objectID": "documentation/quickstart/index.html#step-3-create-an-example-file",
+    "href": "documentation/quickstart/index.html#step-3-create-an-example-file",
+    "title": "Quickstart",
+    "section": "Step 3: Create an example file",
+    "text": "Step 3: Create an example file\nThe input for this pipeline consists of one or more TSV files in the data directory. Add a new file named file1.tsv to the data directory and add the following as its content (or download the file):\nDownload file1.tsv\n# this is a header      \n# this is also a header     \none     0.11    123\ntwo     0.23    456\nthree   0.35    789\nfour    0.47    123\n\n\n\nSee current directory structure\n\nadvanced_pipeline\n├── data  \n│   └── > sample.tsv <  \n└── src  \n    └── example  \n        ├── combine_columns  \n        ├── remove_comments  \n        └── take_column"
+  },
+  {
+    "objectID": "documentation/quickstart/index.html#step-4-write-a-script",
+    "href": "documentation/quickstart/index.html#step-4-write-a-script",
+    "title": "Quickstart",
+    "section": "Step 4: Write a script",
+    "text": "Step 4: Write a script\nA Viash component consists of a script and a component, let’s start with a Bash script. Add a new file named script.sh to the advanced_pipeline/src/example/remove_comments directory and add this:\nDownload script.sh\n#!/bin/bash\ngrep -v '^#' \"$par_input\" > \"$par_output\"\n\n\nSee current directory structure\n\nadvanced_pipeline\n├── data\n│   └── file1.tsv\n└── src\n    └── example\n        ├── combine_columns\n        ├── remove_comments\n        │   └── > script.sh <\n        └── take_column"
+  },
+  {
+    "objectID": "documentation/quickstart/index.html#step-5-add-a-viash-config-file",
+    "href": "documentation/quickstart/index.html#step-5-add-a-viash-config-file",
+    "title": "Quickstart",
+    "section": "Step 5: Add a Viash config file",
+    "text": "Step 5: Add a Viash config file\nWith the script added, you can now add a Viash config file next to it. This combination is called a component. Add another file named config.vsh.yaml to the advanced_pipeline/src/example/remove_comments directory. use the following as its content:\nDownload config.vsh.yaml\nfunctionality:\n  name: remove_comments\n  description: My first Nextflow pipeline module\n  namespace: example\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      required: true\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n    - type: string\n      name: --id\n      default: \"remove_comments\"\n  resources:\n  - type: bash_script\n    path: ./script.sh\nplatforms:\n  - type: docker\n    image: ubuntu:20.04\n  - type: nextflow\n    variant: vdsl3\n\n\nSee current directory structure\n\nadvanced_pipeline\n├── data\n│   └── file1.tsv\n└── src\n    └── example\n        ├── combine_columns\n        ├── remove_comments\n        │   ├── > config.vsh.yaml <\n        │   └── script.sh\n        └── take_column"
+  },
+  {
+    "objectID": "documentation/quickstart/index.html#step-6-generating-builds",
+    "href": "documentation/quickstart/index.html#step-6-generating-builds",
+    "title": "Quickstart",
+    "section": "Step 6: Generating builds",
+    "text": "Step 6: Generating builds\nNow that you have a component, it’s time to use Viash to generate the executable and module. Make sure your working directory is inside the root of the advanced_pipeline directory, then run the following command:\nviash ns build\nThe output should look like this:\nExporting remove_comments (example) =docker=> target/docker/example/remove_comments\nExporting remove_comments (example) =nextflow=> target/nextflow/example/remove_comments\nAll 2 configs built successfully\nViash has now generated a target directory structure and several files grouped per platform.\n\n\nSee current directory structure\n\nadvanced_pipeline\n├── data\n│   └── file1.tsv\n├── src\n│   └── example\n│       ├── combine_columns\n│       ├── remove_comments\n│       │   ├── config.vsh.yaml\n│       │   └── script.sh\n│       └── take_column\n└── > target <\n    ├── docker\n    │   └── example\n    │       └── remove_comments\n    │           └── remove_comments\n    └── nextflow\n        └── example\n            └── remove_comments\n                ├── main.nf\n                └── nextflow.config"
+  },
+  {
+    "objectID": "documentation/quickstart/index.html#step-7-run-the-build-targets",
+    "href": "documentation/quickstart/index.html#step-7-run-the-build-targets",
+    "title": "Quickstart",
+    "section": "Step 7: Run the build targets",
+    "text": "Step 7: Run the build targets\nYou now have two usable targets which you can run:\n\nAn executable with a Docker backend in the target/docker directory. This runs an executable based on your component in a docker container.\nA Nextflow module in the target/nextflow directory. This module is ready to be used in a data pipeline.\n\nTo test if the executable works, try running the following command:\ntarget/docker/example/remove_comments/remove_comments --help\nThis should give you a summary of what you can do with the executable and the arguments it accepts based on the component’s config file.\nNext, try running it with the following command:\ntarget/docker/example/remove_comments/remove_comments \\\n--input data/file1.tsv --output data/test_output.tsv\nThere should now be a test_output.tsv file in the data directory with the following content:\none     0.11    123\ntwo     0.23    456\nthree   0.35    789\nfour    0.47    123\n\nNotice that the lines starting with hashtags have been removed, this means the executable works!\nNow try getting the documentation from the Nextflow module with this command:\nnextflow run target/nextflow/example/remove_comments/main.nf --help\nThis will not only give you the same information as it did with the executable, but also additional arguments specific to Nextflow modules.\nThe final test is to run the Nextflow module as a standalone pipeline so it can process the TSV just like the executable did before it:\nnextflow run target/nextflow/example/remove_comments/main.nf \\\n--input ./data/file1.tsv --publishDir output\nIf all went well, you should now find a new file inside of an output directory that contains the TSV contents without the comments."
+  },
+  {
+    "objectID": "documentation/quickstart/index.html#step-8-create-a-nextflow-pipeline",
+    "href": "documentation/quickstart/index.html#step-8-create-a-nextflow-pipeline",
+    "title": "Quickstart",
+    "section": "Step 8: Create a Nextflow pipeline",
+    "text": "Step 8: Create a Nextflow pipeline\nTime to ramp things up and create a simple Nextflow pipeline by adding a Nextflow script named main.nf to the root of the advanced_pipeline folder. Add the following:\ntargetDir = \"./target/nextflow\" \n\ninclude { remove_comments } from \"$targetDir/example/remove_comments/main.nf\" \n\nworkflow {\n  Channel.fromPath(params.input) // 3\n    | map{ file -> [ file.baseName, file ] } \n    | view{ file -> \"Input: $file\" }\n    | remove_comments.run( \n    auto: [ publish: true ])\n    | view{ file -> \"Output: $file\" } \n}"
+  },
+  {
+    "objectID": "documentation/quickstart/index.html#step-9-run-the-pipeline",
+    "href": "documentation/quickstart/index.html#step-9-run-the-pipeline",
+    "title": "Quickstart",
+    "section": "Step 9: Run the pipeline",
+    "text": "Step 9: Run the pipeline\nNow run the pipeline script you just created with Nextflow:\nnextflow run main.nf \\\n--input ./data/file1.tsv --publishDir output\nThis should have created another file inside of the output directory, which means the pipeline works as expected."
+  },
+  {
+    "objectID": "documentation/quickstart/index.html#step-10-expand-the-pipeline",
+    "href": "documentation/quickstart/index.html#step-10-expand-the-pipeline",
+    "title": "Quickstart",
+    "section": "Step 10: Expand the pipeline",
+    "text": "Step 10: Expand the pipeline\nYou now have a pipeline with a single module, which isn’t not a very realistic scenario. To remedy that, you’ll add two more components to the src directory.\nTo start with, add the following script and config to the src/example/combine_columns directory:\nTODO: Add instructions to add combine_columns TODO: Add instructions to add take_column"
+  },
+  {
+    "objectID": "documentation/quickstart/index.html#step-11-generate-more-modules",
+    "href": "documentation/quickstart/index.html#step-11-generate-more-modules",
+    "title": "Quickstart",
+    "section": "Step 11: Generate more modules",
+    "text": "Step 11: Generate more modules\nviash ns build"
+  },
+  {
+    "objectID": "documentation/quickstart/index.html#step-12-create-the-final-pipeline",
+    "href": "documentation/quickstart/index.html#step-12-create-the-final-pipeline",
+    "title": "Quickstart",
+    "section": "Step 12: Create the final pipeline",
+    "text": "Step 12: Create the final pipeline\nrun full pipeline"
   },
   {
     "objectID": "documentation/quickstart/index.html#whats-next",
     "href": "documentation/quickstart/index.html#whats-next",
     "title": "Quickstart",
     "section": "What’s next?",
-    "text": "What’s next?"
+    "text": "What’s next?\nNow that you’ve had a taste of what Viash can do for you, take a look at our Guide and Reference pages to learn more about how to use Viash.\nIf you want to start simple, we suggest to take a look at the Native component creation guide."
   },
   {
     "objectID": "documentation/faq/index.html",

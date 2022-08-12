@@ -15,6 +15,69 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -54,14 +117,17 @@ ul.task-list{list-style: none;}
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Viash - Quickstart">
-<meta property="og:description" content="This short tutorial will touch on the basic concepts of Viash. Before getting started, make sure you’ve installed Viash so you can follow along with the example.">
+<meta property="og:description" content="This tutorial will guide you through creating a Viash component, generating a Nextflow module and using that in a simple data pipeline.">
 <meta property="og:site-name" content="Viash">
 <meta name="twitter:title" content="Viash - Quickstart">
-<meta name="twitter:description" content="This short tutorial will touch on the basic concepts of Viash. Before getting started, make sure you’ve installed Viash so you can follow along with the example.">
+<meta name="twitter:description" content="This tutorial will guide you through creating a Viash component, generating a Nextflow module and using that in a simple data pipeline.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -143,7 +209,19 @@ ul.task-list{list-style: none;}
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#what-is-viash" id="toc-what-is-viash" class="nav-link" data-scroll-target="#what-is-viash">What is Viash?</a></li>
-  <li><a href="#todo" id="toc-todo" class="nav-link" data-scroll-target="#todo">TODO</a></li>
+  <li><a href="#quickstart-example-project" id="toc-quickstart-example-project" class="nav-link" data-scroll-target="#quickstart-example-project">Quickstart example project</a></li>
+  <li><a href="#step-1-installation" id="toc-step-1-installation" class="nav-link" data-scroll-target="#step-1-installation">Step 1: Installation</a></li>
+  <li><a href="#step-2-prepare-the-directory-structure" id="toc-step-2-prepare-the-directory-structure" class="nav-link" data-scroll-target="#step-2-prepare-the-directory-structure">Step 2: Prepare the directory structure</a></li>
+  <li><a href="#step-3-create-an-example-file" id="toc-step-3-create-an-example-file" class="nav-link" data-scroll-target="#step-3-create-an-example-file">Step 3: Create an example file</a></li>
+  <li><a href="#step-4-write-a-script" id="toc-step-4-write-a-script" class="nav-link" data-scroll-target="#step-4-write-a-script">Step 4: Write a script</a></li>
+  <li><a href="#step-5-add-a-viash-config-file" id="toc-step-5-add-a-viash-config-file" class="nav-link" data-scroll-target="#step-5-add-a-viash-config-file">Step 5: Add a Viash config file</a></li>
+  <li><a href="#step-6-generating-builds" id="toc-step-6-generating-builds" class="nav-link" data-scroll-target="#step-6-generating-builds">Step 6: Generating builds</a></li>
+  <li><a href="#step-7-run-the-build-targets" id="toc-step-7-run-the-build-targets" class="nav-link" data-scroll-target="#step-7-run-the-build-targets">Step 7: Run the build targets</a></li>
+  <li><a href="#step-8-create-a-nextflow-pipeline" id="toc-step-8-create-a-nextflow-pipeline" class="nav-link" data-scroll-target="#step-8-create-a-nextflow-pipeline">Step 8: Create a Nextflow pipeline</a></li>
+  <li><a href="#step-9-run-the-pipeline" id="toc-step-9-run-the-pipeline" class="nav-link" data-scroll-target="#step-9-run-the-pipeline">Step 9: Run the pipeline</a></li>
+  <li><a href="#step-10-expand-the-pipeline" id="toc-step-10-expand-the-pipeline" class="nav-link" data-scroll-target="#step-10-expand-the-pipeline">Step 10: Expand the pipeline</a></li>
+  <li><a href="#step-11-generate-more-modules" id="toc-step-11-generate-more-modules" class="nav-link" data-scroll-target="#step-11-generate-more-modules">Step 11: Generate more modules</a></li>
+  <li><a href="#step-12-create-the-final-pipeline" id="toc-step-12-create-the-final-pipeline" class="nav-link" data-scroll-target="#step-12-create-the-final-pipeline">Step 12: Create the final pipeline</a></li>
   <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next">What’s next?</a></li>
   </ul>
 </nav>
@@ -247,40 +325,265 @@ function invertDictionary(dict){
 </script>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This short tutorial will touch on the basic concepts of Viash. Before getting started, make sure you’ve <a href="../../documentation/get-started/">installed Viash</a> so you can follow along with the example.</p>
+<p>This tutorial will guide you through creating a Viash component, generating a Nextflow module and using that in a simple data pipeline. We will provide useful links to our <a href="../../documentation/guide/">Guide</a> and <a href="../../documentation/reference/">Reference</a> pages along the way if you want to delve deeper into certain topics.</p>
+<p>TODO: add links to docs throughout</p>
 </section>
 <section id="what-is-viash" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-viash">What is Viash?</h2>
-<p>Viash is … TODO: Add quick breakdown of the core of Viash</p>
+<p><strong>Viash</strong> is a script code wrapper for building modular software components that serve as building blocks to develop (Nextflow) data pipelines. All you need is your script and a metadata file to get started.<br>
+Here are a few of Viash’s key features:</p>
+<ul>
+<li>You can use your <a href="../../documentation/guide/component/languages.html">preferred scripting language</a> per component, and mix and match scripts between multiple components as you please. Supported languages include: Bash, Python, R, Scala, JS and C#.</li>
+<li>A <strong>custom Docker container</strong> is automatically generated based on your dependencies described in your metadata. No expert Docker knowledge is required.</li>
+<li>Viash generates a <strong>Nextflow module</strong> from your script. No expert Nextflow knowledge is required.</li>
+<li>You can simply script the nextflow modules to create and run your scalable and reproducible data pipeline.</li>
+<li>You can test every single module on your local workstation through the built-in development kit.</li>
+</ul>
 </section>
-<section id="todo" class="level2">
-<h2 class="anchored" data-anchor-id="todo">TODO</h2>
-<div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Bash</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">C#</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">JavaScript</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Python</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false">Scala</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-6" role="tab" aria-controls="tabset-1-6" aria-selected="false">R</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<section id="quickstart-example-project" class="level2">
+<h2 class="anchored" data-anchor-id="quickstart-example-project">Quickstart example project</h2>
+<p>The example in this Quickstart will take you from nothing to a scalable and reproducible data pipeline. Here’s the pipeline you’ll be building:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+</p><pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-1">graph LR
+   A(data/file?.tsv) --&gt; B[/remove_comments/]
+   B --&gt; C[/take_column/]
+   C --&gt; D[/combine_columns/]
+   D --&gt; E(output)
+</pre>
+<div id="mermaid-tooltip-1" class="mermaidTooltip">
 
 </div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-
-</div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-
-</div>
-<div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
-
-</div>
-<div id="tabset-1-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-6-tab">
-
+<p></p>
 </div>
 </div>
 </div>
+<p>One or more TSV files are taken as the input and will be processed through a series of modules. At the end, the output is written away to a folder.</p>
+</section>
+<section id="step-1-installation" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-installation">Step 1: Installation</h2>
+<p>Before getting started, make sure you’ve <a href="../../documentation/get-started/">installed Viash, Docker and Nextflow</a> on your system.<br>
+If you want to skip the directory structure component creation and start using Viash commands right away, download the zip below and skip to <a href="#step-6-generating-builds">Step 6: Generating builds</a>.</p>
+<p>TODO: ADD ZIP FILE AND DOWNLOAD BUTTON <!-- ```{python}
+create_zip(parent_dir = "/download/components/", zip_dir = "hello_world")
+create_download_button("/download/components/hello_world.zip")
+``` --></p>
+</section>
+<section id="step-2-prepare-the-directory-structure" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-prepare-the-directory-structure">Step 2: Prepare the directory structure</h2>
+<p>To keep the source code, input data and build targets separated, it’s good practice to make some dedicated directories. Create a directory structure that looks like this, either by hand or with the commands below:</p>
+<pre><code>advanced_pipeline
+├── data
+└── src
+    └── example
+        ├── combine_columns
+        ├── remove_comments
+        └── take_column</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> advanced_pipeline</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> advanced_pipeline/data</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> advanced_pipeline/src</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> advanced_pipeline/src/example</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> advanced_pipeline/src/example/combine_columns</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> advanced_pipeline/src/example/remove_comments</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> advanced_pipeline/src/example/take_column</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-3-create-an-example-file" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-create-an-example-file">Step 3: Create an example file</h2>
+<p>The input for this pipeline consists of one or more TSV files in the <strong>data</strong> directory. Add a new file named <strong>file1.tsv</strong> to the <strong>data</strong> directory and add the following as its content (or download the file):</p>
+<p><a href="../../download/quickstart/complete/data/file1.tsv" id="btn-download" class="btn btn-info btn-md" role="button" download="">Download file1.tsv</a></p>
+<pre class="tsv"><code># this is a header      
+# this is also a header     
+one     0.11    123
+two     0.23    456
+three   0.35    789
+four    0.47    123
+</code></pre>
+<details>
+<summary>
+See current directory structure
+</summary>
+<pre><code>advanced_pipeline
+├── data  
+│   └── &gt; sample.tsv &lt;  
+└── src  
+    └── example  
+        ├── combine_columns  
+        ├── remove_comments  
+        └── take_column  </code></pre>
+</details>
+</section>
+<section id="step-4-write-a-script" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-write-a-script">Step 4: Write a script</h2>
+<p>A Viash component consists of a script and a component, let’s start with a Bash script. Add a new file named <strong>script.sh</strong> to the <strong>advanced_pipeline/src/example/remove_comments</strong> directory and add this:</p>
+<p><a href="../../download/quickstart/complete/src/example/remove_comments/script.sh" id="btn-download" class="btn btn-info btn-md" role="button" download="">Download script.sh</a></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-v</span> <span class="st">'^#'</span> <span class="st">"</span><span class="va">$par_input</span><span class="st">"</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$par_output</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>
+See current directory structure
+</summary>
+<pre><code>advanced_pipeline
+├── data
+│   └── file1.tsv
+└── src
+    └── example
+        ├── combine_columns
+        ├── remove_comments
+        │   └── &gt; script.sh &lt;
+        └── take_column</code></pre>
+</details>
+</section>
+<section id="step-5-add-a-viash-config-file" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-add-a-viash-config-file">Step 5: Add a Viash config file</h2>
+<p>With the script added, you can now add a Viash config file next to it. This combination is called a <strong>component</strong>. Add another file named <strong>config.vsh.yaml</strong> to the <strong>advanced_pipeline/src/example/remove_comments</strong> directory. use the following as its content:</p>
+<p><a href="../../download/quickstart/complete/src/example/remove_comments/config.vsh.yaml" id="btn-download" class="btn btn-info btn-md" role="button" download="">Download config.vsh.yaml</a></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> remove_comments</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">description</span><span class="kw">:</span><span class="at"> My first Nextflow pipeline module</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> example</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">arguments</span><span class="kw">:</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"--input"</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">alternatives</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="st">"-i"</span><span class="at"> </span><span class="kw">]</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"--output"</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">alternatives</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="st">"-o"</span><span class="at"> </span><span class="kw">]</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> string</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --id</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">default</span><span class="kw">:</span><span class="at"> </span><span class="st">"remove_comments"</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> bash_script</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> ./script.sh</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> ubuntu:20.04</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> nextflow</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">variant</span><span class="kw">:</span><span class="at"> vdsl3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>
+See current directory structure
+</summary>
+<pre><code>advanced_pipeline
+├── data
+│   └── file1.tsv
+└── src
+    └── example
+        ├── combine_columns
+        ├── remove_comments
+        │   ├── &gt; config.vsh.yaml &lt;
+        │   └── script.sh
+        └── take_column</code></pre>
+</details>
+</section>
+<section id="step-6-generating-builds" class="level2">
+<h2 class="anchored" data-anchor-id="step-6-generating-builds">Step 6: Generating builds</h2>
+<p>Now that you have a component, it’s time to use Viash to generate the executable and module. Make sure your working directory is inside the root of the <strong>advanced_pipeline</strong> directory, then run the following command:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns build</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The output should look like this:</p>
+<pre><code>Exporting remove_comments (example) =docker=&gt; target/docker/example/remove_comments
+Exporting remove_comments (example) =nextflow=&gt; target/nextflow/example/remove_comments
+All 2 configs built successfully</code></pre>
+<p>Viash has now generated a <strong>target</strong> directory structure and several files grouped per platform.</p>
+<details>
+<summary>
+See current directory structure
+</summary>
+<pre><code>advanced_pipeline
+├── data
+│   └── file1.tsv
+├── src
+│   └── example
+│       ├── combine_columns
+│       ├── remove_comments
+│       │   ├── config.vsh.yaml
+│       │   └── script.sh
+│       └── take_column
+└── &gt; target &lt;
+    ├── docker
+    │   └── example
+    │       └── remove_comments
+    │           └── remove_comments
+    └── nextflow
+        └── example
+            └── remove_comments
+                ├── main.nf
+                └── nextflow.config</code></pre>
+</details>
+</section>
+<section id="step-7-run-the-build-targets" class="level2">
+<h2 class="anchored" data-anchor-id="step-7-run-the-build-targets">Step 7: Run the build targets</h2>
+<p>You now have two usable targets which you can run:</p>
+<ul>
+<li>An <strong>executable</strong> with a Docker backend in the <strong>target/docker</strong> directory. This runs an executable based on your component in a docker container.</li>
+<li>A <strong>Nextflow module</strong> in the <strong>target/nextflow</strong> directory. This module is ready to be used in a data pipeline.</li>
+</ul>
+<p>To test if the executable works, try running the following command:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/docker/example/remove_comments/remove_comments</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This should give you a summary of what you can do with the executable and the arguments it accepts based on the component’s config file.<br>
+Next, try running it with the following command:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/docker/example/remove_comments/remove_comments</span> <span class="dt">\</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>--input data/file1.tsv <span class="at">--output</span> data/test_output.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>There should now be a <strong>test_output.tsv</strong> file in the data directory with the following content:</p>
+<pre class="tsv"><code>one     0.11    123
+two     0.23    456
+three   0.35    789
+four    0.47    123
+</code></pre>
+<p>Notice that the lines starting with hashtags have been removed, this means the executable works!<br>
+Now try getting the documentation from the Nextflow module with this command:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/nextflow/example/remove_comments/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will not only give you the same information as it did with the executable, but also additional arguments specific to Nextflow modules.<br>
+The final test is to run the Nextflow module as a standalone pipeline so it can process the TSV just like the executable did before it:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/nextflow/example/remove_comments/main.nf <span class="dt">\</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>--input ./data/file1.tsv <span class="at">--publishDir</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If all went well, you should now find a new file inside of an <strong>output</strong> directory that contains the TSV contents without the comments.</p>
+</section>
+<section id="step-8-create-a-nextflow-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="step-8-create-a-nextflow-pipeline">Step 8: Create a Nextflow pipeline</h2>
+<p>Time to ramp things up and create a simple Nextflow pipeline by adding a Nextflow script named <strong>main.nf</strong> to the root of the <strong>advanced_pipeline</strong> folder. Add the following:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>targetDir <span class="op">=</span> <span class="st">"./target/nextflow"</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> remove_comments <span class="op">}</span> from <span class="st">"</span><span class="ss">$targetDir</span><span class="st">/example/remove_comments/main.nf"</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>workflow <span class="op">{</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">Channel</span><span class="op">.</span><span class="fu">fromPath</span><span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> <span class="co">// 3</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> map<span class="op">{</span> file <span class="op">-&gt;</span> <span class="op">[</span> file<span class="op">.</span>baseName<span class="op">,</span> file <span class="op">]</span> <span class="op">}</span> </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> view<span class="op">{</span> file <span class="op">-&gt;</span> <span class="st">"Input: </span><span class="ss">$file</span><span class="st">"</span> <span class="op">}</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> remove_comments<span class="op">.</span><span class="fu">run</span><span class="op">(</span> </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    auto<span class="op">:</span> <span class="op">[</span> publish<span class="op">:</span> <span class="kw">true</span> <span class="op">])</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> view<span class="op">{</span> file <span class="op">-&gt;</span> <span class="st">"Output: </span><span class="ss">$file</span><span class="st">"</span> <span class="op">}</span> </span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-9-run-the-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="step-9-run-the-pipeline">Step 9: Run the pipeline</h2>
+<p>Now run the pipeline script you just created with Nextflow:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run main.nf <span class="dt">\</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>--input ./data/file1.tsv <span class="at">--publishDir</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This should have created another file inside of the <strong>output</strong> directory, which means the pipeline works as expected.</p>
+</section>
+<section id="step-10-expand-the-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="step-10-expand-the-pipeline">Step 10: Expand the pipeline</h2>
+<p>You now have a pipeline with a single module, which isn’t not a very realistic scenario. To remedy that, you’ll add two more components to the <strong>src</strong> directory.<br>
+To start with, add the following script and config to the <strong>src/example/combine_columns</strong> directory:</p>
+<p>TODO: Add instructions to add combine_columns TODO: Add instructions to add take_column</p>
+</section>
+<section id="step-11-generate-more-modules" class="level2">
+<h2 class="anchored" data-anchor-id="step-11-generate-more-modules">Step 11: Generate more modules</h2>
+<p>viash ns build</p>
+</section>
+<section id="step-12-create-the-final-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="step-12-create-the-final-pipeline">Step 12: Create the final pipeline</h2>
+<p>run full pipeline</p>
 </section>
 <section id="whats-next" class="level2">
 <h2 class="anchored" data-anchor-id="whats-next">What’s next?</h2>
+<p>Now that you’ve had a taste of what Viash can do for you, take a look at our <a href="../../documentation/guide/">Guide</a> and <a href="../../documentation/reference/">Reference</a> pages to learn more about how to use Viash.<br>
+If you want to start simple, we suggest to take a look at the <a href="../../documentation/guide/component/creation/native.html">Native component creation guide</a>.</p>
 
 
 </section>
