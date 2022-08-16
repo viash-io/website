@@ -14,8 +14,6 @@ execute:
 
 This tutorial will guide you through creating a Viash component, generating a Nextflow module and using that in a simple data pipeline. We will provide useful links to our [Guide](/documentation/guide/) and [Reference](/documentation/reference/) pages along the way if you want to delve deeper into certain topics.  
 
-TODO: add links to docs throughout
-
 ## What is Viash?
 
 **Viash** is a script code wrapper for building modular software components that serve as building blocks to develop (Nextflow) data pipelines. All you need is your script and a metadata file to get started.  
@@ -26,8 +24,6 @@ Here are a few of Viash's key features:
 - Viash generates a **Nextflow module** from your script. No expert Nextflow knowledge is required. 
 - You can simply script the nextflow modules to create and run your scalable and reproducible data pipeline.
 - You can test every single module on your local workstation through the built-in development kit.
-
-
 
 ## Quickstart example project
 
@@ -48,12 +44,10 @@ One or more TSV files are taken as the input and will be processed through a ser
 Before getting started, make sure you've [installed Viash, Docker and Nextflow](/documentation/get-started/) on your system.  
 If you want to skip the directory structure component creation and start using Viash commands right away, download the zip below and skip to [Step 6: Generating builds](#step-6-generating-builds).
 
-
-TODO: ADD ZIP FILE AND DOWNLOAD BUTTON
-<!-- ```{python}
-create_zip(parent_dir = "/download/components/", zip_dir = "hello_world")
-create_download_button("/download/components/hello_world.zip")
-``` -->
+```{python}
+create_zip(parent_dir = "/download/quickstart", zip_dir = "starter")
+create_download_button("/download/quickstart/starter.zip")
+```
 
 ## Step 2: Prepare the directory structure
 
@@ -104,7 +98,7 @@ advanced_pipeline
 
 ## Step 4: Write a script
 
-A Viash component consists of a script and a component, let's start with a Bash script. Add a new file named **script.sh** to the **advanced_pipeline/src/example/remove_comments** directory and add this:
+A [Viash component](documentation/guide/component/creation/native.html) consists of a [script](/documentation/guide/component/languages.html) and a [config file](/documentation/reference/config/overview.html), let's start with a Bash script. Add a new file named **script.sh** to the **advanced_pipeline/src/example/remove_comments** directory and add this:
 
 ```{python}
 create_download_button("/download/quickstart/complete/src/example/remove_comments/script.sh")
@@ -128,7 +122,7 @@ advanced_pipeline
 
 ## Step 5: Add a Viash config file
 
-With the script added, you can now add a Viash config file next to it. This combination is called a **component**. Add another file named **config.vsh.yaml** to the **advanced_pipeline/src/example/remove_comments** directory. use the following as its content:
+With the script added, you can now add a [Viash config file](/documentation/reference/config/overview.html) next to it to complete the component. Add a file named **config.vsh.yaml** to the **advanced_pipeline/src/example/remove_comments** directory, using the following as its content:
 
 ```{python}
 create_download_button("/download/quickstart/complete/src/example/remove_comments/config.vsh.yaml")
@@ -153,11 +147,15 @@ advanced_pipeline
 
 ## Step 6: Generating builds
 
-Now that you have a component, it's time to use Viash to generate the executable and module. Make sure your working directory is inside the root of the **advanced_pipeline** directory, then run the following command:
+Now that you have a component, it's time to use Viash to generate the executable and module. Make sure your working directory is inside the root of the **advanced_pipeline** directory, then run the [`viash ns build`](/documentation/reference/viash/ns.html#viash-ns-build) command:
 
 ```bash
 viash ns build
 ```
+
+:::{.callout-note}
+A [namespace](/documentation/guide/component/namespaces.html) is a group of related Viash components. The `ns build` command builds all components in a given namespace. 
+:::
 
 The output should look like this:
 
@@ -199,8 +197,8 @@ advanced_pipeline
 
 You now have two usable targets which you can run:
 
-- An **executable** with a Docker backend in the **target/docker** directory. This runs an executable based on your component in a docker container.
-- A **Nextflow module** in the **target/nextflow** directory. This module is ready to be used in a data pipeline.
+- An [**executable** with a Docker backend](/documentation/guide/building-block/docker/building-running.html) in the **target/docker** directory. This runs an executable based on your component in a docker container.
+- A [**Nextflow module**](/documentation/guide/building-block/nextflow/building-running.html) in the **target/nextflow** directory. This module is ready to be used in a data pipeline.
 
 To test if the executable works, try running the following command:
 
@@ -213,13 +211,16 @@ Next, try running it with the following command:
 
 ```bash
 target/docker/example/remove_comments/remove_comments \
---input data/file1.tsv --output data/test_output.tsv
+--input data/file1.tsv --output output/test_output.tsv
 ```
 
-There should now be a **test_output.tsv** file in the data directory with the following content:
+There should now be a **test_output.tsv** file in the **output** directory with the following content:
 
-```{python}
-print_file_contents("/download/quickstart/complete/data/test_output.tsv", "tsv", False)
+```tsv
+one     0.11    123
+two     0.23    456
+three   0.35    789
+four    0.47    123
 ```
 
 Notice that the lines starting with hashtags have been removed, this means the executable works!  
@@ -241,11 +242,39 @@ If all went well, you should now find a new file inside of an **output** directo
 
 ## Step 8: Create a Nextflow pipeline
 
-Time to ramp things up and create a simple Nextflow pipeline by adding a Nextflow script named **main.nf** to the root of the **advanced_pipeline** folder. Add the following:
+Time to ramp things up and create a simple [Nextflow pipeline](/documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html) by adding a Nextflow script named **main.nf** to the root of the **advanced_pipeline** folder. Add the following:
 
 ```{python}
-print_file_contents("/download/quickstart/complete/main.nf", "groovy", False)
+print_file_contents("/download/quickstart/starter/main.nf", "groovy", False)
 ```
+
+<details>
+<summary>See current directory structure</summary>
+```
+advanced_pipeline
+├── data
+│   ├── file1.tsv
+│   └── test_output.tsv
+├── > main.nf <
+├── src
+│   └── example
+│       ├── combine_columns
+│       ├── remove_comments
+│       │   ├── config.vsh.yaml
+│       │   └── script.sh
+│       └── take_column
+└── target
+    ├── docker
+    │   └── example
+    │       └── remove_comments
+    │           └── remove_comments
+    └── nextflow
+        └── example
+            └── remove_comments
+                ├── main.nf
+                └── nextflow.config
+```
+</details>
 
 ## Step 9: Run the pipeline
 
@@ -260,21 +289,162 @@ This should have created another file inside of the **output** directory, which 
 
 ## Step 10: Expand the pipeline
 
-You now have a pipeline with a single module, which isn't not a very realistic scenario. To remedy that, you'll add two more components to the **src** directory.  
-To start with, add the following script and config to the **src/example/combine_columns** directory:
+You now have a pipeline with a single module, which isn't a very realistic scenario. To remedy that, you'll add two more components to the **src** directory.  
 
-TODO: Add instructions to add combine_columns
-TODO: Add instructions to add take_column
+To start with, add the **take_column** component by adding a script named **script.py** and the config file to the **src/example/take_columns** directory
+
+```{python}
+create_download_button("/download/quickstart/complete/src/example/take_column/script.py")
+print_file_contents("/download/quickstart/complete/src/example/take_column/script.py", "python", True)
+```
+
+```{python}
+create_download_button("/download/quickstart/complete/src/example/take_column/config.vsh.yaml")
+print_file_contents("/download/quickstart/complete/src/example/take_column/config.vsh.yaml", "yaml", True)
+```
+
+This component subsets a TSV file by extracting only a certain column for the file.  
+Now add a script named **script.R** and a Viash config to the **src/example/combine_columns** directory to create the **combine_columns** component:
+
+```{python}
+create_download_button("/download/quickstart/complete/src/example/combine_columns/script.R")
+print_file_contents("/download/quickstart/complete/src/example/combine_columns/script.R", "R", True)
+```
+
+```{python}
+create_download_button("/download/quickstart/complete/src/example/combine_columns/config.vsh.yaml")
+print_file_contents("/download/quickstart/complete/src/example/combine_columns/config.vsh.yaml", "yaml", True)
+```
+
+The **combine_columns** combines multiple TSV files into one by concatenating all of the columns together, assuming every TSV file has the same amount of rows.
+
+<details>
+<summary>See current directory structure</summary>
+```
+advanced_pipeline
+├── data
+│   ├── file1.tsv
+│   └── test_output.tsv
+├── main.nf
+├── src
+│   └── example
+│       ├── combine_columns
+│       │   ├── > config.vsh.yaml <
+│       │   └── > script.R <
+│       ├── remove_comments
+│       │   ├── config.vsh.yaml
+│       │   └── script.sh
+│       └── take_column
+│           ├── > config.vsh.yaml <
+│           └── > script.py <
+└── target
+    ├── docker
+    │   └── example
+    │       └── remove_comments
+    │           └── remove_comments
+    └── nextflow
+        └── example
+            └── remove_comments
+                ├── main.nf
+                └── nextflow.config
+```
+</details>
 
 ## Step 11: Generate more modules
 
+With the two extra components in place, run the `viash ns build` command again:  
+
+```bash
 viash ns build
+```
+
+The output will look like this:
+
+```
+Exporting take_column (example) =docker=> target/docker/example/take_column
+Exporting take_column (example) =nextflow=> target/nextflow/example/take_column
+Exporting combine_columns (example) =docker=> target/docker/example/combine_columns
+Exporting combine_columns (example) =nextflow=> target/nextflow/example/combine_columns
+Exporting remove_comments (example) =docker=> target/docker/example/remove_comments
+Exporting remove_comments (example) =nextflow=> target/nextflow/example/remove_comments
+```
+
+The **target** directory now contains the needed executables and modules to expand the pipeline.
+
+<details>
+<summary>See current directory structure</summary>
+```
+advanced_pipeline
+├── data
+│   ├── file1.tsv
+│   └── test_output.tsv
+├── main.nf
+├── src
+│   └── example
+│       ├── combine_columns
+│       │   ├── config.vsh.yaml
+│       │   └── script.R
+│       ├── remove_comments
+│       │   ├── config.vsh.yaml
+│       │   └── script.sh
+│       └── take_column
+│           ├── config.vsh.yaml
+│           └── script.py
+└── target
+    ├── docker
+    │   └── example
+    │       ├── combine_columns
+    │       │   └── combine_columns
+    │       ├── remove_comments
+    │       │   └── remove_comments
+    │       └── take_column
+    │           └── take_column
+    └── nextflow
+        └── example
+            ├── combine_columns
+            │   ├── main.nf
+            │   └── nextflow.config
+            ├── remove_comments
+            │   ├── main.nf
+            │   └── nextflow.config
+            └── take_column
+                ├── main.nf
+                └── nextflow.config
+```
+</details>
 
 ## Step 12: Create the final pipeline
 
-run full pipeline
+The puzzle pieces are now in place, waiting for you to create the final pipeline and run it. Replace the contents of the **main.nf** script in the root of the **advanced_pipeline** directory with the following:
+
+```{python}
+print_file_contents("/download/quickstart/complete/main.nf", "groovy", False)
+```
+
+Finally, run the pipeline using Nextflow with the following command:
+
+```bash
+nextflow run main.nf \
+--input ./data/file1.tsv --publishDir output
+```
+
+This will process the input file through the three modules with the result being written to the **output** folder:
+
+```tsv
+"1"	123
+"2"	456
+"3"	789
+"4"	123
+```
 
 ## What's next?
+
+You can download the full pipeline using the download button below.
+
+```{python}
+create_zip(parent_dir = "/download/quickstart", zip_dir = "complete")
+create_download_button("/download/quickstart/complete.zip")
+```
 
 Now that you've had a taste of what Viash can do for you, take a look at our [Guide](/documentation/guide/) and [Reference](/documentation/reference/) pages to learn more about how to use Viash.  
 If you want to start simple, we suggest to take a look at the [Native component creation guide](/documentation/guide/component/creation/native.html).
