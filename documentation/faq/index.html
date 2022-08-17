@@ -231,14 +231,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="one-or-more-of-my-output-files-are-owned-by-root-after-running-a-component.-why-is-this" class="level3">
 <h3 class="anchored" data-anchor-id="one-or-more-of-my-output-files-are-owned-by-root-after-running-a-component.-why-is-this">One or more of my output files are owned by root after running a component. Why is this?</h3>
 <p>In Linux, files created by Docker are owned by root by default.<br>
-You can set up the <a href="http://localhost:8000/documentation/reference/config/platforms/dockerPlatform.html#chown">chown attribute</a> in your config file to automatically transfer the ownership of files to the user running the component. Any file output where an argument of the type file with an output direction was used will also have their ownership transferred.</p>
+You can set up the <a href="../../documentation/reference/config/platforms/dockerPlatform.html#chown">chown attribute</a> in your config file to automatically transfer the ownership of files to the user running the component. Any file output where an argument of the type file with an output direction was used will also have their ownership transferred.</p>
 </section>
 <section id="can-i-store-helper-functions-as-separate-files" class="level3">
 <h3 class="anchored" data-anchor-id="can-i-store-helper-functions-as-separate-files">Can I store helper functions as separate files?</h3>
 <p>Yes, though you’ll need to let Viash know which additional files are required to run the component. For example, if several helper functions are stored in an additional file <strong>mymodule.py</strong> or <strong>mymodule.R</strong>, use the following code to import the helper functions:</p>
 <section id="python" class="level4">
 <h4 class="anchored" data-anchor-id="python">Python</h4>
-<p>In the <a href="../../api/config/functionality/">functionality</a> resources section in the <a href="../../api/config/config/">config</a>:</p>
+<p>In the <a href="../../documentation/reference/config/functionality.html#resources">resources</a> section of the <a href="../../documentation/reference/config/overview.html">Viash config file</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resources</span><span class="kw">:</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> python_script</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.py</span></span>
@@ -255,7 +255,7 @@ You can set up the <a href="http://localhost:8000/documentation/reference/config
 </section>
 <section id="r" class="level4">
 <h4 class="anchored" data-anchor-id="r">R</h4>
-<p>In the <a href="../../api/config/functionality/">functionality</a> resources section in the <a href="../../api/config/config/">config</a>:</p>
+<p>In the <a href="../../documentation/reference/config/functionality.html#resources">resources</a> section of the <a href="../../documentation/reference/config/overview.html">Viash config file</a>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resources</span><span class="kw">:</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> r_script</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.R</span></span>
