@@ -17,7 +17,264 @@
 <width>144</width>
 </image>
 <generator>quarto-1.0.38</generator>
-<lastBuildDate>Fri, 06 May 2022 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 14 Jul 2022 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Viash 0.5.15</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/documentation/blog/posts/viash-0.5.15/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This release introduces testbenches and new default argument groups: <code>Inputs</code>, <code>Outputs</code> and <code>Arguments</code>.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="breaking-changes" class="level3">
+<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
+<ul>
+<li><code>WorkflowHelper::helpMessage</code>: Now only takes one argument, namely the config.</li>
+</ul>
+</section>
+<section id="major-changes" class="level3">
+<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
+<ul>
+<li><code>Namespace</code>: Changed the namespace of viash from <code>com.dataintuitive.viash</code> to <code>io.viash</code>.</li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>Testbenches</code>: Add a testbench framework to test lots of character sequences, single or repeating to be tested in the yaml config. This can be used to later extend to other tests.</p></li>
+<li><p><code>Testbenches::vdsl3</code>: Add testbenches to verify functionality:</p>
+<ul>
+<li>Vdsl3’s <code>param_list</code> (<code>yamlblob</code>, <code>yaml</code>, <code>json</code>, <code>csv</code>).</li>
+<li>NextFlow’s own <code>params-file</code>.</li>
+<li>Vdsl3’s recalculating resource file paths to be relative to the <code>param_list</code> file instead of the workflow file (only available for <code>yaml</code>, <code>json</code>, <code>csv</code>).</li>
+<li>Vdsl3’s wrapping of modules to run these as a separate workflow automagically out of the box.</li>
+</ul></li>
+<li><p><code>Main</code>: Added <code>viash --schema_export</code> which outputs a schema of the Viash config file to console. This is to be used to automate populating the documentation website.</p></li>
+<li><p><code>Helper</code>: Split help message by argument group.</p></li>
+<li><p><code>Helper</code>: Remove unneeded arguments.</p></li>
+<li><p><code>Functionality</code>: Add default groups <code>Inputs</code>, <code>Outputs</code> and <code>Arguments</code> for all arguments missing from user-defined <code>argument_groups</code>.</p></li>
+<li><p><code>WorkflowHelper::helpMessage</code>: Rewrite to bring on par with Viash’s help message.</p></li>
+</ul>
+</section>
+<section id="internal-changes" class="level3">
+<h3 class="anchored" data-anchor-id="internal-changes">INTERNAL CHANGES</h3>
+<ul>
+<li><code>BooleanArguments</code>: Renamed internal class names for BooleanArguments to be better in line with how they are named in the config yaml. <code>BooleanArgumentRegular</code> -&gt; <code>BooleanArgument</code> (in line with <code>boolean</code>) <code>BooleanArgumentTrue</code> -&gt; <code>BooleanTrueArgument</code> (in line with <code>boolean_true</code>) <code>BooleanArgumentFalse</code> -&gt; <code>BooleanFalseArgument</code> (in line with <code>boolean_false</code>)</li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>NextflowVdsl3Platform</code>: Change how <code>--id</code> is processed when a VDSL3 module is called from the CLI.</p></li>
+<li><p><code>NextflowVdsl3Platform</code>: Fix error when param_list is <code>null</code>.</p></li>
+<li><p><code>NextflowVdsl3Platform</code>: Fix error when optional, multiple arguments are set to <code>null</code>.</p></li>
+<li><p><code>Testbenches</code>: Better capture expected error messages while running testbenches again. Code changes right before previous release re-introduced some of the messages.</p></li>
+<li><p><code>NextflowVdsl3Platform</code>: Fix issue where optional parameters aren’t removed when <code>.run(args: [optarg: null])</code>.</p></li>
+<li><p><code>WorkflowHelper::readCsv</code>: Treat empty values as undefined instead of throwing an error.</p></li>
+<li><p><code>NextflowVdsl3Platform</code>: Use <code>$NXF_TEMP</code> or <code>$VIASH_TEMP</code> as temporary directory if the container engine is not set to <code>docker</code>, <code>podman</code> or <code>charlieengine</code>, else set to <code>/tmp</code>.</p></li>
+<li><p><code>Resources</code>: When adding a resource folder, allow a trailing <code>/</code> at the end of the path. Previously this caused the target folder to be erased and the content of the resource folder to be written directly into the target folder.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/documentation/blog/posts/viash-0.5.15/index.html</guid>
+  <pubDate>Thu, 14 Jul 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.5.14</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/documentation/blog/posts/viash-0.5.14/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>Argument groups allow for grouping arguments together by function or category, making the <code>--help</code> output a lot more clear for components with a lot of arguments.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="new-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
+<ul>
+<li><p><code>Functionality</code>: Allow specifying argument groups. Example:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb1-2"><span class="at" style="color: #657422;">  ...</span></span>
+<span id="cb1-3"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">argument_groups</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb1-4"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> First group</span></span>
+<span id="cb1-5"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="kw" style="color: #003B4F;">[</span><span class="at" style="color: #657422;">foo</span><span class="kw" style="color: #003B4F;">,</span><span class="at" style="color: #657422;"> bar</span><span class="kw" style="color: #003B4F;">]</span></span>
+<span id="cb1-6"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">description</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> Description</span></span></code></pre></div></li>
+<li><p><code>NextflowVdsl3Platform</code>: Use <code>--param_list</code> to initialise a Nextflow channel with multiple parameter sets. Possible formats are csv, json, yaml, or simply a yaml_blob. A csv should have column names which correspond to the different arguments of this pipeline. A json or a yaml file should be a list of maps, each of which has keys corresponding to the arguments of the pipeline. A yaml blob can also be passed directly as a parameter. Inside the Nextflow pipeline code, params.params_list can also be used to directly a list of parameter sets. When passing a csv, json or yaml, relative path names are relativized to the location of the parameter file.</p>
+<p>Examples:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;">nextflow</span> run <span class="st" style="color: #20794D;">"target/foo/bar/main.nf"</span> <span class="at" style="color: #657422;">--param_list</span> <span class="st" style="color: #20794D;">'[{"id": "foo", "input": "/path/to/bar"}]'</span></span>
+<span id="cb2-2"><span class="ex" style="color: null;">nextflow</span> run <span class="st" style="color: #20794D;">"target/foo/bar/main.nf"</span> <span class="at" style="color: #657422;">--param_list</span> <span class="st" style="color: #20794D;">"params.csv"</span> <span class="at" style="color: #657422;">--reference</span> <span class="st" style="color: #20794D;">"/path/to/ref"</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="major-changes" class="level3">
+<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
+<ul>
+<li><p><code>NextflowVdsl3Platform</code>: The functionality is now slurped from a json instead of manually taking care of the formatting in Groovy.</p></li>
+<li><p><code>NextflowVdsl3Platform</code>: The <code>--help</code> is auto-generated from the config.</p></li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>NextflowVdsl3Platform</code>: Allow both <code>--publish_dir</code> and <code>--publishDir</code> when <code>auto.publish = true</code>.</p></li>
+<li><p><code>NextflowVdsl3Platform</code>: Allow passing parameters with multiplicity &gt; 1 from Nextflow CLI.</p></li>
+<li><p><code>Main</code>: Added <code>viash --cli_export</code> which outputs the internal cli construction information to console. This is to be used to automate populating the documentation website.</p></li>
+<li><p><code>viash ns</code>: Display success and failure summary statistics, printed to stderr.</p></li>
+<li><p><code>DataObject</code>: <code>.alternatives</code> is now a <code>OneOrMore[String]</code> instead of <code>List[String]</code>, meaning you can now specify <code>{ type: string, name: "--foo", alternatives: "-f" }</code> instead of <code>{ type: string, name: "--foo", alternatives: [ "-f" ] }</code></p></li>
+<li><p><code>BashWrapper</code>: Added metadata field <code>meta_executable</code>, which is a shorthand notation for <code>meta_executable="$meta_resources_dir/$meta_functionality_name"</code></p></li>
+</ul>
+</section>
+<section id="internal-changes" class="level3">
+<h3 class="anchored" data-anchor-id="internal-changes">INTERNAL CHANGES</h3>
+<ul>
+<li><p><code>Arguments</code>: Internal naming of functionality.arguments is changed from DataObject to Arguments. Change is also applied to child classes, e.g.&nbsp;StringObject -&gt; StringArgument.</p></li>
+<li><p><code>Script</code>: Allow more control over where injected code ends up.</p></li>
+<li><p>Restructure type system to allow type-specific arguments.</p></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>DockerPlatform</code>: Change <code>org.opencontainers.image.version</code> annotation to <code>functionality.version</code> when set. Additionally fixed retrieving the git tag possibly returning <code>fatal: No names found, cannot describe anything.</code> or similar.</p></li>
+<li><p><code>viash config inject</code>: Fix config inject when <code>.functionality.inputs</code> or <code>.functionality.outputs</code> is used.</p></li>
+<li><p><code>BashWrapper</code>: Don’t add <code>bc</code> as dependency. Only perform integer/float min/max checks when bc is available, otherwise ignore.</p></li>
+<li><p><code>DockerPlatform</code>: Fix inputs &amp; outputs arguments being present twice.</p></li>
+<li><p><code>viash ns test</code>: Silently skip Nextflow platforms as these don’t support tests and will always fail.</p></li>
+<li><p><code>Testbenches</code>: Better capture expected error messages while running testbenches. Having these show on the console could be confusing.</p></li>
+<li><p><code>NextflowVdsl3Platform</code>: Fix issue when running multiple VDSL3 modules concurrently on the same channel.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/documentation/blog/posts/viash-0.5.14/index.html</guid>
+  <pubDate>Thu, 30 Jun 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.5.13</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/documentation/blog/posts/viash-0.5.13/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>VDSL3 gets even more improvements and bug fixes. Read the full changelog below to see all of the changes.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="new-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
+<ul>
+<li><code>NextflowVdsl3Platform</code>: Allow overriding the container registry of all Viash components by setting the <code>params.override_container_registry</code> value. Only works for auto-derived image names.</li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>Functionality</code> and <code>viash ns</code>: Added <code>.enabled</code> in functionality, set to <code>true</code> by default. Filter for disabled components in namespace commands.</p></li>
+<li><p><code>DockerPlatform</code>: Add org.opencontainers.image annotations to built docker images.</p></li>
+<li><p><code>Functionality</code>: when defining text resources, permit defining <code>path</code> instead of <code>dest</code>. If both <code>dest</code> and <code>path</code> are unset, use a default file name depending on the resource type, such as <code>script.sh</code> or <code>text.txt</code>.</p></li>
+<li><p><code>viash build</code>: Errors are printed in red.</p></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>NextflowVdsl3Platform</code>: Undefined input files should not inject a <code>VIASH_PAR_*</code> variable when <code>multiple: true</code>.</p></li>
+<li><p><code>NextflowVdsl3Platform</code>: Make injected resources dir absolute.</p></li>
+<li><p><code>NextflowVdsl3Platform</code>: Fix escaping of triple single quotes.</p></li>
+<li><p><code>NextflowVdsl3Platform</code>: Also apply auto.simplifyInput to Lists.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/documentation/blog/posts/viash-0.5.13/index.html</guid>
+  <pubDate>Fri, 10 Jun 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.5.12</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/documentation/blog/posts/viash-0.5.12/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This release contains a bunch improvements for VDSL3 and adds some parameters to the <code>viash test</code> and <code>viash test ns</code> commands.<br>
+Read the full changelog below to see all of the changes.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>--help</code>: Don’t print “my_component <not versioned="">” when no version is specified, but instead simply “my_component”.</not></p></li>
+<li><p><code>NextflowVdsl3Platform</code>: Set <code>mode=copy</code> for <code>auto.publish</code> and <code>auto.transcript</code>.</p></li>
+<li><p><code>NextflowVdsl3Platform</code>: When a module is used multiple times in the same workflow, don’t throw an error anymore, instead simply generate a warning.</p></li>
+<li><p><code>NextflowVdsl3Platform</code>: Throw an error when an input file was not found.</p></li>
+<li><p><code>viash build</code>: Indent auto-generated code according the indentation of <code>VIASH START</code> when found.</p></li>
+<li><p><code>Main</code>: Handle not finding the config file or resources in a config file better. Display a more helpful message instead of a stack trace.</p></li>
+<li><p><code>BashWrapper</code>: Add checks on parameters for valid integer, double and boolean values.</p></li>
+<li><p><code>BashWrapper</code>: Add option to limit string and integer values to specific choice values.</p></li>
+<li><p><code>BashWrapper</code>: Add option to set min and max values for integer and double values.</p></li>
+<li><p>Dependencies:</p>
+<ul>
+<li>Scala was upgraded from 2.12.10 to 2.12.15</li>
+<li>sbt was upgraded from 1.3.4 to 1.6.1</li>
+<li>sbt-scoverage was upgraded from 1.5.1 to 1.9.3</li>
+</ul></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>viash_test</code>: Add back <code>--no_cache</code> parameter to <code>viash_test</code>.</p></li>
+<li><p><code>viash_test</code>: Fix <code>--append</code> parameter for <code>viash_test</code>, was not getting passed through.</p></li>
+<li><p><code>viash ns test</code>: Fix <code>--append</code> parameter, actually start from a clean file if append is false.</p></li>
+<li><p><code>viash_push</code>: Fix component not being built during a release of Viash.</p></li>
+<li><p><code>PythonRequirements</code>: Fix packages being mentioned twice in a Dockerfile.</p></li>
+<li><p><code>Main</code>: Added support spaces in filenames of config files and resources</p></li>
+<li><p><code>BashWrapper</code>: Display a message when the last parsed argument would require more values than are still available. Now display a message that values are missing, used to silently crash the wrapper.</p></li>
+<li><p><code>viash config inject</code>: Fix error when file argument is <code>must_exist: true</code>.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/documentation/blog/posts/viash-0.5.12/index.html</guid>
+  <pubDate>Tue, 24 May 2022 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Viash 0.5.11</title>
   <dc:creator>Viash Team</dc:creator>
@@ -1107,240 +1364,6 @@ As long as you use long-option arguments (e.g.&nbsp;<code>--my-option</code>) in
   <category>New Release</category>
   <guid>https://viash.io/documentation/blog/posts/viash-0.3.0/index.html</guid>
   <pubDate>Tue, 24 Nov 2020 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.2.2</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/documentation/blog/posts/viash-0.2.2/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="allow-generating-placeholder-without-viash-startviash-end-blocks." class="level2">
-<h2 class="anchored" data-anchor-id="allow-generating-placeholder-without-viash-startviash-end-blocks.">Allow generating placeholder without VIASH START/VIASH END blocks.</h2>
-<p>A script does not need to contain a <code>VIASH START</code>/<code>VIASH END</code> block in order to function.</p>
-<p>Previously, each script had to contain a codeblock as follows:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="do" style="color: #5E5E5E;
-font-style: italic;">## VIASH START</span></span>
-<span id="cb1-2">par <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">list</span>(</span>
-<span id="cb1-3">  <span class="at" style="color: #657422;">input =</span> <span class="st" style="color: #20794D;">"foo"</span>,</span>
-<span id="cb1-4">  <span class="at" style="color: #657422;">output =</span> <span class="st" style="color: #20794D;">"bar</span></span>
-<span id="cb1-5"><span class="st" style="color: #20794D;">)</span></span>
-<span id="cb1-6"><span class="st" style="color: #20794D;">## VIASH END</span></span></code></pre></div>
-</section>
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog:</h2>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li>Allow generating placeholder without VIASH START/VIASH END blocks.</li>
-</ul>
-</section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
-<ul>
-<li><code>viash ns build</code>: Some platforms would sometimes not be detected.</li>
-<li><code>viash run</code>: Avoid error when no arguments need to be chowned.</li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/documentation/blog/posts/viash-0.2.2/index.html</guid>
-  <pubDate>Tue, 22 Sep 2020 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.2.1</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/documentation/blog/posts/viash-0.2.1/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="docker-chown-by-default" class="level2">
-<h2 class="anchored" data-anchor-id="docker-chown-by-default">Docker chown by default</h2>
-<p>Running a script using a Docker platform will now chown output files by default, as well as any temporary files. You can turn off this feature by specifying <code>chown: false</code> in the yaml of a Docker platform.</p>
-</section>
-<section id="nxf-data-references" class="level2">
-<h2 class="anchored" data-anchor-id="nxf-data-references">[NXF] Data references</h2>
-<p>Data references in Map form can now have values being lists. In other words, we can have multiple options which have one or more values.</p>
-</section>
-<section id="viash-ns-build--p-docker-parallel-setup" class="level2">
-<h2 class="anchored" data-anchor-id="viash-ns-build--p-docker-parallel-setup">viash ns build -P docker –parallel –setup</h2>
-<p><code>viash ns build</code> has been greatly improved! You can automatically build the docker container by adding <code>--setup</code> to the command, as well as make the whole thing run in parallel using the <code>--parallel</code> or <code>-l</code> flag.</p>
-<p>To build a docker container, you can run either of the following:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;">viash</span> run <span class="at" style="color: #657422;">-f</span> path/to/config.yaml <span class="at" style="color: #657422;">-P</span> docker <span class="at" style="color: #657422;">--</span> <span class="at" style="color: #657422;">---setup</span></span>
-<span id="cb1-2"><span class="ex" style="color: null;">viash</span> build <span class="at" style="color: #657422;">-f</span> path/to/functionality.yaml <span class="at" style="color: #657422;">-P</span> docker <span class="at" style="color: #657422;">-o</span> target/docker/path/to <span class="at" style="color: #657422;">--setup</span></span></code></pre></div>
-<p>Note that the first will only build the docker container, whereas the second will build the executable and then build the docker container.</p>
-<p>To build a lot of them all at once, run:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;">viash</span> ns build <span class="at" style="color: #657422;">-P</span> docker <span class="at" style="color: #657422;">--parallel</span> <span class="at" style="color: #657422;">--setup</span></span></code></pre></div>
-</section>
-<section id="custom-order-of-platform-requirements" class="level2">
-<h2 class="anchored" data-anchor-id="custom-order-of-platform-requirements">Custom order of platform requirements</h2>
-<p>You can now choose the order in which platform requirements are installed!</p>
-<p>Before:</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> docker</span></span>
-<span id="cb3-2"><span class="fu" style="color: #4758AB;">image</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> rocker/tidyverse</span></span>
-<span id="cb3-3"><span class="fu" style="color: #4758AB;">target_image</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"viash_test/r"</span></span>
-<span id="cb3-4"><span class="fu" style="color: #4758AB;">r</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb3-5"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">cran</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb3-6"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> optparse</span></span>
-<span id="cb3-7"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">github</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb3-8"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> dynverse/dynutils@devel</span></span>
-<span id="cb3-9"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">bioc</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb3-10"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> limma</span></span>
-<span id="cb3-11"><span class="fu" style="color: #4758AB;">apt</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb3-12"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">packages</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb3-13"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> libhdf5-serial-dev</span></span>
-<span id="cb3-14"><span class="fu" style="color: #4758AB;">docker</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb3-15"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">build_arg</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb3-16"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> GITHUB_PAT="$GITHUB_PAT"</span></span>
-<span id="cb3-17"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">run</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb3-18"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> git clone --depth 1 https://github.com/data-intuitive/viash_docs.git &amp;&amp; rm -r viash_docs/.git</span></span>
-<span id="cb3-19"><span class="at" style="color: #657422;">↑ in which order will these three components be run? Who knows!</span></span></code></pre></div>
-<p>Now:</p>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> docker</span></span>
-<span id="cb4-2"><span class="fu" style="color: #4758AB;">image</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> rocker/tidyverse</span></span>
-<span id="cb4-3"><span class="fu" style="color: #4758AB;">target_image</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"viash_test/r"</span></span>
-<span id="cb4-4"><span class="fu" style="color: #4758AB;">setup</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb4-5"><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> docker</span></span>
-<span id="cb4-6"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">build_arg</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb4-7"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> GITHUB_PAT="$GITHUB_PAT"</span></span>
-<span id="cb4-8"><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> apt</span></span>
-<span id="cb4-9"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">packages</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb4-10"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> libhdf5-serial-dev</span></span>
-<span id="cb4-11"><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> r</span></span>
-<span id="cb4-12"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">cran</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb4-13"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> optparse</span></span>
-<span id="cb4-14"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> dynutils</span></span>
-<span id="cb4-15"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">github</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb4-16"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> rcannood/princurve@devel</span></span>
-<span id="cb4-17"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">bioc</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb4-18"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> limma</span></span>
-<span id="cb4-19"><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> docker</span></span>
-<span id="cb4-20"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">run</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb4-21"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> git clone --depth 1 https://github.com/data-intuitive/viash_docs.git &amp;&amp; rm -r viash_docs/.git</span></span></code></pre></div>
-<p>This will ensure that the setup instructions are installed in the given order.</p>
-</section>
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog:</h2>
-<section id="new-features" class="level3">
-<h3 class="anchored" data-anchor-id="new-features">NEW FEATURES</h3>
-<ul>
-<li><code>NXF</code>: Data references in Map form can now have values being lists. In other words, we can have multiple options which have one or more values.</li>
-<li><code>viash ns build</code>: Added –parallel and –setup flag.</li>
-<li>viash build`: Added –setup flag.</li>
-<li>Allow changing the order of setup commands using the&nbsp;<code>setup:</code>&nbsp;variable.</li>
-<li>Do not escape&nbsp;<code>${VIASH_...}</code>&nbsp;elements in default values and descriptions!</li>
-</ul>
-</section>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li>Remove&nbsp;<code>---chown</code>&nbsp;flag, move to&nbsp;<code>platform.docker.chown</code>; is set to true by default.</li>
-<li>Perform chown during both run and test using a Docker platform.</li>
-</ul>
-</section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
-<ul>
-<li>Issue trying to parse positional arguments even when none is provided.</li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/documentation/blog/posts/viash-0.2.1/index.html</guid>
-  <pubDate>Fri, 11 Sep 2020 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.1.0</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/documentation/blog/posts/viash-0.1.0/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog:</h2>
-<section id="major-changes" class="level3">
-<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
-<p>Refactoring of the Functionality class as discussed in VIP1 (#1). This has resulted in a lot of internal changes, but the changes with regard to the yaml definitions are relatively minor. See the section below for more info:</p>
-<section id="changes-to-functionality.yaml" class="level4">
-<h4 class="anchored" data-anchor-id="changes-to-functionality.yaml">Changes to functionality.yaml</h4>
-<ul>
-<li>ftype has been renamed to function_type. The value for this field is also being checked.</li>
-<li>platform has been removed.</li>
-<li>Instead, the first resource listed is expected to have <code>type: r_script</code>, <code>type: bash_script</code>, <code>type: python_script</code>, or <code>type: executable</code>. The other resources are expected to have <code>type: file</code> by default, and are left untouched by Viash.</li>
-<li>in the arguments, field <code>flagValue</code> has been removed. Instead, use <code>type: boolean_true</code> and <code>type: boolean_false</code> to achieve the same effect.</li>
-</ul>
-</section>
-<section id="changes-to-platform_dockernative.yaml" class="level4">
-<h4 class="anchored" data-anchor-id="changes-to-platform_dockernative.yaml">Changes to platform_(docker/native).yaml</h4>
-<ul>
-<li>The <code>r: packages:</code> field has been renamed to <code>r: cran:</code>.</li>
-</ul>
-</section>
-</section>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li>Updated the functionality.yamls under <code>atoms/</code> and <code>src/test/</code> to reflect these aforementioned changes.</li>
-<li>Allow for bioconductor and other repositories in the R environment.</li>
-<li>Add support for pip versioning syntax.</li>
-</ul>
-</section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
-<ul>
-<li>Do not quote passthrough flags.</li>
-<li>Allow for spaces inside of Docker volume paths.</li>
-</ul>
-</section>
-<section id="documentation" class="level3">
-<h3 class="anchored" data-anchor-id="documentation">DOCUMENTATION</h3>
-<ul>
-<li>Updated the README.md.</li>
-<li>Provide some small examples at <code>doc/examples</code>.</li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/documentation/blog/posts/viash-0.1.0/index.html</guid>
-  <pubDate>Thu, 14 May 2020 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Say hello to Viash 👋</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/documentation/blog/posts/say-hello/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>Look out for more info soon!</p>
-<p><img src="https://viash.io/viash.png" class="img-fluid"></p>
-
-
-
- ]]></description>
-  <category>News</category>
-  <guid>https://viash.io/documentation/blog/posts/say-hello/index.html</guid>
-  <pubDate>Wed, 13 May 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://viash.io/viash.png" medium="image" type="image/png" height="38" width="144"/>
 </item>
 </channel>
 </rss>
