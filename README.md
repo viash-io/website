@@ -7,7 +7,7 @@ Alternatively, you can pull the repo and execute this command for a local previe
 quarto preview
 ```
 
-You'll probably need some R and Python prerequisite for the command above to work.
+You'll need some R and Python prerequisites for the command above to work.
 
 ## Updating
 
