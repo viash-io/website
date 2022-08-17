@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Viash Team">
+<meta name="dcterms.date" content="2020-05-05">
+
+<title>Viash - Viash 0.2.0</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>
+    .quarto-title-block .quarto-title-banner {
+      background: #f7f9fb;
+    }
+    </style>
+
+
+<link rel="stylesheet" href="../../../../styles.css">
+<meta property="og:title" content="Viash - Viash 0.2.0">
+<meta property="og:description" content="Autoresolve of docker paths">
+<meta property="og:site-name" content="Viash">
+<meta name="twitter:title" content="Viash - Viash 0.2.0">
+<meta name="twitter:description" content="Autoresolve of docker paths">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../../../index.html">
+    <img src="../../../../viash.png" alt="">
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html">Overview</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../documentation/installation/index.html">Installation</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../documentation/quickstart/index.html">Quickstart</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../documentation/guide/index.html">Guide</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../documentation/reference/index.html">Reference</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../documentation/blog/index.html">Blog</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false">Help</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-help">    
+        <li>
+    <a class="dropdown-item" href="../../../../documentation/help/terminology.html"><i class="bi bi-journal-text" role="img">
+</i> 
+ <span class="dropdown-text">Terminology</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/viash-io/viash/issues"><i class="bi bi-bug" role="img">
+</i> 
+ <span class="dropdown-text">Report a Viash issue</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/viash-io/viash_web/issues"><i class="bi bi-bug" role="img">
+</i> 
+ <span class="dropdown-text">Report a website issue</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/DataIntuitive"><i class="bi bi-twitter" role="img" aria-label="Viash Twitter">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/viash-io/viash"><i class="bi bi-github" role="img" aria-label="Viash GitHub">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Viash 0.2.0</h1>
+            <p class="subtitle lead">Autoresolve of docker paths</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">New Release</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Viash Team </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 5, 2020</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#changes-to-functionality-metadata" id="toc-changes-to-functionality-metadata" class="nav-link active" data-scroll-target="#changes-to-functionality-metadata">Changes to functionality metadata</a>
+  <ul class="collapse">
+  <li><a href="#autoresolve-docker-paths" id="toc-autoresolve-docker-paths" class="nav-link" data-scroll-target="#autoresolve-docker-paths">Autoresolve docker paths</a></li>
+  <li><a href="#argument-multiplicity" id="toc-argument-multiplicity" class="nav-link" data-scroll-target="#argument-multiplicity">Argument multiplicity</a></li>
+  <li><a href="#new-format" id="toc-new-format" class="nav-link" data-scroll-target="#new-format">New format</a></li>
+  </ul></li>
+  <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link" data-scroll-target="#full-changelog">Full changelog:</a>
+  <ul class="collapse">
+  <li><a href="#new-features" id="toc-new-features" class="nav-link" data-scroll-target="#new-features">NEW FEATURES</a></li>
+  <li><a href="#major-changes" id="toc-major-changes" class="nav-link" data-scroll-target="#major-changes">MAJOR CHANGES</a></li>
+  <li><a href="#minor-changes" id="toc-minor-changes" class="nav-link" data-scroll-target="#minor-changes">MINOR CHANGES</a></li>
+  <li><a href="#bug-fixes" id="toc-bug-fixes" class="nav-link" data-scroll-target="#bug-fixes">BUG FIXES</a></li>
+  <li><a href="#internal-changes" id="toc-internal-changes" class="nav-link" data-scroll-target="#internal-changes">INTERNAL CHANGES</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="changes-to-functionality-metadata" class="level2">
+<h2 class="anchored" data-anchor-id="changes-to-functionality-metadata">Changes to functionality metadata</h2>
+<ul>
+<li>Added version attribute</li>
+</ul>
+<section id="autoresolve-docker-paths" class="level3">
+<h3 class="anchored" data-anchor-id="autoresolve-docker-paths">Autoresolve docker paths</h3>
+<p>Arguments of type: file are processed to automatically create a mount in docker. More specifically, when you pass an argument value: <code>--input /path/to/file</code>, this will be processed such that the following parameters are passed to docker:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-v</span> /path/to:/viash_automount/path/to ... <span class="at">--input</span> /viash_automount/path/to/file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If, for some reason, you need to manually specify a mount, you can do this with <code>---mount /path/to/mount:/mymount</code>.</p>
+</section>
+<section id="argument-multiplicity" class="level3">
+<h3 class="anchored" data-anchor-id="argument-multiplicity">Argument multiplicity</h3>
+<p>For all parameter types (except for <code>boolean_true</code> and <code>boolean_false</code>), you can specify <code>multiple: true</code> in order to turn this argument into an array-based argument. What this does is allow you to pass multiple values for this argument, e.g.&nbsp;<code>--input file1 --input file2 --input file3:file4:file5</code>.</p>
+<p>The default separator is <code>:</code> but this can be overridden by changing the separator by setting it to <code>multiple_sep: ","</code> (for example).</p>
+</section>
+<section id="new-format" class="level3">
+<h3 class="anchored" data-anchor-id="new-format">New format</h3>
+<p>Viash now supports placing the functionality.yaml, platform*.yaml(s) and script into a single file. For example, this could be a merged script.R:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' functionality:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'   name: r-estimate</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#'   arguments: ...</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#' platforms:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#' - type: native</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' - type: docker</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#'   image: rocker/tidyverse</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Hello world!</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Instead of running:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run <span class="at">-f</span> functionality.yaml <span class="at">-p</span> platform_docker.yaml <span class="at">--</span> arg1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>With this format, you can now run:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run script.R                     <span class="co"># run script.R with the first platform</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run <span class="at">-P</span> docker script.R           <span class="co"># run script.R with the platform called 'docker' with the large P argument</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># use small p to override the platform with a custom yaml:</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run <span class="at">-p</span> ../common_resources/platform_docker.yaml script.R</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># note that any arguments for the run command (e.g. -p or -P) should come before the script.R, as script.R is considered a trailing argument.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog:</h2>
+<section id="new-features" class="level3">
+<h3 class="anchored" data-anchor-id="new-features">NEW FEATURES</h3>
+<ul>
+<li>Allow (optional) version attributes in&nbsp;<code>functionality.yaml</code>&nbsp;and&nbsp;<code>platform.yaml</code>.</li>
+<li>Allow testing a component with the&nbsp;<code>viash test</code>&nbsp;functionality. Tests are executed in a temporary directory on the specified platform. The temporary directory contains all the resource and test files.</li>
+<li><code>viash --version</code>: Add flag for printing the version of viash.</li>
+<li>Allow fetching resources from URL (http:// and https://)</li>
+<li>Allow retrieving functionality and platform YAMLs from URL.</li>
+<li>For docker containers, autoresolve path names of files. Use&nbsp;<code>---v path:path</code>&nbsp;or&nbsp;<code>---volume path:path</code>&nbsp;to manually mount a specific folder.</li>
+<li>Implement parameter multiplicity. Set&nbsp;<code>multiple: true</code>&nbsp;to denote an argument to have higher multiplicity. Run&nbsp;<code>./cmd --foo one --foo two --foo three:four</code>&nbsp;in order for multiple values to be added to the same parameter list.</li>
+<li>Added a new format for defining functionality in which the user passes the script in which the functionality and platforms are listed as yaml headers.</li>
+<li>A&nbsp;<code>---chown</code>&nbsp;flag has been added to Docker executables to automatically change the ownership of output files to the current user.</li>
+<li><code>viash ns build</code>: A command for building a whole namespace.</li>
+<li><code>NXF</code>: Join operations are now fully supported by means of&nbsp;<code>multiple</code>.</li>
+<li><code>NXF</code>: Modules that perform joins can take either arrays (multiple input files or the same type to be joined) or hashes (multiple input files passed using different options on the CLI). Please refer to the docs for more info.</li>
+</ul>
+</section>
+<section id="major-changes" class="level3">
+<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
+<ul>
+<li>Remove passthrough parameters.</li>
+<li>Since CLI generation is now performed in the outer script,&nbsp;<code>viash pimp</code>&nbsp;has been deprecated.</li>
+<li>Write out meta.yaml containing viash run information as well as the original&nbsp;<code>functionality.yaml</code>&nbsp;and&nbsp;<code>platform.yaml</code>&nbsp;content.</li>
+<li>Renamed&nbsp;<code>viash export</code>&nbsp;to&nbsp;<code>viash build</code>.</li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><code>viash run</code>&nbsp;and&nbsp;<code>viash test</code>: Allow changing the temporary directory by defining&nbsp;<code>VIASH_TEMP</code>&nbsp;as a environment variable. Temporary directories are cleaned up after successful executions.</li>
+<li><code>viash run</code>&nbsp;and&nbsp;<code>viash test</code>: Exit(1) when execution or test fails.</li>
+<li><code>viash build</code>: Add -m flag for outputting metadata after build.</li>
+<li><code>viash run</code>: Required parameters can have a default value now. Produce error when a required parameter is not passed, even when a default is provided.</li>
+<li><code>NXF</code>:&nbsp;<em>Modules</em>&nbsp;are now stored under&nbsp;<code>target/nextflow</code>&nbsp;by default</li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><code>NXF</code>: Correctly escape path variable when running NXF command.</li>
+<li><code>NXF</code>: Surround parameters with quotes when running NXF command.</li>
+</ul>
+</section>
+<section id="internal-changes" class="level3">
+<h3 class="anchored" data-anchor-id="internal-changes">INTERNAL CHANGES</h3>
+<ul>
+<li>Move CLI from inner script to outer script.</li>
+<li>Renamed Target to Platform</li>
+<li>Renamed Environment to Requirements</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script type="text/javascript">
+// Anything in this script block will be included on every page
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/https:\/\/viash\.io/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="quarto-dev/quarto-web" data-repo-id="MDEwOlJlcG9zaXRvcnkzNDc2MzMzNTg=" data-category="Blog" data-category-id="DIC_kwDOFLh2zs4CBQQq" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">
+        <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html">About</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../../../documentation/faq/index.html">FAQ</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../../../privacy.html">Privacy Policy</a>
+  </li>  
+</ul>
+      </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/DataIntuitive">
+      <i class="bi bi-twitter" role="img" aria-label="Viash Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/viash-io/viash">
+      <i class="bi bi-github" role="img" aria-label="Viash GitHub">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
