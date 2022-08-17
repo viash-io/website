@@ -1,0 +1,46 @@
+---
+title: "Viash 0.5.9"
+subtitle: "A long running Viash component can be interrupted by pressing CTRL-C or by sending it an INT or SIGINT signal"
+date: 2022/03/14
+categories:
+  - New Release
+author: Viash Team
+---
+
+## What's new?
+
+The biggest change in this release is that long running Viash components (like [RStudio Server](/guides/component_cookbook/rstudioserver/) or [VS Code Server](/guides/component_cookbook/vscodeserver/)) can now be interrupted by pressing CTRL-C or by sending it an `INT` or `SIGINT` signal. Before this release, you had to manually stop the Docker container to get the component to terminate. 
+
+Read the full changelog below to see all of the changes.
+
+## Full changelog:
+
+### NEW FEATURES
+
+* `viash run`: A long running Viash component can be interrupted by pressing 
+  CTRL-C or by sending it an `INT` or `SIGINT` signal.
+
+* `DockerPlatform`: Automatically add a few labels based on metadata to Dockerfile.
+
+* `DockerPlatform`: Added value `target_image_source` for setting the source of 
+  the target image. This is used for defining labels in the dockerfile.
+  Example:
+  ```yaml
+  target_image_source: https://github.com/foo/bar
+  ```
+
+### MINOR CHANGES
+
+* `viash ns list`: Added `--format yaml/json` argument to be able to return the
+  output as a json as well. Useful for when `jq` is installed but `yq` is not. Example:
+  ```
+    viash ns list -p docker -f json | jq '.[] | .info.config'
+  ```
+
+* `viash config view`: Same as above.
+
+### DEPRECATION
+
+* `CLI`: Deprecated `-P` flag use `-p` intead.
+
+* `DockerPlatform`: Deprecated `version` value.

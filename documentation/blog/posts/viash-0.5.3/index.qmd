@@ -1,0 +1,78 @@
+---
+title: "Viash 0.5.3"
+subtitle: "New meta data list for scripts, VIASH_TEMP environment variable for NextFlow, fixed output formatting with separate outputs"
+date: 2021/08/16
+categories:
+  - New Release
+author: Viash Team
+---
+
+## What's new?
+
+This release provides more information to scripts with the new `meta` list. This list contains two values for now:
+
+  - `meta["resources_dir"]`: Path to the directory containing the resources
+  - `meta["functionality_name"]`: Name of the component
+
+A new environment variable is now available for export when working with the NextFlow platform: `VIASH_TEMP`.
+
+## Resources directory
+
+All [resources](/api/config/functionality/#resources-list) defined in the [config file](/api/config/config/) are copied over to a temporary location right before a Viash component is executed. This location is can now be easily accessed in your scripts, allowing you to modify and copy the files as needed.  
+Here are some examples in different scripting languages on how to access the meta data, it works similarly to the `par` list:
+
+Bash:  
+
+```bash
+echo $meta_resources_dir 
+```
+
+Python:  
+
+```python
+print(meta["resources_dir"])
+```
+
+R:
+
+```r
+cat(meta$resources_dir)
+```
+
+## Functionality name
+
+The name of the component can now be accessed in the same way as the resources directory. This allows you to print the name of the component out to a console window for example.
+Here's how to access this data in different scripting languages:
+
+Bash:
+
+```bash
+echo $meta_functionality_name
+```
+
+Python:  
+
+```python
+print(meta["functionality_name"])
+```
+
+R:
+
+```r
+cat(meta$functionality_name)
+```
+
+## Full changelog:
+
+### NEW FEATURES
+
+* Similar to `par`, each script now also has a `meta` list. `meta` contains meta information about the component
+  or the execution thereof. It currently has the following fields:
+  - `meta["resources_dir"]`: Path to the directory containing the resources
+  - `meta["functionality_name"]`: Name of the component
+
+* `NextFlowPlatform`: Export `VIASH_TEMP` environment variable.
+
+### BUG FIXES
+
+* `NextFlowPlatform`: Fix output formatting when `separate_multiple_outputs` is `false`.
