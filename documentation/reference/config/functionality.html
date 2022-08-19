@@ -400,22 +400,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#example-9" id="toc-example-9" class="nav-link" data-scroll-target="#example-9">Example</a></li>
   </ul></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">resources</a>
+  <li><a href="#requirements" id="toc-requirements" class="nav-link" data-scroll-target="#requirements">requirements</a>
   <ul class="collapse">
   <li><a href="#example-10" id="toc-example-10" class="nav-link" data-scroll-target="#example-10">Example</a></li>
   </ul></li>
-  <li><a href="#test_resources" id="toc-test_resources" class="nav-link" data-scroll-target="#test_resources">test_resources</a>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">resources</a>
   <ul class="collapse">
   <li><a href="#example-11" id="toc-example-11" class="nav-link" data-scroll-target="#example-11">Example</a></li>
+  </ul></li>
+  <li><a href="#test_resources" id="toc-test_resources" class="nav-link" data-scroll-target="#test_resources">test_resources</a>
+  <ul class="collapse">
+  <li><a href="#example-12" id="toc-example-12" class="nav-link" data-scroll-target="#example-12">Example</a></li>
   </ul></li>
   <li><a href="#tests" id="toc-tests" class="nav-link" data-scroll-target="#tests">tests</a></li>
   <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">usage</a>
   <ul class="collapse">
-  <li><a href="#example-12" id="toc-example-12" class="nav-link" data-scroll-target="#example-12">Example</a></li>
+  <li><a href="#example-13" id="toc-example-13" class="nav-link" data-scroll-target="#example-13">Example</a></li>
   </ul></li>
   <li><a href="#version" id="toc-version" class="nav-link" data-scroll-target="#version">version</a>
   <ul class="collapse">
-  <li><a href="#example-13" id="toc-example-13" class="nav-link" data-scroll-target="#example-13">Example</a></li>
+  <li><a href="#example-14" id="toc-example-14" class="nav-link" data-scroll-target="#example-14">Example</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -539,8 +543,7 @@ Warning
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">multiple</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">multiple_sep</span><span class="kw">:</span><span class="at"> </span><span class="st">","</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="at">   </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --bar</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> string</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span></span></code></pre></div>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> string</span></span></code></pre></div>
 </section>
 </section>
 <section id="authors" class="level2">
@@ -694,6 +697,17 @@ Warning
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>          <span class="ex">type:</span> file, output</span></code></pre></div>
 </section>
 </section>
+<section id="requirements" class="level2">
+<h2 class="anchored" data-anchor-id="requirements">requirements</h2>
+<p><strong>Type</strong>: <code>ComputationalRequirements</code></p>
+<p>Computational requirements related to running the component. <code>n_proc</code> specifies the maximum number of processes a component is allowed to spawn in parallel, whereas <code>memory</code> specifies the maximum amount of memory a component is allowed to allicate. Memory units must be in B, KB, MB, GB, TB or PB.</p>
+<section id="example-10" class="level3">
+<h3 class="anchored" data-anchor-id="example-10">Example</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">requirements</span><span class="kw">:</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">n_proc</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">memory</span><span class="kw">:</span><span class="at"> 10GB</span></span></code></pre></div>
+</section>
+</section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">resources</h2>
 <p><strong>Type</strong>: <code>List of Resource</code></p>
@@ -706,27 +720,27 @@ Warning
 <li>text: …multiline text…, the raw content of the input file. Exactly one of path or text must be defined, the other undefined.</li>
 <li>is_executable: <code>true</code> / <code>false</code>, whether the resulting file is made executable.</li>
 </ul>
-<section id="example-10" class="level3">
-<h3 class="anchored" data-anchor-id="example-10">Example</h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resources</span><span class="kw">:</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> r_script</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.R</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> resource1.txt</span></span></code></pre></div>
+<section id="example-11" class="level3">
+<h3 class="anchored" data-anchor-id="example-11">Example</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> r_script</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.R</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> resource1.txt</span></span></code></pre></div>
 </section>
 </section>
 <section id="test_resources" class="level2">
 <h2 class="anchored" data-anchor-id="test_resources">test_resources</h2>
 <p><strong>Type</strong>: <code>List of Resource</code></p>
 <p>One or more <a href="../../../documentation/guide/component/languages.html">scripts</a> to be used to test the component behaviour when <code>viash test</code> is invoked. Additional files of type <code>file</code> will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code &gt;0 when unexpected behaviour occurs during testing. See the <a href="../../../documentation/guide/component/unit-testing.html">Unit Testing guide</a> for more info.</p>
-<section id="example-11" class="level3">
-<h3 class="anchored" data-anchor-id="example-11">Example</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">test_resources</span><span class="kw">:</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> bash_script</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> tests/test1.sh</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> r_script</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> tests/test2.R</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">path</span><span class="kw">:</span><span class="at"> resource1.txt</span></span></code></pre></div>
+<section id="example-12" class="level3">
+<h3 class="anchored" data-anchor-id="example-12">Example</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">test_resources</span><span class="kw">:</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> bash_script</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> tests/test1.sh</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> r_script</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> tests/test2.R</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">path</span><span class="kw">:</span><span class="at"> resource1.txt</span></span></code></pre></div>
 </section>
 </section>
 <section id="tests" class="level2">
@@ -751,18 +765,18 @@ Warning
 <h2 class="anchored" data-anchor-id="usage">usage</h2>
 <p><strong>Type</strong>: <code>String</code></p>
 <p>A description on how to use the component. This will be displayed with <code>--help</code> under the ‘Usage:’ section.</p>
-<section id="example-12" class="level3">
-<h3 class="anchored" data-anchor-id="example-12">Example</h3>
-<div class="sourceCode" id="cb16"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">usage</span><span class="kw">:</span><span class="at"> Place the executable in a directory containing TSV files and run it</span></span></code></pre></div>
+<section id="example-13" class="level3">
+<h3 class="anchored" data-anchor-id="example-13">Example</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">usage</span><span class="kw">:</span><span class="at"> Place the executable in a directory containing TSV files and run it</span></span></code></pre></div>
 </section>
 </section>
 <section id="version" class="level2">
 <h2 class="anchored" data-anchor-id="version">version</h2>
 <p><strong>Type</strong>: <code>Version</code></p>
 <p>Version of the component. This field will be used to version the executable and the Docker container.</p>
-<section id="example-13" class="level3">
-<h3 class="anchored" data-anchor-id="example-13">Example</h3>
-<div class="sourceCode" id="cb17"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.8</span></span></code></pre></div>
+<section id="example-14" class="level3">
+<h3 class="anchored" data-anchor-id="example-14">Example</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.8</span></span></code></pre></div>
 
 
 </section>

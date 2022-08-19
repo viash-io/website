@@ -98,6 +98,13 @@
     "text": "outputs\nType: List of Argument\nA list of output arguments in addition to the arguments list. Any arguments specified here will have their type set to file and thr direction set to output by default.\n\nExample\noutputs:\n  - name: output_file\n  - name: another_output\nThis results in the following output when calling the component with the --help argument:\ncomponent_with_outputs\n  \n  Outputs:\n      output_file\n          type: file, output\n  \n      another_output\n          type: file, output"
   },
   {
+    "objectID": "documentation/reference/config/functionality.html#requirements",
+    "href": "documentation/reference/config/functionality.html#requirements",
+    "title": "Functionality",
+    "section": "requirements",
+    "text": "requirements\nType: ComputationalRequirements\nComputational requirements related to running the component. n_proc specifies the maximum number of processes a component is allowed to spawn in parallel, whereas memory specifies the maximum amount of memory a component is allowed to allicate. Memory units must be in B, KB, MB, GB, TB or PB.\n\nExample\nrequirements:\n  n_proc: 5\n  memory: 10GB"
+  },
+  {
     "objectID": "documentation/reference/config/functionality.html#resources",
     "href": "documentation/reference/config/functionality.html#resources",
     "title": "Functionality",
@@ -263,7 +270,7 @@
     "href": "documentation/reference/config/platforms/nextflowVdsl3Platform.html#auto",
     "title": "Nextflow VDSL3 Platform",
     "section": "auto",
-    "text": "auto\nType: NextflowAuto\nAutomated processing flags which can be turned off:\n\nsimplifyInput: If true, an input tuple only containing only a single File (e.g. [\"foo\", file(\"in.h5ad\")]) is automatically transformed to a map (i.e. [\"foo\", [ input: file(\"in.h5ad\") ] ]). Default is true.\nsimplifyOutput: If true, an output tuple containing a map with a File (e.g. [\"foo\", [ output: file(\"out.h5ad\") ] ]) is automatically transformed to a map (i.e. [\"foo\", file(\"out.h5ad\")]). Default is true.\ntranscript: If true, the module’s transcripts from work/ are automatically published to params.transcriptDir. If not defined, params.publishDir + \"/_transcripts\" will be used. Will throw an error if neither are defined. Default is false.\npublish: If true, the module’s outputs are automatically published to params.publishDir. Will throw an error if params.publishDir is not defined. Default is false.\n\n\nExample\nauto:\n    publish: true"
+    "text": "auto\nType: NextflowAuto\nAutomated processing flags which can be toggled on or off:\n\nsimplifyInput: If true, an input tuple only containing only a single File (e.g. [\"foo\", file(\"in.h5ad\")]) is automatically transformed to a map (i.e. [\"foo\", [ input: file(\"in.h5ad\") ] ]). Default is true.\nsimplifyOutput: If true, an output tuple containing a map with a File (e.g. [\"foo\", [ output: file(\"out.h5ad\") ] ]) is automatically transformed to a map (i.e. [\"foo\", file(\"out.h5ad\")]). Default is true.\ntranscript: If true, the module’s transcripts from work/ are automatically published to params.transcriptDir. If not defined, params.publishDir + \"/_transcripts\" will be used. Will throw an error if neither are defined. Default is false.\npublish: If true, the module’s outputs are automatically published to params.publishDir. Will throw an error if params.publishDir is not defined. Default is false.\n\n\nExample\nauto:\n    publish: true"
   },
   {
     "objectID": "documentation/reference/config/platforms/nextflowVdsl3Platform.html#debug",
@@ -466,7 +473,7 @@
     "href": "documentation/reference/config/arguments/boolean_false.html",
     "title": "boolean_false",
     "section": "",
-    "text": "An argument of the boolean_false type acts like an inverted boolean flag with a default value of true. When called as an argument it sets the boolean to false.\nExample:"
+    "text": "An argument of the boolean_false type acts like an inverted boolean flag with a default value of true. When called as an argument it sets the boolean to false."
   },
   {
     "objectID": "documentation/reference/config/arguments/boolean_false.html#alternatives",
@@ -494,7 +501,7 @@
     "href": "documentation/reference/config/arguments/file.html",
     "title": "file",
     "section": "",
-    "text": "A file type argument has a string value that points to a file or folder path.\nExample:"
+    "text": "A file type argument has a string value that points to a file or folder path."
   },
   {
     "objectID": "documentation/reference/config/arguments/file.html#alternatives",
@@ -525,8 +532,8 @@
     "text": "direction\nType: Direction\nMakes this argument an input or an output, as in does the file/folder needs to be read or written. input by default.\n\nExample\n- name: --my_output_file\n  type: file\n  direction: output"
   },
   {
-    "objectID": "documentation/reference/config/arguments/file.html#example-2",
-    "href": "documentation/reference/config/arguments/file.html#example-2",
+    "objectID": "documentation/reference/config/arguments/file.html#example-3",
+    "href": "documentation/reference/config/arguments/file.html#example-3",
     "title": "file",
     "section": "example",
     "text": "example\nType: Path / List of Path\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\n\nExample\n- name: --my_file\n  type: file\n  example: data.csv"
@@ -571,7 +578,7 @@
     "href": "documentation/reference/config/arguments/integer.html",
     "title": "integer",
     "section": "",
-    "text": "An integer type argument has a numeric value without decimal points.\nExample:"
+    "text": "An integer type argument has a numeric value without decimal points."
   },
   {
     "objectID": "documentation/reference/config/arguments/integer.html#alternatives",
@@ -602,8 +609,8 @@
     "text": "description\nType: String\nA description of the argument. This will be displayed with --help."
   },
   {
-    "objectID": "documentation/reference/config/arguments/integer.html#example-2",
-    "href": "documentation/reference/config/arguments/integer.html#example-2",
+    "objectID": "documentation/reference/config/arguments/integer.html#example-3",
+    "href": "documentation/reference/config/arguments/integer.html#example-3",
     "title": "integer",
     "section": "example",
     "text": "example\nType: Int / List of Int\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\n\nExample\n- name: --my_integer\n  type: integer\n  example: 100"
@@ -655,7 +662,7 @@
     "href": "documentation/reference/config/arguments/double.html",
     "title": "double",
     "section": "",
-    "text": "A double type argument has a numeric value with decimal points.\nExample:"
+    "text": "A double type argument has a numeric value with decimal points"
   },
   {
     "objectID": "documentation/reference/config/arguments/double.html#alternatives",
@@ -679,8 +686,8 @@
     "text": "description\nType: String\nA description of the argument. This will be displayed with --help."
   },
   {
-    "objectID": "documentation/reference/config/arguments/double.html#example-1",
-    "href": "documentation/reference/config/arguments/double.html#example-1",
+    "objectID": "documentation/reference/config/arguments/double.html#example-2",
+    "href": "documentation/reference/config/arguments/double.html#example-2",
     "title": "double",
     "section": "example",
     "text": "example\nType: Double / List of Double\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\n\nExample\n- name: --my_double\n  type: double\n  example: 5.8"
@@ -732,7 +739,7 @@
     "href": "documentation/reference/config/arguments/string.html",
     "title": "string",
     "section": "",
-    "text": "A string type argument has a value made up of an ordered sequences of characters, like “Hello” or “I’m a string”.\nExample:"
+    "text": "A string type argument has a value made up of an ordered sequences of characters, like “Hello” or “I’m a string”."
   },
   {
     "objectID": "documentation/reference/config/arguments/string.html#alternatives",
@@ -763,8 +770,8 @@
     "text": "description\nType: String\nA description of the argument. This will be displayed with --help."
   },
   {
-    "objectID": "documentation/reference/config/arguments/string.html#example-2",
-    "href": "documentation/reference/config/arguments/string.html#example-2",
+    "objectID": "documentation/reference/config/arguments/string.html#example-3",
+    "href": "documentation/reference/config/arguments/string.html#example-3",
     "title": "string",
     "section": "example",
     "text": "example\nType: String / List of String\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\n\nExample\n- name: --my_string\n  type: string\n  example: \"Hello World\""
@@ -802,7 +809,7 @@
     "href": "documentation/reference/config/arguments/boolean.html",
     "title": "boolean",
     "section": "",
-    "text": "A boolean type argument has two possible values: true or false.\nExample:"
+    "text": "A boolean type argument has two possible values: true or false."
   },
   {
     "objectID": "documentation/reference/config/arguments/boolean.html#alternatives",
@@ -826,8 +833,8 @@
     "text": "description\nType: String\nA description of the argument. This will be displayed with --help."
   },
   {
-    "objectID": "documentation/reference/config/arguments/boolean.html#example-1",
-    "href": "documentation/reference/config/arguments/boolean.html#example-1",
+    "objectID": "documentation/reference/config/arguments/boolean.html#example-2",
+    "href": "documentation/reference/config/arguments/boolean.html#example-2",
     "title": "boolean",
     "section": "example",
     "text": "example\nType: Boolean / List of Boolean\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\n\nExample\n- name: --my_boolean\n  type: boolean\n  example: true"
@@ -865,7 +872,7 @@
     "href": "documentation/reference/config/arguments/boolean_true.html",
     "title": "boolean_true",
     "section": "",
-    "text": "An argument of the boolean_true type acts like a boolean flag with a default value of false. When called as an argument it sets the boolean to true.\nExample:"
+    "text": "An argument of the boolean_true type acts like a boolean flag with a default value of false. When called as an argument it sets the boolean to true."
   },
   {
     "objectID": "documentation/reference/config/arguments/boolean_true.html#alternatives",
