@@ -58,6 +58,8 @@ def create_page(full_json, page_name, json_entry, directory):
     for i in range(len(sorted_dict)):
         if sorted_dict[i]["name"] == "__this__":
             qmd += sorted_dict[i]["description"] + "\n\n"
+            if "example" in sorted_dict[i] and len(sorted_dict[i]["example"]) > 0:
+                qmd += parse_example_dict(sorted_dict[i]["example"])
             continue
 
         name = sorted_dict[i]["name"]
@@ -114,18 +116,7 @@ def create_page(full_json, page_name, json_entry, directory):
         if description is not None:
             qmd += description + "\n\n"
         if example is not None:
-            qmd += "### Example" + "\n\n"
-            for ex in example:
-                if "description" in ex:
-                    qmd += ex["description"] + "\n\n"
-
-                qmd += (
-                    "```"
-                    + ex["format"]
-                    + "\n"
-                    + ex["example"].replace("\\n", "\n")
-                    + "\n```\n\n"
-                )
+            qmd += parse_example_dict(example)
         # if since is not None:
         #     qmd += pill("Introduced: " + since)
 
@@ -172,6 +163,22 @@ def parse_type(type_string):
     qmd += "\n\n"
     return qmd
 
+def parse_example_dict(example_dict):
+    qmd = ""
+    qmd += "### Example" + "\n\n"
+    for ex in example_dict:
+        if "description" in ex:
+            qmd += ex["description"] + "\n\n"
+
+        qmd += (
+            "```"
+            + ex["format"]
+            + "\n"
+            + ex["example"].replace("\\n", "\n")
+            + "\n```\n\n"
+        )
+    
+    return qmd
 
 if __name__ == "__main__":
     generate_json()
