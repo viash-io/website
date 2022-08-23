@@ -35,7 +35,7 @@ create_download_button("/download/components/md_url_checker/bash/script.sh")
 
 ### Configuration
 
-To get started, open up **config.vsh.yaml** file and take a look at the end of the [functionality]() dictionary, between the `path: script.sh` and `platforms:` lines:
+To get started, open up **config.vsh.yaml** file and take a look at the end of the [functionality](/documentation/reference/config/functionality.html) dictionary, between the `path: script.sh` and `platforms:` lines:
 
 ```yaml
   test_resources:
@@ -44,9 +44,9 @@ To get started, open up **config.vsh.yaml** file and take a look at the end of t
   - path: Testfile.md
 ```
 
-The [`tests`]() dictionary contains a reference to a test script and all of the files that need to be copied over in order to complete a test:
+The [`test_resources`]/documentation/reference/config/functionality.html#test_resources) dictionary contains a reference to a test script and all of the files that need to be copied over in order to complete a test:
 
-- The `type` signifies what [scripting language]() is used for performing the unit test, which doesn't need to be the same language as the main script. The `path` points to the test script.
+- The `type` signifies what [scripting language](/documentation/guide/component/languages.html) is used for performing the unit test, which doesn't need to be the same language as the main script. The `path` points to the test script.
 - Every file `path` added straight into the `tests` dictionary will be copied over next to the temporary test directory. Any files that are necessary for the test to work correctly can be added here. 
 
 In the case of this example, **test.sh** will be the test script and **Testfile.md** is necessary as an input markdown file for the script to function.  
@@ -60,7 +60,7 @@ print_file_contents("/download/components/md_url_checker/bash/test.sh", "bash", 
 ```
 
 :::{.callout-tip}
-As you can see above, you can use the [meta variable]() `$meta_functionality_name` to automatically get the name of the component (and the generated executable). This way, you can more reuse parts of your test scripts.
+As you can see above, you can use the [meta variable](/documentation/guide/component/languages.html#meta-variables) `$meta_functionality_name` to automatically get the name of the component (and the generated executable). This way, you can more reuse parts of your test scripts.
 :::
 
 :::{.callout-tip}
@@ -71,7 +71,7 @@ The bash script above is just a minimal example of how you can write a test. You
 
 ### Running a test
 
-To run all tests defined in a config file, use the [`viash test`]() command:
+To run all tests defined in a config file, use the [`viash test`](/documentation/reference/viash/test.html) command:
 
 ```bash
 viash test config.vsh.yaml
@@ -108,5 +108,5 @@ Cleaning up temporary directory
 If the test succeeds, Viash writes the full output to the shell and deletes the temporary files. If there are any issues, the script stops and an error message will appear in red. In this case, you can inspect the temporary files to troubleshoot.  
 
 :::{.callout-tip}
-You can pass the [`--keep true`]() argument to `viash test` to prevent viash from automatically deleting the temporary files in case of a success: `viash test --keep true config.vsh.yaml`.
+You can pass the [`--keep true`](/documentation/reference/viash/test.html) argument to `viash test` to prevent viash from automatically deleting the temporary files in case of a success: `viash test --keep true config.vsh.yaml`.
 :::

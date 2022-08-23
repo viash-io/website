@@ -10,7 +10,7 @@ execute:
 
 ## Overview
 
-explain this pipeline is a more realistic example of a typical use-case of a Nextflow bioinformatics pipeline as it has a mixture of scripting languages used and a `join` is used to merge all events  
+This guide explains how to create an example pipeline that's closer to a typical use-case of a Nextflow bioinformatics pipeline. It has a mixture of scripting languages and uses a `join` to merge all events.
 
 ## Creating the modules
 
@@ -88,7 +88,7 @@ print_file_contents("/download/components/combine_columns/R/script.R", "r", True
 
 ## Building the modules
 
-The [basic pipeline guide]() describes how to generate an individual VDSL3 Nextflow module using the [`viash build`]() command, but there's a better way when it comes to building multiple modules at once: [`viash ns build`](). Each one of the three components has its namespace defined as nextflow_modules inside of its config file.
+The [basic pipeline guide](/documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html) describes how to generate an individual VDSL3 Nextflow module using the [`viash build`](/documentation/reference/viash/build.html) command, but there's a better way when it comes to building multiple modules at once: [`viash ns build`](/documentation/reference/viash/ns.html#viash-ns-build). Each one of the three components has its namespace defined as nextflow_modules inside of its config file.
 Execute this command from the root of the **advanced_pipeline** directory
 
 ```bash
@@ -140,20 +140,20 @@ Create a new file named **main.nf** and add it to the root of the **advanced_pip
 print_file_contents("/download/pipeline_workflow/advanced_pipeline/main.nf", "groovy", False)
 ```
 
-1. target dir where the modules are located
-2. include the modules from the `target` directory
+1. Target directory where the modules are located
+2. Include the modules from the `target` directory
 3. Create a channel based on the `input` parameter's path
 4. Assign a unique ID to each event using [`map{}`](https://www.nextflow.io/docs/latest/operator.html#map)
 5. Run `remove_comments` to remove the comments from the TSV
 6. Extract a single column from TSV by running `take_column`
 7. Combine all events into a single List event using [`toList()`](https://www.nextflow.io/docs/latest/operator.html#tolist)
-8. Add unique ID to the tuple
-9. Concatenate the TSVs into one by running the `combine_columns` module with [auto publishing]() enabled using the `auto` directive to 
+8. Add **unique ID** to the tuple
+9. Concatenate the TSVs into one by running the `combine_columns` module with [auto publishing](/documentation/reference/config/platforms/nextflowVdsl3Platform.html#auto) enabled using the `auto` directive to 
 10. View the channel contents bu printing it to the console using [`view()`](https://www.nextflow.io/docs/latest/operator.html?highlight=view#view)
 
 ## Running the pipeline
 
-before running, you need some TSV files to work with
+Before being able to run the pipeline, you'll need some TSV files to work with. Download the files below and place them in a new directory named **data** in the root of **advanced_pipeline**.
 
 ```{python}
 create_download_button("/download/components/sample_input/file1.tsv")
@@ -163,13 +163,13 @@ create_download_button("/download/components/sample_input/file1.tsv")
 create_download_button("/download/components/sample_input/file2.tsv")
 ```
 
-now run the following command
+Now run the following command to run the pipeline using Nextflow:
 
 ```bash
 nextflow run main.nf --input "data/file?.tsv" --publishDir output
 ```
 
-output
+You should get an output similar to this:
 
 ```
 N E X T F L O W  ~  version 22.04.3
@@ -182,4 +182,13 @@ Launching `workflows/310-realistic_pipeline/main.nf` [stupefied_saha] DSL2 - rev
 Output: [combined, /home/runner/work/viash_nxf_course/viash_nxf_course/work/8d/6eeff571e9ff2c5389851c6ab3001c/combined.combine_columns.output]
 ```
 
-a TSV file was generated in the output directory 
+You can find the final TSV in the **output** directory:
+
+```tsv
+# this is a header		
+# this is also a header		
+one     0.11	123
+two	    0.23	456
+three	0.35	789
+four	0.47	123
+```
