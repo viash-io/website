@@ -18,24 +18,30 @@ Viash supports **unit testing**, which is a software testing method by which ind
 
 To write a unit test for a component, you need two things: a definition in the [config file](/documentation/reference/config/overview.html) and a script that runs the executable and verifies its output.  
 
-This tutorial uses a sample component named **md_url_checker**  to explain how to write a unit test for Viash. To follow along, create a new folder named "**testing**" on your machine, download the files below and move them to the folder you just created.
-
+This tutorial uses a sample component named **md_url_checker**  to explain how to write a unit test for Viash. To follow along, start by creating a new folder named "**testing**" on your machine.  
+Now create a new file named **Testfile.md** and add the following contents:
 
 ```{python}
-create_download_button("/download/components/md_url_checker/bash/Testfile.md")
+# create_download_button("/download/components/md_url_checker/bash/Testfile.md")
+print_file_contents("/download/components/md_url_checker/bash/Testfile.md", "md", False)
 ```
+ 
+Next, either download or copy the text for the config file and script below and add them to the same folder:
 
 ```{python}
 create_download_button("/download/components/md_url_checker/bash/config.vsh.yaml")
+print_file_contents("/download/components/md_url_checker/bash/config.vsh.yaml", "yaml", True)
 ```
 
 ```{python}
 create_download_button("/download/components/md_url_checker/bash/script.sh")
+print_file_contents("/download/components/md_url_checker/bash/script.sh", "bash", True)
+
 ```
 
 ### Configuration
 
-To get started, open up **config.vsh.yaml** file and take a look at the end of the [functionality](/documentation/reference/config/functionality.html) dictionary, between the `path: script.sh` and `platforms:` lines:
+To see where to define your unit tests, open up **config.vsh.yaml** file and take a look at the end of the [functionality](/documentation/reference/config/functionality.html) dictionary, between the `path: script.sh` and `platforms:` lines:
 
 ```yaml
   test_resources:
