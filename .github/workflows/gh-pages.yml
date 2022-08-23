@@ -54,15 +54,15 @@ jobs:
           chmod +x /usr/local/bin/viash
           viash -v
 
-      - name: Install dependencies
+      - name: Install dependencies via renv restore
         run: |
           Rscript -e 'renv::restore()'
 
-      - name: Install R dependencies
+      - name: Install missing R dependencies
         run: |
           Rscript -e 'install.packages(c("readr", "rmarkdown"))'
 
-      - name: Install Py dependencies
+      - name: Install missing Python dependencies
         run: |
           source renv/python/virtualenvs/renv-python-3.8/bin/activate
           pip install pandas nbformat jupyter
@@ -72,11 +72,10 @@ jobs:
         with:
           tinytex: true 
 
-      - name: Render book to all formats
+      - name: Render with Quarto
         shell: bash -l {0}  
         run: |
           source renv/python/virtualenvs/renv-python-3.8/bin/activate
-          docker -v # check whether podman is correctly detected
           quarto render
 
       - name: Deploy 🚀
