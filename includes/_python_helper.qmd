@@ -52,7 +52,11 @@ def print_web_file_contents(url, language = "default", folded = False, replace_d
 def create_download_button(path):
     basename = os.path.basename(path)
     download_path = path
-    print(f"<a href=\"{download_path}\" id=\"btn-download\" class=\"btn btn-info btn-md\" role=\"button\" download>Download {basename}</a>  ")
+    create_button(download_path, "Download " + basename, "download")
+
+def create_button(link, text, role = "download"):
+    print(f"<a href=\"{link}\" id=\"btn-download\" class=\"btn btn-info btn-md\" role=\"button\" {role}>{text}</a>  ")
+
 
 # Example: create_zip(parent_dir = "/download/projects", zip_dir = "namespace_example")
 def create_zip(parent_dir, zip_dir):
