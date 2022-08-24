@@ -3,7 +3,7 @@
 #| output: asis
 
 # Imports
-import git, os, shutil
+import git, os, shutil, urllib.request
 
 # Get root dir of repo
 repo = git.Repo('.', search_parent_directories=True)
@@ -26,6 +26,24 @@ def print_file_contents(path, language = "default", folded = False, replace_dict
 
     print(f"```{language}  ")
     print(file_contents)
+    print("```  ")
+    if folded:
+        print("</details>")
+
+# Example: print_web_file_contents("https://raw.githubusercontent.com/viash-io/viash_project_template/main/src/demo/take_column/config.vsh.yaml", "yaml", False, {"Replace me":"With this"})
+def print_web_file_contents(url, language = "default", folded = False, replace_dict = {}):
+    page = urllib.request.urlopen(url)
+    contents = str(page.read().decode())
+
+    for key, value in replace_dict.items():
+        contents = contents.replace(key,value)
+
+    if folded:
+        print("<details>")
+        print(f"<summary>Contents of {basename}</summary>")
+
+    print(f"```{language}  ")
+    print(contents)
     print("```  ")
     if folded:
         print("</details>")
