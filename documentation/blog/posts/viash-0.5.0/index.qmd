@@ -11,7 +11,7 @@ Viash 0.5.0 has some improvements to the way components with a Docker backend ca
 
 ## Improvements to Docker backend
 
-In the past, you needed to perform `--setup` on your [Docker-based components](/api/config/platform-docker/) and executables in order for the image to be built before you could run the component or executable. Now you can simply run your component or executable and Viash will do the image building automatically by default if it detects an image isn't present yet. This behaviour can be changed by using a [Docker setup strategy](/guides/running/executables-docker/#docker-setup-strategies). For example:
+In the past, you needed to perform `--setup` on your [Docker-based components](/documentation/reference/config/platforms/dockerPlatform.html) and executables in order for the image to be built before you could run the component or executable. Now you can simply run your component or executable and Viash will do the image building automatically by default if it detects an image isn't present yet. This behaviour can be changed by using a [Docker setup strategy](/guides/running/executables-docker/#docker-setup-strategies). For example:
 
 ```bash
 viash build config.vsh.yaml -p docker --setup alwayscachedbuild
@@ -19,7 +19,7 @@ viash build config.vsh.yaml -p docker --setup alwayscachedbuild
 
 ## Nextflow gets some argument changes
 
-Arguments for the [Nextflow platform](/api/config/platform-nextflow/) now have optional `required` and `default` values, just like their native and Docker counterparts. For example:
+Arguments for the [Nextflow platform](/documentation/reference/config/platforms/nextflowVdsl3Platform.html) now have optional `required` and `default` values, just like their native and Docker counterparts. For example:
 
 ```yaml
   arguments:
@@ -33,8 +33,8 @@ Arguments for the [Nextflow platform](/api/config/platform-nextflow/) now have o
       default: 100
 ```
 
-Take a look at the [Functionality page](/api/config/functionality/) for more information on arguments and their properties.  
-As long as you use long-option arguments (e.g. `--my-option`) in the [config file](/api/config/config/) for required arguments, the way of specifying argument values for the Nextflow platform is identical to the Docker platform. You still access non-required arguments via this syntax: `--<component_name>__<argument_name> <value>`. For example:
+Take a look at the [Functionality page](/documentation/reference/config/functionality.html) for more information on arguments and their properties.  
+As long as you use long-option arguments (e.g. `--my-option`) in the [config file](/documentation/reference/config/overview.html) for required arguments, the way of specifying argument values for the Nextflow platform is identical to the Docker platform. You still access non-required arguments via this syntax: `--<component_name>__<argument_name> <value>`. For example:
 
 ```bash
 my_component -- --my_component__input Hello!
