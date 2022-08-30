@@ -1008,32 +1008,81 @@
     "text": "What’s next?\nNow that you’ve had a taste of what Viash can do for you, take a look at our Guide and Reference pages to learn more about how to use Viash. If you want to start simple, we suggest to take a look at the Native component creation guide."
   },
   {
+    "objectID": "documentation/guide/building-block/docker/setup-strategies.html",
+    "href": "documentation/guide/building-block/docker/setup-strategies.html",
+    "title": "Setup Strategies",
+    "section": "",
+    "text": "Viash supports the use of several different Docker setup strategies. You can choose what strategy to build an executable with when using a Docker backend by passing the --setup option followed by one of the strategies below.\nFor example:"
+  },
+  {
+    "objectID": "documentation/guide/building-block/docker/setup-strategies.html#build",
+    "href": "documentation/guide/building-block/docker/setup-strategies.html#build",
+    "title": "Setup Strategies",
+    "section": "Build",
+    "text": "Build\n\nalwaysbuild / build / b: Always build the image from the dockerfile. This is the default setup strategy.\nalwayscachedbuild / cachedbuild / cb: Always build the image from the dockerfile, with caching enabled.\nifneedbebuild: Build the image if it does not exist locally.\nifneedbecachedbuild: Build the image with caching enabled if it does not exist locally."
+  },
+  {
+    "objectID": "documentation/guide/building-block/docker/setup-strategies.html#pull",
+    "href": "documentation/guide/building-block/docker/setup-strategies.html#pull",
+    "title": "Setup Strategies",
+    "section": "Pull",
+    "text": "Pull\n\nalwayspull / pull / p: Try to pull the container from Docker Hub or the specified docker registry.\nalwayspullelsebuild / pullelsebuild: Try to pull the image from a registry and build it if it doesn’t exist.\nalwayspullelsecachedbuild / pullelsecachedbuild: Try to pull the image from a registry and build it with caching if it doesn’t exist.\nifneedbepull: If the image does not exist locally, pull the image.\nifneedbepullelsebuild If the image does not exist locally, pull the image. If the image does exist, build it.\nifneedbepullelsecachedbuild: If the image does not exist locally, pull the image. If the image does exist, build it with caching enabled."
+  },
+  {
+    "objectID": "documentation/guide/building-block/docker/setup-strategies.html#push",
+    "href": "documentation/guide/building-block/docker/setup-strategies.html#push",
+    "title": "Setup Strategies",
+    "section": "Push",
+    "text": "Push\n\npush: Push the container to Docker Hub or the specified docker registry.\npushifnotpresent Push the container to Docker Hub or the specified docker registry if the specified tag does not exist yet."
+  },
+  {
+    "objectID": "documentation/guide/building-block/docker/setup-strategies.html#do-nothing",
+    "href": "documentation/guide/building-block/docker/setup-strategies.html#do-nothing",
+    "title": "Setup Strategies",
+    "section": "Do nothing",
+    "text": "Do nothing\n\ndonothing / meh: Do not build or pull anything."
+  },
+  {
+    "objectID": "documentation/guide/building-block/docker/inspect-dockerfile.html",
+    "href": "documentation/guide/building-block/docker/inspect-dockerfile.html",
+    "title": "Inspect Dockerfile",
+    "section": "",
+    "text": "viash run -p docker config.vsh.yaml -- ---dockerfile\n./my_docker_executable ---dockerfile\nBoth of these output the Docker config to the terminal:\nFROM bash:latest\n\nRUN apk add --no-cache curl"
+  },
+  {
     "objectID": "documentation/guide/building-block/docker/building-running.html",
     "href": "documentation/guide/building-block/docker/building-running.html",
-    "title": "Docker Executable",
+    "title": "Build & Run",
     "section": "",
     "text": "This guide covers how you can can build and run an executable with a Docker backend. Most of what is covered in the Native Executable guide is true for executables with a Docker backend."
   },
   {
     "objectID": "documentation/guide/building-block/docker/building-running.html#building-the-executable",
     "href": "documentation/guide/building-block/docker/building-running.html#building-the-executable",
-    "title": "Docker Executable",
+    "title": "Build & Run",
     "section": "Building the executable",
     "text": "Building the executable\nIf you have multiple platforms defined in your Viash config file, use the --platform argument of viash build to specify you want to create an executable with a Docker backend.\nviash build config.vsh.yaml --platform docker --output bin"
   },
   {
     "objectID": "documentation/guide/building-block/docker/building-running.html#running-the-executable",
     "href": "documentation/guide/building-block/docker/building-running.html#running-the-executable",
-    "title": "Docker Executable",
+    "title": "Build & Run",
     "section": "Running the executable",
     "text": "Running the executable\nYou can run the executable by executing it as a command:\nbin/hello_world\nExecutable with a Docker backend include functions to create a Docker image and a container based on your Viash config file. When you run the executable for the first time, both the image and container will built, followed by running the executable inside of the container:\n[notice] Checking if Docker image is available at 'hello_world:latest'\n[warning] Could not pull from 'hello_world:latest'. Docker image doesn't exist or is not accessible.\n[notice] Building container 'hello_world:latest' with Dockerfile\nHello World\nIf you already have the container on your system, that will be used to run the executable:\nHello World"
   },
   {
     "objectID": "documentation/guide/building-block/docker/building-running.html#whats-next",
     "href": "documentation/guide/building-block/docker/building-running.html#whats-next",
-    "title": "Docker Executable",
+    "title": "Build & Run",
     "section": "What’s next?",
     "text": "What’s next?\nNow you know how to build and run executables with a Docker backend, you may be interested in building and running Nextflow modules."
+  },
+  {
+    "objectID": "documentation/guide/building-block/docker/docker-volume.html",
+    "href": "documentation/guide/building-block/docker/docker-volume.html",
+    "title": "Docker Volumes",
+    "section": "",
+    "text": "The full mount path is /viash_automount/ABSOLUTE_PATH_TO_FILE_DIRECTORY.\nBy default, files created and modified by a Docker container are owned by root. By default, Viash automatically changes the owner of any files defined in the config file to the user running the executable. This behaviour can be overridden by setting the chown setting to false in your config file.\n\n\n\n\n\n\nImportant\n\n\n\nAny files your script generates that are not defined as file arguments will still be owned by root as Viash won’t have any knowledge of them."
   },
   {
     "objectID": "documentation/guide/building-block/nextflow/building-running.html",
