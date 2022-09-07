@@ -1,4 +1,3 @@
-import json
 import git, subprocess, json
 from pathlib import Path
 
