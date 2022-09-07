@@ -103,9 +103,6 @@ def create_opts_table(opts):
             argument += f", `-{opt['short']}`"
 
         description = replace_terms(opt["descr"])
-        # description = opt["descr"].replace(
-        #     "$", "\$"
-        # )  # Prevents dollar sign being detected as LaTeX start
 
         if opt["required"]:
             description += " **This is a required argument.**"
@@ -124,6 +121,7 @@ def replace_terms(text: str) -> str:
     csvreader = csv.reader(keywords_csv)
     for row in csvreader:
         text = text.replace(row[0], row[1])
+    keywords_csv.close()
     return text
 
 if __name__ == "__main__":

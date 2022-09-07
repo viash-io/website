@@ -1,4 +1,4 @@
-import git, subprocess, json
+import git, subprocess, json, csv
 from pathlib import Path
 
 # Get root dir of repo
@@ -7,12 +7,14 @@ repo_root = repo.working_tree_dir
 json_export = "schema_export.json"
 reference_dir = ""
 child_dir = "config"
-
+keyword_replace_csv = ""
 
 def generate_json():
     bin = repo_root + "/bin/"
     global reference_dir
+    global keyword_replace_csv
     reference_dir = repo_root + "/documentation/reference/"
+    keyword_replace_csv = repo_root + "/bin-data/KeywordReplacements.csv"
 
     # TODO: Remove comments below once viash has --schema_export
 
@@ -178,6 +180,14 @@ def parse_example_dict(example_dict):
         )
     
     return qmd
+
+def replace_terms(text: str) -> str:
+    keywords_csv = open(keyword_replace_csv)
+    csvreader = csv.reader(keywords_csv)
+    for row in csvreader:
+        text = text.replace(row[0], row[1])
+    keywords_csv.close()
+    return text
 
 if __name__ == "__main__":
     generate_json()
