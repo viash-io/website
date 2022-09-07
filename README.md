@@ -1,16 +1,15 @@
-## Viewing
+This is the website repo for [viash.io](https://viash.io). It's built on top of [Quarto](https://quarto.org/).
 
-You can look at the latest version of the  work-in-progress website here: https://viash-io.github.io/new_website/
-Alternatively, you can pull the repo and execute this command for a local preview:
+## Local preview
 
-```
-quarto preview
-```
+Follow the steps below to start a local preview:
 
-You'll need some R and Python prerequisites for the command above to work.
-
-## Updating
-
-The main .qmd files live in the **documentation** folder.
-To create a new version of the website, make your changes and push them to the `main` branch. This will start up a Github action that will build the website to the `gh-pages` branch.
-After about 15 minutes the changes should be visible on https://viash-io.github.io/new_website/.
+1. Install [Quarto](https://quarto.org/docs/get-started/)
+2. Install [Python 3.10](https://www.python.org/) or higher
+3. Install [R 4.1](https://www.r-project.org/) or higher
+4. Pull the repo and use it as your working directory
+5. Execute `Rscript -e 'renv::restore()'` to install most of the R and Python dependencies
+6. Install some missing R dependencies: `Rscript -e 'install.packages(c("readr", "rmarkdown"))'`
+7. Install the missing Python dependencies: `source renv/python/virtualenvs/renv-python-3.8/bin/activate && pip install pandas nbformat jupyter`
+8. Run `quarto preview`
+9. Navigate to [http://localhost:8000](http://localhost:8000) in a web browser
