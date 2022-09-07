@@ -1,17 +1,18 @@
-import json
-import git, subprocess, json
+import git, subprocess, json, csv
 
 # Get root dir of repo
 repo = git.Repo(".", search_parent_directories=True)
 repo_root = repo.working_tree_dir
 json_export = "cli_export.json"
 reference_dir = ""
-
+keyword_replace_csv = ""
 
 def generate_json():
     bin = repo_root + "/bin/"
     global reference_dir
+    global keyword_replace_csv
     reference_dir = repo_root + "/documentation/reference/"
+    keyword_replace_csv = repo_root + "/bin-data/KeywordReplacements.csv"
 
     # TODO: Remove comments below once viash has --cli_export
 
@@ -101,9 +102,10 @@ def create_opts_table(opts):
         if "short" in opt:
             argument += f", `-{opt['short']}`"
 
-        description = opt["descr"].replace(
-            "$", "\$"
-        )  # Prevents dollar sign being detected as LaTeX start
+        description = replace_terms(opt["descr"])
+        # description = opt["descr"].replace(
+        #     "$", "\$"
+        # )  # Prevents dollar sign being detected as LaTeX start
 
         if opt["required"]:
             description += " **This is a required argument.**"
@@ -116,6 +118,13 @@ def create_opts_table(opts):
     qmd += "\n\n"
     return qmd
 
+
+def replace_terms(text: str) -> str:
+    keywords_csv = open(keyword_replace_csv)
+    csvreader = csv.reader(keywords_csv)
+    for row in csvreader:
+        text = text.replace(row[0], row[1])
+    return text
 
 if __name__ == "__main__":
     generate_json()
