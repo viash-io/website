@@ -34,20 +34,19 @@ def create_qmd():
 
     for topic in viash_json:
         if topic == "functionality":
-            create_page(viash_json, topic, viash_json[topic], child_dir)
+            create_page(topic, viash_json[topic], child_dir)
         else:
             for subtopic in viash_json[topic]:
                 if not subtopic.endswith("Requirements"):
-                    create_page(viash_json, subtopic, viash_json[topic][subtopic], child_dir + "/" + topic)
+                    create_page(subtopic, viash_json[topic][subtopic], child_dir + "/" + topic)
 
 
-def create_page(full_json, page_name, json_entry, directory):
+def create_page(page_name, json_entry, directory, output_to_file = True) -> str:
     qmd = ""
 
     title = page_name.replace("Platform", " Platform")
     title = title.replace("Legacy", " Legacy")
     title = title.replace("Vdsl3", " Vdsl3")
-    # qmd += f"---\ntitle: \"{title.title()}\"\n---\n\n"
 
     if directory == "config/arguments": # Don't capitalize the title of argument pages
         qmd += header(page_name)
@@ -123,11 +122,10 @@ def create_page(full_json, page_name, json_entry, directory):
 
     qmd += "\n\n"
 
-    Path(reference_dir + f"{directory}/").mkdir(parents=True, exist_ok=True)
-    qmd_file = open(reference_dir + f"{directory}/{page_name}.qmd", "w")
-    qmd_file.write(qmd)
-    qmd_file.close()
+    if output_to_file:
+        write_qmd_file(directory, page_name, qmd)
 
+    return qmd
 
 def header(title):
     title = title.replace("Vdsl3", "VDSL3")
@@ -188,6 +186,12 @@ def replace_terms(text: str) -> str:
         text = text.replace(row[0], row[1])
     keywords_csv.close()
     return text
+
+def write_qmd_file(dir_in_reference, file_name, content):
+    Path(reference_dir + f"{dir_in_reference}/").mkdir(parents=True, exist_ok=True)
+    qmd_file = open(reference_dir + f"{dir_in_reference}/{file_name}.qmd", "w")
+    qmd_file.write(content)
+    qmd_file.close()
 
 if __name__ == "__main__":
     generate_json()

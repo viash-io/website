@@ -1,4 +1,5 @@
 import git, subprocess, json, csv
+from pathlib import Path
 
 # Get root dir of repo
 repo = git.Repo(".", search_parent_directories=True)
@@ -31,10 +32,10 @@ def create_qmd():
     json_file.close()
 
     for key in viash_json:
-        create_page(viash_json, key["name"], key)
+        create_page(key["name"], key)
 
 
-def create_page(full_json, name, json_entry):
+def create_page(name, json_entry):
     qmd = ""
     qmd += header(f"viash {name}")
 
@@ -44,10 +45,7 @@ def create_page(full_json, name, json_entry):
         for subcommand in json_entry["subcommands"]:
             qmd += add_command(subcommand)
 
-
-    qmd_file = open(reference_dir + f"viash/{name}.qmd", "w")
-    qmd_file.write(qmd)
-    qmd_file.close()
+    write_qmd_file("viash", name, qmd)
 
 
 def add_command(command):
@@ -123,6 +121,12 @@ def replace_terms(text: str) -> str:
         text = text.replace(row[0], row[1])
     keywords_csv.close()
     return text
+
+def write_qmd_file(dir_in_reference, file_name, content):
+    Path(reference_dir + f"{dir_in_reference}/").mkdir(parents=True, exist_ok=True)
+    qmd_file = open(reference_dir + f"{dir_in_reference}/{file_name}.qmd", "w")
+    qmd_file.write(content)
+    qmd_file.close()
 
 if __name__ == "__main__":
     generate_json()
