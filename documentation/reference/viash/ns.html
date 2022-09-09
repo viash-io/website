@@ -315,6 +315,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   <li><a href="#viash-ns-build" id="toc-viash-ns-build" class="nav-link active" data-scroll-target="#viash-ns-build">viash ns build</a></li>
   <li><a href="#viash-ns-test" id="toc-viash-ns-test" class="nav-link" data-scroll-target="#viash-ns-test">viash ns test</a></li>
   <li><a href="#viash-ns-list" id="toc-viash-ns-list" class="nav-link" data-scroll-target="#viash-ns-list">viash ns list</a></li>
+  <li><a href="#viash-ns-exec" id="toc-viash-ns-exec" class="nav-link" data-scroll-target="#viash-ns-exec">viash ns exec</a></li>
   </ul>
 </nav>
     </div>
@@ -521,31 +522,105 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <td style="text-align: right;"><code>Boolean</code></td>
 </tr>
 <tr class="even">
+<td><code>--parse_argument_groups</code></td>
+<td style="text-align: left;">Whether or not to postprocess each component’s argument groups.</td>
+<td style="text-align: right;"><code>Boolean</code></td>
+</tr>
+<tr class="odd">
 <td><code>--platform</code>, <code>-p</code></td>
 <td style="text-align: left;">Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.</td>
 <td style="text-align: right;"><code>String</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>--query</code>, <code>-q</code></td>
 <td style="text-align: left;">Filter which components get selected by name and <a href="../../../documentation/guide/component/namespaces.html">namespace</a>. Can be a regex. Example: “^mynamespace/component1$”.</td>
 <td style="text-align: right;"><code>String</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>--query_name</code></td>
 <td style="text-align: left;">Filter which components get selected by name. Can be a regex. Example: “^component1”.</td>
 <td style="text-align: right;"><code>String</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>--query_namespace</code>, <code>-n</code></td>
 <td style="text-align: left;">Filter which <a href="../../../documentation/guide/component/namespaces.html">namespaces</a> get selected by <a href="../../../documentation/guide/component/namespaces.html">namespace</a>. Can be a regex. Example: “^mynamespace$”.</td>
 <td style="text-align: right;"><code>String</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>--src</code>, <code>-s</code></td>
 <td style="text-align: left;">A source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.</td>
 <td style="text-align: right;"><code>String</code></td>
 </tr>
+<tr class="even">
+<td><code>--help</code>, <code>-h</code></td>
+<td style="text-align: left;">Show help message</td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="viash-ns-exec" class="level2">
+<h2 class="anchored" data-anchor-id="viash-ns-exec">viash ns exec</h2>
+<p>Execute a command for all found Viash components. The syntax of this command is inspired by <code>find . -exec echo {} \;</code>.</p>
+<p>The following fields are automatically replaced: * <code>{}</code> | <code>{path}</code>: path to the config file * <code>{abs-path}</code>: absolute path to the config file * <code>{dir}</code>: path to the parent directory of the config file * <code>{abs-dir}</code>: absolute path to the directory of the config file * <code>{main-script}</code>: path to the main script (if any) * <code>{abs-main-script}</code>: absolute path to the main script (if any) * <code>{functionality-name}</code>: name of the component</p>
+<p>A command suffixed by <code>\;</code> (or nothing) will execute one command for each of the Viash components, whereas a command suffixed by <code>+</code> will execute one command for all Viash components.</p>
+<p><strong>Usage:</strong></p>
+<p><code>viash ns exec 'echo {path} \\;' viash ns exec 'chmod +x {main-script} +'</code></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: right;">Type</th>
+</tr>
+</thead>
+<tbody>
 <tr class="odd">
+<td><code>--cmd</code></td>
+<td style="text-align: left;">The command to execute for each viash config file in the <a href="../../../documentation/guide/component/namespaces.html">namespace</a>. <strong>This is a required argument.</strong></td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="even">
+<td><code>--config_mod</code>, <code>-c</code></td>
+<td style="text-align: left;">Modify a viash config at runtime using a <a href="../../../documentation/reference/config/config-modding.html">custom DSL</a>.</td>
+<td style="text-align: right;"><code>List[String]</code></td>
+</tr>
+<tr class="odd">
+<td><code>--dry_run</code>, <code>-d</code></td>
+<td style="text-align: left;">Perform a dry run.</td>
+<td style="text-align: right;"><code>Boolean</code></td>
+</tr>
+<tr class="even">
+<td><code>--parallel</code>, <code>-l</code></td>
+<td style="text-align: left;">Whether or not to run the process in parallel.</td>
+<td style="text-align: right;"><code>Boolean</code></td>
+</tr>
+<tr class="odd">
+<td><code>--platform</code>, <code>-p</code></td>
+<td style="text-align: left;">Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="even">
+<td><code>--query</code>, <code>-q</code></td>
+<td style="text-align: left;">Filter which components get selected by name and <a href="../../../documentation/guide/component/namespaces.html">namespace</a>. Can be a regex. Example: “^mynamespace/component1$”.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="odd">
+<td><code>--query_name</code></td>
+<td style="text-align: left;">Filter which components get selected by name. Can be a regex. Example: “^component1”.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="even">
+<td><code>--query_namespace</code>, <code>-n</code></td>
+<td style="text-align: left;">Filter which <a href="../../../documentation/guide/component/namespaces.html">namespaces</a> get selected by <a href="../../../documentation/guide/component/namespaces.html">namespace</a>. Can be a regex. Example: “^mynamespace$”.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="odd">
+<td><code>--src</code>, <code>-s</code></td>
+<td style="text-align: left;">A source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="even">
 <td><code>--help</code>, <code>-h</code></td>
 <td style="text-align: left;">Show help message</td>
 <td style="text-align: right;"></td>

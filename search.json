@@ -32,7 +32,7 @@
     "href": "documentation/reference/config/functionality.html#argument_groups",
     "title": "Functionality",
     "section": "argument_groups",
-    "text": "argument_groups\nType: List of ArgumentGroup\nA grouping of the arguments, used to display the help message.\n\nname: foo, the name of the argument group.\ndescription: Description of foo, a description of the argument group. Multiline descriptions are supported.\narguments: [arg1, arg2, ...], list of the arguments names.\n\n\nExample\nargument_groups:\n  - name: \"Input\"\n    arguments: [ id, input1, input2 ]\n  - name: \"Output\"\n    arguments: [ output, optional_output ]\n  - name: \"Foo\"\n    description: Arguments related to the foo functionality of this component.\n    arguments: [ foo, bar, zing, bork ]\nThis results in the following output when calling the component with the --help argument:\ncomponent_name\n\n  Input:\n      --id\n          type: string\n\n      --input1\n          type: file\n\n      --input2\n          type: file\n\n  Output:\n      --output\n          type: file\n\n      --optional_output\n          type: file\n\n  Foo:\n      Arguments related to the foo functionality of this component.\n\n      --foo\n          type: integer\n\n      --bar\n          type: double\n\n      --zing\n          type: boolean\n\n      --bork\n          type: string"
+    "text": "argument_groups\nType: List of ArgumentGroup\nA grouping of the arguments, used to display the help message.\n\nname: foo, the name of the argument group.\ndescription: Description of foo, a description of the argument group. Multiline descriptions are supported.\narguments: [arg1, arg2, ...], list of the arguments names.\n\n\nExample\nargument_groups:\n  - name: \"Input\"\n    arguments:\n      - name: \"--id\"\n        type: string\n        required: true\n      - name: \"--input\"\n        type: file\n        required: true\n  - name: \"Output\"\n    arguments:\n      - name: \"--output\"\n        type: file\n        direction: output\n        required: true\n      - name: \"--output_optional\"\n        type: file\n        direction: output\nThis results in the following output when calling the component with the --help argument:\ncomponent_name\n\n  Input:\n      --id\n          type: string\n\n      --input\n          type: file\n\n  Output:\n      --output\n          type: file\n\n      --optional_output\n          type: file"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#arguments",
@@ -60,7 +60,7 @@
     "href": "documentation/reference/config/functionality.html#enabled",
     "title": "Functionality",
     "section": "enabled",
-    "text": "enabled\nType: Boolean\nSetting this to false will disable this component when using namespaces.\n\nExample\nenabled: false"
+    "text": "enabled\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.6.0. Use status instead.\n\n\nType: Boolean\nSetting this to false with disable this component when using namespaces."
   },
   {
     "objectID": "documentation/reference/config/functionality.html#info",
@@ -74,7 +74,7 @@
     "href": "documentation/reference/config/functionality.html#inputs",
     "title": "Functionality",
     "section": "inputs",
-    "text": "inputs\nType: List of Argument\nA list of input arguments in addition to the arguments list. Any arguments specified here will have their type set to file and the direction set to input by default.\n\nExample\ninputs:\n  - name: input_file\n  - name: another_input\nThis results in the following output when calling the component with the --help argument:\ncomponent_with_inputs\n  \n  Inputs:\n      input_file\n          type: file\n  \n      another_input\n          type: file"
+    "text": "inputs\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.6.0. Use arguments instead.\n\n\nType: List of Argument\nA list of input arguments in addition to the arguments list. Any arguments specified here will have their type set to file and the direction set to input by default.\n\nExample\ninputs:\n  - name: input_file\n  - name: another_input\nThis results in the following output when calling the component with the --help argument:\ncomponent_with_inputs\n  \n  Inputs:\n      input_file\n          type: file\n  \n      another_input\n          type: file"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#name",
@@ -95,7 +95,7 @@
     "href": "documentation/reference/config/functionality.html#outputs",
     "title": "Functionality",
     "section": "outputs",
-    "text": "outputs\nType: List of Argument\nA list of output arguments in addition to the arguments list. Any arguments specified here will have their type set to file and thr direction set to output by default.\n\nExample\noutputs:\n  - name: output_file\n  - name: another_output\nThis results in the following output when calling the component with the --help argument:\ncomponent_with_outputs\n  \n  Outputs:\n      output_file\n          type: file, output\n  \n      another_output\n          type: file, output"
+    "text": "outputs\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.6.0. Use arguments instead.\n\n\nType: List of Argument\nA list of output arguments in addition to the arguments list. Any arguments specified here will have their type set to file and thr direction set to output by default.\n\nExample\noutputs:\n  - name: output_file\n  - name: another_output\nThis results in the following output when calling the component with the --help argument:\ncomponent_with_outputs\n  \n  Outputs:\n      output_file\n          type: file, output\n  \n      another_output\n          type: file, output"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#requirements",
@@ -110,6 +110,13 @@
     "title": "Functionality",
     "section": "resources",
     "text": "resources\nType: List of Resource\nResources are files that support the component. The first resource should be the script that will be executed when the functionality is run. Additional resources will be copied to the same directory.\nCommon properties:\n\ntype: file / r_script / python_script / bash_script / javascript_script / scala_script / csharp_script, the type of resource. The first resource cannot be of type file. When the type is not specified, the default type is simply file.\nname: filename, the resulting name of the resource.\npath: path/to/file, the path of the input file. Can be a relative or an absolute path, or a URI.\ntext: …multiline text…, the raw content of the input file. Exactly one of path or text must be defined, the other undefined.\nis_executable: true / false, whether the resulting file is made executable.\n\n\nExample\nresources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt"
+  },
+  {
+    "objectID": "documentation/reference/config/functionality.html#status",
+    "href": "documentation/reference/config/functionality.html#status",
+    "title": "Functionality",
+    "section": "status",
+    "text": "status\nType: Status\nAllows setting a component to active, deprecated or disabled."
   },
   {
     "objectID": "documentation/reference/config/functionality.html#test_resources",
@@ -928,14 +935,21 @@
     "href": "documentation/reference/viash/ns.html#viash-ns-list",
     "title": "viash ns",
     "section": "viash ns list",
-    "text": "viash ns list\nList a namespace containing many viash config files.\nUsage:\nviash ns list [-n nmspc] [-s src] [-p docker]\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL.\nList[String]\n\n\n--format, -f\nWhich output format to use.\nString\n\n\n--parallel, -l\nWhether or not to run the process in parallel.\nBoolean\n\n\n--platform, -p\nActs as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--query, -q\nFilter which components get selected by name and namespace. Can be a regex. Example: “^mynamespace/component1$”.\nString\n\n\n--query_name\nFilter which components get selected by name. Can be a regex. Example: “^component1”.\nString\n\n\n--query_namespace, -n\nFilter which namespaces get selected by namespace. Can be a regex. Example: “^mynamespace$”.\nString\n\n\n--src, -s\nA source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.\nString\n\n\n--help, -h\nShow help message"
+    "text": "viash ns list\nList a namespace containing many viash config files.\nUsage:\nviash ns list [-n nmspc] [-s src] [-p docker]\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL.\nList[String]\n\n\n--format, -f\nWhich output format to use.\nString\n\n\n--parallel, -l\nWhether or not to run the process in parallel.\nBoolean\n\n\n--parse_argument_groups\nWhether or not to postprocess each component’s argument groups.\nBoolean\n\n\n--platform, -p\nActs as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--query, -q\nFilter which components get selected by name and namespace. Can be a regex. Example: “^mynamespace/component1$”.\nString\n\n\n--query_name\nFilter which components get selected by name. Can be a regex. Example: “^component1”.\nString\n\n\n--query_namespace, -n\nFilter which namespaces get selected by namespace. Can be a regex. Example: “^mynamespace$”.\nString\n\n\n--src, -s\nA source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.\nString\n\n\n--help, -h\nShow help message"
+  },
+  {
+    "objectID": "documentation/reference/viash/ns.html#viash-ns-exec",
+    "href": "documentation/reference/viash/ns.html#viash-ns-exec",
+    "title": "viash ns",
+    "section": "viash ns exec",
+    "text": "viash ns exec\nExecute a command for all found Viash components. The syntax of this command is inspired by find . -exec echo {} \\;.\nThe following fields are automatically replaced: * {} | {path}: path to the config file * {abs-path}: absolute path to the config file * {dir}: path to the parent directory of the config file * {abs-dir}: absolute path to the directory of the config file * {main-script}: path to the main script (if any) * {abs-main-script}: absolute path to the main script (if any) * {functionality-name}: name of the component\nA command suffixed by \\; (or nothing) will execute one command for each of the Viash components, whereas a command suffixed by + will execute one command for all Viash components.\nUsage:\nviash ns exec 'echo {path} \\\\;' viash ns exec 'chmod +x {main-script} +'\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--cmd\nThe command to execute for each viash config file in the namespace. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL.\nList[String]\n\n\n--dry_run, -d\nPerform a dry run.\nBoolean\n\n\n--parallel, -l\nWhether or not to run the process in parallel.\nBoolean\n\n\n--platform, -p\nActs as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--query, -q\nFilter which components get selected by name and namespace. Can be a regex. Example: “^mynamespace/component1$”.\nString\n\n\n--query_name\nFilter which components get selected by name. Can be a regex. Example: “^component1”.\nString\n\n\n--query_namespace, -n\nFilter which namespaces get selected by namespace. Can be a regex. Example: “^mynamespace$”.\nString\n\n\n--src, -s\nA source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.\nString\n\n\n--help, -h\nShow help message"
   },
   {
     "objectID": "documentation/reference/viash/config.html",
     "href": "documentation/reference/viash/config.html",
     "title": "viash config",
     "section": "",
-    "text": "View the config file after parsing.\nUsage:\nviash config view config.vsh.yaml\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL.\nList[String]\n\n\n--format, -f\nWhich output format to use.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--help, -h\nShow help message"
+    "text": "View the config file after parsing.\nUsage:\nviash config view config.vsh.yaml\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using a custom DSL.\nList[String]\n\n\n--format, -f\nWhich output format to use.\nString\n\n\n--parse_argument_groups\nWhether or not to postprocess each component’s argument groups.\nBoolean\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--help, -h\nShow help message"
   },
   {
     "objectID": "documentation/reference/viash/config.html#viash-config-inject",
