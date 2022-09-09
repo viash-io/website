@@ -36,12 +36,22 @@ A grouping of the arguments, used to display the help message.
 ```yaml
 argument_groups:
   - name: "Input"
-    arguments: [ id, input1, input2 ]
+    arguments:
+      - name: "--id"
+        type: string
+        required: true
+      - name: "--input"
+        type: file
+        required: true
   - name: "Output"
-    arguments: [ output, optional_output ]
-  - name: "Foo"
-    description: Arguments related to the foo functionality of this component.
-    arguments: [ foo, bar, zing, bork ]
+    arguments:
+      - name: "--output"
+        type: file
+        direction: output
+        required: true
+      - name: "--output_optional"
+        type: file
+        direction: output
 
 ```
 
@@ -54,10 +64,7 @@ component_name
       --id
           type: string
 
-      --input1
-          type: file
-
-      --input2
+      --input
           type: file
 
   Output:
@@ -66,21 +73,6 @@ component_name
 
       --optional_output
           type: file
-
-  Foo:
-      Arguments related to the foo functionality of this component.
-
-      --foo
-          type: integer
-
-      --bar
-          type: double
-
-      --zing
-          type: boolean
-
-      --bork
-          type: string
 
 ```
 
@@ -167,15 +159,12 @@ description: |
 
 ## enabled
 
+::: {.callout-warning}
+Deprecated since Viash 0.6.0. Use `status` instead.
+:::
 **Type**: `Boolean`
 
-Setting this to `false` will disable this component when using namespaces.
-
-### Example
-
-```yaml
-enabled: false
-```
+Setting this to false with disable this component when using namespaces.
 
 ## info
 
@@ -191,6 +180,9 @@ info: {twitter: wizzkid, appId: com.example.myApplication}
 
 ## inputs
 
+::: {.callout-warning}
+Deprecated since Viash 0.6.0. Use `arguments` instead.
+:::
 **Type**: `List of Argument`
 
 A list of input arguments in addition to the `arguments` list. Any arguments specified here will have their `type` set to `file` and the `direction` set to `input` by default.
@@ -242,6 +234,9 @@ namespace: fancy_components
 
 ## outputs
 
+::: {.callout-warning}
+Deprecated since Viash 0.6.0. Use `arguments` instead.
+:::
 **Type**: `List of Argument`
 
 A list of output arguments in addition to the `arguments` list. Any arguments specified here will have their `type` set to `file` and thr `direction` set to `output` by default.
@@ -310,6 +305,12 @@ resources:
     path: resource1.txt
 
 ```
+
+## status
+
+**Type**: `Status`
+
+Allows setting a component to active, deprecated or disabled.
 
 ## test_resources
 

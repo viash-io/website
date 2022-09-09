@@ -6,6 +6,16 @@
       "description" : "The functionality-part of the config file describes the behaviour of the script in terms of arguments and resources.\nBy specifying a few restrictions (e.g. mandatory arguments) and adding some descriptions, Viash will automatically generate a stylish command-line interface for you.\n"
     },
     {
+      "name" : "enabled",
+      "type" : "Boolean",
+      "description" : "Setting this to false with disable this component when using namespaces.",
+      "since" : "Viash 0.5.13",
+      "deprecated" : {
+        "message" : "Use `status` instead.",
+        "since" : "Viash 0.6.0"
+      }
+    },
+    {
       "name" : "tests",
       "type" : "List of Resource",
       "description" : "One or more Bash/R/Python scripts to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.",
@@ -34,19 +44,13 @@
           "format" : "yaml"
         }
       ],
-      "since" : "Viash 0.5.16"
+      "since" : "Viash 0.6.0"
     },
     {
-      "name" : "enabled",
-      "type" : "Boolean",
-      "description" : "Setting this to `false` will disable this component when using namespaces.",
-      "example" : [
-        {
-          "example" : "enabled: false",
-          "format" : "yaml"
-        }
-      ],
-      "since" : "Viash 0.5.13"
+      "name" : "status",
+      "type" : "Status",
+      "description" : "Allows setting a component to active, deprecated or disabled.",
+      "since" : "Viash 0.6.0"
     },
     {
       "name" : "info",
@@ -110,11 +114,11 @@
       "description" : "A grouping of the arguments, used to display the help message.\n\n - `name: foo`, the name of the argument group. \n - `description: Description of foo`, a description of the argument group. Multiline descriptions are supported.\n - `arguments: [arg1, arg2, ...]`, list of the arguments names.\n\n",
       "example" : [
         {
-          "example" : "argument_groups:\n  - name: \"Input\"\n    arguments: [ id, input1, input2 ]\n  - name: \"Output\"\n    arguments: [ output, optional_output ]\n  - name: \"Foo\"\n    description: Arguments related to the foo functionality of this component.\n    arguments: [ foo, bar, zing, bork ]\n",
+          "example" : "argument_groups:\n  - name: \"Input\"\n    arguments:\n      - name: \"--id\"\n        type: string\n        required: true\n      - name: \"--input\"\n        type: file\n        required: true\n  - name: \"Output\"\n    arguments:\n      - name: \"--output\"\n        type: file\n        direction: output\n        required: true\n      - name: \"--output_optional\"\n        type: file\n        direction: output\n",
           "format" : "yaml"
         },
         {
-          "example" : "component_name\n\n  Input:\n      --id\n          type: string\n\n      --input1\n          type: file\n\n      --input2\n          type: file\n\n  Output:\n      --output\n          type: file\n\n      --optional_output\n          type: file\n\n  Foo:\n      Arguments related to the foo functionality of this component.\n\n      --foo\n          type: integer\n\n      --bar\n          type: double\n\n      --zing\n          type: boolean\n\n      --bork\n          type: string\n",
+          "example" : "component_name\n\n  Input:\n      --id\n          type: string\n\n      --input\n          type: file\n\n  Output:\n      --output\n          type: file\n\n      --optional_output\n          type: file\n",
           "format" : "bash",
           "description" : "This results in the following output when calling the component with the `--help` argument:"
         }
@@ -147,7 +151,11 @@
           "description" : "This results in the following output when calling the component with the `--help` argument:"
         }
       ],
-      "since" : "Viash 0.5.11"
+      "since" : "Viash 0.5.11",
+      "deprecated" : {
+        "message" : "Use `arguments` instead.",
+        "since" : "Viash 0.6.0"
+      }
     },
     {
       "name" : "inputs",
@@ -164,7 +172,11 @@
           "description" : "This results in the following output when calling the component with the `--help` argument:"
         }
       ],
-      "since" : "Viash 0.5.11"
+      "since" : "Viash 0.5.11",
+      "deprecated" : {
+        "message" : "Use `arguments` instead.",
+        "since" : "Viash 0.6.0"
+      }
     },
     {
       "name" : "authors",
@@ -530,7 +542,11 @@
       {
         "name" : "__this__",
         "type" : "NextflowLegacyPlatform",
-        "description" : "Run a Viash component as a Nextflow module."
+        "description" : "Run a Viash component as a Nextflow module.",
+        "deprecated" : {
+          "message" : "Use VDSL3 Nextflow modules instead",
+          "since" : "Viash 0.6.0"
+        }
       },
       {
         "name" : "stageInMode",

@@ -67,6 +67,44 @@ List a namespace containing many viash config files.
 | `--config_mod`, `-c` | Modify a viash config at runtime using a [custom DSL](/documentation/reference/config/config-modding.html).  | `List[String]` |
 | `--format`, `-f` | Which output format to use. | `String` |
 | `--parallel`, `-l` | Whether or not to run the process in parallel. | `Boolean` |
+| `--parse_argument_groups` | Whether or not to postprocess each component's argument groups. | `Boolean` |
+| `--platform`, `-p` | Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified. | `String` |
+| `--query`, `-q` | Filter which components get selected by name and [namespace](/documentation/guide/component/namespaces.html). Can be a regex. Example: "^mynamespace/component1\$". | `String` |
+| `--query_name` | Filter which components get selected by name. Can be a regex. Example: "^component1". | `String` |
+| `--query_namespace`, `-n` | Filter which [namespaces](/documentation/guide/component/namespaces.html) get selected by [namespace](/documentation/guide/component/namespaces.html). Can be a regex. Example: "^mynamespace\$". | `String` |
+| `--src`, `-s` |  A source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/. | `String` |
+| `--help`, `-h` | Show help message |  |
+
+
+## viash ns exec
+
+Execute a command for all found Viash components.
+The syntax of this command is inspired by `find . -exec echo {} \;`.
+
+The following fields are automatically replaced:
+ * `{}` | `{path}`: path to the config file
+ * `{abs-path}`: absolute path to the config file
+ * `{dir}`: path to the parent directory of the config file
+ * `{abs-dir}`: absolute path to the directory of the config file
+ * `{main-script}`: path to the main script (if any)
+ * `{abs-main-script}`: absolute path to the main script (if any)
+ * `{functionality-name}`: name of the component
+
+A command suffixed by `\;` (or nothing) will execute one command for each
+of the Viash components, whereas a command suffixed by `+` will execute one
+command for all Viash components.
+
+**Usage:**
+
+`viash ns exec 'echo {path} \\;'
+viash ns exec 'chmod +x {main-script} +'`
+
+| Argument | Description | Type |
+|-|:----|-:
+| `--cmd` | The command to execute for each viash config file in the [namespace](/documentation/guide/component/namespaces.html). **This is a required argument.** | `String` |
+| `--config_mod`, `-c` | Modify a viash config at runtime using a [custom DSL](/documentation/reference/config/config-modding.html).  | `List[String]` |
+| `--dry_run`, `-d` | Perform a dry run. | `Boolean` |
+| `--parallel`, `-l` | Whether or not to run the process in parallel. | `Boolean` |
 | `--platform`, `-p` | Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified. | `String` |
 | `--query`, `-q` | Filter which components get selected by name and [namespace](/documentation/guide/component/namespaces.html). Can be a regex. Example: "^mynamespace/component1\$". | `String` |
 | `--query_name` | Filter which components get selected by name. Can be a regex. Example: "^component1". | `String` |
