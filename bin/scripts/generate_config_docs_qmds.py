@@ -4,7 +4,7 @@ from pathlib import Path
 # Get root dir of repo
 repo = git.Repo(".", search_parent_directories=True)
 repo_root = repo.working_tree_dir
-json_export = "schema_export.json"
+json_export = "config_schema_export.json"
 reference_dir = ""
 child_dir = "config"
 keyword_replace_csv = ""
@@ -16,14 +16,12 @@ def generate_json():
     reference_dir = repo_root + "/documentation/reference/"
     keyword_replace_csv = repo_root + "/bin-data/KeywordReplacements.csv"
 
-    # TODO: Remove comments below once viash has --schema_export
+    json = subprocess.run([bin + "viash", "export", "config_schema"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+    f = open(reference_dir + json_export, "w")
+    f.write(json)
+    f.close()
 
-    # json = subprocess.run([bin + "viash", "--schema_export"], stdout=subprocess.PIPE).stdout.decode('utf-8')
-    # f = open(reference_dir + json_export, "w")
-    # f.write(json)
-    # f.close()
-
-    # print(f"Generated {reference_dir}/{json_export}")
+    print(f"Generated {reference_dir}/{json_export}")
 
 
 def create_qmd():
