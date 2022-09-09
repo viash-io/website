@@ -17,7 +17,163 @@
 <width>144</width>
 </image>
 <generator>quarto-1.1.189</generator>
-<lastBuildDate>Thu, 14 Jul 2022 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 07 Sep 2022 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Viash 0.6.0</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/documentation/blog/posts/viash-0.6.0/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This is a major release that contains a lot of new features and changes. Here are a few highlights:</p>
+<ul>
+<li><a href="../../../../documentation/reference/config/platforms/nextflowVdsl3Platform.html">VDSL3</a> is now the default Nextflow platform</li>
+<li>The <code>inputs</code> and <code>outputs</code> are now deprecated, use the more flexible argument groups instead</li>
+<li>Arguments can now be added directly to argument groups instead of referencing arguments by name</li>
+<li>The number of processes and amount of memory that are allowed to be used can now be included in the config</li>
+<li>A new <code>viash ns exec</code> command has been added for executing arbitrary commands on all Viash components</li>
+</ul>
+<p>See the full changelog below for a breakdown of all changes.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="breaking-changes" class="level3">
+<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
+<ul>
+<li><p><code>NextflowPlatform</code>: <code>variant: vdsl3</code> is now the default NextflowPlatform. <code>variant: legacy</code> has been deprecated.</p></li>
+<li><p><code>Functionality</code>: Fields <code>.inputs</code> and <code>.outputs</code> has been deprecated. Please use <code>.argument_groups</code> instead (#186). Before:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb1-2"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">inputs</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb1-3"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--foo"</span></span>
+<span id="cb1-4"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">outputs</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb1-5"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--bar"</span></span></code></pre></div>
+<p>Now:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb2-2"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">argument_groups</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb2-3"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> Inputs</span></span>
+<span id="cb2-4"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb2-5"><span class="at" style="color: #657422;">        </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--foo"</span></span>
+<span id="cb2-6"><span class="at" style="color: #657422;">          </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> file</span></span>
+<span id="cb2-7"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> Outputs</span></span>
+<span id="cb2-8"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb2-9"><span class="at" style="color: #657422;">        </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--bar"</span></span>
+<span id="cb2-10"><span class="at" style="color: #657422;">          </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> file</span></span>
+<span id="cb2-11"><span class="at" style="color: #657422;">          </span><span class="fu" style="color: #4758AB;">direction</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> output</span></span></code></pre></div></li>
+<li><p>Passing strings to an argument group’s arguments has been deprecated. Please simply copy the argument itself into the argument group (#186). Before:</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb3-2"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb3-3"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--foo"</span></span>
+<span id="cb3-4"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> file</span></span>
+<span id="cb3-5"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--bar"</span></span>
+<span id="cb3-6"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> file</span></span>
+<span id="cb3-7"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">direction</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> output</span></span>
+<span id="cb3-8"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">argument_groups</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb3-9"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> Inputs</span></span>
+<span id="cb3-10"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="kw" style="color: #003B4F;">[</span><span class="at" style="color: #657422;"> foo </span><span class="kw" style="color: #003B4F;">]</span></span>
+<span id="cb3-11"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> Outputs</span></span>
+<span id="cb3-12"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="kw" style="color: #003B4F;">[</span><span class="at" style="color: #657422;"> bar </span><span class="kw" style="color: #003B4F;">]</span></span></code></pre></div>
+<p>Now:</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb4-2"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">argument_groups</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb4-3"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> Inputs</span></span>
+<span id="cb4-4"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb4-5"><span class="at" style="color: #657422;">        </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--foo"</span></span>
+<span id="cb4-6"><span class="at" style="color: #657422;">          </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> file</span></span>
+<span id="cb4-7"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> Outputs</span></span>
+<span id="cb4-8"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb4-9"><span class="at" style="color: #657422;">        </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--bar"</span></span>
+<span id="cb4-10"><span class="at" style="color: #657422;">          </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> file</span></span>
+<span id="cb4-11"><span class="at" style="color: #657422;">          </span><span class="fu" style="color: #4758AB;">direction</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> output</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="new-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
+<ul>
+<li><p>Allow setting the number of processes and memory limit from within the Viash config, as well as a list of required commands. Example:</p>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb5-2"><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> foo</span></span>
+<span id="cb5-3"><span class="fu" style="color: #4758AB;">requirements</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb5-4"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">n_proc</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="dv" style="color: #AD0000;">10</span></span>
+<span id="cb5-5"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">memory</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> 10G</span></span>
+<span id="cb5-6"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">commands</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="kw" style="color: #003B4F;">[</span><span class="at" style="color: #657422;"> bash</span><span class="kw" style="color: #003B4F;">,</span><span class="at" style="color: #657422;"> r</span><span class="kw" style="color: #003B4F;">,</span><span class="at" style="color: #657422;"> perl </span><span class="kw" style="color: #003B4F;">]</span></span></code></pre></div>
+<p>You can override the default requirements at runtime:</p>
+<ul>
+<li><code>./foo ---n_proc 4 ---memory 100pb</code> (for NativePlatform or DockerPlatform)</li>
+<li>By adding <code>process.cpus = 4</code> and <code>process.memory "100 PB"</code> to a nextflow.config (for NextflowPlatform)</li>
+</ul>
+<p>This results the following meta variables to be injected into a script:</p>
+<ul>
+<li><code>meta_n_proc</code> (in Bash) or <code>meta["n_proc"]</code> (in any other language): Number of processes the script is allowed to spawn.</li>
+<li><code>meta_memory_b</code> (in Bash) or <code>meta["memory_b"]</code> (in any other language): Amount of memory the script is allowed to allocate, in bytes.</li>
+<li><code>meta_memory_kb</code> (in Bash) or <code>meta["memory_kb"]</code> (in any other language): Same but in kilobytes, rounded up.</li>
+<li><code>meta_memory_mb</code> (in Bash) or <code>meta["memory_mb"]</code> (in any other language): Same but in megabytes, rounded up.</li>
+<li><code>meta_memory_gb</code> (in Bash) or <code>meta["memory_gb"]</code> (in any other language): Same but in gigabytes, rounded up.</li>
+<li><code>meta_memory_tb</code> (in Bash) or <code>meta["memory_tb"]</code> (in any other language): Same but in terabytes, rounded up.</li>
+<li><code>meta_memory_pb</code> (in Bash) or <code>meta["memory_pb"]</code> (in any other language): Same but in petabytes, rounded up.</li>
+</ul></li>
+<li><p><code>viash ns exec</code>: Added a command for executing arbitrary commands for all found Viash components. The syntax of this command is inspired by <code>find . -exec echo {} \;</code>.</p>
+<p>The following fields are automatically replaced:</p>
+<ul>
+<li><code>{}</code> | <code>{path}</code>: path to the config file</li>
+<li><code>{abs-path}</code>: absolute path to the config file</li>
+<li><code>{dir}</code>: path to the parent directory of the config file</li>
+<li><code>{abs-dir}</code>: absolute path to the directory of the config file</li>
+<li><code>{main-script}</code>: path to the main script (if any)</li>
+<li><code>{abs-main-script}</code>: absolute path to the main script (if any)</li>
+<li><code>{functionality-name}</code>: name of the component</li>
+</ul>
+<p>A command suffixed by <code>\;</code> (or nothing) will execute one command for each of the Viash components, whereas a command suffixed by <code>+</code> will execute one command for all Viash components.</p></li>
+<li><p><code>ConfigMod</code>: Added a <code>del(...)</code> config mod to be able to delete a value from the yaml. Example: <code>del(.functionality.version)</code>.</p></li>
+</ul>
+</section>
+<section id="major-changes" class="level3">
+<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
+<ul>
+<li><p><code>Folder structure</code>: Adjusted the folder structure to correctly reflect the the namespace change of viash from <code>com.dataintuitive.viash</code> to <code>io.viash</code>.</p></li>
+<li><p><code>Functionality</code>: Reworked the <code>enabled</code> field from boolean to a <code>status</code> field which can have the following statusses: <code>enabled</code>, <code>disabled</code> and <code>deprecated</code>. When parsing a config file which has the <code>status</code> field set to <code>deprecated</code> a warning message is displayed on stderr. Backwards for <code>enabled</code> is provided where <code>enabled: true</code> =&gt; <code>status: enabled</code> and <code>enabled: false</code> =&gt; <code>status: false</code>. The <code>enabled</code> field is marked deprecated.</p></li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>Resources</code>: Handle edge case when no resources are specified in the <code>vsh.yaml</code> config file and display a warning message.</p></li>
+<li><p><code>BashWrapper</code>: Add a warning when an argument containing flags (e.g.&nbsp;<code>--foo</code>) is not recognized and will be handled as a positional argument as this is likely a mistake.</p></li>
+<li><p><code>Functionality</code>: Add check to verify there are no double argument names or short names in the config <code>vsh.yaml</code> declarations.</p></li>
+<li><p><code>BashWrapper</code>: Add check to verify a parameter isn’t declared twice on the CLI, except in the case <code>multiple: true</code> is declared as then it’s a valid use case.</p></li>
+<li><p><code>BashWrapper</code>: For int min/max checking: use native bash functionality so there is no dependency to <code>bc</code>. For double min/max checking: add fallback code to use <code>awk</code> in case <code>bc</code> is not present on the system (most likely to happen when running tests in a docker container).</p></li>
+<li><p><code>viash ns list/viash config view</code>: Allow viewing the post-processed argument groups by passing the <code>--parse_argument_groups</code> parameter.</p></li>
+</ul>
+</section>
+<section id="testing" class="level3">
+<h3 class="anchored" data-anchor-id="testing">TESTING</h3>
+<ul>
+<li><p><code>ConfigMod</code>: Added unit tests for condition config mods.</p></li>
+<li><p><code>MainTestDockerSuite</code>: Derive config alternatives from the base <code>vsh.yaml</code> instead of adding the changes in separate files. This both reduces file clutter and prevents having to change several files when there are updates in the config format.</p></li>
+<li><p><code>GitTest</code>: Added unit tests for Git helper (#216).</p></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>csharp_script</code>, <code>javascript_script</code>, <code>python_script</code>, <code>r_script</code>, <code>scala_script</code>: Make meta fields for <code>memory</code> and <code>n_proc</code> optional.</p></li>
+<li><p><code>NextflowVdsl3Platform</code>: Don’t generate an error when <code>--publish_dir</code> is not defined and <code>-profile no_publish</code> is used.</p></li>
+<li><p><code>Viash run</code>: Viash now properly returns the exit code from the executed script.</p></li>
+<li><p><code>Git</code>: Fix incorrect metadata when git repository is empty (#216).</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/documentation/blog/posts/viash-0.6.0/index.html</guid>
+  <pubDate>Wed, 07 Sep 2022 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Viash 0.5.15</title>
   <dc:creator>Viash Team</dc:creator>
@@ -1289,81 +1445,6 @@ As long as you use long-option arguments (e.g.&nbsp;<code>--my-option</code>) in
   <category>New Release</category>
   <guid>https://viash.io/documentation/blog/posts/viash-0.3.1/index.html</guid>
   <pubDate>Tue, 26 Jan 2021 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.3.0</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/documentation/blog/posts/viash-0.3.0/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog:</h2>
-<section id="breaking-changes" class="level3">
-<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
-<ul>
-<li><p>File format <code>functionality.yaml</code> is no longer supported. Use <code>config.vsh.yaml</code> or <code>script.vsh.R/py/...</code> instead.</p></li>
-<li><p><code>viash run</code> and <code>viash test</code>: By default, temporary files are removed when the execution succeeded, otherwise they are kept. This behaviour can be overridden by specifying <code>--keep true</code> to always keep the temporary files, and <code>--keep false</code> to always remove them.</p></li>
-<li><p><code>NXF</code>: <code>function_type: todir</code> now returns the output directory on the <code>Channel</code> rather than its contents.</p></li>
-</ul>
-</section>
-<section id="new-features" class="level3">
-<h3 class="anchored" data-anchor-id="new-features">NEW FEATURES</h3>
-<ul>
-<li>Added <code>viash ns test</code>: Run all tests in a particular namespace. For each test, the exit code and duration is reported. Results can be written to a tsv file.</li>
-<li>Added support for JavaScript scripts.</li>
-<li>Added support for Scala scripts.</li>
-<li>[NXF] publishing has a few more options:
-<ul>
-<li><code>publish</code>: Publish or yes (default is false)</li>
-<li><code>per_id</code>: Publish results in directories containing the unique (sample) ID (default is true)</li>
-<li><code>path</code>: A prefix path for the results to be published (default is empty)</li>
-</ul></li>
-<li>Functionality resources and tests: Allow copying whole directories instead of only single files. Also allow to rename the destination folder by specifying a value for ‘dest’.</li>
-<li>Platform R / Python dependencies: Allow running a simple command.</li>
-</ul>
-</section>
-<section id="major-changes" class="level3">
-<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
-<ul>
-<li>The <code>-P &lt;platform&gt;</code> parameter will be deprecated. For now, all <code>-P</code> values are simply passed to <code>-p</code>.</li>
-<li><code>viash ns build</code> and <code>viash ns test</code>: Now use all available platforms if <code>-p</code> is not specified.</li>
-<li>By default, python packages will not be installed as user. Use <code>user: true</code> to modify this behaviour.</li>
-</ul>
-</section>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li>Name of autogenerated Docker image is now <code>ns/tool</code>.</li>
-<li>Internal changes to make it easier to extend viash with more scripting languages.</li>
-<li><code>NXF</code>: Default image is now <code>ns/tool</code> for consistency.</li>
-<li><code>NXF</code>: Repurpose <code>asis</code> function type for having simple publishing steps (see docs).</li>
-<li><code>NXF</code>: Add component name to main <code>process</code> name</li>
-<li>R dependencies: by default, do not reinstall Bioconductor packages. Set <code>bioc_force_install: true</code> to revert this behaviour.</li>
-</ul>
-</section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
-<ul>
-<li><code>viash build</code>: Do not display error messages when pwd is not a git repository.</li>
-</ul>
-</section>
-<section id="testing" class="level3">
-<h3 class="anchored" data-anchor-id="testing">TESTING</h3>
-<ul>
-<li><code>viash test</code>: Add tests for <code>viash test</code> functionality.</li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/documentation/blog/posts/viash-0.3.0/index.html</guid>
-  <pubDate>Tue, 24 Nov 2020 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
