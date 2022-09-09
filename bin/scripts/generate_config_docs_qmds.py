@@ -1,4 +1,4 @@
-import git, subprocess, json, csv
+import git, subprocess, json, csv, re
 from pathlib import Path
 
 # Get root dir of repo
@@ -7,15 +7,17 @@ repo_root = repo.working_tree_dir
 json_export = "config_schema_export.json"
 reference_dir = ""
 child_dir = "config"
-keyword_replace_csv = ""
+keyword_replace_csv = repo_root + "/bin-data/keyword_links.csv"
+keyword_regex = r"\@\[(.*?)\]\((.*?)\)"
 
 def generate_json():
     bin = repo_root + "/bin/"
     global reference_dir
     global keyword_replace_csv
     reference_dir = repo_root + "/documentation/reference/"
-    keyword_replace_csv = repo_root + "/bin-data/KeywordReplacements.csv"
+    keyword_replace_csv = repo_root + "/bin-data/keyword_links.csv"
 
+    # Run bin/viash export config_schema
     json = subprocess.run([bin + "viash", "export", "config_schema"], stdout=subprocess.PIPE).stdout.decode('utf-8')
     f = open(reference_dir + json_export, "w")
     f.write(json)
@@ -177,12 +179,28 @@ def parse_example_dict(example_dict):
     
     return qmd
 
-def replace_terms(text: str) -> str:
-    keywords_csv = open(keyword_replace_csv)
-    csvreader = csv.reader(keywords_csv)
-    for row in csvreader:
-        text = text.replace(row[0], row[1])
-    keywords_csv.close()
+def replace_keywords(text: str) -> str:
+    # Find all keyword links
+    matches = re.finditer(keyword_regex, text, re.MULTILINE)
+
+    for matchNum, match in enumerate(matches, start=1):
+        whole_match = match.group(0)
+        keyword = match.group(1)
+        keyword_text = match.group(2)
+        link = "no-link"
+
+        # Find keyword in csv
+        keywords_csv = open(keyword_replace_csv)
+        csvreader = csv.reader(keywords_csv)
+        for row in csvreader:
+            if row[0] == keyword:
+                link = row[1]
+                break
+        keywords_csv.close()
+
+        # Replace match with hyperlink
+        text = text.replace(whole_match, f"[{keyword_text}]({link})")
+
     return text
 
 def write_qmd_file(dir_in_reference, file_name, content):
