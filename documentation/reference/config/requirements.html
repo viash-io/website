@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Viash - Viash Config Overview</title>
+<title>Viash - Setup Requirements</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,8 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../documentation/reference/config/functionality.html" rel="next">
-<link href="../../../documentation/reference/viash/test.html" rel="prev">
+<link href="../../../documentation/reference/config/arguments/string.html" rel="prev">
 <link href="../../../favicon.png" rel="icon" type="image/png">
 <script src="../../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
@@ -137,13 +136,11 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <link rel="stylesheet" href="../../../styles.css">
 <link rel="stylesheet" href="../reference.css">
-<meta property="og:title" content="Viash - Viash Config Overview">
-<meta property="og:description" content="A Viash configuration is a YAML file which contains metadata to describe the behaviour and build target(s) of a component.
-We commonly name this file config.vsh.">
+<meta property="og:title" content="Viash - Setup Requirements">
+<meta property="og:description" content="Specify which apk packages should be available in order to run the component.">
 <meta property="og:site-name" content="Viash">
-<meta name="twitter:title" content="Viash - Viash Config Overview">
-<meta name="twitter:description" content="A Viash configuration is a YAML file which contains metadata to describe the behaviour and build target(s) of a component.
-We commonly name this file config.vsh.">
+<meta name="twitter:title" content="Viash - Setup Requirements">
+<meta name="twitter:description" content="Specify which apk packages should be available in order to run the component.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -215,7 +212,7 @@ We commonly name this file config.vsh.">
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Viash Config Overview</h1>
+      <h1 class="quarto-secondary-nav-title">Setup Requirements</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -278,7 +275,7 @@ We commonly name this file config.vsh.">
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../documentation/reference/config/overview.html" class="sidebar-item-text sidebar-link active">Viash Config Overview</a>
+  <a href="../../../documentation/reference/config/overview.html" class="sidebar-item-text sidebar-link">Viash Config Overview</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -368,7 +365,7 @@ We commonly name this file config.vsh.">
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../documentation/reference/config/requirements.html" class="sidebar-item-text sidebar-link">Setup Requirements</a>
+  <a href="../../../documentation/reference/config/requirements.html" class="sidebar-item-text sidebar-link active">Setup Requirements</a>
   </div>
 </li>
       </ul>
@@ -382,8 +379,38 @@ We commonly name this file config.vsh.">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#functionality" id="toc-functionality" class="nav-link active" data-scroll-target="#functionality">Functionality</a></li>
-  <li><a href="#platforms" id="toc-platforms" class="nav-link" data-scroll-target="#platforms">Platforms</a></li>
+  <li><a href="#apk-requirements" id="toc-apk-requirements" class="nav-link active" data-scroll-target="#apk-requirements">Apk Requirements</a>
+  <ul class="collapse">
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  </ul></li>
+  <li><a href="#apt-requirements" id="toc-apt-requirements" class="nav-link" data-scroll-target="#apt-requirements">Apt Requirements</a>
+  <ul class="collapse">
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example</a></li>
+  </ul></li>
+  <li><a href="#docker-requirements" id="toc-docker-requirements" class="nav-link" data-scroll-target="#docker-requirements">Docker Requirements</a>
+  <ul class="collapse">
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example</a></li>
+  </ul></li>
+  <li><a href="#javascript-requirements" id="toc-javascript-requirements" class="nav-link" data-scroll-target="#javascript-requirements">Javascript Requirements</a>
+  <ul class="collapse">
+  <li><a href="#example-3" id="toc-example-3" class="nav-link" data-scroll-target="#example-3">Example</a></li>
+  </ul></li>
+  <li><a href="#python-requirements" id="toc-python-requirements" class="nav-link" data-scroll-target="#python-requirements">Python Requirements</a>
+  <ul class="collapse">
+  <li><a href="#example-4" id="toc-example-4" class="nav-link" data-scroll-target="#example-4">Example</a></li>
+  </ul></li>
+  <li><a href="#r-requirements" id="toc-r-requirements" class="nav-link" data-scroll-target="#r-requirements">R Requirements</a>
+  <ul class="collapse">
+  <li><a href="#example-5" id="toc-example-5" class="nav-link" data-scroll-target="#example-5">Example</a></li>
+  </ul></li>
+  <li><a href="#ruby-requirements" id="toc-ruby-requirements" class="nav-link" data-scroll-target="#ruby-requirements">Ruby Requirements</a>
+  <ul class="collapse">
+  <li><a href="#example-6" id="toc-example-6" class="nav-link" data-scroll-target="#example-6">Example</a></li>
+  </ul></li>
+  <li><a href="#yum-requirements" id="toc-yum-requirements" class="nav-link" data-scroll-target="#yum-requirements">Yum Requirements</a>
+  <ul class="collapse">
+  <li><a href="#example-7" id="toc-example-7" class="nav-link" data-scroll-target="#example-7">Example</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -392,7 +419,7 @@ We commonly name this file config.vsh.">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Viash Config Overview</h1>
+<h1 class="title d-none d-lg-block">Setup Requirements</h1>
 </div>
 
 
@@ -406,32 +433,109 @@ We commonly name this file config.vsh.">
 
 </header>
 
-<p>A Viash configuration is a <a href="https://en.wikipedia.org/wiki/YAML">YAML</a> file which contains metadata to describe the behaviour and build target(s) of a component.<br>
-We commonly name this file <code>config.vsh.yaml</code> in our examples, but you can name it however you choose.</p>
-<p>Here’s an example of a config file:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> hello_world</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">description</span><span class="kw">:</span><span class="at"> A minimal example component.</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">arguments</span><span class="kw">:</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> string</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --input</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">default</span><span class="kw">:</span><span class="at"> </span><span class="st">"World"</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> bash_script</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.sh</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> native</span></span></code></pre></div>
-<p>Every Viash config consists of two main sections: <code>functionality</code> and <code>platforms</code>.</p>
-<section id="functionality" class="level2">
-<h2 class="anchored" data-anchor-id="functionality">Functionality</h2>
-<p>The <a href="../../../documentation/reference/config/functionality.html"><code>functionality</code></a> section describes the behaviour of the component. This includes a name, a description and the arguments and resources the component needs to function.<br>
-Check out our <strong>Arguments</strong> section on the left to find out more about the supported arguments. The <a href="../../../documentation/guide/component/resources.html">External Resources</a> guide contains information on how to add resources and use them.</p>
+<section id="apk-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="apk-requirements">Apk Requirements</h2>
+<p>Specify which apk packages should be available in order to run the component.</p>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup</span><span class="kw">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> apk</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">packages</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> sl </span><span class="kw">]</span></span></code></pre></div>
 </section>
-<section id="platforms" class="level2">
-<h2 class="anchored" data-anchor-id="platforms">Platforms</h2>
-<p>The <code>platforms</code> section specifies what platforms are supported as build targets for a component and their requirements. We support <a href="../../../documentation/reference/config/platforms/nativePlatform.html">native</a>, <a href="../../../documentation/reference/config/platforms/dockerPlatform.html">docker</a> and <a href="../../../documentation/reference/config/platforms/nextflowLegacyPlatform.html">nextflow</a>. If no platforms are specified, the <code>native</code> platform is used by default.</p>
+</section>
+<section id="apt-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="apt-requirements">Apt Requirements</h2>
+<p>Specify which apt packages should be available in order to run the component.</p>
+<section id="example-1" class="level3">
+<h3 class="anchored" data-anchor-id="example-1">Example</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup</span><span class="kw">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> apt</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">packages</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> sl </span><span class="kw">]</span></span></code></pre></div>
+</section>
+</section>
+<section id="docker-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="docker-requirements">Docker Requirements</h2>
+<p>Specify which Docker commands should be run during setup.</p>
+<section id="example-2" class="level3">
+<h3 class="anchored" data-anchor-id="example-2">Example</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup</span><span class="kw">:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">build_args</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> GITHUB_PAT=hello_world </span><span class="kw">]</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">run</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> git clone ... </span><span class="kw">]</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">add</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="st">"http://foo.bar ."</span><span class="at"> </span><span class="kw">]</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">copy</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="st">"http://foo.bar ."</span><span class="at"> </span><span class="kw">]</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">resources</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> resource.txt /path/to/resource.txt</span></span></code></pre></div>
+</section>
+</section>
+<section id="javascript-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="javascript-requirements">Javascript Requirements</h2>
+<p>Specify which JavaScript packages should be available in order to run the component.</p>
+<section id="example-3" class="level3">
+<h3 class="anchored" data-anchor-id="example-3">Example</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> javascript</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">npm</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> packagename </span><span class="kw">]</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">git</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> https://... </span><span class="kw">]</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">github</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> owner/repository </span><span class="kw">]</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> https://... </span><span class="kw">]</span></span></code></pre></div>
+</section>
+</section>
+<section id="python-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="python-requirements">Python Requirements</h2>
+<p>Specify which Python packages should be available in order to run the component.</p>
+<section id="example-4" class="level3">
+<h3 class="anchored" data-anchor-id="example-4">Example</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> python</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">pip</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> numpy </span><span class="kw">]</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">git</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> https://some.git.repository/org/repo </span><span class="kw">]</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">github</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> jkbr/httpie </span><span class="kw">]</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">gitlab</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> foo/bar </span><span class="kw">]</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">mercurial</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> http://... </span><span class="kw">]</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">svn</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> http://...</span><span class="kw">]</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">bazaar</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> http://... </span><span class="kw">]</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> http://... </span><span class="kw">]</span></span></code></pre></div>
+</section>
+</section>
+<section id="r-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="r-requirements">R Requirements</h2>
+<p>Specify which R packages should be available in order to run the component.</p>
+<section id="example-5" class="level3">
+<h3 class="anchored" data-anchor-id="example-5">Example</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> r</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cran</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> dynutils </span><span class="kw">]</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">bioc</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> AnnotationDbi </span><span class="kw">]</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">git</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> https://some.git.repository/org/repo </span><span class="kw">]</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">github</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> rcannood/SCORPIUS </span><span class="kw">]</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">gitlab</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> org/package </span><span class="kw">]</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">svn</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> https://path.to.svn/group/repo </span><span class="kw">]</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> https://github.com/hadley/stringr/archive/HEAD.zip </span><span class="kw">]</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">script</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="st">'devtools::install(".")'</span><span class="at"> </span><span class="kw">]</span></span></code></pre></div>
+</section>
+</section>
+<section id="ruby-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="ruby-requirements">Ruby Requirements</h2>
+<p>Specify which Ruby packages should be available in order to run the component.</p>
+<section id="example-6" class="level3">
+<h3 class="anchored" data-anchor-id="example-6">Example</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup</span><span class="kw">:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> ruby</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">packages</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> rspec </span><span class="kw">]</span></span></code></pre></div>
+</section>
+</section>
+<section id="yum-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="yum-requirements">Yum Requirements</h2>
+<p>Specify which yum packages should be available in order to run the component.</p>
+<section id="example-7" class="level3">
+<h3 class="anchored" data-anchor-id="example-7">Example</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup</span><span class="kw">:</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> yum</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">packages</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> sl </span><span class="kw">]</span></span></code></pre></div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -531,14 +635,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../documentation/reference/viash/test.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">viash test</span>
+      <a href="../../../documentation/reference/config/arguments/string.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">string</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../documentation/reference/config/functionality.html" class="pagination-link">
-        <span class="nav-page-text">Functionality</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

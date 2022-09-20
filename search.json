@@ -14,6 +14,62 @@
     "text": "Can I store helper functions as separate files?\nYes, though you’ll need to let Viash know which additional files are required to run the component. For example, if several helper functions are stored in an additional file mymodule.py or mymodule.R, use the following code to import the helper functions:\n\nPython\nIn the resources section of the Viash config file:\nresources:\n  - type: python_script\n    path: script.py\n  - path: mymodule.py\nIn the main Python script:\nimport sys\n\n## VIASH START\nmeta = { 'resources_dir': '.' }\n## VIASH END\n\nsys.path.append(meta['resources_dir'])\nfrom mymodule import helper_fun\n\n\nR\nIn the resources section of the Viash config file:\nresources:\n  - type: r_script\n    path: script.R\n  - path: mymodule.R\nIn the main R script:\n## VIASH START\nmeta <- list(resources_dir = \".\")\n## VIASH END\n\nsource(paste0(meta[[\"resources_dir\"]], \"/mymodule.R\"))\nhelper_fun(...)"
   },
   {
+    "objectID": "documentation/reference/config/requirements.html",
+    "href": "documentation/reference/config/requirements.html",
+    "title": "Setup Requirements",
+    "section": "",
+    "text": "Specify which apk packages should be available in order to run the component.\n\n\nsetup:\n  - type: apk\n    packages: [ sl ]"
+  },
+  {
+    "objectID": "documentation/reference/config/requirements.html#apt-requirements",
+    "href": "documentation/reference/config/requirements.html#apt-requirements",
+    "title": "Setup Requirements",
+    "section": "Apt Requirements",
+    "text": "Apt Requirements\nSpecify which apt packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: apt\n    packages: [ sl ]"
+  },
+  {
+    "objectID": "documentation/reference/config/requirements.html#docker-requirements",
+    "href": "documentation/reference/config/requirements.html#docker-requirements",
+    "title": "Setup Requirements",
+    "section": "Docker Requirements",
+    "text": "Docker Requirements\nSpecify which Docker commands should be run during setup.\n\nExample\nsetup:\n  - type: docker\n    build_args: [ GITHUB_PAT=hello_world ]\n    run: [ git clone ... ]\n    add: [ \"http://foo.bar .\" ]\n    copy: [ \"http://foo.bar .\" ]\n    resources: \n      - resource.txt /path/to/resource.txt"
+  },
+  {
+    "objectID": "documentation/reference/config/requirements.html#javascript-requirements",
+    "href": "documentation/reference/config/requirements.html#javascript-requirements",
+    "title": "Setup Requirements",
+    "section": "Javascript Requirements",
+    "text": "Javascript Requirements\nSpecify which JavaScript packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: javascript\n    npm: [ packagename ]\n    git: [ https://... ]\n    github: [ owner/repository ]\n    url: [ https://... ]"
+  },
+  {
+    "objectID": "documentation/reference/config/requirements.html#python-requirements",
+    "href": "documentation/reference/config/requirements.html#python-requirements",
+    "title": "Setup Requirements",
+    "section": "Python Requirements",
+    "text": "Python Requirements\nSpecify which Python packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ jkbr/httpie ]\n    gitlab: [ foo/bar ]\n    mercurial: [ http://... ]\n    svn: [ http://...]\n    bazaar: [ http://... ]\n    url: [ http://... ]"
+  },
+  {
+    "objectID": "documentation/reference/config/requirements.html#r-requirements",
+    "href": "documentation/reference/config/requirements.html#r-requirements",
+    "title": "Setup Requirements",
+    "section": "R Requirements",
+    "text": "R Requirements\nSpecify which R packages should be available in order to run the component.\n\nExample\nsetup: \n  - type: r\n    cran: [ dynutils ]\n    bioc: [ AnnotationDbi ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ rcannood/SCORPIUS ]\n    gitlab: [ org/package ]\n    svn: [ https://path.to.svn/group/repo ]\n    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]\n    script: [ 'devtools::install(\".\")' ]"
+  },
+  {
+    "objectID": "documentation/reference/config/requirements.html#ruby-requirements",
+    "href": "documentation/reference/config/requirements.html#ruby-requirements",
+    "title": "Setup Requirements",
+    "section": "Ruby Requirements",
+    "text": "Ruby Requirements\nSpecify which Ruby packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: ruby\n    packages: [ rspec ]"
+  },
+  {
+    "objectID": "documentation/reference/config/requirements.html#yum-requirements",
+    "href": "documentation/reference/config/requirements.html#yum-requirements",
+    "title": "Setup Requirements",
+    "section": "Yum Requirements",
+    "text": "Yum Requirements\nSpecify which yum packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: yum\n    packages: [ sl ]"
+  },
+  {
     "objectID": "documentation/reference/config/functionality.html",
     "href": "documentation/reference/config/functionality.html",
     "title": "Functionality",
