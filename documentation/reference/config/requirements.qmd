@@ -1,0 +1,134 @@
+---
+title: Setup Requirements
+search: true
+execute:
+  echo: false
+  output: asis
+---
+
+## Apk Requirements
+
+Specify which apk packages should be available in order to run the component.
+
+### Example
+
+```yaml
+setup:
+  - type: apk
+    packages: [ sl ]
+
+```
+
+## Apt Requirements
+
+Specify which apt packages should be available in order to run the component.
+
+### Example
+
+```yaml
+setup:
+  - type: apt
+    packages: [ sl ]
+
+```
+
+## Docker Requirements
+
+Specify which Docker commands should be run during setup.
+
+### Example
+
+```yaml
+setup:
+  - type: docker
+    build_args: [ GITHUB_PAT=hello_world ]
+    run: [ git clone ... ]
+    add: [ "http://foo.bar ." ]
+    copy: [ "http://foo.bar ." ]
+    resources: 
+      - resource.txt /path/to/resource.txt
+
+```
+
+## Javascript Requirements
+
+Specify which JavaScript packages should be available in order to run the component.
+
+### Example
+
+```yaml
+setup:
+  - type: javascript
+    npm: [ packagename ]
+    git: [ https://... ]
+    github: [ owner/repository ]
+    url: [ https://... ]
+
+```
+
+## Python Requirements
+
+Specify which Python packages should be available in order to run the component.
+
+### Example
+
+```yaml
+setup:
+  - type: python
+    pip: [ numpy ]
+    git: [ https://some.git.repository/org/repo ]
+    github: [ jkbr/httpie ]
+    gitlab: [ foo/bar ]
+    mercurial: [ http://... ]
+    svn: [ http://...]
+    bazaar: [ http://... ]
+    url: [ http://... ]
+
+```
+
+## R Requirements
+
+Specify which R packages should be available in order to run the component.
+
+### Example
+
+```yaml
+setup: 
+  - type: r
+    cran: [ dynutils ]
+    bioc: [ AnnotationDbi ]
+    git: [ https://some.git.repository/org/repo ]
+    github: [ rcannood/SCORPIUS ]
+    gitlab: [ org/package ]
+    svn: [ https://path.to.svn/group/repo ]
+    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]
+    script: [ 'devtools::install(".")' ]
+
+```
+
+## Ruby Requirements
+
+Specify which Ruby packages should be available in order to run the component.
+
+### Example
+
+```yaml
+setup:
+  - type: ruby
+    packages: [ rspec ]
+
+```
+
+## Yum Requirements
+
+Specify which yum packages should be available in order to run the component.
+
+### Example
+
+```yaml
+setup:
+  - type: yum
+    packages: [ sl ]
+
+```
+
