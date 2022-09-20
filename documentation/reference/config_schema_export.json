@@ -348,7 +348,7 @@
       {
         "name" : "setup",
         "type" : "List of Requirements",
-        "description" : "A list of requirements for installing the following types of packages:\n\n - apt\n - apk\n - yum\n - R\n - Python\n - JavaScript\n - Docker setup instructions\n\nThe order in which these dependencies are specified determines the order in which they will be installed.\n"
+        "description" : "A list of requirements for installing the following types of packages:\n\n - @[apt_req](apt)\n - @[apk_req](apk)\n - @[yum_req](yum)\n - @[r_req](R)\n - @[python_req](Python)\n - @[javascript_req](JavaScript)\n - @[docker_req](Docker setup instructions)\n\nThe order in which these dependencies are specified determines the order in which they will be installed.\n"
       },
       {
         "name" : "target_image_source",
@@ -733,7 +733,13 @@
       {
         "name" : "__this__",
         "type" : "RubyRequirements",
-        "description" : "Specify which Ruby packages should be available in order to run the component."
+        "description" : "Specify which Ruby packages should be available in order to run the component.",
+        "example" : [
+          {
+            "example" : "setup:\n  - type: ruby\n    packages: [ rspec ]\n",
+            "format" : "yaml"
+          }
+        ]
       }
     ],
     "yumRequirements" : [

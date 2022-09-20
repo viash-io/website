@@ -18,10 +18,10 @@ def generate_json():
     keyword_replace_csv = repo_root + "/bin-data/keyword_links.csv"
 
     # Run bin/viash export config_schema
-    json = subprocess.run([bin + "viash", "export", "config_schema"], stdout=subprocess.PIPE).stdout.decode('utf-8')
-    f = open(reference_dir + json_export, "w")
-    f.write(json)
-    f.close()
+    # json = subprocess.run([bin + "viash", "export", "config_schema"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+    # f = open(reference_dir + json_export, "w")
+    # f.write(json)
+    # f.close()
 
     print(f"Generated {reference_dir}/{json_export}")
 
@@ -37,14 +37,14 @@ def create_qmd():
             create_page(topic, viash_json[topic], child_dir)
         else:
             for subtopic in viash_json[topic]:
-                if not subtopic.endswith("Requirements"):
-                    create_page(subtopic, viash_json[topic][subtopic], child_dir + "/" + topic)
+                create_page(subtopic, viash_json[topic][subtopic], child_dir + "/" + topic)
 
 
 def create_page(page_name, json_entry, directory, output_to_file = True) -> str:
     qmd = ""
 
     title = page_name.replace("Platform", " Platform")
+    title = title.replace("Requirements", " Requirements")
     title = title.replace("Legacy", " Legacy")
     title = title.replace("Vdsl3", " Vdsl3")
 
@@ -56,6 +56,10 @@ def create_page(page_name, json_entry, directory, output_to_file = True) -> str:
     sorted_dict = sorted(json_entry, key=lambda x: x["name"], reverse=False)
 
     for i in range(len(sorted_dict)):
+        # Uncomment to hide removed and deprecated entries
+        if "removed" in sorted_dict[i] or "deprecated" in sorted_dict[i]:
+            continue
+
         if sorted_dict[i]["name"] == "__this__":
             qmd += sorted_dict[i]["description"] + "\n\n"
             if "example" in sorted_dict[i] and len(sorted_dict[i]["example"]) > 0:
@@ -81,7 +85,7 @@ def create_page(page_name, json_entry, directory, output_to_file = True) -> str:
             type = None
 
         if "description" in sorted_dict[i]:
-            description = sorted_dict[i]["description"]
+            description = replace_keywords(sorted_dict[i]["description"])
         else:
             description = None
 
