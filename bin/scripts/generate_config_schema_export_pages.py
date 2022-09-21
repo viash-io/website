@@ -184,19 +184,19 @@ def clean_title(title) -> str:
 	title = title.replace("Vdsl3", "VDSL3")
 	return title.title()
 
-def qmd_paragraph(text):
+def qmd_paragraph(text) -> str:
 	""" Returns text with newlines added. """
 	return text + "\n\n"
 
-def qmd_h2(text):
+def qmd_h2(text) -> str:
 	""" Returns text with H2 markdown and newlines. """
 	return "## " + text + "\n\n"
 
-def qmd_h3(text):
+def qmd_h3(text) -> str:
 	""" Returns text with H3 markdown and newlines. """
 	return "### " + text + "\n\n"
 
-def qmd_header(title):
+def qmd_header(title) -> str:
 	""" Returns the page metadata markdown that belongs at the top of a qmd file, with the title filled in. """
 	qmd = ""
 	qmd += f"---\ntitle: {title}\n"
@@ -207,7 +207,7 @@ def qmd_header(title):
 	qmd += "---\n\n"
 	return qmd
 
-def qmd_callout(type, content):
+def qmd_callout(type, content) -> str:
 	""" Returns a quarto callout block: https://quarto.org/docs/authoring/callouts.html """
 	return "::: {" + f".callout-{type}" + "}\n" + content + "\n:::\n"
 
@@ -261,7 +261,7 @@ def replace_keywords(text: str) -> str:
 
 	return text
 
-def qmd_parse_type(type_string):
+def qmd_parse_type(type_string) -> str:
 	""" Returns a human readable markdown version of the type property.  """
 	qmd ="**Type**: "
 
@@ -277,7 +277,7 @@ def qmd_parse_type(type_string):
 	qmd += "\n\n"
 	return qmd
 
-def qmd_parse_examples(examples):
+def qmd_parse_examples(examples) -> str:
 	""" Returns a human readable markdown version of a list of examples with code formatting.  """
 	qmd = ""
 
