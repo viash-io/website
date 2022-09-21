@@ -55,7 +55,7 @@
     {
       "name" : "info",
       "type" : "Map of String,String",
-      "description" : "A map for storing custom annotation.",
+      "description" : "A map for storing custom annotations.",
       "example" : [
         {
           "example" : "info: {twitter: wizzkid, appId: com.example.myApplication}",
@@ -365,6 +365,17 @@
         "name" : "run_args",
         "type" : "OneOrMore of String",
         "description" : "Add [docker run](https://docs.docker.com/engine/reference/run/) arguments."
+      },
+      {
+        "name" : "setup_strategy",
+        "type" : "DockerSetupStrategy",
+        "description" : "The Docker setup strategy to use when building a container.\n\n| Strategy | Description |\n|-----|----------|\n| `alwaysbuild` / `build` / `b` | Always build the image from the dockerfile. This is the default setup strategy.\n| `alwayscachedbuild` / `cachedbuild` / `cb` | Always build the image from the dockerfile, with caching enabled.\n| `ifneedbebuild` |  Build the image if it does not exist locally.\n| `ifneedbecachedbuild` | Build the image with caching enabled if it does not exist locally, with caching enabled.\n| `alwayspull` / `pull` / `p` |  Try to pull the container from [Docker Hub](https://hub.docker.com) or the [specified docker registry](/documentation/reference/config/platforms/DockerPlatform.html#registry).\n| `alwayspullelsebuild` / `pullelsebuild` |  Try to pull the image from a registry and build it if it doesn't exist.\n| `alwayspullelsecachedbuild` / `pullelsecachedbuild` |  Try to pull the image from a registry and build it with caching if it doesn't exist.\n| `ifneedbepull` |  If the image does not exist locally, pull the image.\n| `ifneedbepullelsebuild` |  If the image does not exist locally, pull the image. If the image does exist, build it.\n| `ifneedbepullelsecachedbuild` | If the image does not exist locally, pull the image. If the image does exist, build it with caching enabled.\n| `push` | Push the container to [Docker Hub](https://hub.docker.com)  or the [specified docker registry](/documentation/reference/config/platforms/DockerPlatform.html#registry).\n| `pushifnotpresent` | Push the container to [Docker Hub](https://hub.docker.com) or the [specified docker registry](/documentation/reference/config/platforms/DockerPlatform.html#registry) if the [specified tag](/documentation/reference/config/platforms/DockerPlatform.html#tag) does not exist yet.\n| `donothing` / `meh` | Do not build or pull anything.\n\n",
+        "example" : [
+          {
+            "example" : "setup_strategy: alwaysbuild",
+            "format" : "yaml"
+          }
+        ]
       },
       {
         "name" : "workdir",
