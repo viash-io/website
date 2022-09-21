@@ -364,6 +364,13 @@
     "text": "setup\nType: List of Requirements\nA list of requirements for installing the following types of packages:\n\napt\napk\nyum\nR\nPython\nJavaScript\nDocker setup instructions\n\nThe order in which these dependencies are specified determines the order in which they will be installed."
   },
   {
+    "objectID": "documentation/reference/config/platforms/DockerPlatform.html#setup_strategy",
+    "href": "documentation/reference/config/platforms/DockerPlatform.html#setup_strategy",
+    "title": "Docker Platform",
+    "section": "setup_strategy",
+    "text": "setup_strategy\nType: DockerSetupStrategy\nThe Docker setup strategy to use when building a container.\n\n\n\nStrategy\nDescription\n\n\n\n\nalwaysbuild / build / b\nAlways build the image from the dockerfile. This is the default setup strategy.\n\n\nalwayscachedbuild / cachedbuild / cb\nAlways build the image from the dockerfile, with caching enabled.\n\n\nifneedbebuild\nBuild the image if it does not exist locally.\n\n\nifneedbecachedbuild\nBuild the image with caching enabled if it does not exist locally, with caching enabled.\n\n\nalwayspull / pull / p\nTry to pull the container from Docker Hub or the specified docker registry.\n\n\nalwayspullelsebuild / pullelsebuild\nTry to pull the image from a registry and build it if it doesn’t exist.\n\n\nalwayspullelsecachedbuild / pullelsecachedbuild\nTry to pull the image from a registry and build it with caching if it doesn’t exist.\n\n\nifneedbepull\nIf the image does not exist locally, pull the image.\n\n\nifneedbepullelsebuild\nIf the image does not exist locally, pull the image. If the image does exist, build it.\n\n\nifneedbepullelsecachedbuild\nIf the image does not exist locally, pull the image. If the image does exist, build it with caching enabled.\n\n\npush\nPush the container to Docker Hub or the specified docker registry.\n\n\npushifnotpresent\nPush the container to Docker Hub or the specified docker registry if the specified tag does not exist yet.\n\n\ndonothing / meh\nDo not build or pull anything.\n\n\n\n\nExample\nsetup_strategy: alwaysbuild"
+  },
+  {
     "objectID": "documentation/reference/config/platforms/DockerPlatform.html#tag",
     "href": "documentation/reference/config/platforms/DockerPlatform.html#tag",
     "title": "Docker Platform",

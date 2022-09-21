@@ -427,34 +427,38 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   </ul></li>
   <li><a href="#run_args" id="toc-run_args" class="nav-link" data-scroll-target="#run_args">run_args</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">setup</a></li>
-  <li><a href="#tag" id="toc-tag" class="nav-link" data-scroll-target="#tag">tag</a>
+  <li><a href="#setup_strategy" id="toc-setup_strategy" class="nav-link" data-scroll-target="#setup_strategy">setup_strategy</a>
   <ul class="collapse">
   <li><a href="#example-11" id="toc-example-11" class="nav-link" data-scroll-target="#example-11">Example</a></li>
   </ul></li>
-  <li><a href="#target_image" id="toc-target_image" class="nav-link" data-scroll-target="#target_image">target_image</a>
+  <li><a href="#tag" id="toc-tag" class="nav-link" data-scroll-target="#tag">tag</a>
   <ul class="collapse">
   <li><a href="#example-12" id="toc-example-12" class="nav-link" data-scroll-target="#example-12">Example</a></li>
   </ul></li>
-  <li><a href="#target_image_source" id="toc-target_image_source" class="nav-link" data-scroll-target="#target_image_source">target_image_source</a>
+  <li><a href="#target_image" id="toc-target_image" class="nav-link" data-scroll-target="#target_image">target_image</a>
   <ul class="collapse">
   <li><a href="#example-13" id="toc-example-13" class="nav-link" data-scroll-target="#example-13">Example</a></li>
   </ul></li>
-  <li><a href="#target_registry" id="toc-target_registry" class="nav-link" data-scroll-target="#target_registry">target_registry</a>
+  <li><a href="#target_image_source" id="toc-target_image_source" class="nav-link" data-scroll-target="#target_image_source">target_image_source</a>
   <ul class="collapse">
   <li><a href="#example-14" id="toc-example-14" class="nav-link" data-scroll-target="#example-14">Example</a></li>
   </ul></li>
-  <li><a href="#target_tag" id="toc-target_tag" class="nav-link" data-scroll-target="#target_tag">target_tag</a>
+  <li><a href="#target_registry" id="toc-target_registry" class="nav-link" data-scroll-target="#target_registry">target_registry</a>
   <ul class="collapse">
   <li><a href="#example-15" id="toc-example-15" class="nav-link" data-scroll-target="#example-15">Example</a></li>
+  </ul></li>
+  <li><a href="#target_tag" id="toc-target_tag" class="nav-link" data-scroll-target="#target_tag">target_tag</a>
+  <ul class="collapse">
+  <li><a href="#example-16" id="toc-example-16" class="nav-link" data-scroll-target="#example-16">Example</a></li>
   </ul></li>
   <li><a href="#test_setup" id="toc-test_setup" class="nav-link" data-scroll-target="#test_setup">test_setup</a></li>
   <li><a href="#workdir" id="toc-workdir" class="nav-link" data-scroll-target="#workdir">workdir</a>
   <ul class="collapse">
-  <li><a href="#example-16" id="toc-example-16" class="nav-link" data-scroll-target="#example-16">Example</a></li>
+  <li><a href="#example-17" id="toc-example-17" class="nav-link" data-scroll-target="#example-17">Example</a></li>
   </ul></li>
   <li><a href="#yum" id="toc-yum" class="nav-link" data-scroll-target="#yum">yum</a>
   <ul class="collapse">
-  <li><a href="#example-17" id="toc-example-17" class="nav-link" data-scroll-target="#example-17">Example</a></li>
+  <li><a href="#example-18" id="toc-example-18" class="nav-link" data-scroll-target="#example-18">Example</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -699,49 +703,120 @@ Warning
 </ul>
 <p>The order in which these dependencies are specified determines the order in which they will be installed.</p>
 </section>
+<section id="setup_strategy" class="level2">
+<h2 class="anchored" data-anchor-id="setup_strategy">setup_strategy</h2>
+<p><strong>Type</strong>: <code>DockerSetupStrategy</code></p>
+<p>The Docker setup strategy to use when building a container.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Strategy</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>alwaysbuild</code> / <code>build</code> / <code>b</code></td>
+<td>Always build the image from the dockerfile. This is the default setup strategy.</td>
+</tr>
+<tr class="even">
+<td><code>alwayscachedbuild</code> / <code>cachedbuild</code> / <code>cb</code></td>
+<td>Always build the image from the dockerfile, with caching enabled.</td>
+</tr>
+<tr class="odd">
+<td><code>ifneedbebuild</code></td>
+<td>Build the image if it does not exist locally.</td>
+</tr>
+<tr class="even">
+<td><code>ifneedbecachedbuild</code></td>
+<td>Build the image with caching enabled if it does not exist locally, with caching enabled.</td>
+</tr>
+<tr class="odd">
+<td><code>alwayspull</code> / <code>pull</code> / <code>p</code></td>
+<td>Try to pull the container from <a href="https://hub.docker.com">Docker Hub</a> or the <a href="../../../../documentation/reference/config/platforms/DockerPlatform.html#registry">specified docker registry</a>.</td>
+</tr>
+<tr class="even">
+<td><code>alwayspullelsebuild</code> / <code>pullelsebuild</code></td>
+<td>Try to pull the image from a registry and build it if it doesn’t exist.</td>
+</tr>
+<tr class="odd">
+<td><code>alwayspullelsecachedbuild</code> / <code>pullelsecachedbuild</code></td>
+<td>Try to pull the image from a registry and build it with caching if it doesn’t exist.</td>
+</tr>
+<tr class="even">
+<td><code>ifneedbepull</code></td>
+<td>If the image does not exist locally, pull the image.</td>
+</tr>
+<tr class="odd">
+<td><code>ifneedbepullelsebuild</code></td>
+<td>If the image does not exist locally, pull the image. If the image does exist, build it.</td>
+</tr>
+<tr class="even">
+<td><code>ifneedbepullelsecachedbuild</code></td>
+<td>If the image does not exist locally, pull the image. If the image does exist, build it with caching enabled.</td>
+</tr>
+<tr class="odd">
+<td><code>push</code></td>
+<td>Push the container to <a href="https://hub.docker.com">Docker Hub</a> or the <a href="../../../../documentation/reference/config/platforms/DockerPlatform.html#registry">specified docker registry</a>.</td>
+</tr>
+<tr class="even">
+<td><code>pushifnotpresent</code></td>
+<td>Push the container to <a href="https://hub.docker.com">Docker Hub</a> or the <a href="../../../../documentation/reference/config/platforms/DockerPlatform.html#registry">specified docker registry</a> if the <a href="../../../../documentation/reference/config/platforms/DockerPlatform.html#tag">specified tag</a> does not exist yet.</td>
+</tr>
+<tr class="odd">
+<td><code>donothing</code> / <code>meh</code></td>
+<td>Do not build or pull anything.</td>
+</tr>
+</tbody>
+</table>
+<section id="example-11" class="level3">
+<h3 class="anchored" data-anchor-id="example-11">Example</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup_strategy</span><span class="kw">:</span><span class="at"> alwaysbuild</span></span></code></pre></div>
+</section>
+</section>
 <section id="tag" class="level2">
 <h2 class="anchored" data-anchor-id="tag">tag</h2>
 <p><strong>Type</strong>: <code>Version</code></p>
 <p>Specify a Docker image based on its tag.</p>
-<section id="example-11" class="level3">
-<h3 class="anchored" data-anchor-id="example-11">Example</h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tag</span><span class="kw">:</span><span class="at"> </span><span class="fl">4.0</span></span></code></pre></div>
+<section id="example-12" class="level3">
+<h3 class="anchored" data-anchor-id="example-12">Example</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tag</span><span class="kw">:</span><span class="at"> </span><span class="fl">4.0</span></span></code></pre></div>
 </section>
 </section>
 <section id="target_image" class="level2">
 <h2 class="anchored" data-anchor-id="target_image">target_image</h2>
 <p><strong>Type</strong>: <code>String</code></p>
 <p>If anything is specified in the setup section, running the <code>---setup</code> will result in an image with the name of <code>&lt;target_image&gt;:&lt;version&gt;</code>. If nothing is specified in the <code>setup</code> section, simply <code>image</code> will be used.</p>
-<section id="example-12" class="level3">
-<h3 class="anchored" data-anchor-id="example-12">Example</h3>
-<div class="sourceCode" id="cb13"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_image</span><span class="kw">:</span><span class="at"> myfoo</span></span></code></pre></div>
+<section id="example-13" class="level3">
+<h3 class="anchored" data-anchor-id="example-13">Example</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_image</span><span class="kw">:</span><span class="at"> myfoo</span></span></code></pre></div>
 </section>
 </section>
 <section id="target_image_source" class="level2">
 <h2 class="anchored" data-anchor-id="target_image_source">target_image_source</h2>
 <p><strong>Type</strong>: <code>String</code></p>
 <p>The source of the target image. This is used for defining labels in the dockerfile.</p>
-<section id="example-13" class="level3">
-<h3 class="anchored" data-anchor-id="example-13">Example</h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_image_source</span><span class="kw">:</span><span class="at"> https://github.com/foo/bar</span></span></code></pre></div>
+<section id="example-14" class="level3">
+<h3 class="anchored" data-anchor-id="example-14">Example</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_image_source</span><span class="kw">:</span><span class="at"> https://github.com/foo/bar</span></span></code></pre></div>
 </section>
 </section>
 <section id="target_registry" class="level2">
 <h2 class="anchored" data-anchor-id="target_registry">target_registry</h2>
 <p><strong>Type</strong>: <code>String</code></p>
 <p>The URL where the resulting image will be pushed to.</p>
-<section id="example-14" class="level3">
-<h3 class="anchored" data-anchor-id="example-14">Example</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_registry</span><span class="kw">:</span><span class="at"> https://my-docker-registry.org</span></span></code></pre></div>
+<section id="example-15" class="level3">
+<h3 class="anchored" data-anchor-id="example-15">Example</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_registry</span><span class="kw">:</span><span class="at"> https://my-docker-registry.org</span></span></code></pre></div>
 </section>
 </section>
 <section id="target_tag" class="level2">
 <h2 class="anchored" data-anchor-id="target_tag">target_tag</h2>
 <p><strong>Type</strong>: <code>Version</code></p>
 <p>The tag the resulting image gets.</p>
-<section id="example-15" class="level3">
-<h3 class="anchored" data-anchor-id="example-15">Example</h3>
-<div class="sourceCode" id="cb16"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_tag</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.5.0</span></span></code></pre></div>
+<section id="example-16" class="level3">
+<h3 class="anchored" data-anchor-id="example-16">Example</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_tag</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.5.0</span></span></code></pre></div>
 </section>
 </section>
 <section id="test_setup" class="level2">
@@ -752,9 +827,9 @@ Warning
 <h2 class="anchored" data-anchor-id="workdir">workdir</h2>
 <p><strong>Type</strong>: <code>String</code></p>
 <p>The working directory when starting the container. This doesn’t change the Dockerfile but gets added as a command-line argument at runtime.</p>
-<section id="example-16" class="level3">
-<h3 class="anchored" data-anchor-id="example-16">Example</h3>
-<div class="sourceCode" id="cb17"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">workdir</span><span class="kw">:</span><span class="at"> /home/user</span></span></code></pre></div>
+<section id="example-17" class="level3">
+<h3 class="anchored" data-anchor-id="example-17">Example</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">workdir</span><span class="kw">:</span><span class="at"> /home/user</span></span></code></pre></div>
 </section>
 </section>
 <section id="yum" class="level2">
@@ -774,11 +849,11 @@ Warning
 </div>
 </div>
 <p>Specify which yum packages should be available in order to run the component.</p>
-<section id="example-17" class="level3">
-<h3 class="anchored" data-anchor-id="example-17">Example</h3>
-<div class="sourceCode" id="cb18"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup</span><span class="kw">:</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> yum</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">packages</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> sl </span><span class="kw">]</span></span></code></pre></div>
+<section id="example-18" class="level3">
+<h3 class="anchored" data-anchor-id="example-18">Example</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup</span><span class="kw">:</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> yum</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">packages</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> sl </span><span class="kw">]</span></span></code></pre></div>
 
 
 </section>
