@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Viash - Nextflow Legacy Platform</title>
+<title>Viash - Nextflow Vdsl3 Platform</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,8 +93,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../../">
-<link href="../../../../documentation/reference/config/platforms/nextflowVdsl3Platform.html" rel="next">
-<link href="../../../../documentation/reference/config/platforms/dockerPlatform.html" rel="prev">
+<link href="../../../../documentation/reference/config/arguments/boolean_false.html" rel="next">
+<link href="../../../../documentation/reference/config/platforms/NextflowLegacyPlatform.html" rel="prev">
 <link href="../../../../favicon.png" rel="icon" type="image/png">
 <script src="../../../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../../../site_libs/quarto-html/popper.min.js"></script>
@@ -137,11 +137,11 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <link rel="stylesheet" href="../../../../styles.css">
 <link rel="stylesheet" href="../../reference.css">
-<meta property="og:title" content="Viash - Nextflow Legacy Platform">
-<meta property="og:description" content="Run a Viash component as a Nextflow module.">
+<meta property="og:title" content="Viash - Nextflow Vdsl3 Platform">
+<meta property="og:description" content="Next-gen platform for generating NextFlow VDSL3 modules.">
 <meta property="og:site-name" content="Viash">
-<meta name="twitter:title" content="Viash - Nextflow Legacy Platform">
-<meta name="twitter:description" content="Run a Viash component as a Nextflow module.">
+<meta name="twitter:title" content="Viash - Nextflow Vdsl3 Platform">
+<meta name="twitter:description" content="Next-gen platform for generating NextFlow VDSL3 modules.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -213,7 +213,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Nextflow Legacy Platform</h1>
+      <h1 class="quarto-secondary-nav-title">Nextflow Vdsl3 Platform</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -299,22 +299,22 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../documentation/reference/config/platforms/nativePlatform.html" class="sidebar-item-text sidebar-link">Native Platform</a>
+  <a href="../../../../documentation/reference/config/platforms/NativePlatform.html" class="sidebar-item-text sidebar-link">Native Platform</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../documentation/reference/config/platforms/dockerPlatform.html" class="sidebar-item-text sidebar-link">Docker Platform</a>
+  <a href="../../../../documentation/reference/config/platforms/DockerPlatform.html" class="sidebar-item-text sidebar-link">Docker Platform</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../documentation/reference/config/platforms/nextflowLegacyPlatform.html" class="sidebar-item-text sidebar-link active">Nextflow Legacy Platform</a>
+  <a href="../../../../documentation/reference/config/platforms/NextflowLegacyPlatform.html" class="sidebar-item-text sidebar-link">Nextflow Legacy Platform</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../documentation/reference/config/platforms/nextflowVdsl3Platform.html" class="sidebar-item-text sidebar-link">Nextflow VDSL3 Platform</a>
+  <a href="../../../../documentation/reference/config/platforms/NextflowVdsl3Platform.html" class="sidebar-item-text sidebar-link active">Nextflow Vdsl3 Platform</a>
   </div>
 </li>
       </ul>
@@ -380,42 +380,18 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#id" id="toc-id" class="nav-link active" data-scroll-target="#id">id</a></li>
-  <li><a href="#image" id="toc-image" class="nav-link" data-scroll-target="#image">image</a></li>
-  <li><a href="#label" id="toc-label" class="nav-link" data-scroll-target="#label">label</a>
+  <li><a href="#auto" id="toc-auto" class="nav-link active" data-scroll-target="#auto">auto</a>
   <ul class="collapse">
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
   </ul></li>
-  <li><a href="#labels" id="toc-labels" class="nav-link" data-scroll-target="#labels">labels</a>
+  <li><a href="#debug" id="toc-debug" class="nav-link" data-scroll-target="#debug">debug</a></li>
+  <li><a href="#directives" id="toc-directives" class="nav-link" data-scroll-target="#directives">directives</a>
   <ul class="collapse">
   <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example</a></li>
   </ul></li>
-  <li><a href="#namespace_separator" id="toc-namespace_separator" class="nav-link" data-scroll-target="#namespace_separator">namespace_separator</a>
+  <li><a href="#id" id="toc-id" class="nav-link" data-scroll-target="#id">id</a>
   <ul class="collapse">
   <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example</a></li>
-  </ul></li>
-  <li><a href="#organization" id="toc-organization" class="nav-link" data-scroll-target="#organization">organization</a>
-  <ul class="collapse">
-  <li><a href="#example-3" id="toc-example-3" class="nav-link" data-scroll-target="#example-3">Example</a></li>
-  </ul></li>
-  <li><a href="#path" id="toc-path" class="nav-link" data-scroll-target="#path">path</a></li>
-  <li><a href="#per_id" id="toc-per_id" class="nav-link" data-scroll-target="#per_id">per_id</a></li>
-  <li><a href="#publish" id="toc-publish" class="nav-link" data-scroll-target="#publish">publish</a></li>
-  <li><a href="#registry" id="toc-registry" class="nav-link" data-scroll-target="#registry">registry</a>
-  <ul class="collapse">
-  <li><a href="#example-4" id="toc-example-4" class="nav-link" data-scroll-target="#example-4">Example</a></li>
-  </ul></li>
-  <li><a href="#separate_multiple_outputs" id="toc-separate_multiple_outputs" class="nav-link" data-scroll-target="#separate_multiple_outputs">separate_multiple_outputs</a>
-  <ul class="collapse">
-  <li><a href="#example-5" id="toc-example-5" class="nav-link" data-scroll-target="#example-5">Example</a></li>
-  </ul></li>
-  <li><a href="#stageinmode" id="toc-stageinmode" class="nav-link" data-scroll-target="#stageinmode">stageInMode</a>
-  <ul class="collapse">
-  <li><a href="#example-6" id="toc-example-6" class="nav-link" data-scroll-target="#example-6">Example</a></li>
-  </ul></li>
-  <li><a href="#tag" id="toc-tag" class="nav-link" data-scroll-target="#tag">tag</a>
-  <ul class="collapse">
-  <li><a href="#example-7" id="toc-example-7" class="nav-link" data-scroll-target="#example-7">Example</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -425,7 +401,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Nextflow Legacy Platform</h1>
+<h1 class="title d-none d-lg-block">Nextflow Vdsl3 Platform</h1>
 </div>
 
 
@@ -439,139 +415,77 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 </header>
 
-<p>Run a Viash component as a Nextflow module.</p>
+<p>Next-gen platform for generating NextFlow VDSL3 modules.</p>
+<section id="auto" class="level2">
+<h2 class="anchored" data-anchor-id="auto">auto</h2>
+<p><strong>Type</strong>: <code>NextflowAuto</code></p>
+<p>Automated processing flags which can be toggled on or off:</p>
+<ul>
+<li><code>simplifyInput</code>: If <code>true</code>, an input tuple only containing only a single File (e.g.&nbsp;<code>["foo", file("in.h5ad")]</code>) is automatically transformed to a map (i.e.&nbsp;<code>["foo", [ input: file("in.h5ad") ] ]</code>). Default is <code>true</code>.</li>
+<li><code>simplifyOutput</code>: If <code>true</code>, an output tuple containing a map with a File (e.g.&nbsp;<code>["foo", [ output: file("out.h5ad") ] ]</code>) is automatically transformed to a map (i.e.&nbsp;<code>["foo", file("out.h5ad")]</code>). Default is <code>true</code>.</li>
+<li><code>transcript</code>: If <code>true</code>, the module’s transcripts from <code>work/</code> are automatically published to <code>params.transcriptDir</code>. If not defined, <code>params.publishDir + "/_transcripts"</code> will be used. Will throw an error if neither are defined. Default is <code>false</code>.</li>
+<li><code>publish</code>: If <code>true</code>, the module’s outputs are automatically published to <code>params.publishDir</code>. Will throw an error if <code>params.publishDir</code> is not defined. Default is <code>false</code>.</li>
+</ul>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auto</span><span class="kw">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">publish</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+</section>
+</section>
+<section id="debug" class="level2">
+<h2 class="anchored" data-anchor-id="debug">debug</h2>
+<p><strong>Type</strong>: <code>Boolean</code></p>
+<p>Whether or not to print debug messages.</p>
+</section>
+<section id="directives" class="level2">
+<h2 class="anchored" data-anchor-id="directives">directives</h2>
+<p><strong>Type</strong>: <code>NextflowDirectives</code></p>
+<p>Directives are optional settings that affect the execution of the process. These mostly match up with the Nextflow counterparts that are linked below:</p>
+<ul>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#accelerator"><code>accelerator</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#afterscript"><code>afterScript</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#beforeScript"><code>beforeScript</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#cache"><code>cache</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#conda"><code>conda</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#container"><code>container</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#containeroptions"><code>containerOptions</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#cpus"><code>cpus</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#disk"><code>disk</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#echo"><code>echo</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#errorstrategy"><code>errorStrategy</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#executor"><code>executor</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#machinetype"><code>machineType</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#maxerrors"><code>maxErrors</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#maxforks"><code>maxForks</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#maxretries"><code>maxRetries</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#memory"><code>memory</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#module"><code>module</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#penv"><code>penv</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#publishdir"><code>publishDir</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#queue"><code>queue</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#scratch"><code>scratch</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#storeDir"><code>storeDir</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#stageinmode"><code>stageInMode</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#stageoutmode"><code>stageOutMode</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#tag"><code>tag</code></a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#time"><code>time</code></a></li>
+</ul>
+<section id="example-1" class="level3">
+<h3 class="anchored" data-anchor-id="example-1">Example</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">directives</span><span class="kw">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">container</span><span class="kw">:</span><span class="at"> rocker/r-ver:4.1</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">label</span><span class="kw">:</span><span class="at"> highcpu</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cpus</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">memory</span><span class="kw">:</span><span class="at"> 16 GB</span></span></code></pre></div>
+</section>
+</section>
 <section id="id" class="level2">
 <h2 class="anchored" data-anchor-id="id">id</h2>
 <p><strong>Type</strong>: <code>String</code></p>
 <p>Every platform can be given a specific id that can later be referred to explicitly when running or building the Viash component.</p>
-</section>
-<section id="image" class="level2">
-<h2 class="anchored" data-anchor-id="image">image</h2>
-<p><strong>Type</strong>: <code>String</code></p>
-<p>If no image attributes are configured, Viash will use the auto-generated image name from the Docker platform:</p>
-<pre><code>[&lt;namespace&gt;/]&lt;name&gt;:&lt;version&gt;</code></pre>
-<p>It’s possible to specify the container image explicitly with which to run the module in different ways:</p>
-<pre><code>image: dataintuitive/viash:0.4.0</code></pre>
-<p>Exactly the same can be obtained with</p>
-<pre><code>image: dataintuitive/viash
-registry: index.docker.io/v1/
-tag: 0.4.0</code></pre>
-<p>Specifying the attribute(s) like this will use the container <code>dataintuitive/viash:0.4.0</code> from Docker hub (registry).</p>
-<p>If no tag is specified Viash will use <code>functionality.version</code> as the tag.</p>
-<p>If no registry is specified, Viash (and NextFlow) will assume the image is available locally or on Docker Hub. In other words, the <code>registry: ...</code> attribute above is superfluous. No other registry is checked automatically due to a limitation from Docker itself.</p>
-</section>
-<section id="label" class="level2">
-<h2 class="anchored" data-anchor-id="label">label</h2>
-<p><strong>Type</strong>: <code>String</code></p>
-<p>When running the module in a cluster context and depending on the cluster type, <a href="https://www.nextflow.io/docs/latest/process.html#label">NextFlow allows for attaching labels</a> to the process that can later be used as selectors for associating resources to this process.</p>
-<p>In order to attach one label to a process/component, one can use the <code>label: ...</code> attribute, multiple labels can be added using <code>labels: [ ..., ... ]</code> and the two can even be mixed.</p>
-<p>In the main <code>nextflow.config</code>, one can now use this label:</p>
-<p>process { … withLabel: bigmem { maxForks = 5 … } }</p>
-<section id="example" class="level3">
-<h3 class="anchored" data-anchor-id="example">Example</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span><span class="kw">:</span><span class="at"> highmem labels: [ highmem, highcpu ]</span></span></code></pre></div>
-</section>
-</section>
-<section id="labels" class="level2">
-<h2 class="anchored" data-anchor-id="labels">labels</h2>
-<p><strong>Type</strong>: <code>String</code> / <code>List of String</code></p>
-<p>When running the module in a cluster context and depending on the cluster type, <a href="https://www.nextflow.io/docs/latest/process.html#label">NextFlow allows for attaching labels</a> to the process that can later be used as selectors for associating resources to this process.</p>
-<p>In order to attach one label to a process/component, one can use the <code>label: ...</code> attribute, multiple labels can be added using <code>labels: [ ..., ... ]</code> and the two can even be mixed.</p>
-<p>In the main <code>nextflow.config</code>, one can now use this label:</p>
-<p>process { … withLabel: bigmem { maxForks = 5 … } }</p>
-<section id="example-1" class="level3">
-<h3 class="anchored" data-anchor-id="example-1">Example</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span><span class="kw">:</span><span class="at"> highmem labels: [ highmem, highcpu ]</span></span></code></pre></div>
-</section>
-</section>
-<section id="namespace_separator" class="level2">
-<h2 class="anchored" data-anchor-id="namespace_separator">namespace_separator</h2>
-<p><strong>Type</strong>: <code>String</code></p>
-<p>The default namespace separator is “_“.</p>
 <section id="example-2" class="level3">
 <h3 class="anchored" data-anchor-id="example-2">Example</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">namespace_separator</span><span class="kw">:</span><span class="at"> </span><span class="st">"+"</span></span></code></pre></div>
-</section>
-</section>
-<section id="organization" class="level2">
-<h2 class="anchored" data-anchor-id="organization">organization</h2>
-<p><strong>Type</strong>: <code>String</code></p>
-<p>Name of a container’s <a href="https://docs.docker.com/docker-hub/orgs/">organization</a>.</p>
-<section id="example-3" class="level3">
-<h3 class="anchored" data-anchor-id="example-3">Example</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">organization</span><span class="kw">:</span><span class="at"> viash-io</span></span></code></pre></div>
-</section>
-</section>
-<section id="path" class="level2">
-<h2 class="anchored" data-anchor-id="path">path</h2>
-<p><strong>Type</strong>: <code>String</code></p>
-<p>When <code>publish: true</code>, this attribute defines where the output is written relative to the <code>params.publishDir</code> setting. For example, <code>path: processed</code> in combination with <code>--output s3://some_bucket/</code> will store the output of this component under</p>
-<pre><code>s3://some_bucket/processed/</code></pre>
-<p>This attribute gives control over the directory structure of the output. For example:</p>
-<pre><code>path: raw_data</code></pre>
-<p>Or even:</p>
-<pre><code>path: raw_data/bcl</code></pre>
-<p>Please note that <code>per_id</code> and <code>path</code> can be combined.</p>
-</section>
-<section id="per_id" class="level2">
-<h2 class="anchored" data-anchor-id="per_id">per_id</h2>
-<p><strong>Type</strong>: <code>Boolean</code></p>
-<p>By default, a subdirectory is created corresponding to the unique ID that is passed in the triplet. Let us illustrate this with an example. The following code snippet uses the value of <code>--input</code> as an input of a workflow. The input can include a wildcard so that multiple samples can run in parallel. We use the parent directory name (<code>.getParent().baseName</code>) as an identifier for the sample. We pass this as the first entry of the triplet:</p>
-<pre><code>Channel.fromPath(params.input) \
-    | map{ it -&gt; [ it.getParent().baseName , it ] } \
-    | map{ it -&gt; [ it[0] , it[1], params ] }
-    | ...</code></pre>
-<p>Say the resulting sample names are <code>SAMPLE1</code> and <code>SAMPLE2</code>. The next step in the pipeline will be published (at least by default) under:</p>
-<pre><code>&lt;publishDir&gt;/SAMPLE1/
-&lt;publishDir&gt;/SAMPLE2/</code></pre>
-<p>These per-ID subdirectories can be avoided by setting:</p>
-<pre><code>per_id: false</code></pre>
-</section>
-<section id="publish" class="level2">
-<h2 class="anchored" data-anchor-id="publish">publish</h2>
-<p><strong>Type</strong>: <code>Boolean</code></p>
-<p>NextFlow uses the autogenerated <code>work</code> dirs to manage process IO under the hood. In order effectively output something one can publish the results a module or step in the pipeline. In order to do this, add <code>publish: true</code> to the config:</p>
-<ul>
-<li>publish is optional</li>
-<li>Default value is false</li>
-</ul>
-<p>This attribute simply defines if output of a component should be published yes or no. The output location has to be provided at pipeline launch by means of the option <code>--publishDir ...</code> or as <code>params.publishDir</code> in <code>nextflow.config</code>:</p>
-<pre><code>params.publishDir = "..."</code></pre>
-</section>
-<section id="registry" class="level2">
-<h2 class="anchored" data-anchor-id="registry">registry</h2>
-<p><strong>Type</strong>: <code>String</code></p>
-<p>The URL to the a <a href="https://docs.docker.com/registry/">custom Docker registry</a>.</p>
-<section id="example-4" class="level3">
-<h3 class="anchored" data-anchor-id="example-4">Example</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">registry</span><span class="kw">:</span><span class="at"> https://my-docker-registry.org</span></span></code></pre></div>
-</section>
-</section>
-<section id="separate_multiple_outputs" class="level2">
-<h2 class="anchored" data-anchor-id="separate_multiple_outputs">separate_multiple_outputs</h2>
-<p><strong>Type</strong>: <code>Boolean</code></p>
-<p>Separates the outputs generated by a Nextflow component with multiple outputs as separate events on the channel. Default value: <code>true</code>.</p>
-<section id="example-5" class="level3">
-<h3 class="anchored" data-anchor-id="example-5">Example</h3>
-<div class="sourceCode" id="cb16"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">separate_multiple_outputs</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
-</section>
-</section>
-<section id="stageinmode" class="level2">
-<h2 class="anchored" data-anchor-id="stageinmode">stageInMode</h2>
-<p><strong>Type</strong>: <code>String</code></p>
-<p>By default NextFlow will create a symbolic link to the inputs for a process/module and run the tool at hand using those symbolic links. Some applications do not cope well with this strategy, in that case the files should effectively be copied rather than linked to. This can be achieved by using <code>stageInMode: copy</code>. This attribute is optional, the default is <code>symlink</code>.</p>
-<section id="example-6" class="level3">
-<h3 class="anchored" data-anchor-id="example-6">Example</h3>
-<div class="sourceCode" id="cb17"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stageInMode</span><span class="kw">:</span><span class="at"> copy</span></span></code></pre></div>
-</section>
-</section>
-<section id="tag" class="level2">
-<h2 class="anchored" data-anchor-id="tag">tag</h2>
-<p><strong>Type</strong>: <code>Version</code></p>
-<p>Specify a Docker image based on its tag.</p>
-<section id="example-7" class="level3">
-<h3 class="anchored" data-anchor-id="example-7">Example</h3>
-<div class="sourceCode" id="cb18"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tag</span><span class="kw">:</span><span class="at"> </span><span class="fl">4.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> foo</span></span></code></pre></div>
 
 
 </section>
@@ -674,13 +588,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../../documentation/reference/config/platforms/dockerPlatform.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Docker Platform</span>
+      <a href="../../../../documentation/reference/config/platforms/NextflowLegacyPlatform.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Nextflow Legacy Platform</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../../documentation/reference/config/platforms/nextflowVdsl3Platform.html" class="pagination-link">
-        <span class="nav-page-text">Nextflow VDSL3 Platform</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../../documentation/reference/config/arguments/boolean_false.html" class="pagination-link">
+        <span class="nav-page-text">boolean_false</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
