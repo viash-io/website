@@ -1,4 +1,3 @@
-from ast import If
 import git, subprocess, json, csv, re
 from pathlib import Path
 
@@ -6,6 +5,8 @@ TOPIC_FUNCTIONALITY = "functionality"
 TOPIC_PLATFORMS = "platforms"
 TOPIC_REQUIREMENTS = "requirements"
 TOPIC_ARGUMENTS = "arguments"
+
+THIS_IDENTIFIER = "__this__"
 
 class JsonEntryData:
 	title = ""
@@ -56,19 +57,19 @@ def read_json_entries():
 
 	for topic in viash_json:
 		if topic == "functionality":
-			get_json_entries(page_name= topic, topic = topic, json_entry = viash_json[topic])
+			get_json_entries(page_title= topic, topic = topic, json_entry = viash_json[topic])
 		else:
 			for subtopic in viash_json[topic]:
-				get_json_entries(page_name = subtopic, topic = topic, json_entry = viash_json[topic][subtopic])
+				get_json_entries(page_title = subtopic, topic = topic, json_entry = viash_json[topic][subtopic])
 
 
-def get_json_entries(page_name, json_entry, topic):
+def get_json_entries(page_title, json_entry, topic):
 	""" Reads the generated JSON file and extract all information into instances of the JsonEntryData class. """
 
 	if topic == TOPIC_ARGUMENTS: # Keep title of argument pages as-is
-		title = page_name
+		title = page_title
 	else:
-		title = clean_title(page_name)
+		title = clean_title(page_title)
 
 	# Sort json entries alphabetically and store in a dictionary
 	sorted_dict = sorted(json_entry, key=lambda x: x["name"], reverse=False)
@@ -100,39 +101,82 @@ def add_json_data_to_list(data : JsonEntryData):
 		requirements_entry_list.append(data)
 
 def generate_pages():
-	generate_simple_combined_page(entry_list= requirements_entry_list, page_name= "Setup Requirements", save_dir= config_dir, save_filename= "requirements")
-	generate_related_pages(entry_list= platforms_entry_list, save_dir= config_dir)
+	"""Feed JsonEntryData lists to page generation functions."""
 
-def generate_simple_combined_page(entry_list, page_name, save_dir, save_filename):
-	qmd = qmd_header(title=page_name)
+	generate_combined_page(entry_list= functionality_entry_list, page_title= "Functionality", save_filename= "functionality", title_is_name=False)
+	generate_combined_page(entry_list= requirements_entry_list, page_title= "Setup Requirements", save_filename= "requirements", title_is_name=True)
+	generate_grouped_pages(entry_list= platforms_entry_list, save_dir= config_dir + "/platforms")
+	generate_grouped_pages(entry_list= arguments_entry_list, save_dir= config_dir + "/arguments")
+
+def generate_combined_page(entry_list, page_title, save_filename, title_is_name):
+	"""
+	Parses a list of JsonEntryData and combines it into a single page.
+
+	Arguments:
+		 entry_list: List of JsonEntryData to parse
+		 page_title: Title of the combined page
+		 save_filename: Name of the file without any extensions
+		 title_is_name: If True, the title property of every JsonEntryData will be used as if it was the name property
+	"""
+
+	qmd = qmd_header(title=page_title)
 	entry_list = sorted(entry_list, key=lambda x: x.title, reverse=False)
 
 	for data in entry_list:
 		data : JsonEntryData = data
-		qmd += qmd_h2(data.title)
-		qmd += qmd_paragraph(replace_keywords(data.description))
-		qmd += qmd_parse_examples(data.examples)
 
-	write_qmd_file(directory=save_dir, file_name=save_filename, content=qmd)
+		if title_is_name: # The title property should be used as if it was the name of the property. This is the case with small separate pages.
+			qmd += qmd_h2(data.title)
+			qmd += qmd_paragraph(replace_keywords(data.description))
+			qmd += qmd_parse_examples(data.examples)
+		else:
+			if data.name != THIS_IDENTIFIER:
+				qmd += qmd_h2(data.name)
+				qmd += qmd_parse_type(data.type)
+				qmd += qmd_removed_deprecated(data.removed, data.deprecated)
+				qmd += qmd_paragraph(replace_keywords(data.description))
+				qmd += qmd_parse_examples(data.examples)
+			else:
+				qmd += qmd_paragraph(replace_keywords(data.description))
+				qmd += qmd_parse_examples(data.examples)
+
+	write_qmd_file(directory=config_dir, file_name=save_filename, content=qmd)
 	
 
-def generate_related_pages(entry_list, save_dir):
+def generate_grouped_pages(entry_list, save_dir):
+	"""
+	Parses a list of JsonEntryData, groups them by title and creates a page for each title.
 
-	for data in entry_list:
-		data : JsonEntryData = data
-		
+	Arguments:
+		 entry_list: List of JsonEntryData to parse
+		 save_dir: Subdirectory of config to place files. Will be created if it doesn't exist.
+	"""
 
-	for data in entry_list:
-		data : JsonEntryData = data
-		qmd = ""
-		qmd += qmd_h2(data.title)
-		qmd += qmd_paragraph(replace_keywords(data.description))
-		qmd += qmd_parse_examples(data.examples)
-		print(qmd)
+	# Group entries per title
+	uniqueTitles = set(map(lambda x:x.title, entry_list))
+	groupedList = [[y for y in entry_list if y.title==x] for x in uniqueTitles]
+
+	for group in groupedList:
+		# Take title from first entry in group and use that as the header for this page
+		qmd = qmd_header(group[0].title)
+		filename = group[0].title.replace(" ", "")
+
+		for data in group:
+			data : JsonEntryData = data
+			if data.name != THIS_IDENTIFIER:
+				qmd += qmd_h2(data.name)
+				qmd += qmd_parse_type(data.type)
+				qmd += qmd_removed_deprecated(data.removed, data.deprecated)
+				qmd += qmd_paragraph(replace_keywords(data.description))
+				qmd += qmd_parse_examples(data.examples)
+			else:
+				qmd += qmd_paragraph(replace_keywords(data.description))
+				qmd += qmd_parse_examples(data.examples)
+
+		write_qmd_file(directory=save_dir, file_name=filename, content=qmd)
 	
-	
-
 def clean_title(title) -> str:
+	""" Returns title with added spaces and capitalization for better readability. """
 	title = title.replace("Platform", " Platform")
 	title = title.replace("Requirements", " Requirements")
 	title = title.replace("Legacy", " Legacy")
@@ -141,17 +185,19 @@ def clean_title(title) -> str:
 	return title.title()
 
 def qmd_paragraph(text):
+	""" Returns text with newlines added. """
 	return text + "\n\n"
 
 def qmd_h2(text):
+	""" Returns text with H2 markdown and newlines. """
 	return "## " + text + "\n\n"
 
 def qmd_h3(text):
+	""" Returns text with H3 markdown and newlines. """
 	return "### " + text + "\n\n"
 
 def qmd_header(title):
 	""" Returns the page metadata markdown that belongs at the top of a qmd file, with the title filled in. """
-
 	qmd = ""
 	qmd += f"---\ntitle: {title}\n"
 	qmd += "search: true\n"
@@ -165,7 +211,33 @@ def qmd_callout(type, content):
 	""" Returns a quarto callout block: https://quarto.org/docs/authoring/callouts.html """
 	return "::: {" + f".callout-{type}" + "}\n" + content + "\n:::\n"
 
+def qmd_removed_deprecated(removed_dict, deprecated_dict) -> str:
+	""" Returns markdown with added warning callouts based on the removed and deprecated properties of JsonEntryData  """
+	qmd = ""
+
+	if removed_dict is not None:
+		qmd += qmd_callout(
+				"warning",
+				"Removed since "
+				+ removed_dict["since"]
+				+ ". "
+				+ removed_dict["message"],
+			)
+	
+	if deprecated_dict is not None:
+		qmd += qmd_callout(
+				"warning",
+				"Deprecated since "
+				+ deprecated_dict["since"]
+				+ ". "
+				+ deprecated_dict["message"],
+			)
+
+	return qmd
+
+
 def replace_keywords(text: str) -> str:
+	""" Finds all keywords in the format @[keyword](text) and returns the replacements based on the keywords CSV. """
 	# Find all keyword links
 	matches = re.finditer(keyword_regex, text, re.MULTILINE)
 
@@ -189,7 +261,24 @@ def replace_keywords(text: str) -> str:
 
 	return text
 
+def qmd_parse_type(type_string):
+	""" Returns a human readable markdown version of the type property.  """
+	qmd ="**Type**: "
+
+	if type_string.startswith("Option of"):
+		type = type_string.replace("Option of","").strip()
+		qmd += f"`{type}`"
+	elif type_string.startswith("OneOrMore of"):
+		type = type_string.replace("OneOrMore of","").strip()
+		qmd += f"`{type}` / `List of {type}`"
+	else:
+		qmd += f"`{type_string}`"
+	
+	qmd += "\n\n"
+	return qmd
+
 def qmd_parse_examples(examples):
+	""" Returns a human readable markdown version of a list of examples with code formatting.  """
 	qmd = ""
 
 	if examples is None or len(examples) == 0:
@@ -211,6 +300,7 @@ def qmd_parse_examples(examples):
 	return qmd
 
 def write_qmd_file(directory, file_name, content):
+	""" Write a qmd file to disk in the specified directory, with the given filename and content. """
 	Path(directory).mkdir(parents=True, exist_ok=True)
 	qmd_file = open(f"{directory}/{file_name}.qmd", "w")
 	qmd_file.write(content)
