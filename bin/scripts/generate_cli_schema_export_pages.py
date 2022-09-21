@@ -72,7 +72,11 @@ def qmd_header(title) -> str:
 
 def qmd_code_paragraph(text) -> str:
 	""" Returns text with newlines and code styling added. """
-	return "`" + text + "`\n\n"
+	qmd = ""
+	splitted = text.split("\n")
+	for part in splitted:
+		qmd += "`" + part + "`\n\n"
+	return qmd
 
 def qmd_bold_paragraph(text) -> str:
 	""" Returns text with newlines and bold styling added. """
