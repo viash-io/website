@@ -727,61 +727,6 @@ Unexpected field: [package]; valid fields: packages, interactive, type: DownFiel
   <pubDate>Fri, 04 Mar 2022 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Viash 0.5.6</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/documentation/blog/posts/viash-0.5.6/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="whats-new" class="level2">
-<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<p>Here are some highlights:</p>
-<ul>
-<li>Viash can now be installed without Docker needing to be installed on your system. You do need <code>unzip</code> and <code>wget</code> to complete the installation.</li>
-<li>The Docker related messages are more user friendly now.</li>
-</ul>
-</section>
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog:</h2>
-<section id="breaking-changes" class="level3">
-<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
-<ul>
-<li><code>BashWrapper</code>: Forbidden flags <code>-v</code>, <code>--verbose</code>, <code>--verbosity</code> have been renamed to <code>---v</code>, <code>---verbose</code>, <code>---verbosity</code>.</li>
-</ul>
-</section>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li><p>Set version of helper scripts to the same version as Viash.</p></li>
-<li><p><code>DockerPlatform</code>: Produce helpful warning message when Docker image can’t be found remotely (#94).</p></li>
-<li><p><code>DockerPlatform</code>: Produce helpful error message when Docker isn’t installed or the daemon is not running (#94 bis).</p></li>
-</ul>
-</section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
-<ul>
-<li><p><code>viash_install</code>:</p>
-<ul>
-<li>Passing Viash path as a string instead of as a file to ensure the path is not converted to an absolute path</li>
-<li>Switch from Docker backend to a Native backend, ‘unzip’ and ‘wget’ are required.</li>
-<li>Correctly set the log file for viash_test.</li>
-</ul></li>
-<li><p><code>DockerPlatform</code>: Added sleep workaround to avoid concurrency issue where a file is executed to build docker containers but apparently still in the process of being written.</p></li>
-<li><p><code>DockerPlatform</code>: Fix order issue of —verbose flag in combination with —setup, allowing to run <code>viash run config.vsh.yaml -- ---setup cb ---verbose</code> and actually get output.</p></li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/documentation/blog/posts/viash-0.5.6/index.html</guid>
-  <pubDate>Mon, 21 Feb 2022 00:00:00 GMT</pubDate>
-</item>
-<item>
   <title>Viash 0.5.7</title>
   <dc:creator>Viash Team</dc:creator>
   <link>https://viash.io/documentation/blog/posts/viash-0.5.7/index.html</link>
@@ -841,6 +786,61 @@ You can now add yum packages as a requirement:</p>
  ]]></description>
   <category>New Release</category>
   <guid>https://viash.io/documentation/blog/posts/viash-0.5.7/index.html</guid>
+  <pubDate>Mon, 21 Feb 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.5.6</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/documentation/blog/posts/viash-0.5.6/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>Here are some highlights:</p>
+<ul>
+<li>Viash can now be installed without Docker needing to be installed on your system. You do need <code>unzip</code> and <code>wget</code> to complete the installation.</li>
+<li>The Docker related messages are more user friendly now.</li>
+</ul>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog:</h2>
+<section id="breaking-changes" class="level3">
+<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
+<ul>
+<li><code>BashWrapper</code>: Forbidden flags <code>-v</code>, <code>--verbose</code>, <code>--verbosity</code> have been renamed to <code>---v</code>, <code>---verbose</code>, <code>---verbosity</code>.</li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p>Set version of helper scripts to the same version as Viash.</p></li>
+<li><p><code>DockerPlatform</code>: Produce helpful warning message when Docker image can’t be found remotely (#94).</p></li>
+<li><p><code>DockerPlatform</code>: Produce helpful error message when Docker isn’t installed or the daemon is not running (#94 bis).</p></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>viash_install</code>:</p>
+<ul>
+<li>Passing Viash path as a string instead of as a file to ensure the path is not converted to an absolute path</li>
+<li>Switch from Docker backend to a Native backend, ‘unzip’ and ‘wget’ are required.</li>
+<li>Correctly set the log file for viash_test.</li>
+</ul></li>
+<li><p><code>DockerPlatform</code>: Added sleep workaround to avoid concurrency issue where a file is executed to build docker containers but apparently still in the process of being written.</p></li>
+<li><p><code>DockerPlatform</code>: Fix order issue of —verbose flag in combination with —setup, allowing to run <code>viash run config.vsh.yaml -- ---setup cb ---verbose</code> and actually get output.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/documentation/blog/posts/viash-0.5.6/index.html</guid>
   <pubDate>Mon, 21 Feb 2022 00:00:00 GMT</pubDate>
 </item>
 <item>
@@ -938,6 +938,52 @@ To use deep caching again, add this to your config file:</p>
   <pubDate>Mon, 27 Sep 2021 00:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>Viash 0.5.2</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/documentation/blog/posts/viash-0.5.2/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This is a small release containing two small features and a bug fix. The new <code>run_args</code> field allows you to add <a href="https://docs.docker.com/engine/reference/commandline/run/">docker run</a> arguments to the <a href="../../../../documentation/reference/config/platforms/DockerPlatform.html">Docker platform</a> section of a <a href="../../../../documentation/reference/config/overview.html">config file</a>. For example:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;">platforms</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb1-2"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> docker</span></span>
+<span id="cb1-3"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">image</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> bash:4.0</span></span>
+<span id="cb1-4"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">run_args</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--expose 127.0.0.1:80:8080/tcp --env MY_ENV_VAR=foo"</span></span></code></pre></div>
+<p>There’s also a new field for the <a href="../../../../documentation/reference/config/platforms/NextflowVdsl3Platform.html">Nextflow platform</a>: <code>separate_multiple_outputs</code>. By default, this is set to <code>true</code> and separates the outputs generated by a Nextflow component with multiple outputs as separate events on the channel. You can now choose to disable this behaviour:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><span class="fu" style="color: #4758AB;">platforms</span><span class="kw" style="color: #003B4F;">:</span></span>
+<span id="cb2-2"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> nextflow</span></span>
+<span id="cb2-3"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">publish</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="ch" style="color: #20794D;">true</span></span>
+<span id="cb2-4"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">separate_multiple_outputs</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="ch" style="color: #20794D;">false</span></span></code></pre></div>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog:</h2>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>DockerPlatform</code>: Added <code>run_args</code> field to allow setting <code>docker run</code> arguments.</p></li>
+<li><p><code>NextFlowPlatform</code>: Added argument <code>separate_multiple_outputs</code> to allow not separating the outputs generated by a component with multiple outputs as separate events on the channel.</p></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><code>IO</code>: Allow overwriting directory resources upon rebuild.</li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/documentation/blog/posts/viash-0.5.2/index.html</guid>
+  <pubDate>Mon, 16 Aug 2021 00:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Viash 0.5.3</title>
   <dc:creator>Viash Team</dc:creator>
   <link>https://viash.io/documentation/blog/posts/viash-0.5.3/index.html</link>
@@ -1002,52 +1048,6 @@ Here are some examples in different scripting languages on how to access the met
  ]]></description>
   <category>New Release</category>
   <guid>https://viash.io/documentation/blog/posts/viash-0.5.3/index.html</guid>
-  <pubDate>Mon, 16 Aug 2021 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.5.2</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/documentation/blog/posts/viash-0.5.2/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="whats-new" class="level2">
-<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<p>This is a small release containing two small features and a bug fix. The new <code>run_args</code> field allows you to add <a href="https://docs.docker.com/engine/reference/commandline/run/">docker run</a> arguments to the <a href="../../../../documentation/reference/config/platforms/DockerPlatform.html">Docker platform</a> section of a <a href="../../../../documentation/reference/config/overview.html">config file</a>. For example:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;">platforms</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb1-2"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> docker</span></span>
-<span id="cb1-3"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">image</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> bash:4.0</span></span>
-<span id="cb1-4"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">run_args</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--expose 127.0.0.1:80:8080/tcp --env MY_ENV_VAR=foo"</span></span></code></pre></div>
-<p>There’s also a new field for the <a href="../../../../documentation/reference/config/platforms/NextflowVdsl3Platform.html">Nextflow platform</a>: <code>separate_multiple_outputs</code>. By default, this is set to <code>true</code> and separates the outputs generated by a Nextflow component with multiple outputs as separate events on the channel. You can now choose to disable this behaviour:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><span class="fu" style="color: #4758AB;">platforms</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb2-2"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> nextflow</span></span>
-<span id="cb2-3"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">publish</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="ch" style="color: #20794D;">true</span></span>
-<span id="cb2-4"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">separate_multiple_outputs</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="ch" style="color: #20794D;">false</span></span></code></pre></div>
-</section>
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog:</h2>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li><p><code>DockerPlatform</code>: Added <code>run_args</code> field to allow setting <code>docker run</code> arguments.</p></li>
-<li><p><code>NextFlowPlatform</code>: Added argument <code>separate_multiple_outputs</code> to allow not separating the outputs generated by a component with multiple outputs as separate events on the channel.</p></li>
-</ul>
-</section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
-<ul>
-<li><code>IO</code>: Allow overwriting directory resources upon rebuild.</li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/documentation/blog/posts/viash-0.5.2/index.html</guid>
   <pubDate>Mon, 16 Aug 2021 00:00:00 GMT</pubDate>
 </item>
 <item>

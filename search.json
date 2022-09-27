@@ -1,73 +1,10 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About Viash",
+    "objectID": "download/components/md_url_checker/bash/Testfile.html",
+    "href": "download/components/md_url_checker/bash/Testfile.html",
+    "title": "Viash",
     "section": "",
-    "text": "Viash is free open source software distributed under the GPL-3 license.\nFor more information or support contact us at info@data-intuitive.com."
-  },
-  {
-    "objectID": "documentation/faq/index.html",
-    "href": "documentation/faq/index.html",
-    "title": "Frequently Asked Questions",
-    "section": "",
-    "text": "Can I store helper functions as separate files?\nYes, though you’ll need to let Viash know which additional files are required to run the component. For example, if several helper functions are stored in an additional file mymodule.py or mymodule.R, use the following code to import the helper functions:\n\nPython\nIn the resources section of the Viash config file:\nresources:\n  - type: python_script\n    path: script.py\n  - path: mymodule.py\nIn the main Python script:\nimport sys\n\n## VIASH START\nmeta = { 'resources_dir': '.' }\n## VIASH END\n\nsys.path.append(meta['resources_dir'])\nfrom mymodule import helper_fun\n\n\nR\nIn the resources section of the Viash config file:\nresources:\n  - type: r_script\n    path: script.R\n  - path: mymodule.R\nIn the main R script:\n## VIASH START\nmeta <- list(resources_dir = \".\")\n## VIASH END\n\nsource(paste0(meta[[\"resources_dir\"]], \"/mymodule.R\"))\nhelper_fun(...)"
-  },
-  {
-    "objectID": "documentation/reference/config/requirements.html",
-    "href": "documentation/reference/config/requirements.html",
-    "title": "Setup Requirements",
-    "section": "",
-    "text": "Specify which apk packages should be available in order to run the component.\n\n\nsetup:\n  - type: apk\n    packages: [ sl ]"
-  },
-  {
-    "objectID": "documentation/reference/config/requirements.html#apt-requirements",
-    "href": "documentation/reference/config/requirements.html#apt-requirements",
-    "title": "Setup Requirements",
-    "section": "Apt Requirements",
-    "text": "Apt Requirements\nSpecify which apt packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: apt\n    packages: [ sl ]"
-  },
-  {
-    "objectID": "documentation/reference/config/requirements.html#docker-requirements",
-    "href": "documentation/reference/config/requirements.html#docker-requirements",
-    "title": "Setup Requirements",
-    "section": "Docker Requirements",
-    "text": "Docker Requirements\nSpecify which Docker commands should be run during setup.\n\nExample\nsetup:\n  - type: docker\n    build_args: [ GITHUB_PAT=hello_world ]\n    run: [ git clone ... ]\n    add: [ \"http://foo.bar .\" ]\n    copy: [ \"http://foo.bar .\" ]\n    resources: \n      - resource.txt /path/to/resource.txt"
-  },
-  {
-    "objectID": "documentation/reference/config/requirements.html#javascript-requirements",
-    "href": "documentation/reference/config/requirements.html#javascript-requirements",
-    "title": "Setup Requirements",
-    "section": "Javascript Requirements",
-    "text": "Javascript Requirements\nSpecify which JavaScript packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: javascript\n    npm: [ packagename ]\n    git: [ https://... ]\n    github: [ owner/repository ]\n    url: [ https://... ]"
-  },
-  {
-    "objectID": "documentation/reference/config/requirements.html#python-requirements",
-    "href": "documentation/reference/config/requirements.html#python-requirements",
-    "title": "Setup Requirements",
-    "section": "Python Requirements",
-    "text": "Python Requirements\nSpecify which Python packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ jkbr/httpie ]\n    gitlab: [ foo/bar ]\n    mercurial: [ http://... ]\n    svn: [ http://...]\n    bazaar: [ http://... ]\n    url: [ http://... ]"
-  },
-  {
-    "objectID": "documentation/reference/config/requirements.html#r-requirements",
-    "href": "documentation/reference/config/requirements.html#r-requirements",
-    "title": "Setup Requirements",
-    "section": "R Requirements",
-    "text": "R Requirements\nSpecify which R packages should be available in order to run the component.\n\nExample\nsetup: \n  - type: r\n    cran: [ dynutils ]\n    bioc: [ AnnotationDbi ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ rcannood/SCORPIUS ]\n    gitlab: [ org/package ]\n    svn: [ https://path.to.svn/group/repo ]\n    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]\n    script: [ 'devtools::install(\".\")' ]"
-  },
-  {
-    "objectID": "documentation/reference/config/requirements.html#ruby-requirements",
-    "href": "documentation/reference/config/requirements.html#ruby-requirements",
-    "title": "Setup Requirements",
-    "section": "Ruby Requirements",
-    "text": "Ruby Requirements\nSpecify which Ruby packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: ruby\n    packages: [ rspec ]"
-  },
-  {
-    "objectID": "documentation/reference/config/requirements.html#yum-requirements",
-    "href": "documentation/reference/config/requirements.html#yum-requirements",
-    "title": "Setup Requirements",
-    "section": "Yum Requirements",
-    "text": "Yum Requirements\nSpecify which yum packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: yum\n    packages: [ sl ]"
+    "text": "This is a simple markdown file with some hyperlinks to test if the component works correctly. Some links to websites:\n\nGoogle\nReddit\nA broken link\n\nLinks that are relative to viash.io:\n\nYou can install viash here.\nIt all starts with a script and a config file."
   },
   {
     "objectID": "documentation/reference/config/functionality.html",
@@ -95,7 +32,7 @@
     "href": "documentation/reference/config/functionality.html#arguments",
     "title": "Functionality",
     "section": "arguments",
-    "text": "arguments\nType: List of Argument\nA list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:\n\nstring\nfile\ninteger\ndouble\nboolean\nboolean_true\nboolean_false\n\n\nExample\narguments:\n   - name: --foo\n    type: file\n    alternatives: [-f]\n    description: Description of foo\n    default: \"/foo/bar\"\n    must_exist: true\n    required: false\n    multiple: true\n    multiple_sep: \",\"\n   - name: --bar\n    type: string"
+    "text": "arguments\nType: List of Argument\nA list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:\n\nstring\nfile\ninteger\ndouble\nboolean\nboolean_true\nboolean_false\n\n\nExample\narguments:\n   - name: --foo\n    type: file\n    alternatives: [-f]\n    description: Description of foo\n    default: \"/foo/bar\"\n    must_exist: true\n    direction: output\n    required: false\n    multiple: true\n    multiple_sep: \",\"\n   - name: --bar\n    type: string"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#authors",
@@ -165,7 +102,7 @@
     "href": "documentation/reference/config/functionality.html#resources",
     "title": "Functionality",
     "section": "resources",
-    "text": "resources\nType: List of Resource\nResources are files that support the component. The first resource should be the script that will be executed when the functionality is run. Additional resources will be copied to the same directory.\nCommon properties:\n\ntype: file / r_script / python_script / bash_script / javascript_script / scala_script / csharp_script, the type of resource. The first resource cannot be of type file. When the type is not specified, the default type is simply file.\nname: filename, the resulting name of the resource.\npath: path/to/file, the path of the input file. Can be a relative or an absolute path, or a URI.\ntext: …multiline text…, the raw content of the input file. Exactly one of path or text must be defined, the other undefined.\nis_executable: true / false, whether the resulting file is made executable.\n\n\nExample\nresources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt"
+    "text": "resources\nType: List of Resource\nResources are files that support the component. The first resource should be a script that will be executed when the functionality is run. Additional resources will be copied to the same directory.\nCommon properties:\n\ntype: file / r_script / python_script / bash_script / javascript_script / scala_script / csharp_script, the type of resource. The first resource cannot be of type file. When the type is not specified, the default type is simply file.\nname: filename, the resulting name of the resource.\npath: path/to/file, the path of the input file. Can be a relative or an absolute path, or a URI.\ntext: …multiline text…, the raw content of the input file. Exactly one of path or text must be defined, the other undefined.\nis_executable: true / false, whether the resulting file is made executable.\n\n\nExample\nresources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#status",
@@ -179,7 +116,7 @@
     "href": "documentation/reference/config/functionality.html#test_resources",
     "title": "Functionality",
     "section": "test_resources",
-    "text": "test_resources\nType: List of Resource\nOne or more scripts to be used to test the component behaviour when viash test is invoked. Additional files of type file will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing. See the Unit Testing guide for more info.\n\nExample\ntest_resources:\n  - type: bash_script\n    path: tests/test1.sh\n  - type: r_script\n    path: tests/test2.R\n  - path: resource1.txt"
+    "text": "test_resources\nType: List of Resource\nOne or more scripts to be used to test the component behaviour when viash test is invoked. Additional files of type file will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing. See Unit Testing for more info.\n\nExample\ntest_resources:\n  - type: bash_script\n    path: tests/test1.sh\n  - type: r_script\n    path: tests/test2.R\n  - path: resource1.txt"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#tests",
@@ -201,62 +138,6 @@
     "title": "Functionality",
     "section": "version",
     "text": "version\nType: Version\nVersion of the component. This field will be used to version the executable and the Docker container.\n\nExample\nversion: 0.8"
-  },
-  {
-    "objectID": "documentation/reference/config/overview.html",
-    "href": "documentation/reference/config/overview.html",
-    "title": "Viash Config Overview",
-    "section": "",
-    "text": "A Viash configuration is a YAML file which contains metadata to describe the behaviour and build target(s) of a component.\nWe commonly name this file config.vsh.yaml in our examples, but you can name it however you choose.\nHere’s an example of a config file:\nEvery Viash config consists of two main sections: functionality and platforms."
-  },
-  {
-    "objectID": "documentation/reference/config/overview.html#functionality",
-    "href": "documentation/reference/config/overview.html#functionality",
-    "title": "Viash Config Overview",
-    "section": "Functionality",
-    "text": "Functionality\nThe functionality section describes the behaviour of the component. This includes a name, a description and the arguments and resources the component needs to function.\nCheck out our Arguments section on the left to find out more about the supported arguments. The External Resources guide contains information on how to add resources and use them."
-  },
-  {
-    "objectID": "documentation/reference/config/overview.html#platforms",
-    "href": "documentation/reference/config/overview.html#platforms",
-    "title": "Viash Config Overview",
-    "section": "Platforms",
-    "text": "Platforms\nThe platforms section specifies what platforms are supported as build targets for a component and their requirements. We support native, docker and nextflow. If no platforms are specified, the native platform is used by default."
-  },
-  {
-    "objectID": "documentation/reference/config/platforms/NextflowVdsl3Platform.html",
-    "href": "documentation/reference/config/platforms/NextflowVdsl3Platform.html",
-    "title": "Nextflow Vdsl3 Platform",
-    "section": "",
-    "text": "Next-gen platform for generating NextFlow VDSL3 modules."
-  },
-  {
-    "objectID": "documentation/reference/config/platforms/NextflowVdsl3Platform.html#auto",
-    "href": "documentation/reference/config/platforms/NextflowVdsl3Platform.html#auto",
-    "title": "Nextflow Vdsl3 Platform",
-    "section": "auto",
-    "text": "auto\nType: NextflowAuto\nAutomated processing flags which can be toggled on or off:\n\nsimplifyInput: If true, an input tuple only containing only a single File (e.g. [\"foo\", file(\"in.h5ad\")]) is automatically transformed to a map (i.e. [\"foo\", [ input: file(\"in.h5ad\") ] ]). Default is true.\nsimplifyOutput: If true, an output tuple containing a map with a File (e.g. [\"foo\", [ output: file(\"out.h5ad\") ] ]) is automatically transformed to a map (i.e. [\"foo\", file(\"out.h5ad\")]). Default is true.\ntranscript: If true, the module’s transcripts from work/ are automatically published to params.transcriptDir. If not defined, params.publishDir + \"/_transcripts\" will be used. Will throw an error if neither are defined. Default is false.\npublish: If true, the module’s outputs are automatically published to params.publishDir. Will throw an error if params.publishDir is not defined. Default is false.\n\n\nExample\nauto:\n    publish: true"
-  },
-  {
-    "objectID": "documentation/reference/config/platforms/NextflowVdsl3Platform.html#debug",
-    "href": "documentation/reference/config/platforms/NextflowVdsl3Platform.html#debug",
-    "title": "Nextflow Vdsl3 Platform",
-    "section": "debug",
-    "text": "debug\nType: Boolean\nWhether or not to print debug messages."
-  },
-  {
-    "objectID": "documentation/reference/config/platforms/NextflowVdsl3Platform.html#directives",
-    "href": "documentation/reference/config/platforms/NextflowVdsl3Platform.html#directives",
-    "title": "Nextflow Vdsl3 Platform",
-    "section": "directives",
-    "text": "directives\nType: NextflowDirectives\nDirectives are optional settings that affect the execution of the process. These mostly match up with the Nextflow counterparts that are linked below:\n\naccelerator\nafterScript\nbeforeScript\ncache\nconda\ncontainer\ncontainerOptions\ncpus\ndisk\necho\nerrorStrategy\nexecutor\nmachineType\nmaxErrors\nmaxForks\nmaxRetries\nmemory\nmodule\npenv\npublishDir\nqueue\nscratch\nstoreDir\nstageInMode\nstageOutMode\ntag\ntime\n\n\nExample\ndirectives:\n    container: rocker/r-ver:4.1\n    label: highcpu\n    cpus: 4\n    memory: 16 GB"
-  },
-  {
-    "objectID": "documentation/reference/config/platforms/NextflowVdsl3Platform.html#id",
-    "href": "documentation/reference/config/platforms/NextflowVdsl3Platform.html#id",
-    "title": "Nextflow Vdsl3 Platform",
-    "section": "id",
-    "text": "id\nType: String\nEvery platform can be given a specific id that can later be referred to explicitly when running or building the Viash component.\n\nExample\nid: foo"
   },
   {
     "objectID": "documentation/reference/config/platforms/DockerPlatform.html",
@@ -368,7 +249,7 @@
     "href": "documentation/reference/config/platforms/DockerPlatform.html#setup_strategy",
     "title": "Docker Platform",
     "section": "setup_strategy",
-    "text": "setup_strategy\nType: DockerSetupStrategy\nThe Docker setup strategy to use when building a container.\n\n\n\nStrategy\nDescription\n\n\n\n\nalwaysbuild / build / b\nAlways build the image from the dockerfile. This is the default setup strategy.\n\n\nalwayscachedbuild / cachedbuild / cb\nAlways build the image from the dockerfile, with caching enabled.\n\n\nifneedbebuild\nBuild the image if it does not exist locally.\n\n\nifneedbecachedbuild\nBuild the image with caching enabled if it does not exist locally, with caching enabled.\n\n\nalwayspull / pull / p\nTry to pull the container from Docker Hub or the specified docker registry.\n\n\nalwayspullelsebuild / pullelsebuild\nTry to pull the image from a registry and build it if it doesn’t exist.\n\n\nalwayspullelsecachedbuild / pullelsecachedbuild\nTry to pull the image from a registry and build it with caching if it doesn’t exist.\n\n\nifneedbepull\nIf the image does not exist locally, pull the image.\n\n\nifneedbepullelsebuild\nIf the image does not exist locally, pull the image. If the image does exist, build it.\n\n\nifneedbepullelsecachedbuild\nIf the image does not exist locally, pull the image. If the image does exist, build it with caching enabled.\n\n\npush\nPush the container to Docker Hub or the specified docker registry.\n\n\npushifnotpresent\nPush the container to Docker Hub or the specified docker registry if the specified tag does not exist yet.\n\n\ndonothing / meh\nDo not build or pull anything.\n\n\n\n\nExample\nsetup_strategy: alwaysbuild"
+    "text": "setup_strategy\nType: DockerSetupStrategy\nThe Docker setup strategy to use when building a container.\n\n\n\nStrategy\nDescription\n\n\n\n\nalwaysbuild / build / b\nAlways build the image from the dockerfile. This is the default setup strategy.\n\n\nalwayscachedbuild / cachedbuild / cb\nAlways build the image from the dockerfile, with caching enabled.\n\n\nifneedbebuild\nBuild the image if it does not exist locally.\n\n\nifneedbecachedbuild\nBuild the image with caching enabled if it does not exist locally, with caching enabled.\n\n\nalwayspull / pull / p\nTry to pull the container from Docker Hub or the specified docker registry.\n\n\nalwayspullelsebuild / pullelsebuild\nTry to pull the image from a registry and build it if it doesn’t exist.\n\n\nalwayspullelsecachedbuild / pullelsecachedbuild\nTry to pull the image from a registry and build it with caching if it doesn’t exist.\n\n\nifneedbepull\nIf the image does not exist locally, pull the image.\n\n\nifneedbepullelsebuild\nIf the image does not exist locally, pull the image. If the image does exist, build it.\n\n\nifneedbepullelsecachedbuild\nIf the image does not exist locally, pull the image. If the image does exist, build it with caching enabled.\n\n\npush\nPush the container to Docker Hub or the specified docker registry.\n\n\npushifnotpresent\nPush the container to Docker Hub or the specified docker registry if the tag does not exist yet.\n\n\ndonothing / meh\nDo not build or pull anything.\n\n\n\n\nExample\nsetup_strategy: alwaysbuild"
   },
   {
     "objectID": "documentation/reference/config/platforms/DockerPlatform.html#tag",
@@ -425,6 +306,55 @@
     "title": "Docker Platform",
     "section": "yum",
     "text": "yum\nType: YumRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which yum packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: yum\n    packages: [ sl ]"
+  },
+  {
+    "objectID": "documentation/reference/config/platforms/NativePlatform.html",
+    "href": "documentation/reference/config/platforms/NativePlatform.html",
+    "title": "Native Platform",
+    "section": "",
+    "text": "Running a Viash component on a native platform means that the script will be executed in your current environment. Any dependencies are assumed to have been installed by the user, so the native platform is meant for developers (who know what they’re doing) or for simple bash scripts (which have no extra dependencies)."
+  },
+  {
+    "objectID": "documentation/reference/config/platforms/NativePlatform.html#id",
+    "href": "documentation/reference/config/platforms/NativePlatform.html#id",
+    "title": "Native Platform",
+    "section": "id",
+    "text": "id\nType: String\nAs with all platforms, you can give a platform a different name. By specifying id: foo, you can target this platform (only) by specifying -p foo in any of the Viash commands.\n\nExample\nid: foo"
+  },
+  {
+    "objectID": "documentation/reference/config/platforms/NextflowVdsl3Platform.html",
+    "href": "documentation/reference/config/platforms/NextflowVdsl3Platform.html",
+    "title": "Nextflow Vdsl3 Platform",
+    "section": "",
+    "text": "Next-gen platform for generating NextFlow VDSL3 modules."
+  },
+  {
+    "objectID": "documentation/reference/config/platforms/NextflowVdsl3Platform.html#auto",
+    "href": "documentation/reference/config/platforms/NextflowVdsl3Platform.html#auto",
+    "title": "Nextflow Vdsl3 Platform",
+    "section": "auto",
+    "text": "auto\nType: NextflowAuto\nAutomated processing flags which can be toggled on or off:\n\nsimplifyInput: If true, an input tuple only containing only a single File (e.g. [\"foo\", file(\"in.h5ad\")]) is automatically transformed to a map (i.e. [\"foo\", [ input: file(\"in.h5ad\") ] ]). Default is true.\nsimplifyOutput: If true, an output tuple containing a map with a File (e.g. [\"foo\", [ output: file(\"out.h5ad\") ] ]) is automatically transformed to a map (i.e. [\"foo\", file(\"out.h5ad\")]). Default is true.\ntranscript: If true, the module’s transcripts from work/ are automatically published to params.transcriptDir. If not defined, params.publishDir + \"/_transcripts\" will be used. Will throw an error if neither are defined. Default is false.\npublish: If true, the module’s outputs are automatically published to params.publishDir. Will throw an error if params.publishDir is not defined. Default is false.\n\n\nExample\nauto:\n    publish: true"
+  },
+  {
+    "objectID": "documentation/reference/config/platforms/NextflowVdsl3Platform.html#debug",
+    "href": "documentation/reference/config/platforms/NextflowVdsl3Platform.html#debug",
+    "title": "Nextflow Vdsl3 Platform",
+    "section": "debug",
+    "text": "debug\nType: Boolean\nWhether or not to print debug messages."
+  },
+  {
+    "objectID": "documentation/reference/config/platforms/NextflowVdsl3Platform.html#directives",
+    "href": "documentation/reference/config/platforms/NextflowVdsl3Platform.html#directives",
+    "title": "Nextflow Vdsl3 Platform",
+    "section": "directives",
+    "text": "directives\nType: NextflowDirectives\nDirectives are optional settings that affect the execution of the process. These mostly match up with the Nextflow counterparts that are linked below:\n\naccelerator\nafterScript\nbeforeScript\ncache\nconda\ncontainer\ncontainerOptions\ncpus\ndisk\necho\nerrorStrategy\nexecutor\nmachineType\nmaxErrors\nmaxForks\nmaxRetries\nmemory\nmodule\npenv\npublishDir\nqueue\nscratch\nstoreDir\nstageInMode\nstageOutMode\ntag\ntime\n\n\nExample\ndirectives:\n    container: rocker/r-ver:4.1\n    label: highcpu\n    cpus: 4\n    memory: 16 GB"
+  },
+  {
+    "objectID": "documentation/reference/config/platforms/NextflowVdsl3Platform.html#id",
+    "href": "documentation/reference/config/platforms/NextflowVdsl3Platform.html#id",
+    "title": "Nextflow Vdsl3 Platform",
+    "section": "id",
+    "text": "id\nType: String\nEvery platform can be given a specific id that can later be referred to explicitly when running or building the Viash component.\n\nExample\nid: foo"
   },
   {
     "objectID": "documentation/reference/config/platforms/NextflowLegacyPlatform.html",
@@ -525,18 +455,81 @@
     "text": "tag\nType: Version\nSpecify a Docker image based on its tag.\n\nExample\ntag: 4.0"
   },
   {
-    "objectID": "documentation/reference/config/platforms/NativePlatform.html",
-    "href": "documentation/reference/config/platforms/NativePlatform.html",
-    "title": "Native Platform",
+    "objectID": "documentation/reference/config/overview.html",
+    "href": "documentation/reference/config/overview.html",
+    "title": "Viash Config Overview",
     "section": "",
-    "text": "Running a Viash component on a native platform means that the script will be executed in your current environment. Any dependencies are assumed to have been installed by the user, so the native platform is meant for developers (who know what they’re doing) or for simple bash scripts (which have no extra dependencies)."
+    "text": "A Viash configuration is a YAML file which contains metadata to describe the behaviour and build target(s) of a component.\nWe commonly name this file config.vsh.yaml in our examples, but you can name it however you choose.\nHere’s an example of a config file:\nEvery Viash config consists of two main sections: functionality and platforms."
   },
   {
-    "objectID": "documentation/reference/config/platforms/NativePlatform.html#id",
-    "href": "documentation/reference/config/platforms/NativePlatform.html#id",
-    "title": "Native Platform",
-    "section": "id",
-    "text": "id\nType: String\nAs with all platforms, you can give a platform a different name. By specifying id: foo, you can target this platform (only) by specifying -p foo in any of the Viash commands.\n\nExample\nid: foo"
+    "objectID": "documentation/reference/config/overview.html#functionality",
+    "href": "documentation/reference/config/overview.html#functionality",
+    "title": "Viash Config Overview",
+    "section": "Functionality",
+    "text": "Functionality\nThe functionality section describes the behaviour of the component. This includes a name, a description and the arguments and resources the component needs to function.\nCheck out our Arguments section on the left to find out more about the supported arguments. The External Resources guide contains information on how to add resources and use them."
+  },
+  {
+    "objectID": "documentation/reference/config/overview.html#platforms",
+    "href": "documentation/reference/config/overview.html#platforms",
+    "title": "Viash Config Overview",
+    "section": "Platforms",
+    "text": "Platforms\nThe platforms section specifies what platforms are supported as build targets for a component and their requirements. We support native, docker and nextflow. If no platforms are specified, the native platform is used by default."
+  },
+  {
+    "objectID": "documentation/reference/config/requirements.html",
+    "href": "documentation/reference/config/requirements.html",
+    "title": "Setup Requirements",
+    "section": "",
+    "text": "Specify which apk packages should be available in order to run the component.\n\n\nsetup:\n  - type: apk\n    packages: [ sl ]"
+  },
+  {
+    "objectID": "documentation/reference/config/requirements.html#apt-requirements",
+    "href": "documentation/reference/config/requirements.html#apt-requirements",
+    "title": "Setup Requirements",
+    "section": "Apt Requirements",
+    "text": "Apt Requirements\nSpecify which apt packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: apt\n    packages: [ sl ]"
+  },
+  {
+    "objectID": "documentation/reference/config/requirements.html#docker-requirements",
+    "href": "documentation/reference/config/requirements.html#docker-requirements",
+    "title": "Setup Requirements",
+    "section": "Docker Requirements",
+    "text": "Docker Requirements\nSpecify which Docker commands should be run during setup.\n\nExample\nsetup:\n  - type: docker\n    build_args: [ GITHUB_PAT=hello_world ]\n    run: [ git clone ... ]\n    add: [ \"http://foo.bar .\" ]\n    copy: [ \"http://foo.bar .\" ]\n    resources: \n      - resource.txt /path/to/resource.txt"
+  },
+  {
+    "objectID": "documentation/reference/config/requirements.html#javascript-requirements",
+    "href": "documentation/reference/config/requirements.html#javascript-requirements",
+    "title": "Setup Requirements",
+    "section": "Javascript Requirements",
+    "text": "Javascript Requirements\nSpecify which JavaScript packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: javascript\n    npm: [ packagename ]\n    git: [ https://... ]\n    github: [ owner/repository ]\n    url: [ https://... ]"
+  },
+  {
+    "objectID": "documentation/reference/config/requirements.html#python-requirements",
+    "href": "documentation/reference/config/requirements.html#python-requirements",
+    "title": "Setup Requirements",
+    "section": "Python Requirements",
+    "text": "Python Requirements\nSpecify which Python packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ jkbr/httpie ]\n    gitlab: [ foo/bar ]\n    mercurial: [ http://... ]\n    svn: [ http://...]\n    bazaar: [ http://... ]\n    url: [ http://... ]"
+  },
+  {
+    "objectID": "documentation/reference/config/requirements.html#r-requirements",
+    "href": "documentation/reference/config/requirements.html#r-requirements",
+    "title": "Setup Requirements",
+    "section": "R Requirements",
+    "text": "R Requirements\nSpecify which R packages should be available in order to run the component.\n\nExample\nsetup: \n  - type: r\n    cran: [ dynutils ]\n    bioc: [ AnnotationDbi ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ rcannood/SCORPIUS ]\n    gitlab: [ org/package ]\n    svn: [ https://path.to.svn/group/repo ]\n    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]\n    script: [ 'devtools::install(\".\")' ]"
+  },
+  {
+    "objectID": "documentation/reference/config/requirements.html#ruby-requirements",
+    "href": "documentation/reference/config/requirements.html#ruby-requirements",
+    "title": "Setup Requirements",
+    "section": "Ruby Requirements",
+    "text": "Ruby Requirements\nSpecify which Ruby packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: ruby\n    packages: [ rspec ]"
+  },
+  {
+    "objectID": "documentation/reference/config/requirements.html#yum-requirements",
+    "href": "documentation/reference/config/requirements.html#yum-requirements",
+    "title": "Setup Requirements",
+    "section": "Yum Requirements",
+    "text": "Yum Requirements\nSpecify which yum packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: yum\n    packages: [ sl ]"
   },
   {
     "objectID": "documentation/reference/config/config-modding.html",
@@ -553,109 +546,60 @@
     "text": "Examples\nChange the version of a component:\nviash build -c '.functionality.version := \"0.3.0\"'\nChange the registry of a docker container:\nviash build -c \\\n  '.platforms[.type == \"docker\"].container_registry := \"url-to-registry\"'\nAdd an author to the list:\nviash build -c '.functionality.authors += { name: \"Mr. T\", role: \"sponsor\" }'\nYou can use dynamic config modding to alter the config of multiple components at once:\nviash ns build \\\n  -c '.functionality.version := \"0.3.0\"' \\\n  -c '.platforms[.type == \"docker\"].container_registry := \"url-to-registry\"' \\\n  -c '.functionality.authors += { name: \"Mr. T\", role: \"sponsor\" }'"
   },
   {
-    "objectID": "documentation/reference/config/arguments/boolean_false.html",
-    "href": "documentation/reference/config/arguments/boolean_false.html",
-    "title": "boolean_false",
+    "objectID": "documentation/reference/config/requirements/yumRequirements.html",
+    "href": "documentation/reference/config/requirements/yumRequirements.html",
+    "title": "Yum Requirements",
     "section": "",
-    "text": "An argument of the boolean_false type acts like an inverted boolean flag with a default value of true. When called as an argument it sets the boolean to false."
+    "text": "Example\nsetup:\n  - type: yum\n    packages: [ sl ]"
   },
   {
-    "objectID": "documentation/reference/config/arguments/boolean_false.html#alternatives",
-    "href": "documentation/reference/config/arguments/boolean_false.html#alternatives",
-    "title": "boolean_false",
-    "section": "alternatives",
-    "text": "alternatives\nType: String / List of String\nList of alternative format variations for this argument."
-  },
-  {
-    "objectID": "documentation/reference/config/arguments/boolean_false.html#description",
-    "href": "documentation/reference/config/arguments/boolean_false.html#description",
-    "title": "boolean_false",
-    "section": "description",
-    "text": "description\nType: String\nA description of the argument. This will be displayed with --help."
-  },
-  {
-    "objectID": "documentation/reference/config/arguments/boolean_false.html#name",
-    "href": "documentation/reference/config/arguments/boolean_false.html#name",
-    "title": "boolean_false",
-    "section": "name",
-    "text": "name\nType: String\nThe name of the argument. Can be in the formats --no-log, -n or no-log. The number of dashes determines how values can be passed:\n\n--no-log is a long option, which can be passed with executable_name --no-log\n-n is a short option, which can be passed with executable_name -n\nno-log is an argument, which can be passed with executable_name no-log"
-  },
-  {
-    "objectID": "documentation/reference/config/arguments/file.html",
-    "href": "documentation/reference/config/arguments/file.html",
-    "title": "file",
+    "objectID": "documentation/reference/config/requirements/pythonRequirements.html",
+    "href": "documentation/reference/config/requirements/pythonRequirements.html",
+    "title": "Python Requirements",
     "section": "",
-    "text": "A file type argument has a string value that points to a file or folder path."
+    "text": "Example\nsetup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ jkbr/httpie ]\n    gitlab: [ foo/bar ]\n    mercurial: [ http://... ]\n    svn: [ http://...]\n    bazaar: [ http://... ]\n    url: [ http://... ]"
   },
   {
-    "objectID": "documentation/reference/config/arguments/file.html#alternatives",
-    "href": "documentation/reference/config/arguments/file.html#alternatives",
-    "title": "file",
-    "section": "alternatives",
-    "text": "alternatives\nType: String / List of String\nList of alternative format variations for this argument."
+    "objectID": "documentation/reference/config/requirements/apkRequirements.html",
+    "href": "documentation/reference/config/requirements/apkRequirements.html",
+    "title": "Apk Requirements",
+    "section": "",
+    "text": "Example\nsetup:\n  - type: apk\n    packages: [ sl ]"
   },
   {
-    "objectID": "documentation/reference/config/arguments/file.html#default",
-    "href": "documentation/reference/config/arguments/file.html#default",
-    "title": "file",
-    "section": "default",
-    "text": "default\nType: Path / List of Path\nThe default value when no argument value is provided. This will not work if the required property is enabled.\n\nExample\n- name: --my_file\n  type: file\n  default: data.csv"
+    "objectID": "documentation/reference/config/requirements/javascriptRequirements.html",
+    "href": "documentation/reference/config/requirements/javascriptRequirements.html",
+    "title": "Javascript Requirements",
+    "section": "",
+    "text": "Example\nsetup:\n  - type: javascript\n    npm: [ packagename ]\n    git: [ https://... ]\n    github: [ owner/repository ]\n    url: [ https://... ]"
   },
   {
-    "objectID": "documentation/reference/config/arguments/file.html#description",
-    "href": "documentation/reference/config/arguments/file.html#description",
-    "title": "file",
-    "section": "description",
-    "text": "description\nType: String\nA description of the argument. This will be displayed with --help."
+    "objectID": "documentation/reference/config/requirements/dockerRequirements.html",
+    "href": "documentation/reference/config/requirements/dockerRequirements.html",
+    "title": "Docker Requirements",
+    "section": "",
+    "text": "Example\nsetup:\n  - type: docker\n    build_args: [ GITHUB_PAT=hello_world ]\n    run: [ git clone ... ]\n    add: [ \"http://foo.bar .\" ]\n    copy: [ \"http://foo.bar .\" ]\n    resources: \n      - resource.txt /path/to/resource.txt"
   },
   {
-    "objectID": "documentation/reference/config/arguments/file.html#direction",
-    "href": "documentation/reference/config/arguments/file.html#direction",
-    "title": "file",
-    "section": "direction",
-    "text": "direction\nType: Direction\nMakes this argument an input or an output, as in does the file/folder needs to be read or written. input by default.\n\nExample\n- name: --my_output_file\n  type: file\n  direction: output"
+    "objectID": "documentation/reference/config/requirements/rRequirements.html",
+    "href": "documentation/reference/config/requirements/rRequirements.html",
+    "title": "R Requirements",
+    "section": "",
+    "text": "Example\nsetup: \n  - type: r\n    cran: [ dynutils ]\n    bioc: [ AnnotationDbi ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ rcannood/SCORPIUS ]\n    gitlab: [ org/package ]\n    svn: [ https://path.to.svn/group/repo ]\n    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]\n    script: [ 'devtools::install(\".\")' ]"
   },
   {
-    "objectID": "documentation/reference/config/arguments/file.html#example-3",
-    "href": "documentation/reference/config/arguments/file.html#example-3",
-    "title": "file",
-    "section": "example",
-    "text": "example\nType: Path / List of Path\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\n\nExample\n- name: --my_file\n  type: file\n  example: data.csv"
+    "objectID": "documentation/reference/config/requirements/rubyRequirements.html",
+    "href": "documentation/reference/config/requirements/rubyRequirements.html",
+    "title": "Ruby Requirements",
+    "section": "",
+    "text": "Example\nsetup:\n  - type: ruby\n    packages: [ rspec ]"
   },
   {
-    "objectID": "documentation/reference/config/arguments/file.html#multiple",
-    "href": "documentation/reference/config/arguments/file.html#multiple",
-    "title": "file",
-    "section": "multiple",
-    "text": "multiple\nType: Boolean\nTreat the argument value as an array. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. You can use a custom delimiter by using the multiple_sep property. false by default.\n\nExample\n- name: --my_files\n  type: file\n  multiple: true\nHere’s an example of how to use this:\nmy_component --my_files=firstFile.csv:anotherFile.csv:yetAnother.csv"
-  },
-  {
-    "objectID": "documentation/reference/config/arguments/file.html#multiple_sep",
-    "href": "documentation/reference/config/arguments/file.html#multiple_sep",
-    "title": "file",
-    "section": "multiple_sep",
-    "text": "multiple_sep\nType: Char\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_files\n  type: file\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_files=firstFile.csv,anotherFile.csv,yetAnother.csv"
-  },
-  {
-    "objectID": "documentation/reference/config/arguments/file.html#must_exist",
-    "href": "documentation/reference/config/arguments/file.html#must_exist",
-    "title": "file",
-    "section": "must_exist",
-    "text": "must_exist\nType: Boolean\nThe file or folder should exist before the start of execution. If set to true, an error will be produced if the file or folder wasn’t found.\n\nExample\n- name: --my_file\n  type: file\n  must_exist: true"
-  },
-  {
-    "objectID": "documentation/reference/config/arguments/file.html#name",
-    "href": "documentation/reference/config/arguments/file.html#name",
-    "title": "file",
-    "section": "name",
-    "text": "name\nType: String\nThe name of the argument. Can be in the formats --foo, -f or foo. The number of dashes determines how values can be passed:\n\n--foo is a long option, which can be passed with executable_name --foo=value or executable_name --foo value\n-f is a short option, which can be passed with executable_name -f value\nfoo is an argument, which can be passed with executable_name value"
-  },
-  {
-    "objectID": "documentation/reference/config/arguments/file.html#required",
-    "href": "documentation/reference/config/arguments/file.html#required",
-    "title": "file",
-    "section": "required",
-    "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\n\nExample\n- name: --my_file\n  type: file\n  required: true"
+    "objectID": "documentation/reference/config/requirements/aptRequirements.html",
+    "href": "documentation/reference/config/requirements/aptRequirements.html",
+    "title": "Apt Requirements",
+    "section": "",
+    "text": "Example\nsetup:\n  - type: apt\n    packages: [ sl ]"
   },
   {
     "objectID": "documentation/reference/config/arguments/integer.html",
@@ -819,6 +763,97 @@
     "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\n\nExample\n- name: --my_double\n  type: double\n  required: true"
   },
   {
+    "objectID": "documentation/reference/config/arguments/boolean_false.html",
+    "href": "documentation/reference/config/arguments/boolean_false.html",
+    "title": "boolean_false",
+    "section": "",
+    "text": "An argument of the boolean_false type acts like an inverted boolean flag with a default value of true. When called as an argument it sets the boolean to false."
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/boolean_false.html#alternatives",
+    "href": "documentation/reference/config/arguments/boolean_false.html#alternatives",
+    "title": "boolean_false",
+    "section": "alternatives",
+    "text": "alternatives\nType: String / List of String\nList of alternative format variations for this argument."
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/boolean_false.html#description",
+    "href": "documentation/reference/config/arguments/boolean_false.html#description",
+    "title": "boolean_false",
+    "section": "description",
+    "text": "description\nType: String\nA description of the argument. This will be displayed with --help."
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/boolean_false.html#name",
+    "href": "documentation/reference/config/arguments/boolean_false.html#name",
+    "title": "boolean_false",
+    "section": "name",
+    "text": "name\nType: String\nThe name of the argument. Can be in the formats --no-log, -n or no-log. The number of dashes determines how values can be passed:\n\n--no-log is a long option, which can be passed with executable_name --no-log\n-n is a short option, which can be passed with executable_name -n\nno-log is an argument, which can be passed with executable_name no-log"
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/boolean.html",
+    "href": "documentation/reference/config/arguments/boolean.html",
+    "title": "boolean",
+    "section": "",
+    "text": "A boolean type argument has two possible values: true or false."
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/boolean.html#alternatives",
+    "href": "documentation/reference/config/arguments/boolean.html#alternatives",
+    "title": "boolean",
+    "section": "alternatives",
+    "text": "alternatives\nType: String / List of String\nList of alternative format variations for this argument."
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/boolean.html#default",
+    "href": "documentation/reference/config/arguments/boolean.html#default",
+    "title": "boolean",
+    "section": "default",
+    "text": "default\nType: Boolean / List of Boolean\nThe default value when no argument value is provided. This will not work if the required property is enabled.\n\nExample\n- name: --my_boolean\n  type: boolean\n  default: true"
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/boolean.html#description",
+    "href": "documentation/reference/config/arguments/boolean.html#description",
+    "title": "boolean",
+    "section": "description",
+    "text": "description\nType: String\nA description of the argument. This will be displayed with --help."
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/boolean.html#example-2",
+    "href": "documentation/reference/config/arguments/boolean.html#example-2",
+    "title": "boolean",
+    "section": "example",
+    "text": "example\nType: Boolean / List of Boolean\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\n\nExample\n- name: --my_boolean\n  type: boolean\n  example: true"
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/boolean.html#multiple",
+    "href": "documentation/reference/config/arguments/boolean.html#multiple",
+    "title": "boolean",
+    "section": "multiple",
+    "text": "multiple\nType: Boolean\nTreat the argument value as an array. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. You can use a custom delimiter by using the multiple_sep property. false by default.\n\nExample\n- name: --my_boolean\n  type: boolean\n  multiple: true\nHere’s an example of how to use this:\nmy_component --my_boolean=true:true:false"
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/boolean.html#multiple_sep",
+    "href": "documentation/reference/config/arguments/boolean.html#multiple_sep",
+    "title": "boolean",
+    "section": "multiple_sep",
+    "text": "multiple_sep\nType: Char\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_boolean\n  type: boolean\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_boolean=true,true,false"
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/boolean.html#name",
+    "href": "documentation/reference/config/arguments/boolean.html#name",
+    "title": "boolean",
+    "section": "name",
+    "text": "name\nType: String\nThe name of the argument. Can be in the formats --trim, -t or trim. The number of dashes determines how values can be passed:\n\n--trim is a long option, which can be passed with executable_name --trim\n-t is a short option, which can be passed with executable_name -t\ntrim is an argument, which can be passed with executable_name trim"
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/boolean.html#required",
+    "href": "documentation/reference/config/arguments/boolean.html#required",
+    "title": "boolean",
+    "section": "required",
+    "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\n\nExample\n- name: --my_boolean\n  type: boolean\n  required: true"
+  },
+  {
     "objectID": "documentation/reference/config/arguments/string.html",
     "href": "documentation/reference/config/arguments/string.html",
     "title": "string",
@@ -889,67 +924,81 @@
     "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\n\nExample\n- name: --my_string\n  type: string\n  required: true"
   },
   {
-    "objectID": "documentation/reference/config/arguments/boolean.html",
-    "href": "documentation/reference/config/arguments/boolean.html",
-    "title": "boolean",
+    "objectID": "documentation/reference/config/arguments/file.html",
+    "href": "documentation/reference/config/arguments/file.html",
+    "title": "file",
     "section": "",
-    "text": "A boolean type argument has two possible values: true or false."
+    "text": "A file type argument has a string value that points to a file or folder path."
   },
   {
-    "objectID": "documentation/reference/config/arguments/boolean.html#alternatives",
-    "href": "documentation/reference/config/arguments/boolean.html#alternatives",
-    "title": "boolean",
+    "objectID": "documentation/reference/config/arguments/file.html#alternatives",
+    "href": "documentation/reference/config/arguments/file.html#alternatives",
+    "title": "file",
     "section": "alternatives",
     "text": "alternatives\nType: String / List of String\nList of alternative format variations for this argument."
   },
   {
-    "objectID": "documentation/reference/config/arguments/boolean.html#default",
-    "href": "documentation/reference/config/arguments/boolean.html#default",
-    "title": "boolean",
+    "objectID": "documentation/reference/config/arguments/file.html#default",
+    "href": "documentation/reference/config/arguments/file.html#default",
+    "title": "file",
     "section": "default",
-    "text": "default\nType: Boolean / List of Boolean\nThe default value when no argument value is provided. This will not work if the required property is enabled.\n\nExample\n- name: --my_boolean\n  type: boolean\n  default: true"
+    "text": "default\nType: Path / List of Path\nThe default value when no argument value is provided. This will not work if the required property is enabled.\n\nExample\n- name: --my_file\n  type: file\n  default: data.csv"
   },
   {
-    "objectID": "documentation/reference/config/arguments/boolean.html#description",
-    "href": "documentation/reference/config/arguments/boolean.html#description",
-    "title": "boolean",
+    "objectID": "documentation/reference/config/arguments/file.html#description",
+    "href": "documentation/reference/config/arguments/file.html#description",
+    "title": "file",
     "section": "description",
     "text": "description\nType: String\nA description of the argument. This will be displayed with --help."
   },
   {
-    "objectID": "documentation/reference/config/arguments/boolean.html#example-2",
-    "href": "documentation/reference/config/arguments/boolean.html#example-2",
-    "title": "boolean",
+    "objectID": "documentation/reference/config/arguments/file.html#direction",
+    "href": "documentation/reference/config/arguments/file.html#direction",
+    "title": "file",
+    "section": "direction",
+    "text": "direction\nType: Direction\nMakes this argument an input or an output, as in does the file/folder needs to be read or written. input by default.\n\nExample\n- name: --my_output_file\n  type: file\n  direction: output"
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/file.html#example-3",
+    "href": "documentation/reference/config/arguments/file.html#example-3",
+    "title": "file",
     "section": "example",
-    "text": "example\nType: Boolean / List of Boolean\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\n\nExample\n- name: --my_boolean\n  type: boolean\n  example: true"
+    "text": "example\nType: Path / List of Path\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\n\nExample\n- name: --my_file\n  type: file\n  example: data.csv"
   },
   {
-    "objectID": "documentation/reference/config/arguments/boolean.html#multiple",
-    "href": "documentation/reference/config/arguments/boolean.html#multiple",
-    "title": "boolean",
+    "objectID": "documentation/reference/config/arguments/file.html#multiple",
+    "href": "documentation/reference/config/arguments/file.html#multiple",
+    "title": "file",
     "section": "multiple",
-    "text": "multiple\nType: Boolean\nTreat the argument value as an array. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. You can use a custom delimiter by using the multiple_sep property. false by default.\n\nExample\n- name: --my_boolean\n  type: boolean\n  multiple: true\nHere’s an example of how to use this:\nmy_component --my_boolean=true:true:false"
+    "text": "multiple\nType: Boolean\nTreat the argument value as an array. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. You can use a custom delimiter by using the multiple_sep property. false by default.\n\nExample\n- name: --my_files\n  type: file\n  multiple: true\nHere’s an example of how to use this:\nmy_component --my_files=firstFile.csv:anotherFile.csv:yetAnother.csv"
   },
   {
-    "objectID": "documentation/reference/config/arguments/boolean.html#multiple_sep",
-    "href": "documentation/reference/config/arguments/boolean.html#multiple_sep",
-    "title": "boolean",
+    "objectID": "documentation/reference/config/arguments/file.html#multiple_sep",
+    "href": "documentation/reference/config/arguments/file.html#multiple_sep",
+    "title": "file",
     "section": "multiple_sep",
-    "text": "multiple_sep\nType: Char\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_boolean\n  type: boolean\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_boolean=true,true,false"
+    "text": "multiple_sep\nType: Char\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_files\n  type: file\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_files=firstFile.csv,anotherFile.csv,yetAnother.csv"
   },
   {
-    "objectID": "documentation/reference/config/arguments/boolean.html#name",
-    "href": "documentation/reference/config/arguments/boolean.html#name",
-    "title": "boolean",
+    "objectID": "documentation/reference/config/arguments/file.html#must_exist",
+    "href": "documentation/reference/config/arguments/file.html#must_exist",
+    "title": "file",
+    "section": "must_exist",
+    "text": "must_exist\nType: Boolean\nThe file or folder should exist before the start of execution. If set to true, an error will be produced if the file or folder wasn’t found.\n\nExample\n- name: --my_file\n  type: file\n  must_exist: true"
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/file.html#name",
+    "href": "documentation/reference/config/arguments/file.html#name",
+    "title": "file",
     "section": "name",
-    "text": "name\nType: String\nThe name of the argument. Can be in the formats --trim, -t or trim. The number of dashes determines how values can be passed:\n\n--trim is a long option, which can be passed with executable_name --trim\n-t is a short option, which can be passed with executable_name -t\ntrim is an argument, which can be passed with executable_name trim"
+    "text": "name\nType: String\nThe name of the argument. Can be in the formats --foo, -f or foo. The number of dashes determines how values can be passed:\n\n--foo is a long option, which can be passed with executable_name --foo=value or executable_name --foo value\n-f is a short option, which can be passed with executable_name -f value\nfoo is an argument, which can be passed with executable_name value"
   },
   {
-    "objectID": "documentation/reference/config/arguments/boolean.html#required",
-    "href": "documentation/reference/config/arguments/boolean.html#required",
-    "title": "boolean",
+    "objectID": "documentation/reference/config/arguments/file.html#required",
+    "href": "documentation/reference/config/arguments/file.html#required",
+    "title": "file",
     "section": "required",
-    "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\n\nExample\n- name: --my_boolean\n  type: boolean\n  required: true"
+    "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\n\nExample\n- name: --my_file\n  type: file\n  required: true"
   },
   {
     "objectID": "documentation/reference/config/arguments/boolean_true.html",
@@ -980,62 +1029,6 @@
     "text": "name\nType: String\nThe name of the argument. Can be in the formats --silent, -s or silent. The number of dashes determines how values can be passed:\n\n--silent is a long option, which can be passed with executable_name --silent\n-s is a short option, which can be passed with executable_name -s\nsilent is an argument, which can be passed with executable_name silent"
   },
   {
-    "objectID": "documentation/reference/config/requirements/apkRequirements.html",
-    "href": "documentation/reference/config/requirements/apkRequirements.html",
-    "title": "Apk Requirements",
-    "section": "",
-    "text": "Example\nsetup:\n  - type: apk\n    packages: [ sl ]"
-  },
-  {
-    "objectID": "documentation/reference/config/requirements/dockerRequirements.html",
-    "href": "documentation/reference/config/requirements/dockerRequirements.html",
-    "title": "Docker Requirements",
-    "section": "",
-    "text": "Example\nsetup:\n  - type: docker\n    build_args: [ GITHUB_PAT=hello_world ]\n    run: [ git clone ... ]\n    add: [ \"http://foo.bar .\" ]\n    copy: [ \"http://foo.bar .\" ]\n    resources: \n      - resource.txt /path/to/resource.txt"
-  },
-  {
-    "objectID": "documentation/reference/config/requirements/pythonRequirements.html",
-    "href": "documentation/reference/config/requirements/pythonRequirements.html",
-    "title": "Python Requirements",
-    "section": "",
-    "text": "Example\nsetup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ jkbr/httpie ]\n    gitlab: [ foo/bar ]\n    mercurial: [ http://... ]\n    svn: [ http://...]\n    bazaar: [ http://... ]\n    url: [ http://... ]"
-  },
-  {
-    "objectID": "documentation/reference/config/requirements/rubyRequirements.html",
-    "href": "documentation/reference/config/requirements/rubyRequirements.html",
-    "title": "Ruby Requirements",
-    "section": "",
-    "text": "Example\nsetup:\n  - type: ruby\n    packages: [ rspec ]"
-  },
-  {
-    "objectID": "documentation/reference/config/requirements/yumRequirements.html",
-    "href": "documentation/reference/config/requirements/yumRequirements.html",
-    "title": "Yum Requirements",
-    "section": "",
-    "text": "Example\nsetup:\n  - type: yum\n    packages: [ sl ]"
-  },
-  {
-    "objectID": "documentation/reference/config/requirements/rRequirements.html",
-    "href": "documentation/reference/config/requirements/rRequirements.html",
-    "title": "R Requirements",
-    "section": "",
-    "text": "Example\nsetup: \n  - type: r\n    cran: [ dynutils ]\n    bioc: [ AnnotationDbi ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ rcannood/SCORPIUS ]\n    gitlab: [ org/package ]\n    svn: [ https://path.to.svn/group/repo ]\n    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]\n    script: [ 'devtools::install(\".\")' ]"
-  },
-  {
-    "objectID": "documentation/reference/config/requirements/javascriptRequirements.html",
-    "href": "documentation/reference/config/requirements/javascriptRequirements.html",
-    "title": "Javascript Requirements",
-    "section": "",
-    "text": "Example\nsetup:\n  - type: javascript\n    npm: [ packagename ]\n    git: [ https://... ]\n    github: [ owner/repository ]\n    url: [ https://... ]"
-  },
-  {
-    "objectID": "documentation/reference/config/requirements/aptRequirements.html",
-    "href": "documentation/reference/config/requirements/aptRequirements.html",
-    "title": "Apt Requirements",
-    "section": "",
-    "text": "Example\nsetup:\n  - type: apt\n    packages: [ sl ]"
-  },
-  {
     "objectID": "documentation/reference/viash/ns.html",
     "href": "documentation/reference/viash/ns.html",
     "title": "viash ns",
@@ -1064,6 +1057,20 @@
     "text": "viash ns exec\nExecute a command for all found Viash components. The syntax of this command is inspired by find . -exec echo {} \\;.\nThe following fields are automatically replaced:\n\n{} | {path}: path to the config file\n{abs-path}: absolute path to the config file\n{dir}: path to the parent directory of the config file\n{abs-dir}: absolute path to the directory of the config file\n{main-script}: path to the main script (if any)\n{abs-main-script}: absolute path to the main script (if any)\n{functionality-name}: name of the component\n\nA command suffixed by \\; (or nothing) will execute one command for each of the Viash components, whereas a command suffixed by + will execute one command for all Viash components.\nUsage:\nviash ns exec 'echo {path} \\\\;'\nviash ns exec 'chmod +x {main-script} +'\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--cmd\nThe command to execute for each viash config file in the namespace. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--dry_run, -d\nPerform a dry run.\nBoolean\n\n\n--parallel, -l\nWhether or not to run the process in parallel.\nBoolean\n\n\n--platform, -p\nActs as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--query, -q\nFilter which components get selected by component and namespace name. Can be a regex. Example: “^mynamespace/component1$”.\nString\n\n\n--query_name\nFilter which components get selected by component name. Can be a regex. Example: “^component1”.\nString\n\n\n--query_namespace, -n\nFilter which namespaces get selected by namespace name. Can be a regex. Example: “^mynamespace$”.\nString\n\n\n--src, -s\nA source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.\nString\n\n\n--help, -h\nShow help message"
   },
   {
+    "objectID": "documentation/reference/viash/build.html",
+    "href": "documentation/reference/viash/build.html",
+    "title": "viash build",
+    "section": "",
+    "text": "Usage:\nviash build config.vsh.yaml -o output [-p docker] [-m] [-s]\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--meta, -m\nPrint out some meta information at the end.\nBoolean\n\n\n--output, -o\nPath to directory in which the executable and any resources is built to. Default: “output/”. This is a required argument.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--push\nWhether or not to push the container to a Docker registry [Docker Platform only].\nBoolean\n\n\n--setup, -s\nWhich setup strategy for creating the container to use [Docker Platform only].\nString\n\n\n--write_meta, -w\nWrite out some meta information to RESOURCES_DIR/viash.yaml at the end.\nBoolean\n\n\n--help, -h\nShow help message"
+  },
+  {
+    "objectID": "documentation/reference/viash/run.html",
+    "href": "documentation/reference/viash/run.html",
+    "title": "viash run",
+    "section": "",
+    "text": "Usage:\nviash run config.vsh.yaml [-p docker] [-k true/false]  -- [arguments for script]\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--help, -h\nShow help message"
+  },
+  {
     "objectID": "documentation/reference/viash/config.html",
     "href": "documentation/reference/viash/config.html",
     "title": "viash config",
@@ -1083,20 +1090,6 @@
     "title": "viash test",
     "section": "",
     "text": "Usage:\nviash test config.vsh.yaml [-p docker] [-k true/false]\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--help, -h\nShow help message"
-  },
-  {
-    "objectID": "documentation/reference/viash/run.html",
-    "href": "documentation/reference/viash/run.html",
-    "title": "viash run",
-    "section": "",
-    "text": "Usage:\nviash run config.vsh.yaml [-p docker] [-k true/false]  -- [arguments for script]\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--help, -h\nShow help message"
-  },
-  {
-    "objectID": "documentation/reference/viash/build.html",
-    "href": "documentation/reference/viash/build.html",
-    "title": "viash build",
-    "section": "",
-    "text": "Usage:\nviash build config.vsh.yaml -o output [-p docker] [-m] [-s]\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--meta, -m\nPrint out some meta information at the end.\nBoolean\n\n\n--output, -o\nPath to directory in which the executable and any resources is built to. Default: “output/”. This is a required argument.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--push\nWhether or not to push the container to a Docker registry [Docker Platform only].\nBoolean\n\n\n--setup, -s\nWhich setup strategy for creating the container to use [Docker Platform only].\nString\n\n\n--write_meta, -w\nWrite out some meta information to RESOURCES_DIR/viash.yaml at the end.\nBoolean\n\n\n--help, -h\nShow help message"
   },
   {
     "objectID": "documentation/quickstart/index.html",
@@ -1302,6 +1295,76 @@
     "text": "What’s next?\n\n\nNow you know how to build and run native executables, you might also be interested in learning more about executables with a Docker backend."
   },
   {
+    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html",
+    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html",
+    "title": "Basic Pipeline",
+    "section": "",
+    "text": "This guide will explain how to create a basic Nextflow pipeline using a Viash component."
+  },
+  {
+    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#creating-the-module",
+    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#creating-the-module",
+    "title": "Basic Pipeline",
+    "section": "Creating the module",
+    "text": "Creating the module\nNextflow works with modules to run scripts and handle their input and output, so the first step is generating a Nextflow module from a Viash component. This guide will use a small component named remove_comments that removes comments (lines starting with a hashtag) from a TSV file.\n\n\n\n\n\n\nNote\n\n\n\nThis guide won’t go in-depth about how to generate a Nextflow module from a Viash component. For more information on that topic, read the Nextflow component creation and the Nextflow Build & Run guides.\n\n\n\nDownload the source files\nDownload the zip below and extract it to a directory of your choosing:\nDownload basic_pipeline.zip\nOnce extracted, the directory contains the remove_comments component in the src directory and a small TSV file in the data directory:\nbasic_pipeline\n├── data\n│   └── sample.tsv\n└── src\n    └── remove_comments\n        ├── config.vsh.yaml\n        └── script.sh\n\n\nBuilding the Nextflow module\nWith the component ready, execute the viash build command below to generate the Nextflow module:\nviash build src/remove_comments/config.vsh.yaml -p nextflow -o target/remove_comments\nYou should now have a target directory that contains the generated Nextflow module.\nbasic_pipeline\n├── data\n│   └── sample.tsv\n├── src\n│   └── remove_comments\n│       ├── config.vsh.yaml\n│       └── script.sh\n└── target\n    └── remove_comments\n        ├── main.nf\n        └── nextflow.config"
+  },
+  {
+    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#creating-the-pipeline",
+    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#creating-the-pipeline",
+    "title": "Basic Pipeline",
+    "section": "Creating the pipeline",
+    "text": "Creating the pipeline\nTo use the module in a pipeline, create a new file in the root of the directory and name it main.nf, this will be the Nextflow pipeline script. Add this as its contents:\ntargetDir = \"./target\" // 1\n\ninclude { remove_comments } from \"$targetDir/remove_comments/main.nf\" // 2\n\nworkflow {\n  Channel.fromPath(params.input) // 3\n    | map{ file -> [ file.baseName, file ] } // 4\n    | view{ file -> \"Input: $file\" } // 5\n    | remove_comments.run( // 6\n      auto: [ publish: true ]\n      )\n    | view{ file -> \"Output: $file\" } // 7\n}\nHere’s an overview of this Nextflow script:\n\nStore the location of the target directory where the modules are located\nInclude the remove_comments module from the remove_comments/main.nf script\nCreate a channel based on the input parameter’s path\nTake the tuple list and map it to the [ file.baseName, file ] format\nPrint the input tuple to the console\nRun the remove_comments module with auto publishing enabled using the auto directive, this makes sure that the output of this module is written to a directory based on its id\nPrint the output tuple to the console"
+  },
+  {
+    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#running-the-pipeline",
+    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#running-the-pipeline",
+    "title": "Basic Pipeline",
+    "section": "Running the pipeline",
+    "text": "Running the pipeline\nYou can now run the pipeline script above with Nextflow using the following command:\nnextflow run main.nf --input \"data/sample.tsv\" --publishDir output\nThis results in a console output similar to this:\nN E X T F L O W  ~  version 22.04.3\nLaunching `main.nf` [curious_gates] DSL2 - revision: 3e22e3038c\nexecutor >  local (1)\n[2a/5df658] process > remove_comments:remove_comments_process (1) [100%] 1 of 1 ✔\nInput: [sample, basic_pipeline/data/sample.tsv]\nOutput: [sample, basic_pipeline/work/2a/5df6584524e26995953a4eaec97136/sample.remove_comments.output.tsv]\nAfter the pipeline has finished working, a new file named sample.remove_comments.output.tsv has been created in the output directory:\nbasic_pipeline\n└── output\n    └── sample.remove_comments.output.tsv\nFor comparison, here’s what the input and output files look like to show what changed:\nsample.tsv\n# this is a header      \n# this is also a header     \none     0.11    123\ntwo     0.23    456\nthree   0.35    789\nfour    0.47    123\nsample.remove_comments.output.tsv\none     0.11    123\ntwo     0.23    456\nthree   0.35    789\nfour    0.47    123"
+  },
+  {
+    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#whats-next",
+    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#whats-next",
+    "title": "Basic Pipeline",
+    "section": "What’s next?",
+    "text": "What’s next?\nThe pipeline in this guide was a bare minimum example, to learn more about creating Nextflow pipelines, take a look at the Advanced Pipeline guide."
+  },
+  {
+    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html",
+    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html",
+    "title": "Advanced Pipeline",
+    "section": "",
+    "text": "This guide explains how to create an example pipeline that’s closer to a typical use-case of a Nextflow bioinformatics pipeline. It has a mixture of scripting languages and uses a join to merge all events."
+  },
+  {
+    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#creating-the-modules",
+    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#creating-the-modules",
+    "title": "Advanced Pipeline",
+    "section": "Creating the modules",
+    "text": "Creating the modules\nThe sections below describe how to create the VDSL3 modules in preparation for creating the pipeline.\n\nPreparation\ncreate a new folder named advanced pipeline, add src folder with a nextflow_module folder inside. Now create three folders inside nextflow_module folder, one per component needed for the pipeline:\n\ncombine_columns\nremove_comments\ntake_columns\n\nThe folder structure should look like this now:\nadvanced_pipeline\n└── src\n    └── nextflow_modules\n        ├── combine_columns\n        ├── remove_comments\n        └── take_column\n\n\nCreating the remove_comments component\nThis component removes all comments (lines starting with a hashtag) from a tsv file.\nDownload or copy the contents of config.vsh.yaml and script.sh below into the remove_comments folder.\nDownload config.vsh.yaml\n\n\n\nContents of config.vsh.yaml\n\nfunctionality:\n  name: remove_comments\n  description: Remove comments from a TSV file.\n  namespace: nextflow_modules\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      required: true\n      example: \"file.tsv\"\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n      example: \"file.tsv\"\n    - type: string\n      name: --id\n      default: \"remove_comments\"\n  resources:\n  - type: bash_script\n    path: ./script.sh\nplatforms:\n  - type: docker\n    image: ubuntu:20.04\n  - type: nextflow\n    variant: vdsl3\n\nDownload script.sh\n\n\n\nContents of script.sh\n\n#!/bin/bash\n\ngrep -v '^#' \"$par_input\" > \"$par_output\"\n\n\n\nCreating the take_column component\nThis component subsets an incoming tsv file by extracting a certain column from the file.\nDownload or copy the contents of config.vsh.yaml and script.py below into the take_column folder.\nDownload config.vsh.yaml\n\n\n\nContents of config.vsh.yaml\n\nfunctionality:\n  name: take_column\n  namespace: nextflow_modules\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      required: true\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n    - name: \"--column\"\n      type: integer\n      required: false\n      default: 2\n    - type: string\n      name: --id\n      default: \"take_column\"\n  resources:\n  - type: python_script\n    path: ./script.py\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: amancevice/pandas:slim\n\nDownload script.py\n\n\n\nContents of script.py\n\nimport pandas as pd\n\n## VIASH START\npar = {\n    \"input\": \"data/file1.tsv\",\n    \"column\": 2,\n    \"output\": \"temp/foo\"\n}\n## VIASH END\n\n# read the tsv file\ntab = pd.read_csv(par[\"input\"], sep=\"\\t\", comment=\"#\")\n\n# subset a column\ntab_filt = tab.iloc[:, par[\"column\"]-1]\n\n# write to file\ntab_filt.to_csv(par[\"output\"], index=False)\n\n\n\nCreating the combine_columns component\nThis component combines multiple tsv files into one by concatenating all of the columns together. It assumes each incoming tsv file has an equal number of rows.\nDownload or copy the contents of config.vsh.yaml and script.R below into the combine_columns folder.\nDownload config.vsh.yaml\n\n\n\nContents of config.vsh.yaml\n\nfunctionality:\n  name: combine_columns\n  namespace: nextflow_modules\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      multiple: true\n      required: true\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n    - type: string\n      name: --id\n      default: \"combine_columns\"\n  resources:\n    - type: r_script\n      path: ./script.R\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: rocker/r-ver:4.1\n\nDownload script.R\n\n\n\nContents of script.R\n\n## VIASH START\npar <- list(\n    input = c(\"data/file1.tsv\", \"data/file2.tsv\"),\n    output = \"temp/foo.tsv\"\n)\n## VIASH END\n\nouts <- lapply(par$input, function(file) {\n  read.delim(file, comment.char = \"#\", sep = \"\\t\", header = FALSE)\n})\n\ntable <- do.call(cbind, outs)\n\nwrite.table(table, par$output, col.names = FALSE, sep = \"\\t\")"
+  },
+  {
+    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#building-the-modules",
+    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#building-the-modules",
+    "title": "Advanced Pipeline",
+    "section": "Building the modules",
+    "text": "Building the modules\nThe basic pipeline guide describes how to generate an individual VDSL3 Nextflow module using the viash build command, but there’s a better way when it comes to building multiple modules at once: viash ns build. Each one of the three components has its namespace defined as nextflow_modules inside of its config file. Execute this command from the root of the advanced_pipeline directory\nviash ns build\nThis will result in the following output:\nExporting take_column (nextflow_modules) =nextflow=> target/nextflow/nextflow_modules/take_column\nExporting combine_columns (nextflow_modules) =nextflow=> target/nextflow/nextflow_modules/combine_columns\nExporting remove_comments (nextflow_modules) =nextflow=> target/nextflow/nextflow_modules/remove_comments\nThe VDSL3 Nextflow modules were generated inside of a target folder. The directory structure now looks like this:\nadvanced_pipeline\n├── src\n│   └── nextflow_modules\n│       ├── combine_columns\n│       │   ├── config.vsh.yaml\n│       │   └── script.R\n│       ├── remove_comments\n│       │   ├── config.vsh.yaml\n│       │   └── script.sh\n│       └── take_column\n│           ├── config.vsh.yaml\n│           └── script.py\n└── target\n    └── nextflow\n        └── nextflow_modules\n            ├── combine_columns\n            │   ├── main.nf\n            │   └── nextflow.config\n            ├── remove_comments\n            │   ├── main.nf\n            │   └── nextflow.config\n            └── take_column\n                ├── main.nf\n                └── nextflow.config"
+  },
+  {
+    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#creating-the-pipeline",
+    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#creating-the-pipeline",
+    "title": "Advanced Pipeline",
+    "section": "Creating the pipeline",
+    "text": "Creating the pipeline\nCreate a new file named main.nf and add it to the root of the advanced_pipeline directory. Use the following as its contents:\ntargetDir = \"../../target/nextflow\" // 1\n\n// 2\ninclude { remove_comments } from \"$targetDir/nextflow_modules/remove_comments/main.nf\"\ninclude { take_column } from \"$targetDir/nextflow_modules/take_column/main.nf\"\ninclude { combine_columns } from \"$targetDir/nextflow_modules/combine_columns/main.nf\"\n\nworkflow {\n  Channel.fromPath(params.input) // 3\n  \n    // 4\n    // File -> (String, File)\n    | map{ file -> [ file.baseName, file ] }\n    \n    // 5\n    // (String, File) -> (String, File)\n    | remove_comments\n\n    // 6\n    // (String, File) -> (String, File)\n    | take_column\n\n    // 7\n    // (String, File)* -> List[(String, File)]\n    | toList()\n\n    // 8\n    // List[(String, File)] -> (String, {input: List[File]})\n    | map{ tups -> \n      files = tups.collect{id, file -> file}\n      [ \"combined\", [ input: files ] ] \n    }\n\n    // 9\n    // (String, {input: List[File]}) -> (String, File)\n    | combine_columns.run(\n      auto: [ publish: true ]\n      )\n\n    // 10\n    | view{ file -> \"Output: $file\" }\n}\n\nTarget directory where the modules are located\nInclude the modules from the target directory\nCreate a channel based on the input parameter’s path\nAssign a unique ID to each event using map{}\nRun remove_comments to remove the comments from the TSV\nExtract a single column from TSV by running take_column\nCombine all events into a single List event using toList()\nAdd unique ID to the tuple\nConcatenate the TSVs into one by running the combine_columns module with auto publishing enabled using the auto directive\nView the channel contents bu printing it to the console using view()"
+  },
+  {
+    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#running-the-pipeline",
+    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#running-the-pipeline",
+    "title": "Advanced Pipeline",
+    "section": "Running the pipeline",
+    "text": "Running the pipeline\nBefore being able to run the pipeline, you’ll need some TSV files to work with. Download the files below and place them in a new directory named data in the root of advanced_pipeline.\nDownload file1.tsv\nDownload file2.tsv\nNow run the following command to run the pipeline using Nextflow:\nnextflow run main.nf --input \"data/file?.tsv\" --publishDir output\nYou should get an output similar to this:\nN E X T F L O W  ~  version 22.04.3\nLaunching `workflows/310-realistic_pipeline/main.nf` [stupefied_saha] DSL2 - revision: 6669aefc6c\n[93/232aba] Submitted process > remove_comments:remove_comments_process (2)\n[ef/a28e89] Submitted process > remove_comments:remove_comments_process (1)\n[63/279f98] Submitted process > take_column:take_column_process (1)\n[50/2a17ef] Submitted process > take_column:take_column_process (2)\n[8d/6eeff5] Submitted process > combine_columns:combine_columns_process\nOutput: [combined, /home/runner/work/viash_nxf_course/viash_nxf_course/work/8d/6eeff571e9ff2c5389851c6ab3001c/combined.combine_columns.output]\nYou can find the final TSV in the output directory:\n# this is a header      \n# this is also a header     \none     0.11    123\ntwo     0.23    456\nthree   0.35    789\nfour    0.47    123"
+  },
+  {
     "objectID": "documentation/guide/dev-environment/vscode.html",
     "href": "documentation/guide/dev-environment/vscode.html",
     "title": "VS Code",
@@ -1379,62 +1442,6 @@
     "text": "WSL2\nIf you’re using WSL2, you’ll probably want to install the Remote - WSL extension. This extension lets you use your Windows version of VS Code in WSL2, as if it was running native.\nThe commands, extensions and the terminal will run on WSL, which makes for an ideal hybrid environment.\nOnce installed, you can connect to WSL2 by clicking the green remote button at the bottom left and choosing New WSL Window in the list that pops up. Alternatively, you can use the command code FOLDER/FILE (e.g. code .) on the WSL2 side to open that file or folder in a remote VS Code session."
   },
   {
-    "objectID": "documentation/guide/component/unit-testing.html",
-    "href": "documentation/guide/component/unit-testing.html",
-    "title": "Unit Testing",
-    "section": "",
-    "text": "To ensure that your components and namespaces works as expected during its development cycle, writing one or more tests is essential.\nViash supports unit testing, which is a software testing method by which individual units of source code are tested to determine whether they output data as expected."
-  },
-  {
-    "objectID": "documentation/guide/component/unit-testing.html#unit-testing-a-single-component",
-    "href": "documentation/guide/component/unit-testing.html#unit-testing-a-single-component",
-    "title": "Unit Testing",
-    "section": "Unit testing a single component",
-    "text": "Unit testing a single component\nTo write a unit test for a component, you need two things: a definition in the config file and a script that runs the executable and verifies its output.\nThis tutorial uses a sample component named md_url_checker to explain how to write a unit test for Viash. To follow along, start by creating a new folder named “testing” on your machine.\nNow create a new file named Testfile.md and add the following contents:\n# Test File\n\nThis is a simple markdown file with some hyperlinks to test if the component works correctly.\nSome links to websites:\n\n- [Google](https://www.google.com)\n- [Reddit](https://www.reddit.com)\n- [A broken link](http://microsoft.com/random-link)\n\nLinks that are relative to [viash.io](http://www.viash.io):\n\n- You can [install viash here](/documentation/installation).\n- It all starts with a script and a [config file](/documentation/reference/config/overview.html).\nNext, either download or copy the text for the config file and script below and add them to the same folder:\nDownload config.vsh.yaml\n\n\n\nContents of config.vsh.yaml\n\nfunctionality:\n  name: md_url_checker\n  description: Check if URLs in a markdown are reachable and create a text report with the results.\n  arguments:                     \n  - type: file\n    name: --inputfile\n    description: The input markdown file.\n    required: true\n    must_exist: true\n  - type: string                           \n    name: --domain\n    description: The domain URL that gets inserted before any relative URLs. For example, \"/documentation/intro\" could be replaced with \"https://my-website/documentation/intro\" to create a valid URL.\n  - type: file                           \n    name: --output\n    description: The path of the output text file that will contain the report.\n    default: \"output.txt\"\n    direction: output\n  resources:\n  - type: bash_script\n    path: script.sh\n  test_resources:\n  - type: bash_script\n    path: test.sh\n  - path: Testfile.md\nplatforms:\n  - type: native\n  - type: docker\n    image: bash:latest\n    setup:\n      - type: apk\n        packages: [ curl ]\n\nDownload script.sh\n\n\n\nContents of script.sh\n\n#!/usr/bin/env bash\n\n### 1 ###\n\n## VIASH START\n\npar_inputfile=\"Testfile.md\"\npar_domain=\"https://viash.io\"\npar_output=\"output.txt\"\n\n## VIASH END\n\namount_of_errors=0\n\necho \"Extracting URLs\"\n\n### 2 ###\n\n# Extract the titles and URLs from the markdown file with sed and put them into arrays\nreadarray -t title_array <<<$(sed -rn 's@^.*\\[(.*)\\]\\((.*)\\).*$@\\1@p' $par_inputfile)\nreadarray -t url_array <<<$(sed -rn 's@^.*\\[(.*)\\]\\((.*)\\).*$@\\2@p' $par_inputfile)\n\n# Get length of array\namount_of_urls=$(echo \"${#url_array[@]}\")\n\necho \"Checking $amount_of_urls URLs\"\n\n# Clear file\n>$par_output\n\n### 3 ###\n\n# Iterate over the array of titles and check each URL\nfor ((n = 0; n < ${#title_array[*]}; n++)); do\n    title=\"${title_array[n]}\"\n    url=\"${url_array[n]}\"\n\n    ### 4 ###\n\n    # If an URL doesn't start with 'http', add the domain before it\n    if [[ $url != http* ]]; then\n        url=\"$par_domain${url_array[n]}\"\n    fi\n\n    echo \"$(($n + 1)): $url\"\n\n    echo -e \"Link name: $title\" >>$par_output\n    echo -e \"URL: $url\" >>$par_output\n\n    ### 5 ###\n\n    # Do a cURL and get the status code from the last response after following any redirects\n    status_code=$(curl -ILs --max-redirs 5 $url | tac | grep -m1 HTTP)\n    expected_code=\"200\"\n\n    # Check if status code obtained via cURL contains the expected code\n    if [[ $status_code == *$expected_code* ]]; then\n        echo \"OK\"\n        echo -e \"Status: OK, can be reached.\" >>$par_output\n    else\n        echo $status_code\n        echo -e \"Status: ERROR! URL cannot be reached. Status code: $status_code\" >>$par_output\n        amount_of_errors=$(($amount_of_errors + 1))\n    fi\n\n    echo -e \"---\" >>$par_output\ndone\n\necho \"\"\necho \"$par_inputfile has been checked and a report named $par_output has been generated.\n$amount_of_errors of $amount_of_urls URLs could not be resolved.\"\n\n\nConfiguration\nTo see where to define your unit tests, open up config.vsh.yaml file and take a look at the end of the functionality dictionary, between the path: script.sh and platforms: lines:\n  test_resources:\n  - type: bash_script\n    path: test.sh\n  - path: Testfile.md\nThe test_resources dictionary contains a reference to a test script and all of the files that need to be copied over in order to complete a test:\n\nThe type signifies what scripting language is used for performing the unit test, which doesn’t need to be the same language as the main script. The path points to the test script.\nEvery file path added straight into the tests dictionary will be copied over next to the temporary test directory. Any files that are necessary for the test to work correctly can be added here.\n\nIn the case of this example, test.sh will be the test script and Testfile.md is necessary as an input markdown file for the script to function.\n\n\nTest script\nTo write the test itself, create a new file named test.sh in the testing folder and add this as its content:\nset -ex # Exit the script when one of the checks fail. Output all commands.\n\n# Check 1\necho \">>> Checking whether output is correct\"\n\n# Run md_url_checker component with its required inputs and output the results to test-output.txt\n\"./$meta_functionality_name\" --inputfile Testfile.md > test-output.txt\n\n[[ ! -f test-output.txt ]] && echo \"Test output file could not be found!\" && exit 1 # Check if test-output.txt exists\ngrep -q '1: https://www.google.com' test-output.txt # Did the script find the URL?\ngrep -q 'HTTP/2 404' test-output.txt  # Did the web request return a 404 for the page that doesn't exist?\n\n# Check 2\necho \">>> Checking whether an output file was created correctly\"\n\n[[ ! -f output.txt ]] && echo \"Output file could not be found!\" && exit 1 # Check if output.txt exists\ngrep -q 'URL: https://www.google.com' output.txt # Was the URL written correctly in the report?\ngrep -q 'Status: ERROR! URL cannot be reached. Status code: HTTP/2 404' output.txt # Was the error written correctly in the report?\ngrep -q 'Link name: install viash here' output.txt # Was link name written correctly in the report?\n\necho \">>> Test finished successfully!\"\nexit 0 # Exit with a 0 code to note a success \n\n\n\n\n\n\nTip\n\n\n\nAs you can see above, you can use the meta variable $meta_functionality_name to automatically get the name of the component (and the generated executable). This way, you can more reuse parts of your test scripts.\n\n\n\n\n\n\n\n\nTip\n\n\n\nThis script uses grep to search for files and strings. Make sure to read the comments to understand what is happening.\n\n\nThe bash script above is just a minimal example of how you can write a test. You can use any of the supported languages and your favorite testing framework if that’s your preference. The most important part is the last line, which uses a 0 exit code to signal a success.\n\n\nRunning a test\nTo run all tests defined in a config file, use the viash test command:\nviash test config.vsh.yaml\nViash will now automatically build an executable and place it alongside the other defined resources in a temporary working directory. The output should look like this:\nRunning tests in temporary directory: '/tmp/viash_test_md_url_checker5828773777380597444'\n====================================================================\n+/tmp/viash_test_md_url_checker5828773777380597444/build_executable/md_url_checker ---setup\n====================================================================\n+/tmp/viash_test_md_url_checker5828773777380597444/test_test.sh/test.sh\n>>> Checking whether output is correct\n+ echo '>>> Checking whether output is correct'\n+ ./md_url_checker --inputfile Testfile.md\n+ [[ ! -f test-output.txt ]]\n+ grep -q '1: https://www.google.com' test-output.txt\n+ grep -q 'HTTP/2 404' test-output.txt\n>>> Checking whether an output file was created correctly\n+ echo '>>> Checking whether an output file was created correctly'\n+ [[ ! -f output.txt ]]\n+ grep -q 'URL: https://www.google.com' output.txt\n+ grep -q 'Status: ERROR! URL cannot be reached. Status code: HTTP/2 404' output.txt\n+ grep -q 'Link name: install viash here' output.txt\n+ echo '>>> Test finished successfully!'\n>>> Test finished successfully!\n+ exit 0\n====================================================================\n[32mSUCCESS! All 1 out of 1 test scripts succeeded![0m\nCleaning up temporary directory\nIf the test succeeds, Viash writes the full output to the shell and deletes the temporary files. If there are any issues, the script stops and an error message will appear in red. In this case, you can inspect the temporary files to troubleshoot.\n\n\n\n\n\n\nTip\n\n\n\nYou can pass the --keep true argument to viash test to prevent viash from automatically deleting the temporary files in case of a success: viash test --keep true config.vsh.yaml."
-  },
-  {
-    "objectID": "documentation/guide/component/creation/nextflow.html",
-    "href": "documentation/guide/component/creation/nextflow.html",
-    "title": "Nextflow",
-    "section": "",
-    "text": "When targeting the Nextflow platform, a module is generated that can be run standalone or used in a pipeline."
-  },
-  {
-    "objectID": "documentation/guide/component/creation/nextflow.html#requirements",
-    "href": "documentation/guide/component/creation/nextflow.html#requirements",
-    "title": "Nextflow",
-    "section": "Requirements",
-    "text": "Requirements\nThis example targets the Nextflow platform, which requires you to install Nextflow and Docker. Follow the instructions on NextFlow’s homepage to install it on your system if you haven’t done so already. You can find instructions on how to install Docker for your OS on the Viash installation page."
-  },
-  {
-    "objectID": "documentation/guide/component/creation/nextflow.html#preparing-a-component-for-nextflow",
-    "href": "documentation/guide/component/creation/nextflow.html#preparing-a-component-for-nextflow",
-    "title": "Nextflow",
-    "section": "Preparing a component for Nextflow",
-    "text": "Preparing a component for Nextflow\nUnlike components that target the native and Docker platform, a component targeting Nextflow requires you to keep some things in mind besides editing your config file.\n\nCreating the component\nThis guide builds upon the hello_world component from the Docker component creation guide. You can either follow with that guide first or simply download the component below that contains the component in all supported languages. Simply rename the language folder you want to use to hello_world and use that as your working directory.\nDownload hello_world_docker.zip\nCreate a new folder named src and drag the component files inside of that, this is to keep your source and target files neatly separated. Your directory structure should look like this now:\nhello world\n└── src\n    └── config.vsh.yaml\n    └── script"
-  },
-  {
-    "objectID": "documentation/guide/component/creation/nextflow.html#adapting-the-script",
-    "href": "documentation/guide/component/creation/nextflow.html#adapting-the-script",
-    "title": "Nextflow",
-    "section": "Adapting the script",
-    "text": "Adapting the script\nComponents that target the Nextflow platform don’t support writing to standard output when run in a pipeline. Instead, their output should be redirected to a file. To do that, change the contents of your script file as below:\n\nBashC#JavaScriptPythonScalaR\n\n\nChange this:\necho \"Hello $par_input\"\nTo this:\necho \"Hello $par_input\" > $par_output\n\n\nChange this:\nConsole.WriteLine(\"Hello \" + par.input);\nTo this:\nFile.WriteAllText(par.output, \"Hello \" + par.input);\n\n\nChange this:\nconsole.log('Hello' + par['input']);\nTo this:\nconst fs = require('fs');\nfs.writeFileSync(par['output'], 'Hello ' + par['input']);\n\n\nChange this:\nprint(\"Hello\", par[\"input\"])\nTo this:\nfile = open(par[\"output\"], 'a+')\nfile.write(\"Hello \" + par[\"input\"])\nfile.close()\n\n\nChange this:\nprintln(\"Hello \" + par.input.get)\nTo this:\nimport java.io._\n\nval writer = new FileWriter(par.output.get)\ntry { writer.append(\"Hello \" + par.input.get) }\nfinally { writer.close }        \n\n\nChange this:\ncat(\"Hello \", par$input)\nTo this:\ncat(\"Hello\", par$input, file=par$output, sep=\" \", append=TRUE)"
-  },
-  {
-    "objectID": "documentation/guide/component/creation/nextflow.html#adjusting-the-config",
-    "href": "documentation/guide/component/creation/nextflow.html#adjusting-the-config",
-    "title": "Nextflow",
-    "section": "Adjusting the config",
-    "text": "Adjusting the config\n\nAdd --id argument\nNextflow modules need an --id argument in order to work, so add that to the config file below the --input argument:\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n...\n\n\nAdd a file output argument\nNow that the script outputs a file, its output path should be added as an argument to the config file. To do that, add yet another argument below the --id argument named --output:\n- type: file\n  name: --output\n  default: \"output\"\n\n\nAdd Nextflow platform\nTo add support for the Nextflow platform as a build target, you need to add nextflow to the platforms section of your Viash config file. To do this, add these lines to the bottom of your config file:\n- type: nextflow\n  variant: vdsl3\nThis will add Nextflow as a build target, with VDSL3 set as the pipeline scripting variant, which adds new features and quality of life changes.\n\n\n\n\n\n\nSpecifying the Docker image\n\n\n\n\n\nBy default, Nextflow will use the Docker image specified in the docker platform section. For example:\nplatforms:\n  - type: docker\n    image: bash:4.0\nIf you don’t add docker as a build target or want to override the image, you can use the directives dictionary to specify a base image to use:\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: ubuntu:20.04\n\n\n\n\nBashC#JavaScriptPythonScalaR\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: bash_script\n    path: script.sh\nplatforms:\n  - type: native\n  - type: docker\n    image: bash:4.0\n  - type: nextflow\n    variant: vdsl3\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: csharp_script\n    path: script.csx\nplatforms:\n  - type: native\n  - type: docker\n    image: \"dataintuitive/dotnet-script:1.2.1\"\n    setup:\n      - type: apk\n        packages: [ bash ]\n  - type: nextflow\n    variant: vdsl3\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: javascript_script\n    path: script.js\nplatforms:\n  - type: native\n  - type: docker\n    image: node:15-buster\n  - type: nextflow\n    variant: vdsl3\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: python_script\n    path: script.py\nplatforms:\n  - type: native\n  - type: docker\n    image: \"python:3.8\"\n  - type: nextflow\n    variant: vdsl3\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: scala_script\n    path: script.scala\nplatforms:\n  - type: native\n  - type: docker\n    image: hseeberger/scala-sbt\n  - type: nextflow\n    variant: vdsl3\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: r_script\n    path: script.R\nplatforms:\n  - type: native\n  - type: docker\n    image: \"rocker/tidyverse:4.0.4\"\n  - type: nextflow\n    variant: vdsl3"
-  },
-  {
-    "objectID": "documentation/guide/component/creation/nextflow.html#running",
-    "href": "documentation/guide/component/creation/nextflow.html#running",
-    "title": "Nextflow",
-    "section": "Running",
-    "text": "Running\nIn contrast to native and Docker based components, a Nextflow based component cannot be ran by using the viash run command. Components targeting Nextflow require you to use viash build first to generate a Nextflow module and run that module using nextflow run. See the Nextflow Build Target page for more information on how to generate a Nextflow module and run it as a standalone pipeline."
-  },
-  {
     "objectID": "documentation/guide/component/creation/native.html",
     "href": "documentation/guide/component/creation/native.html",
     "title": "Native",
@@ -1505,6 +1512,83 @@
     "text": "What’s next?\nTo learn how to use Viash to build an executable with a Docker backend and run it, see Building and Running."
   },
   {
+    "objectID": "documentation/guide/component/creation/nextflow.html",
+    "href": "documentation/guide/component/creation/nextflow.html",
+    "title": "Nextflow",
+    "section": "",
+    "text": "When targeting the Nextflow platform, a module is generated that can be run standalone or used in a pipeline."
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow.html#requirements",
+    "href": "documentation/guide/component/creation/nextflow.html#requirements",
+    "title": "Nextflow",
+    "section": "Requirements",
+    "text": "Requirements\nThis example targets the Nextflow platform, which requires you to install Nextflow and Docker. Follow the instructions on NextFlow’s homepage to install it on your system if you haven’t done so already. You can find instructions on how to install Docker for your OS on the Viash installation page."
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow.html#preparing-a-component-for-nextflow",
+    "href": "documentation/guide/component/creation/nextflow.html#preparing-a-component-for-nextflow",
+    "title": "Nextflow",
+    "section": "Preparing a component for Nextflow",
+    "text": "Preparing a component for Nextflow\nUnlike components that target the native and Docker platform, a component targeting Nextflow requires you to keep some things in mind besides editing your config file.\n\nCreating the component\nThis guide builds upon the hello_world component from the Docker component creation guide. You can either follow with that guide first or simply download the component below that contains the component in all supported languages. Simply rename the language folder you want to use to hello_world and use that as your working directory.\nDownload hello_world_docker.zip\nCreate a new folder named src and drag the component files inside of that, this is to keep your source and target files neatly separated. Your directory structure should look like this now:\nhello world\n└── src\n    └── config.vsh.yaml\n    └── script"
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow.html#adapting-the-script",
+    "href": "documentation/guide/component/creation/nextflow.html#adapting-the-script",
+    "title": "Nextflow",
+    "section": "Adapting the script",
+    "text": "Adapting the script\nComponents that target the Nextflow platform don’t support writing to standard output when run in a pipeline. Instead, their output should be redirected to a file. To do that, change the contents of your script file as below:\n\nBashC#JavaScriptPythonScalaR\n\n\nChange this:\necho \"Hello $par_input\"\nTo this:\necho \"Hello $par_input\" > $par_output\n\n\nChange this:\nConsole.WriteLine(\"Hello \" + par.input);\nTo this:\nFile.WriteAllText(par.output, \"Hello \" + par.input);\n\n\nChange this:\nconsole.log('Hello' + par['input']);\nTo this:\nconst fs = require('fs');\nfs.writeFileSync(par['output'], 'Hello ' + par['input']);\n\n\nChange this:\nprint(\"Hello\", par[\"input\"])\nTo this:\nfile = open(par[\"output\"], 'a+')\nfile.write(\"Hello \" + par[\"input\"])\nfile.close()\n\n\nChange this:\nprintln(\"Hello \" + par.input.get)\nTo this:\nimport java.io._\n\nval writer = new FileWriter(par.output.get)\ntry { writer.append(\"Hello \" + par.input.get) }\nfinally { writer.close }        \n\n\nChange this:\ncat(\"Hello \", par$input)\nTo this:\ncat(\"Hello\", par$input, file=par$output, sep=\" \", append=TRUE)"
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow.html#adjusting-the-config",
+    "href": "documentation/guide/component/creation/nextflow.html#adjusting-the-config",
+    "title": "Nextflow",
+    "section": "Adjusting the config",
+    "text": "Adjusting the config\n\nAdd --id argument\nNextflow modules need an --id argument in order to work, so add that to the config file below the --input argument:\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n...\n\n\nAdd a file output argument\nNow that the script outputs a file, its output path should be added as an argument to the config file. To do that, add yet another argument below the --id argument named --output:\n- type: file\n  name: --output\n  default: \"output\"\n\n\nAdd Nextflow platform\nTo add support for the Nextflow platform as a build target, you need to add nextflow to the platforms section of your Viash config file. To do this, add these lines to the bottom of your config file:\n- type: nextflow\n  variant: vdsl3\nThis will add Nextflow as a build target, with VDSL3 set as the pipeline scripting variant, which adds new features and quality of life changes.\n\n\n\n\n\n\nSpecifying the Docker image\n\n\n\n\n\nBy default, Nextflow will use the Docker image specified in the docker platform section. For example:\nplatforms:\n  - type: docker\n    image: bash:4.0\nIf you don’t add docker as a build target or want to override the image, you can use the directives dictionary to specify a base image to use:\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: ubuntu:20.04\n\n\n\n\nBashC#JavaScriptPythonScalaR\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: bash_script\n    path: script.sh\nplatforms:\n  - type: native\n  - type: docker\n    image: bash:4.0\n  - type: nextflow\n    variant: vdsl3\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: csharp_script\n    path: script.csx\nplatforms:\n  - type: native\n  - type: docker\n    image: \"dataintuitive/dotnet-script:1.2.1\"\n    setup:\n      - type: apk\n        packages: [ bash ]\n  - type: nextflow\n    variant: vdsl3\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: javascript_script\n    path: script.js\nplatforms:\n  - type: native\n  - type: docker\n    image: node:15-buster\n  - type: nextflow\n    variant: vdsl3\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: python_script\n    path: script.py\nplatforms:\n  - type: native\n  - type: docker\n    image: \"python:3.8\"\n  - type: nextflow\n    variant: vdsl3\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: scala_script\n    path: script.scala\nplatforms:\n  - type: native\n  - type: docker\n    image: hseeberger/scala-sbt\n  - type: nextflow\n    variant: vdsl3\n\n\nHere’s the full config after making these changes:\nDownload config.vsh.yaml\nfunctionality:\n  name: hello_world\n  description: A minimal example component.\n  arguments:\n  - type: string\n    name: --input\n    default: \"World\"\n  - type: string\n    name: --id\n    default: \"hello_world\"\n  - type: file\n    name: --output\n    direction: output\n    default: \"output\"\n  resources:\n  - type: r_script\n    path: script.R\nplatforms:\n  - type: native\n  - type: docker\n    image: \"rocker/tidyverse:4.0.4\"\n  - type: nextflow\n    variant: vdsl3"
+  },
+  {
+    "objectID": "documentation/guide/component/creation/nextflow.html#running",
+    "href": "documentation/guide/component/creation/nextflow.html#running",
+    "title": "Nextflow",
+    "section": "Running",
+    "text": "Running\nIn contrast to native and Docker based components, a Nextflow based component cannot be ran by using the viash run command. Components targeting Nextflow require you to use viash build first to generate a Nextflow module and run that module using nextflow run. See the Nextflow Build Target page for more information on how to generate a Nextflow module and run it as a standalone pipeline."
+  },
+  {
+    "objectID": "documentation/guide/component/namespaces.html",
+    "href": "documentation/guide/component/namespaces.html",
+    "title": "Namespaces",
+    "section": "",
+    "text": "A namespace is a group of Viash components.\nHere are some benefits of grouping your components:\n\nGrouping components in namespaces allows for categorizing components.\nEach teams of developers can work on a different set of components in parallel, which improves the separation of concerns.\nGenerating build targets and unit testing can be done in bulk, with optional filtering by namespace using the viash ns commands.\n\nThis guide will cover how to define a namespace and use it with Viash."
+  },
+  {
+    "objectID": "documentation/guide/component/namespaces.html#adding-components-to-a-namespace",
+    "href": "documentation/guide/component/namespaces.html#adding-components-to-a-namespace",
+    "title": "Namespaces",
+    "section": "Adding components to a namespace",
+    "text": "Adding components to a namespace\nThere are two ways of defining a namespace: either by adding the namespace property to the Viash config file or by creating a directory structure. You can use one or both of these methods in your projects.\n\nNamespace property\nYou can assign a component to a namespace by defining its namespace attribute in the viash config file:\nfunctionality:\n  name: some_component\n  namespace: my_namespace\n\n\nDirectory structure\nViash can deduce namespaces automatically if you structure the components hierarchically. The namespace directories should be in the root of your (source) directory, with the component directories inside, grouped per namespace.\nIn the example below, there are two namespaces: namespace_one and namespace_two, each of these namespaces has one or more components assigned to them:\nsrc\n├── namespace_one\n│   ├── component_one\n│   │   ├── config.vsh.yaml\n│   │   └── script.sh\n│   └── component_two\n│       ├── config.vsh.yaml\n│       └── script.sh\n└── namespace_two\n    └── component_three\n        ├── config.vsh.yaml\n        └── script.sh\nHere, namespace_one groups component_one and component_two together while namespace_two only consists of a single component, component_three."
+  },
+  {
+    "objectID": "documentation/guide/component/namespaces.html#using-the-viash-ns-subcommands",
+    "href": "documentation/guide/component/namespaces.html#using-the-viash-ns-subcommands",
+    "title": "Namespaces",
+    "section": "Using the viash ns subcommands",
+    "text": "Using the viash ns subcommands\nViash comes with a useful viash ns command to work with namespaces. This can be used to inspect, test and build the components that are part of a namespace.\nWe’ve provided a simple example project if you wish to test these commands. Its components use bash for some integer and string manipulation.\nDownload namespace_example.zip\n\nListing components and namespaces\nThe viash ns list command is the namespace equivalent of viash config view, it outputs a parsed version of all config files found in a directory and their subdirectories:\nviash ns list -src src\nThis prints all fields to the terminal, even those not defined in the config files themselves. Here’s a part of the output:\n\n\nOutput\n\n- functionality:\n    name: \"replace\"\n    namespace: \"string_manipulation\"\n    authors: []\n    inputs: []\n    outputs: []\n    arguments:\n    - type: \"string\"\n      name: \"--text\"\n      alternatives: []\n      example: []\n      default:\n      - \"Hello world!\"\n      required: false\n      values: []\n      direction: \"input\"\n      multiple: false\n      multiple_sep: \":\"\n    - type: \"string\"\n      name: \"--search\"\n      alternatives: []\n      example: []\n      default:\n      - \"Hello\"\n      required: false\n      values: []\n      direction: \"input\"\n      multiple: false\n      multiple_sep: \":\"\n    - type: \"string\"\n      name: \"--replace\"\n      alternatives: []\n      example: []\n      default:\n      - \"Greetings\"\n      required: false\n      values: []\n      direction: \"input\"\n      multiple: false\n      multiple_sep: \":\"\n    resources:\n    - type: \"bash_script\"\n      path: \"script.sh\"\n      is_executable: true\n      parent: \"file:/.../namespace_example/src/string_manipulation/replace/config.vsh.yaml\"\n    description: \"Search for a substring in a string and replace it with another string\"\n    test_resources:\n    - type: \"bash_script\"\n      path: \"test.sh\"\n      is_executable: true\n      parent: \"file:/.../namespace_example/src/string_manipulation/replace/config.vsh.yaml\"\n    info: {}\n    dummy_arguments: []\n    set_wd_to_resources_dir: false\n  platform:\n    type: \"native\"\n    id: \"native\"\n  platforms:\n  - type: \"native\"\n    id: \"native\"\n  info:\n    config: \"namespace_example/src/string_manipulation/replace/config.vsh.yaml\"\n    platform: \"native\"\n    viash_version: \"0.5.12\"\n    git_commit: \"d9d624de0264b1154d7eeb5dba3c1deb567311ac\"\n    git_remote: \"https://github.com/...\"\n...\n\n\n\nUnit testing a namespace\nYou can test multiple components using the viash ns test command.\nviash ns test --src src\n\n\n\n\n\n\nTip\n\n\n\nTo speed up the testing, you can use the parallel flag to test all components at once:\nviash ns test --src src --parallel\n\n\nThis will test each component in series and will output a tab separated output that contains the results:\nThe working directory for the namespace tests is /tmp/viash_ns_test2526740097581645786\n           namespace        functionality             platform            test_name exit_code duration               result\n string_manipulation              replace               native                start                                        \n string_manipulation              replace               native              test.sh         0        0              SUCCESS\n                math             subtract               native                start                                        \n                math             subtract               native              test.sh         0        0              SUCCESS\n                math                  add               native                start                                        \n                math                  add               native              test.sh         0        0              SUCCESS\n\n\nBuilding a namespace\nMultiple components can be build in series using the viash ns build command:\nviash ns build --src src --target target\n\n\n\n\n\n\nTip\n\n\n\nTo speed up the building, you can use the parallel flag to build all components at once:\nviash ns build --src src --target target --parallel\n\n\nThis will output the following to the console:\nExporting replace (string_manipulation) =native=> target/native/string_manipulation/replace\nExporting subtract (math) =native=> target/native/math/subtract\nExporting add (math) =native=> target/native/math/add\nAn executable and/or module will be generated for every target platform defined in each of the component configs. These are grouped per platform and namespace in the target directory:\ntarget\n└── native\n    ├── math\n    │   ├── add\n    │   │   └── add\n    │   └── subtract\n    │       └── subtract\n    └── string_manipulation\n        └── replace\n            └── replace"
+  },
+  {
+    "objectID": "documentation/guide/component/unit-testing.html",
+    "href": "documentation/guide/component/unit-testing.html",
+    "title": "Unit Testing",
+    "section": "",
+    "text": "To ensure that your components and namespaces works as expected during its development cycle, writing one or more tests is essential.\nViash supports unit testing, which is a software testing method by which individual units of source code are tested to determine whether they output data as expected."
+  },
+  {
+    "objectID": "documentation/guide/component/unit-testing.html#unit-testing-a-single-component",
+    "href": "documentation/guide/component/unit-testing.html#unit-testing-a-single-component",
+    "title": "Unit Testing",
+    "section": "Unit testing a single component",
+    "text": "Unit testing a single component\nTo write a unit test for a component, you need two things: a definition in the config file and a script that runs the executable and verifies its output.\nThis tutorial uses a sample component named md_url_checker to explain how to write a unit test for Viash. To follow along, start by creating a new folder named “testing” on your machine.\nNow create a new file named Testfile.md and add the following contents:\n# Test File\n\nThis is a simple markdown file with some hyperlinks to test if the component works correctly.\nSome links to websites:\n\n- [Google](https://www.google.com)\n- [Reddit](https://www.reddit.com)\n- [A broken link](http://microsoft.com/random-link)\n\nLinks that are relative to [viash.io](http://www.viash.io):\n\n- You can [install viash here](/documentation/installation).\n- It all starts with a script and a [config file](/documentation/reference/config/overview.html).\nNext, either download or copy the text for the config file and script below and add them to the same folder:\nDownload config.vsh.yaml\n\n\n\nContents of config.vsh.yaml\n\nfunctionality:\n  name: md_url_checker\n  description: Check if URLs in a markdown are reachable and create a text report with the results.\n  arguments:                     \n  - type: file\n    name: --inputfile\n    description: The input markdown file.\n    required: true\n    must_exist: true\n  - type: string                           \n    name: --domain\n    description: The domain URL that gets inserted before any relative URLs. For example, \"/documentation/intro\" could be replaced with \"https://my-website/documentation/intro\" to create a valid URL.\n  - type: file                           \n    name: --output\n    description: The path of the output text file that will contain the report.\n    default: \"output.txt\"\n    direction: output\n  resources:\n  - type: bash_script\n    path: script.sh\n  test_resources:\n  - type: bash_script\n    path: test.sh\n  - path: Testfile.md\nplatforms:\n  - type: native\n  - type: docker\n    image: bash:latest\n    setup:\n      - type: apk\n        packages: [ curl ]\n\nDownload script.sh\n\n\n\nContents of script.sh\n\n#!/usr/bin/env bash\n\n### 1 ###\n\n## VIASH START\n\npar_inputfile=\"Testfile.md\"\npar_domain=\"https://viash.io\"\npar_output=\"output.txt\"\n\n## VIASH END\n\namount_of_errors=0\n\necho \"Extracting URLs\"\n\n### 2 ###\n\n# Extract the titles and URLs from the markdown file with sed and put them into arrays\nreadarray -t title_array <<<$(sed -rn 's@^.*\\[(.*)\\]\\((.*)\\).*$@\\1@p' $par_inputfile)\nreadarray -t url_array <<<$(sed -rn 's@^.*\\[(.*)\\]\\((.*)\\).*$@\\2@p' $par_inputfile)\n\n# Get length of array\namount_of_urls=$(echo \"${#url_array[@]}\")\n\necho \"Checking $amount_of_urls URLs\"\n\n# Clear file\n>$par_output\n\n### 3 ###\n\n# Iterate over the array of titles and check each URL\nfor ((n = 0; n < ${#title_array[*]}; n++)); do\n    title=\"${title_array[n]}\"\n    url=\"${url_array[n]}\"\n\n    ### 4 ###\n\n    # If an URL doesn't start with 'http', add the domain before it\n    if [[ $url != http* ]]; then\n        url=\"$par_domain${url_array[n]}\"\n    fi\n\n    echo \"$(($n + 1)): $url\"\n\n    echo -e \"Link name: $title\" >>$par_output\n    echo -e \"URL: $url\" >>$par_output\n\n    ### 5 ###\n\n    # Do a cURL and get the status code from the last response after following any redirects\n    status_code=$(curl -ILs --max-redirs 5 $url | tac | grep -m1 HTTP)\n    expected_code=\"200\"\n\n    # Check if status code obtained via cURL contains the expected code\n    if [[ $status_code == *$expected_code* ]]; then\n        echo \"OK\"\n        echo -e \"Status: OK, can be reached.\" >>$par_output\n    else\n        echo $status_code\n        echo -e \"Status: ERROR! URL cannot be reached. Status code: $status_code\" >>$par_output\n        amount_of_errors=$(($amount_of_errors + 1))\n    fi\n\n    echo -e \"---\" >>$par_output\ndone\n\necho \"\"\necho \"$par_inputfile has been checked and a report named $par_output has been generated.\n$amount_of_errors of $amount_of_urls URLs could not be resolved.\"\n\n\nConfiguration\nTo see where to define your unit tests, open up config.vsh.yaml file and take a look at the end of the functionality dictionary, between the path: script.sh and platforms: lines:\n  test_resources:\n  - type: bash_script\n    path: test.sh\n  - path: Testfile.md\nThe test_resources dictionary contains a reference to a test script and all of the files that need to be copied over in order to complete a test:\n\nThe type signifies what scripting language is used for performing the unit test, which doesn’t need to be the same language as the main script. The path points to the test script.\nEvery file path added straight into the tests dictionary will be copied over next to the temporary test directory. Any files that are necessary for the test to work correctly can be added here.\n\nIn the case of this example, test.sh will be the test script and Testfile.md is necessary as an input markdown file for the script to function.\n\n\nTest script\nTo write the test itself, create a new file named test.sh in the testing folder and add this as its content:\nset -ex # Exit the script when one of the checks fail. Output all commands.\n\n# Check 1\necho \">>> Checking whether output is correct\"\n\n# Run md_url_checker component with its required inputs and output the results to test-output.txt\n\"./$meta_functionality_name\" --inputfile Testfile.md > test-output.txt\n\n[[ ! -f test-output.txt ]] && echo \"Test output file could not be found!\" && exit 1 # Check if test-output.txt exists\ngrep -q '1: https://www.google.com' test-output.txt # Did the script find the URL?\ngrep -q 'HTTP/2 404' test-output.txt  # Did the web request return a 404 for the page that doesn't exist?\n\n# Check 2\necho \">>> Checking whether an output file was created correctly\"\n\n[[ ! -f output.txt ]] && echo \"Output file could not be found!\" && exit 1 # Check if output.txt exists\ngrep -q 'URL: https://www.google.com' output.txt # Was the URL written correctly in the report?\ngrep -q 'Status: ERROR! URL cannot be reached. Status code: HTTP/2 404' output.txt # Was the error written correctly in the report?\ngrep -q 'Link name: install viash here' output.txt # Was link name written correctly in the report?\n\necho \">>> Test finished successfully!\"\nexit 0 # Exit with a 0 code to note a success \n\n\n\n\n\n\nTip\n\n\n\nAs you can see above, you can use the meta variable $meta_functionality_name to automatically get the name of the component (and the generated executable). This way, you can more reuse parts of your test scripts.\n\n\n\n\n\n\n\n\nTip\n\n\n\nThis script uses grep to search for files and strings. Make sure to read the comments to understand what is happening.\n\n\nThe bash script above is just a minimal example of how you can write a test. You can use any of the supported languages and your favorite testing framework if that’s your preference. The most important part is the last line, which uses a 0 exit code to signal a success.\n\n\nRunning a test\nTo run all tests defined in a config file, use the viash test command:\nviash test config.vsh.yaml\nViash will now automatically build an executable and place it alongside the other defined resources in a temporary working directory. The output should look like this:\nRunning tests in temporary directory: '/tmp/viash_test_md_url_checker5828773777380597444'\n====================================================================\n+/tmp/viash_test_md_url_checker5828773777380597444/build_executable/md_url_checker ---setup\n====================================================================\n+/tmp/viash_test_md_url_checker5828773777380597444/test_test.sh/test.sh\n>>> Checking whether output is correct\n+ echo '>>> Checking whether output is correct'\n+ ./md_url_checker --inputfile Testfile.md\n+ [[ ! -f test-output.txt ]]\n+ grep -q '1: https://www.google.com' test-output.txt\n+ grep -q 'HTTP/2 404' test-output.txt\n>>> Checking whether an output file was created correctly\n+ echo '>>> Checking whether an output file was created correctly'\n+ [[ ! -f output.txt ]]\n+ grep -q 'URL: https://www.google.com' output.txt\n+ grep -q 'Status: ERROR! URL cannot be reached. Status code: HTTP/2 404' output.txt\n+ grep -q 'Link name: install viash here' output.txt\n+ echo '>>> Test finished successfully!'\n>>> Test finished successfully!\n+ exit 0\n====================================================================\n[32mSUCCESS! All 1 out of 1 test scripts succeeded![0m\nCleaning up temporary directory\nIf the test succeeds, Viash writes the full output to the shell and deletes the temporary files. If there are any issues, the script stops and an error message will appear in red. In this case, you can inspect the temporary files to troubleshoot.\n\n\n\n\n\n\nTip\n\n\n\nYou can pass the --keep true argument to viash test to prevent viash from automatically deleting the temporary files in case of a success: viash test --keep true config.vsh.yaml."
+  },
+  {
     "objectID": "documentation/guide/component/languages.html",
     "href": "documentation/guide/component/languages.html",
     "title": "Scripting Languages",
@@ -1547,95 +1631,11 @@
     "text": "Meta variables\nViash offers hidden variables to use in your scripts that can be used to get meta information about your component.\n\nFunctionality name\nName of the component found in the functionality section of the Viash config:\nfunctionality:\n  name: my_component\n\nBashC#JavaScriptPythonRScala\n\n\necho $meta_functionality_name\n\n\nConsole.WriteLine(meta.functionality_name);\n\n\nconsole.log(meta['functionality_name']);\n\n\nprint(meta[\"functionality_name\"])\n\n\ncat(meta$functionality_name)\n\n\nprintln(meta.functionality_name)\n\n\n\nOutput\nmy_component\n\n\nResources directory\nPath where the resources as defined in the Viash config file are stored.\n\nBashC#JavaScriptPythonRScala\n\n\necho $meta_resources_dir\n\n\nConsole.WriteLine(meta.resources_dir);\n\n\nconsole.log(meta['resources_dir']);\n\n\nprint(meta[\"resources_dir\"])\n\n\ncat(meta$resources_dir)\n\n\nprintln(meta.resources_dir)\n\n\n\nWhen using viash run to create a temporary build target and execute it, this will point to the temporary path where the executable was generated:\n/tmp/viash_my_component9560481446119256265\nAfter building a component using viash build and running the generated executable, it points to the directory where the executable and the other resources reside in:\n/home/user/components/my_component_target_dir\n\n\nTemp directory\nPath to the directory supplied by the host system where you can write temporary files to.\n\nBashC#JavaScriptPythonRScala\n\n\necho $meta_temp_dir\n\n\nConsole.WriteLine(meta.temp_dir);\n\n\nconsole.log(meta['temp_dir']);\n\n\nprint(meta[\"temp_dir\"])\n\n\ncat(meta$temp_dir)\n\n\nprintln(meta.temp_dir)\n\n\n\nOutput\n/tmp"
   },
   {
-    "objectID": "documentation/guide/component/namespaces.html",
-    "href": "documentation/guide/component/namespaces.html",
-    "title": "Namespaces",
+    "objectID": "documentation/faq/index.html",
+    "href": "documentation/faq/index.html",
+    "title": "Frequently Asked Questions",
     "section": "",
-    "text": "A namespace is a group of Viash components.\nHere are some benefits of grouping your components:\n\nGrouping components in namespaces allows for categorizing components.\nEach teams of developers can work on a different set of components in parallel, which improves the separation of concerns.\nGenerating build targets and unit testing can be done in bulk, with optional filtering by namespace using the viash ns commands.\n\nThis guide will cover how to define a namespace and use it with Viash."
-  },
-  {
-    "objectID": "documentation/guide/component/namespaces.html#adding-components-to-a-namespace",
-    "href": "documentation/guide/component/namespaces.html#adding-components-to-a-namespace",
-    "title": "Namespaces",
-    "section": "Adding components to a namespace",
-    "text": "Adding components to a namespace\nThere are two ways of defining a namespace: either by adding the namespace property to the Viash config file or by creating a directory structure. You can use one or both of these methods in your projects.\n\nNamespace property\nYou can assign a component to a namespace by defining its namespace attribute in the viash config file:\nfunctionality:\n  name: some_component\n  namespace: my_namespace\n\n\nDirectory structure\nViash can deduce namespaces automatically if you structure the components hierarchically. The namespace directories should be in the root of your (source) directory, with the component directories inside, grouped per namespace.\nIn the example below, there are two namespaces: namespace_one and namespace_two, each of these namespaces has one or more components assigned to them:\nsrc\n├── namespace_one\n│   ├── component_one\n│   │   ├── config.vsh.yaml\n│   │   └── script.sh\n│   └── component_two\n│       ├── config.vsh.yaml\n│       └── script.sh\n└── namespace_two\n    └── component_three\n        ├── config.vsh.yaml\n        └── script.sh\nHere, namespace_one groups component_one and component_two together while namespace_two only consists of a single component, component_three."
-  },
-  {
-    "objectID": "documentation/guide/component/namespaces.html#using-the-viash-ns-subcommands",
-    "href": "documentation/guide/component/namespaces.html#using-the-viash-ns-subcommands",
-    "title": "Namespaces",
-    "section": "Using the viash ns subcommands",
-    "text": "Using the viash ns subcommands\nViash comes with a useful viash ns command to work with namespaces. This can be used to inspect, test and build the components that are part of a namespace.\nWe’ve provided a simple example project if you wish to test these commands. Its components use bash for some integer and string manipulation.\nDownload namespace_example.zip\n\nListing components and namespaces\nThe viash ns list command is the namespace equivalent of viash config view, it outputs a parsed version of all config files found in a directory and their subdirectories:\nviash ns list -src src\nThis prints all fields to the terminal, even those not defined in the config files themselves. Here’s a part of the output:\n\n\nOutput\n\n- functionality:\n    name: \"replace\"\n    namespace: \"string_manipulation\"\n    authors: []\n    inputs: []\n    outputs: []\n    arguments:\n    - type: \"string\"\n      name: \"--text\"\n      alternatives: []\n      example: []\n      default:\n      - \"Hello world!\"\n      required: false\n      values: []\n      direction: \"input\"\n      multiple: false\n      multiple_sep: \":\"\n    - type: \"string\"\n      name: \"--search\"\n      alternatives: []\n      example: []\n      default:\n      - \"Hello\"\n      required: false\n      values: []\n      direction: \"input\"\n      multiple: false\n      multiple_sep: \":\"\n    - type: \"string\"\n      name: \"--replace\"\n      alternatives: []\n      example: []\n      default:\n      - \"Greetings\"\n      required: false\n      values: []\n      direction: \"input\"\n      multiple: false\n      multiple_sep: \":\"\n    resources:\n    - type: \"bash_script\"\n      path: \"script.sh\"\n      is_executable: true\n      parent: \"file:/.../namespace_example/src/string_manipulation/replace/config.vsh.yaml\"\n    description: \"Search for a substring in a string and replace it with another string\"\n    test_resources:\n    - type: \"bash_script\"\n      path: \"test.sh\"\n      is_executable: true\n      parent: \"file:/.../namespace_example/src/string_manipulation/replace/config.vsh.yaml\"\n    info: {}\n    dummy_arguments: []\n    set_wd_to_resources_dir: false\n  platform:\n    type: \"native\"\n    id: \"native\"\n  platforms:\n  - type: \"native\"\n    id: \"native\"\n  info:\n    config: \"namespace_example/src/string_manipulation/replace/config.vsh.yaml\"\n    platform: \"native\"\n    viash_version: \"0.5.12\"\n    git_commit: \"d9d624de0264b1154d7eeb5dba3c1deb567311ac\"\n    git_remote: \"https://github.com/...\"\n...\n\n\n\nUnit testing a namespace\nYou can test multiple components using the viash ns test command.\nviash ns test --src src\n\n\n\n\n\n\nTip\n\n\n\nTo speed up the testing, you can use the parallel flag to test all components at once:\nviash ns test --src src --parallel\n\n\nThis will test each component in series and will output a tab separated output that contains the results:\nThe working directory for the namespace tests is /tmp/viash_ns_test2526740097581645786\n           namespace        functionality             platform            test_name exit_code duration               result\n string_manipulation              replace               native                start                                        \n string_manipulation              replace               native              test.sh         0        0              SUCCESS\n                math             subtract               native                start                                        \n                math             subtract               native              test.sh         0        0              SUCCESS\n                math                  add               native                start                                        \n                math                  add               native              test.sh         0        0              SUCCESS\n\n\nBuilding a namespace\nMultiple components can be build in series using the viash ns build command:\nviash ns build --src src --target target\n\n\n\n\n\n\nTip\n\n\n\nTo speed up the building, you can use the parallel flag to build all components at once:\nviash ns build --src src --target target --parallel\n\n\nThis will output the following to the console:\nExporting replace (string_manipulation) =native=> target/native/string_manipulation/replace\nExporting subtract (math) =native=> target/native/math/subtract\nExporting add (math) =native=> target/native/math/add\nAn executable and/or module will be generated for every target platform defined in each of the component configs. These are grouped per platform and namespace in the target directory:\ntarget\n└── native\n    ├── math\n    │   ├── add\n    │   │   └── add\n    │   └── subtract\n    │       └── subtract\n    └── string_manipulation\n        └── replace\n            └── replace"
-  },
-  {
-    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html",
-    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html",
-    "title": "Advanced Pipeline",
-    "section": "",
-    "text": "This guide explains how to create an example pipeline that’s closer to a typical use-case of a Nextflow bioinformatics pipeline. It has a mixture of scripting languages and uses a join to merge all events."
-  },
-  {
-    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#creating-the-modules",
-    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#creating-the-modules",
-    "title": "Advanced Pipeline",
-    "section": "Creating the modules",
-    "text": "Creating the modules\nThe sections below describe how to create the VDSL3 modules in preparation for creating the pipeline.\n\nPreparation\ncreate a new folder named advanced pipeline, add src folder with a nextflow_module folder inside. Now create three folders inside nextflow_module folder, one per component needed for the pipeline:\n\ncombine_columns\nremove_comments\ntake_columns\n\nThe folder structure should look like this now:\nadvanced_pipeline\n└── src\n    └── nextflow_modules\n        ├── combine_columns\n        ├── remove_comments\n        └── take_column\n\n\nCreating the remove_comments component\nThis component removes all comments (lines starting with a hashtag) from a tsv file.\nDownload or copy the contents of config.vsh.yaml and script.sh below into the remove_comments folder.\nDownload config.vsh.yaml\n\n\n\nContents of config.vsh.yaml\n\nfunctionality:\n  name: remove_comments\n  description: Remove comments from a TSV file.\n  namespace: nextflow_modules\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      required: true\n      example: \"file.tsv\"\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n      example: \"file.tsv\"\n    - type: string\n      name: --id\n      default: \"remove_comments\"\n  resources:\n  - type: bash_script\n    path: ./script.sh\nplatforms:\n  - type: docker\n    image: ubuntu:20.04\n  - type: nextflow\n    variant: vdsl3\n\nDownload script.sh\n\n\n\nContents of script.sh\n\n#!/bin/bash\n\ngrep -v '^#' \"$par_input\" > \"$par_output\"\n\n\n\nCreating the take_column component\nThis component subsets an incoming tsv file by extracting a certain column from the file.\nDownload or copy the contents of config.vsh.yaml and script.py below into the take_column folder.\nDownload config.vsh.yaml\n\n\n\nContents of config.vsh.yaml\n\nfunctionality:\n  name: take_column\n  namespace: nextflow_modules\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      required: true\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n    - name: \"--column\"\n      type: integer\n      required: false\n      default: 2\n    - type: string\n      name: --id\n      default: \"take_column\"\n  resources:\n  - type: python_script\n    path: ./script.py\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: amancevice/pandas:slim\n\nDownload script.py\n\n\n\nContents of script.py\n\nimport pandas as pd\n\n## VIASH START\npar = {\n    \"input\": \"data/file1.tsv\",\n    \"column\": 2,\n    \"output\": \"temp/foo\"\n}\n## VIASH END\n\n# read the tsv file\ntab = pd.read_csv(par[\"input\"], sep=\"\\t\", comment=\"#\")\n\n# subset a column\ntab_filt = tab.iloc[:, par[\"column\"]-1]\n\n# write to file\ntab_filt.to_csv(par[\"output\"], index=False)\n\n\n\nCreating the combine_columns component\nThis component combines multiple tsv files into one by concatenating all of the columns together. It assumes each incoming tsv file has an equal number of rows.\nDownload or copy the contents of config.vsh.yaml and script.R below into the combine_columns folder.\nDownload config.vsh.yaml\n\n\n\nContents of config.vsh.yaml\n\nfunctionality:\n  name: combine_columns\n  namespace: nextflow_modules\n  arguments:\n    - name: \"--input\"\n      alternatives: [ \"-i\" ]\n      type: file\n      multiple: true\n      required: true\n    - name: \"--output\"\n      alternatives: [ \"-o\" ]\n      type: file\n      required: true\n      direction: output\n    - type: string\n      name: --id\n      default: \"combine_columns\"\n  resources:\n    - type: r_script\n      path: ./script.R\nplatforms:\n  - type: nextflow\n    variant: vdsl3\n    directives:\n      container: rocker/r-ver:4.1\n\nDownload script.R\n\n\n\nContents of script.R\n\n## VIASH START\npar <- list(\n    input = c(\"data/file1.tsv\", \"data/file2.tsv\"),\n    output = \"temp/foo.tsv\"\n)\n## VIASH END\n\nouts <- lapply(par$input, function(file) {\n  read.delim(file, comment.char = \"#\", sep = \"\\t\", header = FALSE)\n})\n\ntable <- do.call(cbind, outs)\n\nwrite.table(table, par$output, col.names = FALSE, sep = \"\\t\")"
-  },
-  {
-    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#building-the-modules",
-    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#building-the-modules",
-    "title": "Advanced Pipeline",
-    "section": "Building the modules",
-    "text": "Building the modules\nThe basic pipeline guide describes how to generate an individual VDSL3 Nextflow module using the viash build command, but there’s a better way when it comes to building multiple modules at once: viash ns build. Each one of the three components has its namespace defined as nextflow_modules inside of its config file. Execute this command from the root of the advanced_pipeline directory\nviash ns build\nThis will result in the following output:\nExporting take_column (nextflow_modules) =nextflow=> target/nextflow/nextflow_modules/take_column\nExporting combine_columns (nextflow_modules) =nextflow=> target/nextflow/nextflow_modules/combine_columns\nExporting remove_comments (nextflow_modules) =nextflow=> target/nextflow/nextflow_modules/remove_comments\nThe VDSL3 Nextflow modules were generated inside of a target folder. The directory structure now looks like this:\nadvanced_pipeline\n├── src\n│   └── nextflow_modules\n│       ├── combine_columns\n│       │   ├── config.vsh.yaml\n│       │   └── script.R\n│       ├── remove_comments\n│       │   ├── config.vsh.yaml\n│       │   └── script.sh\n│       └── take_column\n│           ├── config.vsh.yaml\n│           └── script.py\n└── target\n    └── nextflow\n        └── nextflow_modules\n            ├── combine_columns\n            │   ├── main.nf\n            │   └── nextflow.config\n            ├── remove_comments\n            │   ├── main.nf\n            │   └── nextflow.config\n            └── take_column\n                ├── main.nf\n                └── nextflow.config"
-  },
-  {
-    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#creating-the-pipeline",
-    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#creating-the-pipeline",
-    "title": "Advanced Pipeline",
-    "section": "Creating the pipeline",
-    "text": "Creating the pipeline\nCreate a new file named main.nf and add it to the root of the advanced_pipeline directory. Use the following as its contents:\ntargetDir = \"../../target/nextflow\" // 1\n\n// 2\ninclude { remove_comments } from \"$targetDir/nextflow_modules/remove_comments/main.nf\"\ninclude { take_column } from \"$targetDir/nextflow_modules/take_column/main.nf\"\ninclude { combine_columns } from \"$targetDir/nextflow_modules/combine_columns/main.nf\"\n\nworkflow {\n  Channel.fromPath(params.input) // 3\n  \n    // 4\n    // File -> (String, File)\n    | map{ file -> [ file.baseName, file ] }\n    \n    // 5\n    // (String, File) -> (String, File)\n    | remove_comments\n\n    // 6\n    // (String, File) -> (String, File)\n    | take_column\n\n    // 7\n    // (String, File)* -> List[(String, File)]\n    | toList()\n\n    // 8\n    // List[(String, File)] -> (String, {input: List[File]})\n    | map{ tups -> \n      files = tups.collect{id, file -> file}\n      [ \"combined\", [ input: files ] ] \n    }\n\n    // 9\n    // (String, {input: List[File]}) -> (String, File)\n    | combine_columns.run(\n      auto: [ publish: true ]\n      )\n\n    // 10\n    | view{ file -> \"Output: $file\" }\n}\n\nTarget directory where the modules are located\nInclude the modules from the target directory\nCreate a channel based on the input parameter’s path\nAssign a unique ID to each event using map{}\nRun remove_comments to remove the comments from the TSV\nExtract a single column from TSV by running take_column\nCombine all events into a single List event using toList()\nAdd unique ID to the tuple\nConcatenate the TSVs into one by running the combine_columns module with auto publishing enabled using the auto directive\nView the channel contents bu printing it to the console using view()"
-  },
-  {
-    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#running-the-pipeline",
-    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-advanced.html#running-the-pipeline",
-    "title": "Advanced Pipeline",
-    "section": "Running the pipeline",
-    "text": "Running the pipeline\nBefore being able to run the pipeline, you’ll need some TSV files to work with. Download the files below and place them in a new directory named data in the root of advanced_pipeline.\nDownload file1.tsv\nDownload file2.tsv\nNow run the following command to run the pipeline using Nextflow:\nnextflow run main.nf --input \"data/file?.tsv\" --publishDir output\nYou should get an output similar to this:\nN E X T F L O W  ~  version 22.04.3\nLaunching `workflows/310-realistic_pipeline/main.nf` [stupefied_saha] DSL2 - revision: 6669aefc6c\n[93/232aba] Submitted process > remove_comments:remove_comments_process (2)\n[ef/a28e89] Submitted process > remove_comments:remove_comments_process (1)\n[63/279f98] Submitted process > take_column:take_column_process (1)\n[50/2a17ef] Submitted process > take_column:take_column_process (2)\n[8d/6eeff5] Submitted process > combine_columns:combine_columns_process\nOutput: [combined, /home/runner/work/viash_nxf_course/viash_nxf_course/work/8d/6eeff571e9ff2c5389851c6ab3001c/combined.combine_columns.output]\nYou can find the final TSV in the output directory:\n# this is a header      \n# this is also a header     \none     0.11    123\ntwo     0.23    456\nthree   0.35    789\nfour    0.47    123"
-  },
-  {
-    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html",
-    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html",
-    "title": "Basic Pipeline",
-    "section": "",
-    "text": "This guide will explain how to create a basic Nextflow pipeline using a Viash component."
-  },
-  {
-    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#creating-the-module",
-    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#creating-the-module",
-    "title": "Basic Pipeline",
-    "section": "Creating the module",
-    "text": "Creating the module\nNextflow works with modules to run scripts and handle their input and output, so the first step is generating a Nextflow module from a Viash component. This guide will use a small component named remove_comments that removes comments (lines starting with a hashtag) from a TSV file.\n\n\n\n\n\n\nNote\n\n\n\nThis guide won’t go in-depth about how to generate a Nextflow module from a Viash component. For more information on that topic, read the Nextflow component creation and the Nextflow Build & Run guides.\n\n\n\nDownload the source files\nDownload the zip below and extract it to a directory of your choosing:\nDownload basic_pipeline.zip\nOnce extracted, the directory contains the remove_comments component in the src directory and a small TSV file in the data directory:\nbasic_pipeline\n├── data\n│   └── sample.tsv\n└── src\n    └── remove_comments\n        ├── config.vsh.yaml\n        └── script.sh\n\n\nBuilding the Nextflow module\nWith the component ready, execute the viash build command below to generate the Nextflow module:\nviash build src/remove_comments/config.vsh.yaml -p nextflow -o target/remove_comments\nYou should now have a target directory that contains the generated Nextflow module.\nbasic_pipeline\n├── data\n│   └── sample.tsv\n├── src\n│   └── remove_comments\n│       ├── config.vsh.yaml\n│       └── script.sh\n└── target\n    └── remove_comments\n        ├── main.nf\n        └── nextflow.config"
-  },
-  {
-    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#creating-the-pipeline",
-    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#creating-the-pipeline",
-    "title": "Basic Pipeline",
-    "section": "Creating the pipeline",
-    "text": "Creating the pipeline\nTo use the module in a pipeline, create a new file in the root of the directory and name it main.nf, this will be the Nextflow pipeline script. Add this as its contents:\ntargetDir = \"./target\" // 1\n\ninclude { remove_comments } from \"$targetDir/remove_comments/main.nf\" // 2\n\nworkflow {\n  Channel.fromPath(params.input) // 3\n    | map{ file -> [ file.baseName, file ] } // 4\n    | view{ file -> \"Input: $file\" } // 5\n    | remove_comments.run( // 6\n      auto: [ publish: true ]\n      )\n    | view{ file -> \"Output: $file\" } // 7\n}\nHere’s an overview of this Nextflow script:\n\nStore the location of the target directory where the modules are located\nInclude the remove_comments module from the remove_comments/main.nf script\nCreate a channel based on the input parameter’s path\nTake the tuple list and map it to the [ file.baseName, file ] format\nPrint the input tuple to the console\nRun the remove_comments module with auto publishing enabled using the auto directive, this makes sure that the output of this module is written to a directory based on its id\nPrint the output tuple to the console"
-  },
-  {
-    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#running-the-pipeline",
-    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#running-the-pipeline",
-    "title": "Basic Pipeline",
-    "section": "Running the pipeline",
-    "text": "Running the pipeline\nYou can now run the pipeline script above with Nextflow using the following command:\nnextflow run main.nf --input \"data/sample.tsv\" --publishDir output\nThis results in a console output similar to this:\nN E X T F L O W  ~  version 22.04.3\nLaunching `main.nf` [curious_gates] DSL2 - revision: 3e22e3038c\nexecutor >  local (1)\n[2a/5df658] process > remove_comments:remove_comments_process (1) [100%] 1 of 1 ✔\nInput: [sample, basic_pipeline/data/sample.tsv]\nOutput: [sample, basic_pipeline/work/2a/5df6584524e26995953a4eaec97136/sample.remove_comments.output.tsv]\nAfter the pipeline has finished working, a new file named sample.remove_comments.output.tsv has been created in the output directory:\nbasic_pipeline\n└── output\n    └── sample.remove_comments.output.tsv\nFor comparison, here’s what the input and output files look like to show what changed:\nsample.tsv\n# this is a header      \n# this is also a header     \none     0.11    123\ntwo     0.23    456\nthree   0.35    789\nfour    0.47    123\nsample.remove_comments.output.tsv\none     0.11    123\ntwo     0.23    456\nthree   0.35    789\nfour    0.47    123"
-  },
-  {
-    "objectID": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#whats-next",
-    "href": "documentation/guide/data-workflow/nextflow-pipeline/pipeline-basics.html#whats-next",
-    "title": "Basic Pipeline",
-    "section": "What’s next?",
-    "text": "What’s next?\nThe pipeline in this guide was a bare minimum example, to learn more about creating Nextflow pipelines, take a look at the Advanced Pipeline guide."
+    "text": "Can I store helper functions as separate files?\nYes, though you’ll need to let Viash know which additional files are required to run the component. For example, if several helper functions are stored in an additional file mymodule.py or mymodule.R, use the following code to import the helper functions:\n\nPython\nIn the resources section of the Viash config file:\nresources:\n  - type: python_script\n    path: script.py\n  - path: mymodule.py\nIn the main Python script:\nimport sys\n\n## VIASH START\nmeta = { 'resources_dir': '.' }\n## VIASH END\n\nsys.path.append(meta['resources_dir'])\nfrom mymodule import helper_fun\n\n\nR\nIn the resources section of the Viash config file:\nresources:\n  - type: r_script\n    path: script.R\n  - path: mymodule.R\nIn the main R script:\n## VIASH START\nmeta <- list(resources_dir = \".\")\n## VIASH END\n\nsource(paste0(meta[[\"resources_dir\"]], \"/mymodule.R\"))\nhelper_fun(...)"
   },
   {
     "objectID": "documentation/help/terminology.html",
@@ -1645,17 +1645,17 @@
     "text": "Term\nDescription\n\n\n\n\nViash\nA script code wrapper for building modular software components that serve as building blocks to develop (Nextflow) data pipelines.\n\n\nComponent\nAt minimum, the combination of a script and a config file. This can also include any needed resources and unit tests.\n\n\nViash config\nA YAML based file that holds all of the parameters needed to create a component.\n\n\nResources\nTools, helper scripts, templates and other files the component depends on to work.\n\n\nUnit test\nA small block of code to test a component.\n\n\nBuild target\nAn executable or a VDSL3 module that’s generated by Viash.\n\n\n(VDSL3) Module\nA Nextflow module generated by Viash.\n\n\n(Viash) Executable\nAn executable script generated for the Native or Docker platform.\n\n\n(Docker) Image\nA standard unit of software that packages up the OS, code and its dependencies so the application runs quickly and reliably from one computing environment to another.\n\n\n(Docker) Container\nAn instance of a Docker image.\n\n\nPlatform\nThe platform(s) targeted by a component. We currently support Native, Docker and Nextflow."
   },
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Viash",
+    "section": "",
+    "text": "Viash is free open source software distributed under the GPL-3 license.\nFor more information or support contact us at info@data-intuitive.com."
+  },
+  {
     "objectID": "privacy.html",
     "href": "privacy.html",
     "title": "Privacy Policy",
     "section": "",
     "text": "Website visitors\n\nNo personal information is collected.\nNo information is stored in the browser.\nNo information is shared with, sent to or sold to third-parties.\nNo information is shared with advertising companies.\nNo information is mined and harvested for personal and behavioral trends.\nNo information is monetized.\n\n\n\nInformation we collect and what we use it for\nWe run Google Analytics analytics on viash.io. The following information is collected:\n\nPage URL. We track the page URL of each page view on this website. We use this to understand which pages have been viewed and how many times a particular page has been viewed. For example: https://viash.io/.\nHTTP Referrer. We use the referrer string to understand the number of visitors referred to this website from links on other sites. For example: https://github.com/.\nBrowser. We use this to understand what browsers people use when visiting this website. This is derived from the User-Agent HTTP header. The full User-Agent is discarded. For example: Chrome.\nOperating system. We use this to understand what operating systems people use when visiting this website. We only use the brand of the operating system and don’t include the version number or any other details. This is derived from the User-Agent HTTP header. The full User-Agent is discarded. For example: GNU/Linux.\nDevice type. We use this to understand what devices people use when visiting this website. This is derived from window.innerWidth. The actual width of the browser in pixels is discarded. For example: Desktop.\nVisitor Country. We look up the visitor’s country using the IP address. We do not track anything more granular than the country of origin and the IP address of the visitor is discarded. We never store IP addresses in our database or logs. For example: Canada.\n\n\n\nContact us\nContact us if you have any questions."
-  },
-  {
-    "objectID": "download/components/md_url_checker/bash/Testfile.html",
-    "href": "download/components/md_url_checker/bash/Testfile.html",
-    "title": "Viash",
-    "section": "",
-    "text": "This is a simple markdown file with some hyperlinks to test if the component works correctly. Some links to websites:\n\nGoogle\nReddit\nA broken link\n\nLinks that are relative to viash.io:\n\nYou can install viash here.\nIt all starts with a script and a config file."
   }
 ]
