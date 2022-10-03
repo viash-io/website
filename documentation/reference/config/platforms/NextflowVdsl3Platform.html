@@ -420,12 +420,42 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <h2 class="anchored" data-anchor-id="auto">auto</h2>
 <p><strong>Type</strong>: <code>NextflowAuto</code></p>
 <p>Automated processing flags which can be toggled on or off:</p>
-<ul>
-<li><code>simplifyInput</code>: If <code>true</code>, an input tuple only containing only a single File (e.g.&nbsp;<code>["foo", file("in.h5ad")]</code>) is automatically transformed to a map (i.e.&nbsp;<code>["foo", [ input: file("in.h5ad") ] ]</code>). Default is <code>true</code>.</li>
-<li><code>simplifyOutput</code>: If <code>true</code>, an output tuple containing a map with a File (e.g.&nbsp;<code>["foo", [ output: file("out.h5ad") ] ]</code>) is automatically transformed to a map (i.e.&nbsp;<code>["foo", file("out.h5ad")]</code>). Default is <code>true</code>.</li>
-<li><code>transcript</code>: If <code>true</code>, the module’s transcripts from <code>work/</code> are automatically published to <code>params.transcriptDir</code>. If not defined, <code>params.publishDir + "/_transcripts"</code> will be used. Will throw an error if neither are defined. Default is <code>false</code>.</li>
-<li><code>publish</code>: If <code>true</code>, the module’s outputs are automatically published to <code>params.publishDir</code>. Will throw an error if <code>params.publishDir</code> is not defined. Default is <code>false</code>.</li>
-</ul>
+<table class="table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 56%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Flag</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>simplifyInput</code></td>
+<td>If <code>true</code>, an input tuple only containing only a single File (e.g.&nbsp;<code>["foo", file("in.h5ad")]</code>) is automatically transformed to a map (i.e.&nbsp;<code>["foo", [ input: file("in.h5ad") ] ]</code>).</td>
+<td><code>true</code></td>
+</tr>
+<tr class="even">
+<td><code>simplifyOutput</code></td>
+<td>If <code>true</code>, an output tuple containing a map with a File (e.g.&nbsp;<code>["foo", [ output: file("out.h5ad") ] ]</code>) is automatically transformed to a map (i.e.&nbsp;<code>["foo", file("out.h5ad")]</code>).</td>
+<td><code>true</code></td>
+</tr>
+<tr class="odd">
+<td><code>transcript</code></td>
+<td>If <code>true</code>, the module’s transcripts from <code>work/</code> are automatically published to <code>params.transcriptDir</code>. If not defined, <code>params.publishDir + "/_transcripts"</code> will be used. Will throw an error if neither are defined.</td>
+<td><code>false</code></td>
+</tr>
+<tr class="even">
+<td><code>publish</code></td>
+<td>If <code>true</code>, the module’s outputs are automatically published to <code>params.publishDir</code>. Will throw an error if <code>params.publishDir</code> is not defined.</td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table>
 <section id="example" class="level3">
 <h3 class="anchored" data-anchor-id="example">Example</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auto</span><span class="kw">:</span></span>
