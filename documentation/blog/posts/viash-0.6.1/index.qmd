@@ -1,0 +1,89 @@
+---
+title: "Viash 0.6.1"
+subtitle: "Mostly minor improvements of functionality released in Viash 0.6.0"
+date: 2022/09/07
+categories:
+  - New Release
+author: Viash Team
+---
+
+This release contains mostly minor improvements of functionality released in Viash 0.6.0. Most notably:
+
+* Support was added for `type: long` arguments
+
+* `meta["n_proc"]` has been renamed to `meta["cpus"]`. `meta["cpus"]` is now an integer, whereas `meta["memory_*"]` are now longs.
+
+* `viash ns exec` is able to recognise `{platform}` and `{namespace}` fields.
+
+* And various bug fixes and improvements to documentation and unit testing.
+
+## BREAKING CHANGES
+
+* Deprecated usage `resources_dir` variable inside scripts, use `meta["resources_dir"]` instead (or `$meta_resources_dir` in Bash, or `meta$resources_dir` in R).
+
+* Deprecated `meta["n_proc"]` in favour for `meta["cpus"]`.
+
+## NEW FUNCTIONALITY
+
+* `viash ns exec`: Added two more fields:
+
+  - `{platform}`: the platform name (if applicable)
+  - `{namespace}`: the namespace of the component
+
+* `LongArgument`: Added support for 64-bit integers with `type: long` as opposed to `type: integer` which are 32-bit integers.
+
+## MAJOR CHANGES
+
+* Allow passing integers/doubles/booleans to string parameters (#225). Removed the 'Version' helper class.
+
+## MINOR CHANGES
+
+* `meta["cpus"]` is now an integer, `meta["memory_*"]` are now longs (#224).
+
+* `DockerPlatform`: Only store author names in the authors metadata.
+
+* `NextflowPlatform`: Only store author names in the authors metadata.
+
+* `Argument[_]`: Turn `multiple_sep` from `Char` into `String`.
+
+## INTERNAL CHANGES
+
+* All `meta[...]` variables are now processed similar to `Argument[_]`s, instead of using custom code to convert object types and detect Docker mounts.
+
+* `Escaper`: Make more generic Escaper helper class.
+
+## DOCUMENTATION
+
+* Hardcoded URLs pointing to viash.io in the documentation annotations were replaced with a new keyword system.
+
+* Replaced references to "DSL" with "Dynamic Config Modding" in the `--help` output.
+
+* Added an example for Ruby based Docker setups.
+
+## BUG FIXES
+
+* `viash ns`: Reverse exit code outputs, was returning 1 when everything was OK and 0 when errors were detected (#227).
+
+* `viash config inject`: Fix processing of arguments when argument groups are defined (#231).
+
+* Fixed a few typos in the CLI.
+
+* Fixed the formatting of `ns exec` documentation.
+
+* `VDSL3`: Fix stub functionality.
+
+* `VDSL3`: Fix error during error message.
+
+* `viash test`: Fix issue where `VIASH_TEMP` could not be a relative directory when running `viash test` (#242).
+
+* `BashScript`, `CSharpScript`, `JavaScriptScript`, `PythonScript`, `RScript`, `ScalaScript`: Fix quoting issues of certain characters (#113).
+
+## DEPRECATION
+
+* `NextflowPlatform`: Deprecate `--param_list_format` parameter.
+
+## TESTING
+
+* `BashScript`, `CSharpScript`, `JavaScriptScript`, `PythonScript`, `RScript`, `ScalaScript`: Implement more rigorous testing of which characters are escaped.
+
+* `BashWrapper`: Escape usage of `multiple_sep`. This fixes various checks and transformations not working when when `multiple_sep` is set to `";"` (#235).

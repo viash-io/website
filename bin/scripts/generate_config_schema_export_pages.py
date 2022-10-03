@@ -38,11 +38,11 @@ def generate_json():
 	""" Calls viash in order to generate a config export. """
 	
 	# Run bin/viash export config_schema
-	# bin = repo_root + "/bin/"
-	# json = subprocess.run([bin + "viash", "export", "config_schema"], stdout=subprocess.PIPE).stdout.decode('utf-8')
-	# f = open(reference_dir + json_export, "w")
-	# f.write(json)
-	# f.close()
+	bin = repo_root + "/bin/"
+	json = subprocess.run([bin + "viash", "export", "config_schema"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+	f = open(reference_dir + json_export, "w")
+	f.write(json)
+	f.close()
 
 	print(f"Generated {reference_dir}/{json_export}")
 
