@@ -37,10 +37,10 @@
     {
       "name" : "requirements",
       "type" : "ComputationalRequirements",
-      "description" : "Computational requirements related to running the component. \n`n_proc` specifies the maximum number of processes a component is allowed to spawn in parallel, whereas\n`memory` specifies the maximum amount of memory a component is allowed to allicate. Memory units must be\nin B, KB, MB, GB, TB or PB.",
+      "description" : "Computational requirements related to running the component. \n`cpus` specifies the maximum number of (logical) cpus a component is allowed to use., whereas\n`memory` specifies the maximum amount of memory a component is allowed to allicate. Memory units must be\nin B, KB, MB, GB, TB or PB.",
       "example" : [
         {
-          "example" : "requirements:\n  n_proc: 5\n  memory: 10GB\n",
+          "example" : "requirements:\n  cpus: 5\n  memory: 10GB\n",
           "format" : "yaml"
         }
       ],
@@ -192,7 +192,7 @@
     },
     {
       "name" : "version",
-      "type" : "Option of Version",
+      "type" : "Option of String",
       "description" : "Version of the component. This field will be used to version the executable and the Docker container.",
       "example" : [
         {
@@ -423,7 +423,7 @@
       },
       {
         "name" : "target_tag",
-        "type" : "Option of Version",
+        "type" : "Option of String",
         "description" : "The tag the resulting image gets.",
         "example" : [
           {
@@ -456,7 +456,7 @@
       },
       {
         "name" : "tag",
-        "type" : "Option of Version",
+        "type" : "Option of String",
         "description" : "Specify a Docker image based on its tag.",
         "example" : [
           {
@@ -653,7 +653,7 @@
       },
       {
         "name" : "tag",
-        "type" : "Option of Version",
+        "type" : "Option of String",
         "description" : "Specify a Docker image based on its tag.",
         "example" : [
           {
@@ -795,7 +795,7 @@
       },
       {
         "name" : "multiple_sep",
-        "type" : "Char",
+        "type" : "String",
         "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
         "example" : [
           {
@@ -899,7 +899,7 @@
       },
       {
         "name" : "multiple_sep",
-        "type" : "Char",
+        "type" : "String",
         "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
         "example" : [
           {
@@ -1000,6 +1000,133 @@
         "description" : "The name of the argument. Can be in the formats `--foo`, `-f` or `foo`. The number of dashes determines how values can be passed:  \n\n  - `--foo` is a long option, which can be passed with `executable_name --foo=value` or `executable_name --foo value`\n  - `-f` is a short option, which can be passed with `executable_name -f value`\n  - `foo` is an argument, which can be passed with `executable_name value`  \n"
       }
     ],
+    "long" : [
+      {
+        "name" : "__this__",
+        "type" : "LongArgument",
+        "description" : "An `long` type argument has a numeric value without decimal points.",
+        "example" : [
+          {
+            "example" : "arguments:\n  - name: --core_amount\n    type: long\n    default: 16\n    description: Amount of CPU cores to use\n    alternatives: [\"-c\"]\n",
+            "format" : "yaml"
+          }
+        ],
+        "since" : "Viash 0.6.1"
+      },
+      {
+        "name" : "multiple_sep",
+        "type" : "String",
+        "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_long\n  type: long\n  multiple: true\n  multiple_sep: \",\"\n",
+            "format" : "yaml"
+          },
+          {
+            "example" : "my_component --my_long=10:80:152",
+            "format" : "bash",
+            "description" : "Here's an example of how to use this:"
+          }
+        ]
+      },
+      {
+        "name" : "multiple",
+        "type" : "Boolean",
+        "description" : "Treat the argument value as an array. Arrays can be passed using the delimiter `--foo=1:2:3` or by providing the same argument multiple times `--foo 1 --foo 2`. You can use a custom delimiter by using the [`multiple_sep`](#multiple_sep) property. `false` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_long\n  type: long\n  multiple: true\n",
+            "format" : "yaml"
+          },
+          {
+            "example" : "my_component --my_long=10:80:152",
+            "format" : "bash",
+            "description" : "Here's an example of how to use this:"
+          }
+        ]
+      },
+      {
+        "name" : "max",
+        "type" : "Option of Long",
+        "description" : "Maximum allowed value for this argument. If set and the provided value is higher than the maximum, an error will be produced. Can be combined with [`min`](#min) to clamp values.",
+        "example" : [
+          {
+            "example" : "- name: --my_long\n  type: long\n  max: 150\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "min",
+        "type" : "Option of Long",
+        "description" : "Minimum allowed value for this argument. If set and the provided value is lower than the minimum, an error will be produced. Can be combined with [`max`](#max) to clamp values.",
+        "example" : [
+          {
+            "example" : "- name: --my_long\n  type: long\n  min: 50\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "choices",
+        "type" : "List of Long",
+        "description" : "Limit the amount of valid values for this argument to those set in this list. When set and a value not present in the list is provided, an error will be produced.",
+        "example" : [
+          {
+            "example" : "- name: --values\n  type: long\n  choices: [1024, 2048, 4096]\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "required",
+        "type" : "Boolean",
+        "description" : "Make the value for this argument required. If set to `true`, an error will be produced if no value was provided. `false` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_long\n  type: long\n  required: true\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "default",
+        "type" : "OneOrMore of Long",
+        "description" : "The default value when no argument value is provided. This will not work if the [`required`](#required) property is enabled.",
+        "example" : [
+          {
+            "example" : "- name: --my_long\n  type: long\n  default: 100\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "example",
+        "type" : "OneOrMore of Long",
+        "description" : "An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.",
+        "example" : [
+          {
+            "example" : "- name: --my_long\n  type: long\n  example: 100\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "description",
+        "type" : "Option of String",
+        "description" : "A description of the argument. This will be displayed with `--help`."
+      },
+      {
+        "name" : "alternatives",
+        "type" : "OneOrMore of String",
+        "description" : "List of alternative format variations for this argument."
+      },
+      {
+        "name" : "name",
+        "type" : "String",
+        "description" : "The name of the argument. Can be in the formats `--foo`, `-f` or `foo`. The number of dashes determines how values can be passed:  \n\n  - `--foo` is a long option, which can be passed with `executable_name --foo=value` or `executable_name --foo value`\n  - `-f` is a short option, which can be passed with `executable_name -f value`\n  - `foo` is an argument, which can be passed with `executable_name value`  \n"
+      }
+    ],
     "boolean" : [
       {
         "name" : "__this__",
@@ -1014,7 +1141,7 @@
       },
       {
         "name" : "multiple_sep",
-        "type" : "Char",
+        "type" : "String",
         "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
         "example" : [
           {
@@ -1107,7 +1234,7 @@
       },
       {
         "name" : "multiple_sep",
-        "type" : "Char",
+        "type" : "String",
         "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
         "example" : [
           {
@@ -1250,7 +1377,7 @@
       },
       {
         "name" : "multiple_sep",
-        "type" : "Char",
+        "type" : "String",
         "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
         "example" : [
           {
@@ -1308,7 +1435,7 @@
         "description" : "Limit the amount of valid values for this argument to those set in this list. When set and a value not present in the list is provided, an error will be produced.",
         "example" : [
           {
-            "example" : "- name: --memory\n  type: integer\n  choices: [1024, 2048, 4096]\n",
+            "example" : "- name: --values\n  type: integer\n  choices: [1024, 2048, 4096]\n",
             "format" : "yaml"
           }
         ]
