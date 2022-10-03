@@ -95,7 +95,7 @@
     "href": "documentation/reference/config/functionality.html#requirements",
     "title": "Functionality",
     "section": "requirements",
-    "text": "requirements\nType: ComputationalRequirements\nComputational requirements related to running the component. n_proc specifies the maximum number of processes a component is allowed to spawn in parallel, whereas memory specifies the maximum amount of memory a component is allowed to allicate. Memory units must be in B, KB, MB, GB, TB or PB.\n\nExample\nrequirements:\n  n_proc: 5\n  memory: 10GB"
+    "text": "requirements\nType: ComputationalRequirements\nComputational requirements related to running the component. cpus specifies the maximum number of (logical) cpus a component is allowed to use., whereas memory specifies the maximum amount of memory a component is allowed to allicate. Memory units must be in B, KB, MB, GB, TB or PB.\n\nExample\nrequirements:\n  cpus: 5\n  memory: 10GB"
   },
   {
     "objectID": "documentation/reference/config/functionality.html#resources",
@@ -137,7 +137,7 @@
     "href": "documentation/reference/config/functionality.html#version",
     "title": "Functionality",
     "section": "version",
-    "text": "version\nType: Version\nVersion of the component. This field will be used to version the executable and the Docker container.\n\nExample\nversion: 0.8"
+    "text": "version\nType: String\nVersion of the component. This field will be used to version the executable and the Docker container.\n\nExample\nversion: 0.8"
   },
   {
     "objectID": "documentation/reference/config/platforms/DockerPlatform.html",
@@ -256,7 +256,7 @@
     "href": "documentation/reference/config/platforms/DockerPlatform.html#tag",
     "title": "Docker Platform",
     "section": "tag",
-    "text": "tag\nType: Version\nSpecify a Docker image based on its tag.\n\nExample\ntag: 4.0"
+    "text": "tag\nType: String\nSpecify a Docker image based on its tag.\n\nExample\ntag: 4.0"
   },
   {
     "objectID": "documentation/reference/config/platforms/DockerPlatform.html#target_image",
@@ -284,7 +284,7 @@
     "href": "documentation/reference/config/platforms/DockerPlatform.html#target_tag",
     "title": "Docker Platform",
     "section": "target_tag",
-    "text": "target_tag\nType: Version\nThe tag the resulting image gets.\n\nExample\ntarget_tag: 0.5.0"
+    "text": "target_tag\nType: String\nThe tag the resulting image gets.\n\nExample\ntarget_tag: 0.5.0"
   },
   {
     "objectID": "documentation/reference/config/platforms/DockerPlatform.html#test_setup",
@@ -452,7 +452,7 @@
     "href": "documentation/reference/config/platforms/NextflowLegacyPlatform.html#tag",
     "title": "Nextflow Legacy Platform",
     "section": "tag",
-    "text": "tag\nType: Version\nSpecify a Docker image based on its tag.\n\nExample\ntag: 4.0"
+    "text": "tag\nType: String\nSpecify a Docker image based on its tag.\n\nExample\ntag: 4.0"
   },
   {
     "objectID": "documentation/reference/config/overview.html",
@@ -620,7 +620,7 @@
     "href": "documentation/reference/config/arguments/integer.html#choices",
     "title": "integer",
     "section": "choices",
-    "text": "choices\nType: List of Int\nLimit the amount of valid values for this argument to those set in this list. When set and a value not present in the list is provided, an error will be produced.\n\nExample\n- name: --memory\n  type: integer\n  choices: [1024, 2048, 4096]"
+    "text": "choices\nType: List of Int\nLimit the amount of valid values for this argument to those set in this list. When set and a value not present in the list is provided, an error will be produced.\n\nExample\n- name: --values\n  type: integer\n  choices: [1024, 2048, 4096]"
   },
   {
     "objectID": "documentation/reference/config/arguments/integer.html#default",
@@ -669,7 +669,7 @@
     "href": "documentation/reference/config/arguments/integer.html#multiple_sep",
     "title": "integer",
     "section": "multiple_sep",
-    "text": "multiple_sep\nType: Char\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_integer\n  type: integer\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_integer=10:80:152"
+    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_integer\n  type: integer\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_integer=10:80:152"
   },
   {
     "objectID": "documentation/reference/config/arguments/integer.html#name",
@@ -746,7 +746,7 @@
     "href": "documentation/reference/config/arguments/double.html#multiple_sep",
     "title": "double",
     "section": "multiple_sep",
-    "text": "multiple_sep\nType: Char\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_double\n  type: double\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_double=5.8,22.6,200.4"
+    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_double\n  type: double\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_double=5.8,22.6,200.4"
   },
   {
     "objectID": "documentation/reference/config/arguments/double.html#name",
@@ -837,7 +837,7 @@
     "href": "documentation/reference/config/arguments/boolean.html#multiple_sep",
     "title": "boolean",
     "section": "multiple_sep",
-    "text": "multiple_sep\nType: Char\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_boolean\n  type: boolean\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_boolean=true,true,false"
+    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_boolean\n  type: boolean\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_boolean=true,true,false"
   },
   {
     "objectID": "documentation/reference/config/arguments/boolean.html#name",
@@ -907,7 +907,7 @@
     "href": "documentation/reference/config/arguments/string.html#multiple_sep",
     "title": "string",
     "section": "multiple_sep",
-    "text": "multiple_sep\nType: Char\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_string\n  type: string\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_string=Marc,Susan,Paul"
+    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_string\n  type: string\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_string=Marc,Susan,Paul"
   },
   {
     "objectID": "documentation/reference/config/arguments/string.html#name",
@@ -977,7 +977,7 @@
     "href": "documentation/reference/config/arguments/file.html#multiple_sep",
     "title": "file",
     "section": "multiple_sep",
-    "text": "multiple_sep\nType: Char\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_files\n  type: file\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_files=firstFile.csv,anotherFile.csv,yetAnother.csv"
+    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_files\n  type: file\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_files=firstFile.csv,anotherFile.csv,yetAnother.csv"
   },
   {
     "objectID": "documentation/reference/config/arguments/file.html#must_exist",
@@ -999,6 +999,90 @@
     "title": "file",
     "section": "required",
     "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\n\nExample\n- name: --my_file\n  type: file\n  required: true"
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/long.html",
+    "href": "documentation/reference/config/arguments/long.html",
+    "title": "long",
+    "section": "",
+    "text": "An long type argument has a numeric value without decimal points."
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/long.html#alternatives",
+    "href": "documentation/reference/config/arguments/long.html#alternatives",
+    "title": "long",
+    "section": "alternatives",
+    "text": "alternatives\nType: String / List of String\nList of alternative format variations for this argument."
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/long.html#choices",
+    "href": "documentation/reference/config/arguments/long.html#choices",
+    "title": "long",
+    "section": "choices",
+    "text": "choices\nType: List of Long\nLimit the amount of valid values for this argument to those set in this list. When set and a value not present in the list is provided, an error will be produced.\n\nExample\n- name: --values\n  type: long\n  choices: [1024, 2048, 4096]"
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/long.html#default",
+    "href": "documentation/reference/config/arguments/long.html#default",
+    "title": "long",
+    "section": "default",
+    "text": "default\nType: Long / List of Long\nThe default value when no argument value is provided. This will not work if the required property is enabled.\n\nExample\n- name: --my_long\n  type: long\n  default: 100"
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/long.html#description",
+    "href": "documentation/reference/config/arguments/long.html#description",
+    "title": "long",
+    "section": "description",
+    "text": "description\nType: String\nA description of the argument. This will be displayed with --help."
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/long.html#example-3",
+    "href": "documentation/reference/config/arguments/long.html#example-3",
+    "title": "long",
+    "section": "example",
+    "text": "example\nType: Long / List of Long\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\n\nExample\n- name: --my_long\n  type: long\n  example: 100"
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/long.html#max",
+    "href": "documentation/reference/config/arguments/long.html#max",
+    "title": "long",
+    "section": "max",
+    "text": "max\nType: Long\nMaximum allowed value for this argument. If set and the provided value is higher than the maximum, an error will be produced. Can be combined with min to clamp values.\n\nExample\n- name: --my_long\n  type: long\n  max: 150"
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/long.html#min",
+    "href": "documentation/reference/config/arguments/long.html#min",
+    "title": "long",
+    "section": "min",
+    "text": "min\nType: Long\nMinimum allowed value for this argument. If set and the provided value is lower than the minimum, an error will be produced. Can be combined with max to clamp values.\n\nExample\n- name: --my_long\n  type: long\n  min: 50"
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/long.html#multiple",
+    "href": "documentation/reference/config/arguments/long.html#multiple",
+    "title": "long",
+    "section": "multiple",
+    "text": "multiple\nType: Boolean\nTreat the argument value as an array. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. You can use a custom delimiter by using the multiple_sep property. false by default.\n\nExample\n- name: --my_long\n  type: long\n  multiple: true\nHere’s an example of how to use this:\nmy_component --my_long=10:80:152"
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/long.html#multiple_sep",
+    "href": "documentation/reference/config/arguments/long.html#multiple_sep",
+    "title": "long",
+    "section": "multiple_sep",
+    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_long\n  type: long\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_long=10:80:152"
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/long.html#name",
+    "href": "documentation/reference/config/arguments/long.html#name",
+    "title": "long",
+    "section": "name",
+    "text": "name\nType: String\nThe name of the argument. Can be in the formats --foo, -f or foo. The number of dashes determines how values can be passed:\n\n--foo is a long option, which can be passed with executable_name --foo=value or executable_name --foo value\n-f is a short option, which can be passed with executable_name -f value\nfoo is an argument, which can be passed with executable_name value"
+  },
+  {
+    "objectID": "documentation/reference/config/arguments/long.html#required",
+    "href": "documentation/reference/config/arguments/long.html#required",
+    "title": "long",
+    "section": "required",
+    "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\n\nExample\n- name: --my_long\n  type: long\n  required: true"
   },
   {
     "objectID": "documentation/reference/config/arguments/boolean_true.html",
@@ -1040,7 +1124,7 @@
     "href": "documentation/reference/viash/ns.html#viash-ns-test",
     "title": "viash ns",
     "section": "viash ns test",
-    "text": "viash ns test\nTest a namespace containing many viash config files.\nUsage:\nviash ns test [-n nmspc] [-s src] [-p docker] [--parallel] [--tsv file.tsv] [--append]\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--append, -a\nAppend to tsv instead of overwrite\nBoolean\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--parallel, -l\nWhether or not to run the process in parallel.\nBoolean\n\n\n--platform, -p\nActs as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--query, -q\nFilter which components get selected by component and namespace name. Can be a regex. Example: “^mynamespace/component1$”.\nString\n\n\n--query_name\nFilter which components get selected by component name. Can be a regex. Example: “^component1”.\nString\n\n\n--query_namespace, -n\nFilter which namespaces get selected by namespace name. Can be a regex. Example: “^mynamespace$”.\nString\n\n\n--src, -s\nA source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.\nString\n\n\n--tsv, -t\nPath to write a summary of the test results to.\nString\n\n\n--help, -h\nShow help message"
+    "text": "viash ns test\nTest a namespace containing many viash config files.\nUsage:\nviash ns test [-n nmspc] [-s src] [-p docker] [--parallel] [--tsv file.tsv] [--append]\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--append, -a\nAppend to tsv instead of overwrite\nBoolean\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--cpus\nThe maximum number of (logical) cpus a component is allowed to use.\nInt\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--memory\nThe maximum amount of memory a component is allowed to allocate. Unit must be one of B, KB, MB, GB, TB or PB.\nString\n\n\n--parallel, -l\nWhether or not to run the process in parallel.\nBoolean\n\n\n--platform, -p\nActs as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--query, -q\nFilter which components get selected by component and namespace name. Can be a regex. Example: “^mynamespace/component1$”.\nString\n\n\n--query_name\nFilter which components get selected by component name. Can be a regex. Example: “^component1”.\nString\n\n\n--query_namespace, -n\nFilter which namespaces get selected by namespace name. Can be a regex. Example: “^mynamespace$”.\nString\n\n\n--src, -s\nA source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.\nString\n\n\n--tsv, -t\nPath to write a summary of the test results to.\nString\n\n\n--help, -h\nShow help message"
   },
   {
     "objectID": "documentation/reference/viash/ns.html#viash-ns-list",
@@ -1068,7 +1152,7 @@
     "href": "documentation/reference/viash/run.html",
     "title": "viash run",
     "section": "",
-    "text": "Usage:\nviash run config.vsh.yaml [-p docker] [-k true/false]  -- [arguments for script]\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--help, -h\nShow help message"
+    "text": "Usage:\nviash run config.vsh.yaml [-p docker] [-k true/false]  -- [arguments for script]\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--cpus\nThe maximum number of (logical) cpus a component is allowed to use.\nInt\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--memory\nThe maximum amount of memory a component is allowed to allocate. Unit must be one of B, KB, MB, GB, TB or PB.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--help, -h\nShow help message"
   },
   {
     "objectID": "documentation/reference/viash/config.html",
@@ -1089,7 +1173,7 @@
     "href": "documentation/reference/viash/test.html",
     "title": "viash test",
     "section": "",
-    "text": "Usage:\nviash test config.vsh.yaml [-p docker] [-k true/false]\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--help, -h\nShow help message"
+    "text": "Usage:\nviash test config.vsh.yaml [-p docker] [-k true/false]\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--cpus\nThe maximum number of (logical) cpus a component is allowed to use.\nInt\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--memory\nThe maximum amount of memory a component is allowed to allocate. Unit must be one of B, KB, MB, GB, TB or PB.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--help, -h\nShow help message"
   },
   {
     "objectID": "documentation/quickstart/index.html",
