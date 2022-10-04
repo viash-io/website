@@ -17,7 +17,105 @@
 <width>144</width>
 </image>
 <generator>quarto-1.1.251</generator>
-<lastBuildDate>Wed, 07 Sep 2022 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 03 Oct 2022 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Viash 0.6.1</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/documentation/blog/posts/viash-0.6.1/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>This release contains mostly minor improvements of functionality released in Viash 0.6.0. Most notably:</p>
+<ul>
+<li><p>Support was added for <code>type: long</code> arguments</p></li>
+<li><p><code>meta["n_proc"]</code> has been renamed to <code>meta["cpus"]</code>. <code>meta["cpus"]</code> is now an integer, whereas <code>meta["memory_*"]</code> are now longs.</p></li>
+<li><p><code>viash ns exec</code> is able to recognise <code>{platform}</code> and <code>{namespace}</code> fields.</p></li>
+<li><p>And various bug fixes and improvements to documentation and unit testing.</p></li>
+</ul>
+<section id="breaking-changes" class="level2">
+<h2 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h2>
+<ul>
+<li><p>Deprecated usage <code>resources_dir</code> variable inside scripts, use <code>meta["resources_dir"]</code> instead (or <code>$meta_resources_dir</code> in Bash, or <code>meta$resources_dir</code> in R).</p></li>
+<li><p>Deprecated <code>meta["n_proc"]</code> in favour for <code>meta["cpus"]</code>.</p></li>
+</ul>
+</section>
+<section id="new-functionality" class="level2">
+<h2 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h2>
+<ul>
+<li><p><code>viash ns exec</code>: Added two more fields:</p>
+<ul>
+<li><code>{platform}</code>: the platform name (if applicable)</li>
+<li><code>{namespace}</code>: the namespace of the component</li>
+</ul></li>
+<li><p><code>LongArgument</code>: Added support for 64-bit integers with <code>type: long</code> as opposed to <code>type: integer</code> which are 32-bit integers.</p></li>
+</ul>
+</section>
+<section id="major-changes" class="level2">
+<h2 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h2>
+<ul>
+<li>Allow passing integers/doubles/booleans to string parameters (#225). Removed the ‘Version’ helper class.</li>
+</ul>
+</section>
+<section id="minor-changes" class="level2">
+<h2 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h2>
+<ul>
+<li><p><code>meta["cpus"]</code> is now an integer, <code>meta["memory_*"]</code> are now longs (#224).</p></li>
+<li><p><code>DockerPlatform</code>: Only store author names in the authors metadata.</p></li>
+<li><p><code>NextflowPlatform</code>: Only store author names in the authors metadata.</p></li>
+<li><p><code>Argument[_]</code>: Turn <code>multiple_sep</code> from <code>Char</code> into <code>String</code>.</p></li>
+</ul>
+</section>
+<section id="internal-changes" class="level2">
+<h2 class="anchored" data-anchor-id="internal-changes">INTERNAL CHANGES</h2>
+<ul>
+<li><p>All <code>meta[...]</code> variables are now processed similar to <code>Argument[_]</code>s, instead of using custom code to convert object types and detect Docker mounts.</p></li>
+<li><p><code>Escaper</code>: Make more generic Escaper helper class.</p></li>
+</ul>
+</section>
+<section id="documentation" class="level2">
+<h2 class="anchored" data-anchor-id="documentation">DOCUMENTATION</h2>
+<ul>
+<li><p>Hardcoded URLs pointing to viash.io in the documentation annotations were replaced with a new keyword system.</p></li>
+<li><p>Replaced references to “DSL” with “Dynamic Config Modding” in the <code>--help</code> output.</p></li>
+<li><p>Added an example for Ruby based Docker setups.</p></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level2">
+<h2 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h2>
+<ul>
+<li><p><code>viash ns</code>: Reverse exit code outputs, was returning 1 when everything was OK and 0 when errors were detected (#227).</p></li>
+<li><p><code>viash config inject</code>: Fix processing of arguments when argument groups are defined (#231).</p></li>
+<li><p>Fixed a few typos in the CLI.</p></li>
+<li><p>Fixed the formatting of <code>ns exec</code> documentation.</p></li>
+<li><p><code>VDSL3</code>: Fix stub functionality.</p></li>
+<li><p><code>VDSL3</code>: Fix error during error message.</p></li>
+<li><p><code>viash test</code>: Fix issue where <code>VIASH_TEMP</code> could not be a relative directory when running <code>viash test</code> (#242).</p></li>
+<li><p><code>BashScript</code>, <code>CSharpScript</code>, <code>JavaScriptScript</code>, <code>PythonScript</code>, <code>RScript</code>, <code>ScalaScript</code>: Fix quoting issues of certain characters (#113).</p></li>
+</ul>
+</section>
+<section id="deprecation" class="level2">
+<h2 class="anchored" data-anchor-id="deprecation">DEPRECATION</h2>
+<ul>
+<li><code>NextflowPlatform</code>: Deprecate <code>--param_list_format</code> parameter.</li>
+</ul>
+</section>
+<section id="testing" class="level2">
+<h2 class="anchored" data-anchor-id="testing">TESTING</h2>
+<ul>
+<li><p><code>BashScript</code>, <code>CSharpScript</code>, <code>JavaScriptScript</code>, <code>PythonScript</code>, <code>RScript</code>, <code>ScalaScript</code>: Implement more rigorous testing of which characters are escaped.</p></li>
+<li><p><code>BashWrapper</code>: Escape usage of <code>multiple_sep</code>. This fixes various checks and transformations not working when when <code>multiple_sep</code> is set to <code>";"</code> (#235).</p></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/documentation/blog/posts/viash-0.6.1/index.html</guid>
+  <pubDate>Mon, 03 Oct 2022 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Viash 0.6.0</title>
   <dc:creator>Viash Team</dc:creator>
@@ -172,104 +270,6 @@
  ]]></description>
   <category>New Release</category>
   <guid>https://viash.io/documentation/blog/posts/viash-0.6.0/index.html</guid>
-  <pubDate>Wed, 07 Sep 2022 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.6.1</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/documentation/blog/posts/viash-0.6.1/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>This release contains mostly minor improvements of functionality released in Viash 0.6.0. Most notably:</p>
-<ul>
-<li><p>Support was added for <code>type: long</code> arguments</p></li>
-<li><p><code>meta["n_proc"]</code> has been renamed to <code>meta["cpus"]</code>. <code>meta["cpus"]</code> is now an integer, whereas <code>meta["memory_*"]</code> are now longs.</p></li>
-<li><p><code>viash ns exec</code> is able to recognise <code>{platform}</code> and <code>{namespace}</code> fields.</p></li>
-<li><p>And various bug fixes and improvements to documentation and unit testing.</p></li>
-</ul>
-<section id="breaking-changes" class="level2">
-<h2 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h2>
-<ul>
-<li><p>Deprecated usage <code>resources_dir</code> variable inside scripts, use <code>meta["resources_dir"]</code> instead (or <code>$meta_resources_dir</code> in Bash, or <code>meta$resources_dir</code> in R).</p></li>
-<li><p>Deprecated <code>meta["n_proc"]</code> in favour for <code>meta["cpus"]</code>.</p></li>
-</ul>
-</section>
-<section id="new-functionality" class="level2">
-<h2 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h2>
-<ul>
-<li><p><code>viash ns exec</code>: Added two more fields:</p>
-<ul>
-<li><code>{platform}</code>: the platform name (if applicable)</li>
-<li><code>{namespace}</code>: the namespace of the component</li>
-</ul></li>
-<li><p><code>LongArgument</code>: Added support for 64-bit integers with <code>type: long</code> as opposed to <code>type: integer</code> which are 32-bit integers.</p></li>
-</ul>
-</section>
-<section id="major-changes" class="level2">
-<h2 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h2>
-<ul>
-<li>Allow passing integers/doubles/booleans to string parameters (#225). Removed the ‘Version’ helper class.</li>
-</ul>
-</section>
-<section id="minor-changes" class="level2">
-<h2 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h2>
-<ul>
-<li><p><code>meta["cpus"]</code> is now an integer, <code>meta["memory_*"]</code> are now longs (#224).</p></li>
-<li><p><code>DockerPlatform</code>: Only store author names in the authors metadata.</p></li>
-<li><p><code>NextflowPlatform</code>: Only store author names in the authors metadata.</p></li>
-<li><p><code>Argument[_]</code>: Turn <code>multiple_sep</code> from <code>Char</code> into <code>String</code>.</p></li>
-</ul>
-</section>
-<section id="internal-changes" class="level2">
-<h2 class="anchored" data-anchor-id="internal-changes">INTERNAL CHANGES</h2>
-<ul>
-<li><p>All <code>meta[...]</code> variables are now processed similar to <code>Argument[_]</code>s, instead of using custom code to convert object types and detect Docker mounts.</p></li>
-<li><p><code>Escaper</code>: Make more generic Escaper helper class.</p></li>
-</ul>
-</section>
-<section id="documentation" class="level2">
-<h2 class="anchored" data-anchor-id="documentation">DOCUMENTATION</h2>
-<ul>
-<li><p>Hardcoded URLs pointing to viash.io in the documentation annotations were replaced with a new keyword system.</p></li>
-<li><p>Replaced references to “DSL” with “Dynamic Config Modding” in the <code>--help</code> output.</p></li>
-<li><p>Added an example for Ruby based Docker setups.</p></li>
-</ul>
-</section>
-<section id="bug-fixes" class="level2">
-<h2 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h2>
-<ul>
-<li><p><code>viash ns</code>: Reverse exit code outputs, was returning 1 when everything was OK and 0 when errors were detected (#227).</p></li>
-<li><p><code>viash config inject</code>: Fix processing of arguments when argument groups are defined (#231).</p></li>
-<li><p>Fixed a few typos in the CLI.</p></li>
-<li><p>Fixed the formatting of <code>ns exec</code> documentation.</p></li>
-<li><p><code>VDSL3</code>: Fix stub functionality.</p></li>
-<li><p><code>VDSL3</code>: Fix error during error message.</p></li>
-<li><p><code>viash test</code>: Fix issue where <code>VIASH_TEMP</code> could not be a relative directory when running <code>viash test</code> (#242).</p></li>
-<li><p><code>BashScript</code>, <code>CSharpScript</code>, <code>JavaScriptScript</code>, <code>PythonScript</code>, <code>RScript</code>, <code>ScalaScript</code>: Fix quoting issues of certain characters (#113).</p></li>
-</ul>
-</section>
-<section id="deprecation" class="level2">
-<h2 class="anchored" data-anchor-id="deprecation">DEPRECATION</h2>
-<ul>
-<li><code>NextflowPlatform</code>: Deprecate <code>--param_list_format</code> parameter.</li>
-</ul>
-</section>
-<section id="testing" class="level2">
-<h2 class="anchored" data-anchor-id="testing">TESTING</h2>
-<ul>
-<li><p><code>BashScript</code>, <code>CSharpScript</code>, <code>JavaScriptScript</code>, <code>PythonScript</code>, <code>RScript</code>, <code>ScalaScript</code>: Implement more rigorous testing of which characters are escaped.</p></li>
-<li><p><code>BashWrapper</code>: Escape usage of <code>multiple_sep</code>. This fixes various checks and transformations not working when when <code>multiple_sep</code> is set to <code>";"</code> (#235).</p></li>
-</ul>
-
-
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/documentation/blog/posts/viash-0.6.1/index.html</guid>
   <pubDate>Wed, 07 Sep 2022 00:00:00 GMT</pubDate>
 </item>
 <item>
