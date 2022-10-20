@@ -168,7 +168,7 @@ const writeDocumentOptions = (format: string, path: string) => {
 }
 
 // document formats
-for (const file of expandGlobSync("documentation/reference/formats/**/*.qmd")) {
+for (const file of expandGlobSync("reference/formats/**/*.qmd")) {
   if (file.isFile) {
     const format = basename(file.name, ".qmd");
     writeDocumentOptions(format, join(dirname(file.path), format + ".json"));
@@ -202,7 +202,7 @@ function writeCellGroups(engine: string, groups: string[], path: string) {
 function writeCellPages(engine: string) {
   for (const page of Object.keys(cellPages)) {
     const groups = cellPages[page];
-    writeCellGroups(engine, groups, `documentation/reference/cells/${page}-${engine}.json`);
+    writeCellGroups(engine, groups, `reference/cells/${page}-${engine}.json`);
   }
 }
 writeCellPages("jupyter");
@@ -276,7 +276,7 @@ function findVal(object: any, key: string) {
 
 // Metadata pages
 function writeMetadataTable(name: string, options: Array<Option>) {
-  const path = `documentation/reference/metadata/${name}.json`;
+  const path = `reference/metadata/${name}.json`;
   const metadata = [{
     "name": "citation",
     "title": "Citation",
@@ -289,7 +289,7 @@ const citationOptions = readDefinitionsId("csl-item");
 writeMetadataTable("citation", citationOptions);
 
 function writeProjectTable(name: string, options: Array<Option>) {
-  const path = `documentation/reference/projects/${name}.json`;
+  const path = `reference/projects/${name}.json`;
   Deno.writeTextFileSync(path, JSON.stringify(options, undefined, 2));
 }
 

@@ -1,4 +1,4 @@
-targetDir = "../../target/nextflow" // 1
+targetDir = "../target/nextflow" // 1
 
 // 2
 include { remove_comments } from "$targetDir/nextflow_modules/remove_comments/main.nf"
