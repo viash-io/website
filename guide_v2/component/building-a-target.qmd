@@ -1,0 +1,130 @@
+---
+title: Building a target
+search: true
+execute:
+  echo: false
+  output: asis
+---
+
+{{< include ../../includes/_language_chooser.qmd >}}
+{{< include ../../includes/_python_helper.qmd >}}
+
+
+
+This guide covers how you can can build and run a native executable.
+
+## Building a native executable
+
+To start with, create a Viash component that targets the native platform as explained in [this guide](/guide/component/creation/native.html) or download the sample component via the download button below.  
+The zip contains the component in all [supported languages](/guide/component/languages.html). Simply rename the language folder you want to use to `hello_world` and use that as your working directory.
+
+```{python}
+create_zip(parent_dir = "/download/components/", zip_dir = "hello_world")
+create_download_button("/download/components/hello_world.zip")
+```
+
+Next, use the [viash build](/reference/viash/build.html) command to generate an executable inside of a **bin** directory:
+
+```bash
+viash build config.vsh.yaml --output bin
+```   
+
+This will generate an executable named the same as your component in the **bin** directory:
+
+```
+hello_world
+├── bin
+│   └── hello_world
+├── config.vsh.yaml
+└── script.sh
+```
+
+## Documentation
+
+It's often useful to know what arguments an executable expects before trying to run it. To display its documentation, run the executable with just the `--help` argument:
+
+```bash
+bin/hello_world --help
+```
+
+This will result in output that looks like this:
+
+```
+hello_world
+
+A minimal example component.
+
+Options:
+    --input
+        type: string
+        default: World
+```
+
+This example takes a single optional string named `--input` as an argument. 
+
+## Running the executable
+
+Running a native executable is the same as any other executable on your system. Simply call it as a command in your terminal:
+
+```bash
+bin/hello_world
+```
+
+This results in the following output:
+
+```
+Hello World
+```
+
+You can pass arguments to it directly, which differs from using the [viash run](/guide/component/creation/native.html#running) command as Viash itself isn't called:
+
+```bash
+bin/hello_world --input "everyone!"
+```
+
+This outputs:
+
+```
+Hello everyone!
+```
+
+This guide covers how you can can build and run an executable with a Docker backend. Most of what is covered in the [Native Executable](/guide/building-block/native-building-running.html) guide is true for executables with a Docker backend.
+
+## Building the executable
+
+If you have multiple platforms defined in your Viash config file, use the `--platform` argument of [`viash build`](/reference/viash/build.html) to specify you want to create an executable with a Docker backend.
+
+```bash
+viash build config.vsh.yaml --platform docker --output bin
+```   
+
+## Running the executable
+
+You can run the executable by executing it as a command:
+
+```bash
+bin/hello_world
+```
+
+Executable with a Docker backend include functions to create a Docker image and a container based on your Viash config file. When you run the executable for the first time, both the image and container will built, followed by running the executable inside of the container:
+
+```
+[notice] Checking if Docker image is available at 'hello_world:latest'
+[warning] Could not pull from 'hello_world:latest'. Docker image doesn't exist or is not accessible.
+[notice] Building container 'hello_world:latest' with Dockerfile
+Hello World
+```
+
+If you already have the container on your system, that will be used to run the executable:
+
+```
+Hello World
+```
+
+
+<!--I would also take sections "Using Viash placeholder variables" and "Executing scripts" from guide/component/languages.qmd to explain that if they include a viash codeblock in their script, they can edit / run the script natively for development / debugging purposes.-->
+
+## What's next?
+
+Now you know how to build and run executables with a Docker backend, you may be interested in [building and running Nextflow modules](/guide/building-block/nextflow/building-running.html).  
+<!-- If you prefer to use executables in a simple pipeline, check out the  [Scripted Pipeline](/guide/data-workflow/scripted-pipeline.html) guide.  -->
