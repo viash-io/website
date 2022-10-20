@@ -1,0 +1,25 @@
+functionality:
+  name: your_first_component_js
+  description: A minimal example component.
+  arguments:
+    - type: file
+      name: --input
+      example: file.txt
+      required: true
+    - type: file
+      name: --output
+      direction: output
+      example: output.txt
+      required: true
+  resources:
+    - type: javascript_script
+      path: script.js
+  # test disabled for now
+  # test_resources:
+  #   - type: bash_script
+  #     path: test.sh
+platforms:
+  - type: docker
+    image: "node:15-buster"
+  - type: native
+  - type: nextflow
