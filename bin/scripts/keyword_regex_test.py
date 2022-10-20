@@ -2,7 +2,7 @@ import re, csv, git
 
 repo = git.Repo(".", search_parent_directories=True)
 repo_root = repo.working_tree_dir
-keyword_replace_csv = repo_root + "/bin-data/keyword_links.csv"
+keyword_replace_csv = repo_root + "/bin/scripts/keyword_links.csv"
 keyword_regex = r"\@\[(.*?)\]\((.*?)\)"
 
 # Example input text
