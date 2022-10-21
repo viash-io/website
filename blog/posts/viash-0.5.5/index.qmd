@@ -1,0 +1,46 @@
+---
+title: "Viash 0.5.5"
+subtitle: "Resources dir no longer added to PATH automatically and minor changes"
+date: 2021/12/17
+categories:
+  - New Release
+author: Viash Team
+---
+
+## What's new?
+
+The [resources directory](/reference/config/functionality.html#resources) is no longer added to the [PATH variable](https://en.wikipedia.org/wiki/PATH_(variable)) by default. You can re-enable this behaviour by setting [add_resources_to_path](/reference/config/functionality.html#add_resources_to_path) to `true` in the functionality part of the [config file](/reference/config/overview.html).  
+Here's a snippet of a config file to illustrate this:
+
+```yaml
+functionality:
+  name: example_component
+  description: Serve as a simple example.
+  add_resources_to_path: true
+  ...
+```
+
+## Full changelog:
+
+### BREAKING CHANGES
+
+* `Functionality`: The resources dir no longer automatically added to the PATH variable. 
+  To alter this behaviour, set `.functionality.add_resources_to_path` to `true`.
+
+### NEW FEATURES
+
+* `NextFlowPlatform`: Added `cache` directive to specify the typing of caching to be performed.
+
+### MINOR CHANGES
+
+* Bash Script: only define variables which have values.
+
+* CSharp Test Component: Change Docker image to `dataintuitive/dotnet-script` to have more control over the lifecycle of 
+  versioned tags.
+
+* Updated Code of Conduct from v2.0 to v2.1.
+
+### BUG FIXES
+
+* Viash namespace: Fix incorrect output path when the parent directory of a Viash component is not equal to the value of
+  `.functionality.name`.

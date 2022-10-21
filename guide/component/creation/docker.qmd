@@ -1,0 +1,165 @@
+---
+title: Docker
+search: true
+execute:
+  echo: false
+  output: asis
+---
+
+{{< include ../../../includes/_language_chooser.qmd >}}
+{{< include ../../../includes/_python_helper.qmd >}}
+
+Viash can generate a Docker image and final container for you based on a component. This guide explains how to adapt a component that targets the `native` platform to work with a Docker backend.
+
+## Requirements
+
+As this example targets the [Docker platform](/reference/config/platforms/DockerPlatform.html), the only requirement is to have Docker installed on your system. This is one of the biggest benefits of targeting the Docker platform. You can find instructions on how to install Docker for your OS on the [Viash installation page](/installation/).
+ 
+## Preparing a component for Docker
+
+### Creating a component
+
+For this example, you'll use the same `hello_world` component the [native component creation guide](/guide/component/creation/native.html) uses. You can either follow with that guide first or simply download the component below that contains the component in all [supported languages](/guide/component/languages.html). Simply rename the language folder you want to use to `hello_world` and use that as your working directory.
+
+```{python}
+create_zip(parent_dir = "/download/components/", zip_dir = "hello_world")
+create_download_button("/download/components/hello_world.zip")
+```
+
+### Adjusting the config
+ 
+All you need to do to add the [Docker platform](/reference/config/platforms/DockerPlatform.html) as a build target is adding `docker` to the `platforms` list in your [Viash config file](/reference/config/overview.html). 
+The `docker` platform has an image property that points to a [Docker image](/reference/config/platforms/DockerPlatform.html#image) from [Docker Hub](https://hub.docker.com/) to use as a base.  
+  
+Depending on the scripting language you're using, a [setup section](/reference/config/platforms/DockerPlatform.html#setup) might be included that will install additional packages in the final image.
+
+::: {.panel-tabset}
+## Bash
+
+Add this snippet to the bottom of your config file to add Docker as a build target and add a [bash base image](https://hub.docker.com/_/bash):
+
+```yaml
+- type: docker
+  image: bash:4.0
+```
+
+Here's the full config after making this change:
+
+```{python}
+create_download_button("/download/components/hello_world_docker/bash/config.vsh.yaml")
+print_file_contents("/download/components/hello_world_docker/bash/config.vsh.yaml", "yaml", False)
+```
+
+## C\#
+
+Add this snippet to the bottom of your config file to add Docker as a build target and [our dotnet-script base image](https://hub.docker.com/r/dataintuitive/dotnet-script):
+
+```yaml
+- type: docker
+  image: "dataintuitive/dotnet-script:1.2.1"
+  setup:
+    - type: apk
+      packages: [ bash ]
+```
+
+Here's the full config after making this change:
+
+```{python}
+create_download_button("/download/components/hello_world_docker/csharp/config.vsh.yaml")
+print_file_contents("/download/components/hello_world_docker/csharp/config.vsh.yaml", "yaml", False)
+```
+
+## JavaScript
+
+Add this snippet to the bottom of your config file to add Docker as a build target and a [Node.js base image](https://hub.docker.com/_/node):
+
+```yaml
+- type: docker
+  image: node:15-buster
+```
+
+Here's the full config after making this change:
+
+```{python}
+create_download_button("/download/components/hello_world_docker/js/config.vsh.yaml")
+print_file_contents("/download/components/hello_world_docker/js/config.vsh.yaml", "yaml", False)
+```
+
+## Python
+
+Add this snippet to the bottom of your config file to add Docker as a build target and a [Python base image](https://hub.docker.com/_/python):
+
+```yaml
+- type: docker
+  image: "python:3.8"
+```
+
+Here's the full config after making this change:
+
+```{python}
+create_download_button("/download/components/hello_world_docker/python/config.vsh.yaml")
+print_file_contents("/download/components/hello_world_docker/python/config.vsh.yaml", "yaml", False)
+```
+
+## Scala
+
+Add this snippet to the bottom of your config file to add Docker as a build target and a [base image containing Scala and sbt](https://hub.docker.com/r/hseeberger/scala-sbt):
+
+```yaml
+- type: docker
+  image: hseeberger/scala-sbt
+```
+
+Here's the full config after making this change:
+
+```{python}
+create_download_button("/download/components/hello_world_docker/scala/config.vsh.yaml")
+print_file_contents("/download/components/hello_world_docker/scala/config.vsh.yaml", "yaml", False)
+```
+
+## R
+
+Add this snippet to the bottom of your config file to add Docker as a build target and a [base image containing R, rstudio and R packages](https://hub.docker.com/r/rocker/tidyverse):
+
+```yaml
+- type: docker
+  image: "rocker/tidyverse:4.0.4"
+```
+
+Here's the full config after making this change:
+
+```{python}
+create_download_button("/download/components/hello_world_docker/r/config.vsh.yaml")
+print_file_contents("/download/components/hello_world_docker/r/config.vsh.yaml", "yaml", False)
+```
+
+:::
+
+:::{.callout-note}
+When building your own components that only target Docker or Nextflow, adding the `native` target platform isn't necessary.
+:::
+
+## Running
+
+You can now call upon Viash to generate a temporary executable and run it:
+
+```bash
+viash run config.vsh.yaml --platform docker
+```
+
+The `--platform` argument is passed to [`viash run`](/reference/viash/run.html) so **Docker** will be chosen as the build target. If the platform isn't specified, the first one in the `platforms` list is picked.  
+This results in the following output:
+
+```
+[notice] Checking if Docker image is available at 'hello_world:latest'
+[warning] Could not pull from 'hello_world:latest'. Docker image doesn't exist or is not accessible.
+[notice] Building container 'hello_world:latest' with Dockerfile
+Hello World
+```
+
+As you can see, Viash checks first if an image has been generated before continuing. If the image already exists, Viash will run a contained based on the image.  
+In this case though, no image was found for this component, so Viash generates the image before building and running the container.   
+  
+## What's next?
+
+To learn how to use Viash to build an executable with a Docker backend and run it, see [Building and Running](/guide/building-block/docker/building-running.html).

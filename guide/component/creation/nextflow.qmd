@@ -1,0 +1,234 @@
+---
+title: Nextflow
+search: true
+execute:
+  echo: false
+  output: asis
+---
+
+{{< include ../../../includes/_language_chooser.qmd >}}
+{{< include ../../../includes/_python_helper.qmd >}}
+
+When targeting the Nextflow platform, a module is generated that can be run standalone or used in a pipeline.  
+
+## Requirements
+
+This example targets the [Nextflow platform](/reference/config/platforms/NextflowLegacyPlatform.html), which requires you to install Nextflow and Docker. Follow the instructions on [NextFlow's homepage](https://www.nextflow.io/) to install it on your system if you haven't done so already. You can find instructions on how to install Docker for your OS on the [Viash installation page](/installation/).
+
+## Preparing a component for Nextflow
+
+Unlike components that target the native and Docker platform, a component targeting Nextflow requires you to keep some things in mind besides editing your config file.
+
+### Creating the component
+
+This guide builds upon the `hello_world` component from the [Docker component creation guide](/guide/component/creation/docker.html). You can either follow with that guide first or simply download the component below that contains the component in all [supported languages](/guide/component/languages.html). Simply rename the language folder you want to use to `hello_world` and use that as your working directory.
+
+```{python}
+create_zip(parent_dir = "/download/components/", zip_dir = "hello_world_docker")
+create_download_button("/download/components/hello_world_docker.zip")
+```
+
+Create a new folder named **src** and drag the component files inside of that, this is to keep your source and target files neatly separated. Your directory structure should look like this now: 
+
+```
+hello world
+└── src
+    └── config.vsh.yaml
+    └── script
+```
+ 
+## Adapting the script
+
+Components that target the Nextflow platform don't support writing to standard output when run in a pipeline. Instead, their output should be redirected to a file. To do that, change the contents of your script file as below:
+
+::: {.panel-tabset}
+## Bash
+Change this:
+```{python}
+print_file_contents("/download/components/hello_world_docker/bash/script.sh", "bash", False)
+```
+
+To this:
+```{python}
+print_file_contents("/download/components/hello_world_nextflow/bash/src/script.sh", "bash", False)
+```
+
+## C\#
+Change this:
+```{python}
+print_file_contents("/download/components/hello_world_docker/csharp/script.csx", "csharp", False)
+```
+
+To this:
+```{python}
+print_file_contents("/download/components/hello_world_nextflow/csharp/src/script.csx", "csharp", False)
+```
+
+## JavaScript
+Change this:
+```{python}
+print_file_contents("/download/components/hello_world_docker/js/script.js", "js", False)
+```
+
+To this:
+```{python}
+print_file_contents("/download/components/hello_world_nextflow/js/src/script.js", "js", False)
+```
+
+## Python
+Change this:
+```{python}
+print_file_contents("/download/components/hello_world_docker/python/script.py", "python", False)
+```
+
+To this:
+```{python}
+print_file_contents("/download/components/hello_world_nextflow/python/src/script.py", "python", False)
+```
+
+## Scala
+Change this:
+```{python}
+print_file_contents("/download/components/hello_world_docker/scala/script.scala", "scala", False)
+```
+
+To this:
+```{python}
+print_file_contents("/download/components/hello_world_nextflow/scala/src/script.scala", "scala", False)
+```
+
+## R
+Change this:
+```{python}
+print_file_contents("/download/components/hello_world_docker/r/script.R", "r", False)
+```
+
+To this:
+```{python}
+print_file_contents("/download/components/hello_world_nextflow/r/src/script.R", "r", False)
+```
+
+:::
+
+
+
+
+## Adjusting the config
+
+### Add `--id` argument
+
+Nextflow modules need an `--id` argument in order to work, so add that to the config file below the `--input` argument:
+
+```yaml
+functionality:
+  name: hello_world
+  description: A minimal example component.
+  arguments:
+  - type: string
+    name: --input
+    default: "World"
+  - type: string
+    name: --id
+    default: "hello_world"
+...
+```
+
+### Add a file output argument
+
+Now that the script outputs a file, its output path should be added as an argument to the config file. To do that, add yet another argument below the `--id` argument named `--output`: 
+
+```yaml
+- type: file
+  name: --output
+  default: "output"
+```
+
+
+### Add Nextflow platform
+
+To add support for the [Nextflow platform](/reference/config/platforms/NextflowLegacyPlatform.html) as a build target, you need to add `nextflow` to the `platforms` section of your [Viash config file](/reference/config/overview.html). To do this, add these lines to the bottom of your config file:
+
+```yaml
+- type: nextflow
+  variant: vdsl3
+```
+
+This will add Nextflow as a build target, with [VDSL3](/reference/config/platforms/NextflowVdsl3Platform.html) set as the pipeline scripting variant, which adds new features and quality of life changes.
+
+:::{.callout-tip collapse="true"}
+
+## Specifying the Docker image
+
+By default, Nextflow will use the Docker image specified in the `docker` platform section. For example:
+
+```yaml
+platforms:
+  - type: docker
+    image: bash:4.0
+```
+
+If you don't add `docker` as a build target or want to override the image, you can use the [`directives`](/reference/config/platforms/NextflowVdsl3Platform.html#directives) dictionary to specify a base image to use:
+
+```yaml
+platforms:
+  - type: nextflow
+    variant: vdsl3
+    directives:
+      container: ubuntu:20.04
+```
+:::
+
+::: {.panel-tabset}
+## Bash
+Here's the full config after making these changes:
+
+```{python}
+create_download_button("/download/components/hello_world_nextflow/bash/src/config.vsh.yaml")
+print_file_contents("/download/components/hello_world_nextflow/bash/src/config.vsh.yaml", "yaml", False)
+```
+
+## C\#
+Here's the full config after making these changes:
+
+```{python}
+create_download_button("/download/components/hello_world_nextflow/csharp/src/config.vsh.yaml")
+print_file_contents("/download/components/hello_world_nextflow/csharp/src/config.vsh.yaml", "yaml", False)
+```
+
+## JavaScript
+Here's the full config after making these changes:
+
+```{python}
+create_download_button("/download/components/hello_world_nextflow/js/src/config.vsh.yaml")
+print_file_contents("/download/components/hello_world_nextflow/js/src/config.vsh.yaml", "yaml", False)
+```
+
+## Python
+Here's the full config after making these changes:
+
+```{python}
+create_download_button("/download/components/hello_world_nextflow/python/src/config.vsh.yaml")
+print_file_contents("/download/components/hello_world_nextflow/python/src/config.vsh.yaml", "yaml", False)
+```
+
+## Scala
+Here's the full config after making these changes:
+
+```{python}
+create_download_button("/download/components/hello_world_nextflow/scala/src/config.vsh.yaml")
+print_file_contents("/download/components/hello_world_nextflow/scala/src/config.vsh.yaml", "yaml", False)
+```
+
+## R
+Here's the full config after making these changes:
+
+```{python}
+create_download_button("/download/components/hello_world_nextflow/r/src/config.vsh.yaml")
+print_file_contents("/download/components/hello_world_nextflow/r/src/config.vsh.yaml", "yaml", False)
+```
+
+:::
+
+## Running
+
+In contrast to native and Docker based components, a Nextflow based component cannot be ran by using the [`viash run`](/reference/viash/run.html) command. Components targeting Nextflow require you to use [`viash build`](/reference/viash/build.html) first to generate a Nextflow module and run that module using `nextflow run`. See the [Nextflow Build Target](/guide/building-block/nextflow/building-running.html) page for more information on how to generate a Nextflow module and run it as a standalone pipeline.

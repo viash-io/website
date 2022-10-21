@@ -28,10 +28,10 @@ repo = git.Repo(".", search_parent_directories=True) # Get root dir of repo
 repo_root = repo.working_tree_dir
 
 json_export = "config_schema_export.json"
-keyword_replace_csv = repo_root + "/bin-data/keyword_links.csv"
+keyword_replace_csv = repo_root + "/bin/scripts/keyword_links.csv"
 keyword_regex = r"\@\[(.*?)\]\((.*?)\)"
 
-reference_dir = repo_root + "/documentation/reference/"
+reference_dir = repo_root + "/reference/"
 config_dir = reference_dir + "/config"
 
 def generate_json():
@@ -50,7 +50,7 @@ def generate_json():
 def read_json_entries():
 	""" Load the generated JSON file and pass the entries to be read by the get_json_entries function. """
 
-	reference_dir = repo_root + "/documentation/reference/"
+	reference_dir = repo_root + "/reference/"
 	json_file = open(reference_dir + json_export, "r")
 	viash_json = json.load(json_file)
 	json_file.close()
