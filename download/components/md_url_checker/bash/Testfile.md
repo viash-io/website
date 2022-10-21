@@ -10,4 +10,4 @@ Some links to websites:
 Links that are relative to [viash.io](http://www.viash.io):
 
 - You can [install viash here](/installation).
-- It all starts with a script and a [config file](/reference/config/overview.html).
+- It all starts with a script and a [config file](/reference/config/index.html).
