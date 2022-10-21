@@ -1,0 +1,186 @@
+---
+title: "Installation"
+# subtitle: "Install Viash, then check out the guide to learn the basics."
+format:
+  html:
+    include-in-header: 
+      - 'download/_guess_os.html'
+page-layout: full
+toc: false
+anchor-sections: false
+css: installation.css
+aliases:
+  - /getting-started/installation.html
+---
+
+::: {.grid .step .column-page-right}
+::: {.g-col-lg-3 .g-col-12}
+## Step 1 
+
+#### Install Viash {.fw-light}
+:::
+
+::: {.g-col-lg-9 .g-col-12}
+
+::: {.panel-tabset}
+## Linux
+
+### Requirements
+
+Viash is developed in [Scala](https://www.scala-lang.org/), so you'll need to install [Java 8](https://www.oracle.com/java/technologies/downloads/#java8-linux), [OpenJDK 8](https://openjdk.org/install/) or a later version.  
+You can run the following command to check if you have Java installed:
+
+```bash
+java -version
+```
+
+:::{.callout-note}
+Java version "1.8.x" and "8" are the same release.
+:::
+
+To get the most out of Viash, you'll also need to install [Docker](https://docs.docker.com/desktop/linux/install/) and [Nextflow](https://www.nextflow.io/).
+
+### Installing Viash
+
+To install Viash to a `bin` folder in your current directory, run the following command to download and run the install script:
+
+```bash
+wget -qO- get.viash.io | bash
+```
+
+To verify your installation, run the following command:
+
+```bash
+bin/viash --help
+```
+
+## macOS
+
+### Requirements
+
+Viash is developed in [Scala](https://www.scala-lang.org/), so you'll need to install [Java 8](https://www.oracle.com/java/technologies/downloads/#java8-mac), [OpenJDK 8](https://openjdk.org/install/) or a later version.  
+You can run the following command to check if you have Java installed:
+
+```bash
+java -version
+```
+
+:::{.callout-note}
+Java version "1.8.x" and "8" are the same release.
+:::
+
+To get the most out of Viash, you'll also need to install [Docker](https://docs.docker.com/desktop/mac/install/) and [Nextflow](https://www.nextflow.io/).
+
+### Installing Viash
+
+To install Viash to a `bin` folder in your current directory, run the following command to download and run the install script:
+
+```bash
+curl -fsSL get.viash.io | bash
+```
+
+To verify your installation, run the following command:
+
+```bash
+bin/viash --help
+```
+
+## Windows
+
+
+### Requirements
+
+
+
+### Setting up WSL2
+
+Viash doesn't support Windows natively, but [Windows Subsystem for Linux 2](https://docs.microsoft.com/en-us/windows/wsl/about) can be used instead. Follow the instructions below to get everything ready to use Viash:
+
+1. Install WSL2 by following the [instructions provided by Microsoft](https://docs.microsoft.com/en-us/windows/wsl/install). This will install the default distro, **Ubuntu**.
+2. Follow [these instructions provided by Docker](https://docs.docker.com/desktop/windows/wsl/) to install **Docker Desktop** with a WSL2 backend. This allows you to run Linux docker containers natively.
+3. Open **Ubuntu** from the **Start** menu to start up WSL2.
+4. Run the following command in the Ubuntu terminal to upgrade Ubuntu and its packages to the newest version:
+
+```bash
+sudo apt-get update && sudo apt-get upgrade -y
+```
+
+5. Run this command to check if docker is working correctly:
+
+```bash
+docker run hello-world
+```
+
+If this doesn't work, read the [Docker WSL2 instructions](https://docs.docker.com/desktop/windows/wsl/) again, you might have missed a step or forgot to reboot your system. 
+
+6. Viash is developed in [Scala](https://www.scala-lang.org/), so you'll need to install [Java 8](https://www.oracle.com/java/technologies/downloads/#java8-windows), [OpenJDK 8](https://openjdk.org/install/) or a later version. Install the Viash dependencies by executing this command:
+
+```bash
+sudo apt-get install -y openjdk-12-jdk unzip zip
+```
+
+:::{.callout-note}
+You can choose to install `default-jdk` instead of the more explicit `openjdk-12-jdk`. However, the [Nextflow target platform](/reference/config/platforms/NextflowVdsl3Platform.html) only supports Java version 8 to 12 at this point in time, so keep that in mind.
+:::
+
+7. Install [Nextflow](https://www.nextflow.io/).
+
+### Installing Viash
+
+To install Viash to a `bin` folder in your current directory, run the following command to download and run the install script:
+
+```bash
+wget -qO- get.viash.io | bash
+```
+
+To verify your installation, run the following command:
+
+```bash
+bin/viash --help
+```
+
+:::
+
+:::
+:::
+
+::: {.grid .step .column-page-right}
+::: {.g-col-lg-3 .g-col-12}
+## Step 2 
+
+#### Use the Quickstart{.fw-light}
+<!-- #### Choose your preferred<br/>scripting language{.fw-light} -->
+:::
+
+::: {.tool .g-col-lg-9 .g-col-12}
+
+
+<!-- <a href="/quickstart/index.html?lang=bash" role="button" class="btn btn-outline-light">
+![Bash](/images/lang-bash.svg)Bash
+</a>
+
+<a href="/quickstart/index.html?lang=csharp" role="button" class="btn btn-outline-light">
+![C#](/images/lang-csharp.svg)C#
+</a>
+
+<a href="/quickstart/index.html?lang=js" role="button" class="btn btn-outline-light">
+![JavaScript](/images/lang-js.svg)JavaScript
+</a>
+
+<a href="/quickstart/index.html?lang=python" role="button" class="btn btn-outline-light">
+![Python](/images/lang-python.svg)Python
+</a>
+
+<a href="/quickstart/index.html?lang=scala" role="button" class="btn btn-outline-light">
+![Scala](/images/lang-scala.svg)Scala
+</a>
+
+<a href="/quickstart/index.html?lang=r" role="button" class="btn btn-outline-light">
+![R](/images/lang-r.svg)R
+</a> -->
+
+
+The [Quickstart](/quickstart/) will guide you through the process of creating a Viash component, generating a Nextflow module and incorporating that into a new pipeline.
+
+:::
+:::

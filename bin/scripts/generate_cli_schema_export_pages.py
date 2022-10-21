@@ -5,10 +5,10 @@ repo = git.Repo(".", search_parent_directories=True) # Get root dir of repo
 repo_root = repo.working_tree_dir
 
 json_export = "cli_schema_export.json"
-keyword_replace_csv = repo_root + "/bin-data/keyword_links.csv"
+keyword_replace_csv = repo_root + "/bin/scripts/keyword_links.csv"
 keyword_regex = r"\@\[(.*?)\]\((.*?)\)"
 
-reference_dir = repo_root + "/documentation/reference/"
+reference_dir = repo_root + "/reference/"
 
 def generate_json():
 	""" Calls viash in order to generate a cli export. """
