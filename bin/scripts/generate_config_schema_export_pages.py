@@ -18,6 +18,9 @@ class JsonEntryData:
 	removed = ""
 	deprecated = ""
 	since = ""
+	def __repr__ (self):
+		arg_str = ', '.join([ x + '=' + (str(y) if len(str(y)) < 20 else str(y)[:17]+'...') for x, y in self.__dict__.items() if y ])
+		return 'JsonEntryData(' + arg_str + ')'
 
 functionality_entry_list = []
 platforms_entry_list = []
@@ -102,7 +105,8 @@ def add_json_data_to_list(data : JsonEntryData):
 
 def generate_pages():
 	"""Feed JsonEntryData lists to page generation functions."""
-
+	# print('\n'.join([ str(r) for r in functionality_entry_list]))
+	# print('\n'.join([ str(r) for r in requirements_entry_list]))
 	generate_combined_page(entry_list= functionality_entry_list, page_title= "Functionality", save_filename= "functionality", title_is_name=False)
 	generate_combined_page(entry_list= requirements_entry_list, page_title= "Setup Requirements", save_filename= "requirements", title_is_name=True)
 	generate_grouped_pages(entry_list= platforms_entry_list, save_dir= config_dir + "/platforms")
@@ -124,11 +128,19 @@ def generate_combined_page(entry_list, page_title, save_filename, title_is_name)
 
 	for data in entry_list:
 		data : JsonEntryData = data
+		# print(f"Processing {page_title} - {data.title} - {data.name}")
 
 		if title_is_name: # The title property should be used as if it was the name of the property. This is the case with small separate pages.
-			qmd += qmd_h2(data.title)
-			qmd += qmd_paragraph(replace_keywords(data.description))
-			qmd += qmd_parse_examples(data.examples)
+			if data.name != THIS_IDENTIFIER:
+				qmd += qmd_h3(data.name)
+				qmd += qmd_parse_type(data.type)
+				qmd += qmd_removed_deprecated(data.removed, data.deprecated)
+				qmd += qmd_paragraph(replace_keywords(data.description))
+				qmd += qmd_parse_examples(data.examples)
+			else:
+				qmd += qmd_h2(data.title)
+				qmd += qmd_paragraph(replace_keywords(data.description))
+				qmd += qmd_parse_examples(data.examples)
 		else:
 			if data.name != THIS_IDENTIFIER:
 				qmd += qmd_h2(data.name)
@@ -146,7 +158,7 @@ def generate_combined_page(entry_list, page_title, save_filename, title_is_name)
 def generate_grouped_pages(entry_list, save_dir):
 	"""
 	Parses a list of JsonEntryData, groups them by title and creates a page for each title.
-
+JsonEntryData
 	Arguments:
 		 entry_list: List of JsonEntryData to parse
 		 save_dir: Subdirectory of config to place files. Will be created if it doesn't exist.
@@ -167,11 +179,11 @@ def generate_grouped_pages(entry_list, save_dir):
 				qmd += qmd_h2(data.name)
 				qmd += qmd_parse_type(data.type)
 				qmd += qmd_removed_deprecated(data.removed, data.deprecated)
+			if data.description:
 				qmd += qmd_paragraph(replace_keywords(data.description))
-				qmd += qmd_parse_examples(data.examples)
 			else:
-				qmd += qmd_paragraph(replace_keywords(data.description))
-				qmd += qmd_parse_examples(data.examples)
+				print(f"Warning: description could not be found for \"{group[0].type}.{data.name}\"")
+			qmd += qmd_parse_examples(data.examples)
 
 		write_qmd_file(directory=save_dir, file_name=filename, content=qmd)
 	
@@ -284,7 +296,7 @@ def qmd_parse_examples(examples) -> str:
 	if examples is None or len(examples) == 0:
 		return qmd
 
-	qmd += qmd_h3("Example")
+	qmd += '**Example:**\n\n' # qmd_h3("Example")
 	for ex in examples:
 		if "description" in ex:
 			qmd += ex["description"] + "\n\n"
