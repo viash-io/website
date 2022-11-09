@@ -8,7 +8,7 @@ execute:
 
 A `file` type argument has a string value that points to a file or folder path.
 
-### Example
+**Example:**
 
 ```yaml
 arguments:
@@ -32,7 +32,7 @@ List of alternative format variations for this argument.
 
 The default value when no argument value is provided. This will not work if the [`required`](#required) property is enabled.
 
-### Example
+**Example:**
 
 ```yaml
 - name: --my_file
@@ -53,7 +53,7 @@ A description of the argument. This will be displayed with `--help`.
 
 Makes this argument an `input` or an `output`, as in does the file/folder needs to be read or written. `input` by default.
 
-### Example
+**Example:**
 
 ```yaml
 - name: --my_output_file
@@ -68,7 +68,7 @@ Makes this argument an `input` or an `output`, as in does the file/folder needs 
 
 An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.
 
-### Example
+**Example:**
 
 ```yaml
 - name: --my_file
@@ -77,13 +77,27 @@ An example value for this argument. If no [`default`](#default) property was spe
 
 ```
 
+## info
+
+**Type**: `Json`
+
+Structured information. Can be any shape: a string, vector, map or even nested map.
+
+**Example:**
+
+```yaml
+info:
+  category: cat1
+  labels: [one, two, three]
+```
+
 ## multiple
 
 **Type**: `Boolean`
 
 Treat the argument value as an array. Arrays can be passed using the delimiter `--foo=1:2:3` or by providing the same argument multiple times `--foo 1 --foo 2`. You can use a custom delimiter by using the [`multiple_sep`](#multiple_sep) property. `false` by default.
 
-### Example
+**Example:**
 
 ```yaml
 - name: --my_files
@@ -104,7 +118,7 @@ my_component --my_files=firstFile.csv:anotherFile.csv:yetAnother.csv
 
 The delimiter character for providing [`multiple`](#multiple) values. `:` by default.
 
-### Example
+**Example:**
 
 ```yaml
 - name: --my_files
@@ -126,7 +140,7 @@ my_component --my_files=firstFile.csv,anotherFile.csv,yetAnother.csv
 
 The file or folder should exist before the start of execution. If set to `true`, an error will be produced if the file or folder wasn't found.
 
-### Example
+**Example:**
 
 ```yaml
 - name: --my_file
@@ -152,7 +166,7 @@ The name of the argument. Can be in the formats `--foo`, `-f` or `foo`. The numb
 
 Make the value for this argument required. If set to `true`, an error will be produced if no value was provided. `false` by default.
 
-### Example
+**Example:**
 
 ```yaml
 - name: --my_file
@@ -160,4 +174,10 @@ Make the value for this argument required. If set to `true`, an error will be pr
   required: true
 
 ```
+
+## type
+
+**Type**: `String`
+
+Specifies the type of the argument.
 

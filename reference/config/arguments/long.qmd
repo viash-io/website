@@ -8,7 +8,7 @@ execute:
 
 An `long` type argument has a numeric value without decimal points.
 
-### Example
+**Example:**
 
 ```yaml
 arguments:
@@ -32,7 +32,7 @@ List of alternative format variations for this argument.
 
 Limit the amount of valid values for this argument to those set in this list. When set and a value not present in the list is provided, an error will be produced.
 
-### Example
+**Example:**
 
 ```yaml
 - name: --values
@@ -47,7 +47,7 @@ Limit the amount of valid values for this argument to those set in this list. Wh
 
 The default value when no argument value is provided. This will not work if the [`required`](#required) property is enabled.
 
-### Example
+**Example:**
 
 ```yaml
 - name: --my_long
@@ -68,7 +68,7 @@ A description of the argument. This will be displayed with `--help`.
 
 An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.
 
-### Example
+**Example:**
 
 ```yaml
 - name: --my_long
@@ -77,13 +77,27 @@ An example value for this argument. If no [`default`](#default) property was spe
 
 ```
 
+## info
+
+**Type**: `Json`
+
+Structured information. Can be any shape: a string, vector, map or even nested map.
+
+**Example:**
+
+```yaml
+info:
+  category: cat1
+  labels: [one, two, three]
+```
+
 ## max
 
 **Type**: `Long`
 
 Maximum allowed value for this argument. If set and the provided value is higher than the maximum, an error will be produced. Can be combined with [`min`](#min) to clamp values.
 
-### Example
+**Example:**
 
 ```yaml
 - name: --my_long
@@ -98,7 +112,7 @@ Maximum allowed value for this argument. If set and the provided value is higher
 
 Minimum allowed value for this argument. If set and the provided value is lower than the minimum, an error will be produced. Can be combined with [`max`](#max) to clamp values.
 
-### Example
+**Example:**
 
 ```yaml
 - name: --my_long
@@ -113,7 +127,7 @@ Minimum allowed value for this argument. If set and the provided value is lower 
 
 Treat the argument value as an array. Arrays can be passed using the delimiter `--foo=1:2:3` or by providing the same argument multiple times `--foo 1 --foo 2`. You can use a custom delimiter by using the [`multiple_sep`](#multiple_sep) property. `false` by default.
 
-### Example
+**Example:**
 
 ```yaml
 - name: --my_long
@@ -134,7 +148,7 @@ my_component --my_long=10:80:152
 
 The delimiter character for providing [`multiple`](#multiple) values. `:` by default.
 
-### Example
+**Example:**
 
 ```yaml
 - name: --my_long
@@ -167,7 +181,7 @@ The name of the argument. Can be in the formats `--foo`, `-f` or `foo`. The numb
 
 Make the value for this argument required. If set to `true`, an error will be produced if no value was provided. `false` by default.
 
-### Example
+**Example:**
 
 ```yaml
 - name: --my_long
@@ -175,4 +189,10 @@ Make the value for this argument required. If set to `true`, an error will be pr
   required: true
 
 ```
+
+## type
+
+**Type**: `String`
+
+Specifies the type of the argument.
 
