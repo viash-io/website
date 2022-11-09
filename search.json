@@ -543,7 +543,7 @@
     "href": "reference/config/arguments/long.html",
     "title": "long",
     "section": "",
-    "text": "An long type argument has a numeric value without decimal points."
+    "text": "An long type argument has a numeric value without decimal points.\nExample:"
   },
   {
     "objectID": "reference/config/arguments/long.html#alternatives",
@@ -557,14 +557,14 @@
     "href": "reference/config/arguments/long.html#choices",
     "title": "long",
     "section": "choices",
-    "text": "choices\nType: List of Long\nLimit the amount of valid values for this argument to those set in this list. When set and a value not present in the list is provided, an error will be produced.\n\nExample\n- name: --values\n  type: long\n  choices: [1024, 2048, 4096]"
+    "text": "choices\nType: List of Long\nLimit the amount of valid values for this argument to those set in this list. When set and a value not present in the list is provided, an error will be produced.\nExample:\n- name: --values\n  type: long\n  choices: [1024, 2048, 4096]"
   },
   {
     "objectID": "reference/config/arguments/long.html#default",
     "href": "reference/config/arguments/long.html#default",
     "title": "long",
     "section": "default",
-    "text": "default\nType: Long / List of Long\nThe default value when no argument value is provided. This will not work if the required property is enabled.\n\nExample\n- name: --my_long\n  type: long\n  default: 100"
+    "text": "default\nType: Long / List of Long\nThe default value when no argument value is provided. This will not work if the required property is enabled.\nExample:\n- name: --my_long\n  type: long\n  default: 100"
   },
   {
     "objectID": "reference/config/arguments/long.html#description",
@@ -574,39 +574,46 @@
     "text": "description\nType: String\nA description of the argument. This will be displayed with --help."
   },
   {
-    "objectID": "reference/config/arguments/long.html#example-3",
-    "href": "reference/config/arguments/long.html#example-3",
+    "objectID": "reference/config/arguments/long.html#example",
+    "href": "reference/config/arguments/long.html#example",
     "title": "long",
     "section": "example",
-    "text": "example\nType: Long / List of Long\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\n\nExample\n- name: --my_long\n  type: long\n  example: 100"
+    "text": "example\nType: Long / List of Long\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\nExample:\n- name: --my_long\n  type: long\n  example: 100"
+  },
+  {
+    "objectID": "reference/config/arguments/long.html#info",
+    "href": "reference/config/arguments/long.html#info",
+    "title": "long",
+    "section": "info",
+    "text": "info\nType: Json\nStructured information. Can be any shape: a string, vector, map or even nested map.\nExample:\ninfo:\n  category: cat1\n  labels: [one, two, three]"
   },
   {
     "objectID": "reference/config/arguments/long.html#max",
     "href": "reference/config/arguments/long.html#max",
     "title": "long",
     "section": "max",
-    "text": "max\nType: Long\nMaximum allowed value for this argument. If set and the provided value is higher than the maximum, an error will be produced. Can be combined with min to clamp values.\n\nExample\n- name: --my_long\n  type: long\n  max: 150"
+    "text": "max\nType: Long\nMaximum allowed value for this argument. If set and the provided value is higher than the maximum, an error will be produced. Can be combined with min to clamp values.\nExample:\n- name: --my_long\n  type: long\n  max: 150"
   },
   {
     "objectID": "reference/config/arguments/long.html#min",
     "href": "reference/config/arguments/long.html#min",
     "title": "long",
     "section": "min",
-    "text": "min\nType: Long\nMinimum allowed value for this argument. If set and the provided value is lower than the minimum, an error will be produced. Can be combined with max to clamp values.\n\nExample\n- name: --my_long\n  type: long\n  min: 50"
+    "text": "min\nType: Long\nMinimum allowed value for this argument. If set and the provided value is lower than the minimum, an error will be produced. Can be combined with max to clamp values.\nExample:\n- name: --my_long\n  type: long\n  min: 50"
   },
   {
     "objectID": "reference/config/arguments/long.html#multiple",
     "href": "reference/config/arguments/long.html#multiple",
     "title": "long",
     "section": "multiple",
-    "text": "multiple\nType: Boolean\nTreat the argument value as an array. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. You can use a custom delimiter by using the multiple_sep property. false by default.\n\nExample\n- name: --my_long\n  type: long\n  multiple: true\nHere’s an example of how to use this:\nmy_component --my_long=10:80:152"
+    "text": "multiple\nType: Boolean\nTreat the argument value as an array. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. You can use a custom delimiter by using the multiple_sep property. false by default.\nExample:\n- name: --my_long\n  type: long\n  multiple: true\nHere’s an example of how to use this:\nmy_component --my_long=10:80:152"
   },
   {
     "objectID": "reference/config/arguments/long.html#multiple_sep",
     "href": "reference/config/arguments/long.html#multiple_sep",
     "title": "long",
     "section": "multiple_sep",
-    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_long\n  type: long\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_long=10:80:152"
+    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\nExample:\n- name: --my_long\n  type: long\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_long=10:80:152"
   },
   {
     "objectID": "reference/config/arguments/long.html#name",
@@ -620,14 +627,21 @@
     "href": "reference/config/arguments/long.html#required",
     "title": "long",
     "section": "required",
-    "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\n\nExample\n- name: --my_long\n  type: long\n  required: true"
+    "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\nExample:\n- name: --my_long\n  type: long\n  required: true"
+  },
+  {
+    "objectID": "reference/config/arguments/long.html#type",
+    "href": "reference/config/arguments/long.html#type",
+    "title": "long",
+    "section": "type",
+    "text": "type\nType: String\nSpecifies the type of the argument."
   },
   {
     "objectID": "reference/config/arguments/integer.html",
     "href": "reference/config/arguments/integer.html",
     "title": "integer",
     "section": "",
-    "text": "An integer type argument has a numeric value without decimal points."
+    "text": "An integer type argument has a numeric value without decimal points.\nExample:"
   },
   {
     "objectID": "reference/config/arguments/integer.html#alternatives",
@@ -641,14 +655,14 @@
     "href": "reference/config/arguments/integer.html#choices",
     "title": "integer",
     "section": "choices",
-    "text": "choices\nType: List of Int\nLimit the amount of valid values for this argument to those set in this list. When set and a value not present in the list is provided, an error will be produced.\n\nExample\n- name: --values\n  type: integer\n  choices: [1024, 2048, 4096]"
+    "text": "choices\nType: List of Int\nLimit the amount of valid values for this argument to those set in this list. When set and a value not present in the list is provided, an error will be produced.\nExample:\n- name: --values\n  type: integer\n  choices: [1024, 2048, 4096]"
   },
   {
     "objectID": "reference/config/arguments/integer.html#default",
     "href": "reference/config/arguments/integer.html#default",
     "title": "integer",
     "section": "default",
-    "text": "default\nType: Int / List of Int\nThe default value when no argument value is provided. This will not work if the required property is enabled.\n\nExample\n- name: --my_integer\n  type: integer\n  default: 100"
+    "text": "default\nType: Int / List of Int\nThe default value when no argument value is provided. This will not work if the required property is enabled.\nExample:\n- name: --my_integer\n  type: integer\n  default: 100"
   },
   {
     "objectID": "reference/config/arguments/integer.html#description",
@@ -658,39 +672,46 @@
     "text": "description\nType: String\nA description of the argument. This will be displayed with --help."
   },
   {
-    "objectID": "reference/config/arguments/integer.html#example-3",
-    "href": "reference/config/arguments/integer.html#example-3",
+    "objectID": "reference/config/arguments/integer.html#example",
+    "href": "reference/config/arguments/integer.html#example",
     "title": "integer",
     "section": "example",
-    "text": "example\nType: Int / List of Int\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\n\nExample\n- name: --my_integer\n  type: integer\n  example: 100"
+    "text": "example\nType: Int / List of Int\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\nExample:\n- name: --my_integer\n  type: integer\n  example: 100"
+  },
+  {
+    "objectID": "reference/config/arguments/integer.html#info",
+    "href": "reference/config/arguments/integer.html#info",
+    "title": "integer",
+    "section": "info",
+    "text": "info\nType: Json\nStructured information. Can be any shape: a string, vector, map or even nested map.\nExample:\ninfo:\n  category: cat1\n  labels: [one, two, three]"
   },
   {
     "objectID": "reference/config/arguments/integer.html#max",
     "href": "reference/config/arguments/integer.html#max",
     "title": "integer",
     "section": "max",
-    "text": "max\nType: Int\nMaximum allowed value for this argument. If set and the provided value is higher than the maximum, an error will be produced. Can be combined with min to clamp values.\n\nExample\n- name: --my_integer\n  type: integer\n  max: 150"
+    "text": "max\nType: Int\nMaximum allowed value for this argument. If set and the provided value is higher than the maximum, an error will be produced. Can be combined with min to clamp values.\nExample:\n- name: --my_integer\n  type: integer\n  max: 150"
   },
   {
     "objectID": "reference/config/arguments/integer.html#min",
     "href": "reference/config/arguments/integer.html#min",
     "title": "integer",
     "section": "min",
-    "text": "min\nType: Int\nMinimum allowed value for this argument. If set and the provided value is lower than the minimum, an error will be produced. Can be combined with max to clamp values.\n\nExample\n- name: --my_integer\n  type: integer\n  min: 50"
+    "text": "min\nType: Int\nMinimum allowed value for this argument. If set and the provided value is lower than the minimum, an error will be produced. Can be combined with max to clamp values.\nExample:\n- name: --my_integer\n  type: integer\n  min: 50"
   },
   {
     "objectID": "reference/config/arguments/integer.html#multiple",
     "href": "reference/config/arguments/integer.html#multiple",
     "title": "integer",
     "section": "multiple",
-    "text": "multiple\nType: Boolean\nTreat the argument value as an array. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. You can use a custom delimiter by using the multiple_sep property. false by default.\n\nExample\n- name: --my_integer\n  type: integer\n  multiple: true\nHere’s an example of how to use this:\nmy_component --my_integer=10:80:152"
+    "text": "multiple\nType: Boolean\nTreat the argument value as an array. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. You can use a custom delimiter by using the multiple_sep property. false by default.\nExample:\n- name: --my_integer\n  type: integer\n  multiple: true\nHere’s an example of how to use this:\nmy_component --my_integer=10:80:152"
   },
   {
     "objectID": "reference/config/arguments/integer.html#multiple_sep",
     "href": "reference/config/arguments/integer.html#multiple_sep",
     "title": "integer",
     "section": "multiple_sep",
-    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_integer\n  type: integer\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_integer=10:80:152"
+    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\nExample:\n- name: --my_integer\n  type: integer\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_integer=10:80:152"
   },
   {
     "objectID": "reference/config/arguments/integer.html#name",
@@ -704,14 +725,21 @@
     "href": "reference/config/arguments/integer.html#required",
     "title": "integer",
     "section": "required",
-    "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\n\nExample\n- name: --my_integer\n  type: integer\n  required: true"
+    "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\nExample:\n- name: --my_integer\n  type: integer\n  required: true"
+  },
+  {
+    "objectID": "reference/config/arguments/integer.html#type",
+    "href": "reference/config/arguments/integer.html#type",
+    "title": "integer",
+    "section": "type",
+    "text": "type\nType: String\nSpecifies the type of the argument."
   },
   {
     "objectID": "reference/config/arguments/boolean_true.html",
     "href": "reference/config/arguments/boolean_true.html",
     "title": "boolean_true",
     "section": "",
-    "text": "An argument of the boolean_true type acts like a boolean flag with a default value of false. When called as an argument it sets the boolean to true."
+    "text": "An argument of the boolean_true type acts like a boolean flag with a default value of false. When called as an argument it sets the boolean to true.\nExample:"
   },
   {
     "objectID": "reference/config/arguments/boolean_true.html#alternatives",
@@ -728,6 +756,13 @@
     "text": "description\nType: String\nA description of the argument. This will be displayed with --help."
   },
   {
+    "objectID": "reference/config/arguments/boolean_true.html#info",
+    "href": "reference/config/arguments/boolean_true.html#info",
+    "title": "boolean_true",
+    "section": "info",
+    "text": "info\nType: Json\nStructured information. Can be any shape: a string, vector, map or even nested map.\nExample:\ninfo:\n  category: cat1\n  labels: [one, two, three]"
+  },
+  {
     "objectID": "reference/config/arguments/boolean_true.html#name",
     "href": "reference/config/arguments/boolean_true.html#name",
     "title": "boolean_true",
@@ -735,11 +770,18 @@
     "text": "name\nType: String\nThe name of the argument. Can be in the formats --silent, -s or silent. The number of dashes determines how values can be passed:\n\n--silent is a long option, which can be passed with executable_name --silent\n-s is a short option, which can be passed with executable_name -s\nsilent is an argument, which can be passed with executable_name silent"
   },
   {
+    "objectID": "reference/config/arguments/boolean_true.html#type",
+    "href": "reference/config/arguments/boolean_true.html#type",
+    "title": "boolean_true",
+    "section": "type",
+    "text": "type\nType: String\nSpecifies the type of the argument."
+  },
+  {
     "objectID": "reference/config/arguments/boolean.html",
     "href": "reference/config/arguments/boolean.html",
     "title": "boolean",
     "section": "",
-    "text": "A boolean type argument has two possible values: true or false."
+    "text": "A boolean type argument has two possible values: true or false.\nExample:"
   },
   {
     "objectID": "reference/config/arguments/boolean.html#alternatives",
@@ -753,7 +795,7 @@
     "href": "reference/config/arguments/boolean.html#default",
     "title": "boolean",
     "section": "default",
-    "text": "default\nType: Boolean / List of Boolean\nThe default value when no argument value is provided. This will not work if the required property is enabled.\n\nExample\n- name: --my_boolean\n  type: boolean\n  default: true"
+    "text": "default\nType: Boolean / List of Boolean\nThe default value when no argument value is provided. This will not work if the required property is enabled.\nExample:\n- name: --my_boolean\n  type: boolean\n  default: true"
   },
   {
     "objectID": "reference/config/arguments/boolean.html#description",
@@ -763,25 +805,32 @@
     "text": "description\nType: String\nA description of the argument. This will be displayed with --help."
   },
   {
-    "objectID": "reference/config/arguments/boolean.html#example-2",
-    "href": "reference/config/arguments/boolean.html#example-2",
+    "objectID": "reference/config/arguments/boolean.html#example",
+    "href": "reference/config/arguments/boolean.html#example",
     "title": "boolean",
     "section": "example",
-    "text": "example\nType: Boolean / List of Boolean\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\n\nExample\n- name: --my_boolean\n  type: boolean\n  example: true"
+    "text": "example\nType: Boolean / List of Boolean\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\nExample:\n- name: --my_boolean\n  type: boolean\n  example: true"
+  },
+  {
+    "objectID": "reference/config/arguments/boolean.html#info",
+    "href": "reference/config/arguments/boolean.html#info",
+    "title": "boolean",
+    "section": "info",
+    "text": "info\nType: Json\nStructured information. Can be any shape: a string, vector, map or even nested map.\nExample:\ninfo:\n  category: cat1\n  labels: [one, two, three]"
   },
   {
     "objectID": "reference/config/arguments/boolean.html#multiple",
     "href": "reference/config/arguments/boolean.html#multiple",
     "title": "boolean",
     "section": "multiple",
-    "text": "multiple\nType: Boolean\nTreat the argument value as an array. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. You can use a custom delimiter by using the multiple_sep property. false by default.\n\nExample\n- name: --my_boolean\n  type: boolean\n  multiple: true\nHere’s an example of how to use this:\nmy_component --my_boolean=true:true:false"
+    "text": "multiple\nType: Boolean\nTreat the argument value as an array. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. You can use a custom delimiter by using the multiple_sep property. false by default.\nExample:\n- name: --my_boolean\n  type: boolean\n  multiple: true\nHere’s an example of how to use this:\nmy_component --my_boolean=true:true:false"
   },
   {
     "objectID": "reference/config/arguments/boolean.html#multiple_sep",
     "href": "reference/config/arguments/boolean.html#multiple_sep",
     "title": "boolean",
     "section": "multiple_sep",
-    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_boolean\n  type: boolean\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_boolean=true,true,false"
+    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\nExample:\n- name: --my_boolean\n  type: boolean\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_boolean=true,true,false"
   },
   {
     "objectID": "reference/config/arguments/boolean.html#name",
@@ -795,14 +844,21 @@
     "href": "reference/config/arguments/boolean.html#required",
     "title": "boolean",
     "section": "required",
-    "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\n\nExample\n- name: --my_boolean\n  type: boolean\n  required: true"
+    "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\nExample:\n- name: --my_boolean\n  type: boolean\n  required: true"
+  },
+  {
+    "objectID": "reference/config/arguments/boolean.html#type",
+    "href": "reference/config/arguments/boolean.html#type",
+    "title": "boolean",
+    "section": "type",
+    "text": "type\nType: String\nSpecifies the type of the argument."
   },
   {
     "objectID": "reference/config/arguments/string.html",
     "href": "reference/config/arguments/string.html",
     "title": "string",
     "section": "",
-    "text": "A string type argument has a value made up of an ordered sequences of characters, like “Hello” or “I’m a string”."
+    "text": "A string type argument has a value made up of an ordered sequences of characters, like “Hello” or “I’m a string”.\nExample:"
   },
   {
     "objectID": "reference/config/arguments/string.html#alternatives",
@@ -816,14 +872,14 @@
     "href": "reference/config/arguments/string.html#choices",
     "title": "string",
     "section": "choices",
-    "text": "choices\nType: List of String\nLimit the amount of valid values for this argument to those set in this list. When set and a value not present in the list is provided, an error will be produced.\n\nExample\n- name: --language\n  type: string\n  choices: [\"python\", \"r\", \"javascript\"]"
+    "text": "choices\nType: List of String\nLimit the amount of valid values for this argument to those set in this list. When set and a value not present in the list is provided, an error will be produced.\nExample:\n- name: --language\n  type: string\n  choices: [\"python\", \"r\", \"javascript\"]"
   },
   {
     "objectID": "reference/config/arguments/string.html#default",
     "href": "reference/config/arguments/string.html#default",
     "title": "string",
     "section": "default",
-    "text": "default\nType: String / List of String\nThe default value when no argument value is provided. This will not work if the required property is enabled.\n\nExample\n- name: --my_string\n  type: string\n  default: \"The answer is 42\""
+    "text": "default\nType: String / List of String\nThe default value when no argument value is provided. This will not work if the required property is enabled.\nExample:\n- name: --my_string\n  type: string\n  default: \"The answer is 42\""
   },
   {
     "objectID": "reference/config/arguments/string.html#description",
@@ -833,25 +889,32 @@
     "text": "description\nType: String\nA description of the argument. This will be displayed with --help."
   },
   {
-    "objectID": "reference/config/arguments/string.html#example-3",
-    "href": "reference/config/arguments/string.html#example-3",
+    "objectID": "reference/config/arguments/string.html#example",
+    "href": "reference/config/arguments/string.html#example",
     "title": "string",
     "section": "example",
-    "text": "example\nType: String / List of String\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\n\nExample\n- name: --my_string\n  type: string\n  example: \"Hello World\""
+    "text": "example\nType: String / List of String\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\nExample:\n- name: --my_string\n  type: string\n  example: \"Hello World\""
+  },
+  {
+    "objectID": "reference/config/arguments/string.html#info",
+    "href": "reference/config/arguments/string.html#info",
+    "title": "string",
+    "section": "info",
+    "text": "info\nType: Json\nStructured information. Can be any shape: a string, vector, map or even nested map.\nExample:\ninfo:\n  category: cat1\n  labels: [one, two, three]"
   },
   {
     "objectID": "reference/config/arguments/string.html#multiple",
     "href": "reference/config/arguments/string.html#multiple",
     "title": "string",
     "section": "multiple",
-    "text": "multiple\nType: Boolean\nTreat the argument value as an array. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. You can use a custom delimiter by using the multiple_sep property. false by default.\n\nExample\n- name: --my_string\n  type: string\n  multiple: true\nHere’s an example of how to use this:\nmy_component --my_string=Marc:Susan:Paul"
+    "text": "multiple\nType: Boolean\nTreat the argument value as an array. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. You can use a custom delimiter by using the multiple_sep property. false by default.\nExample:\n- name: --my_string\n  type: string\n  multiple: true\nHere’s an example of how to use this:\nmy_component --my_string=Marc:Susan:Paul"
   },
   {
     "objectID": "reference/config/arguments/string.html#multiple_sep",
     "href": "reference/config/arguments/string.html#multiple_sep",
     "title": "string",
     "section": "multiple_sep",
-    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_string\n  type: string\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_string=Marc,Susan,Paul"
+    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\nExample:\n- name: --my_string\n  type: string\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_string=Marc,Susan,Paul"
   },
   {
     "objectID": "reference/config/arguments/string.html#name",
@@ -865,14 +928,21 @@
     "href": "reference/config/arguments/string.html#required",
     "title": "string",
     "section": "required",
-    "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\n\nExample\n- name: --my_string\n  type: string\n  required: true"
+    "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\nExample:\n- name: --my_string\n  type: string\n  required: true"
+  },
+  {
+    "objectID": "reference/config/arguments/string.html#type",
+    "href": "reference/config/arguments/string.html#type",
+    "title": "string",
+    "section": "type",
+    "text": "type\nType: String\nSpecifies the type of the argument."
   },
   {
     "objectID": "reference/config/arguments/file.html",
     "href": "reference/config/arguments/file.html",
     "title": "file",
     "section": "",
-    "text": "A file type argument has a string value that points to a file or folder path."
+    "text": "A file type argument has a string value that points to a file or folder path.\nExample:"
   },
   {
     "objectID": "reference/config/arguments/file.html#alternatives",
@@ -886,7 +956,7 @@
     "href": "reference/config/arguments/file.html#default",
     "title": "file",
     "section": "default",
-    "text": "default\nType: Path / List of Path\nThe default value when no argument value is provided. This will not work if the required property is enabled.\n\nExample\n- name: --my_file\n  type: file\n  default: data.csv"
+    "text": "default\nType: Path / List of Path\nThe default value when no argument value is provided. This will not work if the required property is enabled.\nExample:\n- name: --my_file\n  type: file\n  default: data.csv"
   },
   {
     "objectID": "reference/config/arguments/file.html#description",
@@ -900,35 +970,42 @@
     "href": "reference/config/arguments/file.html#direction",
     "title": "file",
     "section": "direction",
-    "text": "direction\nType: Direction\nMakes this argument an input or an output, as in does the file/folder needs to be read or written. input by default.\n\nExample\n- name: --my_output_file\n  type: file\n  direction: output"
+    "text": "direction\nType: Direction\nMakes this argument an input or an output, as in does the file/folder needs to be read or written. input by default.\nExample:\n- name: --my_output_file\n  type: file\n  direction: output"
   },
   {
-    "objectID": "reference/config/arguments/file.html#example-3",
-    "href": "reference/config/arguments/file.html#example-3",
+    "objectID": "reference/config/arguments/file.html#example",
+    "href": "reference/config/arguments/file.html#example",
     "title": "file",
     "section": "example",
-    "text": "example\nType: Path / List of Path\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\n\nExample\n- name: --my_file\n  type: file\n  example: data.csv"
+    "text": "example\nType: Path / List of Path\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\nExample:\n- name: --my_file\n  type: file\n  example: data.csv"
+  },
+  {
+    "objectID": "reference/config/arguments/file.html#info",
+    "href": "reference/config/arguments/file.html#info",
+    "title": "file",
+    "section": "info",
+    "text": "info\nType: Json\nStructured information. Can be any shape: a string, vector, map or even nested map.\nExample:\ninfo:\n  category: cat1\n  labels: [one, two, three]"
   },
   {
     "objectID": "reference/config/arguments/file.html#multiple",
     "href": "reference/config/arguments/file.html#multiple",
     "title": "file",
     "section": "multiple",
-    "text": "multiple\nType: Boolean\nTreat the argument value as an array. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. You can use a custom delimiter by using the multiple_sep property. false by default.\n\nExample\n- name: --my_files\n  type: file\n  multiple: true\nHere’s an example of how to use this:\nmy_component --my_files=firstFile.csv:anotherFile.csv:yetAnother.csv"
+    "text": "multiple\nType: Boolean\nTreat the argument value as an array. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. You can use a custom delimiter by using the multiple_sep property. false by default.\nExample:\n- name: --my_files\n  type: file\n  multiple: true\nHere’s an example of how to use this:\nmy_component --my_files=firstFile.csv:anotherFile.csv:yetAnother.csv"
   },
   {
     "objectID": "reference/config/arguments/file.html#multiple_sep",
     "href": "reference/config/arguments/file.html#multiple_sep",
     "title": "file",
     "section": "multiple_sep",
-    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_files\n  type: file\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_files=firstFile.csv,anotherFile.csv,yetAnother.csv"
+    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\nExample:\n- name: --my_files\n  type: file\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_files=firstFile.csv,anotherFile.csv,yetAnother.csv"
   },
   {
     "objectID": "reference/config/arguments/file.html#must_exist",
     "href": "reference/config/arguments/file.html#must_exist",
     "title": "file",
     "section": "must_exist",
-    "text": "must_exist\nType: Boolean\nThe file or folder should exist before the start of execution. If set to true, an error will be produced if the file or folder wasn’t found.\n\nExample\n- name: --my_file\n  type: file\n  must_exist: true"
+    "text": "must_exist\nType: Boolean\nThe file or folder should exist before the start of execution. If set to true, an error will be produced if the file or folder wasn’t found.\nExample:\n- name: --my_file\n  type: file\n  must_exist: true"
   },
   {
     "objectID": "reference/config/arguments/file.html#name",
@@ -942,14 +1019,21 @@
     "href": "reference/config/arguments/file.html#required",
     "title": "file",
     "section": "required",
-    "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\n\nExample\n- name: --my_file\n  type: file\n  required: true"
+    "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\nExample:\n- name: --my_file\n  type: file\n  required: true"
+  },
+  {
+    "objectID": "reference/config/arguments/file.html#type",
+    "href": "reference/config/arguments/file.html#type",
+    "title": "file",
+    "section": "type",
+    "text": "type\nType: String\nSpecifies the type of the argument."
   },
   {
     "objectID": "reference/config/arguments/boolean_false.html",
     "href": "reference/config/arguments/boolean_false.html",
     "title": "boolean_false",
     "section": "",
-    "text": "An argument of the boolean_false type acts like an inverted boolean flag with a default value of true. When called as an argument it sets the boolean to false."
+    "text": "An argument of the boolean_false type acts like an inverted boolean flag with a default value of true. When called as an argument it sets the boolean to false.\nExample:"
   },
   {
     "objectID": "reference/config/arguments/boolean_false.html#alternatives",
@@ -966,6 +1050,13 @@
     "text": "description\nType: String\nA description of the argument. This will be displayed with --help."
   },
   {
+    "objectID": "reference/config/arguments/boolean_false.html#info",
+    "href": "reference/config/arguments/boolean_false.html#info",
+    "title": "boolean_false",
+    "section": "info",
+    "text": "info\nType: Json\nStructured information. Can be any shape: a string, vector, map or even nested map.\nExample:\ninfo:\n  category: cat1\n  labels: [one, two, three]"
+  },
+  {
     "objectID": "reference/config/arguments/boolean_false.html#name",
     "href": "reference/config/arguments/boolean_false.html#name",
     "title": "boolean_false",
@@ -973,11 +1064,18 @@
     "text": "name\nType: String\nThe name of the argument. Can be in the formats --no-log, -n or no-log. The number of dashes determines how values can be passed:\n\n--no-log is a long option, which can be passed with executable_name --no-log\n-n is a short option, which can be passed with executable_name -n\nno-log is an argument, which can be passed with executable_name no-log"
   },
   {
+    "objectID": "reference/config/arguments/boolean_false.html#type",
+    "href": "reference/config/arguments/boolean_false.html#type",
+    "title": "boolean_false",
+    "section": "type",
+    "text": "type\nType: String\nSpecifies the type of the argument."
+  },
+  {
     "objectID": "reference/config/arguments/double.html",
     "href": "reference/config/arguments/double.html",
     "title": "double",
     "section": "",
-    "text": "A double type argument has a numeric value with decimal points"
+    "text": "A double type argument has a numeric value with decimal points\nExample:"
   },
   {
     "objectID": "reference/config/arguments/double.html#alternatives",
@@ -991,7 +1089,7 @@
     "href": "reference/config/arguments/double.html#default",
     "title": "double",
     "section": "default",
-    "text": "default\nType: Double / List of Double\nThe default value when no argument value is provided. This will not work if the required property is enabled.\n\nExample\n- name: --my_double\n  type: double\n  default: 5.8"
+    "text": "default\nType: Double / List of Double\nThe default value when no argument value is provided. This will not work if the required property is enabled.\nExample:\n- name: --my_double\n  type: double\n  default: 5.8"
   },
   {
     "objectID": "reference/config/arguments/double.html#description",
@@ -1001,39 +1099,46 @@
     "text": "description\nType: String\nA description of the argument. This will be displayed with --help."
   },
   {
-    "objectID": "reference/config/arguments/double.html#example-2",
-    "href": "reference/config/arguments/double.html#example-2",
+    "objectID": "reference/config/arguments/double.html#example",
+    "href": "reference/config/arguments/double.html#example",
     "title": "double",
     "section": "example",
-    "text": "example\nType: Double / List of Double\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\n\nExample\n- name: --my_double\n  type: double\n  example: 5.8"
+    "text": "example\nType: Double / List of Double\nAn example value for this argument. If no default property was specified, this will be used for that purpose.\nExample:\n- name: --my_double\n  type: double\n  example: 5.8"
+  },
+  {
+    "objectID": "reference/config/arguments/double.html#info",
+    "href": "reference/config/arguments/double.html#info",
+    "title": "double",
+    "section": "info",
+    "text": "info\nType: Json\nStructured information. Can be any shape: a string, vector, map or even nested map.\nExample:\ninfo:\n  category: cat1\n  labels: [one, two, three]"
   },
   {
     "objectID": "reference/config/arguments/double.html#max",
     "href": "reference/config/arguments/double.html#max",
     "title": "double",
     "section": "max",
-    "text": "max\nType: Double\nMaximum allowed value for this argument. If set and the provided value is higher than the maximum, an error will be produced. Can be combined with min to clamp values.\n\nExample\n- name: --my_double\n  type: double\n  max: 80.4"
+    "text": "max\nType: Double\nMaximum allowed value for this argument. If set and the provided value is higher than the maximum, an error will be produced. Can be combined with min to clamp values.\nExample:\n- name: --my_double\n  type: double\n  max: 80.4"
   },
   {
     "objectID": "reference/config/arguments/double.html#min",
     "href": "reference/config/arguments/double.html#min",
     "title": "double",
     "section": "min",
-    "text": "min\nType: Double\nMinimum allowed value for this argument. If set and the provided value is lower than the minimum, an error will be produced. Can be combined with max to clamp values.\n\nExample\n- name: --my_double\n  type: double\n  min: 25.5"
+    "text": "min\nType: Double\nMinimum allowed value for this argument. If set and the provided value is lower than the minimum, an error will be produced. Can be combined with max to clamp values.\nExample:\n- name: --my_double\n  type: double\n  min: 25.5"
   },
   {
     "objectID": "reference/config/arguments/double.html#multiple",
     "href": "reference/config/arguments/double.html#multiple",
     "title": "double",
     "section": "multiple",
-    "text": "multiple\nType: Boolean\nTreat the argument value as an array. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. You can use a custom delimiter by using the multiple_sep property. false by default.\n\nExample\n- name: --my_double\n  type: double\n  multiple: true\nHere’s an example of how to use this:\nmy_component --my_double=5.8:22.6:200.4"
+    "text": "multiple\nType: Boolean\nTreat the argument value as an array. Arrays can be passed using the delimiter --foo=1:2:3 or by providing the same argument multiple times --foo 1 --foo 2. You can use a custom delimiter by using the multiple_sep property. false by default.\nExample:\n- name: --my_double\n  type: double\n  multiple: true\nHere’s an example of how to use this:\nmy_component --my_double=5.8:22.6:200.4"
   },
   {
     "objectID": "reference/config/arguments/double.html#multiple_sep",
     "href": "reference/config/arguments/double.html#multiple_sep",
     "title": "double",
     "section": "multiple_sep",
-    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\n\nExample\n- name: --my_double\n  type: double\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_double=5.8,22.6,200.4"
+    "text": "multiple_sep\nType: String\nThe delimiter character for providing multiple values. : by default.\nExample:\n- name: --my_double\n  type: double\n  multiple: true\n  multiple_sep: \",\"\nHere’s an example of how to use this:\nmy_component --my_double=5.8,22.6,200.4"
   },
   {
     "objectID": "reference/config/arguments/double.html#name",
@@ -1047,7 +1152,14 @@
     "href": "reference/config/arguments/double.html#required",
     "title": "double",
     "section": "required",
-    "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\n\nExample\n- name: --my_double\n  type: double\n  required: true"
+    "text": "required\nType: Boolean\nMake the value for this argument required. If set to true, an error will be produced if no value was provided. false by default.\nExample:\n- name: --my_double\n  type: double\n  required: true"
+  },
+  {
+    "objectID": "reference/config/arguments/double.html#type",
+    "href": "reference/config/arguments/double.html#type",
+    "title": "double",
+    "section": "type",
+    "text": "type\nType: String\nSpecifies the type of the argument."
   },
   {
     "objectID": "reference/config/index.html",
@@ -1145,56 +1257,56 @@
     "href": "reference/config/requirements.html",
     "title": "Setup Requirements",
     "section": "",
-    "text": "Specify which apk packages should be available in order to run the component.\n\n\nsetup:\n  - type: apk\n    packages: [ sl ]"
+    "text": "Specify which apk packages should be available in order to run the component.\nExample:\nsetup:\n  - type: apk\n    packages: [ sl ]\n\n\nType: String / List of String\nSpecifies which packages to install.\nExample:\npackages: [ sl ]\n\n\n\nType: String\nSpecifies the type of the requirement specification."
   },
   {
     "objectID": "reference/config/requirements.html#apt-requirements",
     "href": "reference/config/requirements.html#apt-requirements",
     "title": "Setup Requirements",
     "section": "Apt Requirements",
-    "text": "Apt Requirements\nSpecify which apt packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: apt\n    packages: [ sl ]"
+    "text": "Apt Requirements\nSpecify which apt packages should be available in order to run the component.\nExample:\nsetup:\n  - type: apt\n    packages: [ sl ]\n\ninteractive\nType: Boolean\nIf false, the Debian frontend is set to non-interactive (recommended). Default: false.\n\n\npackages\nType: String / List of String\nSpecifies which packages to install.\nExample:\npackages: [ sl ]\n\n\ntype\nType: String\nSpecifies the type of the requirement specification."
   },
   {
     "objectID": "reference/config/requirements.html#docker-requirements",
     "href": "reference/config/requirements.html#docker-requirements",
     "title": "Setup Requirements",
     "section": "Docker Requirements",
-    "text": "Docker Requirements\nSpecify which Docker commands should be run during setup.\n\nExample\nsetup:\n  - type: docker\n    build_args: [ GITHUB_PAT=hello_world ]\n    run: [ git clone ... ]\n    add: [ \"http://foo.bar .\" ]\n    copy: [ \"http://foo.bar .\" ]\n    resources: \n      - resource.txt /path/to/resource.txt"
+    "text": "Docker Requirements\nSpecify which Docker commands should be run during setup.\nExample:\nsetup:\n  - type: docker\n    build_args: \"R_VERSION=hello_world\"\n    run: |\n      echo 'Run a custom command'\n      echo 'Foo' > /path/to/file.txt\n\nadd\nType: String / List of String\nSpecifies which ADD entries to add to the Dockerfile while building it.\nExample:\nadd: [ \"http://foo/bar .\" ]\n\n\nbuild_args\nType: String / List of String\nSpecifies which ARG entries to add to the Dockerfile while building it.\nExample:\nbuild_args: [ \"R_VERSION=4.2\" ]\n\n\ncopy\nType: String / List of String\nSpecifies which COPY entries to add to the Dockerfile while building it.\nExample:\ncopy: [ \"resource.txt /path/to/resource.txt\" ]\n\n\nenv\nType: String / List of String\nSpecifies which ENV entries to add to the Dockerfile while building it. Unlike ARG, ENV entries are also accessible from inside the container.\nExample:\nenv: [ \"R_VERSION=4.2\" ]\n\n\nlabel\nType: String / List of String\nSpecifies which LABEL entries to add to the Dockerfile while building it.\nExample:\nlabel: [ component=\"foo\" ]\n\n\nresources\nType: String / List of String\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.6.3. Use copy instead.\n\n\nSpecifies which COPY entries to add to the Dockerfile while building it.\nExample:\nresources: [ \"resource.txt /path/to/resource.txt\" ]\n\n\nrun\nType: String / List of String\nSpecifies which RUN entries to add to the Dockerfile while building it.\nExample:\nrun: |\n  echo 'Run a custom command'\n  echo 'Foo' > /path/to/file.txt\n\n\ntype\nType: String\nSpecifies the type of the requirement specification."
   },
   {
     "objectID": "reference/config/requirements.html#javascript-requirements",
     "href": "reference/config/requirements.html#javascript-requirements",
     "title": "Setup Requirements",
     "section": "Javascript Requirements",
-    "text": "Javascript Requirements\nSpecify which JavaScript packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: javascript\n    npm: [ packagename ]\n    git: [ https://... ]\n    github: [ owner/repository ]\n    url: [ https://... ]"
+    "text": "Javascript Requirements\nSpecify which JavaScript packages should be available in order to run the component.\nExample:\nsetup:\n  - type: javascript\n    npm: packagename\n    git: \"https://some.git.repository/org/repo\"\n    github: \"owner/repository\"\n    url: \"https://github.com/org/repo/archive/HEAD.zip\"\n\ngit\nType: String / List of String\nSpecifies which packages to install using a Git URI.\nExample:\ngit: [ https://some.git.repository/org/repo ]\n\n\ngithub\nType: String / List of String\nSpecifies which packages to install from GitHub.\nExample:\ngithub: [ owner/repository ]\n\n\nnpm\nType: String / List of String\nSpecifies which packages to install from npm.\nExample:\nnpm: [ packagename ]\n\n\npackages\nType: String / List of String\nSpecifies which packages to install from npm.\nExample:\npackages: [ packagename ]\n\n\ntype\nType: String\nSpecifies the type of the requirement specification.\n\n\nurl\nType: String / List of String\nSpecifies which packages to install using a generic URI.\nExample:\nurl: [ https://github.com/org/repo/archive/HEAD.zip ]"
   },
   {
     "objectID": "reference/config/requirements.html#python-requirements",
     "href": "reference/config/requirements.html#python-requirements",
     "title": "Setup Requirements",
     "section": "Python Requirements",
-    "text": "Python Requirements\nSpecify which Python packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ jkbr/httpie ]\n    gitlab: [ foo/bar ]\n    mercurial: [ http://... ]\n    svn: [ http://...]\n    bazaar: [ http://... ]\n    url: [ http://... ]"
+    "text": "Python Requirements\nSpecify which Python packages should be available in order to run the component.\nExample:\nsetup:\n  - type: python\n    pip: numpy\n    github: [ jkbr/httpie, foo/bar ]\n    url: \"https://github.com/some_org/some_pkg/zipball/master\"\n\nbazaar\nType: String / List of String\nSpecifies which packages to install using a Bazaar URI.\nExample:\nbazaar: [ http://bazaar.launchpad.net/some_pkg/some_pkg/release-0.1 ]\n\n\ngit\nType: String / List of String\nSpecifies which packages to install using a Git URI.\nExample:\ngit: [ https://some.git.repository/org/repo ]\n\n\ngithub\nType: String / List of String\nSpecifies which packages to install from GitHub.\nExample:\ngithub: [ jkbr/httpie ]\n\n\ngitlab\nType: String / List of String\nSpecifies which packages to install from GitLab.\nExample:\ngitlab: [ foo/bar ]\n\n\nmercurial\nType: String / List of String\nSpecifies which packages to install using a Mercurial URI.\nExample:\nmercurial: [ https://hg.myproject.org/MyProject/#egg=MyProject ]\n\n\npackages\nType: String / List of String\nSpecifies which packages to install from pip.\nExample:\npackages: [ numpy ]\n\n\npip\nType: String / List of String\nSpecifies which packages to install from pip.\nExample:\npip: [ numpy ]\n\n\npypi\nType: String / List of String\nSpecifies which packages to install from PyPI using pip.\nExample:\npypi: [ numpy ]\n\n\nscript\nType: String / List of String\nSpecifies a code block to run as part of the build.\nExample:\nscript: |\n  print(\"Running custom code\")\n  x = 1 + 1 == 2\n\n\nsvn\nType: String / List of String\nSpecifies which packages to install using an SVN URI.\nExample:\nsvn: [ http://svn.repo/some_pkg/trunk/#egg=SomePackage ]\n\n\ntype\nType: String\nSpecifies the type of the requirement specification.\n\n\nupgrade\nType: Boolean\nSets the --upgrade flag when set to true. Default: true.\n\n\nurl\nType: String / List of String\nSpecifies which packages to install using a generic URI.\nExample:\nurl: [ https://github.com/some_org/some_pkg/zipball/master ]\n\n\nuser\nType: Boolean\nSets the --user flag when set to true. Default: false."
   },
   {
     "objectID": "reference/config/requirements.html#r-requirements",
     "href": "reference/config/requirements.html#r-requirements",
     "title": "Setup Requirements",
     "section": "R Requirements",
-    "text": "R Requirements\nSpecify which R packages should be available in order to run the component.\n\nExample\nsetup: \n  - type: r\n    cran: [ dynutils ]\n    bioc: [ AnnotationDbi ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ rcannood/SCORPIUS ]\n    gitlab: [ org/package ]\n    svn: [ https://path.to.svn/group/repo ]\n    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]\n    script: [ 'devtools::install(\".\")' ]"
+    "text": "R Requirements\nSpecify which R packages should be available in order to run the component.\nExample:\nsetup: \n  - type: r\n    cran: anndata\n    bioc: [ AnnotationDbi, SingleCellExperiment ]\n    github: rcannood/SCORPIUS\n\nbioc\nType: String / List of String\nSpecifies which packages to install from BioConductor.\nExample:\nbioc: [ AnnotationDbi ]\n\n\nbioc_force_install\nType: Boolean\nForces packages specified in bioc to be reinstalled, even if they are already present in the container. Default: false.\nExample:\nbioc_force_install: false\n\n\nbitbucket\nType: String / List of String\nSpecifies which packages to install from Bitbucket.\nExample:\nbitbucket: [ org/package ]\n\n\ncran\nType: String / List of String\nSpecifies which packages to install from CRAN.\nExample:\ncran: [ anndata, ggplot2 ]\n\n\ngit\nType: String / List of String\nSpecifies which packages to install using a Git URI.\nExample:\ngit: [ https://some.git.repository/org/repo ]\n\n\ngithub\nType: String / List of String\nSpecifies which packages to install from GitHub.\nExample:\ngithub: [ rcannood/SCORPIUS ]\n\n\ngitlab\nType: String / List of String\nSpecifies which packages to install from GitLab.\nExample:\ngitlab: [ org/package ]\n\n\npackages\nType: String / List of String\nSpecifies which packages to install from CRAN.\nExample:\npackages: [ anndata, ggplot2 ]\n\n\nscript\nType: String / List of String\nSpecifies a code block to run as part of the build.\nExample:\nscript: |\n  cat(\"Running custom code\n\")\n  install.packages(\"anndata\")\n\n\nsvn\nType: String / List of String\nSpecifies which packages to install using an SVN URI.\nExample:\nsvn: [ https://path.to.svn/group/repo ]\n\n\ntype\nType: String\nSpecifies the type of the requirement specification.\n\n\nurl\nType: String / List of String\nSpecifies which packages to install using a generic URI.\nExample:\nurl: [ https://github.com/hadley/stringr/archive/HEAD.zip ]"
   },
   {
     "objectID": "reference/config/requirements.html#ruby-requirements",
     "href": "reference/config/requirements.html#ruby-requirements",
     "title": "Setup Requirements",
     "section": "Ruby Requirements",
-    "text": "Ruby Requirements\nSpecify which Ruby packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: ruby\n    packages: [ rspec ]"
+    "text": "Ruby Requirements\nSpecify which Ruby packages should be available in order to run the component.\nExample:\nsetup:\n  - type: ruby\n    packages: [ rspec ]\n\npackages\nType: String / List of String\nSpecifies which packages to install.\nExample:\npackages: [ rspec ]\n\n\ntype\nType: String\nSpecifies the type of the requirement specification."
   },
   {
     "objectID": "reference/config/requirements.html#yum-requirements",
     "href": "reference/config/requirements.html#yum-requirements",
     "title": "Setup Requirements",
     "section": "Yum Requirements",
-    "text": "Yum Requirements\nSpecify which yum packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: yum\n    packages: [ sl ]"
+    "text": "Yum Requirements\nSpecify which yum packages should be available in order to run the component.\nExample:\nsetup:\n  - type: yum\n    packages: [ sl ]\n\npackages\nType: String / List of String\nSpecifies which packages to install.\nExample:\npackages: [ sl ]\n\n\ntype\nType: String\nSpecifies the type of the requirement specification."
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html",
@@ -1208,49 +1320,49 @@
     "href": "reference/config/platforms/DockerPlatform.html#apk",
     "title": "Docker Platform",
     "section": "apk",
-    "text": "apk\nType: ApkRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which apk packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: apk\n    packages: [ sl ]"
+    "text": "apk\nType: ApkRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which apk packages should be available in order to run the component.\nExample:\nsetup:\n  - type: apk\n    packages: [ sl ]"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#apt",
     "href": "reference/config/platforms/DockerPlatform.html#apt",
     "title": "Docker Platform",
     "section": "apt",
-    "text": "apt\nType: AptRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which apt packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: apt\n    packages: [ sl ]"
+    "text": "apt\nType: AptRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which apt packages should be available in order to run the component.\nExample:\nsetup:\n  - type: apt\n    packages: [ sl ]"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#chown",
     "href": "reference/config/platforms/DockerPlatform.html#chown",
     "title": "Docker Platform",
     "section": "chown",
-    "text": "chown\nType: Boolean\nIn Linux, files created by a Docker container will be owned by root. With chown: true, Viash will automatically change the ownership of output files (arguments with type: file and direction: output) to the user running the Viash command after execution of the component. Default value: true.\n\nExample\nchown: false"
+    "text": "chown\nType: Boolean\nIn Linux, files created by a Docker container will be owned by root. With chown: true, Viash will automatically change the ownership of output files (arguments with type: file and direction: output) to the user running the Viash command after execution of the component. Default value: true.\nExample:\nchown: false"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#docker",
     "href": "reference/config/platforms/DockerPlatform.html#docker",
     "title": "Docker Platform",
     "section": "docker",
-    "text": "docker\nType: DockerRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which Docker commands should be run during setup.\n\nExample\nsetup:\n  - type: docker\n    build_args: [ GITHUB_PAT=hello_world ]\n    run: [ git clone ... ]\n    add: [ \"http://foo.bar .\" ]\n    copy: [ \"http://foo.bar .\" ]\n    resources: \n      - resource.txt /path/to/resource.txt"
+    "text": "docker\nType: DockerRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which Docker commands should be run during setup.\nExample:\nsetup:\n  - type: docker\n    build_args: [ GITHUB_PAT=hello_world ]\n    run: [ git clone ... ]\n    add: [ \"http://foo.bar .\" ]\n    copy: [ \"http://foo.bar .\" ]\n    resources: \n      - resource.txt /path/to/resource.txt"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#id",
     "href": "reference/config/platforms/DockerPlatform.html#id",
     "title": "Docker Platform",
     "section": "id",
-    "text": "id\nType: String\nAs with all platforms, you can give a platform a different name. By specifying id: foo, you can target this platform (only) by specifying -p foo in any of the Viash commands.\n\nExample\nid: foo"
+    "text": "id\nType: String\nAs with all platforms, you can give a platform a different name. By specifying id: foo, you can target this platform (only) by specifying -p foo in any of the Viash commands.\nExample:\nid: foo"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#image",
     "href": "reference/config/platforms/DockerPlatform.html#image",
     "title": "Docker Platform",
     "section": "image",
-    "text": "image\nType: String\nThe base container to start from. You can also add the tag here if you wish.\n\nExample\nimage: \"bash:4.0\""
+    "text": "image\nType: String\nThe base container to start from. You can also add the tag here if you wish.\nExample:\nimage: \"bash:4.0\""
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#namespace_separator",
     "href": "reference/config/platforms/DockerPlatform.html#namespace_separator",
     "title": "Docker Platform",
     "section": "namespace_separator",
-    "text": "namespace_separator\nType: String\nThe default namespace separator is “_“.\n\nExample\nnamespace_separator: \"+\""
+    "text": "namespace_separator\nType: String\nThe default namespace separator is “_“.\nExample:\nnamespace_separator: \"+\""
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#organization",
@@ -1264,28 +1376,42 @@
     "href": "reference/config/platforms/DockerPlatform.html#port",
     "title": "Docker Platform",
     "section": "port",
-    "text": "port\nType: String / List of String\nA list of enabled ports. This doesn’t change the Dockerfile but gets added as a command-line argument at runtime.\n\nExample\nport:\n  - 80\n  - 8080"
+    "text": "port\nType: String / List of String\nA list of enabled ports. This doesn’t change the Dockerfile but gets added as a command-line argument at runtime.\nExample:\nport:\n  - 80\n  - 8080"
+  },
+  {
+    "objectID": "reference/config/platforms/DockerPlatform.html#privileged",
+    "href": "reference/config/platforms/DockerPlatform.html#privileged",
+    "title": "Docker Platform",
+    "section": "privileged",
+    "text": "privileged\nType: Boolean\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.6.3. Add a privileged flag in run_args instead.\n\n\nAdds a privileged flag to the docker run."
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#python",
     "href": "reference/config/platforms/DockerPlatform.html#python",
     "title": "Docker Platform",
     "section": "python",
-    "text": "python\nType: PythonRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which Python packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ jkbr/httpie ]\n    gitlab: [ foo/bar ]\n    mercurial: [ http://... ]\n    svn: [ http://...]\n    bazaar: [ http://... ]\n    url: [ http://... ]"
+    "text": "python\nType: PythonRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which Python packages should be available in order to run the component.\nExample:\nsetup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ jkbr/httpie ]\n    gitlab: [ foo/bar ]\n    mercurial: [ http://... ]\n    svn: [ http://...]\n    bazaar: [ http://... ]\n    url: [ http://... ]"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#r",
     "href": "reference/config/platforms/DockerPlatform.html#r",
     "title": "Docker Platform",
     "section": "r",
-    "text": "r\nType: RRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which R packages should be available in order to run the component.\n\nExample\nsetup: \n  - type: r\n    cran: [ dynutils ]\n    bioc: [ AnnotationDbi ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ rcannood/SCORPIUS ]\n    gitlab: [ org/package ]\n    svn: [ https://path.to.svn/group/repo ]\n    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]\n    script: [ 'devtools::install(\".\")' ]"
+    "text": "r\nType: RRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which R packages should be available in order to run the component.\nExample:\nsetup: \n  - type: r\n    cran: [ dynutils ]\n    bioc: [ AnnotationDbi ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ rcannood/SCORPIUS ]\n    gitlab: [ org/package ]\n    svn: [ https://path.to.svn/group/repo ]\n    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]\n    script: [ 'devtools::install(\".\")' ]"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#registry",
     "href": "reference/config/platforms/DockerPlatform.html#registry",
     "title": "Docker Platform",
     "section": "registry",
-    "text": "registry\nType: String\nThe URL to the a custom Docker registry\n\nExample\nregistry: https://my-docker-registry.org"
+    "text": "registry\nType: String\nThe URL to the a custom Docker registry\nExample:\nregistry: https://my-docker-registry.org"
+  },
+  {
+    "objectID": "reference/config/platforms/DockerPlatform.html#resolve_volume",
+    "href": "reference/config/platforms/DockerPlatform.html#resolve_volume",
+    "title": "Docker Platform",
+    "section": "resolve_volume",
+    "text": "resolve_volume\nType: DockerResolveVolume\nEnables or disables automatic volume mapping. Enabled when set to Automatic or disabled when set to Manual. Default: Automatic"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#run_args",
@@ -1299,70 +1425,84 @@
     "href": "reference/config/platforms/DockerPlatform.html#setup",
     "title": "Docker Platform",
     "section": "setup",
-    "text": "setup\nType: List of Requirements\nA list of requirements for installing the following types of packages:\n\napt\napk\nyum\nR\nPython\nJavaScript\nDocker setup instructions\n\nThe order in which these dependencies are specified determines the order in which they will be installed."
+    "text": "setup\nType: List of Requirements\nA list of requirements for installing the following types of packages:\n\napt\napk\nDocker setup instructions\nJavaScript\nPython\nR\nRuby\nyum\n\nThe order in which these dependencies are specified determines the order in which they will be installed."
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#setup_strategy",
     "href": "reference/config/platforms/DockerPlatform.html#setup_strategy",
     "title": "Docker Platform",
     "section": "setup_strategy",
-    "text": "setup_strategy\nType: DockerSetupStrategy\nThe Docker setup strategy to use when building a container.\n\n\n\nStrategy\nDescription\n\n\n\n\nalwaysbuild / build / b\nAlways build the image from the dockerfile. This is the default setup strategy.\n\n\nalwayscachedbuild / cachedbuild / cb\nAlways build the image from the dockerfile, with caching enabled.\n\n\nifneedbebuild\nBuild the image if it does not exist locally.\n\n\nifneedbecachedbuild\nBuild the image with caching enabled if it does not exist locally, with caching enabled.\n\n\nalwayspull / pull / p\nTry to pull the container from Docker Hub or the specified docker registry.\n\n\nalwayspullelsebuild / pullelsebuild\nTry to pull the image from a registry and build it if it doesn’t exist.\n\n\nalwayspullelsecachedbuild / pullelsecachedbuild\nTry to pull the image from a registry and build it with caching if it doesn’t exist.\n\n\nifneedbepull\nIf the image does not exist locally, pull the image.\n\n\nifneedbepullelsebuild\nIf the image does not exist locally, pull the image. If the image does exist, build it.\n\n\nifneedbepullelsecachedbuild\nIf the image does not exist locally, pull the image. If the image does exist, build it with caching enabled.\n\n\npush\nPush the container to Docker Hub or the specified docker registry.\n\n\npushifnotpresent\nPush the container to Docker Hub or the specified docker registry if the tag does not exist yet.\n\n\ndonothing / meh\nDo not build or pull anything.\n\n\n\n\nExample\nsetup_strategy: alwaysbuild"
+    "text": "setup_strategy\nType: DockerSetupStrategy\nThe Docker setup strategy to use when building a container.\n\n\n\nStrategy\nDescription\n\n\n\n\nalwaysbuild / build / b\nAlways build the image from the dockerfile. This is the default setup strategy.\n\n\nalwayscachedbuild / cachedbuild / cb\nAlways build the image from the dockerfile, with caching enabled.\n\n\nifneedbebuild\nBuild the image if it does not exist locally.\n\n\nifneedbecachedbuild\nBuild the image with caching enabled if it does not exist locally, with caching enabled.\n\n\nalwayspull / pull / p\nTry to pull the container from Docker Hub or the specified docker registry.\n\n\nalwayspullelsebuild / pullelsebuild\nTry to pull the image from a registry and build it if it doesn’t exist.\n\n\nalwayspullelsecachedbuild / pullelsecachedbuild\nTry to pull the image from a registry and build it with caching if it doesn’t exist.\n\n\nifneedbepull\nIf the image does not exist locally, pull the image.\n\n\nifneedbepullelsebuild\nIf the image does not exist locally, pull the image. If the image does exist, build it.\n\n\nifneedbepullelsecachedbuild\nIf the image does not exist locally, pull the image. If the image does exist, build it with caching enabled.\n\n\npush\nPush the container to Docker Hub or the specified docker registry.\n\n\npushifnotpresent\nPush the container to Docker Hub or the specified docker registry if the tag does not exist yet.\n\n\ndonothing / meh\nDo not build or pull anything.\n\n\n\nExample:\nsetup_strategy: alwaysbuild"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#tag",
     "href": "reference/config/platforms/DockerPlatform.html#tag",
     "title": "Docker Platform",
     "section": "tag",
-    "text": "tag\nType: String\nSpecify a Docker image based on its tag.\n\nExample\ntag: 4.0"
+    "text": "tag\nType: String\nSpecify a Docker image based on its tag.\nExample:\ntag: 4.0"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#target_image",
     "href": "reference/config/platforms/DockerPlatform.html#target_image",
     "title": "Docker Platform",
     "section": "target_image",
-    "text": "target_image\nType: String\nIf anything is specified in the setup section, running the ---setup will result in an image with the name of <target_image>:<version>. If nothing is specified in the setup section, simply image will be used.\n\nExample\ntarget_image: myfoo"
+    "text": "target_image\nType: String\nIf anything is specified in the setup section, running the ---setup will result in an image with the name of <target_image>:<version>. If nothing is specified in the setup section, simply image will be used. Advanced usage only.\nExample:\ntarget_image: myfoo"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#target_image_source",
     "href": "reference/config/platforms/DockerPlatform.html#target_image_source",
     "title": "Docker Platform",
     "section": "target_image_source",
-    "text": "target_image_source\nType: String\nThe source of the target image. This is used for defining labels in the dockerfile.\n\nExample\ntarget_image_source: https://github.com/foo/bar"
+    "text": "target_image_source\nType: String\nThe source of the target image. This is used for defining labels in the dockerfile.\nExample:\ntarget_image_source: https://github.com/foo/bar"
+  },
+  {
+    "objectID": "reference/config/platforms/DockerPlatform.html#target_organization",
+    "href": "reference/config/platforms/DockerPlatform.html#target_organization",
+    "title": "Docker Platform",
+    "section": "target_organization",
+    "text": "target_organization\nType: String\nThe organization set in the resulting image. Advanced usage only.\nExample:\ntarget_organization: viash-io"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#target_registry",
     "href": "reference/config/platforms/DockerPlatform.html#target_registry",
     "title": "Docker Platform",
     "section": "target_registry",
-    "text": "target_registry\nType: String\nThe URL where the resulting image will be pushed to.\n\nExample\ntarget_registry: https://my-docker-registry.org"
+    "text": "target_registry\nType: String\nThe URL where the resulting image will be pushed to. Advanced usage only.\nExample:\ntarget_registry: https://my-docker-registry.org"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#target_tag",
     "href": "reference/config/platforms/DockerPlatform.html#target_tag",
     "title": "Docker Platform",
     "section": "target_tag",
-    "text": "target_tag\nType: String\nThe tag the resulting image gets.\n\nExample\ntarget_tag: 0.5.0"
+    "text": "target_tag\nType: String\nThe tag the resulting image gets. Advanced usage only.\nExample:\ntarget_tag: 0.5.0"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#test_setup",
     "href": "reference/config/platforms/DockerPlatform.html#test_setup",
     "title": "Docker Platform",
     "section": "test_setup",
-    "text": "test_setup\nType: List of Requirements"
+    "text": "test_setup\nType: List of Requirements\nAdditional requirements specific for running unit tests."
+  },
+  {
+    "objectID": "reference/config/platforms/DockerPlatform.html#type",
+    "href": "reference/config/platforms/DockerPlatform.html#type",
+    "title": "Docker Platform",
+    "section": "type",
+    "text": "type\nType: String\nSpecifies the type of the platform."
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#workdir",
     "href": "reference/config/platforms/DockerPlatform.html#workdir",
     "title": "Docker Platform",
     "section": "workdir",
-    "text": "workdir\nType: String\nThe working directory when starting the container. This doesn’t change the Dockerfile but gets added as a command-line argument at runtime.\n\nExample\nworkdir: /home/user"
+    "text": "workdir\nType: String\nThe working directory when starting the container. This doesn’t change the Dockerfile but gets added as a command-line argument at runtime.\nExample:\nworkdir: /home/user"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#yum",
     "href": "reference/config/platforms/DockerPlatform.html#yum",
     "title": "Docker Platform",
     "section": "yum",
-    "text": "yum\nType: YumRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which yum packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: yum\n    packages: [ sl ]"
+    "text": "yum\nType: YumRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which yum packages should be available in order to run the component.\nExample:\nsetup:\n  - type: yum\n    packages: [ sl ]"
   },
   {
     "objectID": "reference/config/platforms/NextflowVdsl3Platform.html",
@@ -1376,7 +1516,14 @@
     "href": "reference/config/platforms/NextflowVdsl3Platform.html#auto",
     "title": "Nextflow Vdsl3 Platform",
     "section": "auto",
-    "text": "auto\nType: NextflowAuto\nAutomated processing flags which can be toggled on or off:\n\n\n\n\n\n\n\n\nFlag\nDescription\nDefault\n\n\n\n\nsimplifyInput\nIf true, an input tuple only containing only a single File (e.g. [\"foo\", file(\"in.h5ad\")]) is automatically transformed to a map (i.e. [\"foo\", [ input: file(\"in.h5ad\") ] ]).\ntrue\n\n\nsimplifyOutput\nIf true, an output tuple containing a map with a File (e.g. [\"foo\", [ output: file(\"out.h5ad\") ] ]) is automatically transformed to a map (i.e. [\"foo\", file(\"out.h5ad\")]).\ntrue\n\n\ntranscript\nIf true, the module’s transcripts from work/ are automatically published to params.transcriptDir. If not defined, params.publishDir + \"/_transcripts\" will be used. Will throw an error if neither are defined.\nfalse\n\n\npublish\nIf true, the module’s outputs are automatically published to params.publishDir. Will throw an error if params.publishDir is not defined.\nfalse\n\n\n\n\nExample\nauto:\n    publish: true"
+    "text": "auto\nType: NextflowAuto\nAutomated processing flags which can be toggled on or off:\n\n\n\n\n\n\n\n\nFlag\nDescription\nDefault\n\n\n\n\nsimplifyInput\nIf true, an input tuple only containing only a single File (e.g. [\"foo\", file(\"in.h5ad\")]) is automatically transformed to a map (i.e. [\"foo\", [ input: file(\"in.h5ad\") ] ]).\ntrue\n\n\nsimplifyOutput\nIf true, an output tuple containing a map with a File (e.g. [\"foo\", [ output: file(\"out.h5ad\") ] ]) is automatically transformed to a map (i.e. [\"foo\", file(\"out.h5ad\")]).\ntrue\n\n\ntranscript\nIf true, the module’s transcripts from work/ are automatically published to params.transcriptDir. If not defined, params.publishDir + \"/_transcripts\" will be used. Will throw an error if neither are defined.\nfalse\n\n\npublish\nIf true, the module’s outputs are automatically published to params.publishDir. Will throw an error if params.publishDir is not defined.\nfalse\n\n\n\nExample:\nauto:\n    publish: true"
+  },
+  {
+    "objectID": "reference/config/platforms/NextflowVdsl3Platform.html#container",
+    "href": "reference/config/platforms/NextflowVdsl3Platform.html#container",
+    "title": "Nextflow Vdsl3 Platform",
+    "section": "container",
+    "text": "container\nType: String\nSpecifies the Docker platform id to be used to run Nextflow."
   },
   {
     "objectID": "reference/config/platforms/NextflowVdsl3Platform.html#debug",
@@ -1390,14 +1537,21 @@
     "href": "reference/config/platforms/NextflowVdsl3Platform.html#directives",
     "title": "Nextflow Vdsl3 Platform",
     "section": "directives",
-    "text": "directives\nType: NextflowDirectives\nDirectives are optional settings that affect the execution of the process. These mostly match up with the Nextflow counterparts that are linked below:\n\naccelerator\nafterScript\nbeforeScript\ncache\nconda\ncontainer\ncontainerOptions\ncpus\ndisk\necho\nerrorStrategy\nexecutor\nmachineType\nmaxErrors\nmaxForks\nmaxRetries\nmemory\nmodule\npenv\npublishDir\nqueue\nscratch\nstoreDir\nstageInMode\nstageOutMode\ntag\ntime\n\n\nExample\ndirectives:\n    container: rocker/r-ver:4.1\n    label: highcpu\n    cpus: 4\n    memory: 16 GB"
+    "text": "directives\nType: NextflowDirectives\nDirectives are optional settings that affect the execution of the process. These mostly match up with the Nextflow counterparts that are linked below:\n\naccelerator\nafterScript\nbeforeScript\ncache\nconda\ncontainer\ncontainerOptions\ncpus\ndisk\necho\nerrorStrategy\nexecutor\nmachineType\nmaxErrors\nmaxForks\nmaxRetries\nmemory\nmodule\npenv\npublishDir\nqueue\nscratch\nstoreDir\nstageInMode\nstageOutMode\ntag\ntime\n\nExample:\ndirectives:\n    container: rocker/r-ver:4.1\n    label: highcpu\n    cpus: 4\n    memory: 16 GB"
   },
   {
     "objectID": "reference/config/platforms/NextflowVdsl3Platform.html#id",
     "href": "reference/config/platforms/NextflowVdsl3Platform.html#id",
     "title": "Nextflow Vdsl3 Platform",
     "section": "id",
-    "text": "id\nType: String\nEvery platform can be given a specific id that can later be referred to explicitly when running or building the Viash component.\n\nExample\nid: foo"
+    "text": "id\nType: String\nEvery platform can be given a specific id that can later be referred to explicitly when running or building the Viash component.\nExample:\nid: foo"
+  },
+  {
+    "objectID": "reference/config/platforms/NextflowVdsl3Platform.html#type",
+    "href": "reference/config/platforms/NextflowVdsl3Platform.html#type",
+    "title": "Nextflow Vdsl3 Platform",
+    "section": "type",
+    "text": "type\nType: String\nSpecifies the type of the platform."
   },
   {
     "objectID": "reference/config/platforms/NextflowLegacyPlatform.html",
@@ -1405,6 +1559,13 @@
     "title": "Nextflow Legacy Platform",
     "section": "",
     "text": "Run a Viash component as a Nextflow module."
+  },
+  {
+    "objectID": "reference/config/platforms/NextflowLegacyPlatform.html#executor",
+    "href": "reference/config/platforms/NextflowLegacyPlatform.html#executor",
+    "title": "Nextflow Legacy Platform",
+    "section": "executor",
+    "text": "executor\nType: String\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.6.3. Undocumented & stale value"
   },
   {
     "objectID": "reference/config/platforms/NextflowLegacyPlatform.html#id",
@@ -1425,28 +1586,28 @@
     "href": "reference/config/platforms/NextflowLegacyPlatform.html#label",
     "title": "Nextflow Legacy Platform",
     "section": "label",
-    "text": "label\nType: String\nWhen running the module in a cluster context and depending on the cluster type, NextFlow allows for attaching labels to the process that can later be used as selectors for associating resources to this process.\nIn order to attach one label to a process/component, one can use the label: ... attribute, multiple labels can be added using labels: [ ..., ... ] and the two can even be mixed.\nIn the main nextflow.config, one can now use this label:\nprocess { … withLabel: bigmem { maxForks = 5 … } }\n\nExample\nlabel: highmem labels: [ highmem, highcpu ]"
+    "text": "label\nType: String\nWhen running the module in a cluster context and depending on the cluster type, NextFlow allows for attaching labels to the process that can later be used as selectors for associating resources to this process.\nIn order to attach one label to a process/component, one can use the label: ... attribute, multiple labels can be added using labels: [ ..., ... ] and the two can even be mixed.\nIn the main nextflow.config, one can now use this label:\nprocess { … withLabel: bigmem { maxForks = 5 … } }\nExample:\nlabel: highmem labels: [ highmem, highcpu ]"
   },
   {
     "objectID": "reference/config/platforms/NextflowLegacyPlatform.html#labels",
     "href": "reference/config/platforms/NextflowLegacyPlatform.html#labels",
     "title": "Nextflow Legacy Platform",
     "section": "labels",
-    "text": "labels\nType: String / List of String\nWhen running the module in a cluster context and depending on the cluster type, NextFlow allows for attaching labels to the process that can later be used as selectors for associating resources to this process.\nIn order to attach one label to a process/component, one can use the label: ... attribute, multiple labels can be added using labels: [ ..., ... ] and the two can even be mixed.\nIn the main nextflow.config, one can now use this label:\nprocess { … withLabel: bigmem { maxForks = 5 … } }\n\nExample\nlabel: highmem labels: [ highmem, highcpu ]"
+    "text": "labels\nType: String / List of String\nWhen running the module in a cluster context and depending on the cluster type, NextFlow allows for attaching labels to the process that can later be used as selectors for associating resources to this process.\nIn order to attach one label to a process/component, one can use the label: ... attribute, multiple labels can be added using labels: [ ..., ... ] and the two can even be mixed.\nIn the main nextflow.config, one can now use this label:\nprocess { … withLabel: bigmem { maxForks = 5 … } }\nExample:\nlabel: highmem labels: [ highmem, highcpu ]"
   },
   {
     "objectID": "reference/config/platforms/NextflowLegacyPlatform.html#namespace_separator",
     "href": "reference/config/platforms/NextflowLegacyPlatform.html#namespace_separator",
     "title": "Nextflow Legacy Platform",
     "section": "namespace_separator",
-    "text": "namespace_separator\nType: String\nThe default namespace separator is “_“.\n\nExample\nnamespace_separator: \"+\""
+    "text": "namespace_separator\nType: String\nThe default namespace separator is “_“.\nExample:\nnamespace_separator: \"+\""
   },
   {
     "objectID": "reference/config/platforms/NextflowLegacyPlatform.html#organization",
     "href": "reference/config/platforms/NextflowLegacyPlatform.html#organization",
     "title": "Nextflow Legacy Platform",
     "section": "organization",
-    "text": "organization\nType: String\nName of a container’s organization.\n\nExample\norganization: viash-io"
+    "text": "organization\nType: String\nName of a container’s organization.\nExample:\norganization: viash-io"
   },
   {
     "objectID": "reference/config/platforms/NextflowLegacyPlatform.html#path",
@@ -1474,28 +1635,42 @@
     "href": "reference/config/platforms/NextflowLegacyPlatform.html#registry",
     "title": "Nextflow Legacy Platform",
     "section": "registry",
-    "text": "registry\nType: String\nThe URL to the a custom Docker registry.\n\nExample\nregistry: https://my-docker-registry.org"
+    "text": "registry\nType: String\nThe URL to the a custom Docker registry.\nExample:\nregistry: https://my-docker-registry.org"
   },
   {
     "objectID": "reference/config/platforms/NextflowLegacyPlatform.html#separate_multiple_outputs",
     "href": "reference/config/platforms/NextflowLegacyPlatform.html#separate_multiple_outputs",
     "title": "Nextflow Legacy Platform",
     "section": "separate_multiple_outputs",
-    "text": "separate_multiple_outputs\nType: Boolean\nSeparates the outputs generated by a Nextflow component with multiple outputs as separate events on the channel. Default value: true.\n\nExample\nseparate_multiple_outputs: false"
+    "text": "separate_multiple_outputs\nType: Boolean\nSeparates the outputs generated by a Nextflow component with multiple outputs as separate events on the channel. Default value: true.\nExample:\nseparate_multiple_outputs: false"
   },
   {
     "objectID": "reference/config/platforms/NextflowLegacyPlatform.html#stageinmode",
     "href": "reference/config/platforms/NextflowLegacyPlatform.html#stageinmode",
     "title": "Nextflow Legacy Platform",
     "section": "stageInMode",
-    "text": "stageInMode\nType: String\nBy default NextFlow will create a symbolic link to the inputs for a process/module and run the tool at hand using those symbolic links. Some applications do not cope well with this strategy, in that case the files should effectively be copied rather than linked to. This can be achieved by using stageInMode: copy. This attribute is optional, the default is symlink.\n\nExample\nstageInMode: copy"
+    "text": "stageInMode\nType: String\nBy default NextFlow will create a symbolic link to the inputs for a process/module and run the tool at hand using those symbolic links. Some applications do not cope well with this strategy, in that case the files should effectively be copied rather than linked to. This can be achieved by using stageInMode: copy. This attribute is optional, the default is symlink.\nExample:\nstageInMode: copy"
   },
   {
     "objectID": "reference/config/platforms/NextflowLegacyPlatform.html#tag",
     "href": "reference/config/platforms/NextflowLegacyPlatform.html#tag",
     "title": "Nextflow Legacy Platform",
     "section": "tag",
-    "text": "tag\nType: String\nSpecify a Docker image based on its tag.\n\nExample\ntag: 4.0"
+    "text": "tag\nType: String\nSpecify a Docker image based on its tag.\nExample:\ntag: 4.0"
+  },
+  {
+    "objectID": "reference/config/platforms/NextflowLegacyPlatform.html#type",
+    "href": "reference/config/platforms/NextflowLegacyPlatform.html#type",
+    "title": "Nextflow Legacy Platform",
+    "section": "type",
+    "text": "type\nType: String\nSpecifies the type of the platform."
+  },
+  {
+    "objectID": "reference/config/platforms/NextflowLegacyPlatform.html#version",
+    "href": "reference/config/platforms/NextflowLegacyPlatform.html#version",
+    "title": "Nextflow Legacy Platform",
+    "section": "version",
+    "text": "version\nType: String\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.4.0. nextflow platform: attribute ‘version’ is deprecated and should be left empty."
   },
   {
     "objectID": "reference/config/platforms/NativePlatform.html",
@@ -1509,7 +1684,14 @@
     "href": "reference/config/platforms/NativePlatform.html#id",
     "title": "Native Platform",
     "section": "id",
-    "text": "id\nType: String\nAs with all platforms, you can give a platform a different name. By specifying id: foo, you can target this platform (only) by specifying -p foo in any of the Viash commands.\n\nExample\nid: foo"
+    "text": "id\nType: String\nAs with all platforms, you can give a platform a different name. By specifying id: foo, you can target this platform (only) by specifying -p foo in any of the Viash commands.\nExample:\nid: foo"
+  },
+  {
+    "objectID": "reference/config/platforms/NativePlatform.html#type",
+    "href": "reference/config/platforms/NativePlatform.html#type",
+    "title": "Native Platform",
+    "section": "type",
+    "text": "type\nType: String\nSpecifies the type of the platform."
   },
   {
     "objectID": "reference/config/functionality.html",
@@ -1530,28 +1712,28 @@
     "href": "reference/config/functionality.html#argument_groups",
     "title": "Functionality",
     "section": "argument_groups",
-    "text": "argument_groups\nType: List of ArgumentGroup\nA grouping of the arguments, used to display the help message.\n\nname: foo, the name of the argument group.\ndescription: Description of foo, a description of the argument group. Multiline descriptions are supported.\narguments: [arg1, arg2, ...], list of the arguments names.\n\n\nExample\nargument_groups:\n  - name: \"Input\"\n    arguments:\n      - name: \"--id\"\n        type: string\n        required: true\n      - name: \"--input\"\n        type: file\n        required: true\n  - name: \"Output\"\n    arguments:\n      - name: \"--output\"\n        type: file\n        direction: output\n        required: true\n      - name: \"--output_optional\"\n        type: file\n        direction: output\nThis results in the following output when calling the component with the --help argument:\ncomponent_name\n\n  Input:\n      --id\n          type: string\n\n      --input\n          type: file\n\n  Output:\n      --output\n          type: file\n\n      --optional_output\n          type: file"
+    "text": "argument_groups\nType: List of ArgumentGroup\nA grouping of the arguments, used to display the help message.\n\nname: foo, the name of the argument group.\ndescription: Description of foo, a description of the argument group. Multiline descriptions are supported.\narguments: [arg1, arg2, ...], list of the arguments names.\n\nExample:\nargument_groups:\n  - name: \"Input\"\n    arguments:\n      - name: \"--id\"\n        type: string\n        required: true\n      - name: \"--input\"\n        type: file\n        required: true\n  - name: \"Output\"\n    arguments:\n      - name: \"--output\"\n        type: file\n        direction: output\n        required: true\n      - name: \"--output_optional\"\n        type: file\n        direction: output\nThis results in the following output when calling the component with the --help argument:\ncomponent_name\n\n  Input:\n      --id\n          type: string\n\n      --input\n          type: file\n\n  Output:\n      --output\n          type: file\n\n      --optional_output\n          type: file"
   },
   {
     "objectID": "reference/config/functionality.html#arguments",
     "href": "reference/config/functionality.html#arguments",
     "title": "Functionality",
     "section": "arguments",
-    "text": "arguments\nType: List of Argument\nA list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:\n\nstring\nfile\ninteger\ndouble\nboolean\nboolean_true\nboolean_false\n\n\nExample\narguments:\n   - name: --foo\n    type: file\n    alternatives: [-f]\n    description: Description of foo\n    default: \"/foo/bar\"\n    must_exist: true\n    direction: output\n    required: false\n    multiple: true\n    multiple_sep: \",\"\n   - name: --bar\n    type: string"
+    "text": "arguments\nType: List of Argument\nA list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:\n\nstring\nfile\ninteger\ndouble\nboolean\nboolean_true\nboolean_false\n\nExample:\narguments:\n   - name: --foo\n    type: file\n    alternatives: [-f]\n    description: Description of foo\n    default: \"/foo/bar\"\n    must_exist: true\n    direction: output\n    required: false\n    multiple: true\n    multiple_sep: \",\"\n   - name: --bar\n    type: string"
   },
   {
     "objectID": "reference/config/functionality.html#authors",
     "href": "reference/config/functionality.html#authors",
     "title": "Functionality",
     "section": "authors",
-    "text": "authors\nType: List of Author\nA list of authors. An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.\nSuggested values for roles are:\n\n\n\n\n\n\n\n\nRole\nAbbrev.\nDescription\n\n\n\n\nmaintainer\nmnt\nfor the maintainer of the code. Ideally, exactly one maintainer is specified.\n\n\nauthor\naut\nfor persons who have made substantial contributions to the software.\n\n\ncontributor\nctb\nfor persons who have made smaller contributions (such as code patches).\n\n\ndatacontributor\ndtc\nfor persons or organisations that contributed data sets for the software\n\n\ncopyrightholder\ncph\nfor all copyright holders. This is a legal concept so should use the legal name of an institution or corporate body.\n\n\nfunder\nfnd\nfor persons or organizations that furnished financial support for the development of the software\n\n\n\nThe full list of roles is extremely comprehensive.\n\nExample\nauthors:\n  - name: Bob Cando\n    roles: [maintainer, author]\n    email: bob@can.do\n    props: {github: bobcando, orcid: 0000-0001-0002-0003}\n  - name: Tim Farbe\n    roles: [author]\n    email: tim@far.be"
+    "text": "authors\nType: List of Author\nA list of authors. An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.\nSuggested values for roles are:\n\n\n\n\n\n\n\n\nRole\nAbbrev.\nDescription\n\n\n\n\nmaintainer\nmnt\nfor the maintainer of the code. Ideally, exactly one maintainer is specified.\n\n\nauthor\naut\nfor persons who have made substantial contributions to the software.\n\n\ncontributor\nctb\nfor persons who have made smaller contributions (such as code patches).\n\n\ndatacontributor\ndtc\nfor persons or organisations that contributed data sets for the software\n\n\ncopyrightholder\ncph\nfor all copyright holders. This is a legal concept so should use the legal name of an institution or corporate body.\n\n\nfunder\nfnd\nfor persons or organizations that furnished financial support for the development of the software\n\n\n\nThe full list of roles is extremely comprehensive.\nExample:\nauthors:\n  - name: Bob Cando\n    roles: [maintainer, author]\n    email: bob@can.do\n    props: {github: bobcando, orcid: 0000-0001-0002-0003}\n  - name: Tim Farbe\n    roles: [author]\n    email: tim@far.be"
   },
   {
     "objectID": "reference/config/functionality.html#description",
     "href": "reference/config/functionality.html#description",
     "title": "Functionality",
     "section": "description",
-    "text": "description\nType: String\nA description of the component. This will be displayed with --help.\n\nExample\ndescription: |\n  This component performs function Y and Z.\n  It is possible to make this a multiline string."
+    "text": "description\nType: String\nA description of the component. This will be displayed with --help.\nExample:\ndescription: |\n  This component performs function Y and Z.\n  It is possible to make this a multiline string."
   },
   {
     "objectID": "reference/config/functionality.html#enabled",
@@ -1565,49 +1747,49 @@
     "href": "reference/config/functionality.html#info",
     "title": "Functionality",
     "section": "info",
-    "text": "info\nType: Map of String,String\nA map for storing custom annotations.\n\nExample\ninfo: {twitter: wizzkid, appId: com.example.myApplication}"
+    "text": "info\nType: Json\nStructured information. Can be any shape: a string, vector, map or even nested map.\nExample:\ninfo:\n  twitter: wizzkid\n  classes: [ one, two, three ]"
   },
   {
     "objectID": "reference/config/functionality.html#inputs",
     "href": "reference/config/functionality.html#inputs",
     "title": "Functionality",
     "section": "inputs",
-    "text": "inputs\nType: List of Argument\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.6.0. Use arguments instead.\n\n\nA list of input arguments in addition to the arguments list. Any arguments specified here will have their type set to file and the direction set to input by default.\n\nExample\ninputs:\n  - name: input_file\n  - name: another_input\nThis results in the following output when calling the component with the --help argument:\ncomponent_with_inputs\n  \n  Inputs:\n      input_file\n          type: file\n  \n      another_input\n          type: file"
+    "text": "inputs\nType: List of Argument\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.6.0. Use arguments instead.\n\n\nA list of input arguments in addition to the arguments list. Any arguments specified here will have their type set to file and the direction set to input by default.\nExample:\ninputs:\n  - name: input_file\n  - name: another_input\nThis results in the following output when calling the component with the --help argument:\ncomponent_with_inputs\n  \n  Inputs:\n      input_file\n          type: file\n  \n      another_input\n          type: file"
   },
   {
     "objectID": "reference/config/functionality.html#name",
     "href": "reference/config/functionality.html#name",
     "title": "Functionality",
     "section": "name",
-    "text": "name\nType: String\nName of the component and the filename of the executable when built with viash build.\n\nExample\nname: this_is_my_component"
+    "text": "name\nType: String\nName of the component and the filename of the executable when built with viash build.\nExample:\nname: this_is_my_component"
   },
   {
     "objectID": "reference/config/functionality.html#namespace",
     "href": "reference/config/functionality.html#namespace",
     "title": "Functionality",
     "section": "namespace",
-    "text": "namespace\nType: String\nNamespace this component is a part of. See the Namespaces guide for more information on namespaces.\n\nExample\nnamespace: fancy_components"
+    "text": "namespace\nType: String\nNamespace this component is a part of. See the Namespaces guide for more information on namespaces.\nExample:\nnamespace: fancy_components"
   },
   {
     "objectID": "reference/config/functionality.html#outputs",
     "href": "reference/config/functionality.html#outputs",
     "title": "Functionality",
     "section": "outputs",
-    "text": "outputs\nType: List of Argument\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.6.0. Use arguments instead.\n\n\nA list of output arguments in addition to the arguments list. Any arguments specified here will have their type set to file and thr direction set to output by default.\n\nExample\noutputs:\n  - name: output_file\n  - name: another_output\nThis results in the following output when calling the component with the --help argument:\ncomponent_with_outputs\n  \n  Outputs:\n      output_file\n          type: file, output\n  \n      another_output\n          type: file, output"
+    "text": "outputs\nType: List of Argument\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.6.0. Use arguments instead.\n\n\nA list of output arguments in addition to the arguments list. Any arguments specified here will have their type set to file and thr direction set to output by default.\nExample:\noutputs:\n  - name: output_file\n  - name: another_output\nThis results in the following output when calling the component with the --help argument:\ncomponent_with_outputs\n  \n  Outputs:\n      output_file\n          type: file, output\n  \n      another_output\n          type: file, output"
   },
   {
     "objectID": "reference/config/functionality.html#requirements",
     "href": "reference/config/functionality.html#requirements",
     "title": "Functionality",
     "section": "requirements",
-    "text": "requirements\nType: ComputationalRequirements\nComputational requirements related to running the component. cpus specifies the maximum number of (logical) cpus a component is allowed to use., whereas memory specifies the maximum amount of memory a component is allowed to allicate. Memory units must be in B, KB, MB, GB, TB or PB.\n\nExample\nrequirements:\n  cpus: 5\n  memory: 10GB"
+    "text": "requirements\nType: ComputationalRequirements\nComputational requirements related to running the component. cpus specifies the maximum number of (logical) cpus a component is allowed to use., whereas memory specifies the maximum amount of memory a component is allowed to allicate. Memory units must be in B, KB, MB, GB, TB or PB.\nExample:\nrequirements:\n  cpus: 5\n  memory: 10GB"
   },
   {
     "objectID": "reference/config/functionality.html#resources",
     "href": "reference/config/functionality.html#resources",
     "title": "Functionality",
     "section": "resources",
-    "text": "resources\nType: List of Resource\nResources are files that support the component. The first resource should be a script that will be executed when the functionality is run. Additional resources will be copied to the same directory.\nCommon properties:\n\ntype: file / r_script / python_script / bash_script / javascript_script / scala_script / csharp_script, the type of resource. The first resource cannot be of type file. When the type is not specified, the default type is simply file.\nname: filename, the resulting name of the resource.\npath: path/to/file, the path of the input file. Can be a relative or an absolute path, or a URI.\ntext: …multiline text…, the raw content of the input file. Exactly one of path or text must be defined, the other undefined.\nis_executable: true / false, whether the resulting file is made executable.\n\n\nExample\nresources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt"
+    "text": "resources\nType: List of Resource\nResources are files that support the component. The first resource should be a script that will be executed when the functionality is run. Additional resources will be copied to the same directory.\nCommon properties:\n\ntype: file / r_script / python_script / bash_script / javascript_script / scala_script / csharp_script, the type of resource. The first resource cannot be of type file. When the type is not specified, the default type is simply file.\nname: filename, the resulting name of the resource.\npath: path/to/file, the path of the input file. Can be a relative or an absolute path, or a URI.\ntext: …multiline text…, the raw content of the input file. Exactly one of path or text must be defined, the other undefined.\nis_executable: true / false, whether the resulting file is made executable.\n\nExample:\nresources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt"
   },
   {
     "objectID": "reference/config/functionality.html#status",
@@ -1621,7 +1803,7 @@
     "href": "reference/config/functionality.html#test_resources",
     "title": "Functionality",
     "section": "test_resources",
-    "text": "test_resources\nType: List of Resource\nOne or more scripts to be used to test the component behaviour when viash test is invoked. Additional files of type file will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing. See Unit Testing for more info.\n\nExample\ntest_resources:\n  - type: bash_script\n    path: tests/test1.sh\n  - type: r_script\n    path: tests/test2.R\n  - path: resource1.txt"
+    "text": "test_resources\nType: List of Resource\nOne or more scripts to be used to test the component behaviour when viash test is invoked. Additional files of type file will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing. See Unit Testing for more info.\nExample:\ntest_resources:\n  - type: bash_script\n    path: tests/test1.sh\n  - type: r_script\n    path: tests/test2.R\n  - path: resource1.txt"
   },
   {
     "objectID": "reference/config/functionality.html#tests",
@@ -1635,14 +1817,14 @@
     "href": "reference/config/functionality.html#usage",
     "title": "Functionality",
     "section": "usage",
-    "text": "usage\nType: String\nA description on how to use the component. This will be displayed with --help under the ‘Usage:’ section.\n\nExample\nusage: Place the executable in a directory containing TSV files and run it"
+    "text": "usage\nType: String\nA description on how to use the component. This will be displayed with --help under the ‘Usage:’ section.\nExample:\nusage: Place the executable in a directory containing TSV files and run it"
   },
   {
     "objectID": "reference/config/functionality.html#version",
     "href": "reference/config/functionality.html#version",
     "title": "Functionality",
     "section": "version",
-    "text": "version\nType: String\nVersion of the component. This field will be used to version the executable and the Docker container.\n\nExample\nversion: 0.8"
+    "text": "version\nType: String\nVersion of the component. This field will be used to version the executable and the Docker container.\nExample:\nversion: 0.8"
   },
   {
     "objectID": "reference/viash/build.html",
@@ -1677,7 +1859,7 @@
     "href": "reference/viash/ns.html#viash-ns-exec",
     "title": "viash ns",
     "section": "viash ns exec",
-    "text": "viash ns exec\nExecute a command for all found Viash components. The syntax of this command is inspired by find . -exec echo {} \\;.\nThe following fields are automatically replaced:\n\n{} | {path}: path to the config file\n{abs-path}: absolute path to the config file\n{dir}: path to the parent directory of the config file\n{abs-dir}: absolute path to the directory of the config file\n{main-script}: path to the main script (if any)\n{abs-main-script}: absolute path to the main script (if any)\n{functionality-name}: name of the component\n\nA command suffixed by \\; (or nothing) will execute one command for each of the Viash components, whereas a command suffixed by + will execute one command for all Viash components.\nUsage:\nviash ns exec 'echo {path} \\\\;'\nviash ns exec 'chmod +x {main-script} +'\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--cmd\nThe command to execute for each viash config file in the namespace. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--dry_run, -d\nPerform a dry run.\nBoolean\n\n\n--parallel, -l\nWhether or not to run the process in parallel.\nBoolean\n\n\n--platform, -p\nActs as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--query, -q\nFilter which components get selected by component and namespace name. Can be a regex. Example: “^mynamespace/component1$”.\nString\n\n\n--query_name\nFilter which components get selected by component name. Can be a regex. Example: “^component1”.\nString\n\n\n--query_namespace, -n\nFilter which namespaces get selected by namespace name. Can be a regex. Example: “^mynamespace$”.\nString\n\n\n--src, -s\nA source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.\nString\n\n\n--help, -h\nShow help message"
+    "text": "viash ns exec\nExecute a command for all found Viash components. The syntax of this command is inspired by find . -exec echo {} \\;.\nThe following fields are automatically replaced:\n\n{} | {path}: path to the config file\n{abs-path}: absolute path to the config file\n{dir}: path to the parent directory of the config file\n{abs-dir}: absolute path to the directory of the config file\n{main-script}: path to the main script (if any)\n{abs-main-script}: absolute path to the main script (if any)\n{functionality-name}: name of the component\n{namespace}: namespace of the component\n{platform}: selected platform id (only when –apply_platform is used)\n\nA command suffixed by \\; (or nothing) will execute one command for each of the Viash components, whereas a command suffixed by + will execute one command for all Viash components.\nUsage:\nviash ns exec 'echo {path} \\\\;'\nviash ns exec 'chmod +x {main-script} +'\n\n\n\n\n\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--apply_platform, -a\nFills in the {platform} field by applying each platform to the config separately.\n\n\n\n\nNote that this results in the provided command being applied once for every platform that matches the –platform regex. | Boolean | | --cmd | The command to execute for each viash config file in the namespace. This is a required argument. | String | | --config_mod, -c | Modify a viash config at runtime using dynamic config modding. | List[String] | | --dry_run, -d | Perform a dry run. | Boolean | | --parallel, -l | Whether or not to run the process in parallel. | Boolean | | --platform, -p | Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified. | String | | --query, -q | Filter which components get selected by component and namespace name. Can be a regex. Example: “^mynamespace/component1$”. | String | | --query_name | Filter which components get selected by component name. Can be a regex. Example: “^component1”. | String | | --query_namespace, -n | Filter which namespaces get selected by namespace name. Can be a regex. Example: “^mynamespace$”. | String | | --src, -s | A source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/. | String | | --help, -h | Show help message | |"
   },
   {
     "objectID": "reference/viash/test.html",
