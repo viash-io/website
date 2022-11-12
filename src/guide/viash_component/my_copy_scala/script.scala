@@ -4,4 +4,7 @@ import java.nio.file.Paths
 
 println(s"Copying '${par.input}' to '${par.output}'.")
 
-Files.copy(Paths.get(par.output), Paths.get(par.output), REPLACE_EXISTING)
+val fileIn = Paths.get(par.input)
+val fileOut = Paths.get(par.output)
+
+Files.copy(fileIn, fileOut, REPLACE_EXISTING)
