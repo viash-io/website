@@ -1,6 +1,5 @@
 functionality:
-  name: my_copy_csharp
-  namespace: guide/viash_component
+  name: my_copy_js
   description: A minimal example component.
   arguments:
     - type: file
@@ -13,17 +12,14 @@ functionality:
       example: output.txt
       required: true
   resources:
-    - type: csharp_script
-      path: script.csx
+    - type: javascript_script
+      path: script.js
   # test disabled for now
   # test_resources:
   #   - type: bash_script
   #     path: test.sh
 platforms:
   - type: docker
-    image: "dataintuitive/dotnet-script:1.2.1"
-    setup:
-      - type: apk
-        packages: [ bash ]
+    image: "node:15-buster"
   - type: native
   - type: nextflow

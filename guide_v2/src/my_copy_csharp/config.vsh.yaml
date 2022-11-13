@@ -1,6 +1,5 @@
 functionality:
-  name: my_copy_bash
-  namespace: guide/viash_component
+  name: my_copy_csharp
   description: A minimal example component.
   arguments:
     - type: file
@@ -13,14 +12,17 @@ functionality:
       example: output.txt
       required: true
   resources:
-    - type: bash_script
-      path: script.sh
+    - type: csharp_script
+      path: script.csx
   # test disabled for now
   # test_resources:
   #   - type: bash_script
   #     path: test.sh
 platforms:
   - type: docker
-    image: "bash:4.0"
+    image: "dataintuitive/dotnet-script:1.2.1"
+    setup:
+      - type: apk
+        packages: [ bash ]
   - type: native
   - type: nextflow

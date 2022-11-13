@@ -3,8 +3,87 @@ title: Create a new component
 search: true
 engine: knitr
 ---
- 
-{{< include ../../includes/_language_chooser.qmd >}}
+```{=html}
+<script type="text/javascript">
+let langDict = {
+  'bash': "Bash",
+  'csharp': "C#",
+  'js': "JavaScript",
+  'python': "Python",
+  'scala': "Scala",
+  'r': "R",
+};
+
+let invertedLangDict = invertDictionary(langDict);
+
+document.addEventListener("DOMContentLoaded", function() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    let lang = 'bash';
+
+    if (urlParams.has('lang')){
+        lang = urlParams.get('lang');
+    }
+
+    changeTabSelections(lang);
+
+    var tabs = document.querySelectorAll('[role="tab"]');
+    
+    for(var i = 0; i < tabs.length; i++) {
+        tab = tabs[i];
+        if (tab.textContent in invertedLangDict) {
+            tab.addEventListener('click', onTabClicked);
+        }
+    }
+
+});
+
+function changeTabSelections(language) {
+    var tabs = document.querySelectorAll('[role="tab"]');
+    var tab_panels = document.querySelectorAll('[role="tabpanel"]');
+
+    // Disable all tab panels
+    for(var i = 0; i < tab_panels.length; i++) {
+        panel = tab_panels[i];
+        panel.classList.remove('active')
+    }
+
+    // Iterate over all tabs
+    for(var i = 0; i < tabs.length; i++) {
+        tab = tabs[i];
+
+        // Disable all tabs
+        tab.classList.remove('active');
+
+        // If the tab is the chosen language
+        if (tab.textContent == langDict[language]) {
+            // Mark it active
+            tab.classList.add('active');
+            // Find the linked tab panel and make it active
+            var linked_panel = tab.getAttribute('aria-controls')
+            var panel = document.getElementById(linked_panel);
+            panel.classList.add('active');
+        }
+    }
+
+}
+
+function onTabClicked(event) {
+    changeTabSelections(invertedLangDict[event.srcElement.textContent]);
+}
+
+function invertDictionary(dict){
+    var ret = {};
+    for(var key in dict){
+        ret[dict[key]] = key;
+    }
+    return ret;
+}
+
+</script>
+```
+
 
 ```{r setup, include=FALSE}
 repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
@@ -12,6 +91,7 @@ source(paste0(repo_path, "/includes/_r_helper.R"))
  
 source("_helper.R")
 ```
+
 
 A Viash component can be translated into one or more platforms: Native, Docker, Nextflow. Each of these platforms result in a different artifact:
 
@@ -27,6 +107,7 @@ When creating a new Viash component, you can write a new script or use a pre-exi
 Below is a script that simply copies an input file to an output destination. 
 
 ::: {.panel-tabset}
+
 
 ```{r create-script, echo=FALSE, output="asis"}
 pwalk(langs, function(id, label, script) {
@@ -62,6 +143,7 @@ Create a new file named `{script}` and copy the following content inside of it. 
 })
 ```
 
+
 :::
 
 :::{.callout-note}
@@ -74,6 +156,7 @@ The `par` variable(s) appear to be hard coded, but they're not! When running thi
 A [Viash config file](/reference/config/overview.html) is a YAML file that describes the functionality of a component and the platform(s) it targets.
 
 ::: {.panel-tabset}
+
 
 ```{r create-config, echo=FALSE, output="asis"}
 pwalk(langs, function(id, label, script) {
@@ -97,6 +180,7 @@ Create a file name `config.vsh.yaml` and add the contents below based on your ch
 })
 ```
 
+
 :::
 
 Here's a breakdown of the different sections:
@@ -113,6 +197,7 @@ Next, you can use the [`viash run`](/reference/viash/run.qmd) command to test wh
 
 
 ::: {.panel-tabset}
+
 
 ```{r viash-run, echo=FALSE, output="asis"}
 pwalk(langs, function(id, label, script) {
@@ -138,6 +223,7 @@ As expected, this component has an `--input` and `--output` parameter. You can e
 })
 ```
 
+
 :::
 
 
@@ -145,6 +231,7 @@ As expected, this component has an `--input` and `--output` parameter. You can e
 :::{.callout-note}
 The double dash (`--`) between the viash command and the arguments is used to signify the end of the arguments passed to Viash and the start of those passed to the script. If you forgot to add these, you'll get an error similar to this:   
   
+
 ```{r echo=FALSE, output="asis"}
 run_cmd(
   'viash', 
@@ -154,12 +241,14 @@ run_cmd(
   stderr_to_stdout = TRUE
 )
 ```
+
 :::
 
 
 ## What's next?
 
 To learn how to use Viash to build an executable and run it, see the [Building an executable](build-executable.qmd).
+
 
 
 

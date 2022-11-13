@@ -9,6 +9,7 @@ engine: knitr
 ```{r echo=FALSE, output="asis"}
 repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
 source(paste0(repo_path, "/includes/_r_helper.R"))
+source("_helper.R")
 ```
 
 The following sections discuss how a Viash component can be turned into an executable and how they work.
@@ -41,11 +42,11 @@ pwalk(langs, function(id, label, script) {
 
   # edit: just copy them
   file.copy(
-    paste0(repo_path, "/src/guide/viash_component/my_copy_", id, "/config.vsh.yaml"),
+    paste0("../src/my_copy_", id, "/config.vsh.yaml"),
     paste0("tmp/", id, "/config.vsh.yaml")
   )
   file.copy(
-    paste0(repo_path, "/src/guide/viash_component/my_copy_", id, "/", script),
+    paste0("../src/my_copy_", id, "/", script),
     paste0("tmp/", id, "/", script)
   )
 
