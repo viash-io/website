@@ -124,15 +124,11 @@ viash run config.vsh.yaml -- --help
 As expected, this component has an `--input` and `--output` parameter. You can execute the component by providing values for these parameters.
 
 {quo}{{bash run-io}}
-viash run config.vsh.yaml -- \\
-  --input config.vsh.yaml \\
-  --output foo.txt
+viash run config.vsh.yaml -- --input config.vsh.yaml --output foo.txt
 {quo}
 
 ")
-  md <- run_quarto(qmd, dir = dirname(config_path))
-
-  cat(md)
+  cat(run_quarto(qmd, dir = paste0(temp_dir, "/", id)))
 })
 ```
 
@@ -143,14 +139,10 @@ viash run config.vsh.yaml -- \\
 :::{.callout-note}
 The double dash (`--`) between the viash command and the arguments is used to signify the end of the arguments passed to Viash and the start of those passed to the script. If you forgot to add these, you'll get an error similar to this:   
   
-```{r missing-dashes, echo=FALSE, output="asis"}
-run_cmd(
-  'viash', 
-  c('run', 'config.vsh.yaml', '--input', 'config.vsh.yaml', '--output', 'foo.txt'), 
-  wd = paste0('tmp/', 'bash'),
-  error_on_status = FALSE,
-  stderr_to_stdout = TRUE
-)
+```{bash error=TRUE}
+viash run config.vsh.yaml \
+  --input foo.txt \
+  --output bar.txt
 ```
 :::
 
@@ -158,9 +150,3 @@ run_cmd(
 ## What's next?
 
 To learn how to use Viash to build an executable and run it, see the [Building an executable](build-executable.qmd).
-
-
-
-```{r include=FALSE}
-# unlink("tmp", recursive = TRUE)
-```

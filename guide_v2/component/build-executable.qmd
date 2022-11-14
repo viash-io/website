@@ -6,10 +6,14 @@ engine: knitr
 
 {{< include ../../includes/_language_chooser.qmd >}}
 
-```{r echo=FALSE, output="asis"}
+```{r setup, include=FALSE}
 repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
 source(paste0(repo_path, "/includes/_r_helper.R"))
-source("_helper.R")
+source(paste0(repo_path, "/guide_v2/component/_helper.R"))
+
+temp_dir <- tempfile("create_new_component")
+dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
+on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
 ```
 
 The following sections discuss how a Viash component can be turned into an executable and how they work.
@@ -21,37 +25,29 @@ We continue with the component created in the [previous section](create-componen
 ::: {.panel-tabset}
 
 ```{r echo=FALSE, output="asis"}
-root_url <- "https://raw.githubusercontent.com/viash-io/website/issue_9/src/guide/viash_component"
+# TODO: fix download links
+root_url <- "https://raw.githubusercontent.com/viash-io/website/issue_9/download/examples"
 
 # download one file to check whether the url is working
-download.file(
-  paste0(root_url, "/my_copy_bash/config.vsh.yaml"),
-  "tmp/check_url.txt"
-)
+# download.file(
+#   paste0(root_url, "/my_copy_bash/config.vsh.yaml"),
+#   "tmp/check_url.txt"
+# )
 
-pwalk(langs, function(id, label, script) {
+pwalk(langs, function(id, label, example_config, example_script, ...) {
   cat("## ", label, "\n")
 
   # create dir
-  dir.create(paste0("tmp/", id), recursive = TRUE, showWarnings = FALSE)
+  dir.create(paste0(temp_dir, "/", id), recursive = TRUE, showWarnings = FALSE)
 
-  # download files
-  # root_url <- paste0(root_url, "/my_copy_", id)
-  # download.file(paste0(root_url, "/config.vsh.yaml"), paste0("tmp/", id, "/config.vsh.yaml"))
-  # download.file(paste0(root_url, "/", script), paste0("tmp/", id, "/", script))
-
-  # edit: just copy them
-  file.copy(
-    paste0("../src/my_copy_", id, "/config.vsh.yaml"),
-    paste0("tmp/", id, "/config.vsh.yaml")
-  )
-  file.copy(
-    paste0("../src/my_copy_", id, "/", script),
-    paste0("tmp/", id, "/", script)
-  )
+  # copy source files
+  config_path <- paste0(temp_dir, "/", id, "/", basename(example_config))
+  script_path <- paste0(temp_dir, "/", id, "/", basename(example_script))
+  file.copy(example_config, config_path)
+  file.copy(example_script, script_path)
 
   # generate markdown
-  md <- glue::glue("
+  qmd <- glue::glue("
 
 {qua}{{.callout-tip}}
 You can download the source files by running the following commands in a Bash terminal:
@@ -59,21 +55,25 @@ You can download the source files by running the following commands in a Bash te
 {quo}bash
 root_url=\"{root_url}/my_copy_{id}\"
 
-wget \"$root_url/config.vsh.yaml\" -q -O \"config.vsh.yaml\"
-wget \"$root_url/{script}\" -q -O \"{script}\"
+wget \"$root_url/{basename(example_config)}\" -q -O \"{basename(example_config)}\"
+wget \"$root_url/{basename(example_script)}\" -q -O \"{basename(example_script)}\"
 {quo}
 {qua}
 
 Use the [viash build](/reference/viash/build.qmd) command to generate an executable:
 
-{run_cmd('viash', c('build', 'config.vsh.yaml', '--output', 'target'), wd = paste0('tmp/', id))}
+{quo}{{bash build-example}}
+viash build config.vsh.yaml --output target
+{quo}
 
 This will generate an executable in the `target/` directory:
 
-{run_cmd('tree', wd = paste0('tmp/', id))}
+{quo}{{bash view-tree}}
+tree
+{quo}
 
 ")
-  cat(md)
+  cat(run_quarto(qmd, dir = paste0(temp_dir, "/", id)))
 })
 ```
 
@@ -88,19 +88,18 @@ It's often useful to know what arguments an executable expects before trying to 
 ::: {.panel-tabset}
 ```{r echo=FALSE, output="asis"}
 
-pwalk(langs, function(id, label, script) {
+pwalk(langs, function(id, label, example_config, example_script, ...) {
   cat("## ", label, "\n")
 
-  exec <- paste0("target/my_copy_", id)
-
   # generate markdown
-  md <- glue::glue("
+  qmd <- glue::glue("
 To display its documentation, run the executable with just the `--help` argument:
 
-{run_cmd(exec, c('--help'), wd = paste0('tmp/', id))}
-
+{quo}{{bash exec-help}}
+target/example_{id} --help
+{quo}
 ")
-  cat(md)
+  cat(run_quarto(qmd, dir = paste0(temp_dir, "/", id)))
 })
 ```
 :::
@@ -114,24 +113,27 @@ Running an executable is the same as any other executable on your system.
 
 ::: {.panel-tabset}
 ```{r viash-run-dont-worry-this-takes-a-long-time, echo=FALSE, output="asis"}
-
-pwalk(langs, function(id, label, script) {
+pwalk(langs, function(id, label, example_config, example_script, ...) {
   cat("## ", label, "\n")
 
   exec <- paste0("target/my_copy_", id)
 
   # generate markdown
-  md <- glue::glue("
+  qmd <- glue::glue("
 You can run the executable by providing a value for `--input` and `--output`:
 
-{run_cmd(exec, c('--input', 'config.vsh.yaml', '--output', 'output.txt'), wd = paste0('tmp/', id))}
+{quo}{{bash exec-run}}
+target/example_{id} --input config.vsh.yaml --output output.txt
+{quo}
 
 This results in the following output:
 
-{run_cmd('ls', '-l', wd = paste0('tmp/', id))}
+{quo}{{bash ls-dir}}
+ls -l
+{quo}
 
 ")
-  cat(md)
+  cat(run_quarto(qmd, dir = paste0(temp_dir, "/", id)))
 })
 ```
 :::
