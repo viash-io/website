@@ -1,6 +1,5 @@
 functionality:
-  name: my_copy_scala
-  namespace: guide/viash_component
+  name: example_bash
   description: A minimal example component.
   arguments:
     - type: file
@@ -13,14 +12,14 @@ functionality:
       example: output.txt
       required: true
   resources:
-    - type: scala_script
-      path: script.scala
+    - type: bash_script
+      path: script.sh
   # test disabled for now
   # test_resources:
   #   - type: bash_script
   #     path: test.sh
 platforms:
   - type: docker
-    image: "sbtscala/scala-sbt:eclipse-temurin-19_36_1.7.2_2.13.10"
+    image: "bash:4.0"
   - type: native
   - type: nextflow

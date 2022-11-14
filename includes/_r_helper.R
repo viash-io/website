@@ -33,3 +33,41 @@ run_cmd <- function(command, args = character(), wd = NULL, error_on_status = TR
     out_indented, "\n"
   )
 }
+
+# run_quarto <- function(src_qmd, dir = tempdir(), engine = "knitr") {
+#   # generate temp file path
+#   file_qmd <- tempfile(pattern = "quarto_inline_", tmpdir = dir, fileext = ".qmd")
+#   file_md <- gsub("\\.qmd$", ".md", file_qmd)
+
+#   src_and_header <- paste0("---\nengine: ", engine, "\n---\n\n", src_qmd)
+#   # write qmd source code
+#   readr::write_lines(src_and_header, file_qmd)
+
+#   # run quarto
+#   out <- processx::run(
+#     command = "quarto",
+#     args = c(
+#       "render", file_qmd,
+#       "--to", "markdown",
+#       "--output", "-"
+#     )
+#   )
+
+#   # strip header
+#   src_md1 <- paste(paste0(out$stdout, "\n"), collapse = "")
+#   src_md2 <- gsub("---.*\n---\n+", "", src_md1)
+#   src_md2
+# }
+
+
+run_knitr <- function(src, dir = NULL) {
+  if (!is.null(dir)) {
+    src <- paste0(
+      "```{r set-root}\n",
+      "knitr::opts_knit$set(root.dir = '", dir, "')\n",
+      "```\n\n",
+      src
+    )
+  }
+  knitr::knit(text = src)
+}

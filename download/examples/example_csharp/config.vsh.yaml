@@ -1,5 +1,5 @@
 functionality:
-  name: my_copy_js
+  name: example_csharp
   description: A minimal example component.
   arguments:
     - type: file
@@ -12,14 +12,17 @@ functionality:
       example: output.txt
       required: true
   resources:
-    - type: javascript_script
-      path: script.js
+    - type: csharp_script
+      path: script.csx
   # test disabled for now
   # test_resources:
   #   - type: bash_script
   #     path: test.sh
 platforms:
   - type: docker
-    image: "node:15-buster"
+    image: "dataintuitive/dotnet-script:1.2.1"
+    setup:
+      - type: apk
+        packages: [ bash ]
   - type: native
   - type: nextflow

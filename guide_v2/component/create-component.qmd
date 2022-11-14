@@ -5,12 +5,12 @@ engine: knitr
 ---
  
 {{< include ../../includes/_language_chooser.qmd >}}
-
+ 
 ```{r setup, include=FALSE}
 repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
+# 
 source(paste0(repo_path, "/includes/_r_helper.R"))
- 
-source("_helper.R")
+source(paste0(repo_path, "/guide_v2/component/_helper.R"))
 ```
 
 A Viash component can be translated into one or more platforms: Native, Docker, Nextflow. Each of these platforms result in a different artifact:
@@ -29,7 +29,7 @@ Below is a script that simply copies an input file to an output destination.
 ::: {.panel-tabset}
 
 ```{r create-script, echo=FALSE, output="asis"}
-pwalk(langs, function(id, label, script) {
+pwalk(langs, function(id, label, script, example_config, example_script, ...) {
   cat("## ", label, "\n")
 
   # create dir
@@ -38,14 +38,8 @@ pwalk(langs, function(id, label, script) {
   # copy source files
   config_path <- paste0("tmp/", id, "/config.vsh.yaml")
   script_path <- paste0("tmp/", id, "/", script)
-  file.copy(
-    paste0("../src/my_copy_", id, "/config.vsh.yaml"),
-    config_path
-  )
-  file.copy(
-    paste0("../src/my_copy_", id, "/", script),
-    script_path
-  )
+  file.copy(example_config, config_path)
+  file.copy(example_script, script_path)
   
   # generate markdown
   md <- glue::glue("
@@ -76,7 +70,7 @@ A [Viash config file](/reference/config/overview.html) is a YAML file that descr
 ::: {.panel-tabset}
 
 ```{r create-config, echo=FALSE, output="asis"}
-pwalk(langs, function(id, label, script) {
+pwalk(langs, function(id, label, script, ...) {
   cat("## ", label, "\n")
 
   # path to files
@@ -85,7 +79,7 @@ pwalk(langs, function(id, label, script) {
   # generate markdown
   md <- glue::glue("
 
-Create a file name `config.vsh.yaml` and add the contents below based on your chosen scripting language.
+Create a file named `config.vsh.yaml` and add the contents below based on your chosen scripting language.
 
 {quo}yaml
 {paste(readr::read_lines(config_path), collapse = \"\n\")}
@@ -101,39 +95,46 @@ Create a file name `config.vsh.yaml` and add the contents below based on your ch
 
 Here's a breakdown of the different sections:
 
-- `functionality` describes what the component does and the resources it needs. It contains the `name`, a short `description` and more importantly, the `arguments` and `resources` the component uses.
-  - `arguments` contains all arguments the component accepts and will be passed to the script.
-  - `resources` holds references to all necessary files and folders to make the component work.
-- `platforms` lists what platforms the component can target. As is, this component is defined to output all three currently supported platforms.
+* `functionality`: A description of what the component does.
+  - `name`: The name of the component.
+  - `arguments`: The input and output parameters of the script.
+  - `resources`: References to all necessary files and folders to make the component work.
+* `platforms`: Lists which platforms a component can target (i.e. Native, Docker or Nextflow).
+
 
 ## Run the component
 
 That's it! With these two steps, you created your first component. 
 Next, you can use the [`viash run`](/reference/viash/run.qmd) command to test whether it actually works as intended.
 
-
 ::: {.panel-tabset}
 
 ```{r viash-run, echo=FALSE, output="asis"}
-pwalk(langs, function(id, label, script) {
+pwalk(langs, function(id, label, script, ...) {
   cat("## ", label, "\n")
 
   # path to files
   config_path <- paste0("tmp/", id, "/config.vsh.yaml")
   
   # generate markdown
-  md <- glue::glue("
-
+  qmd <- glue::glue("
 You can call use the component's `--help` functionality to get an overview its parameters and descriptions.
 
-{run_cmd('viash', c('run', 'config.vsh.yaml', '--', '--help'), wd = paste0('tmp/', id))}
+{quo}{{bash run-help}}
+viash run config.vsh.yaml -- --help
+{quo}
 
 As expected, this component has an `--input` and `--output` parameter. You can execute the component by providing values for these parameters.
 
-{run_cmd('viash', c('run', 'config.vsh.yaml', '--', '--input', 'config.vsh.yaml', '--output', 'foo.txt'), wd = paste0('tmp/', id))}
-
+{quo}{{bash run-io}}
+viash run config.vsh.yaml -- \\
+  --input config.vsh.yaml \\
+  --output foo.txt
+{quo}
 
 ")
+  md <- run_knitr(qmd, dir = dirname(config_path))
+
   cat(md)
 })
 ```
@@ -145,7 +146,7 @@ As expected, this component has an `--input` and `--output` parameter. You can e
 :::{.callout-note}
 The double dash (`--`) between the viash command and the arguments is used to signify the end of the arguments passed to Viash and the start of those passed to the script. If you forgot to add these, you'll get an error similar to this:   
   
-```{r echo=FALSE, output="asis"}
+```{r missing-dashes, echo=FALSE, output="asis"}
 run_cmd(
   'viash', 
   c('run', 'config.vsh.yaml', '--input', 'config.vsh.yaml', '--output', 'foo.txt'), 
