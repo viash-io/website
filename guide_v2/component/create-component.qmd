@@ -8,9 +8,12 @@ engine: knitr
  
 ```{r setup, include=FALSE}
 repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
-# 
 source(paste0(repo_path, "/includes/_r_helper.R"))
 source(paste0(repo_path, "/guide_v2/component/_helper.R"))
+
+temp_dir <- tempfile("create_new_component")
+dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
+on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
 ```
 
 A Viash component can be translated into one or more platforms: Native, Docker, Nextflow. Each of these platforms result in a different artifact:
@@ -29,25 +32,16 @@ Below is a script that simply copies an input file to an output destination.
 ::: {.panel-tabset}
 
 ```{r create-script, echo=FALSE, output="asis"}
-pwalk(langs, function(id, label, script, example_config, example_script, ...) {
+pwalk(langs, function(id, label, example_script, ...) {
   cat("## ", label, "\n")
-
-  # create dir
-  dir.create(paste0("tmp/", id), recursive = TRUE, showWarnings = FALSE)
-
-  # copy source files
-  config_path <- paste0("tmp/", id, "/config.vsh.yaml")
-  script_path <- paste0("tmp/", id, "/", script)
-  file.copy(example_config, config_path)
-  file.copy(example_script, script_path)
   
   # generate markdown
   md <- glue::glue("
 
-Create a new file named `{script}` and copy the following content inside of it. This script will copy an input file to an output destination.
+Create a new file named `{basename(example_script)}` and copy the following content inside of it. This script will copy an input file to an output destination.
 
 {quo}{id}
-{paste(readr::read_lines(script_path), collapse = \"\n\")}
+{paste(readr::read_lines(example_script), collapse = \"\n\")}
 {quo}
 
 
@@ -70,19 +64,16 @@ A [Viash config file](/reference/config/overview.html) is a YAML file that descr
 ::: {.panel-tabset}
 
 ```{r create-config, echo=FALSE, output="asis"}
-pwalk(langs, function(id, label, script, ...) {
+pwalk(langs, function(id, label, example_config, ...) {
   cat("## ", label, "\n")
-
-  # path to files
-  config_path <- paste0("tmp/", id, "/config.vsh.yaml")
   
   # generate markdown
   md <- glue::glue("
 
-Create a file named `config.vsh.yaml` and add the contents below based on your chosen scripting language.
+Create a file named `{basename(example_config)}` and add the contents below based on your chosen scripting language.
 
 {quo}yaml
-{paste(readr::read_lines(config_path), collapse = \"\n\")}
+{paste(readr::read_lines(example_config), collapse = \"\n\")}
 {quo}
 
 
@@ -110,11 +101,17 @@ Next, you can use the [`viash run`](/reference/viash/run.qmd) command to test wh
 ::: {.panel-tabset}
 
 ```{r viash-run, echo=FALSE, output="asis"}
-pwalk(langs, function(id, label, script, ...) {
+pwalk(langs, function(id, label, example_config, example_script, ...) {
   cat("## ", label, "\n")
 
-  # path to files
-  config_path <- paste0("tmp/", id, "/config.vsh.yaml")
+  # create dir
+  dir.create(paste0(temp_dir, "/", id), recursive = TRUE, showWarnings = FALSE)
+
+  # copy source files
+  config_path <- paste0(temp_dir, "/", id, "/", basename(example_config))
+  script_path <- paste0(temp_dir, "/", id, "/", basename(example_script))
+  file.copy(example_config, config_path)
+  file.copy(example_script, script_path)
   
   # generate markdown
   qmd <- glue::glue("
@@ -133,7 +130,7 @@ viash run config.vsh.yaml -- \\
 {quo}
 
 ")
-  md <- run_knitr(qmd, dir = dirname(config_path))
+  md <- run_quarto(qmd, dir = dirname(config_path))
 
   cat(md)
 })
@@ -165,5 +162,5 @@ To learn how to use Viash to build an executable and run it, see the [Building a
 
 
 ```{r include=FALSE}
-unlink("tmp", recursive = TRUE)
+# unlink("tmp", recursive = TRUE)
 ```
