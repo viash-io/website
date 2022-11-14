@@ -11,7 +11,7 @@ repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
 source(paste0(repo_path, "/includes/_r_helper.R"))
 source(paste0(repo_path, "/guide_v2/component/_helper.R"))
 
-temp_dir <- tempfile("create_new_component")
+temp_dir <- tempfile("build_executable")
 dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
 on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
 ```
@@ -26,7 +26,8 @@ We continue with the component created in the [previous section](create-componen
 
 ```{r echo=FALSE, output="asis"}
 # TODO: fix download links
-root_url <- "https://raw.githubusercontent.com/viash-io/website/issue_9/download/examples"
+# root_url <- "https://raw.githubusercontent.com/viash-io/website/issue_9/download/examples"
+root_url <- "https://viash.io/examples"
 
 # download one file to check whether the url is working
 # download.file(
@@ -139,15 +140,6 @@ ls -l
 :::
 
 
-<!--I would also take sections "Using Viash placeholder variables" and "Executing scripts" from guide/component/languages.qmd to explain that if they include a viash codeblock in their script, they can edit / run the script natively for development / debugging purposes.-->
-
 ## What's next?
 
-Now you know how to build and run executables with a Docker backend, you may be interested in [building and running Nextflow modules](/guide/building-block/nextflow/building-running.html).  
-<!-- If you prefer to use executables in a simple pipeline, check out the  [Scripted Pipeline](/guide/data-workflow/scripted-pipeline.html) guide.  -->
-
-
-
-```{r include=FALSE}
-unlink("tmp", recursive = TRUE)
-```
+In the next section, we'll take a deeper look into the different variables that are available from within your script.
