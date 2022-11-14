@@ -1,0 +1,169 @@
+---
+title: Create a new component
+search: true
+engine: knitr
+---
+ 
+{{< include ../../includes/_language_chooser.qmd >}}
+ 
+```{r setup, include=FALSE}
+repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
+# 
+source(paste0(repo_path, "/includes/_r_helper.R"))
+source(paste0(repo_path, "/guide_v2/component/_helper.R"))
+```
+
+A Viash component can be translated into one or more platforms: Native, Docker, Nextflow. Each of these platforms result in a different artifact:
+
+* [Native platform](/reference/config/platforms/NativePlatform.html): a single executable is generated which runs natively on the host system. This assumes all dependencies are already installed by the user and is therefore not reproducible. Requirements: Bash.
+* [Docker platform](/reference/config/platforms/DockerPlatform.html): a single executable is generated but it runs inside a Docker container instead. The Docker platform specification can help you install custom dependencies and will take care of auto-mounting input/output files. Requirements: Bash, Docker.
+* [Nextflow platform](/reference/config/platforms/NextflowVdsl3Platform.html): a Nextflow module which can be used as a standalone workflow or as a module in a larger workflow. Requirements: Nextflow and a containerization engine (e.g. Docker, Singularity, Podman).
+
+Below we will create our first Viash component using any of the languages natively supported by Viash. 
+
+## Create a script
+
+When creating a new Viash component, you can write a new script or use a pre-existing script.
+Below is a script that simply copies an input file to an output destination. 
+
+::: {.panel-tabset}
+
+```{r create-script, echo=FALSE, output="asis"}
+pwalk(langs, function(id, label, script, example_config, example_script, ...) {
+  cat("## ", label, "\n")
+
+  # create dir
+  dir.create(paste0("tmp/", id), recursive = TRUE, showWarnings = FALSE)
+
+  # copy source files
+  config_path <- paste0("tmp/", id, "/config.vsh.yaml")
+  script_path <- paste0("tmp/", id, "/", script)
+  file.copy(example_config, config_path)
+  file.copy(example_script, script_path)
+  
+  # generate markdown
+  md <- glue::glue("
+
+Create a new file named `{script}` and copy the following content inside of it. This script will copy an input file to an output destination.
+
+{quo}{id}
+{paste(readr::read_lines(script_path), collapse = \"\n\")}
+{quo}
+
+
+")
+  cat(md)
+})
+```
+
+:::
+
+:::{.callout-note}
+The `par` variable(s) appear to be hard coded, but they're not! When running this script with Viash, Viash will strip away the section between `VIASH START` and `VIASH END`, and replace it with parameter values at runtime. The values included in this script are thus entirely for development and debugging purposes. More information on how this works will be given in the next section.
+:::
+
+
+### Create a config
+ 
+A [Viash config file](/reference/config/overview.html) is a YAML file that describes the functionality of a component and the platform(s) it targets.
+
+::: {.panel-tabset}
+
+```{r create-config, echo=FALSE, output="asis"}
+pwalk(langs, function(id, label, script, ...) {
+  cat("## ", label, "\n")
+
+  # path to files
+  config_path <- paste0("tmp/", id, "/config.vsh.yaml")
+  
+  # generate markdown
+  md <- glue::glue("
+
+Create a file named `config.vsh.yaml` and add the contents below based on your chosen scripting language.
+
+{quo}yaml
+{paste(readr::read_lines(config_path), collapse = \"\n\")}
+{quo}
+
+
+")
+  cat(md)
+})
+```
+
+:::
+
+Here's a breakdown of the different sections:
+
+* `functionality`: A description of what the component does.
+  - `name`: The name of the component.
+  - `arguments`: The input and output parameters of the script.
+  - `resources`: References to all necessary files and folders to make the component work.
+* `platforms`: Lists which platforms a component can target (i.e. Native, Docker or Nextflow).
+
+
+## Run the component
+
+That's it! With these two steps, you created your first component. 
+Next, you can use the [`viash run`](/reference/viash/run.qmd) command to test whether it actually works as intended.
+
+::: {.panel-tabset}
+
+```{r viash-run, echo=FALSE, output="asis"}
+pwalk(langs, function(id, label, script, ...) {
+  cat("## ", label, "\n")
+
+  # path to files
+  config_path <- paste0("tmp/", id, "/config.vsh.yaml")
+  
+  # generate markdown
+  qmd <- glue::glue("
+You can call use the component's `--help` functionality to get an overview its parameters and descriptions.
+
+{quo}{{bash run-help}}
+viash run config.vsh.yaml -- --help
+{quo}
+
+As expected, this component has an `--input` and `--output` parameter. You can execute the component by providing values for these parameters.
+
+{quo}{{bash run-io}}
+viash run config.vsh.yaml -- \\
+  --input config.vsh.yaml \\
+  --output foo.txt
+{quo}
+
+")
+  md <- run_knitr(qmd, dir = dirname(config_path))
+
+  cat(md)
+})
+```
+
+:::
+
+
+
+:::{.callout-note}
+The double dash (`--`) between the viash command and the arguments is used to signify the end of the arguments passed to Viash and the start of those passed to the script. If you forgot to add these, you'll get an error similar to this:   
+  
+```{r missing-dashes, echo=FALSE, output="asis"}
+run_cmd(
+  'viash', 
+  c('run', 'config.vsh.yaml', '--input', 'config.vsh.yaml', '--output', 'foo.txt'), 
+  wd = paste0('tmp/', 'bash'),
+  error_on_status = FALSE,
+  stderr_to_stdout = TRUE
+)
+```
+:::
+
+
+## What's next?
+
+To learn how to use Viash to build an executable and run it, see the [Building an executable](build-executable.qmd).
+
+
+
+```{r include=FALSE}
+unlink("tmp", recursive = TRUE)
+```

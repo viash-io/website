@@ -1,0 +1,151 @@
+---
+title: Building an executable
+search: true
+engine: knitr
+---
+
+{{< include ../../includes/_language_chooser.qmd >}}
+
+```{r echo=FALSE, output="asis"}
+repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
+source(paste0(repo_path, "/includes/_r_helper.R"))
+source("_helper.R")
+```
+
+The following sections discuss how a Viash component can be turned into an executable and how they work.
+
+## Building an executable
+
+We continue with the component created in the [previous section](create-component.qmd).
+
+::: {.panel-tabset}
+
+```{r echo=FALSE, output="asis"}
+root_url <- "https://raw.githubusercontent.com/viash-io/website/issue_9/src/guide/viash_component"
+
+# download one file to check whether the url is working
+download.file(
+  paste0(root_url, "/my_copy_bash/config.vsh.yaml"),
+  "tmp/check_url.txt"
+)
+
+pwalk(langs, function(id, label, script) {
+  cat("## ", label, "\n")
+
+  # create dir
+  dir.create(paste0("tmp/", id), recursive = TRUE, showWarnings = FALSE)
+
+  # download files
+  # root_url <- paste0(root_url, "/my_copy_", id)
+  # download.file(paste0(root_url, "/config.vsh.yaml"), paste0("tmp/", id, "/config.vsh.yaml"))
+  # download.file(paste0(root_url, "/", script), paste0("tmp/", id, "/", script))
+
+  # edit: just copy them
+  file.copy(
+    paste0("../src/my_copy_", id, "/config.vsh.yaml"),
+    paste0("tmp/", id, "/config.vsh.yaml")
+  )
+  file.copy(
+    paste0("../src/my_copy_", id, "/", script),
+    paste0("tmp/", id, "/", script)
+  )
+
+  # generate markdown
+  md <- glue::glue("
+
+{qua}{{.callout-tip}}
+You can download the source files by running the following commands in a Bash terminal:
+
+{quo}bash
+root_url=\"{root_url}/my_copy_{id}\"
+
+wget \"$root_url/config.vsh.yaml\" -q -O \"config.vsh.yaml\"
+wget \"$root_url/{script}\" -q -O \"{script}\"
+{quo}
+{qua}
+
+Use the [viash build](/reference/viash/build.qmd) command to generate an executable:
+
+{run_cmd('viash', c('build', 'config.vsh.yaml', '--output', 'target'), wd = paste0('tmp/', id))}
+
+This will generate an executable in the `target/` directory:
+
+{run_cmd('tree', wd = paste0('tmp/', id))}
+
+")
+  cat(md)
+})
+```
+
+:::
+
+
+## Displaying the help text
+
+It's often useful to know what arguments an executable expects before trying to run it.
+
+
+::: {.panel-tabset}
+```{r echo=FALSE, output="asis"}
+
+pwalk(langs, function(id, label, script) {
+  cat("## ", label, "\n")
+
+  exec <- paste0("target/my_copy_", id)
+
+  # generate markdown
+  md <- glue::glue("
+To display its documentation, run the executable with just the `--help` argument:
+
+{run_cmd(exec, c('--help'), wd = paste0('tmp/', id))}
+
+")
+  cat(md)
+})
+```
+:::
+
+
+This executable takes a file as input and will create an output file.
+
+## Running the executable
+
+Running an executable is the same as any other executable on your system.
+
+::: {.panel-tabset}
+```{r viash-run-dont-worry-this-takes-a-long-time, echo=FALSE, output="asis"}
+
+pwalk(langs, function(id, label, script) {
+  cat("## ", label, "\n")
+
+  exec <- paste0("target/my_copy_", id)
+
+  # generate markdown
+  md <- glue::glue("
+You can run the executable by providing a value for `--input` and `--output`:
+
+{run_cmd(exec, c('--input', 'config.vsh.yaml', '--output', 'output.txt'), wd = paste0('tmp/', id))}
+
+This results in the following output:
+
+{run_cmd('ls', '-l', wd = paste0('tmp/', id))}
+
+")
+  cat(md)
+})
+```
+:::
+
+
+<!--I would also take sections "Using Viash placeholder variables" and "Executing scripts" from guide/component/languages.qmd to explain that if they include a viash codeblock in their script, they can edit / run the script natively for development / debugging purposes.-->
+
+## What's next?
+
+Now you know how to build and run executables with a Docker backend, you may be interested in [building and running Nextflow modules](/guide/building-block/nextflow/building-running.html).  
+<!-- If you prefer to use executables in a simple pipeline, check out the  [Scripted Pipeline](/guide/data-workflow/scripted-pipeline.html) guide.  -->
+
+
+
+```{r include=FALSE}
+unlink("tmp", recursive = TRUE)
+```
