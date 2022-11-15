@@ -10,6 +10,6 @@ Follow the steps below to start a local preview:
 4. Pull the repo and use it as your working directory
 5. Execute `Rscript -e 'renv::restore()'` to install most of the R and Python dependencies
 6. Install some missing R dependencies: `Rscript -e 'install.packages(c("readr", "rmarkdown"))'`
-7. Install the missing Python dependencies: `source renv/python/virtualenvs/renv-python-3.8/bin/activate && pip install pandas nbformat jupyter`
+7. Install the missing Python dependencies: `source renv/python/virtualenvs/renv-python/bin/activate && pip install pandas nbformat jupyter`
 8. Run `quarto preview`
 9. Navigate to [http://localhost:8000](http://localhost:8000) in a web browser
