@@ -31,7 +31,7 @@ A grouping of the arguments, used to display the help message.
 
 
 
-### Example
+**Example:**
 
 ```yaml
 argument_groups:
@@ -91,7 +91,7 @@ A list of arguments for this component. For each argument, a type and a name mus
  - [boolean_false](/reference/config/arguments/boolean_false.html)
 
 
-### Example
+**Example:**
 
 ```yaml
 arguments:
@@ -130,7 +130,7 @@ Suggested values for roles are:
 The [full list of roles](https://www.loc.gov/marc/relators/relaterm.html) is extremely comprehensive.
 
 
-### Example
+**Example:**
 
 ```yaml
 authors:
@@ -149,7 +149,7 @@ authors:
 
 A description of the component. This will be displayed with `--help`.
 
-### Example
+**Example:**
 
 ```yaml
 description: |
@@ -169,14 +169,16 @@ Setting this to false with disable this component when using namespaces.
 
 ## info
 
-**Type**: `Map of String,String`
+**Type**: `Json`
 
-A map for storing custom annotations.
+Structured information. Can be any shape: a string, vector, map or even nested map.
 
-### Example
+**Example:**
 
 ```yaml
-info: {twitter: wizzkid, appId: com.example.myApplication}
+info:
+  twitter: wizzkid
+  classes: [ one, two, three ]
 ```
 
 ## inputs
@@ -188,7 +190,7 @@ Deprecated since Viash 0.6.0. Use `arguments` instead.
 :::
 A list of input arguments in addition to the `arguments` list. Any arguments specified here will have their `type` set to `file` and the `direction` set to `input` by default.
 
-### Example
+**Example:**
 
 ```yaml
 inputs:
@@ -215,7 +217,7 @@ component_with_inputs
 
 Name of the component and the filename of the executable when built with `viash build`.
 
-### Example
+**Example:**
 
 ```yaml
 name: this_is_my_component
@@ -227,7 +229,7 @@ name: this_is_my_component
 
 Namespace this component is a part of. See the [Namespaces guide](/guide/component/namespaces.html) for more information on namespaces.
 
-### Example
+**Example:**
 
 ```yaml
 namespace: fancy_components
@@ -242,7 +244,7 @@ Deprecated since Viash 0.6.0. Use `arguments` instead.
 :::
 A list of output arguments in addition to the `arguments` list. Any arguments specified here will have their `type` set to `file` and thr `direction` set to `output` by default.
 
-### Example
+**Example:**
 
 ```yaml
 outputs:
@@ -272,7 +274,7 @@ Computational requirements related to running the component.
 `memory` specifies the maximum amount of memory a component is allowed to allicate. Memory units must be
 in B, KB, MB, GB, TB or PB.
 
-### Example
+**Example:**
 
 ```yaml
 requirements:
@@ -296,7 +298,7 @@ Common properties:
  * is_executable: `true` / `false`, whether the resulting file is made executable.
 
 
-### Example
+**Example:**
 
 ```yaml
 resources:
@@ -319,7 +321,7 @@ Allows setting a component to active, deprecated or disabled.
 
 One or more [scripts](no-link) to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing. See [Unit Testing](/guide/component/unit-testing.html) for more info.
 
-### Example
+**Example:**
 
 ```yaml
 test_resources:
@@ -346,7 +348,7 @@ One or more Bash/R/Python scripts to be used to test the component behaviour whe
 
 A description on how to use the component. This will be displayed with `--help` under the 'Usage:' section.
 
-### Example
+**Example:**
 
 ```yaml
 usage: Place the executable in a directory containing TSV files and run it
@@ -358,7 +360,7 @@ usage: Place the executable in a directory containing TSV files and run it
 
 Version of the component. This field will be used to version the executable and the Docker container.
 
-### Example
+**Example:**
 
 ```yaml
 version: 0.8

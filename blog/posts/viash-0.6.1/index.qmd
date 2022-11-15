@@ -17,13 +17,15 @@ This release contains mostly minor improvements of functionality released in Via
 
 * And various bug fixes and improvements to documentation and unit testing.
 
-## BREAKING CHANGES
+## Full changelog
+
+### BREAKING CHANGES
 
 * Deprecated usage `resources_dir` variable inside scripts, use `meta["resources_dir"]` instead (or `$meta_resources_dir` in Bash, or `meta$resources_dir` in R).
 
 * Deprecated `meta["n_proc"]` in favour for `meta["cpus"]`.
 
-## NEW FUNCTIONALITY
+### NEW FUNCTIONALITY
 
 * `viash ns exec`: Added two more fields:
 
@@ -32,11 +34,11 @@ This release contains mostly minor improvements of functionality released in Via
 
 * `LongArgument`: Added support for 64-bit integers with `type: long` as opposed to `type: integer` which are 32-bit integers.
 
-## MAJOR CHANGES
+### MAJOR CHANGES
 
 * Allow passing integers/doubles/booleans to string parameters (#225). Removed the 'Version' helper class.
 
-## MINOR CHANGES
+### MINOR CHANGES
 
 * `meta["cpus"]` is now an integer, `meta["memory_*"]` are now longs (#224).
 
@@ -46,13 +48,13 @@ This release contains mostly minor improvements of functionality released in Via
 
 * `Argument[_]`: Turn `multiple_sep` from `Char` into `String`.
 
-## INTERNAL CHANGES
+### INTERNAL CHANGES
 
 * All `meta[...]` variables are now processed similar to `Argument[_]`s, instead of using custom code to convert object types and detect Docker mounts.
 
 * `Escaper`: Make more generic Escaper helper class.
 
-## DOCUMENTATION
+### DOCUMENTATION
 
 * Hardcoded URLs pointing to viash.io in the documentation annotations were replaced with a new keyword system.
 
@@ -60,7 +62,7 @@ This release contains mostly minor improvements of functionality released in Via
 
 * Added an example for Ruby based Docker setups.
 
-## BUG FIXES
+### BUG FIXES
 
 * `viash ns`: Reverse exit code outputs, was returning 1 when everything was OK and 0 when errors were detected (#227).
 
@@ -78,11 +80,11 @@ This release contains mostly minor improvements of functionality released in Via
 
 * `BashScript`, `CSharpScript`, `JavaScriptScript`, `PythonScript`, `RScript`, `ScalaScript`: Fix quoting issues of certain characters (#113).
 
-## DEPRECATION
+### DEPRECATION
 
 * `NextflowPlatform`: Deprecate `--param_list_format` parameter.
 
-## TESTING
+### TESTING
 
 * `BashScript`, `CSharpScript`, `JavaScriptScript`, `PythonScript`, `RScript`, `ScalaScript`: Implement more rigorous testing of which characters are escaped.
 

@@ -40,7 +40,7 @@ jobs:
       - name: Install Nextflow
         env:
             CAPSULE_LOG: none
-            NXF_VER: "22.04.0"
+            NXF_VER: "22.04.5"
         run: |
           mkdir /tmp/nextflow
           cd /tmp/nextflow
@@ -48,24 +48,15 @@ jobs:
           sudo ln -s /tmp/nextflow/nextflow /usr/local/bin/nextflow
           nextflow -version
       
-      - name: Install Viash
+      - name: Install latest Viash
         run: |
-          wget https://github.com/viash-io/viash/releases/download/0.5.12/viash -O /usr/local/bin/viash
+          wget https://github.com/viash-io/viash/releases/latest/download/viash -O /usr/local/bin/viash
           chmod +x /usr/local/bin/viash
           viash -v
 
       - name: Install dependencies via renv restore
         run: |
           Rscript -e 'renv::restore()'
-
-      - name: Install missing R dependencies
-        run: |
-          Rscript -e 'install.packages(c("readr", "rmarkdown"))'
-
-      - name: Install missing Python dependencies
-        run: |
-          source renv/python/virtualenvs/renv-python-3.8/bin/activate
-          pip install pandas nbformat jupyter
           
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/install-quarto@v1
@@ -85,3 +76,8 @@ jobs:
           branch: gh-pages
           folder: _site
           
+      - name: Deploy preview
+        if: github.event_name == 'pull_request'
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: _site
