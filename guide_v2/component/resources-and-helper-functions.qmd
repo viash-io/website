@@ -1,0 +1,24 @@
+---
+title: Resources and helper functions (TODO)
+search: true
+engine: knitr
+---
+
+{{< include ../../includes/_language_chooser.qmd >}}
+
+```{r setup, include=FALSE}
+repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
+source(paste0(repo_path, "/includes/_r_helper.R"))
+source(paste0(repo_path, "/guide_v2/component/_helper.R"))
+
+temp_dir <- tempfile("variables")
+dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
+on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
+```
+
+## Todo: add
+
+
+* I feel this deserves a section on its own, because I see it's something a lot of new users are confused about.
+* It would be create if you could show how to include an external file in the config yaml and how to access it from a script (i.e. meta["resources_dir"] + "/foo.txt".
+* You can include the information shown on the FAQ faq/index.qmd section "Can I store helper functions as separate files?"
