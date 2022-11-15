@@ -109,14 +109,14 @@
     "href": "guide/building-block/docker/inspect-dockerfile.html",
     "title": "Inspect Dockerfile",
     "section": "",
-    "text": "viash run -p docker config.vsh.yaml -- ---dockerfile\n./my_docker_executable ---dockerfile\nBoth of these output the Docker config to the terminal:\nFROM bash:latest\n\nRUN apk add --no-cache curl"
+    "text": "Viash generates a dockerfile for executables with a Docker backend. You can view the result of this by passing the hidden ---dockerfile argument to an executable:\nviash run -p docker config.vsh.yaml -- ---dockerfile\n./my_docker_executable ---dockerfile\nBoth of these output the Docker config to the terminal:\nFROM bash:latest\n\nRUN apk add --no-cache curl"
   },
   {
     "objectID": "guide/building-block/docker/docker-volume.html",
     "href": "guide/building-block/docker/docker-volume.html",
     "title": "Docker Volumes",
     "section": "",
-    "text": "The full mount path is /viash_automount/ABSOLUTE_PATH_TO_FILE_DIRECTORY.\nBy default, files created and modified by a Docker container are owned by root. By default, Viash automatically changes the owner of any files defined in the config file to the user running the executable. This behaviour can be overridden by setting the chown setting to false in your config file.\n\n\n\n\n\n\nImportant\n\n\n\nAny files your script generates that are not defined as file arguments will still be owned by root as Viash won’t have any knowledge of them."
+    "text": "Viash automatically creates a Docker volume for components and executables with a Docker backend if a file argument exists in the config file. This allows your script to read and write files as if working with them natively.\nThe full mount path is /viash_automount/ABSOLUTE_PATH_TO_FILE_DIRECTORY.\nBy default, files created and modified by a Docker container are owned by root. By default, Viash automatically changes the owner of any files defined in the config file to the user running the executable. This behaviour can be overridden by setting the chown setting to false in your config file.\n\n\n\n\n\n\nImportant\n\n\n\nAny files your script generates that are not defined as file arguments will still be owned by root as Viash won’t have any knowledge of them."
   },
   {
     "objectID": "guide/building-block/docker/setup-strategies.html",
@@ -1187,56 +1187,56 @@
     "href": "reference/config/requirements/pythonRequirements.html",
     "title": "Python Requirements",
     "section": "",
-    "text": "Example\nsetup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ jkbr/httpie ]\n    gitlab: [ foo/bar ]\n    mercurial: [ http://... ]\n    svn: [ http://...]\n    bazaar: [ http://... ]\n    url: [ http://... ]"
+    "text": "Specify which Python packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ jkbr/httpie ]\n    gitlab: [ foo/bar ]\n    mercurial: [ http://... ]\n    svn: [ http://...]\n    bazaar: [ http://... ]\n    url: [ http://... ]"
   },
   {
     "objectID": "reference/config/requirements/dockerRequirements.html",
     "href": "reference/config/requirements/dockerRequirements.html",
     "title": "Docker Requirements",
     "section": "",
-    "text": "Example\nsetup:\n  - type: docker\n    build_args: [ GITHUB_PAT=hello_world ]\n    run: [ git clone ... ]\n    add: [ \"http://foo.bar .\" ]\n    copy: [ \"http://foo.bar .\" ]\n    resources: \n      - resource.txt /path/to/resource.txt"
+    "text": "Specify which Docker commands should be run during setup.\n\nExample\nsetup:\n  - type: docker\n    build_args: [ GITHUB_PAT=hello_world ]\n    run: [ git clone ... ]\n    add: [ \"http://foo.bar .\" ]\n    copy: [ \"http://foo.bar .\" ]\n    resources: \n      - resource.txt /path/to/resource.txt"
   },
   {
     "objectID": "reference/config/requirements/aptRequirements.html",
     "href": "reference/config/requirements/aptRequirements.html",
     "title": "Apt Requirements",
     "section": "",
-    "text": "Example\nsetup:\n  - type: apt\n    packages: [ sl ]"
+    "text": "Specify which apt packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: apt\n    packages: [ sl ]"
   },
   {
     "objectID": "reference/config/requirements/apkRequirements.html",
     "href": "reference/config/requirements/apkRequirements.html",
     "title": "Apk Requirements",
     "section": "",
-    "text": "Example\nsetup:\n  - type: apk\n    packages: [ sl ]"
+    "text": "Specify which apk packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: apk\n    packages: [ sl ]"
   },
   {
     "objectID": "reference/config/requirements/rubyRequirements.html",
     "href": "reference/config/requirements/rubyRequirements.html",
     "title": "Ruby Requirements",
     "section": "",
-    "text": "Example\nsetup:\n  - type: ruby\n    packages: [ rspec ]"
+    "text": "Specify which Ruby packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: ruby\n    packages: [ rspec ]"
   },
   {
     "objectID": "reference/config/requirements/rRequirements.html",
     "href": "reference/config/requirements/rRequirements.html",
     "title": "R Requirements",
     "section": "",
-    "text": "Example\nsetup: \n  - type: r\n    cran: [ dynutils ]\n    bioc: [ AnnotationDbi ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ rcannood/SCORPIUS ]\n    gitlab: [ org/package ]\n    svn: [ https://path.to.svn/group/repo ]\n    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]\n    script: [ 'devtools::install(\".\")' ]"
+    "text": "Specify which R packages should be available in order to run the component.\n\nExample\nsetup: \n  - type: r\n    cran: [ dynutils ]\n    bioc: [ AnnotationDbi ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ rcannood/SCORPIUS ]\n    gitlab: [ org/package ]\n    svn: [ https://path.to.svn/group/repo ]\n    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]\n    script: [ 'devtools::install(\".\")' ]"
   },
   {
     "objectID": "reference/config/requirements/yumRequirements.html",
     "href": "reference/config/requirements/yumRequirements.html",
     "title": "Yum Requirements",
     "section": "",
-    "text": "Example\nsetup:\n  - type: yum\n    packages: [ sl ]"
+    "text": "Specify which yum packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: yum\n    packages: [ sl ]"
   },
   {
     "objectID": "reference/config/requirements/javascriptRequirements.html",
     "href": "reference/config/requirements/javascriptRequirements.html",
     "title": "Javascript Requirements",
     "section": "",
-    "text": "Example\nsetup:\n  - type: javascript\n    npm: [ packagename ]\n    git: [ https://... ]\n    github: [ owner/repository ]\n    url: [ https://... ]"
+    "text": "Specify which JavaScript packages should be available in order to run the component.\n\nExample\nsetup:\n  - type: javascript\n    npm: [ packagename ]\n    git: [ https://... ]\n    github: [ owner/repository ]\n    url: [ https://... ]"
   },
   {
     "objectID": "reference/config/config-modding.html",
@@ -1831,7 +1831,7 @@
     "href": "reference/viash/build.html",
     "title": "viash build",
     "section": "",
-    "text": "Usage:\nviash build config.vsh.yaml -o output [-p docker] [-m] [-s]\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--meta, -m\nPrint out some meta information at the end.\nBoolean\n\n\n--output, -o\nPath to directory in which the executable and any resources is built to. Default: “output/”. This is a required argument.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--push\nWhether or not to push the container to a Docker registry [Docker Platform only].\nBoolean\n\n\n--setup, -s\nWhich setup strategy for creating the container to use [Docker Platform only].\nString\n\n\n--write_meta, -w\nWrite out some meta information to RESOURCES_DIR/viash.yaml at the end.\nBoolean\n\n\n--help, -h\nShow help message"
+    "text": "Build an executable from the provided viash config file.\nUsage:\nviash build config.vsh.yaml -o output [-p docker] [-m] [-s]\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--meta, -m\nPrint out some meta information at the end.\nBoolean\n\n\n--output, -o\nPath to directory in which the executable and any resources is built to. Default: “output/”. This is a required argument.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--push\nWhether or not to push the container to a Docker registry [Docker Platform only].\nBoolean\n\n\n--setup, -s\nWhich setup strategy for creating the container to use [Docker Platform only].\nString\n\n\n--write_meta, -w\nWrite out some meta information to RESOURCES_DIR/viash.yaml at the end.\nBoolean\n\n\n--help, -h\nShow help message"
   },
   {
     "objectID": "reference/viash/ns.html",
@@ -1866,14 +1866,14 @@
     "href": "reference/viash/test.html",
     "title": "viash test",
     "section": "",
-    "text": "Usage:\nviash test config.vsh.yaml [-p docker] [-k true/false]\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--cpus\nThe maximum number of (logical) cpus a component is allowed to use.\nInt\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--memory\nThe maximum amount of memory a component is allowed to allocate. Unit must be one of B, KB, MB, GB, TB or PB.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--help, -h\nShow help message"
+    "text": "Test the component using the tests defined in the viash config file.\nUsage:\nviash test config.vsh.yaml [-p docker] [-k true/false]\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--cpus\nThe maximum number of (logical) cpus a component is allowed to use.\nInt\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--memory\nThe maximum amount of memory a component is allowed to allocate. Unit must be one of B, KB, MB, GB, TB or PB.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--help, -h\nShow help message"
   },
   {
     "objectID": "reference/viash/run.html",
     "href": "reference/viash/run.html",
     "title": "viash run",
     "section": "",
-    "text": "Usage:\nviash run config.vsh.yaml [-p docker] [-k true/false]  -- [arguments for script]\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--cpus\nThe maximum number of (logical) cpus a component is allowed to use.\nInt\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--memory\nThe maximum amount of memory a component is allowed to allocate. Unit must be one of B, KB, MB, GB, TB or PB.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--help, -h\nShow help message"
+    "text": "Executes a viash component from the provided viash config file. viash generates a temporary executable and immediately executes it with the given parameters.\nUsage:\nviash run config.vsh.yaml [-p docker] [-k true/false]  -- [arguments for script]\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--cpus\nThe maximum number of (logical) cpus a component is allowed to use.\nInt\n\n\n--keep, -k\nWhether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.\nString\n\n\n--memory\nThe maximum amount of memory a component is allowed to allocate. Unit must be one of B, KB, MB, GB, TB or PB.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--help, -h\nShow help message"
   },
   {
     "objectID": "reference/viash/config.html",
@@ -1894,14 +1894,14 @@
     "href": "privacy.html",
     "title": "Privacy Policy",
     "section": "",
-    "text": "Website visitors\n\nNo personal information is collected.\nNo information is stored in the browser.\nNo information is shared with, sent to or sold to third-parties.\nNo information is shared with advertising companies.\nNo information is mined and harvested for personal and behavioral trends.\nNo information is monetized.\n\n\n\nInformation we collect and what we use it for\nWe run Google Analytics analytics on viash.io. The following information is collected:\n\nPage URL. We track the page URL of each page view on this website. We use this to understand which pages have been viewed and how many times a particular page has been viewed. For example: https://viash.io/.\nHTTP Referrer. We use the referrer string to understand the number of visitors referred to this website from links on other sites. For example: https://github.com/.\nBrowser. We use this to understand what browsers people use when visiting this website. This is derived from the User-Agent HTTP header. The full User-Agent is discarded. For example: Chrome.\nOperating system. We use this to understand what operating systems people use when visiting this website. We only use the brand of the operating system and don’t include the version number or any other details. This is derived from the User-Agent HTTP header. The full User-Agent is discarded. For example: GNU/Linux.\nDevice type. We use this to understand what devices people use when visiting this website. This is derived from window.innerWidth. The actual width of the browser in pixels is discarded. For example: Desktop.\nVisitor Country. We look up the visitor’s country using the IP address. We do not track anything more granular than the country of origin and the IP address of the visitor is discarded. We never store IP addresses in our database or logs. For example: Canada.\n\n\n\nContact us\nContact us if you have any questions."
+    "text": "TL;DR: We do not use cookies and we do not collect any personal data.\n\nWebsite visitors\n\nNo personal information is collected.\nNo information is stored in the browser.\nNo information is shared with, sent to or sold to third-parties.\nNo information is shared with advertising companies.\nNo information is mined and harvested for personal and behavioral trends.\nNo information is monetized.\n\n\n\nInformation we collect and what we use it for\nWe run Google Analytics analytics on viash.io. The following information is collected:\n\nPage URL. We track the page URL of each page view on this website. We use this to understand which pages have been viewed and how many times a particular page has been viewed. For example: https://viash.io/.\nHTTP Referrer. We use the referrer string to understand the number of visitors referred to this website from links on other sites. For example: https://github.com/.\nBrowser. We use this to understand what browsers people use when visiting this website. This is derived from the User-Agent HTTP header. The full User-Agent is discarded. For example: Chrome.\nOperating system. We use this to understand what operating systems people use when visiting this website. We only use the brand of the operating system and don’t include the version number or any other details. This is derived from the User-Agent HTTP header. The full User-Agent is discarded. For example: GNU/Linux.\nDevice type. We use this to understand what devices people use when visiting this website. This is derived from window.innerWidth. The actual width of the browser in pixels is discarded. For example: Desktop.\nVisitor Country. We look up the visitor’s country using the IP address. We do not track anything more granular than the country of origin and the IP address of the visitor is discarded. We never store IP addresses in our database or logs. For example: Canada.\n\n\n\nContact us\nContact us if you have any questions."
   },
   {
     "objectID": "help/terminology.html",
     "href": "help/terminology.html",
     "title": "Terminology",
     "section": "",
-    "text": "Term\nDescription\n\n\n\n\nViash\nA script code wrapper for building modular software components that serve as building blocks to develop (Nextflow) data pipelines.\n\n\nComponent\nAt minimum, the combination of a script and a config file. This can also include any needed resources and unit tests.\n\n\nViash config\nA YAML based file that holds all of the parameters needed to create a component.\n\n\nResources\nTools, helper scripts, templates and other files the component depends on to work.\n\n\nUnit test\nA small block of code to test a component.\n\n\nBuild target\nAn executable or a VDSL3 module that’s generated by Viash.\n\n\n(VDSL3) Module\nA Nextflow module generated by Viash.\n\n\n(Viash) Executable\nAn executable script generated for the Native or Docker platform.\n\n\n(Docker) Image\nA standard unit of software that packages up the OS, code and its dependencies so the application runs quickly and reliably from one computing environment to another.\n\n\n(Docker) Container\nAn instance of a Docker image.\n\n\nPlatform\nThe platform(s) targeted by a component. We currently support Native, Docker and Nextflow."
+    "text": "The reference below serves as a reference for the terms used throughout the guides and other pages.\n\n\n\n\n\n\n\nTerm\nDescription\n\n\n\n\nViash\nA script code wrapper for building modular software components that serve as building blocks to develop (Nextflow) data pipelines.\n\n\nComponent\nAt minimum, the combination of a script and a config file. This can also include any needed resources and unit tests.\n\n\nViash config\nA YAML based file that holds all of the parameters needed to create a component.\n\n\nResources\nTools, helper scripts, templates and other files the component depends on to work.\n\n\nUnit test\nA small block of code to test a component.\n\n\nBuild target\nAn executable or a VDSL3 module that’s generated by Viash.\n\n\n(VDSL3) Module\nA Nextflow module generated by Viash.\n\n\n(Viash) Executable\nAn executable script generated for the Native or Docker platform.\n\n\n(Docker) Image\nA standard unit of software that packages up the OS, code and its dependencies so the application runs quickly and reliably from one computing environment to another.\n\n\n(Docker) Container\nAn instance of a Docker image.\n\n\nPlatform\nThe platform(s) targeted by a component. We currently support Native, Docker and Nextflow."
   },
   {
     "objectID": "about.html",
@@ -1922,13 +1922,13 @@
     "href": "faq/index.html",
     "title": "Frequently Asked Questions",
     "section": "",
-    "text": "Can I store helper functions as separate files?\nYes, though you’ll need to let Viash know which additional files are required to run the component. For example, if several helper functions are stored in an additional file mymodule.py or mymodule.R, use the following code to import the helper functions:\n\nPython\nIn the resources section of the Viash config file:\nresources:\n  - type: python_script\n    path: script.py\n  - path: mymodule.py\nIn the main Python script:\nimport sys\n\n## VIASH START\nmeta = { 'resources_dir': '.' }\n## VIASH END\n\nsys.path.append(meta['resources_dir'])\nfrom mymodule import helper_fun\n\n\nR\nIn the resources section of the Viash config file:\nresources:\n  - type: r_script\n    path: script.R\n  - path: mymodule.R\nIn the main R script:\n## VIASH START\nmeta <- list(resources_dir = \".\")\n## VIASH END\n\nsource(paste0(meta[[\"resources_dir\"]], \"/mymodule.R\"))\nhelper_fun(...)"
+    "text": "One or more of my output files are owned by root after running a component. Why is this?\nIn Linux, files created by Docker are owned by root by default.\nYou can set up the chown attribute in your config file to automatically transfer the ownership of files to the user running the component. Any file output where an argument of the type file with an output direction was used will also have their ownership transferred.\n\n\nCan I store helper functions as separate files?\nYes, though you’ll need to let Viash know which additional files are required to run the component. For example, if several helper functions are stored in an additional file mymodule.py or mymodule.R, use the following code to import the helper functions:\n\nPython\nIn the resources section of the Viash config file:\nresources:\n  - type: python_script\n    path: script.py\n  - path: mymodule.py\nIn the main Python script:\nimport sys\n\n## VIASH START\nmeta = { 'resources_dir': '.' }\n## VIASH END\n\nsys.path.append(meta['resources_dir'])\nfrom mymodule import helper_fun\n\n\nR\nIn the resources section of the Viash config file:\nresources:\n  - type: r_script\n    path: script.R\n  - path: mymodule.R\nIn the main R script:\n## VIASH START\nmeta <- list(resources_dir = \".\")\n## VIASH END\n\nsource(paste0(meta[[\"resources_dir\"]], \"/mymodule.R\"))\nhelper_fun(...)"
   },
   {
     "objectID": "download/components/md_url_checker/bash/Testfile.html",
     "href": "download/components/md_url_checker/bash/Testfile.html",
     "title": "Viash",
     "section": "",
-    "text": "This is a simple markdown file with some hyperlinks to test if the component works correctly. Some links to websites:\n\nGoogle\nReddit\nA broken link\n\nLinks that are relative to viash.io:\n\nYou can install viash here.\nIt all starts with a script and a config file."
+    "text": "Test File\nThis is a simple markdown file with some hyperlinks to test if the component works correctly. Some links to websites:\n\nGoogle\nReddit\nA broken link\n\nLinks that are relative to viash.io:\n\nYou can install viash here.\nIt all starts with a script and a config file."
   }
 ]
