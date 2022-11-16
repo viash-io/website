@@ -6,6 +6,11 @@ repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
 qua <- ":::"
 quo <- "```"
 
+strip_margin <- function(str, margin = "\\|") {
+  regex <- paste0("(\\n?)[ \\t]*", margin)
+  gsub(regex, "\\1", str)
+}
+
 # run command and display as a mardown codeblock
 # `...` doesn't work, for some reason
 run_cmd <- function(command, args = character(), wd = NULL, error_on_status = TRUE, stderr_to_stdout = FALSE) {
@@ -42,20 +47,17 @@ run_quarto <- function(src_qmd, wdir, engine = "knitr") {
   file_md <- gsub("\\.qmd$", ".md", file_qmd)
 
   # assume src does not contain a header
-  src_and_header <- glue::glue("
----
-engine: {engine}
----
-
-{quo}{{r setup, include=FALSE}}
-knitr::opts_knit$set(root.dir = '{wdir}')
-{quo}
-
-{src_qmd}
-")
-  
-  
-  paste0("---\nengine: ", engine, "\n---\n\n", src_qmd)
+  src_and_header <- strip_margin(glue::glue("
+    |---
+    |engine: {engine}
+    |---
+    |
+    |{quo}{{r setup, include=FALSE}}
+    |knitr::opts_knit$set(root.dir = '{wdir}')
+    |{quo}
+    |
+    |{src_qmd}
+    |"))
 
   # write qmd source code
   readr::write_lines(src_and_header, file_qmd)
@@ -74,4 +76,18 @@ knitr::opts_knit$set(root.dir = '{wdir}')
   paste0(out$stdout, "\n") %>%
     paste(collapse = "") %>%
     gsub("---.*\n---\n+", "", .)
+}
+
+qrt <- function(
+  qmd_txt,
+  .dir = tempdir(),
+  .envir = parent.frame(),
+  .open = "{%",
+  .close = "%}",
+  .margin = "\\|"
+) {
+  qmd_glued <- glue::glue(qmd_txt, .envir = .envir, .open = .open, .close = .close)
+  qmd_stripped <- strip_margin(qmd_glued, margin = .margin)
+  md <- run_quarto(qmd_stripped, .dir)
+  cat(md)
 }

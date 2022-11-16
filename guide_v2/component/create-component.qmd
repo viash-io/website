@@ -33,20 +33,16 @@ Below is a script that simply copies an input file to an output destination.
 
 ```{r create-script, echo=FALSE, output="asis"}
 pwalk(langs, function(id, label, example_script, ...) {
-  cat("## ", label, "\n")
-  
-  # generate markdown
-  md <- glue::glue("
-
-Create a new file named `{basename(example_script)}` and copy the following content inside of it. This script will copy an input file to an output destination.
-
-{quo}{id}
-{paste(readr::read_lines(example_script), collapse = \"\n\")}
-{quo}
-
-
-")
-  cat(md)
+  qrt(
+    "## {% label %}
+    |
+    |Create a new file named `{% basename(example_script) %}` and copy the following content inside of it. 
+    |This script will copy an input file to an output destination.
+    |
+    |```{% id %}
+    |{% paste(readr::read_lines(example_script), collapse = '\n') %}
+    |```
+    |")
 })
 ```
 
@@ -68,17 +64,15 @@ pwalk(langs, function(id, label, example_config, ...) {
   cat("## ", label, "\n")
   
   # generate markdown
-  md <- glue::glue("
-
-Create a file named `{basename(example_config)}` and add the contents below based on your chosen scripting language.
-
-{quo}yaml
-{paste(readr::read_lines(example_config), collapse = \"\n\")}
-{quo}
-
-
-")
-  cat(md)
+  qrt(
+    "## {% label %}
+    |
+    |Create a file named `{% basename(example_config) %}` and add the contents below based on your chosen scripting language.
+    |
+    |```yaml
+    |{% paste(readr::read_lines(example_config), collapse = '\n    |') %}
+    |```
+    |")
 })
 ```
 
@@ -102,8 +96,6 @@ Next, you can use the [`viash run`](/reference/viash/run.qmd) command to test wh
 
 ```{r viash-run, echo=FALSE, output="asis"}
 pwalk(langs, function(id, label, example_config, example_script, ...) {
-  cat("## ", label, "\n")
-
   # create dir
   dir.create(paste0(temp_dir, "/", id), recursive = TRUE, showWarnings = FALSE)
 
@@ -114,21 +106,20 @@ pwalk(langs, function(id, label, example_config, example_script, ...) {
   file.copy(example_script, script_path)
   
   # generate markdown
-  qmd <- glue::glue("
-You can call use the component's `--help` functionality to get an overview its parameters and descriptions.
-
-{quo}{{bash run-help}}
-viash run config.vsh.yaml -- --help
-{quo}
-
-As expected, this component has an `--input` and `--output` parameter. You can execute the component by providing values for these parameters.
-
-{quo}{{bash run-io}}
-viash run config.vsh.yaml -- --input config.vsh.yaml --output foo.txt
-{quo}
-
-")
-  cat(run_quarto(qmd, paste0(temp_dir, "/", id)))
+  qrt(
+    "## {% label %}
+    |You can call use the component's `--help` functionality to get an overview its parameters and descriptions.
+    |
+    |```{bash run-help}
+    |viash run config.vsh.yaml -- --help
+    |```
+    |
+    |As expected, this component has an `--input` and `--output` parameter. You can execute the component by providing values for these parameters.
+    |
+    |```{bash run-io}
+    |viash run config.vsh.yaml -- --input config.vsh.yaml --output foo.txt
+    |```
+    |", .dir = paste0(temp_dir, "/", id))
 })
 ```
 

@@ -32,8 +32,6 @@ This will change the contents of your script!
 
 ```{r config-inject, echo=FALSE, output="asis"}
 pwalk(langs, function(id, label, example_config, example_script, script, ...) {
-  cat("## ", label, "\n")
-
   # create dir
   temp_dir2 <- paste0(temp_dir, "/inject_", id)
   dir.create(temp_dir2, recursive = TRUE, showWarnings = FALSE)
@@ -45,28 +43,29 @@ pwalk(langs, function(id, label, example_config, example_script, script, ...) {
   file.copy(example_script, script_path)
 
   # generate markdown
-  qmd <- glue::glue("
-
-Recall that our script `{script}` looks as follows:
-
-{quo}{{embed, lang='{id}'}}
-{script}
-{quo}
-
-Running `viash config inject` effectively changes the contents of the script.
-
-{quo}{{bash config-inject}}
-viash config inject {basename(example_config)}
-{quo}
-
-The updated `{script}` now contains the following code:
-
-{quo}{{embed, lang='{id}'}}
-{script}
-{quo}
-
-")
-  cat(run_quarto(qmd, temp_dir2))
+  qrt(
+    "## {% label %}
+    |
+    |Recall that our script `{%script%}` looks as follows:
+    |
+    |```{embed, lang='{%id%}'}
+    |{%script%}
+    |```
+    |
+    |Running `viash config inject` effectively changes the contents of the script.
+    |
+    |```{bash config-inject}
+    |viash config inject {%basename(example_config)%}
+    |```
+    |
+    |The updated `{%script%}` now contains the following code:
+    |
+    |```{embed, lang='{%id%}'}
+    |{%script%}
+    |```
+    |",
+    .dir = temp_dir2
+  )
 })
 ```
 
@@ -103,8 +102,6 @@ chunks <- list(
 )
 
 pwalk(langs, function(id, label, script, script_type, container, ...) {
-  cat("## ", label, "\n")
-
   # create dir
   temp_dir2 <- paste0(temp_dir, "/fun_name_", id)
   dir.create(temp_dir2, recursive = TRUE, showWarnings = FALSE)
@@ -125,27 +122,28 @@ platforms:
   readr::write_lines(config_yaml, config_path)
 
   # generate markdown
-  qmd <- glue::glue("
-
-Contents of `config.vsh.yaml`:
-
-{quo}{{embed, lang='yaml'}}
-config.vsh.yaml
-{quo}
-
-{quo}{{bash build-{id}, include=FALSE}}
-# need to rebuild to ensure the container is the correct one
-viash run config.vsh.yaml -- ---setup cb
-{quo}
-
-Output by running the component:
-
-{quo}{{bash run-{id}}}
-viash run config.vsh.yaml
-{quo}
-
-")
-  cat(run_quarto(qmd, temp_dir2))
+  qrt(
+    "## {% label %}
+    |
+    |Contents of `config.vsh.yaml`:
+    |
+    |```{embed, lang='yaml'}
+    |config.vsh.yaml
+    |```
+    |
+    |```{bash build-{%id%}, include=FALSE}
+    |# need to rebuild to ensure the container is the correct one
+    |viash run config.vsh.yaml -- ---setup cb
+    |```
+    |
+    |Output by running the component:
+    |
+    |```{bash run-{%id%}}
+    |viash run config.vsh.yaml
+    |```
+    |",
+    .dir = temp_dir2 
+  )
 })
 ```
 
