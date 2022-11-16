@@ -35,14 +35,27 @@ run_cmd <- function(command, args = character(), wd = NULL, error_on_status = TR
 }
 
 # render code as qmd and display as markdown
-run_quarto <- function(src_qmd, engine = "knitr") {
+run_quarto <- function(src_qmd, wdir, engine = "knitr") {
   # generate temp file path
   file_qmd <- tempfile(pattern = "quarto_inline_", fileext = ".qmd")
   on.exit(file.remove(file_qmd))
   file_md <- gsub("\\.qmd$", ".md", file_qmd)
 
   # assume src does not contain a header
-  src_and_header <- paste0("---\nengine: ", engine, "\n---\n\n", src_qmd)
+  src_and_header <- glue::glue("
+---
+engine: {engine}
+---
+
+{quo}{{r setup, include=FALSE}}
+knitr::opts_knit$set(root.dir = '{wdir}')
+{quo}
+
+{src_qmd}
+")
+  
+  
+  paste0("---\nengine: ", engine, "\n---\n\n", src_qmd)
 
   # write qmd source code
   readr::write_lines(src_and_header, file_qmd)
