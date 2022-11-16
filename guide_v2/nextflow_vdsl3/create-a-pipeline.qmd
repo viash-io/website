@@ -1,0 +1,31 @@
+---
+title: Create a pipeline *
+search: true
+engine: knitr
+---
+
+{{< include ../../includes/_language_chooser.qmd >}}
+
+```{r setup, include=FALSE}
+repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
+source(paste0(repo_path, "/includes/_r_helper.R"))
+# source(paste0(repo_path, "/guide_v2/component/_helper.R"))
+
+temp_dir <- tempfile("variables")
+dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
+on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
+```
+
+## Todo: add
+
+
+* Copy guide/data-workflow/nextflow-pipeline/pipeline-advanced.qmd
+* Use template repository instead of download buttons
+
+* New content:
+  - How to use a module in a pipeline.
+  - Specify that we assume the user knows how to write a Nextflow pipeline
+  - Dynamic behaviour (.run()): dynamic directives and auto helper.
+  - Nextflow Viash config
+  - Showcase pre-existing pipeline, e.g. guide/data-workflow/nextflow-pipeline/pipeline-advanced.qmd
+  - Todo: update to latest VDSL3 practices. Let the targetDir use the rootDir. Use the newer WorkflowHelper helper functions.
