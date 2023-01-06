@@ -96,16 +96,6 @@ bin
 ├── init
 ├── nextflow
 ├── viash
-├── viash_build
-├── viash_clean_nxf
-├── viash_gendoc
-├── viash_genrep
-├── viash_install
-├── viash_push
-├── viash_skeleton
-├── viash_tag
-├── viash_test
-└── viash_trafo
 ```
 
 These are executables needed to build, test and run the pipeline.
@@ -115,22 +105,22 @@ These are executables needed to build, test and run the pipeline.
 With the tools present, you can build the Docker executables and Nextflow modules using Viash. To do so, make sure Docker is running and use the following command:
 
 ```bash
-bin/viash_build
+bin/viash ns build --setup cachedbuild
 ```
 
 While building, this will result in the following output:
 
 ```
-In development mode with 'dev'.
-Exporting remove_comments (demo) =nextflow=> target/nextflow/demo/remove_comments
-Exporting combine_columns (demo) =docker=> target/docker/demo/combine_columns
-Exporting take_column (demo) =nextflow=> target/nextflow/demo/take_column
-Exporting take_column (demo) =docker=> target/docker/demo/take_column
-Exporting remove_comments (demo) =docker=> target/docker/demo/remove_comments
-Exporting combine_columns (demo) =nextflow=> target/nextflow/demo/combine_columns
-[notice] Building container 'demo_combine_columns:dev' with Dockerfile
-[notice] Building container 'demo_take_column:dev' with Dockerfile
-[notice] Building container 'demo_remove_comments:dev' with Dockerfile
+Exporting take_column (demo) =docker=> /home/di/code/advanced_pipeline/target/docker/demo/take_column
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_take_column:dev' with Dockerfile
+Exporting take_column (demo) =nextflow=> /home/di/code/advanced_pipeline/target/nextflow/demo/take_column
+Exporting remove_comments (demo) =docker=> /home/di/code/advanced_pipeline/target/docker/demo/remove_comments
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_remove_comments:dev' with Dockerfile
+Exporting remove_comments (demo) =nextflow=> /home/di/code/advanced_pipeline/target/nextflow/demo/remove_comments
+Exporting combine_columns (demo) =docker=> /home/di/code/advanced_pipeline/target/docker/demo/combine_columns
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_combine_columns:dev' with Dockerfile
+Exporting combine_columns (demo) =nextflow=> /home/di/code/advanced_pipeline/target/nextflow/demo/combine_columns
+All 6 configs built successfully
 ```
 
 Once everything is built, a new **target** directory has been created containing the executables and modules grouped per platform:
