@@ -5,7 +5,7 @@ engine: knitr
 ---
  
 {{< include ../../includes/_language_chooser.qmd >}}
- 
+
 ```{r setup, include=FALSE}
 repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
 source(paste0(repo_path, "/includes/_r_helper.R"))
@@ -14,6 +14,20 @@ source(paste0(repo_path, "/guide_v2/component/_helper.R"))
 temp_dir <- tempfile("create_new_component")
 dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
 on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
+
+# create tempdir with files
+langs <- langs %>%
+  mutate(
+    label = gsub("#", "\\\\#", label),
+    config_path = paste0(temp_dir, "/", id, "/", basename(example_config)),
+    script_path = paste0(temp_dir, "/", id, "/", basename(example_script))
+  )
+pwalk(langs, function(id, label, example_config, example_script, config_path, script_path, ...) {
+  # create dir
+  dir.create(paste0(temp_dir, "/", id), recursive = TRUE, showWarnings = FALSE)
+  file.copy(example_config, config_path)
+  file.copy(example_script, script_path)
+})
 ```
 
 A Viash component can be translated into one or more platforms: Native, Docker, Nextflow. Each of these platforms result in a different artifact:
@@ -92,17 +106,7 @@ Next, you can use the [`viash run`](/reference/viash/run.qmd) command to test wh
 ::: {.panel-tabset}
 
 ```{r viash-run, echo=FALSE, output="asis"}
-pwalk(langs, function(id, label, example_config, example_script, ...) {
-  # create dir
-  dir.create(paste0(temp_dir, "/", id), recursive = TRUE, showWarnings = FALSE)
-
-  # copy source files
-  config_path <- paste0(temp_dir, "/", id, "/", basename(example_config))
-  script_path <- paste0(temp_dir, "/", id, "/", basename(example_script))
-  file.copy(example_config, config_path)
-  file.copy(example_script, script_path)
-  
-  # generate markdown
+pwalk(langs, function(id, label, config_path, script_path, ...) {
   qrt(
     "## {% label %}
     |You can call use the component's `--help` functionality to get an overview its parameters and descriptions.
@@ -134,3 +138,90 @@ viash run config.vsh.yaml \
 ```
 :::
 
+## Build an executable
+
+We will now turn the Viash component into an executable.
+
+::: {.panel-tabset}
+
+```{r echo=FALSE, output="asis"}
+
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |Use the [viash build](/reference/viash/build.qmd) command to generate an executable:
+    |
+    |```{bash build-example}
+    |viash build config.vsh.yaml --output target
+    |```
+    |
+    |This will generate an executable in the `target/` directory:
+    |
+    |```{bash view-tree}
+    |tree
+    |```
+    |", 
+    .dir = paste0(temp_dir, "/", id)
+  )
+})
+```
+
+:::
+
+
+## Displaying the help text
+
+It's often useful to know what arguments an executable expects before trying to run it.
+
+
+::: {.panel-tabset}
+```{r echo=FALSE, output="asis"}
+pwalk(langs, function(id, label, ...) {
+  qrt(
+    "## {% label %}
+    |To display its documentation, run the executable with just the `--help` argument:
+    |
+    |```{bash exec-help}
+    |target/example_{%id%} --help
+    |```
+    |",
+    .dir = paste0(temp_dir, "/", id)
+  )
+})
+```
+:::
+
+
+This executable takes a file as input and will create an output file.
+
+## Running the executable
+
+Running an executable is the same as any other executable on your system.
+
+::: {.panel-tabset}
+```{r viash-run-dont-worry-this-takes-a-long-time, echo=FALSE, output="asis"}
+pwalk(langs, function(id, label, ...) {
+  exec <- paste0("target/my_copy_", id)
+
+  # generate markdown
+  qrt(
+    "## {% label %}
+    |
+    |You can run the executable by providing a value for `--input` and `--output`:
+    |
+    |```{bash exec-run}
+    |target/example_{%id%} --input config.vsh.yaml --output output.txt
+    |```
+    |
+    |This results in the following output:
+    |
+    |```{bash ls-dir}
+    |ls -l
+    |```
+    |",
+    .dir = paste0(temp_dir, "/", id)
+  )
+})
+```
+:::
