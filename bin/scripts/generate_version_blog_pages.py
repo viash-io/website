@@ -10,6 +10,7 @@ reference_dir = repo_root + "/reference/"
 posts_dir = repo_root + "/blog/posts/"
 
 def combine_into_file(version: str, header: str, whats_new: list[str], changes: list[str]):
+  """ Combine sections into a new file """
   print("\n---------")
   print(f"version: {version}")
   print(f"header:\n{header}")
@@ -27,15 +28,19 @@ def combine_into_file(version: str, header: str, whats_new: list[str], changes: 
     if changes:
       f.writelines(changes)
 
+def bump_md_line(s: str) -> str:
+  """ if header, bump header up one level """
+  if re.match(r"^#+ .+$", s):
+    s = "#" + s
+  return s
+
 def bump_markdown_headers(lines: list[str]) -> list[str]:
-  buff = []
-  for l in lines:
-    if re.match(r"^#+ .+$", l):
-      l = "#" + l
-    buff.append(l)
-  return buff
+  """ map headers and bump up one level """
+  out = map(bump_md_line, lines)
+  return list(out)
 
 def handle_title(header: str) -> (str, str):
+  """ Split the title and create a header section """
   matches = re.search(r"^# Viash (\d+[\.\d+]+) \(([\dy]{4}-[\dM]{2}-[\dd]{2})\): (.*)$", header)
 
   version = matches.group(1)
@@ -66,6 +71,7 @@ def handle_title(header: str) -> (str, str):
 
 
 def handle_whats_new(lines: list[str]) -> list[str]:
+  """ Adapt what's new section to add header and bump headers to higher level """
   # print("\n---")
   # print(f"what's new: {lines}")
 
@@ -79,6 +85,7 @@ def handle_whats_new(lines: list[str]) -> list[str]:
 
 
 def handle_changes(lines: list[str]) -> list[str]:
+  """ Adapt full changelog section to add header and bump headers to higher level """
   # print("\n---")
   # print(f"changes: {lines}")
 
@@ -92,8 +99,9 @@ def handle_changes(lines: list[str]) -> list[str]:
 
 
 def handle_section(lines: list[str]):
-  print("\n-----------")
-  print(lines)
+  """ Split version data into title, what's new, and full changelog parts and write to file """
+  # print("\n-----------")
+  # print(lines)
 
   # take first line and process as header
   header = lines.pop(0)
