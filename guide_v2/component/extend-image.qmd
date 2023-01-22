@@ -1,0 +1,136 @@
+---
+title: Extend an image
+search: true
+engine: knitr
+---
+
+{{< include ../../includes/_language_chooser.qmd >}}
+
+```{r setup, include=FALSE}
+repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
+source(paste0(repo_path, "/includes/_r_helper.R"))
+source(paste0(repo_path, "/guide_v2/component/_language_examples.R"))
+
+temp_dir <- tempfile("containerization")
+dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
+on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
+```
+
+In the previous section, reproducibility of our Viash component was ensured by a predefined Docker image such as `bash:4.0` and `python:3.10`. However, your script might require other software dependencies, such as command-line tools or Python and R packages.
+
+By default, Viash will build component-specific Docker images. This means that every Viash component can have its own set of dependencies.
+
+## Adding additional software to base images
+
+::: {.panel-tabset}
+
+# Bash
+
+```yaml
+platforms:
+  - type: docker
+    image: "bash:4.0"
+    setup:
+      - type: apk
+        packages: [ curl, wget ]
+  - type: nextflow
+```
+
+# C\#
+
+```yaml
+platforms:
+  - type: docker
+    image: "ghcr.io/data-intuitive/dotnet-script:1.3.1"
+    setup:
+      - type: apk
+        packages: [ curl, wget ]
+  - type: nextflow
+```
+
+# JavaScript
+
+```yaml
+platforms:
+  - type: docker
+    image: "node:19-bullseye"
+    setup:
+      - type: apt
+        packages: [ curl, wget ]
+  - type: nextflow
+```
+
+# Python
+
+```yaml
+platforms:
+  - type: docker
+    image: "python:3.10"
+    setup:
+      - type: apt
+        packages: [ curl, wget ]
+      - type: python
+        packages: anndata
+```
+
+# R
+
+```yaml
+platforms:
+  - type: docker
+    image: "eddelbuettel/r2u:22.04"
+    setup:
+      - type: apt
+        packages: [ curl, wget ]
+      - type: r
+        packages: tidyverse
+```
+
+Tip: using [`r2u`](https://eddelbuettel.github.io/r2u/) as a base R image can reduce the install time of R packages from minutes to seconds.
+
+# Scala
+
+```yaml
+platforms:
+  - type: docker
+    image: "python:3.10"
+    setup:
+      - type: apt
+        packages: [ curl, wget ]
+```
+
+:::
+
+## Traditional solutions
+
+### Find a fitting Docker image
+
+Hunt down a Docker image with the right set of dependencies
+
+### Build your own Dockerfile
+
+### Comparison of benefits
+
+* Find a fitting Docker image
+  - Relatively easy for just one or two dependencies, but certain combinations of dependencies will be difficult to find pre-existing Docker images for.
+  - Poses a security risk
+* Build custom Dockerfile
+  - Requires manual bookkeeping of which Docker images are used in which components.
+  - Not difficult but requires more know-how on how to build custom Docker images.
+* Let Viash build component-specific Docker images
+  - More maintainable: Easier to add / change dependencies to one component without breaking another
+  - More control: Comply with security requirements
+  - Store images in a centralized container registry
+
+
+## Todo: add
+
+
+* Copy guide/component/creation/docker.qmd.
+* Add information on how to install extra software/packages using setup:.
+* Add info on:
+  - Docker volumes (guide/building-block/docker/docker-volume.qmd)
+  - Inspecting the dockerfile (guide/building-block/docker/inspect-dockerfile.qmd)
+  - Debugging the container (---debug)
+  - Setup strategies (guide/building-block/docker/setup-strategies.qmd)
+    ( try to point to the reference documentation instead of copying the ref docs verbatim )
