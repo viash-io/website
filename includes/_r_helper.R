@@ -44,7 +44,6 @@ run_quarto <- function(src_qmd, wdir, engine = "knitr") {
   # generate temp file path
   file_qmd <- tempfile(pattern = "quarto_inline_", fileext = ".qmd")
   on.exit(file.remove(file_qmd))
-  file_md <- gsub("\\.qmd$", ".md", file_qmd)
 
   # assume src does not contain a header
   src_and_header <- strip_margin(glue::glue("
