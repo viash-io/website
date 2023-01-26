@@ -1,5 +1,3 @@
-library(fs)
-
 ## VIASH START
 par <- list(
   "input" = 'file.txt',
@@ -8,5 +6,5 @@ par <- list(
 ## VIASH END
 
 cat("Copying '", par$input, "' to '", par$output, "'.\n")
-file_copy(par$input, par$output)
+file.copy(par$input, par$output)
 
