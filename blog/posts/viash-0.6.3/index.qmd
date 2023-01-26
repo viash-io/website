@@ -1,11 +1,13 @@
 ---
 title: "Viash 0.6.3"
 subtitle: "Quality-of-life improvements in Viash."
-date: 2022/11/09
+date: 2022-11-09
 categories:
   - New Release
 author: Viash Team
 ---
+
+## What's new?
 
 This release features contains mostly quality of life improvements and some experimental functionality. Most notably:
 
@@ -58,11 +60,19 @@ This release features contains mostly quality of life improvements and some expe
   Added a testbench that verifies that all arguments are in fact annotated, skipping those that are not in the class constructor.
   Adds a hierarchy field in the `__this__` member to list the relation of the own and parent classes.
 
+* `Testbenches`: Add exit code to helper method `testMainWithStdErr`.
+
+* `Testbenches`: Add testbench to verify viash underscore components (viash_build, viash_install, viash_push, viash_skeleton, viash_test).
+
+* `Testbenches`: Update viash underscore component tests to use `$meta_executable`.
+
 * `viash ns exec`: Allow choosing whether the `{platform}` field should be filled in, based on the `--apply_platform` parameter.
 
 ### BUG FIXES
 
 * `DockerPlatform`: Remove duplicate auto-mounts (#257).
+
+* `Underscore component tests`: Fix tests for `viash_skeleton` and `viash_test` components.
 
 * `NextflowVDSL3Platform`: Fix 'Module scriptPath has not been defined yet' error when Nextflow>=22.10 (#269).
 
@@ -79,7 +89,7 @@ This release features contains mostly quality of life improvements and some expe
 
 ### EXPERIMENTAL FUNCTIONALITY
 
-* `Config`: Any part of a Viash config can use inheritance to fill data (#259). For example:
+* `Config`: Any part of a Viash config can use inheritance to fill data (#271). For example:
   Contents of `src/test/config.vsh.yaml`:
   ```yaml
   __inherits__: ../api/base.yaml
@@ -119,3 +129,4 @@ This release features contains mostly quality of life improvements and some expe
           echo Copying $par_input to $par_output
           cp $par_input $par_output
   ```
+

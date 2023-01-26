@@ -1,46 +1,50 @@
 ---
 title: "Viash 0.3.1"
-subtitle: "Add authors field to config, added registry fields to Docker platform config, ..."
-date: 2021/01/26
+subtitle: "Add fields for specifying authors and the Docker registry"
+date: 2021-01-26
 categories:
   - New Release
 author: Viash Team
 ---
 
-## Full changelog:
+## What's new?
+
+Add authors field to config, added registry fields to Docker platform config.
+
+## Full changelog
 
 ### NEW FEATURES
 
 * Functionality: Added list of authors field. Example:
 
-```yaml
-functionality:
-  authors:
-    - name: Bob Cando
-      roles: [maintainer, author]
-      email: bob@cando.com
-      props: {github: bobcando, orcid: XXXAAABBB}
-```
+  ```yaml
+  functionality:
+    authors:
+      - name: Bob Cando
+        roles: [maintainer, author]
+        email: bob@cando.com
+        props: {github: bobcando, orcid: XXXAAABBB}
+  ```
 
-* Docker Platform: Allow specifying the registry with `target_registry`. Example:
+* `Docker`: Allow specifying the registry with `target_registry`. Example:
 
-```yaml
-- type: docker
-  image: bash:4.0
-  target_registry: foo.io
-  target_image: bar
-  target_tag: 0.1
-```
+  ```yaml
+  - type: docker
+    image: bash:4.0
+    target_registry: foo.io
+    target_image: bar
+    target_tag: 0.1
+  ```
 
-* Docker Platform: `version` is now a synonym for `target_tag`.
+* `Docker`: `version` is now a synonym for `target_tag`.
   If both `version` and `target_tag` are not defined, `functionality.version` will
   be used instead.
   
-* Docker Platform: Can change the Docker Setup Strategy by specifying
+* `Docker`: Can change the Docker Setup Strategy by specifying
   - in the yaml: `setup_strategy: xxx`
   - on command-line: `---docker_setup_strategy xxx` or `---dss xxx`
   
-  Allowed values for the setup strategy are:
+  Supported values for the setup strategy are:
   - alwaysbuild / build: build the image from the dockerfile (DEFAULT)
   - alwayscachedbuild / cachedbuild: build the image from the dockerfile, with caching
   - alwayspull / pull: pull the image from a registry
@@ -59,7 +63,7 @@ functionality:
 
 ### MINOR CHANGES
 
-* CLI: Allow parameters before and after specifying a viash config yaml. For example,
+* CLI: Allow parameters before and after specifying a viash config yaml. For example, 
   both following commands now work. Up until now, only the latter would work.
   - `viash run config.vsh.yaml -p docker`
   - `viash run -p docker config.vsh.yaml`
@@ -89,3 +93,4 @@ functionality:
 ### TESTING
 
 * YAML: Test invertibility of parsing/unparsing config objects.
+

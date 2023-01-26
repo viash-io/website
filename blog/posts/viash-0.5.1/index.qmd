@@ -1,51 +1,53 @@
 ---
 title: "Viash 0.5.1"
-subtitle: "Viash 0.5.1 adds support for C# scripts and fixes a few bugs."
-date: 2021/07/19
+subtitle: "Viash 0.5.1 adds support for C# scripts and fixes a few bugs"
+date: 2021-07-14
 categories:
   - New Release
 author: Viash Team
 ---
 
-## C# script support
+## What's new?
 
-We've added C# scripts (.csx) as a [supported language](/guide/component/languages.html) using **dotnet-script**.  
-To run C# scripts natively, you'll need to install [.NET Core](https://dotnet.microsoft.com/download) and execute the following command in a terminal:
+### C# script support
 
-```bash
-dotnet tool install -g dotnet-script
-```
+We've added C# scripts (.csx) as a supported language using **dotnet-script**.  
+To run C# scripts natively, you'll need to install .NET Core and execute the following command in a terminal:
+
+  ```bash
+  dotnet tool install -g dotnet-script
+  ```
 
 You can now run C# scripts like this:
 
-```bash
-dotnet script hello_viash.csx
-```
+  ```bash
+  dotnet script hello_viash.csx
+  ```
 
-To use C# scripts as components, use the new `csharp_script` type in the functionality section of your [config file](/reference/config/index.html):
+To use C# scripts as components, use the new `csharp_script` type in the functionality section of your config file:
 
-```yaml
-  resources:
-  - type: csharp_script
-    path: script.csx
-```
+  ```yaml
+    resources:
+    - type: csharp_script
+      path: script.csx
+  ```
 
 Here's an example of a simple C# script with Viash in mind:
 
-```csharp
-// VIASH START
-var par = new {
-  input = "Hello World",
-  name = "Mike"
-};
-// VIASH END
+  ```csharp
+  // VIASH START
+  var par = new {
+    input = "Hello World",
+    name = "Mike"
+  };
+  // VIASH END
 
-System.Console.WriteLine(input + ", " + name + "!");
-```
+  System.Console.WriteLine(input + ", " + name + "!");
+  ```
 
 The language-specific guide for creating C# script components will be added in the near future.
 
-## Bug fixes
+### Bug fixes
 
 First off, these special characters  can now be used in the description, usage, default and example fields of components:
 
@@ -57,43 +59,47 @@ First off, these special characters  can now be used in the description, usage, 
 
 Nextflow output files with the same extension won't overwrite each other any more, like it was the case for arguments like this:
 
-```yaml
-functionality:
-  name: bar
-  arguments:
-    - name: "--input"
-      type: file
-      example: input.txt
-    - name: "--output1"
-      type: file
-      direction: output
-      required: true
-      example: output.txt
-    - name: "--output2"
-      type: file
-      direction: output
-      required: true
-      example: optional.txt
-```
+  ```yaml
+  functionality:
+    name: bar
+    arguments:
+      - name: "--input"
+        type: file
+        example: input.txt
+      - name: "--output1"
+        type: file
+        direction: output
+        required: true
+        example: output.txt
+      - name: "--output2"
+        type: file
+        direction: output
+        required: true
+        example: optional.txt
+  ```
 
 In this case, the two output files would have been identical in the past.
 ___
 
-## Full changelog:
+## Full changelog
 
 ### NEW FEATURES
 
 * `CSharpScript`: Added support for C# scripts (`type: "csharp_script"`) to viash.
 
+### MINOR CHANGES
+
+* `NextflowPlatform`: Added `directive_cpus`, `directive_max_forks`, `directive_memory` and `directive_time` parameters.
+
 ### BUG FIXES
 
 * `BashWrapper`: Refactor escaping descriptions, usages, defaults, and examples (#34).
 
-* `NextFlowPlatform`: Refactor escaping descriptions, usages, defaults and examples (#75).
+* `NextflowPlatform`: Refactor escaping descriptions, usages, defaults and examples (#75).
 
-* `NextFlowPlatform`: Add argument to output path to avoid naming conflicts for components with multiple output files (#76).
+* `NextflowPlatform`: Add argument to output path to avoid naming conflicts for components with multiple output files (#76).
 
-* `NextFlowPlatform`, `renderCLI()`: Only add flag to rendered command when boolean_true is actually true (#78).
+* `NextflowPlatform`, `renderCLI()`: Only add flag to rendered command when boolean_true is actually true (#78).
 
 * `DockerPlatform`: Only chown when output file exists.
 
@@ -104,3 +110,4 @@ ___
 * `viash build`: Check `--help` description output on the whole text instead of per letter or word basis.
 
 * `TestingAllComponentsSuite`: Only testing bash natively, because other dependencies might not be available.
+
