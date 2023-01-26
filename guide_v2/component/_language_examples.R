@@ -8,7 +8,7 @@ repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
 langs <- tribble(
   ~id, ~label, ~script,
   "bash", "Bash", "script.sh",
-  "csharp", "C\\#", "script.csx",
+  "csharp", "C#", "script.csx",
   "js", "JavaScript", "script.js",
   "python", "Python", "script.py",
   "r", "R", "script.R",

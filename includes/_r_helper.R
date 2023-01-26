@@ -74,7 +74,11 @@ run_quarto <- function(src_qmd, wdir, engine = "knitr") {
   # strip header
   paste0(out$stdout, "\n") %>%
     paste(collapse = "") %>%
-    gsub("---.*\n---\n+", "", .)
+    gsub("---.*\n---\n+", "", .) %>%
+    # escape hashes in titles
+    strsplit("\n") %>% .[[1]] %>%
+    gsub("^(#+[^#\n]+)#(.*)", "\\1\\\\#\\2", .) %>%
+    paste(collapse = "\n")
 }
 
 qrt <- function(
