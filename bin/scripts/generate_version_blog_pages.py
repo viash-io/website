@@ -1,12 +1,9 @@
-import git, subprocess, json, csv, re, os
-from pathlib import Path
+import git, re, os
 
 repo = git.Repo(".", search_parent_directories=True) # Get root dir of repo
 repo_root = repo.working_tree_dir
 
-changelog = "CHANGELOG.md"
-
-reference_dir = repo_root + "/reference/"
+changelog_path = repo_root + "/bin/data/CHANGELOG.md"
 posts_dir = repo_root + "/blog/posts/"
 
 def combine_into_file(version: str, header: str, whats_new: list[str], changes: list[str]):
@@ -43,9 +40,7 @@ def handle_title(header: str) -> (str, str):
   """ Split the title and create a header section """
   matches = re.search(r"^# Viash (\d+[\.\d+]+) \(([\dy]{4}-[\dM]{2}-[\dd]{2})\): (.*)$", header)
 
-  version = matches.group(1)
-  date = matches.group(2)
-  subtitle = matches.group(3)
+  version, date, subtitle = matches.group(1, 2, 3)
 
   #print(f"--> {version} <-> {date} <-> {subtitle} <--")
 
@@ -123,7 +118,7 @@ def handle_section(lines: list[str]):
 
 def load_log():
   """ Load changelog and split into sections """
-  with open(reference_dir + changelog, "r") as f:
+  with open(changelog_path, "r") as f:
     contents = f.readlines()
 
   # collect sections into a temporary buffer
