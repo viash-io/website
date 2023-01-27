@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../guide_v2/component/variables.html" rel="next">
-<link href="../../guide_v2/component/containerization.html" rel="prev">
+<link href="../../guide_v2/component/add-dependencies.html" rel="prev">
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -192,7 +192,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../guide_v2/component/containerization.html" class="sidebar-item-text sidebar-link">Containerization *</a>
+  <a href="../../guide_v2/component/add-dependencies.html" class="sidebar-item-text sidebar-link">Add dependencies</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -250,84 +250,6 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 </header>
 
-<script type="text/javascript">
-let langDict = {
-  'bash': "Bash",
-  'csharp': "C#",
-  'js': "JavaScript",
-  'python': "Python",
-  'scala': "Scala",
-  'r': "R",
-};
-
-let invertedLangDict = invertDictionary(langDict);
-
-document.addEventListener("DOMContentLoaded", function() {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-
-    let lang = 'bash';
-
-    if (urlParams.has('lang')){
-        lang = urlParams.get('lang');
-    }
-
-    changeTabSelections(lang);
-
-    var tabs = document.querySelectorAll('[role="tab"]');
-    
-    for(var i = 0; i < tabs.length; i++) {
-        tab = tabs[i];
-        if (tab.textContent in invertedLangDict) {
-            tab.addEventListener('click', onTabClicked);
-        }
-    }
-
-});
-
-function changeTabSelections(language) {
-    var tabs = document.querySelectorAll('[role="tab"]');
-    var tab_panels = document.querySelectorAll('[role="tabpanel"]');
-
-    // Disable all tab panels
-    for(var i = 0; i < tab_panels.length; i++) {
-        panel = tab_panels[i];
-        panel.classList.remove('active')
-    }
-
-    // Iterate over all tabs
-    for(var i = 0; i < tabs.length; i++) {
-        tab = tabs[i];
-
-        // Disable all tabs
-        tab.classList.remove('active');
-
-        // If the tab is the chosen language
-        if (tab.textContent == langDict[language]) {
-            // Mark it active
-            tab.classList.add('active');
-            // Find the linked tab panel and make it active
-            var linked_panel = tab.getAttribute('aria-controls')
-            var panel = document.getElementById(linked_panel);
-            panel.classList.add('active');
-        }
-    }
-
-}
-
-function onTabClicked(event) {
-    changeTabSelections(invertedLangDict[event.srcElement.textContent]);
-}
-
-function invertDictionary(dict){
-    var ret = {};
-    for(var key in dict){
-        ret[dict[key]] = key;
-    }
-    return ret;
-}
-
-</script>
 <section id="todo-add" class="level2">
 <h2 class="anchored" data-anchor-id="todo-add">Todo: add</h2>
 <ul>
@@ -492,8 +414,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../guide_v2/component/containerization.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Containerization *</span>
+      <a href="../../guide_v2/component/add-dependencies.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Add dependencies</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
