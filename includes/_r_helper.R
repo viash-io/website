@@ -94,3 +94,20 @@ qrt <- function(
   md <- run_quarto(qmd_stripped, .dir)
   cat(md)
 }
+
+write_yaml <- function(x, file, ...) {
+  handlers <- list(
+    logical = function(x) {
+      result <- ifelse(x, "true", "false")
+      class(result) <- "verbatim"
+      return(result)
+    }
+  )
+  yaml::write_yaml(
+    x = x,
+    file = file,
+    handlers = handlers,
+    indent.mapping.sequence = TRUE,
+    ...
+  )
+}

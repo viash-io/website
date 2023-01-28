@@ -4,10 +4,111 @@ search: true
 engine: knitr
 ---
 
+{{< include ../../includes/_language_chooser.qmd >}}
 
-## Todo: add
+```{r setup, include=FALSE}
+repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
+source(paste0(repo_path, "/includes/_r_helper.R"))
+source(paste0(repo_path, "/guide_v2/component/_language_examples.R"))
+```
 
+If a script needs access to an external file, it needs to be added as a resource in the config.
+More specifically, if the resource is a script containing helper functions, you'll also need to import
+those functions in the main script (see [this section](#loading-helper-functions)).
 
-* I feel this deserves a section on its own, because I see it's something a lot of new users are confused about.
-* It would be create if you could show how to include an external file in the config yaml and how to access it from a script (i.e. meta["resources_dir"] + "/foo.txt".
-* You can include the information shown on the FAQ faq/index.qmd section "Can I store helper functions as separate files?"
+## Adding resources
+
+```{r setup-adding-resources, include=FALSE}
+temp_dir <- tempfile("add-dependencies")
+dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
+on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
+
+# create tempdir with modified files
+add_text_resource <- function(config) {
+  config$functionality$resources <- c(
+    config$functionality$resources, 
+    list(list(path = "my_file.txt"))
+  )
+  config
+}
+add_line_after_viash_end <- function(...) {
+  function(script) {
+    which_end <- grep("VIASH END", script)
+    c(
+      script[seq_len(which_end)],
+      "",
+      ...,
+      "",
+      script[-seq_len(which_end)]
+    )    
+  }
+}
+use_text_resource <- list(
+  bash = add_line_after_viash_end("# view resource file", "cat \"$meta_resources_dir/my_file.txt\""),
+  csharp = add_line_after_viash_end("// todo"),
+  js = add_line_after_viash_end("// todo"),
+  python = add_line_after_viash_end("# todo"),
+  r = add_line_after_viash_end("# view resource file", "lines <- readLines(paste0(meta$resources_dir, \"/my_file.txt\")", "cat(lines, sep = \"\\n\")"),
+  scala = add_line_after_viash_end("// todo")
+)
+langs <- langs %>%
+  mutate(
+    label = gsub("#", "\\\\#", label),
+    config_path = paste0(temp_dir, "/", id, "/", basename(example_config)),
+    script_path = paste0(temp_dir, "/", id, "/", basename(example_script))
+  )
+pwalk(langs, function(id, label, example_config, example_script, config_path, script_path, ...) {
+  # create dir
+  dir.create(paste0(temp_dir, "/", id), recursive = TRUE, showWarnings = FALSE)
+
+  # read config, make modifications, write to file
+  conf <- yaml::read_yaml(example_config) %>%
+    add_text_resource()
+  write_yaml(
+    conf,
+    config_path
+  )
+  
+  # modify script and write to file
+  script <- readr::read_lines(example_script) %>%
+    use_text_resource[[id]]()
+  readr::write_lines(script, script_path)
+    
+})
+```
+
+For your script to be able to find back a file called `my_file.txt`, it first needs
+to be added to the resources section in your config.
+
+::: {.panel-tabset}
+```{r create-config, output="asis"}
+pwalk(langs, function(id, label, config_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```yaml
+    |{% paste(readr::read_lines(config_path), collapse = '\n    |') %}
+    |```
+    |
+    |")
+})
+```
+:::
+
+Edit script: (todo)
+
+::: {.panel-tabset}
+```{r create-script, echo=FALSE, output="asis"}
+pwalk(langs, function(id, label, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```{% id %}
+    |{% paste(readr::read_lines(script_path), collapse = '\n') %}
+    |```
+    |")
+})
+```
+:::
+
+## Loading helper functions

@@ -59,18 +59,9 @@ pwalk(langs, function(id, label, example_config, example_script, config_path, sc
   # read config, make modifications, write to file
   conf <- yaml::read_yaml(example_config)
   conf2 <- config_overrides[[id]](conf)
-  handlers <- list(
-    logical = function(x) {
-      result <- ifelse(x, "true", "false")
-      class(result) <- "verbatim"
-      return(result)
-    }
-  )
-  yaml::write_yaml(
+  write_yaml(
     conf2,
-    config_path,
-    handlers = handlers,
-    indent.mapping.sequence = TRUE
+    config_path
   )
 })
 ```
@@ -84,7 +75,6 @@ By default, Viash will build component-specific Docker images. This means that e
 Below is an example where additional software is added to a base Docker image using the [`setup`]({{< var reference.setup >}}) section of a Docker platform.
 
 ::: {.panel-tabset}
-
 ```{r create-config, output="asis"}
 pwalk(langs, function(id, label, config_path, ...) {
   qrt(
