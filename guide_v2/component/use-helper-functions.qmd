@@ -16,10 +16,7 @@ Intro
 
 
 ```{r setup-adding-resources, include=FALSE}
-# temp_dir <- tempfile("add-dependencies")
-# dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
-# on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
-temp_dir <- "/home/rcannood/helper2"
+temp_dir <- tempfile("add-dependencies")
 dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
 on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
 
@@ -146,7 +143,6 @@ pwalk(langs, function(id, label, extension, example_config, config_path, script_
   # modify script and write to file
   readr::write_lines(scripts[[id]], script_path)
   readr::write_lines(helpers[[id]], helper_path)
-    
 })
 ```
 
