@@ -10,9 +10,8 @@ val par = ViashPar(
 )
 // VIASH END
 
+// copy file
 println(s"Copying '${par.input}' to '${par.output}'.")
-
 val fileIn = Paths.get(par.input)
 val fileOut = Paths.get(par.output)
-
 Files.copy(fileIn, fileOut, REPLACE_EXISTING)
