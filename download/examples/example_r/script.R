@@ -6,5 +6,5 @@ par <- list(
 ## VIASH END
 
 # copy file
-cat("Copying '", par$input, "' to '", par$output, "'.\n")
+cat("Copying '", par$input, "' to '", par$output, "'.\n", sep = "")
 file.copy(par$input, par$output)

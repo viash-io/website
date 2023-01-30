@@ -1,5 +1,5 @@
 ---
-title: Resources and helper functions *
+title: Resources and helper functions
 search: true
 engine: knitr
 ---
@@ -16,7 +16,9 @@ If a script needs access to an external file, it needs to be added as a resource
 More specifically, if the resource is a script containing helper functions, you'll also need to import
 those functions in the main script (see [this section](#loading-helper-functions)).
 
-## Adding resources
+## Add a resource file
+
+First, we'll create a file called `my_file.txt` and allow the example component to use it.
 
 ```{r setup-adding-resources, include=FALSE}
 temp_dir <- tempfile("add-dependencies")
@@ -57,7 +59,7 @@ use_text_resource <- list(
   js = add_line_after_viash_end(
     "// view resource file",
     "const my_file = `${meta['resources_dir']}/my_file.txt`",
-    "fs.readFile(my_file, (err, data) => {",
+    "fs.readFile(my_file, 'utf8', (err, data) => {",
     "  if (err) throw err;",
     "  console.log(data);",
     "});"
@@ -70,12 +72,12 @@ use_text_resource <- list(
   ),
   r = add_line_after_viash_end(
     "# view resource file",
-    "lines <- readLines(paste0(meta$resources_dir, \"/my_file.txt\")",
+    "lines <- readLines(paste0(meta$resources_dir, \"/my_file.txt\"))",
     "cat(lines, sep = \"\\n\")"
   ),
   scala = add_line_after_viash_end(
     "// view resource file",
-    "val myFile = s\"${meta[\"resources_dir\"]}/my_file.txt\"",
+    "val myFile = s\"${meta.resources_dir}/my_file.txt\"",
     "val src = scala.io.Source.fromFile(myFile)",
     "src.getLines.foreach(println)"
   )
@@ -109,55 +111,44 @@ pwalk(langs, function(id, label, example_config, example_script, config_path, sc
 })
 ```
 
-For your script to be able to find back a file called `my_file.txt`, it first needs
-to be added to the resources section in your config.
 
 ::: {.panel-tabset}
 ```{r create-config, output="asis"}
-pwalk(langs, function(id, label, config_path, ...) {
+pwalk(langs, function(id, label, config_path, script_path, ...) {
   qrt(
     "## {% label %}
+    |
+    |First, create a file called `my_file.txt`.
+    |
+    |```{sh}
+    |echo 'Here are the contents of my_file.txt' > my_file.txt
+    |```
+    |
+    |Next, the file needs to be added to the config as a resource.
+    |This will let Viash know to copy the new file inside a component's resource directory.
     |
     |```yaml
     |{% paste(readr::read_lines(config_path), collapse = '\n    |') %}
     |```
     |
-    |")
-})
-```
-:::
-
-This will let Viash know to copy the new file inside a component's resource directory.
-To access a resource from within the script, use the `resources_dir` [meta-variable](variables.qmd):
-
-::: {.panel-tabset}
-```{r create-script, echo=FALSE, output="asis"}
-pwalk(langs, function(id, label, script_path, ...) {
-  qrt(
-    "## {% label %}
+    |Lastly, to access a resource from within the script, 
+    |use the `resources_dir` [meta-variable](variables.qmd):
     |
     |```{% id %}
     |{% paste(readr::read_lines(script_path), collapse = '\n') %}
     |```
-    |")
-})
-```
-:::
-
-Run the component:
-
-::: {.panel-tabset}
-```{r viash-run, echo=FALSE, output="asis", eval=FALSE}
-pwalk(langs, function(id, label, config_path, script_path, ...) {
-  qrt(
-    "## {% label %}
     |
-    |```{bash run-io}
+    |Now we can run the component as follows:
+    |
+    |```{bash}
     |viash run config.vsh.yaml -- --input config.vsh.yaml --output foo.txt
     |```
+    |
     |", .dir = paste0(temp_dir, "/", id))
 })
 ```
 :::
+
+
 
 ## Loading helper functions
