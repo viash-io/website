@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Viash - Testing *</title>
+<title>Viash - Use helper functions *</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../guide_v2/component/requirements.html" rel="next">
-<link href="../../guide_v2/component/use-helper-functions.html" rel="prev">
+<link href="../../guide_v2/component/testing.html" rel="next">
+<link href="../../guide_v2/component/variables.html" rel="prev">
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -73,9 +73,11 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Viash - Testing *">
+<meta property="og:title" content="Viash - Use helper functions *">
+<meta property="og:description" content="If a script needs access to an external file, it needs to be added as a resource in the config.">
 <meta property="og:site-name" content="Viash">
-<meta name="twitter:title" content="Viash - Testing *">
+<meta name="twitter:title" content="Viash - Use helper functions *">
+<meta name="twitter:description" content="If a script needs access to an external file, it needs to be added as a resource in the config.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -159,7 +161,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Testing *</h1>
+      <h1 class="quarto-secondary-nav-title">Use helper functions *</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -207,12 +209,12 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../guide_v2/component/use-helper-functions.html" class="sidebar-item-text sidebar-link">Use helper functions *</a>
+  <a href="../../guide_v2/component/use-helper-functions.html" class="sidebar-item-text sidebar-link active">Use helper functions *</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../guide_v2/component/testing.html" class="sidebar-item-text sidebar-link active">Testing *</a>
+  <a href="../../guide_v2/component/testing.html" class="sidebar-item-text sidebar-link">Testing *</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -231,7 +233,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#todo-add" id="toc-todo-add" class="nav-link active" data-scroll-target="#todo-add">Todo: add</a></li>
+  <li><a href="#add-a-resource-file" id="toc-add-a-resource-file" class="nav-link active" data-scroll-target="#add-a-resource-file">Add a resource file</a></li>
   </ul>
 </nav>
     </div>
@@ -240,7 +242,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Testing *</h1>
+<h1 class="title d-none d-lg-block">Use helper functions *</h1>
 </div>
 
 
@@ -255,13 +257,88 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 </header>
 
-<section id="todo-add" class="level2">
-<h2 class="anchored" data-anchor-id="todo-add">Todo: add</h2>
-<ul>
-<li>Copy guide/component/unit-testing.qmd.</li>
-<li>Add a note that the scripting language of the unit test doesn’t need to match the language of the main script, as long as all of the requirements are available.</li>
-<li>It would be nice to add examples on how to write unit tests in different languages (similar to how it’s done on other pages).</li>
-</ul>
+<script type="text/javascript">
+let langDict = {
+  'bash': "Bash",
+  'csharp': "C#",
+  'js': "JavaScript",
+  'python': "Python",
+  'r': "R",
+  'scala': "Scala",
+};
+
+let invertedLangDict = invertDictionary(langDict);
+
+document.addEventListener("DOMContentLoaded", function() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    let lang = 'bash';
+
+    if (urlParams.has('lang')){
+        lang = urlParams.get('lang');
+    }
+
+    changeTabSelections(lang);
+
+    var tabs = document.querySelectorAll('[role="tab"]');
+    
+    for(var i = 0; i < tabs.length; i++) {
+        tab = tabs[i];
+        if (tab.textContent in invertedLangDict) {
+            tab.addEventListener('click', onTabClicked);
+        }
+    }
+
+});
+
+function changeTabSelections(language) {
+    var tabs = document.querySelectorAll('[role="tab"]');
+    var tab_panels = document.querySelectorAll('[role="tabpanel"]');
+
+    // Disable all tab panels
+    for(var i = 0; i < tab_panels.length; i++) {
+        panel = tab_panels[i];
+        panel.classList.remove('active')
+    }
+
+    // Iterate over all tabs
+    for(var i = 0; i < tabs.length; i++) {
+        tab = tabs[i];
+
+        // Disable all tabs
+        tab.classList.remove('active');
+
+        // If the tab is the chosen language
+        if (tab.textContent == langDict[language]) {
+            // Mark it active
+            tab.classList.add('active');
+            // Find the linked tab panel and make it active
+            var linked_panel = tab.getAttribute('aria-controls')
+            var panel = document.getElementById(linked_panel);
+            panel.classList.add('active');
+        }
+    }
+
+}
+
+function onTabClicked(event) {
+    changeTabSelections(invertedLangDict[event.srcElement.textContent]);
+}
+
+function invertDictionary(dict){
+    var ret = {};
+    for(var key in dict){
+        ret[dict[key]] = key;
+    }
+    return ret;
+}
+
+</script>
+<p>If a script needs access to an external file, it needs to be added as a resource in the config. More specifically, if the resource is a script containing helper functions, you’ll also need to import those functions in the main script (see <a href="#loading-helper-functions">this section</a>).</p>
+<section id="add-a-resource-file" class="level2">
+<h2 class="anchored" data-anchor-id="add-a-resource-file">Add a resource file</h2>
+<p>First, we’ll create a file called <code>my_file.txt</code> and allow the example component to use it.</p>
 
 
 </section>
@@ -419,13 +496,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../guide_v2/component/use-helper-functions.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Use helper functions *</span>
+      <a href="../../guide_v2/component/variables.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Variables and meta-variables (WIP)</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../guide_v2/component/requirements.html" class="pagination-link">
-        <span class="nav-page-text">Requirements *</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../guide_v2/component/testing.html" class="pagination-link">
+        <span class="nav-page-text">Testing *</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
