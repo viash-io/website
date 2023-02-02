@@ -1,0 +1,85 @@
+functionality:
+  name: generate_version_blog_pages
+  description: |
+    The script takes a changelog.md file and splits it into multiple quarto pages
+    Some formatting is expected to extract titles, version number, etc.
+  arguments:
+    - name: "--input"
+      type: file
+      alternatives: "-i"
+      direction: input
+      description: The changelog.md to use as input
+      required: true
+      must_exist: true
+    - name: "--output"
+      type: file
+      alternatives: "-o"
+      direction: output
+      description: Base path to use to store the pages, should match 'blog/posts'
+    - name: "--verbose"
+      type: boolean_true
+      alternatives: "-v"
+      description: Print output file content to the terminal
+  resources:
+    - type: python_script
+      path: generate_version_blog_pages.py
+  test_resources:
+    - type: bash_script
+      text: |
+        "$meta_executable" --input "changelog.md" --output .
+
+        if ! grep -q "Viash 0.0.1" viash-0.0.1/index.qmd ; then
+          echo viash-0.0.1/index.qmd should contain "Viash 0.0.1"
+          exit 1
+        fi
+        if ! grep -q "Viash 0.0.2" viash-0.0.2/index.qmd ; then
+          echo viash-0.0.2/index.qmd should contain "Viash 0.0.2"
+          exit 1
+        fi
+        if grep -q "Viash 0.0.2" viash-0.0.1/index.qmd ; then
+          echo viash-0.0.1/index.qmd should not contain "Viash 0.0.2"
+          exit 1
+        fi
+        if grep -q "Viash 0.0.1" viash-0.0.2/index.qmd ; then
+          echo viash-0.0.2/index.qmd should contain "Viash 0.0.1"
+          exit 1
+        fi
+
+        if ! grep -q "Summary 1" viash-0.0.1/index.qmd ; then
+          echo viash-0.0.1/index.qmd should contain "Viash 0.0.1"
+          exit 1
+        fi
+        if ! grep -q "Summary 2" viash-0.0.2/index.qmd ; then
+          echo viash-0.0.2/index.qmd should contain "Viash 0.0.2"
+          exit 1
+        fi
+        if grep -q "Summary 2" viash-0.0.1/index.qmd ; then
+          echo viash-0.0.1/index.qmd should not contain "Viash 0.0.2"
+          exit 1
+        fi
+        if grep -q "Summary 1" viash-0.0.2/index.qmd ; then
+          echo viash-0.0.2/index.qmd should contain "Viash 0.0.1"
+          exit 1
+        fi
+    - type: file
+      path: "changelog.md"
+      text: |
+        # Viash 0.0.2 (2020-05-05): Test version 2
+
+        Summary 2
+
+        ## MINOR FIXES
+
+        - A bit of text here
+        - And some more text here
+
+        # Viash 0.0.1 (2020-05-05): Test version 1
+
+        Summary 1
+
+        ## BUG FIXES
+
+        - Some text here
+        - Banana
+platforms:
+  - type: native
