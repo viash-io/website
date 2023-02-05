@@ -7,12 +7,12 @@ execute:
 ---
   
 {{< include ../includes/_python_helper.qmd >}}
- 
-:::{.callout-important}
-This guide assumes you've [installed Viash, Docker and Nextflow](/installation/) on your system. 
-:::
 
 This tutorial will guide you through using our Viash template project to run a data pipeline.
+
+## Requirements
+
+This guide assumes you've installed already installed [Viash](/installation), [Docker](https://docs.docker.com/get-docker) and [Nextflow](https://www.nextflow.io/index.html#GetStarted).
 
 ## What is Viash?
 
@@ -27,7 +27,7 @@ Here are a few of Viash's key features:
 
 ## Quickstart example project
 
-This Quickstart will take you from nothing to a scalable and reproducible [Nextflow](https://www.nextflow.io/) data pipeline. Here's the flow of the pipeline you'll be using:
+This Quickstart will take you from nothing to a scalable and reproducible Nextflow data pipeline. Here's the flow of the pipeline you'll be using:
 
 ```{mermaid}
 graph LR
@@ -41,7 +41,7 @@ One or more TSV files are taken as the input and will be processed through a ser
 
 ## Step 1: Get the template
 
-To get up and running fast, we provide a [template project](https://github.com/viash-io/viash_project_template) for you to use:
+To get up and running fast, we provide a [template project](https://github.com/viash-io/viash_project_template) for you to use. 
 
 ::: {.panel-tabset}
 
@@ -63,49 +63,24 @@ create_button("https://github.com/viash-io/viash_project_template/archive/refs/h
 
 :::
 
-<!-- ```{python}
-print_web_file_contents("https://raw.githubusercontent.com/viash-io/viash_project_template/main/src/demo/take_column/config.vsh.yaml", "yaml")
-``` -->
 
 ## Step 2: Project overview
 
 Open the **advanced_pipeline** project directory if you haven't done so already. Here's a quick overview of its contents:
 
-- The **bin** directory contains a single script to initialize the project, more on that in the next step
-- **main.nf** and **nextflow.config** are dummy files required for Nextflow to work correctly
-- **README.md** contains extra information on how to use the template
-- The **resources_test** directory contains two TSV files which will be used to test the example pipeline
-- **src** contains three [Viash components](/guide/), each with a [config file](/reference/config/index.html) and a [script](/guide/component/languages.html)
-- The **workflows** directory contains a Nextflow script and config to be able to run the pipeline
-
-## Step 3: Use the init script 
+- **README.md** contains extra information on how to use the template.
+- The **resources_test** directory contains two TSV files which will be used to test the example pipeline.
+- **src** contains three [Viash components](/guide/), each with a [config file](/reference/config/index.html) and a [script](/guide/component/languages.html).
+- The **workflows** directory contains a Nextflow script and config to be able to run the pipeline.
+- **main.nf** and **nextflow.config** are dummy files required for Nextflow to work correctly.
 
 
-Inside of the project is a **bin** directory containing the `init` script. This will automatically download Viash and Nextflow to that same directory.
+## Step 3: Build the Viash components
 
-Use the following command to run the **init** script inside of the **bin** directory:
+You can build the Docker executables and Nextflow modules using Viash. To do so, make sure Docker is running and use the following command:
 
 ```bash
-bin/init
-```
-
-After a short while, the script will finish and the following files will be in the **bin** directory:
-
-```
-bin
-├── init
-├── nextflow
-├── viash
-```
-
-These are executables needed to build, test and run the pipeline.
-
-## Step 4: Build the Viash components
-
-With the tools present, you can build the Docker executables and Nextflow modules using Viash. To do so, make sure Docker is running and use the following command:
-
-```bash
-bin/viash ns build --setup cachedbuild
+viash ns build --setup cachedbuild --parallel
 ```
 
 While building, this will result in the following output:
@@ -154,12 +129,12 @@ target/
             └── viash.yaml
 ```
 
-## Step 5: Run the pipeline
+## Step 4: Run the pipeline
 
 Now run run the pipeline with Nextflow:
 
 ```bash
-bin/nextflow run . \
+nextflow run . \
   -main-script workflows/demo_pipeline/main.nf \
   -with-docker \
   --input resources_test/file*.tsv \
