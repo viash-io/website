@@ -233,9 +233,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   <li><a href="#what-is-viash" id="toc-what-is-viash" class="nav-link" data-scroll-target="#what-is-viash">What is Viash?</a></li>
   <li><a href="#quickstart-example-project" id="toc-quickstart-example-project" class="nav-link" data-scroll-target="#quickstart-example-project">Quickstart example project</a></li>
   <li><a href="#step-1-get-the-template" id="toc-step-1-get-the-template" class="nav-link" data-scroll-target="#step-1-get-the-template">Step 1: Get the template</a></li>
-  <li><a href="#step-2-project-overview" id="toc-step-2-project-overview" class="nav-link" data-scroll-target="#step-2-project-overview">Step 2: Project overview</a></li>
-  <li><a href="#step-3-build-the-viash-components" id="toc-step-3-build-the-viash-components" class="nav-link" data-scroll-target="#step-3-build-the-viash-components">Step 3: Build the Viash components</a></li>
-  <li><a href="#step-4-run-the-pipeline" id="toc-step-4-run-the-pipeline" class="nav-link" data-scroll-target="#step-4-run-the-pipeline">Step 4: Run the pipeline</a></li>
+  <li><a href="#step-2-build-the-viash-components" id="toc-step-2-build-the-viash-components" class="nav-link" data-scroll-target="#step-2-build-the-viash-components">Step 2: Build the Viash components</a></li>
+  <li><a href="#step-3-run-the-pipeline" id="toc-step-3-run-the-pipeline" class="nav-link" data-scroll-target="#step-3-run-the-pipeline">Step 3: Run the pipeline</a></li>
   <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next">What’s next?</a></li>
   </ul>
 </nav>
@@ -315,22 +314,28 @@ Here are a few of Viash’s key features:</p>
 </div>
 </div>
 </div>
+<p>The template repo contains the following files:</p>
+<pre><code>.
+├── LICENSE.md                            License information
+├── README.qmd                            The source qmd file for this readme
+├── README.md                             This readme
+├── _viash.yaml                           Global Viash settings
+├── resources_test/*.tsv                  Sample files to showcase pipeline and
+│&nbsp;  ├── file1.tsv                         run component unit tests.
+│&nbsp;  └── file2.tsv
+├── src/demo                              Source directory with Viash components
+│&nbsp;  ├── combine_columns
+│&nbsp;  ├── remove_comments
+│&nbsp;  └── take_column
+└── workflows
+    └── demo_pipeline                     Demo Nextflow pipeline
+        ├── main.nf
+        └── nextflow.config</code></pre>
 </section>
-<section id="step-2-project-overview" class="level2">
-<h2 class="anchored" data-anchor-id="step-2-project-overview">Step 2: Project overview</h2>
-<p>Open the <strong>advanced_pipeline</strong> project directory if you haven’t done so already. Here’s a quick overview of its contents:</p>
-<ul>
-<li><strong>README.md</strong> contains extra information on how to use the template.</li>
-<li>The <strong>resources_test</strong> directory contains two TSV files which will be used to test the example pipeline.</li>
-<li><strong>src</strong> contains three <a href="../guide/">Viash components</a>, each with a <a href="../reference/config/index.html">config file</a> and a <a href="../guide/component/languages.html">script</a>.</li>
-<li>The <strong>workflows</strong> directory contains a Nextflow script and config to be able to run the pipeline.</li>
-<li><strong>main.nf</strong> and <strong>nextflow.config</strong> are dummy files required for Nextflow to work correctly.</li>
-</ul>
-</section>
-<section id="step-3-build-the-viash-components" class="level2">
-<h2 class="anchored" data-anchor-id="step-3-build-the-viash-components">Step 3: Build the Viash components</h2>
-<p>You can build the Docker executables and Nextflow modules using Viash. To do so, make sure Docker is running and use the following command:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns build <span class="at">--setup</span> cachedbuild <span class="at">--parallel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="step-2-build-the-viash-components" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-build-the-viash-components">Step 2: Build the Viash components</h2>
+<p>With Viash you can turn the components in <code>src/</code> into Dockerized Nextflow modules by running:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns build <span class="at">--setup</span> cachedbuild <span class="at">--parallel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>While building, this will result in the following output:</p>
 <pre><code>Exporting take_column (demo) =docker=&gt; target/docker/demo/take_column
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_take_column:dev' with Dockerfile
@@ -370,14 +375,14 @@ All 6 configs built successfully</code></pre>
             ├── nextflow.config
             └── viash.yaml</code></pre>
 </section>
-<section id="step-4-run-the-pipeline" class="level2">
-<h2 class="anchored" data-anchor-id="step-4-run-the-pipeline">Step 4: Run the pipeline</h2>
+<section id="step-3-run-the-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-run-the-pipeline">Step 3: Run the pipeline</h2>
 <p>Now run run the pipeline with Nextflow:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run . <span class="dt">\</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> workflows/demo_pipeline/main.nf <span class="dt">\</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-with-docker</span> <span class="dt">\</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--input</span> resources_test/file<span class="pp">*</span>.tsv <span class="dt">\</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--publishDir</span> temp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run . <span class="dt">\</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> workflows/demo_pipeline/main.nf <span class="dt">\</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-with-docker</span> <span class="dt">\</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--input</span> resources_test/file<span class="pp">*</span>.tsv <span class="dt">\</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--publishDir</span> temp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This will run the three modules in sequence, with the final result result being stored in a file named <strong>combined.combine_columns.output</strong> in a new <strong>temp</strong> directory:</p>
 <pre><code>"1"     0.11
 "2"     0.23
