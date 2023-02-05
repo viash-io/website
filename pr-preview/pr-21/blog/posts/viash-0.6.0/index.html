@@ -142,10 +142,10 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <link rel="stylesheet" href="../../../styles.css">
 <meta property="og:title" content="Viash - Viash 0.6.0">
-<meta property="og:description" content="Major release that includes functionality improvements, testing options and several bug fixes">
+<meta property="og:description" content="Nextflow VDSL3 is now the default, support for tracking memory and cpu requirements more elegantly">
 <meta property="og:site-name" content="Viash">
 <meta name="twitter:title" content="Viash - Viash 0.6.0">
-<meta name="twitter:description" content="Major release that includes functionality improvements, testing options and several bug fixes">
+<meta name="twitter:description" content="Nextflow VDSL3 is now the default, support for tracking memory and cpu requirements more elegantly">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -229,7 +229,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Viash 0.6.0</h1>
-            <p class="subtitle lead">Major release that includes functionality improvements, testing options and several bug fixes</p>
+            <p class="subtitle lead">Nextflow VDSL3 is now the default, support for tracking memory and cpu requirements more elegantly</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">New Release</div>
               </div>
@@ -288,15 +288,13 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <section id="whats-new" class="level2">
 <h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<p>This is a major release that contains a lot of new features and changes. Here are a few highlights:</p>
+<p>The first (major) release this year! The biggest changes are:</p>
 <ul>
-<li><a href="../../../reference/config/platforms/NextflowVdsl3Platform.html">VDSL3</a> is now the default Nextflow platform</li>
-<li>The <code>inputs</code> and <code>outputs</code> are now deprecated, use the more flexible argument groups instead</li>
-<li>Arguments can now be added directly to argument groups instead of referencing arguments by name</li>
-<li>The number of processes and amount of memory that are allowed to be used can now be included in the config</li>
-<li>A new <code>viash ns exec</code> command has been added for executing arbitrary commands on all Viash components</li>
+<li><p>Nextflow VDSL3 is now the default Nextflow platform, whereas the legacy Nextflow platform has been deprecated.</p></li>
+<li><p>Support for tracking memory and cpu requirements more elegantly.</p></li>
+<li><p>Grouping arguments in groups more concisely.</p></li>
+<li><p>The addition of a <code>viash ns exec</code> command, to be able to execute commands on Viash components more easily.</p></li>
 </ul>
-<p>See the full changelog below for a breakdown of all changes.</p>
 </section>
 <section id="full-changelog" class="level2">
 <h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
@@ -356,17 +354,17 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> foo</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">requirements</span><span class="kw">:</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">n_proc</span><span class="kw">:</span><span class="at"> </span><span class="dv">10</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">memory</span><span class="kw">:</span><span class="at"> 10G</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">cpus</span><span class="kw">:</span><span class="at"> </span><span class="dv">10</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">memory</span><span class="kw">:</span><span class="at"> 10GB</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">commands</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> bash</span><span class="kw">,</span><span class="at"> r</span><span class="kw">,</span><span class="at"> perl </span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can override the default requirements at runtime:</p>
 <ul>
-<li><code>./foo ---n_proc 4 ---memory 100pb</code> (for NativePlatform or DockerPlatform)</li>
+<li><code>./foo ---cpus 4 ---memory 100PB</code> (for NativePlatform or DockerPlatform)</li>
 <li>By adding <code>process.cpus = 4</code> and <code>process.memory "100 PB"</code> to a nextflow.config (for NextflowPlatform)</li>
 </ul>
 <p>This results the following meta variables to be injected into a script:</p>
 <ul>
-<li><code>meta_n_proc</code> (in Bash) or <code>meta["n_proc"]</code> (in any other language): Number of processes the script is allowed to spawn.</li>
+<li><code>meta_cpus</code> (in Bash) or <code>meta["cpus"]</code> (in any other language): Number of processes the script is allowed to spawn.</li>
 <li><code>meta_memory_b</code> (in Bash) or <code>meta["memory_b"]</code> (in any other language): Amount of memory the script is allowed to allocate, in bytes.</li>
 <li><code>meta_memory_kb</code> (in Bash) or <code>meta["memory_kb"]</code> (in any other language): Same but in kilobytes, rounded up.</li>
 <li><code>meta_memory_mb</code> (in Bash) or <code>meta["memory_mb"]</code> (in any other language): Same but in megabytes, rounded up.</li>
@@ -418,7 +416,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <section id="bug-fixes" class="level3">
 <h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
 <ul>
-<li><p><code>csharp_script</code>, <code>javascript_script</code>, <code>python_script</code>, <code>r_script</code>, <code>scala_script</code>: Make meta fields for <code>memory</code> and <code>n_proc</code> optional.</p></li>
+<li><p><code>csharp_script</code>, <code>javascript_script</code>, <code>python_script</code>, <code>r_script</code>, <code>scala_script</code>: Make meta fields for <code>memory</code> and <code>cpus</code> optional.</p></li>
 <li><p><code>NextflowVdsl3Platform</code>: Don’t generate an error when <code>--publish_dir</code> is not defined and <code>-profile no_publish</code> is used.</p></li>
 <li><p><code>Viash run</code>: Viash now properly returns the exit code from the executed script.</p></li>
 <li><p><code>Git</code>: Fix incorrect metadata when git repository is empty (#216).</p></li>

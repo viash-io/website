@@ -264,11 +264,14 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#docker-chown-by-default" id="toc-docker-chown-by-default" class="nav-link active" data-scroll-target="#docker-chown-by-default">Docker chown by default</a></li>
+  <li><a href="#whats-new" id="toc-whats-new" class="nav-link active" data-scroll-target="#whats-new">What’s new?</a>
+  <ul class="collapse">
+  <li><a href="#docker-chown-by-default" id="toc-docker-chown-by-default" class="nav-link" data-scroll-target="#docker-chown-by-default">Docker chown by default</a></li>
   <li><a href="#nxf-data-references" id="toc-nxf-data-references" class="nav-link" data-scroll-target="#nxf-data-references">[NXF] Data references</a></li>
   <li><a href="#viash-ns-build--p-docker-parallel-setup" id="toc-viash-ns-build--p-docker-parallel-setup" class="nav-link" data-scroll-target="#viash-ns-build--p-docker-parallel-setup">viash ns build -P docker –parallel –setup</a></li>
   <li><a href="#custom-order-of-platform-requirements" id="toc-custom-order-of-platform-requirements" class="nav-link" data-scroll-target="#custom-order-of-platform-requirements">Custom order of platform requirements</a></li>
-  <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link" data-scroll-target="#full-changelog">Full changelog:</a>
+  </ul></li>
+  <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link" data-scroll-target="#full-changelog">Full changelog</a>
   <ul class="collapse">
   <li><a href="#new-features" id="toc-new-features" class="nav-link" data-scroll-target="#new-features">NEW FEATURES</a></li>
   <li><a href="#minor-changes" id="toc-minor-changes" class="nav-link" data-scroll-target="#minor-changes">MINOR CHANGES</a></li>
@@ -286,16 +289,18 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 
 
-<section id="docker-chown-by-default" class="level2">
-<h2 class="anchored" data-anchor-id="docker-chown-by-default">Docker chown by default</h2>
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<section id="docker-chown-by-default" class="level3">
+<h3 class="anchored" data-anchor-id="docker-chown-by-default">Docker chown by default</h3>
 <p>Running a script using a Docker platform will now chown output files by default, as well as any temporary files. You can turn off this feature by specifying <code>chown: false</code> in the yaml of a Docker platform.</p>
 </section>
-<section id="nxf-data-references" class="level2">
-<h2 class="anchored" data-anchor-id="nxf-data-references">[NXF] Data references</h2>
+<section id="nxf-data-references" class="level3">
+<h3 class="anchored" data-anchor-id="nxf-data-references">[NXF] Data references</h3>
 <p>Data references in Map form can now have values being lists. In other words, we can have multiple options which have one or more values.</p>
 </section>
-<section id="viash-ns-build--p-docker-parallel-setup" class="level2">
-<h2 class="anchored" data-anchor-id="viash-ns-build--p-docker-parallel-setup">viash ns build -P docker –parallel –setup</h2>
+<section id="viash-ns-build--p-docker-parallel-setup" class="level3">
+<h3 class="anchored" data-anchor-id="viash-ns-build--p-docker-parallel-setup">viash ns build -P docker –parallel –setup</h3>
 <p><code>viash ns build</code> has been greatly improved! You can automatically build the docker container by adding <code>--setup</code> to the command, as well as make the whole thing run in parallel using the <code>--parallel</code> or <code>-l</code> flag.</p>
 <p>To build a docker container, you can run either of the following:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run <span class="at">-f</span> path/to/config.yaml <span class="at">-P</span> docker <span class="at">--</span> <span class="at">---setup</span></span>
@@ -304,8 +309,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>To build a lot of them all at once, run:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns build <span class="at">-P</span> docker <span class="at">--parallel</span> <span class="at">--setup</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="custom-order-of-platform-requirements" class="level2">
-<h2 class="anchored" data-anchor-id="custom-order-of-platform-requirements">Custom order of platform requirements</h2>
+<section id="custom-order-of-platform-requirements" class="level3">
+<h3 class="anchored" data-anchor-id="custom-order-of-platform-requirements">Custom order of platform requirements</h3>
 <p>You can now choose the order in which platform requirements are installed!</p>
 <p>Before:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
@@ -351,22 +356,23 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> git clone --depth 1 https://github.com/data-intuitive/viash_docs.git &amp;&amp; rm -r viash_docs/.git</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This will ensure that the setup instructions are installed in the given order.</p>
 </section>
+</section>
 <section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog:</h2>
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
 <section id="new-features" class="level3">
 <h3 class="anchored" data-anchor-id="new-features">NEW FEATURES</h3>
 <ul>
 <li><code>NXF</code>: Data references in Map form can now have values being lists. In other words, we can have multiple options which have one or more values.</li>
 <li><code>viash ns build</code>: Added –parallel and –setup flag.</li>
-<li>viash build`: Added –setup flag.</li>
-<li>Allow changing the order of setup commands using the&nbsp;<code>setup:</code>&nbsp;variable.</li>
-<li>Do not escape&nbsp;<code>${VIASH_...}</code>&nbsp;elements in default values and descriptions!</li>
+<li><code>viash build</code>: Added –setup flag.</li>
+<li>Allow changing the order of setup commands using the <code>setup:</code> variable.</li>
+<li>(HIDDEN) Do not escape <code>${VIASH_...}</code> elements in default values and descriptions!</li>
 </ul>
 </section>
 <section id="minor-changes" class="level3">
 <h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
 <ul>
-<li>Remove&nbsp;<code>---chown</code>&nbsp;flag, move to&nbsp;<code>platform.docker.chown</code>; is set to true by default.</li>
+<li>Remove <code>---chown</code> flag, move to <code>platform.docker.chown</code>; is set to true by default.</li>
 <li>Perform chown during both run and test using a Docker platform.</li>
 </ul>
 </section>

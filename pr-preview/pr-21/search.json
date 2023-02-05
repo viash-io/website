@@ -1838,7 +1838,14 @@
     "href": "quickstart/index.html",
     "title": "Quickstart",
     "section": "",
-    "text": "Important\n\n\n\nThis guide assumes you’ve installed Viash, Docker and Nextflow on your system.\nThis tutorial will guide you through using our Viash template project to run a data pipeline."
+    "text": "This tutorial will guide you through using our Viash template project to run a data pipeline."
+  },
+  {
+    "objectID": "quickstart/index.html#requirements",
+    "href": "quickstart/index.html#requirements",
+    "title": "Quickstart",
+    "section": "Requirements",
+    "text": "Requirements\nThis guide assumes you’ve already installed Viash, Docker and Nextflow."
   },
   {
     "objectID": "quickstart/index.html#what-is-viash",
@@ -1859,35 +1866,28 @@
     "href": "quickstart/index.html#step-1-get-the-template",
     "title": "Quickstart",
     "section": "Step 1: Get the template",
-    "text": "Step 1: Get the template\nTo get up and running fast, we provide a template project for you to use:\n\nUsing git CLIZip download\n\n\nRun the command below to clone the template repository to a new folder named advanced_pipeline:\ngit clone https://github.com/viash-io/viash_project_template advanced_pipeline\n\n\nClick the button below to download a zip file containing the template project. Once downloaded, unzip the file and rename the root directory to advanced_pipeline.\nDownload template"
+    "text": "Step 1: Get the template\nTo get up and running fast, we provide a template project for you to use.\n\nUsing git CLIZip download\n\n\nRun the command below to clone the template repository to a new folder named advanced_pipeline:\ngit clone https://github.com/viash-io/viash_project_template advanced_pipeline\n\n\nClick the button below to download a zip file containing the template project. Once downloaded, unzip the file and rename the root directory to advanced_pipeline.\nDownload template"
   },
   {
     "objectID": "quickstart/index.html#step-2-project-overview",
     "href": "quickstart/index.html#step-2-project-overview",
     "title": "Quickstart",
     "section": "Step 2: Project overview",
-    "text": "Step 2: Project overview\nOpen the advanced_pipeline project directory if you haven’t done so already. Here’s a quick overview of its contents:\n\nThe bin directory contains a single script to initialize the project, more on that in the next step\nmain.nf and nextflow.config are dummy files required for Nextflow to work correctly\nREADME.md contains extra information on how to use the template\nThe resources_test directory contains two TSV files which will be used to test the example pipeline\nsrc contains three Viash components, each with a config file and a script\nThe workflows directory contains a Nextflow script and config to be able to run the pipeline"
+    "text": "Step 2: Project overview\nOpen the advanced_pipeline project directory if you haven’t done so already. Here’s a quick overview of its contents:\n\nREADME.md contains extra information on how to use the template.\nThe resources_test directory contains two TSV files which will be used to test the example pipeline.\nsrc contains three Viash components, each with a config file and a script.\nThe workflows directory contains a Nextflow script and config to be able to run the pipeline.\nmain.nf and nextflow.config are dummy files required for Nextflow to work correctly."
   },
   {
-    "objectID": "quickstart/index.html#step-3-use-the-init-script",
-    "href": "quickstart/index.html#step-3-use-the-init-script",
+    "objectID": "quickstart/index.html#step-3-build-the-viash-components",
+    "href": "quickstart/index.html#step-3-build-the-viash-components",
     "title": "Quickstart",
-    "section": "Step 3: Use the init script",
-    "text": "Step 3: Use the init script\nInside of the project is a bin directory containing the init script. This will automatically download Viash and Nextflow to that same directory.\nUse the following command to run the init script inside of the bin directory:\nbin/init\nAfter a short while, the script will finish and the following files will be in the bin directory:\nbin\n├── init\n├── nextflow\n├── viash\nThese are executables needed to build, test and run the pipeline."
+    "section": "Step 3: Build the Viash components",
+    "text": "Step 3: Build the Viash components\nYou can build the Docker executables and Nextflow modules using Viash. To do so, make sure Docker is running and use the following command:\nviash ns build --setup cachedbuild --parallel\nWhile building, this will result in the following output:\nExporting take_column (demo) =docker=> target/docker/demo/take_column\n[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_take_column:dev' with Dockerfile\nExporting take_column (demo) =nextflow=> target/nextflow/demo/take_column\nExporting remove_comments (demo) =docker=> target/docker/demo/remove_comments\n[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_remove_comments:dev' with Dockerfile\nExporting remove_comments (demo) =nextflow=> target/nextflow/demo/remove_comments\nExporting combine_columns (demo) =docker=> target/docker/demo/combine_columns\n[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_combine_columns:dev' with Dockerfile\nExporting combine_columns (demo) =nextflow=> target/nextflow/demo/combine_columns\nAll 6 configs built successfully\nOnce everything is built, a new target directory has been created containing the executables and modules grouped per platform:\ntarget/\n├── docker\n│   └── demo\n│       ├── combine_columns\n│       │   ├── combine_columns\n│       │   └── viash.yaml\n│       ├── remove_comments\n│       │   ├── remove_comments\n│       │   └── viash.yaml\n│       └── take_column\n│           ├── take_column\n│           └── viash.yaml\n└── nextflow\n    └── demo\n        ├── combine_columns\n        │   ├── main.nf\n        │   ├── nextflow.config\n        │   └── viash.yaml\n        ├── remove_comments\n        │   ├── main.nf\n        │   ├── nextflow.config\n        │   └── viash.yaml\n        └── take_column\n            ├── main.nf\n            ├── nextflow.config\n            └── viash.yaml"
   },
   {
-    "objectID": "quickstart/index.html#step-4-build-the-viash-components",
-    "href": "quickstart/index.html#step-4-build-the-viash-components",
+    "objectID": "quickstart/index.html#step-4-run-the-pipeline",
+    "href": "quickstart/index.html#step-4-run-the-pipeline",
     "title": "Quickstart",
-    "section": "Step 4: Build the Viash components",
-    "text": "Step 4: Build the Viash components\nWith the tools present, you can build the Docker executables and Nextflow modules using Viash. To do so, make sure Docker is running and use the following command:\nbin/viash ns build --setup cachedbuild\nWhile building, this will result in the following output:\nExporting take_column (demo) =docker=> /home/di/code/advanced_pipeline/target/docker/demo/take_column\n[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_take_column:dev' with Dockerfile\nExporting take_column (demo) =nextflow=> /home/di/code/advanced_pipeline/target/nextflow/demo/take_column\nExporting remove_comments (demo) =docker=> /home/di/code/advanced_pipeline/target/docker/demo/remove_comments\n[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_remove_comments:dev' with Dockerfile\nExporting remove_comments (demo) =nextflow=> /home/di/code/advanced_pipeline/target/nextflow/demo/remove_comments\nExporting combine_columns (demo) =docker=> /home/di/code/advanced_pipeline/target/docker/demo/combine_columns\n[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_combine_columns:dev' with Dockerfile\nExporting combine_columns (demo) =nextflow=> /home/di/code/advanced_pipeline/target/nextflow/demo/combine_columns\nAll 6 configs built successfully\nOnce everything is built, a new target directory has been created containing the executables and modules grouped per platform:\ntarget/\n├── docker\n│   └── demo\n│       ├── combine_columns\n│       │   ├── combine_columns\n│       │   └── viash.yaml\n│       ├── remove_comments\n│       │   ├── remove_comments\n│       │   └── viash.yaml\n│       └── take_column\n│           ├── take_column\n│           └── viash.yaml\n└── nextflow\n    └── demo\n        ├── combine_columns\n        │   ├── main.nf\n        │   ├── nextflow.config\n        │   └── viash.yaml\n        ├── remove_comments\n        │   ├── main.nf\n        │   ├── nextflow.config\n        │   └── viash.yaml\n        └── take_column\n            ├── main.nf\n            ├── nextflow.config\n            └── viash.yaml"
-  },
-  {
-    "objectID": "quickstart/index.html#step-5-run-the-pipeline",
-    "href": "quickstart/index.html#step-5-run-the-pipeline",
-    "title": "Quickstart",
-    "section": "Step 5: Run the pipeline",
-    "text": "Step 5: Run the pipeline\nNow run run the pipeline with Nextflow:\nbin/nextflow run . \\\n  -main-script workflows/demo_pipeline/main.nf \\\n  -with-docker \\\n  --input resources_test/file*.tsv \\\n  --publishDir temp\nThis will run the three modules in sequence, with the final result result being stored in a file named combined.combine_columns.output in a new temp directory:\n\"1\"     0.11\n\"2\"     0.23\n\"3\"     0.35\n\"4\"     0.47"
+    "section": "Step 4: Run the pipeline",
+    "text": "Step 4: Run the pipeline\nNow run run the pipeline with Nextflow:\nnextflow run . \\\n  -main-script workflows/demo_pipeline/main.nf \\\n  -with-docker \\\n  --input resources_test/file*.tsv \\\n  --publishDir temp\nThis will run the three modules in sequence, with the final result result being stored in a file named combined.combine_columns.output in a new temp directory:\n\"1\"     0.11\n\"2\"     0.23\n\"3\"     0.35\n\"4\"     0.47"
   },
   {
     "objectID": "quickstart/index.html#whats-next",
