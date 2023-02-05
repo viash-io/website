@@ -1,7 +1,7 @@
 ---
 title: "Viash 0.5.14"
 subtitle: "Argument groups can now be defined in the Viash config"
-date: 2022/06/30
+date: 2022-06-30
 categories:
   - New Release
 author: Viash Team
@@ -25,12 +25,14 @@ Argument groups allow for grouping arguments together by function or category, m
         description: Description
   ```
 
+* Addition of the `viash_nxf_schema` component for converting a Viash config (for a workflow) into a nextflow schema file.
+
 * `NextflowVdsl3Platform`: Use `--param_list` to initialise a Nextflow channel with multiple parameter sets.
   Possible formats are csv, json, yaml, or simply a yaml_blob.
   A csv should have column names which correspond to the different arguments of this pipeline.
   A json or a yaml file should be a list of maps, each of which has keys corresponding to the arguments of the pipeline.
   A yaml blob can also be passed directly as a parameter.
-  Inside the Nextflow pipeline code, params.params_list can also be used to directly a list of parameter sets.
+  Inside the Nextflow pipeline code, params.param_list can also be used to directly a list of parameter sets.
   When passing a csv, json or yaml, relative path names are relativized to the location of the parameter file.
   
   Examples: 
@@ -88,3 +90,4 @@ Argument groups allow for grouping arguments together by function or category, m
 * `Testbenches`: Better capture expected error messages while running testbenches. Having these show on the console could be confusing.
 
 * `NextflowVdsl3Platform`: Fix issue when running multiple VDSL3 modules concurrently on the same channel.
+
