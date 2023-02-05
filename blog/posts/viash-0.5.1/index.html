@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Viash Team">
-<meta name="dcterms.date" content="2021-07-19">
+<meta name="dcterms.date" content="2021-07-14">
 
 <title>Viash - Viash 0.5.1</title>
 <style>
@@ -142,10 +142,10 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <link rel="stylesheet" href="../../../styles.css">
 <meta property="og:title" content="Viash - Viash 0.5.1">
-<meta property="og:description" content="Viash 0.5.1 adds support for C# scripts and fixes a few bugs.">
+<meta property="og:description" content="Viash 0.5.1 adds support for C# scripts and fixes a few bugs">
 <meta property="og:site-name" content="Viash">
 <meta name="twitter:title" content="Viash - Viash 0.5.1">
-<meta name="twitter:description" content="Viash 0.5.1 adds support for C# scripts and fixes a few bugs.">
+<meta name="twitter:description" content="Viash 0.5.1 adds support for C# scripts and fixes a few bugs">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -229,7 +229,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Viash 0.5.1</h1>
-            <p class="subtitle lead">Viash 0.5.1 adds support for C# scripts and fixes a few bugs.</p>
+            <p class="subtitle lead">Viash 0.5.1 adds support for C# scripts and fixes a few bugs</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">New Release</div>
               </div>
@@ -249,7 +249,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">July 19, 2021</p>
+        <p class="date">July 14, 2021</p>
       </div>
     </div>
     
@@ -264,11 +264,15 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#c-script-support" id="toc-c-script-support" class="nav-link active" data-scroll-target="#c-script-support">C# script support</a></li>
+  <li><a href="#whats-new" id="toc-whats-new" class="nav-link active" data-scroll-target="#whats-new">What’s new?</a>
+  <ul class="collapse">
+  <li><a href="#c-script-support" id="toc-c-script-support" class="nav-link" data-scroll-target="#c-script-support">C# script support</a></li>
   <li><a href="#bug-fixes" id="toc-bug-fixes" class="nav-link" data-scroll-target="#bug-fixes">Bug fixes</a></li>
-  <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link" data-scroll-target="#full-changelog">Full changelog:</a>
+  </ul></li>
+  <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link" data-scroll-target="#full-changelog">Full changelog</a>
   <ul class="collapse">
   <li><a href="#new-features" id="toc-new-features" class="nav-link" data-scroll-target="#new-features">NEW FEATURES</a></li>
+  <li><a href="#minor-changes" id="toc-minor-changes" class="nav-link" data-scroll-target="#minor-changes">MINOR CHANGES</a></li>
   <li><a href="#bug-fixes-1" id="toc-bug-fixes-1" class="nav-link" data-scroll-target="#bug-fixes-1">BUG FIXES</a></li>
   <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">TESTING</a></li>
   </ul></li>
@@ -284,14 +288,16 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 
 
-<section id="c-script-support" class="level2">
-<h2 class="anchored" data-anchor-id="c-script-support">C# script support</h2>
-<p>We’ve added C# scripts (.csx) as a <a href="../../../guide/component/languages.html">supported language</a> using <strong>dotnet-script</strong>.<br>
-To run C# scripts natively, you’ll need to install <a href="https://dotnet.microsoft.com/download">.NET Core</a> and execute the following command in a terminal:</p>
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<section id="c-script-support" class="level3">
+<h3 class="anchored" data-anchor-id="c-script-support">C# script support</h3>
+<p>We’ve added C# scripts (.csx) as a supported language using <strong>dotnet-script</strong>.<br>
+To run C# scripts natively, you’ll need to install .NET Core and execute the following command in a terminal:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> tool install <span class="at">-g</span> dotnet-script</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can now run C# scripts like this:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dotnet</span> script hello_viash.csx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>To use C# scripts as components, use the new <code>csharp_script</code> type in the functionality section of your <a href="../../../reference/config/index.html">config file</a>:</p>
+<p>To use C# scripts as components, use the new <code>csharp_script</code> type in the functionality section of your config file:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> csharp_script</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.csx</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -306,8 +312,8 @@ To run C# scripts natively, you’ll need to install <a href="https://dotnet.mic
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>System<span class="op">.</span><span class="fu">Console</span><span class="op">.</span><span class="fu">WriteLine</span><span class="op">(</span>input <span class="op">+</span> <span class="st">", "</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">"!"</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The language-specific guide for creating C# script components will be added in the near future.</p>
 </section>
-<section id="bug-fixes" class="level2">
-<h2 class="anchored" data-anchor-id="bug-fixes">Bug fixes</h2>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">Bug fixes</h3>
 <p>First off, these special characters can now be used in the description, usage, default and example fields of components:</p>
 <ul>
 <li>”</li>
@@ -335,21 +341,28 @@ To run C# scripts natively, you’ll need to install <a href="https://dotnet.mic
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> optional.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In this case, the two output files would have been identical in the past. ___</p>
 </section>
+</section>
 <section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog:</h2>
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
 <section id="new-features" class="level3">
 <h3 class="anchored" data-anchor-id="new-features">NEW FEATURES</h3>
 <ul>
 <li><code>CSharpScript</code>: Added support for C# scripts (<code>type: "csharp_script"</code>) to viash.</li>
 </ul>
 </section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><code>NextflowPlatform</code>: Added <code>directive_cpus</code>, <code>directive_max_forks</code>, <code>directive_memory</code> and <code>directive_time</code> parameters.</li>
+</ul>
+</section>
 <section id="bug-fixes-1" class="level3">
 <h3 class="anchored" data-anchor-id="bug-fixes-1">BUG FIXES</h3>
 <ul>
 <li><p><code>BashWrapper</code>: Refactor escaping descriptions, usages, defaults, and examples (#34).</p></li>
-<li><p><code>NextFlowPlatform</code>: Refactor escaping descriptions, usages, defaults and examples (#75).</p></li>
-<li><p><code>NextFlowPlatform</code>: Add argument to output path to avoid naming conflicts for components with multiple output files (#76).</p></li>
-<li><p><code>NextFlowPlatform</code>, <code>renderCLI()</code>: Only add flag to rendered command when boolean_true is actually true (#78).</p></li>
+<li><p><code>NextflowPlatform</code>: Refactor escaping descriptions, usages, defaults and examples (#75).</p></li>
+<li><p><code>NextflowPlatform</code>: Add argument to output path to avoid naming conflicts for components with multiple output files (#76).</p></li>
+<li><p><code>NextflowPlatform</code>, <code>renderCLI()</code>: Only add flag to rendered command when boolean_true is actually true (#78).</p></li>
 <li><p><code>DockerPlatform</code>: Only chown when output file exists.</p></li>
 </ul>
 </section>

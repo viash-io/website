@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Viash Team">
-<meta name="dcterms.date" content="2021-07-12">
+<meta name="dcterms.date" content="2021-08-16">
 
 <title>Viash - Viash 0.5.0</title>
 <style>
@@ -142,10 +142,10 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <link rel="stylesheet" href="../../../styles.css">
 <meta property="og:title" content="Viash - Viash 0.5.0">
-<meta property="og:description" content="We're proud to announce that we have released Viash 0.5.0.">
+<meta property="og:description" content="Improvements to running Docker executables, and Nextflow platform argument changes">
 <meta property="og:site-name" content="Viash">
 <meta name="twitter:title" content="Viash - Viash 0.5.0">
-<meta name="twitter:description" content="We're proud to announce that we have released Viash 0.5.0.">
+<meta name="twitter:description" content="Improvements to running Docker executables, and Nextflow platform argument changes">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -229,7 +229,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Viash 0.5.0</h1>
-            <p class="subtitle lead">We’re proud to announce that we have released Viash 0.5.0. This new version has some improvements to the way components with a Docker backend can be ran and the Nextflow platform has some argument changes.</p>
+            <p class="subtitle lead">Improvements to running Docker executables, and Nextflow platform argument changes</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">New Release</div>
               </div>
@@ -249,7 +249,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">July 12, 2021</p>
+        <p class="date">August 16, 2021</p>
       </div>
     </div>
     
@@ -264,10 +264,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#improvements-to-docker-backend" id="toc-improvements-to-docker-backend" class="nav-link active" data-scroll-target="#improvements-to-docker-backend">Improvements to Docker backend</a></li>
-  <li><a href="#nextflow-gets-some-argument-changes" id="toc-nextflow-gets-some-argument-changes" class="nav-link" data-scroll-target="#nextflow-gets-some-argument-changes">Nextflow gets some argument changes</a></li>
-  <li><a href="#verbosity-levels-for-viash-run" id="toc-verbosity-levels-for-viash-run" class="nav-link" data-scroll-target="#verbosity-levels-for-viash-run">Verbosity levels for viash run</a></li>
-  <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link" data-scroll-target="#full-changelog">Full changelog:</a>
+  <li><a href="#whats-new" id="toc-whats-new" class="nav-link active" data-scroll-target="#whats-new">What’s new?</a></li>
+  <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link" data-scroll-target="#full-changelog">Full changelog</a>
   <ul class="collapse">
   <li><a href="#breaking-changes" id="toc-breaking-changes" class="nav-link" data-scroll-target="#breaking-changes">BREAKING CHANGES</a></li>
   <li><a href="#major-changes" id="toc-major-changes" class="nav-link" data-scroll-target="#major-changes">MAJOR CHANGES</a></li>
@@ -287,15 +285,13 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 
 
-<p>Viash 0.5.0 has some improvements to the way components with a Docker backend can be ran and the Nextflow platform has some argument changes.</p>
-<section id="improvements-to-docker-backend" class="level2">
-<h2 class="anchored" data-anchor-id="improvements-to-docker-backend">Improvements to Docker backend</h2>
-<p>In the past, you needed to perform <code>--setup</code> on your <a href="../../../reference/config/platforms/DockerPlatform.html">Docker-based components</a> and executables in order for the image to be built before you could run the component or executable. Now you can simply run your component or executable and Viash will do the image building automatically by default if it detects an image isn’t present yet. This behaviour can be changed by using a <a href="../../../guide/building-block/docker/setup-strategies.html">Docker setup strategy</a>. For example:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">-p</span> docker <span class="at">--setup</span> alwayscachedbuild</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="nextflow-gets-some-argument-changes" class="level2">
-<h2 class="anchored" data-anchor-id="nextflow-gets-some-argument-changes">Nextflow gets some argument changes</h2>
-<p>Arguments for the <a href="../../../reference/config/platforms/NextflowVdsl3Platform.html">Nextflow platform</a> now have optional <code>required</code> and <code>default</code> values, just like their native and Docker counterparts. For example:</p>
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>Here are the most important changes:</p>
+<ul>
+<li><p><strong>Improvements to Docker backend</strong>: In the past, you needed to perform <code>--setup</code> on your Docker-based components and executables in order for the image to be built before you could run the component or executable. Now you can simply run your component or executable and Viash will do the image building automatically by default if it detects an image isn’t present yet. This behaviour can be changed by using a Docker setup strategy. For example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">-p</span> docker <span class="at">--setup</span> alwayscachedbuild</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><strong>Nextflow gets some argument changes</strong>: Arguments for the Nextflow platform now have optional <code>required</code> and <code>default</code> values, just like their native and Docker counterparts. For example:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">arguments</span><span class="kw">:</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --name</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> string</span></span>
@@ -305,13 +301,10 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> integer</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">description</span><span class="kw">:</span><span class="at"> Times to repeat the name</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">default</span><span class="kw">:</span><span class="at"> </span><span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Take a look at the <a href="../../../reference/config/functionality.html">Functionality page</a> for more information on arguments and their properties.<br>
-As long as you use long-option arguments (e.g.&nbsp;<code>--my-option</code>) in the <a href="../../../reference/config/index.html">config file</a> for required arguments, the way of specifying argument values for the Nextflow platform is identical to the Docker platform. You still access non-required arguments via this syntax: <code>--&lt;component_name&gt;__&lt;argument_name&gt; &lt;value&gt;</code>. For example:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_component</span> <span class="at">--</span> <span class="at">--my_component__input</span> Hello!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="verbosity-levels-for-viash-run" class="level2">
-<h2 class="anchored" data-anchor-id="verbosity-levels-for-viash-run">Verbosity levels for viash run</h2>
-<p>Executables now have 8 levels of verbosity:</p>
+<p>Take a look at the Functionality page for more information on arguments and their properties.<br>
+As long as you use long-option arguments (e.g.&nbsp;<code>--my-option</code>) in the config file for required arguments, the way of specifying argument values for the Nextflow platform is identical to the Docker platform. You still access non-required arguments via this syntax: <code>--&lt;component_name&gt;__&lt;argument_name&gt; &lt;value&gt;</code>. For example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_component</span> <span class="at">--</span> <span class="at">--my_component__input</span> Hello!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><strong>Verbosity levels for viash run</strong>: Executables now have 8 levels of verbosity</p>
 <ol start="0" type="1">
 <li>emergency</li>
 <li>alert</li>
@@ -323,10 +316,11 @@ As long as you use long-option arguments (e.g.&nbsp;<code>--my-option</code>) in
 <li>debug</li>
 </ol>
 <p>The default verbosity level is <strong>notice</strong>. You can pass the <code>-v</code> or <code>--verbose</code> option to bump up the verbosity by one level. By passing <code>-vv</code> the verbosity goes up by two levels. You can manually set the verbosity by using the <code>--verbosity &lt;int_level&gt;</code> option. For example, if you wanted to only show errors or worse:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">--</span> <span class="at">--verbosity</span> 3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">--</span> <span class="at">--verbosity</span> 3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
 </section>
 <section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog:</h2>
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
 <section id="breaking-changes" class="level3">
 <h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
 <ul>
@@ -338,7 +332,7 @@ As long as you use long-option arguments (e.g.&nbsp;<code>--my-option</code>) in
 <h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
 <ul>
 <li><p><code>NXF</code>: This version changes the handling logic for arguments. An argument can be either <code>required</code> or not and can have a <code>default: ...</code> value or not. Checks are implemented to verify that required arguments are effectively provided <em>during</em> pipeline running.</p></li>
-<li><p><code>NXF</code>: If one sticks to long-option argments in the viash config, for all arguments that are <em>required</em>, the way of specifying the arguments on the CLI is identical for the Docker and NextFlow platforms. Non-required arguments can still be accessed from CLI using <code>--&lt;component_name&gt;__&lt;argument_name&gt; ...</code>.</p></li>
+<li><p><code>NXF</code>: If one sticks to long-option argments in the viash config, for all arguments that are <em>required</em>, the way of specifying the arguments on the CLI is identical for the Docker and Nextflow platforms. Non-required arguments can still be accessed from CLI using <code>--&lt;component_name&gt;__&lt;argument_name&gt; ...</code>.</p></li>
 <li><p><code>NXF</code>: Running a module as a standalone pipeline has become easier.</p></li>
 <li><p><code>viash run</code>: Implement verbosity levels (#58). viash executables now have 7 levels of verbosity: emergency, alert, critical, error, warning, notice, info, debug. The default verbosity level is ‘notice’. Passing <code>-v</code> or <code>--verbose</code> bumps up the verbosity level by one, <code>-vv</code> by two. The verbosity level can be set manually by passing <code>--verbosity x</code>.</p></li>
 </ul>

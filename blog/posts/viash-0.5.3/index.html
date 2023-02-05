@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -142,10 +142,10 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <link rel="stylesheet" href="../../../styles.css">
 <meta property="og:title" content="Viash - Viash 0.5.3">
-<meta property="og:description" content="New meta data list for scripts, VIASH_TEMP environment variable for NextFlow, fixed output formatting with separate outputs">
+<meta property="og:description" content="New meta data list for scripts, VIASH_TEMP environment variable for Nextflow, fixed output formatting with separate outputs">
 <meta property="og:site-name" content="Viash">
 <meta name="twitter:title" content="Viash - Viash 0.5.3">
-<meta name="twitter:description" content="New meta data list for scripts, VIASH_TEMP environment variable for NextFlow, fixed output formatting with separate outputs">
+<meta name="twitter:description" content="New meta data list for scripts, VIASH_TEMP environment variable for Nextflow, fixed output formatting with separate outputs">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -229,7 +229,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Viash 0.5.3</h1>
-            <p class="subtitle lead">New meta data list for scripts, VIASH_TEMP environment variable for NextFlow, fixed output formatting with separate outputs</p>
+            <p class="subtitle lead">New meta data list for scripts, VIASH_TEMP environment variable for Nextflow, fixed output formatting with separate outputs</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">New Release</div>
               </div>
@@ -264,10 +264,12 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#whats-new" id="toc-whats-new" class="nav-link active" data-scroll-target="#whats-new">What’s new?</a></li>
+  <li><a href="#whats-new" id="toc-whats-new" class="nav-link active" data-scroll-target="#whats-new">What’s new?</a>
+  <ul class="collapse">
   <li><a href="#resources-directory" id="toc-resources-directory" class="nav-link" data-scroll-target="#resources-directory">Resources directory</a></li>
   <li><a href="#functionality-name" id="toc-functionality-name" class="nav-link" data-scroll-target="#functionality-name">Functionality name</a></li>
-  <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link" data-scroll-target="#full-changelog">Full changelog:</a>
+  </ul></li>
+  <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link" data-scroll-target="#full-changelog">Full changelog</a>
   <ul class="collapse">
   <li><a href="#new-features" id="toc-new-features" class="nav-link" data-scroll-target="#new-features">NEW FEATURES</a></li>
   <li><a href="#bug-fixes" id="toc-bug-fixes" class="nav-link" data-scroll-target="#bug-fixes">BUG FIXES</a></li>
@@ -291,11 +293,10 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <li><code>meta["resources_dir"]</code>: Path to the directory containing the resources</li>
 <li><code>meta["functionality_name"]</code>: Name of the component</li>
 </ul>
-<p>A new environment variable is now available for export when working with the NextFlow platform: <code>VIASH_TEMP</code>.</p>
-</section>
-<section id="resources-directory" class="level2">
-<h2 class="anchored" data-anchor-id="resources-directory">Resources directory</h2>
-<p>All <a href="../../../reference/config/functionality.html#resources">resources</a> defined in the <a href="../../../reference/config/index.html">config file</a> are copied over to a temporary location right before a Viash component is executed. This location is can now be easily accessed in your scripts, allowing you to modify and copy the files as needed.<br>
+<p>A new environment variable is now available for export when working with the Nextflow platform: <code>VIASH_TEMP</code>.</p>
+<section id="resources-directory" class="level3">
+<h3 class="anchored" data-anchor-id="resources-directory">Resources directory</h3>
+<p>All resources defined in the config file are copied over to a temporary location right before a Viash component is executed. This location is can now be easily accessed in your scripts, allowing you to modify and copy the files as needed.<br>
 Here are some examples in different scripting languages on how to access the meta data, it works similarly to the <code>par</code> list:</p>
 <p>Bash:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$meta_resources_dir</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -304,8 +305,8 @@ Here are some examples in different scripting languages on how to access the met
 <p>R:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(meta<span class="sc">$</span>resources_dir)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="functionality-name" class="level2">
-<h2 class="anchored" data-anchor-id="functionality-name">Functionality name</h2>
+<section id="functionality-name" class="level3">
+<h3 class="anchored" data-anchor-id="functionality-name">Functionality name</h3>
 <p>The name of the component can now be accessed in the same way as the resources directory. This allows you to print the name of the component out to a console window for example. Here’s how to access this data in different scripting languages:</p>
 <p>Bash:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$meta_functionality_name</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -314,8 +315,9 @@ Here are some examples in different scripting languages on how to access the met
 <p>R:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(meta<span class="sc">$</span>functionality_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
+</section>
 <section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog:</h2>
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
 <section id="new-features" class="level3">
 <h3 class="anchored" data-anchor-id="new-features">NEW FEATURES</h3>
 <ul>
@@ -324,13 +326,13 @@ Here are some examples in different scripting languages on how to access the met
 <li><code>meta["resources_dir"]</code>: Path to the directory containing the resources</li>
 <li><code>meta["functionality_name"]</code>: Name of the component</li>
 </ul></li>
-<li><code>NextFlowPlatform</code>: Export <code>VIASH_TEMP</code> environment variable.</li>
+<li><code>NextflowPlatform</code>: Export <code>VIASH_TEMP</code> environment variable.</li>
 </ul>
 </section>
 <section id="bug-fixes" class="level3">
 <h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
 <ul>
-<li><code>NextFlowPlatform</code>: Fix output formatting when <code>separate_multiple_outputs</code> is <code>false</code>.</li>
+<li><code>NextflowPlatform</code>: Fix output formatting when <code>separate_multiple_outputs</code> is <code>false</code>.</li>
 </ul>
 
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -265,7 +265,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
    
   <ul>
   <li><a href="#whats-new" id="toc-whats-new" class="nav-link active" data-scroll-target="#whats-new">What’s new?</a></li>
-  <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link" data-scroll-target="#full-changelog">Full changelog:</a>
+  <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link" data-scroll-target="#full-changelog">Full changelog</a>
   <ul class="collapse">
   <li><a href="#breaking-changes" id="toc-breaking-changes" class="nav-link" data-scroll-target="#breaking-changes">BREAKING CHANGES</a></li>
   <li><a href="#new-functionality" id="toc-new-functionality" class="nav-link" data-scroll-target="#new-functionality">NEW FUNCTIONALITY</a></li>
@@ -285,9 +285,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <section id="whats-new" class="level2">
 <h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<p>Here are some highlights of this release:</p>
 <p>Examples for arguments now need to be of the same type as the argument itself. You can’t provide an <code>integer</code> for a <code>string</code>-based argument for example.<br>
-A handy new command has been added: <code>viash config inject</code>. This can be used to inject a Viash header into a script based on the arguments of the <a href="../../../reference/config/index.html">config file</a>.</p>
+A handy new command has been added: <code>viash config inject</code>. This can be used to inject a Viash header into a script based on the arguments of the config file.</p>
 <p>There have been some improvements to the Docker platform as well.<br>
 You can now add yum packages as a requirement:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
@@ -296,7 +295,7 @@ You can now add yum packages as a requirement:</p>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">setup</span><span class="kw">:</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> yum</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">packages</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> wget </span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You can now include <a href="https://docs.docker.com/engine/reference/builder/#add">ADD</a> and <a href="https://docs.docker.com/engine/reference/builder/#copy">COPY</a> instructions in the <a href="../../../reference/config/index.html">config file</a>:</p>
+<p>You can now include ADD and COPY instructions in the config file:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> bash:latest</span></span>
@@ -305,7 +304,7 @@ You can now add yum packages as a requirement:</p>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">add</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="st">"http://foo.bar ."</span><span class="at"> </span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog:</h2>
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
 <section id="breaking-changes" class="level3">
 <h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
 <ul>
@@ -316,8 +315,8 @@ You can now add yum packages as a requirement:</p>
 <h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
 <ul>
 <li><p><code>viash config inject</code>: A command for inserting a Viash header into your script.</p></li>
-<li><p><code>DockerPlatform</code>: Added a requirement setup for installing through yum. Example: <code>setup: [ [ type: yum, packages: [ wget] ] ]</code></p></li>
-<li><p><code>DockerPlatform</code>: Allow using copy and add instructions. Example: <code>setup: [ [ type: docker, add: [ "http://foo.bar ." ]]]</code></p></li>
+<li><p><code>YumRequirement</code>: Added a requirement setup for installing through yum. Example: <code>setup: [ [ type: yum, packages: [ wget] ] ]</code></p></li>
+<li><p><code>DockerRequirement</code>: Allow using copy and add instructions. Example: <code>setup: [ [ type: docker, add: [ "http://foo.bar ." ]]]</code></p></li>
 </ul>
 </section>
 <section id="bug-fixes" class="level3">
