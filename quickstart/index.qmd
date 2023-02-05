@@ -64,20 +64,29 @@ create_button("https://github.com/viash-io/viash_project_template/archive/refs/h
 :::
 
 
-## Step 2: Project overview
+The template repo contains the following files:
 
-Open the **advanced_pipeline** project directory if you haven't done so already. Here's a quick overview of its contents:
+    .
+    ├── LICENSE.md                            License information
+    ├── README.qmd                            The source qmd file for this readme
+    ├── README.md                             This readme
+    ├── _viash.yaml                           Global Viash settings
+    ├── resources_test/*.tsv                  Sample files to showcase pipeline and
+    │   ├── file1.tsv                         run component unit tests.
+    │   └── file2.tsv
+    ├── src/demo                              Source directory with Viash components
+    │   ├── combine_columns
+    │   ├── remove_comments
+    │   └── take_column
+    └── workflows
+        └── demo_pipeline                     Demo Nextflow pipeline
+            ├── main.nf
+            └── nextflow.config
 
-- **README.md** contains extra information on how to use the template.
-- The **resources_test** directory contains two TSV files which will be used to test the example pipeline.
-- **src** contains three [Viash components](/guide/), each with a [config file](/reference/config/index.html) and a [script](/guide/component/languages.html).
-- The **workflows** directory contains a Nextflow script and config to be able to run the pipeline.
-- **main.nf** and **nextflow.config** are dummy files required for Nextflow to work correctly.
 
+## Step 2: Build the Viash components
 
-## Step 3: Build the Viash components
-
-You can build the Docker executables and Nextflow modules using Viash. To do so, make sure Docker is running and use the following command:
+With Viash you can turn the components in `src/` into Dockerized Nextflow modules by running:
 
 ```bash
 viash ns build --setup cachedbuild --parallel
@@ -129,7 +138,7 @@ target/
             └── viash.yaml
 ```
 
-## Step 4: Run the pipeline
+## Step 3: Run the pipeline
 
 Now run run the pipeline with Nextflow:
 
