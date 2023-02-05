@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Viash - Quickstart</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GDS2XT0DDG"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
+</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="Viash - Quickstart">
+<meta property="og:description" content="This tutorial will guide you through using our Viash template project to run a data pipeline.">
+<meta property="og:site-name" content="Viash">
+<meta name="twitter:title" content="Viash - Quickstart">
+<meta name="twitter:description" content="This tutorial will guide you through using our Viash template project to run a data pipeline.">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../viash.png" alt="" class="navbar-logo">
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+ <span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../installation/index.html">
+ <span class="menu-text">Installation</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../quickstart/index.html" aria-current="page">
+ <span class="menu-text">Quickstart</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../guide/index.html">
+ <span class="menu-text">Guide</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../reference/index.html">
+ <span class="menu-text">Reference</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../blog/index.html">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Help</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-help">    
+        <li>
+    <a class="dropdown-item" href="https://github.com/viash-io/viash/issues"><i class="bi bi-bug" role="img">
+</i> 
+ <span class="dropdown-text">Report a Viash issue</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/viash-io/website/issues"><i class="bi bi-bug" role="img">
+</i> 
+ <span class="dropdown-text">Report a website issue</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/DataIntuitive"><i class="bi bi-twitter" role="img" aria-label="Viash Twitter">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/viash-io/viash"><i class="bi bi-github" role="img" aria-label="Viash GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-is-viash" id="toc-what-is-viash" class="nav-link active" data-scroll-target="#what-is-viash">What is Viash?</a></li>
+  <li><a href="#quickstart-example-project" id="toc-quickstart-example-project" class="nav-link" data-scroll-target="#quickstart-example-project">Quickstart example project</a></li>
+  <li><a href="#step-1-get-the-template" id="toc-step-1-get-the-template" class="nav-link" data-scroll-target="#step-1-get-the-template">Step 1: Get the template</a></li>
+  <li><a href="#step-2-project-overview" id="toc-step-2-project-overview" class="nav-link" data-scroll-target="#step-2-project-overview">Step 2: Project overview</a></li>
+  <li><a href="#step-3-use-the-init-script" id="toc-step-3-use-the-init-script" class="nav-link" data-scroll-target="#step-3-use-the-init-script">Step 3: Use the init script</a></li>
+  <li><a href="#step-4-build-the-viash-components" id="toc-step-4-build-the-viash-components" class="nav-link" data-scroll-target="#step-4-build-the-viash-components">Step 4: Build the Viash components</a></li>
+  <li><a href="#step-5-run-the-pipeline" id="toc-step-5-run-the-pipeline" class="nav-link" data-scroll-target="#step-5-run-the-pipeline">Step 5: Run the pipeline</a></li>
+  <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next">What’s next?</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Quickstart</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This guide assumes you’ve <a href="../installation/">installed Viash, Docker and Nextflow</a> on your system.</p>
+</div>
+</div>
+<p>This tutorial will guide you through using our Viash template project to run a data pipeline.</p>
+<section id="what-is-viash" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-viash">What is Viash?</h2>
+<p><strong>Viash</strong> is a script code wrapper for building modular software components that serve as building blocks to develop (Nextflow) data pipelines. All you need is your script and a metadata file to get started.<br>
+Here are a few of Viash’s key features:</p>
+<ul>
+<li>You can use your <a href="../guide/component/languages.html">preferred scripting language</a> per component, and mix and match scripts between multiple components as you please. Supported languages include: Bash, Python, R, Scala, JS and C#.</li>
+<li>A <strong>custom Docker container</strong> is automatically generated based on your dependencies described in your metadata. No expert Docker knowledge is required.</li>
+<li>Viash generates a <strong>Nextflow module</strong> from your script. No expert Nextflow knowledge is required.</li>
+<li>You can simply script the nextflow modules to create and run your scalable and reproducible data pipeline.</li>
+<li>You can test every single module on your local workstation through the built-in development kit.</li>
+</ul>
+</section>
+<section id="quickstart-example-project" class="level2">
+<h2 class="anchored" data-anchor-id="quickstart-example-project">Quickstart example project</h2>
+<p>This Quickstart will take you from nothing to a scalable and reproducible <a href="https://www.nextflow.io/">Nextflow</a> data pipeline. Here’s the flow of the pipeline you’ll be using:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-1">graph LR
+   A(file?.tsv) --&gt; B[/remove_comments/]
+   B --&gt; C[/take_column/]
+   C --&gt; D[/combine_columns/]
+   D --&gt; E(output)
+</pre>
+<div id="mermaid-tooltip-1" class="mermaidTooltip">
+
+</div>
+<p></p>
+</div>
+</div>
+</div>
+<p>One or more TSV files are taken as the input and will be processed through a series of modules. At the end, the output is written away to a folder.</p>
+</section>
+<section id="step-1-get-the-template" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-get-the-template">Step 1: Get the template</h2>
+<p>To get up and running fast, we provide a <a href="https://github.com/viash-io/viash_project_template">template project</a> for you to use:</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Using git CLI</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Zip download</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Run the command below to clone the template repository to a new folder named <strong>advanced_pipeline</strong>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/viash-io/viash_project_template advanced_pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Click the button below to download a zip file containing the template project. Once downloaded, unzip the file and rename the root directory to <strong>advanced_pipeline</strong>.</p>
+<p><a href="https://github.com/viash-io/viash_project_template/archive/refs/heads/main.zip" id="btn-download" class="btn btn-info btn-md" role="button" download="">Download template</a></p>
+</div>
+</div>
+</div>
+<!-- ```{python}
+print_web_file_contents("https://raw.githubusercontent.com/viash-io/viash_project_template/main/src/demo/take_column/config.vsh.yaml", "yaml")
+``` -->
+</section>
+<section id="step-2-project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-project-overview">Step 2: Project overview</h2>
+<p>Open the <strong>advanced_pipeline</strong> project directory if you haven’t done so already. Here’s a quick overview of its contents:</p>
+<ul>
+<li>The <strong>bin</strong> directory contains a single script to initialize the project, more on that in the next step</li>
+<li><strong>main.nf</strong> and <strong>nextflow.config</strong> are dummy files required for Nextflow to work correctly</li>
+<li><strong>README.md</strong> contains extra information on how to use the template</li>
+<li>The <strong>resources_test</strong> directory contains two TSV files which will be used to test the example pipeline</li>
+<li><strong>src</strong> contains three <a href="../guide/">Viash components</a>, each with a <a href="../reference/config/index.html">config file</a> and a <a href="../guide/component/languages.html">script</a></li>
+<li>The <strong>workflows</strong> directory contains a Nextflow script and config to be able to run the pipeline</li>
+</ul>
+</section>
+<section id="step-3-use-the-init-script" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-use-the-init-script">Step 3: Use the init script</h2>
+<p>Inside of the project is a <strong>bin</strong> directory containing the <code>init</code> script. This will automatically download Viash and Nextflow to that same directory.</p>
+<p>Use the following command to run the <strong>init</strong> script inside of the <strong>bin</strong> directory:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bin/init</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>After a short while, the script will finish and the following files will be in the <strong>bin</strong> directory:</p>
+<pre><code>bin
+├── init
+├── nextflow
+├── viash</code></pre>
+<p>These are executables needed to build, test and run the pipeline.</p>
+</section>
+<section id="step-4-build-the-viash-components" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-build-the-viash-components">Step 4: Build the Viash components</h2>
+<p>With the tools present, you can build the Docker executables and Nextflow modules using Viash. To do so, make sure Docker is running and use the following command:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bin/viash</span> ns build <span class="at">--setup</span> cachedbuild</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>While building, this will result in the following output:</p>
+<pre><code>Exporting take_column (demo) =docker=&gt; /home/di/code/advanced_pipeline/target/docker/demo/take_column
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_take_column:dev' with Dockerfile
+Exporting take_column (demo) =nextflow=&gt; /home/di/code/advanced_pipeline/target/nextflow/demo/take_column
+Exporting remove_comments (demo) =docker=&gt; /home/di/code/advanced_pipeline/target/docker/demo/remove_comments
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_remove_comments:dev' with Dockerfile
+Exporting remove_comments (demo) =nextflow=&gt; /home/di/code/advanced_pipeline/target/nextflow/demo/remove_comments
+Exporting combine_columns (demo) =docker=&gt; /home/di/code/advanced_pipeline/target/docker/demo/combine_columns
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_combine_columns:dev' with Dockerfile
+Exporting combine_columns (demo) =nextflow=&gt; /home/di/code/advanced_pipeline/target/nextflow/demo/combine_columns
+All 6 configs built successfully</code></pre>
+<p>Once everything is built, a new <strong>target</strong> directory has been created containing the executables and modules grouped per platform:</p>
+<pre><code>target/
+├── docker
+│&nbsp;&nbsp; └── demo
+│&nbsp;&nbsp;     ├── combine_columns
+│&nbsp;&nbsp;     │&nbsp;&nbsp; ├── combine_columns
+│&nbsp;&nbsp;     │&nbsp;&nbsp; └── viash.yaml
+│&nbsp;&nbsp;     ├── remove_comments
+│&nbsp;&nbsp;     │&nbsp;&nbsp; ├── remove_comments
+│&nbsp;&nbsp;     │&nbsp;&nbsp; └── viash.yaml
+│&nbsp;&nbsp;     └── take_column
+│&nbsp;&nbsp;         ├── take_column
+│&nbsp;&nbsp;         └── viash.yaml
+└── nextflow
+    └── demo
+        ├── combine_columns
+        │&nbsp;&nbsp; ├── main.nf
+        │&nbsp;&nbsp; ├── nextflow.config
+        │&nbsp;&nbsp; └── viash.yaml
+        ├── remove_comments
+        │&nbsp;&nbsp; ├── main.nf
+        │&nbsp;&nbsp; ├── nextflow.config
+        │&nbsp;&nbsp; └── viash.yaml
+        └── take_column
+            ├── main.nf
+            ├── nextflow.config
+            └── viash.yaml</code></pre>
+</section>
+<section id="step-5-run-the-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-run-the-pipeline">Step 5: Run the pipeline</h2>
+<p>Now run run the pipeline with Nextflow:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bin/nextflow</span> run . <span class="dt">\</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> workflows/demo_pipeline/main.nf <span class="dt">\</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-with-docker</span> <span class="dt">\</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--input</span> resources_test/file<span class="pp">*</span>.tsv <span class="dt">\</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--publishDir</span> temp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will run the three modules in sequence, with the final result result being stored in a file named <strong>combined.combine_columns.output</strong> in a new <strong>temp</strong> directory:</p>
+<pre><code>"1"     0.11
+"2"     0.23
+"3"     0.35
+"4"     0.47</code></pre>
+</section>
+<section id="whats-next" class="level2">
+<h2 class="anchored" data-anchor-id="whats-next">What’s next?</h2>
+<p>Now that you’ve had a taste of what Viash can do for you, take a look at our <a href="../guide/">Guide</a> and <a href="../reference/">Reference</a> pages to learn more about how to use Viash. If you want to start simple, we suggest to take a look at the <a href="../guide/component/creation/native.html">Native component creation guide</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script type="text/javascript">
+// Anything in this script block will be included on every page
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/https:\/\/viash\.io/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">
+        <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../about.html">About</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../faq/index.html">FAQ</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../privacy.html">Privacy Policy</a>
+  </li>  
+</ul>
+      </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/DataIntuitive">
+      <i class="bi bi-twitter" role="img" aria-label="Viash Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/viash-io/viash">
+      <i class="bi bi-github" role="img" aria-label="Viash GitHub">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

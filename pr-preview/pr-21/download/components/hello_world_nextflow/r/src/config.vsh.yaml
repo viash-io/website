@@ -1,0 +1,23 @@
+functionality:
+  name: hello_world
+  description: A minimal example component.
+  arguments:
+  - type: string
+    name: --input
+    default: "World"
+  - type: string
+    name: --id
+    default: "hello_world"
+  - type: file
+    name: --output
+    direction: output
+    default: "output"
+  resources:
+  - type: r_script
+    path: script.R
+platforms:
+  - type: native
+  - type: docker
+    image: "rocker/tidyverse:4.0.4"
+  - type: nextflow
+    variant: vdsl3
