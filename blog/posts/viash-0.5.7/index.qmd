@@ -1,7 +1,7 @@
 ---
 title: "Viash 0.5.7"
 subtitle: "Argument examples need to be of the same type as the argument itself"
-date: 2022/02/16
+date: 2022-02-16
 categories:
   - New Release
 author: Viash Team
@@ -9,35 +9,33 @@ author: Viash Team
 
 ## What's new?
 
-Here are some highlights of this release:
-
 Examples for arguments now need to be of the same type as the argument itself. You can't provide an `integer` for a `string`-based argument for example.  
-A handy new command has been added: `viash config inject`. This can be used to inject a Viash header into a script based on the arguments of the [config file](/reference/config/index.html).
+A handy new command has been added: `viash config inject`. This can be used to inject a Viash header into a script based on the arguments of the config file.
 
 There have been some improvements to the Docker platform as well.  
 You can now add yum packages as a requirement:
 
-```yaml
-platforms:
-  - type: docker
-    image: bash:latest
-    setup:
-      - type: yum
-        packages: [ wget ]
-```
+  ```yaml
+  platforms:
+    - type: docker
+      image: bash:latest
+      setup:
+        - type: yum
+          packages: [ wget ]
+  ```
 
-You can now include [ADD](https://docs.docker.com/engine/reference/builder/#add) and [COPY](https://docs.docker.com/engine/reference/builder/#copy) instructions in the [config file](/reference/config/index.html):
+You can now include ADD and COPY instructions in the config file:
 
-```yaml
-platforms:
-  - type: docker
-    image: bash:latest
-    setup:
-      - type: docker
-        add: [ "http://foo.bar ." ]
-```
+  ```yaml
+  platforms:
+    - type: docker
+      image: bash:latest
+      setup:
+        - type: docker
+          add: [ "http://foo.bar ." ]
+  ```
 
-## Full changelog:
+## Full changelog
 
 ### BREAKING CHANGES
 
@@ -49,10 +47,10 @@ platforms:
 
 * `viash config inject`: A command for inserting a Viash header into your script.
 
-* `DockerPlatform`: Added a requirement setup for installing through yum. Example:
+* `YumRequirement`: Added a requirement setup for installing through yum. Example:
   `setup: [ [ type: yum, packages: [ wget] ] ]`
 
-* `DockerPlatform`: Allow using copy and add instructions. Example:
+* `DockerRequirement`: Allow using copy and add instructions. Example:
   `setup: [ [ type: docker, add: [ "http://foo.bar ." ]]]`
 
 ### BUG FIXES
@@ -60,3 +58,4 @@ platforms:
 * `ViashTest`: Fix verbosity passthrough.
 
 * `--help`: Fix repeated usage flag when printing the help.
+
