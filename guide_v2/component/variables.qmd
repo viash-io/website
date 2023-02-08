@@ -1,5 +1,5 @@
 ---
-title: Variables and meta-variables (WIP)
+title: Placeholder *
 search: true
 engine: knitr
 order: 40
@@ -17,12 +17,22 @@ dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
 on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
 ```
 
+When running a Viash component with `viash run`, Viash will wrap your script into a Bash executable. By passing arguments to the component, Viash will replace add your parameter values to your script by replacing the Viash placeholder code block. This is what a Viash placeholder code block typically looks like:
 
-When running [`viash build`](/reference/viash/build.qmd), Viash wraps your script into a Bash executable. When running the executable, the `VIASH START` -- `VIASH END` code block is replaced with a dictionary / map called `par` which contains the passed parameter values.
+::: {.panel-tabset}
+# Bash
+# C\#
+# JavaScript
+# Python
+# R
+# Scala
+:::
 
-However, Viash also automatically creates a `meta` variable containing additional information related to the execution.
+If no such code block exists yet, it is inserted at the top of the file.
 
-## Overriding the parameter placeholder
+At runtime, the Viash placeholder code block is replaced by two maps (or dictionaries): `par` and `meta`. The `par` map contains the parameter values specified by the user, and `meta` contains additional information on the current runtime environment.
+
+## Previewing the `par` and `meta` objects
 To get insight into how `par` and `meta` are defined, you can run [`viash config inject`](/reference/viash/config.qmd) to replace the current parameter placeholder with an auto-generated parameter placeholder.
 
 ::: {.callout-warning}
