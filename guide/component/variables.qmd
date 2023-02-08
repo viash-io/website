@@ -1,0 +1,112 @@
+---
+title: Par and Meta
+search: true
+engine: knitr
+order: 40
+---
+
+{{< include ../../includes/_language_chooser.qmd >}}
+
+```{r setup, include=FALSE}
+repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
+source(paste0(repo_path, "/includes/_r_helper.R"))
+source(paste0(repo_path, "/guide/component/_language_examples.R"))
+
+temp_dir <- tempfile("meta_variables")
+dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
+on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
+
+# create tempdir with files
+langs <- langs %>%
+  mutate(
+    label = gsub("#", "\\\\#", label),
+    config_path = paste0(temp_dir, "/", id, "/", basename(example_config)),
+    script_path = paste0(temp_dir, "/", id, "/", basename(example_script))
+  )
+pwalk(langs, function(id, label, example_config, example_script, config_path, script_path, ...) {
+  # create dir
+  dir.create(paste0(temp_dir, "/", id), recursive = TRUE, showWarnings = FALSE)
+  file.copy(example_config, config_path)
+  file.copy(example_script, script_path)
+})
+```
+
+
+When running a Viash component with `viash run`, Viash will wrap your script into a Bash executable. In doing so, it strips away the "Viash placeholder" code block and replaces it by a bit of code to your script for reading any parameter values at runtime.
+
+## Recognizing the Viash placeholder code block
+Recall what the script of the previous example looks like:
+
+::: {.panel-tabset}
+```{r show-placeholder, echo=FALSE, output="asis"}
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```{embed, lang='{%id%}'}
+    |{%script_path%}
+    |```
+    |", .dir = paste0(temp_dir, "/", id))
+})
+```
+:::
+
+A "Viash placeholder" code block is the section between the `VIASH START` and `VIASH END` comments.
+
+## What happens at runtime
+By passing arguments to the component, Viash will add your parameter values to your script by replacing the Viash placeholder code block. If no such code block exists yet, the parameters are inserted at the top of the file.
+
+The resulting code block will contain two maps (or dictionaries): `par` and `meta`. The `par` map contains the parameter values specified by the user, and `meta` contains additional information on the current runtime environment. Note that for Bash scripts, the `par` and `meta` maps are flattened into separate environment variables.
+
+## Previewing the `par` and `meta` objects
+To get insight into how `par` and `meta` are defined, you can run [`viash config inject`](/reference/viash/config.qmd) to replace the current parameter placeholder with an auto-generated parameter placeholder.
+
+::: {.callout-warning}
+This will change the contents of your script!
+:::
+
+::: {.panel-tabset}
+```{r config-inject, echo=FALSE, output="asis"}
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |Running `viash config inject` effectively changes the contents of the script.
+    |
+    |```{bash config-inject}
+    |viash config inject {%basename(config_path)%}
+    |```
+    |
+    |The updated `{%basename(script_path)%}` now contains the following code:
+    |
+    |```{embed, lang='{%id%}'}
+    |{%script_path%}
+    |```
+    |", .dir = paste0(temp_dir, "/", id))
+})
+```
+:::
+
+## Runtime parameters in `par`
+
+The `par` object (or `par_` environment variables in Bash) will contain argument values passed at runtime. For example, passing `--input foo.txt` will result in a `par["input"]` being equal to `"foo.txt"`.
+
+:::{.callout-tip}
+Try adding more [arguments]({{< var reference.arguments >}}) with different file types to see what effect this has on the resulting placeholder.
+:::
+
+## Meta variables in `meta`
+
+* `cpus` (integer): The maximum number of (logical) cpus a component is allowed to use. By default, this value will be undefined.
+
+* `config` (string): Path to the processed Viash config YAML. This file is usually called `.config.vsh.yaml` and resides next to the wrapped executable (see below). This YAML file is useful for doing some runtime introspection of the component for writing generic unit tests.
+
+* `executable` (string): The executable being used at runtime; that is, the wrapped script. This variable is used in unit tests.
+
+* `functionality_name` (string): The name of the component, useful for logging.
+
+* `memory_*` (long): The maximum amount of memory a component is allowed to allocate. The following denominations are provided: `memory_b`, `memory_kb`, `memory_mb`, `memory_gb`, `memory_tb`, `memory_pb`. By default, this value will be undefined.
+
+* `resources_dir` (string): Path to where the resources are stored. See the [previous section](add-resources.qmd) on how to define resources.
+
+* `temp_dir` (string) s: A temporary directory in which your script is allowed to create new temporary files / directories. By default, this will be set to the `VIASH_TEMP` environment variable. When the `VIASH_TEMP` variable is undefined, `/tmp` is used instead.
