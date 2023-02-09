@@ -38,37 +38,14 @@ add_unit_test <- function(config, type, path) {
   )
   config
 }
-tests <- list(
-  bash = '#!/bin/bash
-
-echo ">>> Create input test file"
-echo "foo" > foo.txt
-
-echo ">>> Run executable"
-$meta_executable --input foo.txt --output bar.txt
-
-echo ">>> Check whether output file exists"
-[[ -f bar.txt ]] || (echo "Output file could not be found!" && exit 1)
-
-echo ">>> Check whether input and output file are the same"
-cmp foo.txt bar.txt || (echo "Input and output files are different!" && exit 1)
-
-echo ">>> Test finished successfully"
-',
-  csharp = "// No example available yet.",
-  js = "// No example available yet",
-  python = "# No example available yet",
-  r = '# No example available yet',
-  scala = "// No example available yet."
-)
 langs <- langs %>%
   mutate(
-    extension = gsub(".*\\.", "", example_script),
+    example_test = gsub("script", "test", example_script),
     config_path = paste0(temp_dir, "/", id, "/", basename(example_config)),
     script_path = paste0(temp_dir, "/", id, "/", basename(example_script)),
-    test_path = paste0(temp_dir, "/", id, "/test.", extension),
+    test_path = paste0(temp_dir, "/", id, "/", basename(example_test)),
   )
-pwalk(langs, function(id, script_type, example_config, example_script, config_path, script_path, test_path, ...) {
+pwalk(langs, function(id, script_type, example_config, example_script, example_test, config_path, script_path, test_path, ...) {
   # create dir
   dir.create(paste0(temp_dir, "/", id), recursive = TRUE, showWarnings = FALSE)
 
@@ -79,14 +56,14 @@ pwalk(langs, function(id, script_type, example_config, example_script, config_pa
   
   # copy script
   file.copy(example_script, script_path)
-  # modify helper and write to file
-  readr::write_lines(tests[[id]], test_path)
+  file.copy(example_test, test_path)
 })
 ```
 
 
 ## Create unit test
 
+To create a 
 <!-- todo: update description -->
 When you want to reuse a function multiple times, it might make sense to store them in a separate file. For example, your helper file could contain the following helper function:
 
@@ -103,6 +80,10 @@ pwalk(langs, function(id, label, test_path, ...) {
     |", .dir = paste0(temp_dir, "/", id))
 })
 ```
+:::
+
+:::{.callout-important}
+A test script doesn't need to be written in the same scripting language as the main script! This means your main script can be written in R but the unit test in Bash or Python.
 :::
 
 ## Add test to config
