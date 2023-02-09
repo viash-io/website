@@ -34,29 +34,16 @@ jobs:
 
       - uses: r-lib/actions/setup-r@v2
         with:
-          r-version: "4.1"
+          r-version: "4.2"
           use-public-rspm: true
 
       - uses: actions/setup-python@v4
         with:
           python-version: "3.10"
 
-      - name: Install Nextflow
-        env:
-            CAPSULE_LOG: none
-            NXF_VER: "22.04.5"
-        run: |
-          mkdir /tmp/nextflow
-          cd /tmp/nextflow
-          wget -qO- get.nextflow.io | bash
-          sudo ln -s /tmp/nextflow/nextflow /usr/local/bin/nextflow
-          nextflow -version
+      - uses: nf-core/setup-nextflow@v1.2.0
       
-      - name: Install latest Viash
-        run: |
-          wget https://github.com/viash-io/viash/releases/latest/download/viash -O /usr/local/bin/viash
-          chmod +x /usr/local/bin/viash
-          viash -v
+      - uses: viash-io/viash-actions/setup@v3
 
       - name: Install dependencies via renv restore
         run: |
@@ -70,7 +57,7 @@ jobs:
       - name: Render with Quarto
         shell: bash -l {0}  
         run: |
-          source renv/python/virtualenvs/renv-python/bin/activate
+          source renv/python/virtualenvs/renv-python-3.10/bin/activate
           quarto render
 
       - name: Deploy 🚀

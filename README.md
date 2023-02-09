@@ -1,15 +1,45 @@
-This is the website repo for [viash.io](https://viash.io). It's built on top of [Quarto](https://quarto.org/).
+# viash.io
+
+This is the website repo for [viash.io](https://viash.io).
+
+## Requirements
+
+[Quarto](https://quarto.org/docs/get-started/), R 4.2 and Python 3.10.
+
+## First setup
+
+```sh
+# clone the repo
+git@github.com:viash-io/website.git
+cd website
+
+# Install R and Python dependency packages
+Rscript -e 'renv::restore()'
+```
 
 ## Local preview
 
-Follow the steps below to start a local preview:
+```sh
+source renv/python/virtualenvs/renv-python-3.10/bin/activate
+quarto preview
+```
 
-1. Install [Quarto](https://quarto.org/docs/get-started/)
-2. Install [Python 3.10](https://www.python.org/) or higher
-3. Install [R 4.1](https://www.r-project.org/) or higher
-4. Pull the repo and use it as your working directory
-5. Execute `Rscript -e 'renv::restore()'` to install most of the R and Python dependencies
-6. Install some missing R dependencies: `Rscript -e 'install.packages(c("readr", "rmarkdown"))'`
-7. Install the missing Python dependencies: `source renv/python/virtualenvs/renv-python/bin/activate && pip install pandas nbformat jupyter`
-8. Run `quarto preview`
-9. Navigate to [http://localhost:8000](http://localhost:8000) in a web browser
+Navigate to [http://localhost:8000](http://localhost:8000) in a web browser
+
+## How the renv was created
+
+```r
+install.packages("renv")
+renv::init()
+renv::use_python()
+```
+
+```sh
+source renv/python/virtualenvs/renv-python-3.10/bin/activate
+```
+
+```r
+install.packages(c("reticulate", "languageserver", "rmarkdown"))
+reticulate::py_install(c("pandas", "GitPython", "jupyter", "nbformat"))
+renv::snapshot()
+```
