@@ -1,0 +1,131 @@
+---
+title: Unit testing *
+search: true
+engine: knitr
+order: 50
+---
+
+
+{{< include ../../includes/_language_chooser.qmd >}}
+
+```{r setup, include=FALSE}
+repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
+source(paste0(repo_path, "/includes/_r_helper.R"))
+source(paste0(repo_path, "/guide/component/_language_examples.R"))
+
+langs <- langs %>%
+  mutate(
+    label = gsub("#", "\\\\#", label)
+  )
+```
+
+We recommend adding unit tests to all of your components in a project as soon as possible.
+Implementing unit tests not only ensures that your component works, but it also makes
+the project more maintainable in the long run as you will be notified when a component breaks.
+
+This page describes how to add a unit test to your component.
+
+```{r setup-adding-resources, include=FALSE}
+temp_dir <- tempfile("unit-testing")
+dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
+on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
+
+# create tempdir with modified files
+add_unit_test <- function(config, type, path) {
+  # add helper to resources
+  config$functionality$test_resources <- list(
+    list(type = type, path = path)
+  )
+  config
+}
+tests <- list(
+  bash = '#!/bin/bash
+
+echo ">>> Create input test file"
+echo "foo" > foo.txt
+
+echo ">>> Run executable"
+$meta_executable --input foo.txt --output bar.txt
+
+echo ">>> Check whether output file exists"
+[[ -f bar.txt ]] || (echo "Output file could not be found!" && exit 1)
+
+echo ">>> Check whether input and output file are the same"
+cmp foo.txt bar.txt || (echo "Input and output files are different!" && exit 1)
+
+echo ">>> Test finished successfully"
+',
+  csharp = "// No example available yet.",
+  js = "// No example available yet",
+  python = "# No example available yet",
+  r = '# No example available yet',
+  scala = "// No example available yet."
+)
+langs <- langs %>%
+  mutate(
+    extension = gsub(".*\\.", "", example_script),
+    config_path = paste0(temp_dir, "/", id, "/", basename(example_config)),
+    script_path = paste0(temp_dir, "/", id, "/", basename(example_script)),
+    test_path = paste0(temp_dir, "/", id, "/test.", extension),
+  )
+pwalk(langs, function(id, script_type, example_config, example_script, config_path, script_path, test_path, ...) {
+  # create dir
+  dir.create(paste0(temp_dir, "/", id), recursive = TRUE, showWarnings = FALSE)
+
+  # read config, make modifications, write to file
+  conf <- yaml::read_yaml(example_config) %>%
+    add_unit_test(script_type, basename(test_path))
+  write_yaml(conf, config_path)
+  
+  # copy script
+  file.copy(example_script, script_path)
+  # modify helper and write to file
+  readr::write_lines(tests[[id]], test_path)
+})
+```
+
+
+## Create unit test
+
+<!-- todo: update description -->
+When you want to reuse a function multiple times, it might make sense to store them in a separate file. For example, your helper file could contain the following helper function:
+
+::: {.panel-tabset}
+```{r show-helper, output="asis"}
+pwalk(langs, function(id, label, test_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```{% id %}
+    |{% paste(readr::read_lines(test_path), collapse = '\n') %}
+    |```
+    |
+    |", .dir = paste0(temp_dir, "/", id))
+})
+```
+:::
+
+## Add test to config
+
+<!-- todo: update description -->
+To add a helper script as an external resource in a Viash component, you can use the
+`resources` section of the component's config file. Not only does your resources
+section contain the main script, but it's also used to specify external resources 
+such as helper scripts and other files that the component needs to function.
+
+Here is an example of what the config file might look after adding the helper script:
+
+::: {.panel-tabset}
+```{r show-config, output="asis"}
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```yaml
+    |{% paste(readr::read_lines(config_path), collapse = '\n    |') %}
+    |```
+    |", .dir = paste0(temp_dir, "/", id))
+})
+```
+:::
+
