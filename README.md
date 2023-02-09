@@ -25,3 +25,12 @@ quarto preview
 ```
 
 Navigate to [http://localhost:8000](http://localhost:8000) in a web browser
+
+## Please run in terminal
+
+R:
+```
+install.packages(c("reticulate", "languageserver", "rmarkdown"))
+reticulate::py_install(c("pandas", "GitPython", "jupyter", "nbformat"))
+renv::snapshot()
+```
