@@ -1,10 +1,10 @@
-This is the website repo for [viash.io](https://viash.io). It's built on top of [Quarto](https://quarto.org/).
+# viash.io
+
+This is the website repo for [viash.io](https://viash.io).
 
 ## Requirements
 
-1. Install [Quarto](https://quarto.org/docs/get-started/)
-2. Install [Python 3.10](https://www.python.org/) or higher
-3. Install [R 4.2](https://www.r-project.org/) or higher
+[Quarto](https://quarto.org/docs/get-started/), R 4.2 and Python 3.10.
 
 ## First setup
 
@@ -26,10 +26,19 @@ quarto preview
 
 Navigate to [http://localhost:8000](http://localhost:8000) in a web browser
 
-## Please run in terminal
+## How the renv was created
 
-R:
+```r
+install.packages("renv")
+renv::init()
+renv::use_python()
 ```
+
+```sh
+source renv/python/virtualenvs/renv-python-3.10/bin/activate
+```
+
+```r
 install.packages(c("reticulate", "languageserver", "rmarkdown"))
 reticulate::py_install(c("pandas", "GitPython", "jupyter", "nbformat"))
 renv::snapshot()
