@@ -1,5 +1,9 @@
 #!/bin/bash
 
+## VIASH START
+meta_executable="target/example_bash"
+## VIASH END
+
 echo ">>> Create input test file"
 echo "foo" > foo.txt
 
