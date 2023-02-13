@@ -7,7 +7,7 @@ content = "hello\nthere\n"
 
 ## VIASH START
 meta = {
-  "executable" = "target/example_python"
+  "executable": "target/example_python"
 }
 ## VIASH END
 
