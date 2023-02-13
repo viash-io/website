@@ -97,8 +97,9 @@ You can (re)build a component's Docker image by passing the `---setup` flag to t
 
 ::: {.panel-tabset}
 ```{r setup-cachedbuild, echo=FALSE, output="asis"}
-
-pwalk(langs, function(id, label, config_path, script_path, ...) {
+for (i in seq_len(nrow(langs))) {
+  env <- list2env(langs[i,])
+# pwalk(langs, function(id, label, config_path, script_path, ...) {
   qrt(
     "## {% label %}
     |
@@ -114,9 +115,10 @@ pwalk(langs, function(id, label, config_path, script_path, ...) {
     |target/example_{% id %}_with_setup ---setup cachedbuild
     |```
     |", 
-    .dir = paste0(temp_dir, "/", id)
+    .dir = paste0(temp_dir, "/", id),
+    .envir = env
   )
-})
+}
 ```
 :::
 
