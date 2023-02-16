@@ -87,11 +87,17 @@ qrt <- function(
   .envir = parent.frame(),
   .open = "{%",
   .close = "%}",
-  .margin = "\\|"
+  .margin = "\\|",
+  .eval = TRUE
 ) {
   qmd_glued <- glue::glue(qmd_txt, .envir = .envir, .open = .open, .close = .close)
   qmd_stripped <- strip_margin(qmd_glued, margin = .margin)
-  md <- run_quarto(qmd_stripped, .dir)
+  md <-
+    if (.eval) {
+      run_quarto(qmd_stripped, .dir)
+    } else {
+      qmd_stripped
+    }
   cat(md)
 }
 
