@@ -88,7 +88,7 @@ qrt <- function(
   .open = "{%",
   .close = "%}",
   .margin = "\\|",
-  .eval = TRUE
+  .eval = any(grepl("``` *\\{", qmd_txt))
 ) {
   qmd_glued <- glue::glue(qmd_txt, .envir = .envir, .open = .open, .close = .close)
   qmd_stripped <- strip_margin(qmd_glued, margin = .margin)

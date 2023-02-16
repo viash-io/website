@@ -87,7 +87,7 @@ pwalk(langs, function(id, label, config_path, ...) {
     |{% paste(readr::read_lines(config_path), collapse = '\n    |') %}
     |```
     |
-    |", .eval = FALSE)
+    |")
 })
 ```
 :::
@@ -130,7 +130,7 @@ pwalk(langs, function(id, label, config_path, script_path, ...) {
   qrt(
     "## {% label %}
     |
-    |```{bash}
+    |```bash
     |viash build config.vsh.yaml --platform docker --output target --setup cachedbuild
     |```
     |", 
@@ -242,7 +242,7 @@ pwalk(langs, function(id, label, config_path, script_path, ...) {
   qrt(
     "## {% label %}
     |
-    |```{bash}
+    |```bash
     |viash build config.vsh.yaml \
     |  --platform docker \
     |  --output target \
@@ -326,7 +326,7 @@ pwalk(langs, function(id, label, config_path, script_path, ...) {
     |    [notice] + docker run --entrypoint=bash -i --rm -v `pwd`:/pwd --workdir /pwd -t 'example_{%id%}_with_setup:latest'
     |    root@93c38006a124:/pwd#
     |
-    |", .eval = FALSE)
+    |")
 })
 ```
 :::
