@@ -20,8 +20,17 @@ jobs:
       RENV_PATHS_ROOT: ~/.local/share/renv
 
     steps:
+      - name: Debug
+        run: |
+          df -h
+
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v6
+
+      - name: Debug2
+        run: |
+          df -h
+          cat ~/.config/containers/storage.conf
 
       - uses: actions/checkout@v3
 
