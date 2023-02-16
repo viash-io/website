@@ -44,7 +44,17 @@ jobs:
         with:
           python-version: "3.10"
 
-      - uses: nf-core/setup-nextflow@v1.2.0
+      # - uses: nf-core/setup-nextflow@v1.2.0
+      - name: Install Nextflow
+        env:
+            CAPSULE_LOG: none
+            NXF_VER: "22.10.6"
+        run: |
+          mkdir $RUNNER_TEMP/nextflow
+          cd $RUNNER_TEMP/nextflow
+          wget -qO- get.nextflow.io | bash
+          sudo ln -s $RUNNER_TEMP/nextflow/nextflow /usr/local/bin/nextflow
+          nextflow -version
       
       - uses: viash-io/viash-actions/setup@v3
 
