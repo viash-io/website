@@ -1,9 +1,203 @@
 ---
-title: Create a pipeline *
+title: Create a pipeline
 order: 30
 ---
 
 
+```{r setup, include=FALSE}
+repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
+source(paste0(repo_path, "/includes/_r_helper.R"))
+
+# why doesn't this want to work inside a tempdir?
+# temp_dir <- tempfile("create_pipeline")
+# dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
+# on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
+
+proj_dir <- "viash_project_template"
+
+if (dir.exists(proj_dir)) {
+  unlink(proj_dir, recursive = TRUE)
+}
+processx::run(
+  "git",
+  c("clone", "https://github.com/viash-io/viash_project_template.git")
+)
+
+knitr::opts_knit$set(root.dir = proj_dir)
+```
+
+This guide explains how to create an example pipeline that's closer to a typical use-case of a Nextflow bioinformatics pipeline. 
+
+## Get the template project
+
+To get started with building a pipeline, we provide a [template project](https://github.com/viash-io/viash_project_template)
+which already contains a few components. First create a new repository by clicking the "Use this template" button in the [viash_project_template](https://github.com/viash-io/viash_project_template) repository or clicking the button below.
+
+[Use project template](https://github.com/viash-io/viash_project_template/generate){class="btn btn-info btn-md"}
+
+Then clone the repository using the following command.
+
+```bash
+git clone https://github.com/youruser/my_first_pipeline.git
+```
+
+The pipeline already contains three components with which we will build the following pipeline:
+
+```{mermaid}
+graph LR
+   A(file?.tsv) --> B[/remove_comments/]
+   B --> C[/take_column/]
+   C --> D[/combine_columns/]
+   D --> E(output)
+```
+
+* `remove_comments` is a Bash script which removes all lines starting with a `#` from a file. 
+* `take_column` is a Python script which extracts one of the columns in a TSV file. 
+* `combine_columns` is an R script which combines multiple files into a TSV.
+
+## Build the VDSL3 modules
+
+First, we need to build the components into VDSL3 modules.
+
+```{bash viash-ns-build}
+viash ns build --setup cachedbuild --parallel
+```
+
+Once everything is built, a new **target** directory has been created containing the executables and modules grouped per platform:
+
+```{bash}
+tree target
+```
+
+## 
+
+```{bash, include=FALSE}
+cat > main.nf << 'HERE'
+nextflow.enable.dsl=2
+
+include { remove_comments } from "./target/nextflow/demo/remove_comments/main.nf"
+
+workflow {
+  // Create a channel with two events
+  // Each event contains a string (an identifier) and a file (input)
+  Channel.fromList([
+    ["file1", file("resources_test/file1.tsv")],
+    ["file2", file("resources_test/file2.tsv")]
+  ])
+
+    // View channel contents
+    | view { tup -> "Input: $tup" }
+    
+    // Process the input file using the 'remove_comments' module.
+    // This removes comment lines from the input TSV.
+    | remove_comments
+
+    // View channel contents
+    | view { tup -> "Output: $tup" }
+}
+
+HERE
+```
+
+```{embed, lang="groovy"}
+main.nf
+```
+
+## Step 3: Run the pipeline
+
+Now run the pipeline with Nextflow:
+
+```bash
+nextflow run . \
+  -main-script workflows/demo_pipeline/main.nf \
+  -with-docker \
+  --input resources_test/file*.tsv \
+  --publishDir temp
+```
+
+This will run the three modules in sequence, with the final result result being stored in a file named **combined.combine_columns.output.tsv** in a new **temp** directory:
+
+```
+"1"     0.11
+"2"     0.23
+"3"     0.35
+"4"     0.47
+```
+
+
+
+
+
+
+## Creating the modules
+
+The sections below describe how to create the VDSL3 modules in preparation for creating the pipeline. 
+
+### Preparation
+
+create a new folder named advanced pipeline, add src folder with a nextflow_module folder inside. Now create three folders inside nextflow_module folder, one per component needed for the pipeline:
+
+- `combine_columns`
+- `remove_comments`
+- `take_columns`
+
+
+The folder structure should look like this now:
+
+```
+advanced_pipeline
+└── src
+    └── nextflow_modules
+        ├── combine_columns
+        ├── remove_comments
+        └── take_column
+```
+
+
+1. Target directory where the modules are located
+2. Include the modules from the `target` directory
+3. Create a channel based on the `input` parameter's path
+4. Assign a unique ID to each event using [`map{}`](https://www.nextflow.io/docs/latest/operator.html#map)
+5. Run `remove_comments` to remove the comments from the TSV
+6. Extract a single column from TSV by running `take_column`
+7. Combine all events into a single List event using [`toList()`](https://www.nextflow.io/docs/latest/operator.html#tolist)
+8. Add **unique ID** to the tuple
+9. Concatenate the TSVs into one by running the `combine_columns` module with [auto publishing](/reference/config/platforms/NextflowVdsl3Platform.html#auto) enabled using the `auto` directive 
+10. View the channel contents bu printing it to the console using [`view()`](https://www.nextflow.io/docs/latest/operator.html?highlight=view#view)
+
+## Running the pipeline
+
+Before being able to run the pipeline, you'll need some TSV files to work with. Download the files below and place them in a new directory named **data** in the root of **advanced_pipeline**.
+
+Now run the following command to run the pipeline using Nextflow:
+
+```bash
+nextflow run main.nf --input "data/file?.tsv" --publishDir output
+```
+
+You should get an output similar to this:
+
+```
+N E X T F L O W  ~  version 22.04.3
+Launching `workflows/310-realistic_pipeline/main.nf` [stupefied_saha] DSL2 - revision: 6669aefc6c
+[93/232aba] Submitted process > remove_comments:remove_comments_process (2)
+[ef/a28e89] Submitted process > remove_comments:remove_comments_process (1)
+[63/279f98] Submitted process > take_column:take_column_process (1)
+[50/2a17ef] Submitted process > take_column:take_column_process (2)
+[8d/6eeff5] Submitted process > combine_columns:combine_columns_process
+Output: [combined, /home/runner/work/viash_nxf_course/viash_nxf_course/work/8d/6eeff571e9ff2c5389851c6ab3001c/combined.combine_columns.output]
+```
+
+You can find the final TSV in the **output** directory:
+
+```tsv
+# this is a header		
+# this is also a header		
+one     0.11	123
+two	    0.23	456
+three	0.35	789
+four	0.47	123
+```
 
 ## Todo: add
 
@@ -19,3 +213,11 @@ order: 30
   - Nextflow Viash config
   - Showcase pre-existing pipeline, e.g. guide/data-workflow/nextflow-pipeline/pipeline-advanced.qmd
   - Todo: update to latest VDSL3 practices. Let the targetDir use the rootDir. Use the newer WorkflowHelper helper functions.
+
+```{r include=FALSE}
+knitr::opts_knit$set(root.dir = normalizePath("../"))
+```
+
+```{r include=FALSE}
+unlink(proj_dir, recursive = TRUE)
+```
