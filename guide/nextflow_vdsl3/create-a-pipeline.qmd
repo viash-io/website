@@ -13,20 +13,24 @@ source(paste0(repo_path, "/includes/_r_helper.R"))
 # dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
 # on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
 
-proj_dir <- "viash_project_template"
+proj_dir <- "_viash_project_template"
 
 if (dir.exists(proj_dir)) {
   unlink(proj_dir, recursive = TRUE)
 }
 processx::run(
   "git",
-  c("clone", "https://github.com/viash-io/viash_project_template.git")
+  c("clone", "https://github.com/viash-io/viash_project_template.git", proj_dir)
 )
 
 knitr::opts_knit$set(root.dir = proj_dir)
 ```
 
-This guide explains how to create an example pipeline that's closer to a typical use-case of a Nextflow bioinformatics pipeline. 
+This guide explains how to create an example pipeline that's closer to a typical use-case of a Nextflow bioinformatics pipeline.
+
+:::{.callout-note}
+This page assumes knowledge of how to create and manipulate Nextflow channels using DSL2. For more information, check out the [Nextflow reference docs](https://www.nextflow.io/docs/latest/index.html) or contact [Data Intuitive](https://www.data-intuitive.com/contact) for a complete Nextflow+Viash course.
+:::
 
 ## Get the template project
 
@@ -69,7 +73,9 @@ Once everything is built, a new **target** directory has been created containing
 tree target
 ```
 
-## 
+## Create a pipeline
+
+Below is a first Nextflow pipeline which uses just one VDSL3 module and with hard-coded input parameters (file1 and file2).
 
 ```{bash, include=FALSE}
 cat > main.nf << 'HERE'
@@ -90,7 +96,11 @@ workflow {
     
     // Process the input file using the 'remove_comments' module.
     // This removes comment lines from the input TSV.
-    | remove_comments
+    | remove_comments.run(
+      directives: [
+        publishDir: "output/"
+      ]
+    )
 
     // View channel contents
     | view { tup -> "Output: $tup" }
@@ -103,116 +113,54 @@ HERE
 main.nf
 ```
 
-## Step 3: Run the pipeline
+## VDSL3 module interface
+
+It's important to note what the interface of every VDSL3 module is. A VDSL3 module expects an input to be a tuple with the following elements:
+
+* `id` (`String`): A unique identifier used for tracking data objects and for ensuring output filenames are unique.
+* `data` (`Map[String, Any]` or `File`): A named map (or dictionary) used to pass the module's input arguments. If the module only has a 
+  single input file, the file itself can simply be passed.
+* `...` (`Any*`): Any other elements in the tuple simply pass through the module without being altered in any way. For this reason, it is often referred to as the "passthrough" objects.
+
+In turn, a VDSL3 module will return a tuple with the same interface, except that the input data object has been replaced with the output data:
+
+* `id` (`String`): The identifier from the input tuple.
+* `data` (`Map[String, Any]` or `File`): A named map (or dictionary) containing the module's output files. **Important**: If the module only has a single output file, the file itself will be returned.
+* `...` (`Any*`): The passthrough objects from the input tuple (if any).
+
+## What is `.run()`?
+
+Usually, Nextflow processes are quite static objects. For example, changing its directives can be quite tricky.
+
+The `run()` function is a unique feature for every VDSL3 module which allows dynamically altering the behaviour of a module from within the pipeline. In this case, we use it to set the `publishDir` directive to `"output/"` so the output of that step in the pipeline will be stored as output.
+
+## Run the pipeline
 
 Now run the pipeline with Nextflow:
 
-```bash
+```{bash}
 nextflow run . \
-  -main-script workflows/demo_pipeline/main.nf \
-  -with-docker \
-  --input resources_test/file*.tsv \
-  --publishDir temp
+  -main-script main.nf
 ```
 
-This will run the three modules in sequence, with the final result result being stored in a file named **combined.combine_columns.output.tsv** in a new **temp** directory:
-
-```
-"1"     0.11
-"2"     0.23
-"3"     0.35
-"4"     0.47
+```{bash}
+tree output
 ```
 
-
-
-
-
-
-## Creating the modules
-
-The sections below describe how to create the VDSL3 modules in preparation for creating the pipeline. 
-
-### Preparation
-
-create a new folder named advanced pipeline, add src folder with a nextflow_module folder inside. Now create three folders inside nextflow_module folder, one per component needed for the pipeline:
-
-- `combine_columns`
-- `remove_comments`
-- `take_columns`
-
-
-The folder structure should look like this now:
-
-```
-advanced_pipeline
-└── src
-    └── nextflow_modules
-        ├── combine_columns
-        ├── remove_comments
-        └── take_column
+```{bash}
+cat output/*
 ```
 
+## Discussion
 
-1. Target directory where the modules are located
-2. Include the modules from the `target` directory
-3. Create a channel based on the `input` parameter's path
-4. Assign a unique ID to each event using [`map{}`](https://www.nextflow.io/docs/latest/operator.html#map)
-5. Run `remove_comments` to remove the comments from the TSV
-6. Extract a single column from TSV by running `take_column`
-7. Combine all events into a single List event using [`toList()`](https://www.nextflow.io/docs/latest/operator.html#tolist)
-8. Add **unique ID** to the tuple
-9. Concatenate the TSVs into one by running the `combine_columns` module with [auto publishing](/reference/config/platforms/NextflowVdsl3Platform.html#auto) enabled using the `auto` directive 
-10. View the channel contents bu printing it to the console using [`view()`](https://www.nextflow.io/docs/latest/operator.html?highlight=view#view)
+The above example pipeline serves as the backbone for creating more advanced pipelines. However, for the sake of simplicity it contained several hardcoded elements:
 
-## Running the pipeline
+* Input parameters
+* Output directory
+* VDSL3 module directory
 
-Before being able to run the pipeline, you'll need some TSV files to work with. Download the files below and place them in a new directory named **data** in the root of **advanced_pipeline**.
+<!-- TODO: refactor using Viash Nxf config -->
 
-Now run the following command to run the pipeline using Nextflow:
-
-```bash
-nextflow run main.nf --input "data/file?.tsv" --publishDir output
-```
-
-You should get an output similar to this:
-
-```
-N E X T F L O W  ~  version 22.04.3
-Launching `workflows/310-realistic_pipeline/main.nf` [stupefied_saha] DSL2 - revision: 6669aefc6c
-[93/232aba] Submitted process > remove_comments:remove_comments_process (2)
-[ef/a28e89] Submitted process > remove_comments:remove_comments_process (1)
-[63/279f98] Submitted process > take_column:take_column_process (1)
-[50/2a17ef] Submitted process > take_column:take_column_process (2)
-[8d/6eeff5] Submitted process > combine_columns:combine_columns_process
-Output: [combined, /home/runner/work/viash_nxf_course/viash_nxf_course/work/8d/6eeff571e9ff2c5389851c6ab3001c/combined.combine_columns.output]
-```
-
-You can find the final TSV in the **output** directory:
-
-```tsv
-# this is a header		
-# this is also a header		
-one     0.11	123
-two	    0.23	456
-three	0.35	789
-four	0.47	123
-```
-
-## Todo: add
-
-* Assume knowledge of Nextflow (see Nextflow guide). Data Intuitive also offers specialized Nextflow + Viash courses.
-
-* Copy guide/data-workflow/nextflow-pipeline/pipeline-advanced.qmd
-* Use template repository instead of download buttons
-
-* New content:
-  - How to use a module in a pipeline.
-  - Specify that we assume the user knows how to write a Nextflow pipeline
-  - Dynamic behaviour (.run()): dynamic directives and auto helper.
-  - Nextflow Viash config
-  - Showcase pre-existing pipeline, e.g. guide/data-workflow/nextflow-pipeline/pipeline-advanced.qmd
-  - Todo: update to latest VDSL3 practices. Let the targetDir use the rootDir. Use the newer WorkflowHelper helper functions.
 
 ```{r include=FALSE}
 knitr::opts_knit$set(root.dir = normalizePath("../"))
