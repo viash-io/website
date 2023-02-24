@@ -81,9 +81,6 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <meta property="og:title" content="Viash - Viash 0.5.13">
 <meta property="og:description" content="Added overriding of the container registry for the VDSL3 + VDSL3 bug fixes">
 <meta property="og:site-name" content="Viash">
-<meta name="twitter:title" content="Viash - Viash 0.5.13">
-<meta name="twitter:description" content="Added overriding of the container registry for the VDSL3 + VDSL3 bug fixes">
-<meta name="twitter:card" content="summary">
 </head>
 
 <body class="floating nav-fixed">
@@ -117,10 +114,6 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   <li class="nav-item">
     <a class="nav-link" href="../../../guide/index.html">
  <span class="menu-text">Guide</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../../guide_v2/index.html">
- <span class="menu-text">Guide_v2</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../../reference/index.html">
@@ -209,11 +202,12 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link" data-scroll-target="#full-changelog">Full changelog</a>
   <ul class="collapse">
   <li><a href="#new-functionality" id="toc-new-functionality" class="nav-link" data-scroll-target="#new-functionality">NEW FUNCTIONALITY</a></li>
+  <li><a href="#major-changes" id="toc-major-changes" class="nav-link" data-scroll-target="#major-changes">MAJOR CHANGES</a></li>
   <li><a href="#minor-changes" id="toc-minor-changes" class="nav-link" data-scroll-target="#minor-changes">MINOR CHANGES</a></li>
   <li><a href="#bug-fixes" id="toc-bug-fixes" class="nav-link" data-scroll-target="#bug-fixes">BUG FIXES</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/viash-io/website/edit/main/blog/posts/viash-0.5.13/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/viash-io/website/blob/main/blog/posts/viash-0.5.13/index.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/viash-io/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -226,7 +220,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <section id="whats-new" class="level2">
 <h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<p>VDSL3 gets even more improvements and bug fixes. Read the full changelog below to see all of the changes.</p>
+<p>VDSL3 gets even more improvements and bug fixes.</p>
 </section>
 <section id="full-changelog" class="level2">
 <h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
@@ -234,6 +228,12 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
 <ul>
 <li><code>NextflowVdsl3Platform</code>: Allow overriding the container registry of all Viash components by setting the <code>params.override_container_registry</code> value. Only works for auto-derived image names.</li>
+</ul>
+</section>
+<section id="major-changes" class="level3">
+<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
+<ul>
+<li><code>Functionality</code>: renamed <code>tests</code> to <code>test_resources</code>. Backwards compatibility provided but a notification message is displayed on the console.</li>
 </ul>
 </section>
 <section id="minor-changes" class="level3">
@@ -252,6 +252,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <li><p><code>NextflowVdsl3Platform</code>: Make injected resources dir absolute.</p></li>
 <li><p><code>NextflowVdsl3Platform</code>: Fix escaping of triple single quotes.</p></li>
 <li><p><code>NextflowVdsl3Platform</code>: Also apply auto.simplifyInput to Lists.</p></li>
+<li><p><code>DockerPlatform</code>: added a <code>test_setup</code> that allows adding apt/apk/… setup requirements. These are only executed when running tests.</p></li>
 </ul>
 
 

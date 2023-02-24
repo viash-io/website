@@ -142,11 +142,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <link rel="stylesheet" href="../../../styles.css">
 <meta property="og:title" content="Viash - Viash 0.5.2">
-<meta property="og:description" content="This is a small release containing two small features and a bug fix.">
+<meta property="og:description" content="More settings for Docker and Nextflow platform, and a bug fixes for components with resources">
 <meta property="og:site-name" content="Viash">
-<meta name="twitter:title" content="Viash - Viash 0.5.2">
-<meta name="twitter:description" content="This is a small release containing two small features and a bug fix.">
-<meta name="twitter:card" content="summary">
 </head>
 
 <body class="floating nav-fixed">
@@ -180,10 +177,6 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   <li class="nav-item">
     <a class="nav-link" href="../../../guide/index.html">
  <span class="menu-text">Guide</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../../guide_v2/index.html">
- <span class="menu-text">Guide_v2</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../../reference/index.html">
@@ -233,7 +226,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Viash 0.5.2</h1>
-            <p class="subtitle lead">This is a small release containing two small features and a bug fix.</p>
+            <p class="subtitle lead">More settings for Docker and Nextflow platform, and a bug fixes for components with resources</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">New Release</div>
               </div>
@@ -269,13 +262,13 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
    
   <ul>
   <li><a href="#whats-new" id="toc-whats-new" class="nav-link active" data-scroll-target="#whats-new">What’s new?</a></li>
-  <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link" data-scroll-target="#full-changelog">Full changelog:</a>
+  <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link" data-scroll-target="#full-changelog">Full changelog</a>
   <ul class="collapse">
   <li><a href="#minor-changes" id="toc-minor-changes" class="nav-link" data-scroll-target="#minor-changes">MINOR CHANGES</a></li>
-  <li><a href="#bug-fixes" id="toc-bug-fixes" class="nav-link" data-scroll-target="#bug-fixes">BUG FIXES</a></li>
+  <li><a href="#bug-fix" id="toc-bug-fix" class="nav-link" data-scroll-target="#bug-fix">BUG FIX</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/viash-io/website/edit/main/blog/posts/viash-0.5.2/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/viash-io/website/blob/main/blog/posts/viash-0.5.2/index.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/viash-io/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -291,8 +284,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>This is a small release containing two small features and a bug fix. The new <code>run_args</code> field allows you to add <a href="https://docs.docker.com/engine/reference/commandline/run/">docker run</a> arguments to the <a href="../../../reference/config/platforms/DockerPlatform.html">Docker platform</a> section of a <a href="../../../reference/config/index.html">config file</a>. For example:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">image</span><span class="kw">:</span><span class="at"> bash:4.0</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">run_args</span><span class="kw">:</span><span class="at"> </span><span class="st">"--expose 127.0.0.1:80:8080/tcp --env MY_ENV_VAR=foo"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> bash:4.0</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">run_args</span><span class="kw">:</span><span class="at"> </span><span class="st">"--expose 127.0.0.1:80:8080/tcp --env MY_ENV_VAR=foo"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>There’s also a new field for the <a href="../../../reference/config/platforms/NextflowVdsl3Platform.html">Nextflow platform</a>: <code>separate_multiple_outputs</code>. By default, this is set to <code>true</code> and separates the outputs generated by a Nextflow component with multiple outputs as separate events on the channel. You can now choose to disable this behaviour:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> nextflow</span></span>
@@ -300,16 +293,16 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">separate_multiple_outputs</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog:</h2>
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
 <section id="minor-changes" class="level3">
 <h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
 <ul>
 <li><p><code>DockerPlatform</code>: Added <code>run_args</code> field to allow setting <code>docker run</code> arguments.</p></li>
-<li><p><code>NextFlowPlatform</code>: Added argument <code>separate_multiple_outputs</code> to allow not separating the outputs generated by a component with multiple outputs as separate events on the channel.</p></li>
+<li><p><code>NextflowPlatform</code>: Added argument <code>separate_multiple_outputs</code> to allow not separating the outputs generated by a component with multiple outputs as separate events on the channel.</p></li>
 </ul>
 </section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<section id="bug-fix" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fix">BUG FIX</h3>
 <ul>
 <li><code>IO</code>: Allow overwriting directory resources upon rebuild.</li>
 </ul>

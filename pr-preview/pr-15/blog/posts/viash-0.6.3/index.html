@@ -144,9 +144,6 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <meta property="og:title" content="Viash - Viash 0.6.3">
 <meta property="og:description" content="Quality-of-life improvements in Viash.">
 <meta property="og:site-name" content="Viash">
-<meta name="twitter:title" content="Viash - Viash 0.6.3">
-<meta name="twitter:description" content="Quality-of-life improvements in Viash.">
-<meta name="twitter:card" content="summary">
 </head>
 
 <body class="floating nav-fixed">
@@ -180,10 +177,6 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   <li class="nav-item">
     <a class="nav-link" href="../../../guide/index.html">
  <span class="menu-text">Guide</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../../guide_v2/index.html">
- <span class="menu-text">Guide_v2</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../../reference/index.html">
@@ -268,7 +261,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link active" data-scroll-target="#full-changelog">Full changelog</a>
+  <li><a href="#whats-new" id="toc-whats-new" class="nav-link active" data-scroll-target="#whats-new">What’s new?</a></li>
+  <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link" data-scroll-target="#full-changelog">Full changelog</a>
   <ul class="collapse">
   <li><a href="#major-changes" id="toc-major-changes" class="nav-link" data-scroll-target="#major-changes">MAJOR CHANGES</a></li>
   <li><a href="#minor-changes" id="toc-minor-changes" class="nav-link" data-scroll-target="#minor-changes">MINOR CHANGES</a></li>
@@ -277,7 +271,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   <li><a href="#experimental-functionality" id="toc-experimental-functionality" class="nav-link" data-scroll-target="#experimental-functionality">EXPERIMENTAL FUNCTIONALITY</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/viash-io/website/edit/main/blog/posts/viash-0.6.3/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/viash-io/website/blob/main/blog/posts/viash-0.6.3/index.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/viash-io/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -288,6 +282,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 
 
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
 <p>This release features contains mostly quality of life improvements and some experimental functionality. Most notably:</p>
 <ul>
 <li><p><code>viash ns list</code> now only returns a config just once instead of once per platform.</p></li>
@@ -295,6 +291,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <li><p>Bug fixes for using Viash with podman, Nextflow&gt;=22.10 and R&lt;4.0.</p></li>
 <li><p>Experimental support for inheriting from config partials.</p></li>
 </ul>
+</section>
 <section id="full-changelog" class="level2">
 <h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
 <section id="major-changes" class="level3">
@@ -324,6 +321,9 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <li><p><code>Testbenches</code>: Rework <code>MainBuildAuxiliaryNativeParameterCheck</code> to create stimulus files and loop over the file from bash instead of looping natively. This prevents creating thousands of new processes which would only test a single parameter. Note this still calls the main script for each stimulus separately, but that was the case anyway, only much much worse.</p></li>
 <li><p><code>Testbenches</code>: Split some grouped test benches into slightly smaller test benches that group tested functionality better.</p></li>
 <li><p><code>Annotations</code>: Complete the config schema annotations. Make sure all arguments are documented. Added an annotation <code>internalFunctionality</code> and <code>undocumented</code> for arguments that should not be documented. Added a testbench that verifies that all arguments are in fact annotated, skipping those that are not in the class constructor. Adds a hierarchy field in the <code>__this__</code> member to list the relation of the own and parent classes.</p></li>
+<li><p><code>Testbenches</code>: Add exit code to helper method <code>testMainWithStdErr</code>.</p></li>
+<li><p><code>Testbenches</code>: Add testbench to verify viash underscore components (viash_build, viash_install, viash_push, viash_skeleton, viash_test).</p></li>
+<li><p><code>Testbenches</code>: Update viash underscore component tests to use <code>$meta_executable</code>.</p></li>
 <li><p><code>viash ns exec</code>: Allow choosing whether the <code>{platform}</code> field should be filled in, based on the <code>--apply_platform</code> parameter.</p></li>
 </ul>
 </section>
@@ -331,6 +331,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
 <ul>
 <li><p><code>DockerPlatform</code>: Remove duplicate auto-mounts (#257).</p></li>
+<li><p><code>Underscore component tests</code>: Fix tests for <code>viash_skeleton</code> and <code>viash_test</code> components.</p></li>
 <li><p><code>NextflowVDSL3Platform</code>: Fix ‘Module scriptPath has not been defined yet’ error when Nextflow&gt;=22.10 (#269).</p></li>
 <li><p><code>config inject</code>: Doesn’t work when <code>must_exist == true</code> (#273).</p></li>
 <li><p><code>RScript</code>: Fix compatibility issue where the new character escaping in <code>r_script</code> required R&gt;=4.0 (#275). Escaping is now handled without using the new <code>r'(foo)'</code> notation.</p></li>
@@ -346,7 +347,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <section id="experimental-functionality" class="level3">
 <h3 class="anchored" data-anchor-id="experimental-functionality">EXPERIMENTAL FUNCTIONALITY</h3>
 <ul>
-<li><p><code>Config</code>: Any part of a Viash config can use inheritance to fill data (#259). For example: Contents of <code>src/test/config.vsh.yaml</code>:</p>
+<li><p><code>Config</code>: Any part of a Viash config can use inheritance to fill data (#271). For example: Contents of <code>src/test/config.vsh.yaml</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">__inherits__</span><span class="kw">:</span><span class="at"> ../api/base.yaml</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> test</span></span>
