@@ -221,3 +221,13 @@ pwalk(langs, function(id, label, ...) {
 })
 ```
 :::
+
+
+```{bash}
+#| include: false
+# remove example images and prune dangling images
+if [ $PRUNE_IMAGES == "true" ]; then
+  docker rmi $(docker images | grep 'example_')
+  docker system prune -f
+fi
+```

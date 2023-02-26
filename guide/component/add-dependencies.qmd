@@ -389,3 +389,12 @@ Viash components only require a minimal set of dependencies which need to be ava
 * Scala: `bash`, `openjdk-devel` and `sbt`.
 
 :::
+
+```{bash}
+#| include: false
+# remove example images and prune dangling images
+if [ $PRUNE_IMAGES == "true" ]; then
+  docker rmi $(docker images | grep 'example_')
+  docker system prune -f
+fi
+```
