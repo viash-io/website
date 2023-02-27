@@ -156,7 +156,7 @@ viash ns test --parallel --src src/
 #| include: false
 # remove example images and prune dangling images
 if [ $PRUNE_IMAGES == "true" ]; then
-  docker rmi $(docker images | grep 'example_')
+  docker rmi $(docker images | grep example_ | gawk -F' ' '{print $3}')
   docker system prune -f
 fi
 ```

@@ -169,3 +169,12 @@ knitr::opts_knit$set(root.dir = normalizePath("../"))
 ```{r include=FALSE}
 unlink(proj_dir, recursive = TRUE)
 ```
+
+```{bash}
+#| include: false
+# remove example images and prune dangling images
+if [ $PRUNE_IMAGES == "true" ]; then
+  docker rmi $(docker images | grep viash_project_template | gawk -F' ' '{print $3}')
+  docker system prune -f
+fi
+```
