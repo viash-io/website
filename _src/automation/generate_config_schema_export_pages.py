@@ -31,7 +31,7 @@ repo = git.Repo(".", search_parent_directories=True) # Get root dir of repo
 repo_root = repo.working_tree_dir
 
 json_export = "config_schema_export.json"
-keyword_replace_csv = repo_root + "/bin/scripts/keyword_links.csv"
+keyword_replace_csv = repo_root + "/_src/automation/keyword_links.csv"
 keyword_regex = r"\@\[(.*?)\]\((.*?)\)"
 
 reference_dir = repo_root + "/reference/"
@@ -41,8 +41,7 @@ def generate_json():
 	""" Calls viash in order to generate a config export. """
 	
 	# Run bin/viash export config_schema
-	bin = repo_root + "/bin/"
-	json = subprocess.run([bin + "viash", "export", "config_schema"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+	json = subprocess.run(["viash", "export", "config_schema"], stdout=subprocess.PIPE).stdout.decode('utf-8')
 	f = open(reference_dir + json_export, "w")
 	f.write(json)
 	f.close()
