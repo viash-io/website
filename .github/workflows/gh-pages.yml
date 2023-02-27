@@ -19,22 +19,16 @@ jobs:
     env:
       RENV_PATHS_ROOT: ~/.local/share/renv
 
-    steps:
-      - name: Debug
-        run: |
-          df -h
-          pwd
+      # environment variable that enables docker image pruning
+      # between different pages to save on disk space
+      PRUNE_IMAGES: true
 
+    steps:
+      # need to maximise build space for docker images
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v6
         with:
           root-reserve-mb: 5000
-
-      - name: Debug2
-        run: |
-          df -h
-          podman info
-          buildah info
 
       - uses: actions/checkout@v3
 
@@ -53,9 +47,9 @@ jobs:
           r-version: "4.2"
           use-public-rspm: true
 
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
+      # - uses: actions/setup-python@v4
+      #   with:
+      #     python-version: "3.10"
 
       # - uses: nf-core/setup-nextflow@v1.2.0
       - name: Install Nextflow
@@ -83,7 +77,7 @@ jobs:
       - name: Render with Quarto
         shell: bash -l {0}  
         run: |
-          source renv/python/virtualenvs/renv-python-3.10/bin/activate
+          # source renv/python/virtualenvs/renv-python-3.10/bin/activate
           quarto render
 
       - name: Deploy 🚀
