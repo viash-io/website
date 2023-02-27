@@ -1,0 +1,23 @@
+functionality:
+  name: hello_world
+  description: A minimal example component.
+  arguments:
+  - type: string
+    name: --input
+    default: "World"
+  - type: string
+    name: --id
+    default: "hello_world"
+  - type: file
+    name: --output
+    direction: output
+    default: "output"
+  resources:
+  - type: javascript_script
+    path: script.js
+platforms:
+  - type: native
+  - type: docker
+    image: node:15-buster
+  - type: nextflow
+    variant: vdsl3
