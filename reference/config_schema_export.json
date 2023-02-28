@@ -1,4 +1,30 @@
 {
+  "config" : [
+    {
+      "name" : "__this__",
+      "type" : "Config",
+      "hierarchy" : [
+        "io.viash.config.Config"
+      ],
+      "description" : "A Viash configuration is a YAML file which contains metadata to describe the behaviour and build target(s) of a component.  \nWe commonly name this file `config.vsh.yaml` in our examples, but you can name it however you choose.  \n",
+      "example" : [
+        {
+          "example" : "functionality:\n  name: hello_world\n  arguments:\n    - type: string\n      name: --input\n      default: \"world\"\n  resources:\n    - type: bash_script\n      path: script.sh\n      text: echo Hello $par_input\nplatforms:\n  - type: docker\n    image: \"bash:4.0\"\n",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "platforms",
+      "type" : "List of Platform",
+      "description" : "A list of platforms to generate target artifacts for.\n\n - @[native_platform](Native)\n - @[docker_platform](Docker)\n - @[nextflow_platform](Nextflow VDSL3)\n"
+    },
+    {
+      "name" : "functionality",
+      "type" : "Functionality",
+      "description" : "The @[functionality](functionality) describes the behaviour of the script in terms of arguments and resources.\nBy specifying a few restrictions (e.g. mandatory arguments) and adding some descriptions, Viash will automatically generate a stylish command-line interface for you.\n"
+    }
+  ],
   "functionality" : [
     {
       "name" : "__this__",
@@ -65,7 +91,8 @@
       "since" : "Viash 0.5.13",
       "deprecated" : {
         "message" : "Use `status` instead.",
-        "since" : "Viash 0.6.0"
+        "deprecation" : "0.6.0",
+        "removal" : "0.8.0"
       }
     },
     {
@@ -74,7 +101,8 @@
       "description" : "One or more Bash/R/Python scripts to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.",
       "deprecated" : {
         "message" : "Use `test_resources` instead. No functional difference.",
-        "since" : "Viash 0.5.13"
+        "deprecation" : "0.5.13",
+        "removal" : "0.7.0"
       }
     },
     {
@@ -84,7 +112,8 @@
       "since" : "Viash 0.5.5",
       "removed" : {
         "message" : "Extending the PATH turned out to be not desirable.",
-        "since" : "Viash 0.5.11"
+        "deprecation" : "",
+        "removal" : "0.5.11"
       }
     },
     {
@@ -105,7 +134,8 @@
       "since" : "Viash 0.5.11",
       "deprecated" : {
         "message" : "Use `arguments` instead.",
-        "since" : "Viash 0.6.0"
+        "deprecation" : "0.6.0",
+        "removal" : "0.8.0"
       }
     },
     {
@@ -149,7 +179,8 @@
       "since" : "Viash 0.5.11",
       "deprecated" : {
         "message" : "Use `arguments` instead.",
-        "since" : "Viash 0.6.0"
+        "deprecation" : "0.6.0",
+        "removal" : "0.8.0"
       }
     },
     {
@@ -325,8 +356,9 @@
           }
         ],
         "deprecated" : {
-          "message" : "Use `setup` instead.",
-          "since" : "Viash 0.5.15"
+          "message" : "Use `setup` instead, e.g. `{type: docker, setup: [{ type: apk, ... }]}`. Will be removed.",
+          "deprecation" : "0.5.15",
+          "removal" : "0.7.0"
         }
       },
       {
@@ -383,8 +415,9 @@
           }
         ],
         "deprecated" : {
-          "message" : "Use `setup` instead.",
-          "since" : "Viash 0.5.15"
+          "message" : "Use `setup` instead, e.g. `{type: docker, setup: [{ type: yum, ... }]}`. Will be removed.",
+          "deprecation" : "0.5.15",
+          "removal" : "0.7.0"
         }
       },
       {
@@ -415,8 +448,9 @@
           }
         ],
         "deprecated" : {
-          "message" : "Use `setup` instead.",
-          "since" : "Viash 0.5.15"
+          "message" : "Use `setup` instead, e.g. `{type: docker, setup: [{ type: docker, ... }]}`. Will be removed.",
+          "deprecation" : "0.5.15",
+          "removal" : "0.7.0"
         }
       },
       {
@@ -441,8 +475,9 @@
           }
         ],
         "deprecated" : {
-          "message" : "Use `setup` instead.",
-          "since" : "Viash 0.5.15"
+          "message" : "Use `setup` instead, e.g. `{type: docker, setup: [{ type: apt, ... }]}`. Will be removed.",
+          "deprecation" : "0.5.15",
+          "removal" : "0.7.0"
         }
       },
       {
@@ -478,8 +513,9 @@
           }
         ],
         "deprecated" : {
-          "message" : "Use `setup` instead.",
-          "since" : "Viash 0.5.15"
+          "message" : "Use `setup` instead, e.g. `{type: docker, setup: [{ type: python, ... }]}`. Will be removed.",
+          "deprecation" : "0.5.15",
+          "removal" : "0.7.0"
         }
       },
       {
@@ -487,8 +523,9 @@
         "type" : "Option of Boolean",
         "description" : "Adds a `privileged` flag to the docker run.",
         "deprecated" : {
-          "message" : "Add a `privileged` flag in `run_args` instead.",
-          "since" : "Viash 0.6.3"
+          "message" : "Add a `privileged` flag in `run_args` instead, e.g. `{type: docker, run_args: \"--privileged\"}`.",
+          "deprecation" : "0.6.3",
+          "removal" : "0.8.0"
         }
       },
       {
@@ -513,8 +550,9 @@
           }
         ],
         "deprecated" : {
-          "message" : "Use `setup` instead.",
-          "since" : "Viash 0.5.15"
+          "message" : "Use `setup` instead, e.g. `{type: docker, setup: [{ type: r, ... }]}`. Will be removed.",
+          "deprecation" : "0.5.15",
+          "removal" : "0.7.0"
         }
       },
       {
@@ -621,8 +659,9 @@
         ],
         "description" : "Run a Viash component as a Nextflow module.",
         "deprecated" : {
-          "message" : "Use VDSL3 Nextflow modules instead",
-          "since" : "Viash 0.6.0"
+          "message" : "Nextflow platform with `variant: legacy` is deprecated and will be removed",
+          "deprecation" : "0.6.0",
+          "removal" : "0.7.0"
         }
       },
       {
@@ -727,7 +766,8 @@
         "type" : "Option of String",
         "deprecated" : {
           "message" : "nextflow platform: attribute 'version' is deprecated and should be left empty.",
-          "since" : "Viash 0.4.0"
+          "deprecation" : "0.4.0",
+          "removal" : "0.7.0"
         }
       },
       {
@@ -756,7 +796,8 @@
         "type" : "Option of String",
         "deprecated" : {
           "message" : "Undocumented & stale value",
-          "since" : "Viash 0.6.3"
+          "deprecation" : "0.6.3",
+          "removal" : "0.7.0"
         }
       }
     ]
@@ -822,8 +863,9 @@
           }
         ],
         "deprecated" : {
-          "message" : "Use `copy` instead.",
-          "since" : "Viash 0.6.3"
+          "message" : "`resources` in `setup: {type: docker, resources: ...}` will be removed. Please use `copy` instead.",
+          "deprecation" : "0.6.3",
+          "removal" : "0.7.0"
         }
       },
       {
@@ -1949,6 +1991,17 @@
         ]
       },
       {
+        "name" : "create_parent",
+        "type" : "Boolean",
+        "description" : "If the output filename is a path and it does not exist, create it before executing the script (only for `direction: output`).",
+        "example" : [
+          {
+            "example" : "- name: --my_file\n  type: file\n  direction: output\n  create_parent: true\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
         "name" : "direction",
         "type" : "Direction",
         "description" : "Makes this argument an `input` or an `output`, as in does the file/folder needs to be read or written. `input` by default.",
@@ -1974,7 +2027,7 @@
       {
         "name" : "must_exist",
         "type" : "Boolean",
-        "description" : "The file or folder should exist before the start of execution. If set to `true`, an error will be produced if the file or folder wasn't found.",
+        "description" : "Checks whether the file or folder exists. For input files, this check will happen before the execution of the script, while for output files the check will happen afterwards.",
         "example" : [
           {
             "example" : "- name: --my_file\n  type: file\n  must_exist: true\n",
