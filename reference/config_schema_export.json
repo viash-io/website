@@ -15,14 +15,14 @@
       ]
     },
     {
-      "name" : "platforms",
-      "type" : "List of Platform",
-      "description" : "A list of platforms to generate target artifacts for.\n\n - @[native_platform](Native)\n - @[docker_platform](Docker)\n - @[nextflow_platform](Nextflow VDSL3)\n"
-    },
-    {
       "name" : "functionality",
       "type" : "Functionality",
       "description" : "The @[functionality](functionality) describes the behaviour of the script in terms of arguments and resources.\nBy specifying a few restrictions (e.g. mandatory arguments) and adding some descriptions, Viash will automatically generate a stylish command-line interface for you.\n"
+    },
+    {
+      "name" : "platforms",
+      "type" : "List of Platform",
+      "description" : "A list of platforms to generate target artifacts for.\n\n - @[native_platform](Native)\n - @[docker_platform](Docker)\n - @[nextflow_platform](Nextflow VDSL3)\n"
     }
   ],
   "functionality" : [
@@ -41,6 +41,124 @@
       "example" : [
         {
           "example" : "name: this_is_my_component",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "enabled",
+      "type" : "Boolean",
+      "description" : "Setting this to false with disable this component when using namespaces.",
+      "since" : "Viash 0.5.13",
+      "removed" : {
+        "message" : "Use `status` instead.",
+        "deprecation" : "0.6.0",
+        "removal" : "0.7.0"
+      }
+    },
+    {
+      "name" : "tests",
+      "type" : "List of Resource",
+      "description" : "One or more Bash/R/Python scripts to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.",
+      "removed" : {
+        "message" : "Use `test_resources` instead. No functional difference.",
+        "deprecation" : "0.5.13",
+        "removal" : "0.7.0"
+      }
+    },
+    {
+      "name" : "info",
+      "type" : "Json",
+      "description" : "Structured information. Can be any shape: a string, vector, map or even nested map.",
+      "example" : [
+        {
+          "example" : "info:\n  twitter: wizzkid\n  classes: [ one, two, three ]",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.4.0"
+    },
+    {
+      "name" : "version",
+      "type" : "Option of String",
+      "description" : "Version of the component. This field will be used to version the executable and the Docker container.",
+      "example" : [
+        {
+          "example" : "version: 0.8",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "inputs",
+      "type" : "List of Argument",
+      "description" : "A list of input arguments in addition to the `arguments` list. Any arguments specified here will have their `type` set to `file` and the `direction` set to `input` by default.",
+      "example" : [
+        {
+          "example" : "inputs:\n  - name: input_file\n  - name: another_input",
+          "format" : "yaml"
+        },
+        {
+          "example" : "component_with_inputs\n  \n  Inputs:\n      input_file\n          type: file\n  \n      another_input\n          type: file",
+          "format" : "bash",
+          "description" : "This results in the following output when calling the component with the `--help` argument:"
+        }
+      ],
+      "since" : "Viash 0.5.11",
+      "removed" : {
+        "message" : "Use `arguments` instead.",
+        "deprecation" : "0.6.0",
+        "removal" : "0.7.0"
+      }
+    },
+    {
+      "name" : "authors",
+      "type" : "List of Author",
+      "description" : "A list of authors. An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.\n\nSuggested values for roles are:\n \n| Role | Abbrev. | Description |\n|------|---------|-------------|\n| maintainer | mnt | for the maintainer of the code. Ideally, exactly one maintainer is specified. |\n| author | aut | for persons who have made substantial contributions to the software. |\n| contributor | ctb| for persons who have made smaller contributions (such as code patches).\n| datacontributor | dtc | for persons or organisations that contributed data sets for the software\n| copyrightholder | cph | for all copyright holders. This is a legal concept so should use the legal name of an institution or corporate body.\n| funder | fnd | for persons or organizations that furnished financial support for the development of the software\n\nThe [full list of roles](https://www.loc.gov/marc/relators/relaterm.html) is extremely comprehensive.\n",
+      "example" : [
+        {
+          "example" : "authors:\n  - name: Bob Cando\n    roles: [maintainer, author]\n    email: bob@can.do\n    props: {github: bobcando, orcid: 0000-0001-0002-0003}\n  - name: Tim Farbe\n    roles: [author]\n    email: tim@far.be",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.3.1"
+    },
+    {
+      "name" : "status",
+      "type" : "Status",
+      "description" : "Allows setting a component to active, deprecated or disabled.",
+      "since" : "Viash 0.6.0"
+    },
+    {
+      "name" : "requirements",
+      "type" : "ComputationalRequirements",
+      "description" : "Computational requirements related to running the component. \n`cpus` specifies the maximum number of (logical) cpus a component is allowed to use., whereas\n`memory` specifies the maximum amount of memory a component is allowed to allicate. Memory units must be\nin B, KB, MB, GB, TB or PB.",
+      "example" : [
+        {
+          "example" : "requirements:\n  cpus: 5\n  memory: 10GB\n",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.6.0"
+    },
+    {
+      "name" : "resources",
+      "type" : "List of Resource",
+      "description" : "@[resources](Resources) are files that support the component. The first resource should be @[scripting_languages](a script) that will be executed when the functionality is run. Additional resources will be copied to the same directory.\n\nCommon properties:\n\n * type: `file` / `r_script` / `python_script` / `bash_script` / `javascript_script` / `scala_script` / `csharp_script`, specifies the type of the resource. The first resource cannot be of type `file`. When the type is not specified, the default type is simply `file`.\n * dest: filename, the resulting name of the resource.  From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter.\n * path: `path/to/file`, the path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`.\n * text: ...multiline text..., the content of the resulting file specified as a string. Mutually exclusive with `path`.\n * is_executable: `true` / `false`, whether the resulting resource file should be made executable.\n",
+      "example" : [
+        {
+          "example" : "resources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt\n",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "test_resources",
+      "type" : "List of Resource",
+      "description" : "One or more @[scripting_language](scripts) to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing. See @[unit_testing](Unit Testing) for more info.",
+      "example" : [
+        {
+          "example" : "test_resources:\n  - type: bash_script\n    path: tests/test1.sh\n  - type: r_script\n    path: tests/test2.R\n  - path: resource1.txt\n",
           "format" : "yaml"
         }
       ]
@@ -85,27 +203,6 @@
       ]
     },
     {
-      "name" : "enabled",
-      "type" : "Boolean",
-      "description" : "Setting this to false with disable this component when using namespaces.",
-      "since" : "Viash 0.5.13",
-      "deprecated" : {
-        "message" : "Use `status` instead.",
-        "deprecation" : "0.6.0",
-        "removal" : "0.8.0"
-      }
-    },
-    {
-      "name" : "tests",
-      "type" : "List of Resource",
-      "description" : "One or more Bash/R/Python scripts to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.",
-      "deprecated" : {
-        "message" : "Use `test_resources` instead. No functional difference.",
-        "deprecation" : "0.5.13",
-        "removal" : "0.7.0"
-      }
-    },
-    {
       "name" : "add_resources_to_path",
       "type" : "Boolean",
       "description" : "Adds the resources directory to the PATH variable when set to true. This is set to false by default.",
@@ -132,108 +229,11 @@
         }
       ],
       "since" : "Viash 0.5.11",
-      "deprecated" : {
+      "removed" : {
         "message" : "Use `arguments` instead.",
         "deprecation" : "0.6.0",
-        "removal" : "0.8.0"
+        "removal" : "0.7.0"
       }
-    },
-    {
-      "name" : "info",
-      "type" : "Json",
-      "description" : "Structured information. Can be any shape: a string, vector, map or even nested map.",
-      "example" : [
-        {
-          "example" : "info:\n  twitter: wizzkid\n  classes: [ one, two, three ]",
-          "format" : "yaml"
-        }
-      ],
-      "since" : "Viash 0.4.0"
-    },
-    {
-      "name" : "version",
-      "type" : "Option of String",
-      "description" : "Version of the component. This field will be used to version the executable and the Docker container.",
-      "example" : [
-        {
-          "example" : "version: 0.8",
-          "format" : "yaml"
-        }
-      ]
-    },
-    {
-      "name" : "inputs",
-      "type" : "List of Argument",
-      "description" : "A list of input arguments in addition to the `arguments` list. Any arguments specified here will have their `type` set to `file` and the `direction` set to `input` by default.",
-      "example" : [
-        {
-          "example" : "inputs:\n  - name: input_file\n  - name: another_input",
-          "format" : "yaml"
-        },
-        {
-          "example" : "component_with_inputs\n  \n  Inputs:\n      input_file\n          type: file\n  \n      another_input\n          type: file",
-          "format" : "bash",
-          "description" : "This results in the following output when calling the component with the `--help` argument:"
-        }
-      ],
-      "since" : "Viash 0.5.11",
-      "deprecated" : {
-        "message" : "Use `arguments` instead.",
-        "deprecation" : "0.6.0",
-        "removal" : "0.8.0"
-      }
-    },
-    {
-      "name" : "authors",
-      "type" : "List of Author",
-      "description" : "A list of authors. An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.\n\nSuggested values for roles are:\n \n| Role | Abbrev. | Description |\n|------|---------|-------------|\n| maintainer | mnt | for the maintainer of the code. Ideally, exactly one maintainer is specified. |\n| author | aut | for persons who have made substantial contributions to the software. |\n| contributor | ctb| for persons who have made smaller contributions (such as code patches).\n| datacontributor | dtc | for persons or organisations that contributed data sets for the software\n| copyrightholder | cph | for all copyright holders. This is a legal concept so should use the legal name of an institution or corporate body.\n| funder | fnd | for persons or organizations that furnished financial support for the development of the software\n\nThe [full list of roles](https://www.loc.gov/marc/relators/relaterm.html) is extremely comprehensive.\n",
-      "example" : [
-        {
-          "example" : "authors:\n  - name: Bob Cando\n    roles: [maintainer, author]\n    email: bob@can.do\n    props: {github: bobcando, orcid: 0000-0001-0002-0003}\n  - name: Tim Farbe\n    roles: [author]\n    email: tim@far.be",
-          "format" : "yaml"
-        }
-      ],
-      "since" : "Viash 0.3.1"
-    },
-    {
-      "name" : "status",
-      "type" : "Status",
-      "description" : "Allows setting a component to active, deprecated or disabled.",
-      "since" : "Viash 0.6.0"
-    },
-    {
-      "name" : "requirements",
-      "type" : "ComputationalRequirements",
-      "description" : "Computational requirements related to running the component. \n`cpus` specifies the maximum number of (logical) cpus a component is allowed to use., whereas\n`memory` specifies the maximum amount of memory a component is allowed to allicate. Memory units must be\nin B, KB, MB, GB, TB or PB.",
-      "example" : [
-        {
-          "example" : "requirements:\n  cpus: 5\n  memory: 10GB\n",
-          "format" : "yaml"
-        }
-      ],
-      "since" : "Viash 0.6.0"
-    },
-    {
-      "name" : "resources",
-      "type" : "List of Resource",
-      "description" : "@[resources](Resources) are files that support the component. The first resource should be @[scripting_languages](a script) that will be executed when the functionality is run. Additional resources will be copied to the same directory.\n\nCommon properties:\n\n * type: `file` / `r_script` / `python_script` / `bash_script` / `javascript_script` / `scala_script` / `csharp_script`, the type of resource. The first resource cannot be of type `file`. When the type is not specified, the default type is simply `file`.\n * name: filename, the resulting name of the resource.\n * path: `path/to/file`, the path of the input file. Can be a relative or an absolute path, or a URI.\n * text: ...multiline text..., the raw content of the input file. Exactly one of path or text must be defined, the other undefined.\n * is_executable: `true` / `false`, whether the resulting file is made executable.\n",
-      "example" : [
-        {
-          "example" : "resources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt\n",
-          "format" : "yaml"
-        }
-      ]
-    },
-    {
-      "name" : "test_resources",
-      "type" : "List of Resource",
-      "description" : "One or more @[scripting_language](scripts) to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing. See @[unit_testing](Unit Testing) for more info.",
-      "example" : [
-        {
-          "example" : "test_resources:\n  - type: bash_script\n    path: tests/test1.sh\n  - type: r_script\n    path: tests/test2.R\n  - path: resource1.txt\n",
-          "format" : "yaml"
-        }
-      ]
     },
     {
       "name" : "namespace",
@@ -270,11 +270,6 @@
         "description" : "Running a Viash component on a native platform means that the script will be executed in your current environment.\nAny dependencies are assumed to have been installed by the user, so the native platform is meant for developers (who know what they're doing) or for simple bash scripts (which have no extra dependencies).\n"
       },
       {
-        "name" : "type",
-        "type" : "String",
-        "description" : "Specifies the type of the platform."
-      },
-      {
         "name" : "id",
         "type" : "String",
         "description" : "As with all platforms, you can give a platform a different name. By specifying `id: foo`, you can target this platform (only) by specifying `-p foo` in any of the Viash commands.",
@@ -284,6 +279,11 @@
             "format" : "yaml"
           }
         ]
+      },
+      {
+        "name" : "type",
+        "type" : "String",
+        "description" : "Specifies the type of the platform."
       }
     ],
     "dockerPlatform" : [
@@ -335,6 +335,70 @@
         ]
       },
       {
+        "name" : "target_tag",
+        "type" : "Option of String",
+        "description" : "The tag the resulting image gets. Advanced usage only.",
+        "example" : [
+          {
+            "example" : "target_tag: 0.5.0",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "run_args",
+        "type" : "OneOrMore of String",
+        "description" : "Add [docker run](https://docs.docker.com/engine/reference/run/) arguments."
+      },
+      {
+        "name" : "namespace_separator",
+        "type" : "String",
+        "description" : "The separator between the namespace and the name of the component, used for determining the image name.",
+        "example" : [
+          {
+            "example" : "namespace_separator: \"+\"",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "resolve_volume",
+        "type" : "DockerResolveVolume",
+        "description" : "Enables or disables automatic volume mapping. Enabled when set to `Automatic` or disabled when set to `Manual`. Default: `Automatic`"
+      },
+      {
+        "name" : "port",
+        "type" : "OneOrMore of String",
+        "description" : "A list of enabled ports. This doesn't change the Dockerfile but gets added as a command-line argument at runtime.",
+        "example" : [
+          {
+            "example" : "port:\n  - 80\n  - 8080\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "python",
+        "type" : "Option of PythonRequirements",
+        "description" : "Specify which Python packages should be available in order to run the component.",
+        "example" : [
+          {
+            "example" : "setup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ jkbr/httpie ]\n    gitlab: [ foo/bar ]\n    mercurial: [ http://... ]\n    svn: [ http://...]\n    bazaar: [ http://... ]\n    url: [ http://... ]\n",
+            "format" : "yaml"
+          }
+        ],
+        "removed" : {
+          "message" : "Use `setup` instead, e.g. `{type: docker, setup: [{ type: python, ... }]}`. Will be removed.",
+          "deprecation" : "0.5.15",
+          "removal" : "0.7.0"
+        }
+      },
+      {
+        "name" : "setup",
+        "type" : "List of Requirements",
+        "description" : "A list of requirements for installing the following types of packages:\n\n - @[apt_req](apt)\n - @[apk_req](apk)\n - @[docker_req](Docker setup instructions)\n - @[javascript_req](JavaScript)\n - @[python_req](Python)\n - @[r_req](R)\n - @[ruby_req](Ruby)\n - @[yum_req](yum)\n\nThe order in which these dependencies are specified determines the order in which they will be installed.\n"
+      },
+      {
         "name" : "workdir",
         "type" : "Option of String",
         "description" : "The working directory when starting the container. This doesn't change the Dockerfile but gets added as a command-line argument at runtime.",
@@ -355,7 +419,7 @@
             "format" : "yaml"
           }
         ],
-        "deprecated" : {
+        "removed" : {
           "message" : "Use `setup` instead, e.g. `{type: docker, setup: [{ type: apk, ... }]}`. Will be removed.",
           "deprecation" : "0.5.15",
           "removal" : "0.7.0"
@@ -373,38 +437,6 @@
         ]
       },
       {
-        "name" : "target_tag",
-        "type" : "Option of String",
-        "description" : "The tag the resulting image gets. Advanced usage only.",
-        "example" : [
-          {
-            "example" : "target_tag: 0.5.0",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "run_args",
-        "type" : "OneOrMore of String",
-        "description" : "Add [docker run](https://docs.docker.com/engine/reference/run/) arguments."
-      },
-      {
-        "name" : "namespace_separator",
-        "type" : "String",
-        "description" : "The default namespace separator is \"_\".",
-        "example" : [
-          {
-            "example" : "namespace_separator: \"+\"",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "resolve_volume",
-        "type" : "DockerResolveVolume",
-        "description" : "Enables or disables automatic volume mapping. Enabled when set to `Automatic` or disabled when set to `Manual`. Default: `Automatic`"
-      },
-      {
         "name" : "yum",
         "type" : "Option of YumRequirements",
         "description" : "Specify which yum packages should be available in order to run the component.",
@@ -414,7 +446,7 @@
             "format" : "yaml"
           }
         ],
-        "deprecated" : {
+        "removed" : {
           "message" : "Use `setup` instead, e.g. `{type: docker, setup: [{ type: yum, ... }]}`. Will be removed.",
           "deprecation" : "0.5.15",
           "removal" : "0.7.0"
@@ -447,7 +479,7 @@
             "format" : "yaml"
           }
         ],
-        "deprecated" : {
+        "removed" : {
           "message" : "Use `setup` instead, e.g. `{type: docker, setup: [{ type: docker, ... }]}`. Will be removed.",
           "deprecation" : "0.5.15",
           "removal" : "0.7.0"
@@ -474,22 +506,11 @@
             "format" : "yaml"
           }
         ],
-        "deprecated" : {
+        "removed" : {
           "message" : "Use `setup` instead, e.g. `{type: docker, setup: [{ type: apt, ... }]}`. Will be removed.",
           "deprecation" : "0.5.15",
           "removal" : "0.7.0"
         }
-      },
-      {
-        "name" : "port",
-        "type" : "OneOrMore of String",
-        "description" : "A list of enabled ports. This doesn't change the Dockerfile but gets added as a command-line argument at runtime.",
-        "example" : [
-          {
-            "example" : "port:\n  - 80\n  - 8080\n",
-            "format" : "yaml"
-          }
-        ]
       },
       {
         "name" : "target_registry",
@@ -503,29 +524,13 @@
         ]
       },
       {
-        "name" : "python",
-        "type" : "Option of PythonRequirements",
-        "description" : "Specify which Python packages should be available in order to run the component.",
-        "example" : [
-          {
-            "example" : "setup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ jkbr/httpie ]\n    gitlab: [ foo/bar ]\n    mercurial: [ http://... ]\n    svn: [ http://...]\n    bazaar: [ http://... ]\n    url: [ http://... ]\n",
-            "format" : "yaml"
-          }
-        ],
-        "deprecated" : {
-          "message" : "Use `setup` instead, e.g. `{type: docker, setup: [{ type: python, ... }]}`. Will be removed.",
-          "deprecation" : "0.5.15",
-          "removal" : "0.7.0"
-        }
-      },
-      {
         "name" : "privileged",
         "type" : "Option of Boolean",
         "description" : "Adds a `privileged` flag to the docker run.",
-        "deprecated" : {
+        "removed" : {
           "message" : "Add a `privileged` flag in `run_args` instead, e.g. `{type: docker, run_args: \"--privileged\"}`.",
           "deprecation" : "0.6.3",
-          "removal" : "0.8.0"
+          "removal" : "0.7.0"
         }
       },
       {
@@ -549,7 +554,7 @@
             "format" : "yaml"
           }
         ],
-        "deprecated" : {
+        "removed" : {
           "message" : "Use `setup` instead, e.g. `{type: docker, setup: [{ type: r, ... }]}`. Will be removed.",
           "deprecation" : "0.5.15",
           "removal" : "0.7.0"
@@ -581,11 +586,6 @@
             "format" : "yaml"
           }
         ]
-      },
-      {
-        "name" : "setup",
-        "type" : "List of Requirements",
-        "description" : "A list of requirements for installing the following types of packages:\n\n - @[apt_req](apt)\n - @[apk_req](apk)\n - @[docker_req](Docker setup instructions)\n - @[javascript_req](JavaScript)\n - @[python_req](Python)\n - @[r_req](R)\n - @[ruby_req](Ruby)\n - @[yum_req](yum)\n\nThe order in which these dependencies are specified determines the order in which they will be installed.\n"
       }
     ],
     "nextflowVdsl3Platform" : [
@@ -658,8 +658,8 @@
           "io.viash.platforms.Platform"
         ],
         "description" : "Run a Viash component as a Nextflow module.",
-        "deprecated" : {
-          "message" : "Nextflow platform with `variant: legacy` is deprecated and will be removed",
+        "removed" : {
+          "message" : "Nextflow platform with `variant: legacy` was removed",
           "deprecation" : "0.6.0",
           "removal" : "0.7.0"
         }
@@ -674,27 +674,6 @@
             "format" : "yaml"
           }
         ]
-      },
-      {
-        "name" : "registry",
-        "type" : "Option of String",
-        "description" : "The URL to the a [custom Docker registry](https://docs.docker.com/registry/).",
-        "example" : [
-          {
-            "example" : "registry: https://my-docker-registry.org",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "per_id",
-        "type" : "Option of Boolean",
-        "description" : "By default, a subdirectory is created corresponding to the unique ID that is passed in the triplet. Let us illustrate this with an example. The following code snippet uses the value of `--input` as an input of a workflow. The input can include a wildcard so that multiple samples can run in parallel. We use the parent directory name (`.getParent().baseName`) as an identifier for the sample. We pass this as the first entry of the triplet:\n\n```\nChannel.fromPath(params.input) \\\n    | map{ it -> [ it.getParent().baseName , it ] } \\\n    | map{ it -> [ it[0] , it[1], params ] }\n    | ...\n```\nSay the resulting sample names are `SAMPLE1` and `SAMPLE2`. The next step in the pipeline will be published (at least by default) under:\n```\n<publishDir>/SAMPLE1/\n<publishDir>/SAMPLE2/\n```\nThese per-ID subdirectories can be avoided by setting:\n```\nper_id: false\n```\n"
-      },
-      {
-        "name" : "path",
-        "type" : "Option of String",
-        "description" : "When `publish: true`, this attribute defines where the output is written relative to the `params.publishDir` setting. For example, `path: processed` in combination with `--output s3://some_bucket/` will store the output of this component under\n```\ns3://some_bucket/processed/\n```\nThis attribute gives control over the directory structure of the output. For example:\n```\npath: raw_data\n```\nOr even:\n```\npath: raw_data/bcl\n```\nPlease note that `per_id` and `path` can be combined.\n"
       },
       {
         "name" : "image",
@@ -724,28 +703,6 @@
         ]
       },
       {
-        "name" : "separate_multiple_outputs",
-        "type" : "Boolean",
-        "description" : "Separates the outputs generated by a Nextflow component with multiple outputs as separate events on the channel. Default value: `true`.",
-        "example" : [
-          {
-            "example" : "separate_multiple_outputs: false",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "namespace_separator",
-        "type" : "String",
-        "description" : "The default namespace separator is \"_\".",
-        "example" : [
-          {
-            "example" : "namespace_separator: \"+\"",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
         "name" : "stageInMode",
         "type" : "Option of String",
         "description" : "By default NextFlow will create a symbolic link to the inputs for a process/module and run the tool at hand using those symbolic links. Some applications do not cope well with this strategy, in that case the files should effectively be copied rather than linked to. This can be achieved by using `stageInMode: copy`.\nThis attribute is optional, the default is `symlink`.\n",
@@ -755,20 +712,6 @@
             "format" : "yaml"
           }
         ]
-      },
-      {
-        "name" : "publish",
-        "type" : "Option of Boolean",
-        "description" : "NextFlow uses the autogenerated `work` dirs to manage process IO under the hood. In order effectively output something one can publish the results a module or step in the pipeline. In order to do this, add `publish: true` to the config:\n\n - publish is optional\n - Default value is false\n\nThis attribute simply defines if output of a component should be published yes or no. The output location has to be provided at pipeline launch by means of the option `--publishDir ...` or as `params.publishDir` in `nextflow.config`:\n```\nparams.publishDir = \"...\"\n```\n"
-      },
-      {
-        "name" : "version",
-        "type" : "Option of String",
-        "deprecated" : {
-          "message" : "nextflow platform: attribute 'version' is deprecated and should be left empty.",
-          "deprecation" : "0.4.0",
-          "removal" : "0.7.0"
-        }
       },
       {
         "name" : "id",
@@ -792,9 +735,66 @@
         "description" : "Specifies the type of the platform."
       },
       {
+        "name" : "registry",
+        "type" : "Option of String",
+        "description" : "The URL to the a [custom Docker registry](https://docs.docker.com/registry/).",
+        "example" : [
+          {
+            "example" : "registry: https://my-docker-registry.org",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "per_id",
+        "type" : "Option of Boolean",
+        "description" : "By default, a subdirectory is created corresponding to the unique ID that is passed in the triplet. Let us illustrate this with an example. The following code snippet uses the value of `--input` as an input of a workflow. The input can include a wildcard so that multiple samples can run in parallel. We use the parent directory name (`.getParent().baseName`) as an identifier for the sample. We pass this as the first entry of the triplet:\n\n```\nChannel.fromPath(params.input) \\\n    | map{ it -> [ it.getParent().baseName , it ] } \\\n    | map{ it -> [ it[0] , it[1], params ] }\n    | ...\n```\nSay the resulting sample names are `SAMPLE1` and `SAMPLE2`. The next step in the pipeline will be published (at least by default) under:\n```\n<publishDir>/SAMPLE1/\n<publishDir>/SAMPLE2/\n```\nThese per-ID subdirectories can be avoided by setting:\n```\nper_id: false\n```\n"
+      },
+      {
+        "name" : "path",
+        "type" : "Option of String",
+        "description" : "When `publish: true`, this attribute defines where the output is written relative to the `params.publishDir` setting. For example, `path: processed` in combination with `--output s3://some_bucket/` will store the output of this component under\n```\ns3://some_bucket/processed/\n```\nThis attribute gives control over the directory structure of the output. For example:\n```\npath: raw_data\n```\nOr even:\n```\npath: raw_data/bcl\n```\nPlease note that `per_id` and `path` can be combined.\n"
+      },
+      {
+        "name" : "separate_multiple_outputs",
+        "type" : "Boolean",
+        "description" : "Separates the outputs generated by a Nextflow component with multiple outputs as separate events on the channel. Default value: `true`.",
+        "example" : [
+          {
+            "example" : "separate_multiple_outputs: false",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "namespace_separator",
+        "type" : "String",
+        "description" : "The default namespace separator is \"_\".",
+        "example" : [
+          {
+            "example" : "namespace_separator: \"+\"",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "publish",
+        "type" : "Option of Boolean",
+        "description" : "NextFlow uses the autogenerated `work` dirs to manage process IO under the hood. In order effectively output something one can publish the results a module or step in the pipeline. In order to do this, add `publish: true` to the config:\n\n - publish is optional\n - Default value is false\n\nThis attribute simply defines if output of a component should be published yes or no. The output location has to be provided at pipeline launch by means of the option `--publishDir ...` or as `params.publishDir` in `nextflow.config`:\n```\nparams.publishDir = \"...\"\n```\n"
+      },
+      {
+        "name" : "version",
+        "type" : "Option of String",
+        "removed" : {
+          "message" : "nextflow platform: attribute 'version' was removed",
+          "deprecation" : "0.4.0",
+          "removal" : "0.7.0"
+        }
+      },
+      {
         "name" : "executor",
         "type" : "Option of String",
-        "deprecated" : {
+        "removed" : {
           "message" : "Undocumented & stale value",
           "deprecation" : "0.6.3",
           "removal" : "0.7.0"
@@ -803,148 +803,6 @@
     ]
   },
   "requirements" : {
-    "dockerRequirements" : [
-      {
-        "name" : "__this__",
-        "type" : "DockerRequirements",
-        "hierarchy" : [
-          "io.viash.platforms.requirements.DockerRequirements",
-          "io.viash.platforms.requirements.Requirements"
-        ],
-        "description" : "Specify which Docker commands should be run during setup.",
-        "example" : [
-          {
-            "example" : "setup:\n  - type: docker\n    build_args: \"R_VERSION=hello_world\"\n    run: |\n      echo 'Run a custom command'\n      echo 'Foo' > /path/to/file.txt",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "run",
-        "type" : "OneOrMore of String",
-        "description" : "Specifies which `RUN` entries to add to the Dockerfile while building it.",
-        "example" : [
-          {
-            "example" : "run: |\n  echo 'Run a custom command'\n  echo 'Foo' > /path/to/file.txt",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "label",
-        "type" : "OneOrMore of String",
-        "description" : "Specifies which `LABEL` entries to add to the Dockerfile while building it.",
-        "example" : [
-          {
-            "example" : "label: [ component=\"foo\" ]",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "build_args",
-        "type" : "OneOrMore of String",
-        "description" : "Specifies which `ARG` entries to add to the Dockerfile while building it.",
-        "example" : [
-          {
-            "example" : "build_args: [ \"R_VERSION=4.2\" ]",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "resources",
-        "type" : "OneOrMore of String",
-        "description" : "Specifies which `COPY` entries to add to the Dockerfile while building it.",
-        "example" : [
-          {
-            "example" : "resources: [ \"resource.txt /path/to/resource.txt\" ]",
-            "format" : "yaml"
-          }
-        ],
-        "deprecated" : {
-          "message" : "`resources` in `setup: {type: docker, resources: ...}` will be removed. Please use `copy` instead.",
-          "deprecation" : "0.6.3",
-          "removal" : "0.7.0"
-        }
-      },
-      {
-        "name" : "copy",
-        "type" : "OneOrMore of String",
-        "description" : "Specifies which `COPY` entries to add to the Dockerfile while building it.",
-        "example" : [
-          {
-            "example" : "copy: [ \"resource.txt /path/to/resource.txt\" ]",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "type",
-        "type" : "String",
-        "description" : "Specifies the type of the requirement specification."
-      },
-      {
-        "name" : "add",
-        "type" : "OneOrMore of String",
-        "description" : "Specifies which `ADD` entries to add to the Dockerfile while building it.",
-        "example" : [
-          {
-            "example" : "add: [ \"http://foo/bar .\" ]",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "env",
-        "type" : "OneOrMore of String",
-        "description" : "Specifies which `ENV` entries to add to the Dockerfile while building it. Unlike `ARG`, `ENV` entries are also accessible from inside the container.",
-        "example" : [
-          {
-            "example" : "env: [ \"R_VERSION=4.2\" ]",
-            "format" : "yaml"
-          }
-        ]
-      }
-    ],
-    "aptRequirements" : [
-      {
-        "name" : "__this__",
-        "type" : "AptRequirements",
-        "hierarchy" : [
-          "io.viash.platforms.requirements.AptRequirements",
-          "io.viash.platforms.requirements.Requirements"
-        ],
-        "description" : "Specify which apt packages should be available in order to run the component.",
-        "example" : [
-          {
-            "example" : "setup:\n  - type: apt\n    packages: [ sl ]\n",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "type",
-        "type" : "String",
-        "description" : "Specifies the type of the requirement specification."
-      },
-      {
-        "name" : "interactive",
-        "type" : "Boolean",
-        "description" : "If `false`, the Debian frontend is set to non-interactive (recommended). Default: false."
-      },
-      {
-        "name" : "packages",
-        "type" : "OneOrMore of String",
-        "description" : "Specifies which packages to install.",
-        "example" : [
-          {
-            "example" : "packages: [ sl ]",
-            "format" : "yaml"
-          }
-        ]
-      }
-    ],
     "javascriptRequirements" : [
       {
         "name" : "__this__",
@@ -1061,17 +919,6 @@
         ]
       },
       {
-        "name" : "url",
-        "type" : "OneOrMore of String",
-        "description" : "Specifies which packages to install using a generic URI.",
-        "example" : [
-          {
-            "example" : "url: [ https://github.com/some_org/some_pkg/zipball/master ]",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
         "name" : "pip",
         "type" : "OneOrMore of String",
         "description" : "Specifies which packages to install from pip.",
@@ -1100,6 +947,33 @@
         "example" : [
           {
             "example" : "git: [ https://some.git.repository/org/repo ]",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "upgrade",
+        "type" : "Boolean",
+        "description" : "Sets the `--upgrade` flag when set to true. Default: true."
+      },
+      {
+        "name" : "packages",
+        "type" : "OneOrMore of String",
+        "description" : "Specifies which packages to install from pip.",
+        "example" : [
+          {
+            "example" : "packages: [ numpy ]",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "url",
+        "type" : "OneOrMore of String",
+        "description" : "Specifies which packages to install using a generic URI.",
+        "example" : [
+          {
+            "example" : "url: [ https://github.com/some_org/some_pkg/zipball/master ]",
             "format" : "yaml"
           }
         ]
@@ -1143,11 +1017,6 @@
         "description" : "Specifies the type of the requirement specification."
       },
       {
-        "name" : "upgrade",
-        "type" : "Boolean",
-        "description" : "Sets the `--upgrade` flag when set to true. Default: true."
-      },
-      {
         "name" : "mercurial",
         "type" : "OneOrMore of String",
         "description" : "Specifies which packages to install using a Mercurial URI.",
@@ -1162,17 +1031,6 @@
         "name" : "user",
         "type" : "Boolean",
         "description" : "Sets the `--user` flag when set to true. Default: false."
-      },
-      {
-        "name" : "packages",
-        "type" : "OneOrMore of String",
-        "description" : "Specifies which packages to install from pip.",
-        "example" : [
-          {
-            "example" : "packages: [ numpy ]",
-            "format" : "yaml"
-          }
-        ]
       }
     ],
     "rRequirements" : [
@@ -1291,6 +1149,17 @@
         ]
       },
       {
+        "name" : "packages",
+        "type" : "OneOrMore of String",
+        "description" : "Specifies which packages to install from CRAN.",
+        "example" : [
+          {
+            "example" : "packages: [ anndata, ggplot2 ]",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
         "name" : "script",
         "type" : "OneOrMore of String",
         "description" : "Specifies a code block to run as part of the build.",
@@ -1305,17 +1174,6 @@
         "name" : "type",
         "type" : "String",
         "description" : "Specifies the type of the requirement specification."
-      },
-      {
-        "name" : "packages",
-        "type" : "OneOrMore of String",
-        "description" : "Specifies which packages to install from CRAN.",
-        "example" : [
-          {
-            "example" : "packages: [ anndata, ggplot2 ]",
-            "format" : "yaml"
-          }
-        ]
       }
     ],
     "rubyRequirements" : [
@@ -1416,6 +1274,148 @@
           }
         ]
       }
+    ],
+    "dockerRequirements" : [
+      {
+        "name" : "__this__",
+        "type" : "DockerRequirements",
+        "hierarchy" : [
+          "io.viash.platforms.requirements.DockerRequirements",
+          "io.viash.platforms.requirements.Requirements"
+        ],
+        "description" : "Specify which Docker commands should be run during setup.",
+        "example" : [
+          {
+            "example" : "setup:\n  - type: docker\n    build_args: \"R_VERSION=hello_world\"\n    run: |\n      echo 'Run a custom command'\n      echo 'Foo' > /path/to/file.txt",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "run",
+        "type" : "OneOrMore of String",
+        "description" : "Specifies which `RUN` entries to add to the Dockerfile while building it.",
+        "example" : [
+          {
+            "example" : "run: |\n  echo 'Run a custom command'\n  echo 'Foo' > /path/to/file.txt",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "label",
+        "type" : "OneOrMore of String",
+        "description" : "Specifies which `LABEL` entries to add to the Dockerfile while building it.",
+        "example" : [
+          {
+            "example" : "label: [ component=\"foo\" ]",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "build_args",
+        "type" : "OneOrMore of String",
+        "description" : "Specifies which `ARG` entries to add to the Dockerfile while building it.",
+        "example" : [
+          {
+            "example" : "build_args: [ \"R_VERSION=4.2\" ]",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "type",
+        "type" : "String",
+        "description" : "Specifies the type of the requirement specification."
+      },
+      {
+        "name" : "add",
+        "type" : "OneOrMore of String",
+        "description" : "Specifies which `ADD` entries to add to the Dockerfile while building it.",
+        "example" : [
+          {
+            "example" : "add: [ \"http://foo/bar .\" ]",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "env",
+        "type" : "OneOrMore of String",
+        "description" : "Specifies which `ENV` entries to add to the Dockerfile while building it. Unlike `ARG`, `ENV` entries are also accessible from inside the container.",
+        "example" : [
+          {
+            "example" : "env: [ \"R_VERSION=4.2\" ]",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "resources",
+        "type" : "OneOrMore of String",
+        "description" : "Specifies which `COPY` entries to add to the Dockerfile while building it.",
+        "example" : [
+          {
+            "example" : "resources: [ \"resource.txt /path/to/resource.txt\" ]",
+            "format" : "yaml"
+          }
+        ],
+        "removed" : {
+          "message" : "`resources` in `setup: {type: docker, resources: ...}` was removed. Please use `copy` instead.",
+          "deprecation" : "0.6.3",
+          "removal" : "0.7.0"
+        }
+      },
+      {
+        "name" : "copy",
+        "type" : "OneOrMore of String",
+        "description" : "Specifies which `COPY` entries to add to the Dockerfile while building it.",
+        "example" : [
+          {
+            "example" : "copy: [ \"resource.txt /path/to/resource.txt\" ]",
+            "format" : "yaml"
+          }
+        ]
+      }
+    ],
+    "aptRequirements" : [
+      {
+        "name" : "__this__",
+        "type" : "AptRequirements",
+        "hierarchy" : [
+          "io.viash.platforms.requirements.AptRequirements",
+          "io.viash.platforms.requirements.Requirements"
+        ],
+        "description" : "Specify which apt packages should be available in order to run the component.",
+        "example" : [
+          {
+            "example" : "setup:\n  - type: apt\n    packages: [ sl ]\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "interactive",
+        "type" : "Boolean",
+        "description" : "If `false`, the Debian frontend is set to non-interactive (recommended). Default: false."
+      },
+      {
+        "name" : "type",
+        "type" : "String",
+        "description" : "Specifies the type of the requirement specification."
+      },
+      {
+        "name" : "packages",
+        "type" : "OneOrMore of String",
+        "description" : "Specifies which packages to install.",
+        "example" : [
+          {
+            "example" : "packages: [ sl ]",
+            "format" : "yaml"
+          }
+        ]
+      }
     ]
   },
   "arguments" : {
@@ -1457,27 +1457,6 @@
         ]
       },
       {
-        "name" : "description",
-        "type" : "Option of String",
-        "description" : "A description of the argument. This will be displayed with `--help`."
-      },
-      {
-        "name" : "multiple_sep",
-        "type" : "String",
-        "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
-        "example" : [
-          {
-            "example" : "- name: --my_string\n  type: string\n  multiple: true\n  multiple_sep: \",\"\n",
-            "format" : "yaml"
-          },
-          {
-            "example" : "my_component --my_string=Marc,Susan,Paul",
-            "format" : "bash",
-            "description" : "Here's an example of how to use this:"
-          }
-        ]
-      },
-      {
         "name" : "info",
         "type" : "Json",
         "description" : "Structured information. Can be any shape: a string, vector, map or even nested map.",
@@ -1497,6 +1476,38 @@
           {
             "example" : "- name: --my_string\n  type: string\n  default: \"The answer is 42\"\n",
             "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "example",
+        "type" : "OneOrMore of String",
+        "description" : "An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.",
+        "example" : [
+          {
+            "example" : "- name: --my_string\n  type: string\n  example: \"Hello World\"\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "description",
+        "type" : "Option of String",
+        "description" : "A description of the argument. This will be displayed with `--help`."
+      },
+      {
+        "name" : "multiple_sep",
+        "type" : "String",
+        "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_string\n  type: string\n  multiple: true\n  multiple_sep: \",\"\n",
+            "format" : "yaml"
+          },
+          {
+            "example" : "my_component --my_string=Marc,Susan,Paul",
+            "format" : "bash",
+            "description" : "Here's an example of how to use this:"
           }
         ]
       },
@@ -1531,17 +1542,6 @@
             "format" : "yaml"
           }
         ]
-      },
-      {
-        "name" : "example",
-        "type" : "OneOrMore of String",
-        "description" : "An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.",
-        "example" : [
-          {
-            "example" : "- name: --my_string\n  type: string\n  example: \"Hello World\"\n",
-            "format" : "yaml"
-          }
-        ]
       }
     ],
     "double" : [
@@ -1569,38 +1569,6 @@
         "name" : "name",
         "type" : "String",
         "description" : "The name of the argument. Can be in the formats `--foo`, `-f` or `foo`. The number of dashes determines how values can be passed:  \n\n  - `--foo` is a long option, which can be passed with `executable_name --foo=value` or `executable_name --foo value`\n  - `-f` is a short option, which can be passed with `executable_name -f value`\n  - `foo` is an argument, which can be passed with `executable_name value`  \n"
-      },
-      {
-        "name" : "description",
-        "type" : "Option of String",
-        "description" : "A description of the argument. This will be displayed with `--help`."
-      },
-      {
-        "name" : "multiple_sep",
-        "type" : "String",
-        "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
-        "example" : [
-          {
-            "example" : "- name: --my_double\n  type: double\n  multiple: true\n  multiple_sep: \",\"\n",
-            "format" : "yaml"
-          },
-          {
-            "example" : "my_component --my_double=5.8,22.6,200.4",
-            "format" : "bash",
-            "description" : "Here's an example of how to use this:"
-          }
-        ]
-      },
-      {
-        "name" : "min",
-        "type" : "Option of Double",
-        "description" : "Minimum allowed value for this argument. If set and the provided value is lower than the minimum, an error will be produced. Can be combined with [`max`](#max) to clamp values.",
-        "example" : [
-          {
-            "example" : "- name: --my_double\n  type: double\n  min: 25.5\n",
-            "format" : "yaml"
-          }
-        ]
       },
       {
         "name" : "info",
@@ -1637,6 +1605,49 @@
         ]
       },
       {
+        "name" : "example",
+        "type" : "OneOrMore of Double",
+        "description" : "An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.",
+        "example" : [
+          {
+            "example" : "- name: --my_double\n  type: double\n  example: 5.8\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "description",
+        "type" : "Option of String",
+        "description" : "A description of the argument. This will be displayed with `--help`."
+      },
+      {
+        "name" : "multiple_sep",
+        "type" : "String",
+        "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_double\n  type: double\n  multiple: true\n  multiple_sep: \",\"\n",
+            "format" : "yaml"
+          },
+          {
+            "example" : "my_component --my_double=5.8,22.6,200.4",
+            "format" : "bash",
+            "description" : "Here's an example of how to use this:"
+          }
+        ]
+      },
+      {
+        "name" : "min",
+        "type" : "Option of Double",
+        "description" : "Minimum allowed value for this argument. If set and the provided value is lower than the minimum, an error will be produced. Can be combined with [`max`](#max) to clamp values.",
+        "example" : [
+          {
+            "example" : "- name: --my_double\n  type: double\n  min: 25.5\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
         "name" : "multiple",
         "type" : "Boolean",
         "description" : "Treat the argument value as an array. Arrays can be passed using the delimiter `--foo=1:2:3` or by providing the same argument multiple times `--foo 1 --foo 2`. You can use a custom delimiter by using the [`multiple_sep`](#multiple_sep) property. `false` by default.",
@@ -1664,17 +1675,6 @@
         "example" : [
           {
             "example" : "- name: --my_double\n  type: double\n  required: true\n",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "example",
-        "type" : "OneOrMore of Double",
-        "description" : "An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.",
-        "example" : [
-          {
-            "example" : "- name: --my_double\n  type: double\n  example: 5.8\n",
             "format" : "yaml"
           }
         ]
@@ -1719,38 +1719,6 @@
         ]
       },
       {
-        "name" : "description",
-        "type" : "Option of String",
-        "description" : "A description of the argument. This will be displayed with `--help`."
-      },
-      {
-        "name" : "multiple_sep",
-        "type" : "String",
-        "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
-        "example" : [
-          {
-            "example" : "- name: --my_long\n  type: long\n  multiple: true\n  multiple_sep: \",\"\n",
-            "format" : "yaml"
-          },
-          {
-            "example" : "my_component --my_long=10:80:152",
-            "format" : "bash",
-            "description" : "Here's an example of how to use this:"
-          }
-        ]
-      },
-      {
-        "name" : "min",
-        "type" : "Option of Long",
-        "description" : "Minimum allowed value for this argument. If set and the provided value is lower than the minimum, an error will be produced. Can be combined with [`max`](#max) to clamp values.",
-        "example" : [
-          {
-            "example" : "- name: --my_long\n  type: long\n  min: 50\n",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
         "name" : "info",
         "type" : "Json",
         "description" : "Structured information. Can be any shape: a string, vector, map or even nested map.",
@@ -1780,6 +1748,49 @@
         "example" : [
           {
             "example" : "- name: --my_long\n  type: long\n  default: 100\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "example",
+        "type" : "OneOrMore of Long",
+        "description" : "An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.",
+        "example" : [
+          {
+            "example" : "- name: --my_long\n  type: long\n  example: 100\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "description",
+        "type" : "Option of String",
+        "description" : "A description of the argument. This will be displayed with `--help`."
+      },
+      {
+        "name" : "multiple_sep",
+        "type" : "String",
+        "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_long\n  type: long\n  multiple: true\n  multiple_sep: \",\"\n",
+            "format" : "yaml"
+          },
+          {
+            "example" : "my_component --my_long=10:80:152",
+            "format" : "bash",
+            "description" : "Here's an example of how to use this:"
+          }
+        ]
+      },
+      {
+        "name" : "min",
+        "type" : "Option of Long",
+        "description" : "Minimum allowed value for this argument. If set and the provided value is lower than the minimum, an error will be produced. Can be combined with [`max`](#max) to clamp values.",
+        "example" : [
+          {
+            "example" : "- name: --my_long\n  type: long\n  min: 50\n",
             "format" : "yaml"
           }
         ]
@@ -1815,17 +1826,6 @@
             "format" : "yaml"
           }
         ]
-      },
-      {
-        "name" : "example",
-        "type" : "OneOrMore of Long",
-        "description" : "An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.",
-        "example" : [
-          {
-            "example" : "- name: --my_long\n  type: long\n  example: 100\n",
-            "format" : "yaml"
-          }
-        ]
       }
     ],
     "boolean" : [
@@ -1856,27 +1856,6 @@
         "description" : "The name of the argument. Can be in the formats `--trim`, `-t` or `trim`. The number of dashes determines how values can be passed:  \n\n  - `--trim` is a long option, which can be passed with `executable_name --trim`\n  - `-t` is a short option, which can be passed with `executable_name -t`\n  - `trim` is an argument, which can be passed with `executable_name trim`  \n"
       },
       {
-        "name" : "description",
-        "type" : "Option of String",
-        "description" : "A description of the argument. This will be displayed with `--help`."
-      },
-      {
-        "name" : "multiple_sep",
-        "type" : "String",
-        "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
-        "example" : [
-          {
-            "example" : "- name: --my_boolean\n  type: boolean\n  multiple: true\n  multiple_sep: \",\"\n",
-            "format" : "yaml"
-          },
-          {
-            "example" : "my_component --my_boolean=true,true,false",
-            "format" : "bash",
-            "description" : "Here's an example of how to use this:"
-          }
-        ]
-      },
-      {
         "name" : "info",
         "type" : "Json",
         "description" : "Structured information. Can be any shape: a string, vector, map or even nested map.",
@@ -1896,6 +1875,38 @@
           {
             "example" : "- name: --my_boolean\n  type: boolean\n  default: true\n",
             "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "example",
+        "type" : "OneOrMore of Boolean",
+        "description" : "An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.",
+        "example" : [
+          {
+            "example" : "- name: --my_boolean\n  type: boolean\n  example: true\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "description",
+        "type" : "Option of String",
+        "description" : "A description of the argument. This will be displayed with `--help`."
+      },
+      {
+        "name" : "multiple_sep",
+        "type" : "String",
+        "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_boolean\n  type: boolean\n  multiple: true\n  multiple_sep: \",\"\n",
+            "format" : "yaml"
+          },
+          {
+            "example" : "my_component --my_boolean=true,true,false",
+            "format" : "bash",
+            "description" : "Here's an example of how to use this:"
           }
         ]
       },
@@ -1930,17 +1941,203 @@
             "format" : "yaml"
           }
         ]
-      },
+      }
+    ],
+    "integer" : [
       {
-        "name" : "example",
-        "type" : "OneOrMore of Boolean",
-        "description" : "An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.",
+        "name" : "__this__",
+        "type" : "IntegerArgument",
+        "hierarchy" : [
+          "io.viash.functionality.arguments.IntegerArgument",
+          "io.viash.functionality.arguments.Argument"
+        ],
+        "description" : "An `integer` type argument has a numeric value without decimal points.",
         "example" : [
           {
-            "example" : "- name: --my_boolean\n  type: boolean\n  example: true\n",
+            "example" : "arguments:\n  - name: --core_amount\n    type: integer\n    default: 16\n    description: Amount of CPU cores to use\n    alternatives: [\"-c\"]\n",
             "format" : "yaml"
           }
         ]
+      },
+      {
+        "name" : "alternatives",
+        "type" : "OneOrMore of String",
+        "description" : "List of alternative format variations for this argument."
+      },
+      {
+        "name" : "name",
+        "type" : "String",
+        "description" : "The name of the argument. Can be in the formats `--foo`, `-f` or `foo`. The number of dashes determines how values can be passed:  \n\n  - `--foo` is a long option, which can be passed with `executable_name --foo=value` or `executable_name --foo value`\n  - `-f` is a short option, which can be passed with `executable_name -f value`\n  - `foo` is an argument, which can be passed with `executable_name value`  \n"
+      },
+      {
+        "name" : "choices",
+        "type" : "List of Int",
+        "description" : "Limit the amount of valid values for this argument to those set in this list. When set and a value not present in the list is provided, an error will be produced.",
+        "example" : [
+          {
+            "example" : "- name: --values\n  type: integer\n  choices: [1024, 2048, 4096]\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "info",
+        "type" : "Json",
+        "description" : "Structured information. Can be any shape: a string, vector, map or even nested map.",
+        "example" : [
+          {
+            "example" : "info:\n  category: cat1\n  labels: [one, two, three]",
+            "format" : "yaml"
+          }
+        ],
+        "since" : "Viash 0.6.3"
+      },
+      {
+        "name" : "max",
+        "type" : "Option of Int",
+        "description" : "Maximum allowed value for this argument. If set and the provided value is higher than the maximum, an error will be produced. Can be combined with [`min`](#min) to clamp values.",
+        "example" : [
+          {
+            "example" : "- name: --my_integer\n  type: integer\n  max: 150\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "default",
+        "type" : "OneOrMore of Int",
+        "description" : "The default value when no argument value is provided. This will not work if the [`required`](#required) property is enabled.",
+        "example" : [
+          {
+            "example" : "- name: --my_integer\n  type: integer\n  default: 100\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "example",
+        "type" : "OneOrMore of Int",
+        "description" : "An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.",
+        "example" : [
+          {
+            "example" : "- name: --my_integer\n  type: integer\n  example: 100\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "description",
+        "type" : "Option of String",
+        "description" : "A description of the argument. This will be displayed with `--help`."
+      },
+      {
+        "name" : "multiple_sep",
+        "type" : "String",
+        "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_integer\n  type: integer\n  multiple: true\n  multiple_sep: \",\"\n",
+            "format" : "yaml"
+          },
+          {
+            "example" : "my_component --my_integer=10:80:152",
+            "format" : "bash",
+            "description" : "Here's an example of how to use this:"
+          }
+        ]
+      },
+      {
+        "name" : "min",
+        "type" : "Option of Int",
+        "description" : "Minimum allowed value for this argument. If set and the provided value is lower than the minimum, an error will be produced. Can be combined with [`max`](#max) to clamp values.",
+        "example" : [
+          {
+            "example" : "- name: --my_integer\n  type: integer\n  min: 50\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "multiple",
+        "type" : "Boolean",
+        "description" : "Treat the argument value as an array. Arrays can be passed using the delimiter `--foo=1:2:3` or by providing the same argument multiple times `--foo 1 --foo 2`. You can use a custom delimiter by using the [`multiple_sep`](#multiple_sep) property. `false` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_integer\n  type: integer\n  multiple: true\n",
+            "format" : "yaml"
+          },
+          {
+            "example" : "my_component --my_integer=10:80:152",
+            "format" : "bash",
+            "description" : "Here's an example of how to use this:"
+          }
+        ]
+      },
+      {
+        "name" : "type",
+        "type" : "String",
+        "description" : "Specifies the type of the argument."
+      },
+      {
+        "name" : "required",
+        "type" : "Boolean",
+        "description" : "Make the value for this argument required. If set to `true`, an error will be produced if no value was provided. `false` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_integer\n  type: integer\n  required: true\n",
+            "format" : "yaml"
+          }
+        ]
+      }
+    ],
+    "boolean_true" : [
+      {
+        "name" : "__this__",
+        "type" : "BooleanTrueArgument",
+        "hierarchy" : [
+          "io.viash.functionality.arguments.BooleanTrueArgument",
+          "io.viash.functionality.arguments.BooleanArgumentBase",
+          "io.viash.functionality.arguments.Argument"
+        ],
+        "description" : "An argument of the `boolean_true` type acts like a `boolean` flag with a default value of `false`. When called as an argument it sets the `boolean` to `true`.",
+        "example" : [
+          {
+            "example" : "arguments:\n  - name: --silent\n    type: boolean_true\n    description: Ignore console output\n    alternatives: [\"-s\"]\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "alternatives",
+        "type" : "OneOrMore of String",
+        "description" : "List of alternative format variations for this argument."
+      },
+      {
+        "name" : "name",
+        "type" : "String",
+        "description" : "The name of the argument. Can be in the formats `--silent`, `-s` or `silent`. The number of dashes determines how values can be passed:  \n\n  - `--silent` is a long option, which can be passed with `executable_name --silent`\n  - `-s` is a short option, which can be passed with `executable_name -s`\n  - `silent` is an argument, which can be passed with `executable_name silent`  \n"
+      },
+      {
+        "name" : "info",
+        "type" : "Json",
+        "description" : "Structured information. Can be any shape: a string, vector, map or even nested map.",
+        "example" : [
+          {
+            "example" : "info:\n  category: cat1\n  labels: [one, two, three]",
+            "format" : "yaml"
+          }
+        ],
+        "since" : "Viash 0.6.3"
+      },
+      {
+        "name" : "description",
+        "type" : "Option of String",
+        "description" : "A description of the argument. This will be displayed with `--help`."
+      },
+      {
+        "name" : "type",
+        "type" : "String",
+        "description" : "Specifies the type of the argument."
       }
     ],
     "file" : [
@@ -1968,27 +2165,6 @@
         "name" : "name",
         "type" : "String",
         "description" : "The name of the argument. Can be in the formats `--foo`, `-f` or `foo`. The number of dashes determines how values can be passed:  \n\n  - `--foo` is a long option, which can be passed with `executable_name --foo=value` or `executable_name --foo value`\n  - `-f` is a short option, which can be passed with `executable_name -f value`\n  - `foo` is an argument, which can be passed with `executable_name value`  \n"
-      },
-      {
-        "name" : "description",
-        "type" : "Option of String",
-        "description" : "A description of the argument. This will be displayed with `--help`."
-      },
-      {
-        "name" : "multiple_sep",
-        "type" : "String",
-        "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
-        "example" : [
-          {
-            "example" : "- name: --my_files\n  type: file\n  multiple: true\n  multiple_sep: \",\"\n",
-            "format" : "yaml"
-          },
-          {
-            "example" : "my_component --my_files=firstFile.csv,anotherFile.csv,yetAnother.csv",
-            "format" : "bash",
-            "description" : "Here's an example of how to use this:"
-          }
-        ]
       },
       {
         "name" : "create_parent",
@@ -2047,6 +2223,38 @@
         ]
       },
       {
+        "name" : "example",
+        "type" : "OneOrMore of Path",
+        "description" : "An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.",
+        "example" : [
+          {
+            "example" : "- name: --my_file\n  type: file\n  example: data.csv\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "description",
+        "type" : "Option of String",
+        "description" : "A description of the argument. This will be displayed with `--help`."
+      },
+      {
+        "name" : "multiple_sep",
+        "type" : "String",
+        "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
+        "example" : [
+          {
+            "example" : "- name: --my_files\n  type: file\n  multiple: true\n  multiple_sep: \",\"\n",
+            "format" : "yaml"
+          },
+          {
+            "example" : "my_component --my_files=firstFile.csv,anotherFile.csv,yetAnother.csv",
+            "format" : "bash",
+            "description" : "Here's an example of how to use this:"
+          }
+        ]
+      },
+      {
         "name" : "multiple",
         "type" : "Boolean",
         "description" : "Treat the argument value as an array. Arrays can be passed using the delimiter `--foo=1:2:3` or by providing the same argument multiple times `--foo 1 --foo 2`. You can use a custom delimiter by using the [`multiple_sep`](#multiple_sep) property. `false` by default.",
@@ -2074,17 +2282,6 @@
         "example" : [
           {
             "example" : "- name: --my_file\n  type: file\n  required: true\n",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "example",
-        "type" : "OneOrMore of Path",
-        "description" : "An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.",
-        "example" : [
-          {
-            "example" : "- name: --my_file\n  type: file\n  example: data.csv\n",
             "format" : "yaml"
           }
         ]
@@ -2118,11 +2315,6 @@
         "description" : "The name of the argument. Can be in the formats `--no-log`, `-n` or `no-log`. The number of dashes determines how values can be passed:  \n\n  - `--no-log` is a long option, which can be passed with `executable_name --no-log`\n  - `-n` is a short option, which can be passed with `executable_name -n`\n  - `no-log` is an argument, which can be passed with `executable_name no-log`  \n"
       },
       {
-        "name" : "description",
-        "type" : "Option of String",
-        "description" : "A description of the argument. This will be displayed with `--help`."
-      },
-      {
         "name" : "info",
         "type" : "Json",
         "description" : "Structured information. Can be any shape: a string, vector, map or even nested map.",
@@ -2133,208 +2325,355 @@
           }
         ],
         "since" : "Viash 0.6.3"
+      },
+      {
+        "name" : "description",
+        "type" : "Option of String",
+        "description" : "A description of the argument. This will be displayed with `--help`."
       },
       {
         "name" : "type",
         "type" : "String",
         "description" : "Specifies the type of the argument."
       }
-    ],
-    "integer" : [
+    ]
+  },
+  "resources" : {
+    "cSharpScript" : [
       {
         "name" : "__this__",
-        "type" : "IntegerArgument",
+        "type" : "CSharpScript",
         "hierarchy" : [
-          "io.viash.functionality.arguments.IntegerArgument",
-          "io.viash.functionality.arguments.Argument"
+          "io.viash.functionality.resources.CSharpScript",
+          "io.viash.functionality.resources.Script",
+          "io.viash.functionality.resources.Resource"
         ],
-        "description" : "An `integer` type argument has a numeric value without decimal points.",
-        "example" : [
-          {
-            "example" : "arguments:\n  - name: --core_amount\n    type: integer\n    default: 16\n    description: Amount of CPU cores to use\n    alternatives: [\"-c\"]\n",
-            "format" : "yaml"
-          }
-        ]
+        "description" : "An executable C# script.\nWhen defined in functionality.resources, only the first entry will be executed when running the built component or when running `viash run`.\nWhen defined in functionality.test_resources, all entries will be executed during `viash test`."
       },
       {
-        "name" : "alternatives",
-        "type" : "OneOrMore of String",
-        "description" : "List of alternative format variations for this argument."
-      },
-      {
-        "name" : "name",
-        "type" : "String",
-        "description" : "The name of the argument. Can be in the formats `--foo`, `-f` or `foo`. The number of dashes determines how values can be passed:  \n\n  - `--foo` is a long option, which can be passed with `executable_name --foo=value` or `executable_name --foo value`\n  - `-f` is a short option, which can be passed with `executable_name -f value`\n  - `foo` is an argument, which can be passed with `executable_name value`  \n"
-      },
-      {
-        "name" : "choices",
-        "type" : "List of Int",
-        "description" : "Limit the amount of valid values for this argument to those set in this list. When set and a value not present in the list is provided, an error will be produced.",
-        "example" : [
-          {
-            "example" : "- name: --values\n  type: integer\n  choices: [1024, 2048, 4096]\n",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "description",
+        "name" : "path",
         "type" : "Option of String",
-        "description" : "A description of the argument. This will be displayed with `--help`."
+        "description" : "The path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`."
       },
       {
-        "name" : "multiple_sep",
-        "type" : "String",
-        "description" : "The delimiter character for providing [`multiple`](#multiple) values. `:` by default.",
-        "example" : [
-          {
-            "example" : "- name: --my_integer\n  type: integer\n  multiple: true\n  multiple_sep: \",\"\n",
-            "format" : "yaml"
-          },
-          {
-            "example" : "my_component --my_integer=10:80:152",
-            "format" : "bash",
-            "description" : "Here's an example of how to use this:"
-          }
-        ]
+        "name" : "text",
+        "type" : "Option of String",
+        "description" : "The content of the resulting file specified as a string. Mutually exclusive with `path`."
       },
       {
-        "name" : "min",
-        "type" : "Option of Int",
-        "description" : "Minimum allowed value for this argument. If set and the provided value is lower than the minimum, an error will be produced. Can be combined with [`max`](#max) to clamp values.",
-        "example" : [
-          {
-            "example" : "- name: --my_integer\n  type: integer\n  min: 50\n",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "info",
-        "type" : "Json",
-        "description" : "Structured information. Can be any shape: a string, vector, map or even nested map.",
-        "example" : [
-          {
-            "example" : "info:\n  category: cat1\n  labels: [one, two, three]",
-            "format" : "yaml"
-          }
-        ],
-        "since" : "Viash 0.6.3"
-      },
-      {
-        "name" : "max",
-        "type" : "Option of Int",
-        "description" : "Maximum allowed value for this argument. If set and the provided value is higher than the maximum, an error will be produced. Can be combined with [`min`](#min) to clamp values.",
-        "example" : [
-          {
-            "example" : "- name: --my_integer\n  type: integer\n  max: 150\n",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "default",
-        "type" : "OneOrMore of Int",
-        "description" : "The default value when no argument value is provided. This will not work if the [`required`](#required) property is enabled.",
-        "example" : [
-          {
-            "example" : "- name: --my_integer\n  type: integer\n  default: 100\n",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "multiple",
-        "type" : "Boolean",
-        "description" : "Treat the argument value as an array. Arrays can be passed using the delimiter `--foo=1:2:3` or by providing the same argument multiple times `--foo 1 --foo 2`. You can use a custom delimiter by using the [`multiple_sep`](#multiple_sep) property. `false` by default.",
-        "example" : [
-          {
-            "example" : "- name: --my_integer\n  type: integer\n  multiple: true\n",
-            "format" : "yaml"
-          },
-          {
-            "example" : "my_component --my_integer=10:80:152",
-            "format" : "bash",
-            "description" : "Here's an example of how to use this:"
-          }
-        ]
+        "name" : "is_executable",
+        "type" : "Option of Boolean",
+        "description" : "Whether the resulting resource file should be made executable."
       },
       {
         "name" : "type",
         "type" : "String",
-        "description" : "Specifies the type of the argument."
+        "description" : "Specifies the resource as a C# script."
       },
       {
-        "name" : "required",
-        "type" : "Boolean",
-        "description" : "Make the value for this argument required. If set to `true`, an error will be produced if no value was provided. `false` by default.",
-        "example" : [
-          {
-            "example" : "- name: --my_integer\n  type: integer\n  required: true\n",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "example",
-        "type" : "OneOrMore of Int",
-        "description" : "An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.",
-        "example" : [
-          {
-            "example" : "- name: --my_integer\n  type: integer\n  example: 100\n",
-            "format" : "yaml"
-          }
-        ]
+        "name" : "dest",
+        "type" : "Option of String",
+        "description" : "Resulting filename of the resource. From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter."
       }
     ],
-    "boolean_true" : [
+    "pythonScript" : [
       {
         "name" : "__this__",
-        "type" : "BooleanTrueArgument",
+        "type" : "PythonScript",
         "hierarchy" : [
-          "io.viash.functionality.arguments.BooleanTrueArgument",
-          "io.viash.functionality.arguments.BooleanArgumentBase",
-          "io.viash.functionality.arguments.Argument"
+          "io.viash.functionality.resources.PythonScript",
+          "io.viash.functionality.resources.Script",
+          "io.viash.functionality.resources.Resource"
         ],
-        "description" : "An argument of the `boolean_true` type acts like a `boolean` flag with a default value of `false`. When called as an argument it sets the `boolean` to `true`.",
-        "example" : [
-          {
-            "example" : "arguments:\n  - name: --silent\n    type: boolean_true\n    description: Ignore console output\n    alternatives: [\"-s\"]\n",
-            "format" : "yaml"
-          }
-        ]
+        "description" : "An executable Python script.\nWhen defined in functionality.resources, only the first entry will be executed when running the built component or when running `viash run`.\nWhen defined in functionality.test_resources, all entries will be executed during `viash test`."
       },
       {
-        "name" : "alternatives",
-        "type" : "OneOrMore of String",
-        "description" : "List of alternative format variations for this argument."
-      },
-      {
-        "name" : "name",
-        "type" : "String",
-        "description" : "The name of the argument. Can be in the formats `--silent`, `-s` or `silent`. The number of dashes determines how values can be passed:  \n\n  - `--silent` is a long option, which can be passed with `executable_name --silent`\n  - `-s` is a short option, which can be passed with `executable_name -s`\n  - `silent` is an argument, which can be passed with `executable_name silent`  \n"
-      },
-      {
-        "name" : "description",
+        "name" : "path",
         "type" : "Option of String",
-        "description" : "A description of the argument. This will be displayed with `--help`."
+        "description" : "The path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`."
       },
       {
-        "name" : "info",
-        "type" : "Json",
-        "description" : "Structured information. Can be any shape: a string, vector, map or even nested map.",
-        "example" : [
-          {
-            "example" : "info:\n  category: cat1\n  labels: [one, two, three]",
-            "format" : "yaml"
-          }
-        ],
-        "since" : "Viash 0.6.3"
+        "name" : "text",
+        "type" : "Option of String",
+        "description" : "The content of the resulting file specified as a string. Mutually exclusive with `path`."
+      },
+      {
+        "name" : "is_executable",
+        "type" : "Option of Boolean",
+        "description" : "Whether the resulting resource file should be made executable."
       },
       {
         "name" : "type",
         "type" : "String",
-        "description" : "Specifies the type of the argument."
+        "description" : "Specifies the resource as a Python script."
+      },
+      {
+        "name" : "dest",
+        "type" : "Option of String",
+        "description" : "Resulting filename of the resource. From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter."
+      }
+    ],
+    "plainFile" : [
+      {
+        "name" : "__this__",
+        "type" : "PlainFile",
+        "hierarchy" : [
+          "io.viash.functionality.resources.PlainFile",
+          "io.viash.functionality.resources.Resource"
+        ],
+        "description" : "A plain file. This can only be used as a supporting resource for the main script or unit tests."
+      },
+      {
+        "name" : "path",
+        "type" : "Option of String",
+        "description" : "The path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`."
+      },
+      {
+        "name" : "text",
+        "type" : "Option of String",
+        "description" : "The content of the resulting file specified as a string. Mutually exclusive with `path`."
+      },
+      {
+        "name" : "is_executable",
+        "type" : "Option of Boolean",
+        "description" : "Whether the resulting resource file should be made executable."
+      },
+      {
+        "name" : "type",
+        "type" : "String",
+        "description" : "Specifies the resource as a plain file."
+      },
+      {
+        "name" : "dest",
+        "type" : "Option of String",
+        "description" : "Resulting filename of the resource. From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter."
+      }
+    ],
+    "bashScript" : [
+      {
+        "name" : "__this__",
+        "type" : "BashScript",
+        "hierarchy" : [
+          "io.viash.functionality.resources.BashScript",
+          "io.viash.functionality.resources.Script",
+          "io.viash.functionality.resources.Resource"
+        ],
+        "description" : "An executable Bash script.\nWhen defined in functionality.resources, only the first entry will be executed when running the built component or when running `viash run`.\nWhen defined in functionality.test_resources, all entries will be executed during `viash test`."
+      },
+      {
+        "name" : "path",
+        "type" : "Option of String",
+        "description" : "The path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`."
+      },
+      {
+        "name" : "text",
+        "type" : "Option of String",
+        "description" : "The content of the resulting file specified as a string. Mutually exclusive with `path`."
+      },
+      {
+        "name" : "is_executable",
+        "type" : "Option of Boolean",
+        "description" : "Whether the resulting resource file should be made executable."
+      },
+      {
+        "name" : "type",
+        "type" : "String",
+        "description" : "Specifies the resource as a Bash script."
+      },
+      {
+        "name" : "dest",
+        "type" : "Option of String",
+        "description" : "Resulting filename of the resource. From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter."
+      }
+    ],
+    "scalaScript" : [
+      {
+        "name" : "__this__",
+        "type" : "ScalaScript",
+        "hierarchy" : [
+          "io.viash.functionality.resources.ScalaScript",
+          "io.viash.functionality.resources.Script",
+          "io.viash.functionality.resources.Resource"
+        ],
+        "description" : "An executable Scala script.\nWhen defined in functionality.resources, only the first entry will be executed when running the built component or when running `viash run`.\nWhen defined in functionality.test_resources, all entries will be executed during `viash test`."
+      },
+      {
+        "name" : "path",
+        "type" : "Option of String",
+        "description" : "The path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`."
+      },
+      {
+        "name" : "text",
+        "type" : "Option of String",
+        "description" : "The content of the resulting file specified as a string. Mutually exclusive with `path`."
+      },
+      {
+        "name" : "is_executable",
+        "type" : "Option of Boolean",
+        "description" : "Whether the resulting resource file should be made executable."
+      },
+      {
+        "name" : "type",
+        "type" : "String",
+        "description" : "Specifies the resource as a Scala script."
+      },
+      {
+        "name" : "dest",
+        "type" : "Option of String",
+        "description" : "Resulting filename of the resource. From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter."
+      }
+    ],
+    "nextflowScript" : [
+      {
+        "name" : "__this__",
+        "type" : "NextflowScript",
+        "hierarchy" : [
+          "io.viash.functionality.resources.NextflowScript",
+          "io.viash.functionality.resources.Script",
+          "io.viash.functionality.resources.Resource"
+        ],
+        "description" : "A Nextflow script. Work in progress; added mainly for annotation at the moment."
+      },
+      {
+        "name" : "path",
+        "type" : "Option of String",
+        "description" : "The path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`."
+      },
+      {
+        "name" : "text",
+        "type" : "Option of String",
+        "description" : "The content of the resulting file specified as a string. Mutually exclusive with `path`."
+      },
+      {
+        "name" : "entrypoint",
+        "type" : "Option of String",
+        "description" : "The name of the workflow to be executed."
+      },
+      {
+        "name" : "is_executable",
+        "type" : "Option of Boolean",
+        "description" : "Whether the resulting resource file should be made executable."
+      },
+      {
+        "name" : "type",
+        "type" : "String",
+        "description" : "Specifies the resource as a Nextflow script."
+      },
+      {
+        "name" : "dest",
+        "type" : "Option of String",
+        "description" : "Resulting filename of the resource. From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter."
+      }
+    ],
+    "rScript" : [
+      {
+        "name" : "__this__",
+        "type" : "RScript",
+        "hierarchy" : [
+          "io.viash.functionality.resources.RScript",
+          "io.viash.functionality.resources.Script",
+          "io.viash.functionality.resources.Resource"
+        ],
+        "description" : "An executable R script.\nWhen defined in functionality.resources, only the first entry will be executed when running the built component or when running `viash run`.\nWhen defined in functionality.test_resources, all entries will be executed during `viash test`."
+      },
+      {
+        "name" : "path",
+        "type" : "Option of String",
+        "description" : "The path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`."
+      },
+      {
+        "name" : "text",
+        "type" : "Option of String",
+        "description" : "The content of the resulting file specified as a string. Mutually exclusive with `path`."
+      },
+      {
+        "name" : "is_executable",
+        "type" : "Option of Boolean",
+        "description" : "Whether the resulting resource file should be made executable."
+      },
+      {
+        "name" : "type",
+        "type" : "String",
+        "description" : "Specifies the resource as a R script."
+      },
+      {
+        "name" : "dest",
+        "type" : "Option of String",
+        "description" : "Resulting filename of the resource. From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter."
+      }
+    ],
+    "executable" : [
+      {
+        "name" : "__this__",
+        "type" : "Executable",
+        "hierarchy" : [
+          "io.viash.functionality.resources.Executable",
+          "io.viash.functionality.resources.Script",
+          "io.viash.functionality.resources.Resource"
+        ],
+        "description" : "An executable file."
+      },
+      {
+        "name" : "path",
+        "type" : "Option of String",
+        "description" : "The path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`."
+      },
+      {
+        "name" : "text",
+        "type" : "Option of String",
+        "description" : "The content of the resulting file specified as a string. Mutually exclusive with `path`."
+      },
+      {
+        "name" : "is_executable",
+        "type" : "Option of Boolean",
+        "description" : "Whether the resulting resource file should be made executable."
+      },
+      {
+        "name" : "type",
+        "type" : "String",
+        "description" : "Specifies the resource as an executable."
+      },
+      {
+        "name" : "dest",
+        "type" : "Option of String",
+        "description" : "Resulting filename of the resource. From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter."
+      }
+    ],
+    "javaScriptScript" : [
+      {
+        "name" : "__this__",
+        "type" : "JavaScriptScript",
+        "hierarchy" : [
+          "io.viash.functionality.resources.JavaScriptScript",
+          "io.viash.functionality.resources.Script",
+          "io.viash.functionality.resources.Resource"
+        ],
+        "description" : "An executable JavaScript script.\nWhen defined in functionality.resources, only the first entry will be executed when running the built component or when running `viash run`.\nWhen defined in functionality.test_resources, all entries will be executed during `viash test`."
+      },
+      {
+        "name" : "path",
+        "type" : "Option of String",
+        "description" : "The path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`."
+      },
+      {
+        "name" : "text",
+        "type" : "Option of String",
+        "description" : "The content of the resulting file specified as a string. Mutually exclusive with `path`."
+      },
+      {
+        "name" : "is_executable",
+        "type" : "Option of Boolean",
+        "description" : "Whether the resulting resource file should be made executable."
+      },
+      {
+        "name" : "type",
+        "type" : "String",
+        "description" : "Specifies the resource as a JavaScript script."
+      },
+      {
+        "name" : "dest",
+        "type" : "Option of String",
+        "description" : "Resulting filename of the resource. From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter."
       }
     ]
   }
