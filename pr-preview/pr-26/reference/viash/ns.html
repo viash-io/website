@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Viash - viash ns</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../reference/viash/run.html" rel="next">
+<link href="../../reference/viash/config.html" rel="prev">
+<link href="../../favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GDS2XT0DDG"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../reference.css">
+<meta property="og:title" content="Viash - viash ns">
+<meta property="og:description" content="Build a namespace from many viash config files.">
+<meta property="og:site-name" content="Viash">
+<meta name="twitter:title" content="Viash - viash ns">
+<meta name="twitter:description" content="Build a namespace from many viash config files.">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../viash.png" alt="" class="navbar-logo">
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../installation/index.html">
+ <span class="menu-text">Installation</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../quickstart/index.html">
+ <span class="menu-text">Quickstart</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../guide/index.html">
+ <span class="menu-text">Guide</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../reference/index.html" aria-current="page">
+ <span class="menu-text">Reference</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Help</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-help">    
+        <li>
+    <a class="dropdown-item" href="https://github.com/viash-io/viash/issues"><i class="bi bi-bug" role="img">
+</i> 
+ <span class="dropdown-text">Report a Viash issue</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/viash-io/website/issues"><i class="bi bi-bug" role="img">
+</i> 
+ <span class="dropdown-text">Report a website issue</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/DataIntuitive"><i class="bi bi-twitter" role="img" aria-label="Viash Twitter">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/viash-io/viash"><i class="bi bi-github" role="img" aria-label="Viash GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">viash ns</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/index.html" class="sidebar-item-text sidebar-link">Reference</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Viash Commands</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/viash/build.html" class="sidebar-item-text sidebar-link">viash build</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/viash/config.html" class="sidebar-item-text sidebar-link">viash config</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/viash/ns.html" class="sidebar-item-text sidebar-link active">viash ns</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/viash/run.html" class="sidebar-item-text sidebar-link">viash run</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/viash/test.html" class="sidebar-item-text sidebar-link">viash test</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Viash Config</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/config/index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/config/functionality.html" class="sidebar-item-text sidebar-link">Functionality</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/config/config-modding.html" class="sidebar-item-text sidebar-link">Dynamic Config Modding</a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Platforms</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/config/platforms/NativePlatform.html" class="sidebar-item-text sidebar-link">Native Platform</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/config/platforms/DockerPlatform.html" class="sidebar-item-text sidebar-link">Docker Platform</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/config/platforms/NextflowLegacyPlatform.html" class="sidebar-item-text sidebar-link">Nextflow Legacy Platform</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/config/platforms/NextflowVdsl3Platform.html" class="sidebar-item-text sidebar-link">Nextflow Vdsl3 Platform</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Argument Types</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/config/arguments/boolean_false.html" class="sidebar-item-text sidebar-link">boolean_false</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/config/arguments/boolean_true.html" class="sidebar-item-text sidebar-link">boolean_true</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/config/arguments/boolean.html" class="sidebar-item-text sidebar-link">boolean</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/config/arguments/double.html" class="sidebar-item-text sidebar-link">double</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/config/arguments/file.html" class="sidebar-item-text sidebar-link">file</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/config/arguments/integer.html" class="sidebar-item-text sidebar-link">integer</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/config/arguments/string.html" class="sidebar-item-text sidebar-link">string</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../reference/config/requirements.html" class="sidebar-item-text sidebar-link">Setup Requirements</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#viash-ns-build" id="toc-viash-ns-build" class="nav-link active" data-scroll-target="#viash-ns-build">viash ns build</a></li>
+  <li><a href="#viash-ns-test" id="toc-viash-ns-test" class="nav-link" data-scroll-target="#viash-ns-test">viash ns test</a></li>
+  <li><a href="#viash-ns-list" id="toc-viash-ns-list" class="nav-link" data-scroll-target="#viash-ns-list">viash ns list</a></li>
+  <li><a href="#viash-ns-exec" id="toc-viash-ns-exec" class="nav-link" data-scroll-target="#viash-ns-exec">viash ns exec</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">viash ns</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="viash-ns-build" class="level2">
+<h2 class="anchored" data-anchor-id="viash-ns-build">viash ns build</h2>
+<p>Build a namespace from many viash config files.</p>
+<p><strong>Usage:</strong></p>
+<p><code>viash ns build [-n nmspc] [-s src] [-t target] [-p docker] [--setup] [---push] [--parallel] [--flatten]</code></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: right;">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--config_mod</code>, <code>-c</code></td>
+<td style="text-align: left;">Modify a viash config at runtime using <a href="../../reference/config/config-modding.html">dynamic config modding</a>.</td>
+<td style="text-align: right;"><code>List[String]</code></td>
+</tr>
+<tr class="even">
+<td><code>--flatten</code>, <code>-f</code></td>
+<td style="text-align: left;">Flatten the target builds, handy for building one platform to a bin directory.</td>
+<td style="text-align: right;"><code>Boolean</code></td>
+</tr>
+<tr class="odd">
+<td><code>--parallel</code>, <code>-l</code></td>
+<td style="text-align: left;">Whether or not to run the process in parallel.</td>
+<td style="text-align: right;"><code>Boolean</code></td>
+</tr>
+<tr class="even">
+<td><code>--platform</code>, <code>-p</code></td>
+<td style="text-align: left;">Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="odd">
+<td><code>--push</code></td>
+<td style="text-align: left;">Whether or not to push the container to a Docker registry [Docker Platform only].</td>
+<td style="text-align: right;"><code>Boolean</code></td>
+</tr>
+<tr class="even">
+<td><code>--query</code>, <code>-q</code></td>
+<td style="text-align: left;">Filter which components get selected by component and <a href="../../guide/component/namespaces.html">namespace</a> name. Can be a regex. Example: “^mynamespace/component1$”.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="odd">
+<td><code>--query_name</code></td>
+<td style="text-align: left;">Filter which components get selected by component name. Can be a regex. Example: “^component1”.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="even">
+<td><code>--query_namespace</code>, <code>-n</code></td>
+<td style="text-align: left;">Filter which namespaces get selected by <a href="../../guide/component/namespaces.html">namespace</a> name. Can be a regex. Example: “^mynamespace$”.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="odd">
+<td><code>--setup</code></td>
+<td style="text-align: left;">Which <a href="../../guide/building-block/docker/setup-strategies.html">setup strategy</a> for creating the container to use [Docker Platform only].</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="even">
+<td><code>--src</code>, <code>-s</code></td>
+<td style="text-align: left;">A source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="odd">
+<td><code>--target</code>, <code>-t</code></td>
+<td style="text-align: left;">A target directory to build the executables into. Default: target/.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="even">
+<td><code>--write_meta</code>, <code>-w</code></td>
+<td style="text-align: left;">Write out some meta information to RESOURCES_DIR/viash.yaml at the end.</td>
+<td style="text-align: right;"><code>Boolean</code></td>
+</tr>
+<tr class="odd">
+<td><code>--help</code>, <code>-h</code></td>
+<td style="text-align: left;">Show help message</td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="viash-ns-test" class="level2">
+<h2 class="anchored" data-anchor-id="viash-ns-test">viash ns test</h2>
+<p>Test a namespace containing many viash config files.</p>
+<p><strong>Usage:</strong></p>
+<p><code>viash ns test [-n nmspc] [-s src] [-p docker] [--parallel] [--tsv file.tsv] [--append]</code></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: right;">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--append</code>, <code>-a</code></td>
+<td style="text-align: left;">Append to tsv instead of overwrite</td>
+<td style="text-align: right;"><code>Boolean</code></td>
+</tr>
+<tr class="even">
+<td><code>--config_mod</code>, <code>-c</code></td>
+<td style="text-align: left;">Modify a viash config at runtime using <a href="../../reference/config/config-modding.html">dynamic config modding</a>.</td>
+<td style="text-align: right;"><code>List[String]</code></td>
+</tr>
+<tr class="odd">
+<td><code>--cpus</code></td>
+<td style="text-align: left;">The maximum number of (logical) cpus a component is allowed to use.</td>
+<td style="text-align: right;"><code>Int</code></td>
+</tr>
+<tr class="even">
+<td><code>--keep</code>, <code>-k</code></td>
+<td style="text-align: left;">Whether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying –keep true, the temporary files will always be retained, whereas –keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="odd">
+<td><code>--memory</code></td>
+<td style="text-align: left;">The maximum amount of memory a component is allowed to allocate. Unit must be one of B, KB, MB, GB, TB or PB.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="even">
+<td><code>--parallel</code>, <code>-l</code></td>
+<td style="text-align: left;">Whether or not to run the process in parallel.</td>
+<td style="text-align: right;"><code>Boolean</code></td>
+</tr>
+<tr class="odd">
+<td><code>--platform</code>, <code>-p</code></td>
+<td style="text-align: left;">Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="even">
+<td><code>--query</code>, <code>-q</code></td>
+<td style="text-align: left;">Filter which components get selected by component and <a href="../../guide/component/namespaces.html">namespace</a> name. Can be a regex. Example: “^mynamespace/component1$”.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="odd">
+<td><code>--query_name</code></td>
+<td style="text-align: left;">Filter which components get selected by component name. Can be a regex. Example: “^component1”.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="even">
+<td><code>--query_namespace</code>, <code>-n</code></td>
+<td style="text-align: left;">Filter which namespaces get selected by <a href="../../guide/component/namespaces.html">namespace</a> name. Can be a regex. Example: “^mynamespace$”.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="odd">
+<td><code>--src</code>, <code>-s</code></td>
+<td style="text-align: left;">A source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="even">
+<td><code>--tsv</code>, <code>-t</code></td>
+<td style="text-align: left;">Path to write a summary of the test results to.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="odd">
+<td><code>--help</code>, <code>-h</code></td>
+<td style="text-align: left;">Show help message</td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="viash-ns-list" class="level2">
+<h2 class="anchored" data-anchor-id="viash-ns-list">viash ns list</h2>
+<p>List a namespace containing many viash config files.</p>
+<p><strong>Usage:</strong></p>
+<p><code>viash ns list [-n nmspc] [-s src] [-p docker]</code></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: right;">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--config_mod</code>, <code>-c</code></td>
+<td style="text-align: left;">Modify a viash config at runtime using <a href="../../reference/config/config-modding.html">dynamic config modding</a>.</td>
+<td style="text-align: right;"><code>List[String]</code></td>
+</tr>
+<tr class="even">
+<td><code>--format</code>, <code>-f</code></td>
+<td style="text-align: left;">Which output format to use.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="odd">
+<td><code>--parallel</code>, <code>-l</code></td>
+<td style="text-align: left;">Whether or not to run the process in parallel.</td>
+<td style="text-align: right;"><code>Boolean</code></td>
+</tr>
+<tr class="even">
+<td><code>--parse_argument_groups</code></td>
+<td style="text-align: left;">Whether or not to postprocess each component’s <a href="../../reference/config/functionality.html#argument_groups">argument groups</a>.</td>
+<td style="text-align: right;"><code>Boolean</code></td>
+</tr>
+<tr class="odd">
+<td><code>--platform</code>, <code>-p</code></td>
+<td style="text-align: left;">Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="even">
+<td><code>--query</code>, <code>-q</code></td>
+<td style="text-align: left;">Filter which components get selected by component and <a href="../../guide/component/namespaces.html">namespace</a> name. Can be a regex. Example: “^mynamespace/component1$”.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="odd">
+<td><code>--query_name</code></td>
+<td style="text-align: left;">Filter which components get selected by component name. Can be a regex. Example: “^component1”.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="even">
+<td><code>--query_namespace</code>, <code>-n</code></td>
+<td style="text-align: left;">Filter which namespaces get selected by <a href="../../guide/component/namespaces.html">namespace</a> name. Can be a regex. Example: “^mynamespace$”.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="odd">
+<td><code>--src</code>, <code>-s</code></td>
+<td style="text-align: left;">A source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.</td>
+<td style="text-align: right;"><code>String</code></td>
+</tr>
+<tr class="even">
+<td><code>--help</code>, <code>-h</code></td>
+<td style="text-align: left;">Show help message</td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="viash-ns-exec" class="level2">
+<h2 class="anchored" data-anchor-id="viash-ns-exec">viash ns exec</h2>
+<p>Execute a command for all found Viash components. The syntax of this command is inspired by <code>find . -exec echo {} \;</code>.</p>
+<p>The following fields are automatically replaced:</p>
+<ul>
+<li><code>{}</code> | <code>{path}</code>: path to the config file</li>
+<li><code>{abs-path}</code>: absolute path to the config file</li>
+<li><code>{dir}</code>: path to the parent directory of the config file</li>
+<li><code>{abs-dir}</code>: absolute path to the directory of the config file</li>
+<li><code>{main-script}</code>: path to the main script (if any)</li>
+<li><code>{abs-main-script}</code>: absolute path to the main script (if any)</li>
+<li><code>{functionality-name}</code>: name of the component</li>
+<li><code>{namespace}</code>: namespace of the component</li>
+<li><code>{platform}</code>: selected platform id (only when –apply_platform is used)</li>
+</ul>
+<p>A command suffixed by <code>\;</code> (or nothing) will execute one command for each of the Viash components, whereas a command suffixed by <code>+</code> will execute one command for all Viash components.</p>
+<p><strong>Usage:</strong></p>
+<p><code>viash ns exec 'echo {path} \\;'</code></p>
+<p><code>viash ns exec 'chmod +x {main-script} +'</code></p>
+<table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 62%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: right;">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--apply_platform</code>, <code>-a</code></td>
+<td style="text-align: left;">Fills in the {platform} field by applying each platform to the config separately.</td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+<p>Note that this results in the provided command being applied once for every platform that matches the –platform regex. | <code>Boolean</code> | | <code>--cmd</code> | The command to execute for each viash config file in the namespace. <strong>This is a required argument.</strong> | <code>String</code> | | <code>--config_mod</code>, <code>-c</code> | Modify a viash config at runtime using <a href="../../reference/config/config-modding.html">dynamic config modding</a>. | <code>List[String]</code> | | <code>--dry_run</code>, <code>-d</code> | Perform a dry run. | <code>Boolean</code> | | <code>--parallel</code>, <code>-l</code> | Whether or not to run the process in parallel. | <code>Boolean</code> | | <code>--platform</code>, <code>-p</code> | Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified. | <code>String</code> | | <code>--query</code>, <code>-q</code> | Filter which components get selected by component and <a href="../../guide/component/namespaces.html">namespace</a> name. Can be a regex. Example: “^mynamespace/component1$”. | <code>String</code> | | <code>--query_name</code> | Filter which components get selected by component name. Can be a regex. Example: “^component1”. | <code>String</code> | | <code>--query_namespace</code>, <code>-n</code> | Filter which namespaces get selected by <a href="../../guide/component/namespaces.html">namespace</a> name. Can be a regex. Example: “^mynamespace$”. | <code>String</code> | | <code>--src</code>, <code>-s</code> | A source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/. | <code>String</code> | | <code>--help</code>, <code>-h</code> | Show help message | |</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script type="text/javascript">
+// Anything in this script block will be included on every page
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/https:\/\/viash\.io/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../reference/viash/config.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">viash config</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../reference/viash/run.html" class="pagination-link">
+        <span class="nav-page-text">viash run</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">
+        <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../faq/index.html">FAQ</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../privacy.html">Privacy Policy</a>
+  </li>  
+</ul>
+      </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/DataIntuitive">
+      <i class="bi bi-twitter" role="img" aria-label="Viash Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/viash-io/viash">
+      <i class="bi bi-github" role="img" aria-label="Viash GitHub">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
