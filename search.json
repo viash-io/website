@@ -130,7 +130,7 @@
     "href": "reference/config/platforms/NextflowLegacyPlatform.html#executor",
     "title": "Nextflow Legacy Platform",
     "section": "executor",
-    "text": "executor\nType: String\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.6.3. Undocumented & stale value"
+    "text": "executor\nType: String\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since 0.7.0. Undocumented & stale value"
   },
   {
     "objectID": "reference/config/platforms/NextflowLegacyPlatform.html#id",
@@ -235,7 +235,7 @@
     "href": "reference/config/platforms/NextflowLegacyPlatform.html#version",
     "title": "Nextflow Legacy Platform",
     "section": "version",
-    "text": "version\nType: String\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.4.0. nextflow platform: attribute ‘version’ is deprecated and should be left empty."
+    "text": "version\nType: String\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since 0.7.0. nextflow platform: attribute ‘version’ was removed"
   },
   {
     "objectID": "reference/config/platforms/NextflowVdsl3Platform.html",
@@ -298,14 +298,14 @@
     "href": "reference/config/platforms/DockerPlatform.html#apk",
     "title": "Docker Platform",
     "section": "apk",
-    "text": "apk\nType: ApkRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which apk packages should be available in order to run the component.\nExample:\nsetup:\n  - type: apk\n    packages: [ sl ]"
+    "text": "apk\nType: ApkRequirements\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since 0.7.0. Use setup instead, e.g. {type: docker, setup: [{ type: apk, ... }]}. Will be removed.\n\n\nSpecify which apk packages should be available in order to run the component.\nExample:\nsetup:\n  - type: apk\n    packages: [ sl ]"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#apt",
     "href": "reference/config/platforms/DockerPlatform.html#apt",
     "title": "Docker Platform",
     "section": "apt",
-    "text": "apt\nType: AptRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which apt packages should be available in order to run the component.\nExample:\nsetup:\n  - type: apt\n    packages: [ sl ]"
+    "text": "apt\nType: AptRequirements\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since 0.7.0. Use setup instead, e.g. {type: docker, setup: [{ type: apt, ... }]}. Will be removed.\n\n\nSpecify which apt packages should be available in order to run the component.\nExample:\nsetup:\n  - type: apt\n    packages: [ sl ]"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#chown",
@@ -319,7 +319,7 @@
     "href": "reference/config/platforms/DockerPlatform.html#docker",
     "title": "Docker Platform",
     "section": "docker",
-    "text": "docker\nType: DockerRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which Docker commands should be run during setup.\nExample:\nsetup:\n  - type: docker\n    build_args: [ GITHUB_PAT=hello_world ]\n    run: [ git clone ... ]\n    add: [ \"http://foo.bar .\" ]\n    copy: [ \"http://foo.bar .\" ]\n    resources: \n      - resource.txt /path/to/resource.txt"
+    "text": "docker\nType: DockerRequirements\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since 0.7.0. Use setup instead, e.g. {type: docker, setup: [{ type: docker, ... }]}. Will be removed.\n\n\nSpecify which Docker commands should be run during setup.\nExample:\nsetup:\n  - type: docker\n    build_args: [ GITHUB_PAT=hello_world ]\n    run: [ git clone ... ]\n    add: [ \"http://foo.bar .\" ]\n    copy: [ \"http://foo.bar .\" ]\n    resources: \n      - resource.txt /path/to/resource.txt"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#id",
@@ -340,7 +340,7 @@
     "href": "reference/config/platforms/DockerPlatform.html#namespace_separator",
     "title": "Docker Platform",
     "section": "namespace_separator",
-    "text": "namespace_separator\nType: String\nThe default namespace separator is “_“.\nExample:\nnamespace_separator: \"+\""
+    "text": "namespace_separator\nType: String\nThe separator between the namespace and the name of the component, used for determining the image name.\nExample:\nnamespace_separator: \"+\""
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#organization",
@@ -361,21 +361,21 @@
     "href": "reference/config/platforms/DockerPlatform.html#privileged",
     "title": "Docker Platform",
     "section": "privileged",
-    "text": "privileged\nType: Boolean\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.6.3. Add a privileged flag in run_args instead.\n\n\nAdds a privileged flag to the docker run."
+    "text": "privileged\nType: Boolean\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since 0.7.0. Add a privileged flag in run_args instead, e.g. {type: docker, run_args: \"--privileged\"}.\n\n\nAdds a privileged flag to the docker run."
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#python",
     "href": "reference/config/platforms/DockerPlatform.html#python",
     "title": "Docker Platform",
     "section": "python",
-    "text": "python\nType: PythonRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which Python packages should be available in order to run the component.\nExample:\nsetup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ jkbr/httpie ]\n    gitlab: [ foo/bar ]\n    mercurial: [ http://... ]\n    svn: [ http://...]\n    bazaar: [ http://... ]\n    url: [ http://... ]"
+    "text": "python\nType: PythonRequirements\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since 0.7.0. Use setup instead, e.g. {type: docker, setup: [{ type: python, ... }]}. Will be removed.\n\n\nSpecify which Python packages should be available in order to run the component.\nExample:\nsetup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ jkbr/httpie ]\n    gitlab: [ foo/bar ]\n    mercurial: [ http://... ]\n    svn: [ http://...]\n    bazaar: [ http://... ]\n    url: [ http://... ]"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#r",
     "href": "reference/config/platforms/DockerPlatform.html#r",
     "title": "Docker Platform",
     "section": "r",
-    "text": "r\nType: RRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which R packages should be available in order to run the component.\nExample:\nsetup: \n  - type: r\n    cran: [ dynutils ]\n    bioc: [ AnnotationDbi ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ rcannood/SCORPIUS ]\n    gitlab: [ org/package ]\n    svn: [ https://path.to.svn/group/repo ]\n    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]\n    script: [ 'devtools::install(\".\")' ]"
+    "text": "r\nType: RRequirements\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since 0.7.0. Use setup instead, e.g. {type: docker, setup: [{ type: r, ... }]}. Will be removed.\n\n\nSpecify which R packages should be available in order to run the component.\nExample:\nsetup: \n  - type: r\n    cran: [ dynutils ]\n    bioc: [ AnnotationDbi ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ rcannood/SCORPIUS ]\n    gitlab: [ org/package ]\n    svn: [ https://path.to.svn/group/repo ]\n    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]\n    script: [ 'devtools::install(\".\")' ]"
   },
   {
     "objectID": "reference/config/platforms/DockerPlatform.html#registry",
@@ -480,7 +480,7 @@
     "href": "reference/config/platforms/DockerPlatform.html#yum",
     "title": "Docker Platform",
     "section": "yum",
-    "text": "yum\nType: YumRequirements\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.15. Use setup instead.\n\n\nSpecify which yum packages should be available in order to run the component.\nExample:\nsetup:\n  - type: yum\n    packages: [ sl ]"
+    "text": "yum\nType: YumRequirements\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since 0.7.0. Use setup instead, e.g. {type: docker, setup: [{ type: yum, ... }]}. Will be removed.\n\n\nSpecify which yum packages should be available in order to run the component.\nExample:\nsetup:\n  - type: yum\n    packages: [ sl ]"
   },
   {
     "objectID": "reference/config/requirements/rRequirements.html",
@@ -595,6 +595,13 @@
     "text": "alternatives\nType: String / List of String\nList of alternative format variations for this argument."
   },
   {
+    "objectID": "reference/config/arguments/file.html#create_parent",
+    "href": "reference/config/arguments/file.html#create_parent",
+    "title": "file",
+    "section": "create_parent",
+    "text": "create_parent\nType: Boolean\nIf the output filename is a path and it does not exist, create it before executing the script (only for direction: output).\nExample:\n- name: --my_file\n  type: file\n  direction: output\n  create_parent: true"
+  },
+  {
     "objectID": "reference/config/arguments/file.html#default",
     "href": "reference/config/arguments/file.html#default",
     "title": "file",
@@ -648,7 +655,7 @@
     "href": "reference/config/arguments/file.html#must_exist",
     "title": "file",
     "section": "must_exist",
-    "text": "must_exist\nType: Boolean\nThe file or folder should exist before the start of execution. If set to true, an error will be produced if the file or folder wasn’t found.\nExample:\n- name: --my_file\n  type: file\n  must_exist: true"
+    "text": "must_exist\nType: Boolean\nChecks whether the file or folder exists. For input files, this check will happen before the execution of the script, while for output files the check will happen afterwards.\nExample:\n- name: --my_file\n  type: file\n  must_exist: true"
   },
   {
     "objectID": "reference/config/arguments/file.html#name",
@@ -1201,7 +1208,7 @@
     "href": "reference/config/requirements.html#docker-requirements",
     "title": "Setup Requirements",
     "section": "Docker Requirements",
-    "text": "Docker Requirements\nSpecify which Docker commands should be run during setup.\nExample:\nsetup:\n  - type: docker\n    build_args: \"R_VERSION=hello_world\"\n    run: |\n      echo 'Run a custom command'\n      echo 'Foo' > /path/to/file.txt\n\nadd\nType: String / List of String\nSpecifies which ADD entries to add to the Dockerfile while building it.\nExample:\nadd: [ \"http://foo/bar .\" ]\n\n\nbuild_args\nType: String / List of String\nSpecifies which ARG entries to add to the Dockerfile while building it.\nExample:\nbuild_args: [ \"R_VERSION=4.2\" ]\n\n\ncopy\nType: String / List of String\nSpecifies which COPY entries to add to the Dockerfile while building it.\nExample:\ncopy: [ \"resource.txt /path/to/resource.txt\" ]\n\n\nenv\nType: String / List of String\nSpecifies which ENV entries to add to the Dockerfile while building it. Unlike ARG, ENV entries are also accessible from inside the container.\nExample:\nenv: [ \"R_VERSION=4.2\" ]\n\n\nlabel\nType: String / List of String\nSpecifies which LABEL entries to add to the Dockerfile while building it.\nExample:\nlabel: [ component=\"foo\" ]\n\n\nresources\nType: String / List of String\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.6.3. Use copy instead.\n\n\nSpecifies which COPY entries to add to the Dockerfile while building it.\nExample:\nresources: [ \"resource.txt /path/to/resource.txt\" ]\n\n\nrun\nType: String / List of String\nSpecifies which RUN entries to add to the Dockerfile while building it.\nExample:\nrun: |\n  echo 'Run a custom command'\n  echo 'Foo' > /path/to/file.txt\n\n\ntype\nType: String\nSpecifies the type of the requirement specification."
+    "text": "Docker Requirements\nSpecify which Docker commands should be run during setup.\nExample:\nsetup:\n  - type: docker\n    build_args: \"R_VERSION=hello_world\"\n    run: |\n      echo 'Run a custom command'\n      echo 'Foo' > /path/to/file.txt\n\nadd\nType: String / List of String\nSpecifies which ADD entries to add to the Dockerfile while building it.\nExample:\nadd: [ \"http://foo/bar .\" ]\n\n\nbuild_args\nType: String / List of String\nSpecifies which ARG entries to add to the Dockerfile while building it.\nExample:\nbuild_args: [ \"R_VERSION=4.2\" ]\n\n\ncopy\nType: String / List of String\nSpecifies which COPY entries to add to the Dockerfile while building it.\nExample:\ncopy: [ \"resource.txt /path/to/resource.txt\" ]\n\n\nenv\nType: String / List of String\nSpecifies which ENV entries to add to the Dockerfile while building it. Unlike ARG, ENV entries are also accessible from inside the container.\nExample:\nenv: [ \"R_VERSION=4.2\" ]\n\n\nlabel\nType: String / List of String\nSpecifies which LABEL entries to add to the Dockerfile while building it.\nExample:\nlabel: [ component=\"foo\" ]\n\n\nresources\nType: String / List of String\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since 0.7.0. resources in setup: {type: docker, resources: ...} was removed. Please use copy instead.\n\n\nSpecifies which COPY entries to add to the Dockerfile while building it.\nExample:\nresources: [ \"resource.txt /path/to/resource.txt\" ]\n\n\nrun\nType: String / List of String\nSpecifies which RUN entries to add to the Dockerfile while building it.\nExample:\nrun: |\n  echo 'Run a custom command'\n  echo 'Foo' > /path/to/file.txt\n\n\ntype\nType: String\nSpecifies the type of the requirement specification."
   },
   {
     "objectID": "reference/config/requirements.html#javascript-requirements",
@@ -1250,7 +1257,7 @@
     "href": "reference/config/functionality.html#add_resources_to_path",
     "title": "Functionality",
     "section": "add_resources_to_path",
-    "text": "add_resources_to_path\nType: Boolean\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since Viash 0.5.11. Extending the PATH turned out to be not desirable.\n\n\nAdds the resources directory to the PATH variable when set to true. This is set to false by default."
+    "text": "add_resources_to_path\nType: Boolean\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since 0.5.11. Extending the PATH turned out to be not desirable.\n\n\nAdds the resources directory to the PATH variable when set to true. This is set to false by default."
   },
   {
     "objectID": "reference/config/functionality.html#argument_groups",
@@ -1285,7 +1292,7 @@
     "href": "reference/config/functionality.html#enabled",
     "title": "Functionality",
     "section": "enabled",
-    "text": "enabled\nType: Boolean\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.6.0. Use status instead.\n\n\nSetting this to false with disable this component when using namespaces."
+    "text": "enabled\nType: Boolean\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since 0.7.0. Use status instead.\n\n\nSetting this to false with disable this component when using namespaces."
   },
   {
     "objectID": "reference/config/functionality.html#info",
@@ -1299,7 +1306,7 @@
     "href": "reference/config/functionality.html#inputs",
     "title": "Functionality",
     "section": "inputs",
-    "text": "inputs\nType: List of Argument\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.6.0. Use arguments instead.\n\n\nA list of input arguments in addition to the arguments list. Any arguments specified here will have their type set to file and the direction set to input by default.\nExample:\ninputs:\n  - name: input_file\n  - name: another_input\nThis results in the following output when calling the component with the --help argument:\ncomponent_with_inputs\n  \n  Inputs:\n      input_file\n          type: file\n  \n      another_input\n          type: file"
+    "text": "inputs\nType: List of Argument\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since 0.7.0. Use arguments instead.\n\n\nA list of input arguments in addition to the arguments list. Any arguments specified here will have their type set to file and the direction set to input by default.\nExample:\ninputs:\n  - name: input_file\n  - name: another_input\nThis results in the following output when calling the component with the --help argument:\ncomponent_with_inputs\n  \n  Inputs:\n      input_file\n          type: file\n  \n      another_input\n          type: file"
   },
   {
     "objectID": "reference/config/functionality.html#name",
@@ -1320,7 +1327,7 @@
     "href": "reference/config/functionality.html#outputs",
     "title": "Functionality",
     "section": "outputs",
-    "text": "outputs\nType: List of Argument\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.6.0. Use arguments instead.\n\n\nA list of output arguments in addition to the arguments list. Any arguments specified here will have their type set to file and thr direction set to output by default.\nExample:\noutputs:\n  - name: output_file\n  - name: another_output\nThis results in the following output when calling the component with the --help argument:\ncomponent_with_outputs\n  \n  Outputs:\n      output_file\n          type: file, output\n  \n      another_output\n          type: file, output"
+    "text": "outputs\nType: List of Argument\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since 0.7.0. Use arguments instead.\n\n\nA list of output arguments in addition to the arguments list. Any arguments specified here will have their type set to file and thr direction set to output by default.\nExample:\noutputs:\n  - name: output_file\n  - name: another_output\nThis results in the following output when calling the component with the --help argument:\ncomponent_with_outputs\n  \n  Outputs:\n      output_file\n          type: file, output\n  \n      another_output\n          type: file, output"
   },
   {
     "objectID": "reference/config/functionality.html#requirements",
@@ -1334,7 +1341,7 @@
     "href": "reference/config/functionality.html#resources",
     "title": "Functionality",
     "section": "resources",
-    "text": "resources\nType: List of Resource\nResources are files that support the component. The first resource should be a script that will be executed when the functionality is run. Additional resources will be copied to the same directory.\nCommon properties:\n\ntype: file / r_script / python_script / bash_script / javascript_script / scala_script / csharp_script, the type of resource. The first resource cannot be of type file. When the type is not specified, the default type is simply file.\nname: filename, the resulting name of the resource.\npath: path/to/file, the path of the input file. Can be a relative or an absolute path, or a URI.\ntext: …multiline text…, the raw content of the input file. Exactly one of path or text must be defined, the other undefined.\nis_executable: true / false, whether the resulting file is made executable.\n\nExample:\nresources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt"
+    "text": "resources\nType: List of Resource\nResources are files that support the component. The first resource should be a script that will be executed when the functionality is run. Additional resources will be copied to the same directory.\nCommon properties:\n\ntype: file / r_script / python_script / bash_script / javascript_script / scala_script / csharp_script, specifies the type of the resource. The first resource cannot be of type file. When the type is not specified, the default type is simply file.\ndest: filename, the resulting name of the resource. From within a script, the file can be accessed at meta[\"resources_dir\"] + \"/\" + dest. If unspecified, dest will be set to the basename of the path parameter.\npath: path/to/file, the path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with text.\ntext: …multiline text…, the content of the resulting file specified as a string. Mutually exclusive with path.\nis_executable: true / false, whether the resulting resource file should be made executable.\n\nExample:\nresources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt"
   },
   {
     "objectID": "reference/config/functionality.html#status",
@@ -1355,7 +1362,7 @@
     "href": "reference/config/functionality.html#tests",
     "title": "Functionality",
     "section": "tests",
-    "text": "tests\nType: List of Resource\n\n\n\n\n\n\nWarning\n\n\n\nDeprecated since Viash 0.5.13. Use test_resources instead. No functional difference.\n\n\nOne or more Bash/R/Python scripts to be used to test the component behaviour when viash test is invoked. Additional files of type file will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing."
+    "text": "tests\nType: List of Resource\n\n\n\n\n\n\nWarning\n\n\n\nRemoved since 0.7.0. Use test_resources instead. No functional difference.\n\n\nOne or more Bash/R/Python scripts to be used to test the component behaviour when viash test is invoked. Additional files of type file will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing."
   },
   {
     "objectID": "reference/config/functionality.html#usage",
@@ -1397,7 +1404,7 @@
     "href": "reference/viash/ns.html",
     "title": "viash ns",
     "section": "",
-    "text": "Build a namespace from many viash config files.\nUsage:\nviash ns build [-n nmspc] [-s src] [-t target] [-p docker] [--setup] [---push] [--parallel] [--flatten]\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--flatten, -f\nFlatten the target builds, handy for building one platform to a bin directory.\nBoolean\n\n\n--parallel, -l\nWhether or not to run the process in parallel.\nBoolean\n\n\n--platform, -p\nActs as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--push\nWhether or not to push the container to a Docker registry [Docker Platform only].\nBoolean\n\n\n--query, -q\nFilter which components get selected by component and namespace name. Can be a regex. Example: “^mynamespace/component1$”.\nString\n\n\n--query_name\nFilter which components get selected by component name. Can be a regex. Example: “^component1”.\nString\n\n\n--query_namespace, -n\nFilter which namespaces get selected by namespace name. Can be a regex. Example: “^mynamespace$”.\nString\n\n\n--setup\nWhich setup strategy for creating the container to use [Docker Platform only].\nString\n\n\n--src, -s\nA source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.\nString\n\n\n--target, -t\nA target directory to build the executables into. Default: target/.\nString\n\n\n--write_meta, -w\nWrite out some meta information to RESOURCES_DIR/viash.yaml at the end.\nBoolean\n\n\n--help, -h\nShow help message"
+    "text": "Build a namespace from many viash config files.\nUsage:\nviash ns build [-n nmspc] [-s src] [-t target] [-p docker] [--setup] [--push] [--parallel] [--flatten]\n\n\n\nArgument\nDescription\nType\n\n\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--flatten, -f\nFlatten the target builds, handy for building one platform to a bin directory.\nBoolean\n\n\n--parallel, -l\nWhether or not to run the process in parallel.\nBoolean\n\n\n--platform, -p\nActs as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--push\nWhether or not to push the container to a Docker registry [Docker Platform only].\nBoolean\n\n\n--query, -q\nFilter which components get selected by component and namespace name. Can be a regex. Example: “^mynamespace/component1$”.\nString\n\n\n--query_name\nFilter which components get selected by component name. Can be a regex. Example: “^component1”.\nString\n\n\n--query_namespace, -n\nFilter which namespaces get selected by namespace name. Can be a regex. Example: “^mynamespace$”.\nString\n\n\n--setup\nWhich setup strategy for creating the container to use [Docker Platform only].\nString\n\n\n--src, -s\nA source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/.\nString\n\n\n--target, -t\nA target directory to build the executables into. Default: target/.\nString\n\n\n--help, -h\nShow help message"
   },
   {
     "objectID": "reference/viash/ns.html#viash-ns-test",
@@ -1432,7 +1439,7 @@
     "href": "reference/viash/build.html",
     "title": "viash build",
     "section": "",
-    "text": "Build an executable from the provided viash config file.\nUsage:\nviash build config.vsh.yaml -o output [-p docker] [-m] [-s]\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--meta, -m\nPrint out some meta information at the end.\nBoolean\n\n\n--output, -o\nPath to directory in which the executable and any resources is built to. Default: “output/”. This is a required argument.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--push\nWhether or not to push the container to a Docker registry [Docker Platform only].\nBoolean\n\n\n--setup, -s\nWhich setup strategy for creating the container to use [Docker Platform only].\nString\n\n\n--write_meta, -w\nWrite out some meta information to RESOURCES_DIR/viash.yaml at the end.\nBoolean\n\n\n--help, -h\nShow help message"
+    "text": "Build an executable from the provided viash config file.\nUsage:\nviash build config.vsh.yaml -o output [-p docker] [-m] [-s]\n\n\n\nArgument\nDescription\nType\n\n\n\n\nconfig\nA viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. This is a required argument.\nString\n\n\n--config_mod, -c\nModify a viash config at runtime using dynamic config modding.\nList[String]\n\n\n--output, -o\nPath to directory in which the executable and any resources is built to. Default: “output/”. This is a required argument.\nString\n\n\n--platform, -p\nSpecifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.\nString\n\n\n--push\nWhether or not to push the container to a Docker registry [Docker Platform only].\nBoolean\n\n\n--setup, -s\nWhich setup strategy for creating the container to use [Docker Platform only].\nString\n\n\n--help, -h\nShow help message"
   },
   {
     "objectID": "reference/viash/config.html",
