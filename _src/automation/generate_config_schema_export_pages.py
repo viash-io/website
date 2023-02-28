@@ -58,7 +58,7 @@ def read_json_entries():
 	json_file.close()
 
 	for topic in viash_json:
-		if topic == "functionality":
+		if topic == "functionality" or topic == "config":
 			get_json_entries(page_title= topic, topic = topic, json_entry = viash_json[topic])
 		else:
 			for subtopic in viash_json[topic]:
@@ -227,20 +227,26 @@ def qmd_removed_deprecated(removed_dict, deprecated_dict) -> str:
 	qmd = ""
 
 	if removed_dict is not None:
+		deprecated_str = ""
+		if removed_dict["deprecation"]:
+			"Deprecated since " + removed_dict["deprecation"] + ". "
+		removed_str = "Removed since " + removed_dict["removal"] + ". "
 		qmd += qmd_callout(
 				"warning",
-				"Removed since "
-				+ removed_dict["since"]
-				+ ". "
+				deprecated_str
+				+ removed_str
 				+ removed_dict["message"],
 			)
 	
 	if deprecated_dict is not None:
+		deprecated_str = "Deprecated since " + deprecated_dict["deprecation"] + ". "
+		removed_str = ""
+		if deprecated_dict["removal"]:
+			removed_str = "Planned removal at " + deprecated_dict["removal"] + ". "
 		qmd += qmd_callout(
 				"warning",
-				"Deprecated since "
-				+ deprecated_dict["since"]
-				+ ". "
+				deprecated_str
+				+ removed_str
 				+ deprecated_dict["message"],
 			)
 
