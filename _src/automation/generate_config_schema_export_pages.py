@@ -58,11 +58,11 @@ def read_json_entries():
 	json_file.close()
 
 	for topic in viash_json:
-		if topic == "functionality" or topic == "config":
-			get_json_entries(page_title= topic, topic = topic, json_entry = viash_json[topic])
-		else:
+		if isinstance(viash_json[topic], dict):
 			for subtopic in viash_json[topic]:
 				get_json_entries(page_title = subtopic, topic = topic, json_entry = viash_json[topic][subtopic])
+		else:
+			get_json_entries(page_title= topic, topic = topic, json_entry = viash_json[topic])		
 
 
 def get_json_entries(page_title, json_entry, topic):
