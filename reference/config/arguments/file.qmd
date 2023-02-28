@@ -26,6 +26,22 @@ arguments:
 
 List of alternative format variations for this argument.
 
+## create_parent
+
+**Type**: `Boolean`
+
+If the output filename is a path and it does not exist, create it before executing the script (only for `direction: output`).
+
+**Example:**
+
+```yaml
+- name: --my_file
+  type: file
+  direction: output
+  create_parent: true
+
+```
+
 ## default
 
 **Type**: `Path` / `List of Path`
@@ -138,7 +154,7 @@ my_component --my_files=firstFile.csv,anotherFile.csv,yetAnother.csv
 
 **Type**: `Boolean`
 
-The file or folder should exist before the start of execution. If set to `true`, an error will be produced if the file or folder wasn't found.
+Checks whether the file or folder exists. For input files, this check will happen before the execution of the script, while for output files the check will happen afterwards.
 
 **Example:**
 
