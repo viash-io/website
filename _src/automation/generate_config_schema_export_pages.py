@@ -122,7 +122,6 @@ def generate_combined_page(entry_list, page_title, save_filename, title_is_name)
 		 title_is_name: If True, the title property of every JsonEntryData will be used as if it was the name property
 	"""
 
-	qmd = qmd_header(title=page_title)
 	entry_list = sorted(entry_list, key=lambda x: x.title, reverse=False)
 
 	page_data = {}
@@ -143,42 +142,7 @@ def generate_combined_page(entry_list, page_title, save_filename, title_is_name)
 		# d['since'] = data.since
 		page_data['data'].append(d)
 		
-	with open(config_dir + "/" + save_filename + ".yaml", 'w') as outfile:
-		yaml.safe_dump(page_data, outfile, default_flow_style=False)
-
-	qmd_output = subprocess.run(["j2", config_dir + "/combined_page.j2.qmd", config_dir + "/" + save_filename + ".yaml"], stdout=subprocess.PIPE).stdout.decode('utf-8')
-	f = open(config_dir + "/" + save_filename + "_new.qmd", "w")
-	f.write(qmd_output)
-	f.close()
-
-	for data in entry_list:
-		data : JsonEntryData = data
-		# print(f"Processing {page_title} - {data.title} - {data.name}")
-
-		if title_is_name: # The title property should be used as if it was the name of the property. This is the case with small separate pages.
-			if data.name != THIS_IDENTIFIER:
-				qmd += qmd_h3(data.name)
-				qmd += qmd_parse_type(data.type)
-				qmd += qmd_removed_deprecated(data.removed, data.deprecated)
-				qmd += qmd_paragraph(replace_keywords(data.description))
-				qmd += qmd_parse_examples(data.examples)
-			else:
-				qmd += qmd_h2(data.title)
-				qmd += qmd_paragraph(replace_keywords(data.description))
-				qmd += qmd_parse_examples(data.examples)
-		else:
-			if data.name != THIS_IDENTIFIER:
-				qmd += qmd_h2(data.name)
-				qmd += qmd_parse_type(data.type)
-				qmd += qmd_removed_deprecated(data.removed, data.deprecated)
-				qmd += qmd_paragraph(replace_keywords(data.description))
-				qmd += qmd_parse_examples(data.examples)
-			else:
-				qmd += qmd_paragraph(replace_keywords(data.description))
-				qmd += qmd_parse_examples(data.examples)
-
-	write_qmd_file(directory=config_dir, file_name=save_filename, content=qmd)
-	
+	render_jinja_page("combined_page.j2.qmd", config_dir, save_filename, page_data)
 
 def generate_grouped_pages(entry_list, save_dir):
 	"""
@@ -216,32 +180,7 @@ JsonEntryData
 			page_data['data'].append(d)
 		
 		filename = group[0].title.replace(" ", "")
-		with open(save_dir + "/" + filename + ".yaml", 'w') as outfile:
-			yaml.safe_dump(page_data, outfile, default_flow_style=False)
-
-		qmd_output = subprocess.run(["j2", config_dir + "/grouped_page.j2.qmd", save_dir + "/" + filename + ".yaml"], stdout=subprocess.PIPE).stdout.decode('utf-8')
-		f = open(save_dir + "/" + filename + "_new.qmd", "w")
-		f.write(qmd_output)
-		f.close()
-
-
-		# Take title from first entry in group and use that as the header for this page
-		qmd = qmd_header(group[0].title)
-		filename = group[0].title.replace(" ", "")
-
-		for data in group:
-			data : JsonEntryData = data
-			if data.name != THIS_IDENTIFIER:
-				qmd += qmd_h2(data.name)
-				qmd += qmd_parse_type(data.type)
-				qmd += qmd_removed_deprecated(data.removed, data.deprecated)
-			if data.description:
-				qmd += qmd_paragraph(replace_keywords(data.description))
-			else:
-				print(f"Warning: description could not be found for \"{group[0].type}.{data.name}\"")
-			qmd += qmd_parse_examples(data.examples)
-
-		write_qmd_file(directory=save_dir, file_name=filename, content=qmd)
+		render_jinja_page("grouped_page.j2.qmd", save_dir, filename, page_data)
 	
 def clean_title(title) -> str:
 	""" Returns title with added spaces and capitalization for better readability. """
@@ -252,63 +191,19 @@ def clean_title(title) -> str:
 	title = title.replace("Vdsl3", "VDSL3")
 	return title.title()
 
-def qmd_paragraph(text) -> str:
-	""" Returns text with newlines added. """
-	return text + "\n\n"
+def render_jinja_page(template: str, folder: str, filename: str, data: dict):
+	""" Write data to yaml file and run jinja. """
+	Path(folder).mkdir(parents=True, exist_ok=True)	
 
-def qmd_h2(text) -> str:
-	""" Returns text with H2 markdown and newlines. """
-	return "## " + text + "\n\n"
+	path_file = Path(folder, filename)
+	with open(path_file.with_suffix(".yaml"), 'w') as outfile:
+			yaml.safe_dump(data, outfile, default_flow_style=False)
 
-def qmd_h3(text) -> str:
-	""" Returns text with H3 markdown and newlines. """
-	return "### " + text + "\n\n"
-
-def qmd_header(title) -> str:
-	""" Returns the page metadata markdown that belongs at the top of a qmd file, with the title filled in. """
-	qmd = ""
-	qmd += f"---\ntitle: {title}\n"
-	qmd += "search: true\n"
-	qmd += "execute:\n"
-	qmd += "  echo: false\n"
-	qmd += "  output: asis\n"
-	qmd += "---\n\n"
-	return qmd
-
-def qmd_callout(type, content) -> str:
-	""" Returns a quarto callout block: https://quarto.org/docs/authoring/callouts.html """
-	return "::: {" + f".callout-{type}" + "}\n" + content + "\n:::\n"
-
-def qmd_removed_deprecated(removed_dict, deprecated_dict) -> str:
-	""" Returns markdown with added warning callouts based on the removed and deprecated properties of JsonEntryData  """
-	qmd = ""
-
-	if removed_dict is not None:
-		deprecated_str = ""
-		if removed_dict["deprecation"]:
-			"Deprecated since " + removed_dict["deprecation"] + ". "
-		removed_str = "Removed since " + removed_dict["removal"] + ". "
-		qmd += qmd_callout(
-				"warning",
-				deprecated_str
-				+ removed_str
-				+ removed_dict["message"],
-			)
+	path_template = Path(repo_root, "_src" ,"automation", template)
 	
-	if deprecated_dict is not None:
-		deprecated_str = "Deprecated since " + deprecated_dict["deprecation"] + ". "
-		removed_str = ""
-		if deprecated_dict["removal"]:
-			removed_str = "Planned removal at " + deprecated_dict["removal"] + ". "
-		qmd += qmd_callout(
-				"warning",
-				deprecated_str
-				+ removed_str
-				+ deprecated_dict["message"],
-			)
-
-	return qmd
-
+	qmd = subprocess.run(["j2", path_template, path_file.with_suffix(".yaml")], stdout=subprocess.PIPE).stdout.decode('utf-8')
+	with open(path_file.with_suffix(".qmd"), 'w') as outfile:
+		outfile.write(qmd)
 
 def replace_keywords(text: str) -> str:
 	""" Finds all keywords in the format @[keyword](text) and returns the replacements based on the keywords CSV. """
@@ -334,51 +229,6 @@ def replace_keywords(text: str) -> str:
 		text = text.replace(whole_match, f"[{keyword_text}]({link})")
 
 	return text
-
-def qmd_parse_type(type_string) -> str:
-	""" Returns a human readable markdown version of the type property.  """
-	qmd ="**Type**: "
-
-	if type_string.startswith("Option of"):
-		type = type_string.replace("Option of","").strip()
-		qmd += f"`{type}`"
-	elif type_string.startswith("OneOrMore of"):
-		type = type_string.replace("OneOrMore of","").strip()
-		qmd += f"`{type}` / `List of {type}`"
-	else:
-		qmd += f"`{type_string}`"
-	
-	qmd += "\n\n"
-	return qmd
-
-def qmd_parse_examples(examples) -> str:
-	""" Returns a human readable markdown version of a list of examples with code formatting.  """
-	qmd = ""
-
-	if examples is None or len(examples) == 0:
-		return qmd
-
-	qmd += '**Example:**\n\n' # qmd_h3("Example")
-	for ex in examples:
-		if "description" in ex:
-			qmd += ex["description"] + "\n\n"
-
-		qmd += (
-			"```"
-			+ ex["format"]
-			+ "\n"
-			+ ex["example"].replace("\\n", "\n")
-			+ "\n```\n\n"
-		)
-	
-	return qmd
-
-def write_qmd_file(directory, file_name, content):
-	""" Write a qmd file to disk in the specified directory, with the given filename and content. """
-	Path(directory).mkdir(parents=True, exist_ok=True)
-	qmd_file = open(f"{directory}/{file_name}.qmd", "w")
-	qmd_file.write(content)
-	qmd_file.close()
 
 if __name__ == "__main__":
 	generate_json()
