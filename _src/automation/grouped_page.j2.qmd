@@ -17,14 +17,14 @@ execute:
 {% else %}
 **Type**: `{{d.type}}`
 {% endif %}
-{% if d.removed -%}
+{% if d.removed is defined -%}
 ::: {.callout-warning}
 {%- if d.removed.deprecation -%}
 Deprecated since {{d.removed.deprecation}}. {% endif %}
 Removed since {{d.removed.removal}}. {{d.removed.message}}
 :::
 {% endif -%}
-{%- if d.deprecated -%}
+{%- if d.deprecated is defined -%}
 ::: {.callout-warning}
 Deprecated since {{d.deprecated.deprecation}}.
 {%- if d.deprecated.removal %} Planned removal at {{d.deprecated.removal}}. {% endif -%}
@@ -35,7 +35,7 @@ Deprecated since {{d.deprecated.deprecation}}.
 {%- if d.description is defined %}
 {{-d.description}}
 {% endif -%}
-{% if d.examples %}
+{% if d.examples is defined %}
 **Example:**
 {% for ex in d.examples %}
 {%- if ex.description is defined %}
