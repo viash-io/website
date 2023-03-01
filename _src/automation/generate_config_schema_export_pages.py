@@ -1,4 +1,4 @@
-import git, subprocess, json, csv, re
+import git, subprocess, json, csv, re, yaml
 from pathlib import Path
 
 TOPIC_FUNCTIONALITY = "functionality"
@@ -124,6 +124,27 @@ def generate_combined_page(entry_list, page_title, save_filename, title_is_name)
 
 	qmd = qmd_header(title=page_title)
 	entry_list = sorted(entry_list, key=lambda x: x.title, reverse=False)
+
+	page_data = {}
+	page_data['pageTitle'] = page_title
+	page_data['title_is_name'] = title_is_name
+	page_data['data'] = []
+
+	for data in entry_list:
+		d = {}
+		d['title'] = data.title
+		d['topic'] = data.topic
+		d['name'] = data.name
+		d['type'] = data.type
+		d['description'] = replace_keywords(data.description)
+		d['examples'] = data.examples
+		d['removed'] = data.removed
+		d['deprecated'] = data.deprecated
+		d['since'] = data.since
+		page_data['data'].append(d)
+		
+	with open(config_dir + "/" + save_filename + ".yaml", 'w') as outfile:
+		yaml.safe_dump(page_data, outfile, default_flow_style=False)
 
 	for data in entry_list:
 		data : JsonEntryData = data

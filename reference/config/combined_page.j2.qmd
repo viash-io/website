@@ -1,0 +1,56 @@
+---
+title: "{{pageTitle}}"
+search: true
+execute:
+  echo: false
+  output: asis
+---
+{% for d in data -%}
+
+{%- if title_is_name and not d.name == "__this__" %}
+### {{d.name}}
+{% elif title_is_name and d.name == "__this__" %}
+## {{d.title}}
+{% elif not title_is_name and not d.name == "__this__" %}
+## {{d.name}}
+{% endif %}
+{%- if not d.name == "__this__" %}
+{%- if "Option of " in d.type %}
+**Type**: `{{d.type|replace("Option of ", "")}}`
+{% elif "OneOrMore of " in d.type %}
+**Type**: `{{d.type|replace("OneOrMore of ", "")}}` / `List of {{d.type|replace("OneOrMore of ", "")}}`
+{% else %}
+**Type**: `{{d.type}}`
+{% endif %}
+{% else %}
+{% endif -%}
+{% if d.removed -%}
+::: {.callout-warning}
+{%- if d.removed.deprecation -%}
+Deprecated since {{d.removed.deprecation}}. {% endif %}
+Removed since {{d.removed.removal}}. {{d.removed.message}}
+:::
+{% endif -%}
+{%- if d.deprecated -%}
+::: {.callout-warning}
+Deprecated since {{d.deprecated.deprecation}}.
+{%- if d.deprecated.removal %} Planned removal at {{d.deprecated.removal}}. {% endif -%}
+{{d.deprecated.message}}
+:::
+{% endif -%}
+
+{{-d.description}}
+{% if d.examples %}
+**Example:**
+{% for ex in d.examples %}
+{%- if ex.description is defined %}
+{{ex.description}}
+{% endif %}
+```{{ex.format}}
+{{ex.example|replace("\\n", "\n")}}
+```
+{% endfor -%}
+{% endif -%}
+
+{%- endfor %}
+
