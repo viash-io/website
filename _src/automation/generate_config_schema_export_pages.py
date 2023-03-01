@@ -1,4 +1,4 @@
-import git, subprocess, json, csv, re, yaml
+import git, subprocess, json, csv, re, yaml, jinja2
 from pathlib import Path
 
 TOPIC_FUNCTIONALITY = "functionality"
@@ -146,6 +146,11 @@ def generate_combined_page(entry_list, page_title, save_filename, title_is_name)
 	with open(config_dir + "/" + save_filename + ".yaml", 'w') as outfile:
 		yaml.safe_dump(page_data, outfile, default_flow_style=False)
 
+	qmd_output = subprocess.run(["j2", config_dir + "/combined_page.j2.qmd", config_dir + "/" + save_filename + ".yaml"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+	f = open(config_dir + "/" + save_filename + "_new.qmd", "w")
+	f.write(qmd_output)
+	f.close()
+
 	for data in entry_list:
 		data : JsonEntryData = data
 		# print(f"Processing {page_title} - {data.title} - {data.name}")
@@ -213,6 +218,11 @@ JsonEntryData
 		filename = group[0].title.replace(" ", "")
 		with open(save_dir + "/" + filename + ".yaml", 'w') as outfile:
 			yaml.safe_dump(page_data, outfile, default_flow_style=False)
+
+		qmd_output = subprocess.run(["j2", config_dir + "/grouped_page.j2.qmd", save_dir + "/" + filename + ".yaml"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+		f = open(save_dir + "/" + filename + "_new.qmd", "w")
+		f.write(qmd_output)
+		f.close()
 
 
 		# Take title from first entry in group and use that as the header for this page
