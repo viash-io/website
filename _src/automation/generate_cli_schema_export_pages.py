@@ -5,7 +5,7 @@ repo = git.Repo(".", search_parent_directories=True) # Get root dir of repo
 repo_root = repo.working_tree_dir
 
 json_export = "cli_schema_export.json"
-keyword_replace_csv = repo_root + "/bin/scripts/keyword_links.csv"
+keyword_replace_csv = repo_root + "/_src/automation/keyword_links.csv"
 keyword_regex = r"\@\[(.*?)\]\((.*?)\)"
 
 reference_dir = repo_root + "/reference/"
@@ -14,8 +14,7 @@ def generate_json():
 	""" Calls viash in order to generate a cli export. """
 
 	# Run bin/viash export cli_schema
-	bin = repo_root + "/bin/"
-	json = subprocess.run([bin + "viash", "export", "cli_schema"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+	json = subprocess.run(["viash", "export", "cli_schema"], stdout=subprocess.PIPE).stdout.decode('utf-8')
 	f = open(reference_dir + json_export, "w")
 	f.write(json)
 	f.close()
@@ -61,8 +60,8 @@ def qmd_add_command(command_json, is_subcommand) -> str:
 
 def qmd_header(title) -> str:
 	""" Returns the page metadata markdown that belongs at the top of a qmd file, with the title filled in. """
-	qmd = ""
-	qmd += f"---\ntitle: {title}\n"
+	qmd = "---\n"
+	qmd += f"title: {title}\n"
 	qmd += "search: true\n"
 	qmd += "execute:\n"
 	qmd += "  echo: false\n"

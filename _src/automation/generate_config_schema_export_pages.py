@@ -31,7 +31,7 @@ repo = git.Repo(".", search_parent_directories=True) # Get root dir of repo
 repo_root = repo.working_tree_dir
 
 json_export = "config_schema_export.json"
-keyword_replace_csv = repo_root + "/bin/scripts/keyword_links.csv"
+keyword_replace_csv = repo_root + "/_src/automation/keyword_links.csv"
 keyword_regex = r"\@\[(.*?)\]\((.*?)\)"
 
 reference_dir = repo_root + "/reference/"
@@ -41,8 +41,7 @@ def generate_json():
 	""" Calls viash in order to generate a config export. """
 	
 	# Run bin/viash export config_schema
-	bin = repo_root + "/bin/"
-	json = subprocess.run([bin + "viash", "export", "config_schema"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+	json = subprocess.run(["viash", "export", "config_schema"], stdout=subprocess.PIPE).stdout.decode('utf-8')
 	f = open(reference_dir + json_export, "w")
 	f.write(json)
 	f.close()
@@ -59,11 +58,11 @@ def read_json_entries():
 	json_file.close()
 
 	for topic in viash_json:
-		if topic == "functionality":
-			get_json_entries(page_title= topic, topic = topic, json_entry = viash_json[topic])
-		else:
+		if isinstance(viash_json[topic], dict):
 			for subtopic in viash_json[topic]:
 				get_json_entries(page_title = subtopic, topic = topic, json_entry = viash_json[topic][subtopic])
+		else:
+			get_json_entries(page_title= topic, topic = topic, json_entry = viash_json[topic])		
 
 
 def get_json_entries(page_title, json_entry, topic):
@@ -228,20 +227,26 @@ def qmd_removed_deprecated(removed_dict, deprecated_dict) -> str:
 	qmd = ""
 
 	if removed_dict is not None:
+		deprecated_str = ""
+		if removed_dict["deprecation"]:
+			"Deprecated since " + removed_dict["deprecation"] + ". "
+		removed_str = "Removed since " + removed_dict["removal"] + ". "
 		qmd += qmd_callout(
 				"warning",
-				"Removed since "
-				+ removed_dict["since"]
-				+ ". "
+				deprecated_str
+				+ removed_str
 				+ removed_dict["message"],
 			)
 	
 	if deprecated_dict is not None:
+		deprecated_str = "Deprecated since " + deprecated_dict["deprecation"] + ". "
+		removed_str = ""
+		if deprecated_dict["removal"]:
+			removed_str = "Planned removal at " + deprecated_dict["removal"] + ". "
 		qmd += qmd_callout(
 				"warning",
-				"Deprecated since "
-				+ deprecated_dict["since"]
-				+ ". "
+				deprecated_str
+				+ removed_str
 				+ deprecated_dict["message"],
 			)
 

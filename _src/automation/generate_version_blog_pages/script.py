@@ -59,6 +59,7 @@ def handle_title(header: str) -> Tuple[str, str]:
     # author: Viash Team
     # ---
     header = textwrap.dedent(f"""\
+    ---
     title: "Viash {version}"
     subtitle: "{subtitle}"
     date: "{date}"
