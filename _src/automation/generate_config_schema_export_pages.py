@@ -140,7 +140,7 @@ def generate_combined_page(entry_list, page_title, save_filename, title_is_name)
 		d['examples'] = data.examples
 		d['removed'] = data.removed
 		d['deprecated'] = data.deprecated
-		d['since'] = data.since
+		# d['since'] = data.since
 		page_data['data'].append(d)
 		
 	with open(config_dir + "/" + save_filename + ".yaml", 'w') as outfile:
@@ -189,6 +189,32 @@ JsonEntryData
 	groupedList = [[y for y in entry_list if y.title==x] for x in uniqueTitles]
 
 	for group in groupedList:
+		page_data = {}
+		page_data['pageTitle'] = group[0].title
+		# page_data['title_is_name'] = title_is_name
+		page_data['data'] = []
+		
+		for data in group:
+			d = {}
+			# d['title'] = data.title
+			# d['topic'] = data.topic
+			d['name'] = data.name
+			d['type'] = data.type
+			if data.description:
+				d['description'] = replace_keywords(data.description)
+			else:
+				print(f"Warning: description could not be found for \"{group[0].type}.{data.name}\"")
+			d['examples'] = data.examples
+			d['removed'] = data.removed
+			d['deprecated'] = data.deprecated
+			# d['since'] = data.since
+			page_data['data'].append(d)
+		
+		filename = group[0].title.replace(" ", "")
+		with open(save_dir + "/" + filename + ".yaml", 'w') as outfile:
+			yaml.safe_dump(page_data, outfile, default_flow_style=False)
+
+
 		# Take title from first entry in group and use that as the header for this page
 		qmd = qmd_header(group[0].title)
 		filename = group[0].title.replace(" ", "")
