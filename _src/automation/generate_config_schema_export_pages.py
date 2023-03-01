@@ -7,11 +7,15 @@ repo = git.Repo(".", search_parent_directories=True) # Get root dir of repo
 repo_root = repo.working_tree_dir
 
 json_export = "config_schema_export.json"
-keyword_replace_csv = repo_root + "/_src/automation/keyword_links.csv"
 keyword_regex = r"\@\[(.*?)\]\((.*?)\)"
 
 reference_dir = repo_root + "/reference/"
 config_dir = reference_dir + "/config"
+
+config_file = Path(repo_root, '_src', 'automation', 'config_pages_settings.yaml')
+config_pages_settings = ''
+with open(config_file, 'r') as infile:
+		config_pages_settings = yaml.safe_load(infile)
 
 def generate_json():
 	""" Calls viash in order to generate a config export. """
@@ -65,12 +69,12 @@ def get_json_entries(page_title, json_entry, topic):
 def generate_pages():
 	"""Feed JsonEntryData lists to page generation functions."""
 
-	generate_combined_page(entry_list= entry_lists['functionality'], page_title= "Functionality", save_filename= "functionality", title_is_name=False)
-	generate_combined_page(entry_list= entry_lists['requirements'], page_title= "Setup Requirements", save_filename= "requirements", title_is_name=True)
-	generate_grouped_pages(entry_list= entry_lists['platforms'], save_dir= config_dir + "/platforms")
-	generate_grouped_pages(entry_list= entry_lists['arguments'], save_dir= config_dir + "/arguments")
+	generate_combined_page(entry_list= entry_lists['functionality'], page_title= "Functionality", filename= "functionality", title_is_name=False)
+	generate_combined_page(entry_list= entry_lists['requirements'], page_title= "Setup Requirements", filename= "requirements", title_is_name=True)
+	generate_grouped_pages(entry_list= entry_lists['platforms'], group_name= "platforms")
+	generate_grouped_pages(entry_list= entry_lists['arguments'], group_name= "arguments")
 
-def generate_combined_page(entry_list, page_title, save_filename, title_is_name):
+def generate_combined_page(entry_list, page_title, filename, title_is_name):
 	"""
 	Parses a data dictionary and combines it into a single page.
 
@@ -87,10 +91,15 @@ def generate_combined_page(entry_list, page_title, save_filename, title_is_name)
 	page_data['pageTitle'] = page_title
 	page_data['title_is_name'] = title_is_name
 	page_data['data'] = entry_list
-		
-	render_jinja_page("combined_page.j2.qmd", config_dir, save_filename, page_data)
 
-def generate_grouped_pages(entry_list, save_dir):
+	if filename in config_pages_settings['structure']:
+		filename = config_pages_settings['structure'][filename]
+	else:
+		print(f"Could not find {filename} in the config pages settings structure")
+		
+	render_jinja_page("combined_page.j2.qmd", config_dir, filename, page_data)
+
+def generate_grouped_pages(entry_list, group_name):
 	"""
 	Parses a list of data dictionaries, groups them by title and creates a page for each title.
 
@@ -109,8 +118,14 @@ def generate_grouped_pages(entry_list, save_dir):
 		# page_data['title_is_name'] = title_is_name
 		page_data['data'] = group
 		
-		filename = group[0]['title'].replace(" ", "")
-		render_jinja_page("grouped_page.j2.qmd", save_dir, filename, page_data)
+		filename = group_name + "/" + group[0]['title'].replace(" ", "")
+
+		if filename in config_pages_settings['structure']:
+			filename = config_pages_settings['structure'][filename]
+		else:
+			print(f"Could not find {filename} in the config pages settings structure")
+
+		render_jinja_page("grouped_page.j2.qmd", config_dir, filename, page_data)
 	
 def clean_title(title) -> str:
 	""" Returns title with added spaces and capitalization for better readability. """
@@ -125,14 +140,16 @@ def render_jinja_page(template: str, folder: str, filename: str, data: dict):
 	""" Write data to yaml file and run jinja. """
 	Path(folder).mkdir(parents=True, exist_ok=True)	
 
-	path_file = Path(folder, filename)
-	with open(path_file.with_suffix(".yaml"), 'w') as outfile:
+	yaml_file = Path(folder, filename).with_suffix('.yaml')
+	qmd_file = Path(folder, filename).with_suffix('.qmd')
+	
+	with open(yaml_file, 'w') as outfile:
 			yaml.safe_dump(data, outfile, default_flow_style=False)
 
 	path_template = Path(repo_root, "_src" ,"automation", template)
 	
-	qmd = subprocess.run(["j2", path_template, path_file.with_suffix(".yaml")], stdout=subprocess.PIPE).stdout.decode('utf-8')
-	with open(path_file.with_suffix(".qmd"), 'w') as outfile:
+	qmd = subprocess.run(["j2", path_template, yaml_file], stdout=subprocess.PIPE).stdout.decode('utf-8')
+	with open(qmd_file, 'w') as outfile:
 		outfile.write(qmd)
 
 def replace_keywords(text: str) -> str:
@@ -146,14 +163,8 @@ def replace_keywords(text: str) -> str:
 		keyword_text = match.group(2)
 		link = "no-link"
 
-		# Find keyword in csv
-		keywords_csv = open(keyword_replace_csv)
-		csvreader = csv.reader(keywords_csv)
-		for row in csvreader:
-			if row[0] == keyword:
-				link = row[1]
-				break
-		keywords_csv.close()
+		if keyword in config_pages_settings['keywords']:
+			link = config_pages_settings['keywords'][keyword]
 
 		# Replace match with hyperlink
 		text = text.replace(whole_match, f"[{keyword_text}]({link})")
