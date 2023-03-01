@@ -1,0 +1,134 @@
+data:
+- description: A `file` type argument has a string value that points to a file or
+    folder path.
+  example:
+  - example: "arguments:\n  - name: --input_csv\n    type: file\n    must_exist: true\n\
+      \    description: CSV file to read contents from\n    alternatives: [\"-i\"\
+      ]\n"
+    format: yaml
+  hierarchy:
+  - io.viash.functionality.arguments.FileArgument
+  - io.viash.functionality.arguments.Argument
+  name: __this__
+  title: file
+  topic: arguments
+  type: FileArgument
+- description: List of alternative format variations for this argument.
+  name: alternatives
+  title: file
+  topic: arguments
+  type: OneOrMore of String
+- description: 'If the output filename is a path and it does not exist, create it
+    before executing the script (only for `direction: output`).'
+  example:
+  - example: "- name: --my_file\n  type: file\n  direction: output\n  create_parent:\
+      \ true\n"
+    format: yaml
+  name: create_parent
+  title: file
+  topic: arguments
+  type: Boolean
+- description: The default value when no argument value is provided. This will not
+    work if the [`required`](#required) property is enabled.
+  example:
+  - example: "- name: --my_file\n  type: file\n  default: data.csv\n"
+    format: yaml
+  name: default
+  title: file
+  topic: arguments
+  type: OneOrMore of Path
+- description: A description of the argument. This will be displayed with `--help`.
+  name: description
+  title: file
+  topic: arguments
+  type: Option of String
+- description: Makes this argument an `input` or an `output`, as in does the file/folder
+    needs to be read or written. `input` by default.
+  example:
+  - example: "- name: --my_output_file\n  type: file\n  direction: output\n"
+    format: yaml
+  name: direction
+  title: file
+  topic: arguments
+  type: Direction
+- description: An example value for this argument. If no [`default`](#default) property
+    was specified, this will be used for that purpose.
+  example:
+  - example: "- name: --my_file\n  type: file\n  example: data.csv\n"
+    format: yaml
+  name: example
+  title: file
+  topic: arguments
+  type: OneOrMore of Path
+- description: 'Structured information. Can be any shape: a string, vector, map or
+    even nested map.'
+  example:
+  - example: "info:\n  category: cat1\n  labels: [one, two, three]"
+    format: yaml
+  name: info
+  since: Viash 0.6.3
+  title: file
+  topic: arguments
+  type: Json
+- description: Treat the argument value as an array. Arrays can be passed using the
+    delimiter `--foo=1:2:3` or by providing the same argument multiple times `--foo
+    1 --foo 2`. You can use a custom delimiter by using the [`multiple_sep`](#multiple_sep)
+    property. `false` by default.
+  example:
+  - example: "- name: --my_files\n  type: file\n  multiple: true\n"
+    format: yaml
+  - description: 'Here''s an example of how to use this:'
+    example: my_component --my_files=firstFile.csv:anotherFile.csv:yetAnother.csv
+    format: bash
+  name: multiple
+  title: file
+  topic: arguments
+  type: Boolean
+- description: The delimiter character for providing [`multiple`](#multiple) values.
+    `:` by default.
+  example:
+  - example: "- name: --my_files\n  type: file\n  multiple: true\n  multiple_sep:\
+      \ \",\"\n"
+    format: yaml
+  - description: 'Here''s an example of how to use this:'
+    example: my_component --my_files=firstFile.csv,anotherFile.csv,yetAnother.csv
+    format: bash
+  name: multiple_sep
+  title: file
+  topic: arguments
+  type: String
+- description: Checks whether the file or folder exists. For input files, this check
+    will happen before the execution of the script, while for output files the check
+    will happen afterwards.
+  example:
+  - example: "- name: --my_file\n  type: file\n  must_exist: true\n"
+    format: yaml
+  name: must_exist
+  title: file
+  topic: arguments
+  type: Boolean
+- description: "The name of the argument. Can be in the formats `--foo`, `-f` or `foo`.\
+    \ The number of dashes determines how values can be passed:  \n\n  - `--foo` is\
+    \ a long option, which can be passed with `executable_name --foo=value` or `executable_name\
+    \ --foo value`\n  - `-f` is a short option, which can be passed with `executable_name\
+    \ -f value`\n  - `foo` is an argument, which can be passed with `executable_name\
+    \ value`  \n"
+  name: name
+  title: file
+  topic: arguments
+  type: String
+- description: Make the value for this argument required. If set to `true`, an error
+    will be produced if no value was provided. `false` by default.
+  example:
+  - example: "- name: --my_file\n  type: file\n  required: true\n"
+    format: yaml
+  name: required
+  title: file
+  topic: arguments
+  type: Boolean
+- description: Specifies the type of the argument.
+  name: type
+  title: file
+  topic: arguments
+  type: String
+pageTitle: file

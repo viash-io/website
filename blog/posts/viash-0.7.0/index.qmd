@@ -1,0 +1,112 @@
+---
+title: "Viash 0.7.0"
+subtitle: "Major code cleanup and minor improvements to VDSL3"
+date: "2022-02-26"
+categories: [ New Release ]
+author: Viash Team
+---
+
+## What's new?
+
+* Default namespace separator has been changed from `_` to `/`. This means 
+  Docker images will be named `<Registry>/<Organization>/<Namespace>/<Name>`
+  by default. For example, `ghcr.io/openpipelines-bio/mapping/cellranger_count`
+  instead of `ghcr.io/openpipelines-bio/mapping_cellranger_count`.
+
+* Removed deprecated code of unused functionality to simplify code.
+  - Shorthand notation for specitying input/output arguments
+  - Shorthand notation for specifying Docker requirements
+  - Legacy Nextflow platform
+
+* Improvements in VDSL3 and the Nextflow Workflow Helper to make behaviour
+  more predictable and fixing some bugs in the meantime.
+
+* Improvements to test benches and several bug fixes.
+
+## Full changelog
+
+### BREAKING CHANGES
+
+* Viash config: Previously deprecated fields are now removed.
+  - `functionality.inputs`: Use `arguments` or `argument_groups` instead.
+  - `functionality.outputs`: Use `arguments` or `argument_groups` instead.
+  - `functionality.tests`: Use `test_resources` instead. No functional difference.
+  - `functionality.enabled`: Use `status: enabled` instead.
+  - `functionality.requirements.n_proc`: Use `cpus` instead.
+  - `platforms.DockerPlatform.privileged`: Add a `--privileged` flag in `run_args` instead.
+  - `platforms.DockerPlatform.apk`: Use `setup: [{ type: apk, packages: ... }]` instead.
+  - `platforms.DockerPlatform.apt`: Use `setup: [{ type: apt, packages: ... }]` instead.
+  - `platforms.DockerPlatform.yum`: Use `setup: [{ type: yum, packages: ... }]` instead.
+  - `platforms.DockerPlatform.r`: Use `setup: [{ type: r, packages: ... }]` instead.
+  - `platforms.DockerPlatform.python`: Use `setup: [{ type: python, packages: ... }]` instead.
+  - `platforms.DockerPlatform.docker`: Use `setup: [{ type: docker, run: ... }]` instead.
+  - `platforms.DockerPlatform.docker.setup.resources`: Use `setup: [{ type: docker, copy: ... }]` instead.
+  - `platforms.NextflowLegacy`: Use the Nextflow VDSL3 platform instead.
+  - `functionality.ArgumentGroups`: No longer supports strings referring to arguments in the `arguments:` section.
+    Instead directly put the arguments inside the argument groups.
+
+* `viash_install`: The bootstrap script has been reworked in line with the project config introduced in 0.6.4:
+
+    * The default location for installing the Viash executable is now `./viash` (was: `bin/viash`).
+    * The new `viash_install` support `--output` and `--tag`.
+    * The various settings that existed in `viash_install` (organisation, tag, ...) are moved to the project config.
+
+  Please note that this new `viash_install` bootstrap script can be run from the CLI using:
+
+    ```
+    curl -fsSL dl.viash.io | bash
+    ```
+  The old `get.viash.io` is still available but points to the version 0.6.7 version of this component and is deprecated.
+
+* `WorkflowHelper`: `paramsToList`, `paramsToChannel` and `viashChannel` are now deprecated and will be removed in a future release.
+
+* `viash (ns) build`: Change the default value of the namespace separator in a Docker platform from `_` to `/`. 
+  Add `".platforms[.type == 'docker'].namespace_separator := '_'"` to the project config `_viash.yaml` to revert to the previous behaviour.
+
+### MAJOR CHANGES
+
+* `VDSL3`: now uses the newly implemented `channelFromParams` and `preprocessInputs` instead of `viashChannel`.
+
+### NEW FEATURES
+
+* `WorkflowHelper`: Added `preprocessInputs` and `channelFromParams` to replace `paramsToList`, `paramsToChannel` and `viashChannel`. This refactor allows processing parameters that are already in a Channel using `preprocessInputs`, which is necessary when passing parameters from a workflow to a subworkflow in a Nextflow pipeline.
+
+### MINOR CHANGES
+
+* `Main`: Capture build, setup and push errors and output an exit code.
+
+* `File downloading`: Add check to pre-emptively catch file errors (e.g. 404).
+
+* `Scala`: Updated to Scala 2.13 and updated several dependencies.
+
+* `Main`: Improve `match` completeness in some edge cases and throw exceptions where needed.
+
+* `Changelog`: Reformat the changelog to a more structured format.
+  For every release, there is now a date, title, and summary.
+  This both improves the changelog itself but can then also be used to postprocess the CHANGELOG programmatically.
+
+* `VDSL3`: Add a default value for `id` when running a VDSL3 module as a standalone pipeline.
+
+* `TestBenches`:
+  - Verify switching of Viash versions
+  - Prepare ConfigDeriver by copying base resources to the targetFolder. Use cases so far showed that it's always required and it simplifies the usage.
+  - Remove some old & unmaintained IntelliJ Idea `editor-fold` tags. Given that the testbenches were split up, these were broken but also no longer needed.
+  - Add 2 testbenches for computational requirements when running `viash run` or `viash test`.
+  - Added tests for different values for the `--id` and `--param_list` parameters of VDSL3 modules.
+
+* `viash test`: Use `test` as a random tag during testing, instead of `test` plus a random string.
+
+### BUG FIXES
+
+* `WorkflowHelper`: fixed where passing a relative path as `--param_list` would cause incorrect resolving of input files.
+
+* `Testbenches`: Fix GitTest testbench to correctly increment temporary folder naming and dispose them after the test finishes.
+
+* `viash xxx url`: Fix passing a url to viash as the config file to process. Add a short testbench to test principle functionality.
+
+* `Testbenches`: Simplify `testr` container.
+
+* `Main`: Improve error reporting to the user in some cases where files or folders can't be found. Depending on the thrown exception, more or less context was given.
+
+* `VDSL3`: Create parent directory of output files before starting the script.
+

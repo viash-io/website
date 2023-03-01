@@ -1,0 +1,241 @@
+data:
+- deprecated:
+    deprecation: 0.6.0
+    message: 'Nextflow platform with `variant: legacy` is deprecated and will be removed'
+    removal: 0.7.0
+  description: Run a Viash component as a Nextflow module.
+  hierarchy:
+  - io.viash.platforms.NextflowLegacyPlatform
+  - io.viash.platforms.NextflowPlatform
+  - io.viash.platforms.Platform
+  name: __this__
+  title: Nextflow Legacy Platform
+  topic: platforms
+  type: NextflowLegacyPlatform
+- deprecated:
+    deprecation: 0.6.3
+    message: Undocumented & stale value
+    removal: 0.7.0
+  name: executor
+  title: Nextflow Legacy Platform
+  topic: platforms
+  type: Option of String
+- description: Every platform can be given a specific id that can later be referred
+    to explicitly when running or building the Viash component.
+  name: id
+  title: Nextflow Legacy Platform
+  topic: platforms
+  type: String
+- description: 'If no image attributes are configured, Viash will use the auto-generated
+    image name from the Docker platform:
+
+
+    ```
+
+    [<namespace>/]<name>:<version>
+
+    ```
+
+    It''s possible to specify the container image explicitly with which to run the
+    module in different ways:
+
+
+    ```
+
+    image: dataintuitive/viash:0.4.0
+
+    ```
+
+    Exactly the same can be obtained with
+
+
+    ```
+
+    image: dataintuitive/viash
+
+    registry: index.docker.io/v1/
+
+    tag: 0.4.0
+
+    ```
+
+    Specifying the attribute(s) like this will use the container `dataintuitive/viash:0.4.0`
+    from Docker hub (registry).
+
+
+    If no tag is specified Viash will use `functionality.version` as the tag.
+
+
+    If no registry is specified, Viash (and NextFlow) will assume the image is available
+    locally or on Docker Hub. In other words, the `registry: ...` attribute above
+    is superfluous. No other registry is checked automatically due to a limitation
+    from Docker itself.
+
+    '
+  name: image
+  title: Nextflow Legacy Platform
+  topic: platforms
+  type: Option of String
+- description: "When running the module in a cluster context and depending on the\
+    \ cluster type, [NextFlow allows for attaching labels](https://www.nextflow.io/docs/latest/process.html#label)\
+    \ to the process that can later be used as selectors for associating resources\
+    \ to this process.\n\nIn order to attach one label to a process/component, one\
+    \ can use the `label: ...` attribute, multiple labels can be added using `labels:\
+    \ [ ..., ... ]` and the two can even be mixed.\n\nIn the main `nextflow.config`,\
+    \ one can now use this label:\n\nprocess {\n  ...\n  withLabel: bigmem {\n   \
+    \  maxForks = 5\n     ...\n  }\n}\n"
+  example:
+  - example: 'label: highmem labels: [ highmem, highcpu ]'
+    format: yaml
+  name: label
+  title: Nextflow Legacy Platform
+  topic: platforms
+  type: Option of String
+- description: "When running the module in a cluster context and depending on the\
+    \ cluster type, [NextFlow allows for attaching labels](https://www.nextflow.io/docs/latest/process.html#label)\
+    \ to the process that can later be used as selectors for associating resources\
+    \ to this process.\n\nIn order to attach one label to a process/component, one\
+    \ can use the `label: ...` attribute, multiple labels can be added using `labels:\
+    \ [ ..., ... ]` and the two can even be mixed.\n\nIn the main `nextflow.config`,\
+    \ one can now use this label:\n\nprocess {\n  ...\n  withLabel: bigmem {\n   \
+    \  maxForks = 5\n     ...\n  }\n}\n"
+  example:
+  - example: 'label: highmem labels: [ highmem, highcpu ]'
+    format: yaml
+  name: labels
+  title: Nextflow Legacy Platform
+  topic: platforms
+  type: OneOrMore of String
+- description: The default namespace separator is "_".
+  example:
+  - example: 'namespace_separator: "+"'
+    format: yaml
+  name: namespace_separator
+  title: Nextflow Legacy Platform
+  topic: platforms
+  type: String
+- description: Name of a container's [organization](https://docs.docker.com/docker-hub/orgs/).
+  example:
+  - example: 'organization: viash-io'
+    format: yaml
+  name: organization
+  title: Nextflow Legacy Platform
+  topic: platforms
+  type: Option of String
+- description: 'When `publish: true`, this attribute defines where the output is written
+    relative to the `params.publishDir` setting. For example, `path: processed` in
+    combination with `--output s3://some_bucket/` will store the output of this component
+    under
+
+    ```
+
+    s3://some_bucket/processed/
+
+    ```
+
+    This attribute gives control over the directory structure of the output. For example:
+
+    ```
+
+    path: raw_data
+
+    ```
+
+    Or even:
+
+    ```
+
+    path: raw_data/bcl
+
+    ```
+
+    Please note that `per_id` and `path` can be combined.
+
+    '
+  name: path
+  title: Nextflow Legacy Platform
+  topic: platforms
+  type: Option of String
+- description: "By default, a subdirectory is created corresponding to the unique\
+    \ ID that is passed in the triplet. Let us illustrate this with an example. The\
+    \ following code snippet uses the value of `--input` as an input of a workflow.\
+    \ The input can include a wildcard so that multiple samples can run in parallel.\
+    \ We use the parent directory name (`.getParent().baseName`) as an identifier\
+    \ for the sample. We pass this as the first entry of the triplet:\n\n```\nChannel.fromPath(params.input)\
+    \ \\\n    | map{ it -> [ it.getParent().baseName , it ] } \\\n    | map{ it ->\
+    \ [ it[0] , it[1], params ] }\n    | ...\n```\nSay the resulting sample names\
+    \ are `SAMPLE1` and `SAMPLE2`. The next step in the pipeline will be published\
+    \ (at least by default) under:\n```\n<publishDir>/SAMPLE1/\n<publishDir>/SAMPLE2/\n\
+    ```\nThese per-ID subdirectories can be avoided by setting:\n```\nper_id: false\n\
+    ```\n"
+  name: per_id
+  title: Nextflow Legacy Platform
+  topic: platforms
+  type: Option of Boolean
+- description: "NextFlow uses the autogenerated `work` dirs to manage process IO under\
+    \ the hood. In order effectively output something one can publish the results\
+    \ a module or step in the pipeline. In order to do this, add `publish: true` to\
+    \ the config:\n\n - publish is optional\n - Default value is false\n\nThis attribute\
+    \ simply defines if output of a component should be published yes or no. The output\
+    \ location has to be provided at pipeline launch by means of the option `--publishDir\
+    \ ...` or as `params.publishDir` in `nextflow.config`:\n```\nparams.publishDir\
+    \ = \"...\"\n```\n"
+  name: publish
+  title: Nextflow Legacy Platform
+  topic: platforms
+  type: Option of Boolean
+- description: The URL to the a [custom Docker registry](https://docs.docker.com/registry/).
+  example:
+  - example: 'registry: https://my-docker-registry.org'
+    format: yaml
+  name: registry
+  title: Nextflow Legacy Platform
+  topic: platforms
+  type: Option of String
+- description: 'Separates the outputs generated by a Nextflow component with multiple
+    outputs as separate events on the channel. Default value: `true`.'
+  example:
+  - example: 'separate_multiple_outputs: false'
+    format: yaml
+  name: separate_multiple_outputs
+  title: Nextflow Legacy Platform
+  topic: platforms
+  type: Boolean
+- description: 'By default NextFlow will create a symbolic link to the inputs for
+    a process/module and run the tool at hand using those symbolic links. Some applications
+    do not cope well with this strategy, in that case the files should effectively
+    be copied rather than linked to. This can be achieved by using `stageInMode: copy`.
+
+    This attribute is optional, the default is `symlink`.
+
+    '
+  example:
+  - example: 'stageInMode: copy'
+    format: yaml
+  name: stageInMode
+  title: Nextflow Legacy Platform
+  topic: platforms
+  type: Option of String
+- description: Specify a Docker image based on its tag.
+  example:
+  - example: 'tag: 4.0'
+    format: yaml
+  name: tag
+  title: Nextflow Legacy Platform
+  topic: platforms
+  type: Option of String
+- description: Specifies the type of the platform.
+  name: type
+  title: Nextflow Legacy Platform
+  topic: platforms
+  type: String
+- deprecated:
+    deprecation: 0.4.0
+    message: 'nextflow platform: attribute ''version'' is deprecated and should be
+      left empty.'
+    removal: 0.7.0
+  name: version
+  title: Nextflow Legacy Platform
+  topic: platforms
+  type: Option of String
+pageTitle: Nextflow Legacy Platform

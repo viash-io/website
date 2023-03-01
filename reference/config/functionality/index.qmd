@@ -1,5 +1,5 @@
 ---
-title: Functionality
+title: "Functionality"
 search: true
 execute:
   echo: false
@@ -15,7 +15,7 @@ By specifying a few restrictions (e.g. mandatory arguments) and adding some desc
 **Type**: `Boolean`
 
 ::: {.callout-warning}
-Removed since Viash 0.5.11. Extending the PATH turned out to be not desirable.
+Removed since 0.5.11. Extending the PATH turned out to be not desirable.
 :::
 Adds the resources directory to the PATH variable when set to true. This is set to false by default.
 
@@ -82,13 +82,13 @@ component_name
 
 A list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:  
 
- - [string](/reference/config/arguments/string.html)
- - [file](/reference/config/arguments/file.html)
- - [integer](/reference/config/arguments/integer.html)
- - [double](/reference/config/arguments/double.html)
- - [boolean](/reference/config/arguments/boolean.html)
- - [boolean_true](/reference/config/arguments/boolean_true.html)
- - [boolean_false](/reference/config/arguments/boolean_false.html)
+ - [string](/reference/config/functionality/arguments/string.html)
+ - [file](/reference/config/functionality/arguments/file.html)
+ - [integer](/reference/config/functionality/arguments/integer.html)
+ - [double](/reference/config/functionality/arguments/double.html)
+ - [boolean](/reference/config/functionality/arguments/boolean.html)
+ - [boolean_true](/reference/config/functionality/arguments/boolean_true.html)
+ - [boolean_false](/reference/config/functionality/arguments/boolean_false.html)
 
 
 **Example:**
@@ -163,7 +163,7 @@ description: |
 **Type**: `Boolean`
 
 ::: {.callout-warning}
-Deprecated since Viash 0.6.0. Use `status` instead.
+Deprecated since 0.6.0. Planned removal at 0.8.0. Use `status` instead.
 :::
 Setting this to false with disable this component when using namespaces.
 
@@ -186,7 +186,7 @@ info:
 **Type**: `List of Argument`
 
 ::: {.callout-warning}
-Deprecated since Viash 0.6.0. Use `arguments` instead.
+Deprecated since 0.6.0. Planned removal at 0.8.0. Use `arguments` instead.
 :::
 A list of input arguments in addition to the `arguments` list. Any arguments specified here will have their `type` set to `file` and the `direction` set to `input` by default.
 
@@ -240,7 +240,7 @@ namespace: fancy_components
 **Type**: `List of Argument`
 
 ::: {.callout-warning}
-Deprecated since Viash 0.6.0. Use `arguments` instead.
+Deprecated since 0.6.0. Planned removal at 0.8.0. Use `arguments` instead.
 :::
 A list of output arguments in addition to the `arguments` list. Any arguments specified here will have their `type` set to `file` and thr `direction` set to `output` by default.
 
@@ -287,7 +287,7 @@ requirements:
 
 **Type**: `List of Resource`
 
-[Resources](#) are files that support the component. The first resource should be [a script](/guide/component/languages.html) that will be executed when the functionality is run. Additional resources will be copied to the same directory.
+[Resources](None) are files that support the component. The first resource should be [a script](/guide/component/languages.html) that will be executed when the functionality is run. Additional resources will be copied to the same directory.
 
 Common properties:
 
@@ -338,7 +338,7 @@ test_resources:
 **Type**: `List of Resource`
 
 ::: {.callout-warning}
-Deprecated since Viash 0.5.13. Use `test_resources` instead. No functional difference.
+Deprecated since 0.5.13. Planned removal at 0.7.0. Use `test_resources` instead. No functional difference.
 :::
 One or more Bash/R/Python scripts to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.
 

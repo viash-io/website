@@ -1,5 +1,5 @@
 ---
-title: Docker Platform
+title: "Docker Platform"
 search: true
 execute:
   echo: false
@@ -15,7 +15,7 @@ By specifying which dependencies your component needs, users will be able to bui
 **Type**: `ApkRequirements`
 
 ::: {.callout-warning}
-Deprecated since Viash 0.5.15. Use `setup` instead.
+Deprecated since 0.5.15. Planned removal at 0.7.0. Use `setup` instead, e.g. `{type: docker, setup: [{ type: apk, ... }]}`. Will be removed.
 :::
 Specify which apk packages should be available in order to run the component.
 
@@ -33,7 +33,7 @@ setup:
 **Type**: `AptRequirements`
 
 ::: {.callout-warning}
-Deprecated since Viash 0.5.15. Use `setup` instead.
+Deprecated since 0.5.15. Planned removal at 0.7.0. Use `setup` instead, e.g. `{type: docker, setup: [{ type: apt, ... }]}`. Will be removed.
 :::
 Specify which apt packages should be available in order to run the component.
 
@@ -63,7 +63,7 @@ chown: false
 **Type**: `DockerRequirements`
 
 ::: {.callout-warning}
-Deprecated since Viash 0.5.15. Use `setup` instead.
+Deprecated since 0.5.15. Planned removal at 0.7.0. Use `setup` instead, e.g. `{type: docker, setup: [{ type: docker, ... }]}`. Will be removed.
 :::
 Specify which Docker commands should be run during setup.
 
@@ -143,7 +143,7 @@ port:
 **Type**: `Boolean`
 
 ::: {.callout-warning}
-Deprecated since Viash 0.6.3. Add a `privileged` flag in `run_args` instead.
+Deprecated since 0.6.3. Planned removal at 0.8.0. Add a `privileged` flag in `run_args` instead, e.g. `{type: docker, run_args: "--privileged"}`.
 :::
 Adds a `privileged` flag to the docker run.
 
@@ -152,7 +152,7 @@ Adds a `privileged` flag to the docker run.
 **Type**: `PythonRequirements`
 
 ::: {.callout-warning}
-Deprecated since Viash 0.5.15. Use `setup` instead.
+Deprecated since 0.5.15. Planned removal at 0.7.0. Use `setup` instead, e.g. `{type: docker, setup: [{ type: python, ... }]}`. Will be removed.
 :::
 Specify which Python packages should be available in order to run the component.
 
@@ -177,7 +177,7 @@ setup:
 **Type**: `RRequirements`
 
 ::: {.callout-warning}
-Deprecated since Viash 0.5.15. Use `setup` instead.
+Deprecated since 0.5.15. Planned removal at 0.7.0. Use `setup` instead, e.g. `{type: docker, setup: [{ type: r, ... }]}`. Will be removed.
 :::
 Specify which R packages should be available in order to run the component.
 
@@ -227,14 +227,14 @@ Add [docker run](https://docs.docker.com/engine/reference/run/) arguments.
 
 A list of requirements for installing the following types of packages:
 
- - [apt](/reference/config/requirements.html#apt-requirements)
- - [apk](/reference/config/requirements.html#apk-requirements)
- - [Docker setup instructions](/reference/config/requirements.html#docker-requirements)
- - [JavaScript](/reference/config/requirements.html#javascript-requirements)
- - [Python](/reference/config/requirements.html#python-requirements)
- - [R](/reference/config/requirements.html#r-requirements)
- - [Ruby](/reference/config/requirements.html#ruby-requirements)
- - [yum](/reference/config/requirements.html#yum-requirements)
+ - [apt](/reference/config/platforms/docker/setup/#apt-requirements)
+ - [apk](/reference/config/platforms/docker/setup/#apk-requirements)
+ - [Docker setup instructions](/reference/config/platforms/docker/setup/#docker-requirements)
+ - [JavaScript](/reference/config/platforms/docker/setup/#javascript-requirements)
+ - [Python](/reference/config/platforms/docker/setup/#python-requirements)
+ - [R](/reference/config/platforms/docker/setup/#r-requirements)
+ - [Ruby](/reference/config/platforms/docker/setup/#ruby-requirements)
+ - [yum](/reference/config/platforms/docker/setup/#yum-requirements)
 
 The order in which these dependencies are specified determines the order in which they will be installed.
 
@@ -251,14 +251,14 @@ The Docker setup strategy to use when building a container.
 | `alwayscachedbuild` / `cachedbuild` / `cb` | Always build the image from the dockerfile, with caching enabled.
 | `ifneedbebuild` |  Build the image if it does not exist locally.
 | `ifneedbecachedbuild` | Build the image with caching enabled if it does not exist locally, with caching enabled.
-| `alwayspull` / `pull` / `p` |  Try to pull the container from [Docker Hub](https://hub.docker.com) or the [specified docker registry](/reference/config/platforms/DockerPlatform.html#registry).
+| `alwayspull` / `pull` / `p` |  Try to pull the container from [Docker Hub](https://hub.docker.com) or the [specified docker registry](/reference/config/platforms/docker/#registry).
 | `alwayspullelsebuild` / `pullelsebuild` |  Try to pull the image from a registry and build it if it doesn't exist.
 | `alwayspullelsecachedbuild` / `pullelsecachedbuild` |  Try to pull the image from a registry and build it with caching if it doesn't exist.
 | `ifneedbepull` |  If the image does not exist locally, pull the image.
 | `ifneedbepullelsebuild` |  If the image does not exist locally, pull the image. If the image does exist, build it.
 | `ifneedbepullelsecachedbuild` | If the image does not exist locally, pull the image. If the image does exist, build it with caching enabled.
-| `push` | Push the container to [Docker Hub](https://hub.docker.com)  or the [specified docker registry](/reference/config/platforms/DockerPlatform.html#registry).
-| `pushifnotpresent` | Push the container to [Docker Hub](https://hub.docker.com) or the [specified docker registry](/reference/config/platforms/DockerPlatform.html#registry) if the [tag](/reference/config/platforms/DockerPlatform.html#tag) does not exist yet.
+| `push` | Push the container to [Docker Hub](https://hub.docker.com)  or the [specified docker registry](/reference/config/platforms/docker/#registry).
+| `pushifnotpresent` | Push the container to [Docker Hub](https://hub.docker.com) or the [specified docker registry](/reference/config/platforms/docker/#registry) if the [tag](/reference/config/platforms/docker/#tag) does not exist yet.
 | `donothing` / `meh` | Do not build or pull anything.
 
 
@@ -370,7 +370,7 @@ workdir: /home/user
 **Type**: `YumRequirements`
 
 ::: {.callout-warning}
-Deprecated since Viash 0.5.15. Use `setup` instead.
+Deprecated since 0.5.15. Planned removal at 0.7.0. Use `setup` instead, e.g. `{type: docker, setup: [{ type: yum, ... }]}`. Will be removed.
 :::
 Specify which yum packages should be available in order to run the component.
 

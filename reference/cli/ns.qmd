@@ -12,11 +12,11 @@ Build a namespace from many viash config files.
 
 **Usage:**
 
-`viash ns build [-n nmspc] [-s src] [-t target] [-p docker] [--setup] [---push] [--parallel] [--flatten]`
+`viash ns build [-n nmspc] [-s src] [-t target] [-p docker] [--setup] [--push] [--parallel] [--flatten]`
 
 | Argument | Description | Type |
 |-|:----|-:
-| `--config_mod`, `-c` | Modify a viash config at runtime using [dynamic config modding](/reference/config/config-modding.html). | `List[String]` |
+| `--config_mod`, `-c` | Modify a viash config at runtime using [dynamic config modding](/reference/config/config_mods/#). | `List[String]` |
 | `--flatten`, `-f` | Flatten the target builds, handy for building one platform to a bin directory. | `Boolean` |
 | `--parallel`, `-l` | Whether or not to run the process in parallel. | `Boolean` |
 | `--platform`, `-p` | Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified. | `String` |
@@ -27,7 +27,6 @@ Build a namespace from many viash config files.
 | `--setup` | Which [setup strategy](/guide/building-block/docker/setup-strategies.html) for creating the container to use [Docker Platform only]. | `String` |
 | `--src`, `-s` |  A source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/. | `String` |
 | `--target`, `-t` | A target directory to build the executables into. Default: target/. | `String` |
-| `--write_meta`, `-w` | Write out some meta information to RESOURCES_DIR/viash.yaml at the end. | `Boolean` |
 | `--help`, `-h` | Show help message |  |
 
 
@@ -42,7 +41,7 @@ Test a namespace containing many viash config files.
 | Argument | Description | Type |
 |-|:----|-:
 | `--append`, `-a` | Append to tsv instead of overwrite | `Boolean` |
-| `--config_mod`, `-c` | Modify a viash config at runtime using [dynamic config modding](/reference/config/config-modding.html). | `List[String]` |
+| `--config_mod`, `-c` | Modify a viash config at runtime using [dynamic config modding](/reference/config/config_mods/#). | `List[String]` |
 | `--cpus` | The maximum number of (logical) cpus a component is allowed to use. | `Int` |
 | `--keep`, `-k` | Whether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying --keep true, the temporary files will always be retained, whereas --keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory. | `String` |
 | `--memory` | The maximum amount of memory a component is allowed to allocate. Unit must be one of B, KB, MB, GB, TB or PB. | `String` |
@@ -66,10 +65,10 @@ List a namespace containing many viash config files.
 
 | Argument | Description | Type |
 |-|:----|-:
-| `--config_mod`, `-c` | Modify a viash config at runtime using [dynamic config modding](/reference/config/config-modding.html). | `List[String]` |
+| `--config_mod`, `-c` | Modify a viash config at runtime using [dynamic config modding](/reference/config/config_mods/#). | `List[String]` |
 | `--format`, `-f` | Which output format to use. | `String` |
 | `--parallel`, `-l` | Whether or not to run the process in parallel. | `Boolean` |
-| `--parse_argument_groups` | Whether or not to postprocess each component's [argument groups](/reference/config/functionality.html#argument_groups). | `Boolean` |
+| `--parse_argument_groups` | Whether or not to postprocess each component's [argument groups](/reference/config/functionality/#argument_groups). | `Boolean` |
 | `--platform`, `-p` | Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified. | `String` |
 | `--query`, `-q` | Filter which components get selected by component and [namespace](/guide/component/namespaces.html) name. Can be a regex. Example: "^mynamespace/component1\$". | `String` |
 | `--query_name` | Filter which components get selected by component name. Can be a regex. Example: "^component1". | `String` |
@@ -111,7 +110,7 @@ command for all Viash components.
 Note that this results in the provided command being applied once for every platform
 that matches the --platform regex. | `Boolean` |
 | `--cmd` | The command to execute for each viash config file in the namespace. **This is a required argument.** | `String` |
-| `--config_mod`, `-c` | Modify a viash config at runtime using [dynamic config modding](/reference/config/config-modding.html). | `List[String]` |
+| `--config_mod`, `-c` | Modify a viash config at runtime using [dynamic config modding](/reference/config/config_mods/#). | `List[String]` |
 | `--dry_run`, `-d` | Perform a dry run. | `Boolean` |
 | `--parallel`, `-l` | Whether or not to run the process in parallel. | `Boolean` |
 | `--platform`, `-p` | Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified. | `String` |

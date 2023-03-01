@@ -1,0 +1,261 @@
+data:
+- description: 'The functionality-part of the config file describes the behaviour
+    of the script in terms of arguments and resources.
+
+    By specifying a few restrictions (e.g. mandatory arguments) and adding some descriptions,
+    Viash will automatically generate a stylish command-line interface for you.
+
+    '
+  hierarchy:
+  - io.viash.functionality.Functionality
+  name: __this__
+  title: Functionality
+  topic: functionality
+  type: Functionality
+- description: Adds the resources directory to the PATH variable when set to true.
+    This is set to false by default.
+  name: add_resources_to_path
+  removed:
+    deprecation: ''
+    message: Extending the PATH turned out to be not desirable.
+    removal: 0.5.11
+  since: Viash 0.5.5
+  title: Functionality
+  topic: functionality
+  type: Boolean
+- description: "A grouping of the arguments, used to display the help message.\n\n\
+    \ - `name: foo`, the name of the argument group. \n - `description: Description\
+    \ of foo`, a description of the argument group. Multiline descriptions are supported.\n\
+    \ - `arguments: [arg1, arg2, ...]`, list of the arguments names.\n\n"
+  example:
+  - example: "argument_groups:\n  - name: \"Input\"\n    arguments:\n      - name:\
+      \ \"--id\"\n        type: string\n        required: true\n      - name: \"--input\"\
+      \n        type: file\n        required: true\n  - name: \"Output\"\n    arguments:\n\
+      \      - name: \"--output\"\n        type: file\n        direction: output\n\
+      \        required: true\n      - name: \"--output_optional\"\n        type:\
+      \ file\n        direction: output\n"
+    format: yaml
+  - description: 'This results in the following output when calling the component
+      with the `--help` argument:'
+    example: "component_name\n\n  Input:\n      --id\n          type: string\n\n \
+      \     --input\n          type: file\n\n  Output:\n      --output\n         \
+      \ type: file\n\n      --optional_output\n          type: file\n"
+    format: bash
+  name: argument_groups
+  since: Viash 0.5.14
+  title: Functionality
+  topic: functionality
+  type: List of ArgumentGroup
+- description: "A list of arguments for this component. For each argument, a type\
+    \ and a name must be specified. Depending on the type of argument, different properties\
+    \ can be set. See these reference pages per type for more information:  \n\n -\
+    \ [string](/reference/config/functionality/arguments/string.html)\n - [file](/reference/config/functionality/arguments/file.html)\n\
+    \ - [integer](/reference/config/functionality/arguments/integer.html)\n - [double](/reference/config/functionality/arguments/double.html)\n\
+    \ - [boolean](/reference/config/functionality/arguments/boolean.html)\n - [boolean_true](/reference/config/functionality/arguments/boolean_true.html)\n\
+    \ - [boolean_false](/reference/config/functionality/arguments/boolean_false.html)\n"
+  example:
+  - example: "arguments:\n   - name: --foo\n    type: file\n    alternatives: [-f]\n\
+      \    description: Description of foo\n    default: \"/foo/bar\"\n    must_exist:\
+      \ true\n    direction: output\n    required: false\n    multiple: true\n   \
+      \ multiple_sep: \",\"\n   - name: --bar\n    type: string\n"
+    format: yaml
+  name: arguments
+  title: Functionality
+  topic: functionality
+  type: List of Argument
+- description: "A list of authors. An author must at least have a name, but can also\
+    \ have a list of roles, an e-mail address, and a map of custom properties.\n\n\
+    Suggested values for roles are:\n \n| Role | Abbrev. | Description |\n|------|---------|-------------|\n\
+    | maintainer | mnt | for the maintainer of the code. Ideally, exactly one maintainer\
+    \ is specified. |\n| author | aut | for persons who have made substantial contributions\
+    \ to the software. |\n| contributor | ctb| for persons who have made smaller contributions\
+    \ (such as code patches).\n| datacontributor | dtc | for persons or organisations\
+    \ that contributed data sets for the software\n| copyrightholder | cph | for all\
+    \ copyright holders. This is a legal concept so should use the legal name of an\
+    \ institution or corporate body.\n| funder | fnd | for persons or organizations\
+    \ that furnished financial support for the development of the software\n\nThe\
+    \ [full list of roles](https://www.loc.gov/marc/relators/relaterm.html) is extremely\
+    \ comprehensive.\n"
+  example:
+  - example: "authors:\n  - name: Bob Cando\n    roles: [maintainer, author]\n   \
+      \ email: bob@can.do\n    props: {github: bobcando, orcid: 0000-0001-0002-0003}\n\
+      \  - name: Tim Farbe\n    roles: [author]\n    email: tim@far.be"
+    format: yaml
+  name: authors
+  since: Viash 0.3.1
+  title: Functionality
+  topic: functionality
+  type: List of Author
+- description: A description of the component. This will be displayed with `--help`.
+  example:
+  - example: "description: |\n  This component performs function Y and Z.\n  It is\
+      \ possible to make this a multiline string.\n"
+    format: yaml
+  name: description
+  title: Functionality
+  topic: functionality
+  type: Option of String
+- deprecated:
+    deprecation: 0.6.0
+    message: Use `status` instead.
+    removal: 0.8.0
+  description: Setting this to false with disable this component when using namespaces.
+  name: enabled
+  since: Viash 0.5.13
+  title: Functionality
+  topic: functionality
+  type: Boolean
+- description: 'Structured information. Can be any shape: a string, vector, map or
+    even nested map.'
+  example:
+  - example: "info:\n  twitter: wizzkid\n  classes: [ one, two, three ]"
+    format: yaml
+  name: info
+  since: Viash 0.4.0
+  title: Functionality
+  topic: functionality
+  type: Json
+- deprecated:
+    deprecation: 0.6.0
+    message: Use `arguments` instead.
+    removal: 0.8.0
+  description: A list of input arguments in addition to the `arguments` list. Any
+    arguments specified here will have their `type` set to `file` and the `direction`
+    set to `input` by default.
+  example:
+  - example: "inputs:\n  - name: input_file\n  - name: another_input"
+    format: yaml
+  - description: 'This results in the following output when calling the component
+      with the `--help` argument:'
+    example: "component_with_inputs\n  \n  Inputs:\n      input_file\n          type:\
+      \ file\n  \n      another_input\n          type: file"
+    format: bash
+  name: inputs
+  since: Viash 0.5.11
+  title: Functionality
+  topic: functionality
+  type: List of Argument
+- description: Name of the component and the filename of the executable when built
+    with `viash build`.
+  example:
+  - example: 'name: this_is_my_component'
+    format: yaml
+  name: name
+  title: Functionality
+  topic: functionality
+  type: String
+- description: Namespace this component is a part of. See the [Namespaces guide](/guide/component/namespaces.html)
+    for more information on namespaces.
+  example:
+  - example: 'namespace: fancy_components'
+    format: yaml
+  name: namespace
+  title: Functionality
+  topic: functionality
+  type: Option of String
+- deprecated:
+    deprecation: 0.6.0
+    message: Use `arguments` instead.
+    removal: 0.8.0
+  description: A list of output arguments in addition to the `arguments` list. Any
+    arguments specified here will have their `type` set to `file` and thr `direction`
+    set to `output` by default.
+  example:
+  - example: "outputs:\n  - name: output_file\n  - name: another_output"
+    format: yaml
+  - description: 'This results in the following output when calling the component
+      with the `--help` argument:'
+    example: "component_with_outputs\n  \n  Outputs:\n      output_file\n        \
+      \  type: file, output\n  \n      another_output\n          type: file, output"
+    format: bash
+  name: outputs
+  since: Viash 0.5.11
+  title: Functionality
+  topic: functionality
+  type: List of Argument
+- description: "Computational requirements related to running the component. \n`cpus`\
+    \ specifies the maximum number of (logical) cpus a component is allowed to use.,\
+    \ whereas\n`memory` specifies the maximum amount of memory a component is allowed\
+    \ to allicate. Memory units must be\nin B, KB, MB, GB, TB or PB."
+  example:
+  - example: "requirements:\n  cpus: 5\n  memory: 10GB\n"
+    format: yaml
+  name: requirements
+  since: Viash 0.6.0
+  title: Functionality
+  topic: functionality
+  type: ComputationalRequirements
+- description: "[Resources](None) are files that support the component. The first\
+    \ resource should be [a script](/guide/component/languages.html) that will be\
+    \ executed when the functionality is run. Additional resources will be copied\
+    \ to the same directory.\n\nCommon properties:\n\n * type: `file` / `r_script`\
+    \ / `python_script` / `bash_script` / `javascript_script` / `scala_script` / `csharp_script`,\
+    \ the type of resource. The first resource cannot be of type `file`. When the\
+    \ type is not specified, the default type is simply `file`.\n * name: filename,\
+    \ the resulting name of the resource.\n * path: `path/to/file`, the path of the\
+    \ input file. Can be a relative or an absolute path, or a URI.\n * text: ...multiline\
+    \ text..., the raw content of the input file. Exactly one of path or text must\
+    \ be defined, the other undefined.\n * is_executable: `true` / `false`, whether\
+    \ the resulting file is made executable.\n"
+  example:
+  - example: "resources:\n  - type: r_script\n    path: script.R\n  - type: file\n\
+      \    path: resource1.txt\n"
+    format: yaml
+  name: resources
+  title: Functionality
+  topic: functionality
+  type: List of Resource
+- description: Allows setting a component to active, deprecated or disabled.
+  name: status
+  since: Viash 0.6.0
+  title: Functionality
+  topic: functionality
+  type: Status
+- description: One or more [scripts](no-link) to be used to test the component behaviour
+    when `viash test` is invoked. Additional files of type `file` will be made available
+    only during testing. Each test script should expect no command-line inputs, be
+    platform-independent, and return an exit code >0 when unexpected behaviour occurs
+    during testing. See [Unit Testing](/guide/component/unit-testing.html) for more
+    info.
+  example:
+  - example: "test_resources:\n  - type: bash_script\n    path: tests/test1.sh\n \
+      \ - type: r_script\n    path: tests/test2.R\n  - path: resource1.txt\n"
+    format: yaml
+  name: test_resources
+  title: Functionality
+  topic: functionality
+  type: List of Resource
+- deprecated:
+    deprecation: 0.5.13
+    message: Use `test_resources` instead. No functional difference.
+    removal: 0.7.0
+  description: One or more Bash/R/Python scripts to be used to test the component
+    behaviour when `viash test` is invoked. Additional files of type `file` will be
+    made available only during testing. Each test script should expect no command-line
+    inputs, be platform-independent, and return an exit code >0 when unexpected behaviour
+    occurs during testing.
+  name: tests
+  title: Functionality
+  topic: functionality
+  type: List of Resource
+- description: A description on how to use the component. This will be displayed with
+    `--help` under the 'Usage:' section.
+  example:
+  - example: 'usage: Place the executable in a directory containing TSV files and
+      run it'
+    format: yaml
+  name: usage
+  title: Functionality
+  topic: functionality
+  type: Option of String
+- description: Version of the component. This field will be used to version the executable
+    and the Docker container.
+  example:
+  - example: 'version: 0.8'
+    format: yaml
+  name: version
+  title: Functionality
+  topic: functionality
+  type: Option of String
+pageTitle: Functionality
+title_is_name: false

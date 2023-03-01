@@ -1,0 +1,478 @@
+data:
+- description: Specify which apk packages should be available in order to run the
+    component.
+  example:
+  - example: "setup:\n  - type: apk\n    packages: [ sl ]\n"
+    format: yaml
+  hierarchy:
+  - io.viash.platforms.requirements.ApkRequirements
+  - io.viash.platforms.requirements.Requirements
+  name: __this__
+  title: Apk Requirements
+  topic: requirements
+  type: ApkRequirements
+- description: Specifies which packages to install.
+  example:
+  - example: 'packages: [ sl ]'
+    format: yaml
+  name: packages
+  title: Apk Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies the type of the requirement specification.
+  name: type
+  title: Apk Requirements
+  topic: requirements
+  type: String
+- description: Specify which apt packages should be available in order to run the
+    component.
+  example:
+  - example: "setup:\n  - type: apt\n    packages: [ sl ]\n"
+    format: yaml
+  hierarchy:
+  - io.viash.platforms.requirements.AptRequirements
+  - io.viash.platforms.requirements.Requirements
+  name: __this__
+  title: Apt Requirements
+  topic: requirements
+  type: AptRequirements
+- description: 'If `false`, the Debian frontend is set to non-interactive (recommended).
+    Default: false.'
+  name: interactive
+  title: Apt Requirements
+  topic: requirements
+  type: Boolean
+- description: Specifies which packages to install.
+  example:
+  - example: 'packages: [ sl ]'
+    format: yaml
+  name: packages
+  title: Apt Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies the type of the requirement specification.
+  name: type
+  title: Apt Requirements
+  topic: requirements
+  type: String
+- description: Specify which Docker commands should be run during setup.
+  example:
+  - example: "setup:\n  - type: docker\n    build_args: \"R_VERSION=hello_world\"\n\
+      \    run: |\n      echo 'Run a custom command'\n      echo 'Foo' > /path/to/file.txt"
+    format: yaml
+  hierarchy:
+  - io.viash.platforms.requirements.DockerRequirements
+  - io.viash.platforms.requirements.Requirements
+  name: __this__
+  title: Docker Requirements
+  topic: requirements
+  type: DockerRequirements
+- description: Specifies which `ADD` entries to add to the Dockerfile while building
+    it.
+  example:
+  - example: 'add: [ "http://foo/bar ." ]'
+    format: yaml
+  name: add
+  title: Docker Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which `ARG` entries to add to the Dockerfile while building
+    it.
+  example:
+  - example: 'build_args: [ "R_VERSION=4.2" ]'
+    format: yaml
+  name: build_args
+  title: Docker Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which `COPY` entries to add to the Dockerfile while building
+    it.
+  example:
+  - example: 'copy: [ "resource.txt /path/to/resource.txt" ]'
+    format: yaml
+  name: copy
+  title: Docker Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which `ENV` entries to add to the Dockerfile while building
+    it. Unlike `ARG`, `ENV` entries are also accessible from inside the container.
+  example:
+  - example: 'env: [ "R_VERSION=4.2" ]'
+    format: yaml
+  name: env
+  title: Docker Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which `LABEL` entries to add to the Dockerfile while building
+    it.
+  example:
+  - example: 'label: [ component="foo" ]'
+    format: yaml
+  name: label
+  title: Docker Requirements
+  topic: requirements
+  type: OneOrMore of String
+- deprecated:
+    deprecation: 0.6.3
+    message: '`resources` in `setup: {type: docker, resources: ...}` will be removed.
+      Please use `copy` instead.'
+    removal: 0.7.0
+  description: Specifies which `COPY` entries to add to the Dockerfile while building
+    it.
+  example:
+  - example: 'resources: [ "resource.txt /path/to/resource.txt" ]'
+    format: yaml
+  name: resources
+  title: Docker Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which `RUN` entries to add to the Dockerfile while building
+    it.
+  example:
+  - example: "run: |\n  echo 'Run a custom command'\n  echo 'Foo' > /path/to/file.txt"
+    format: yaml
+  name: run
+  title: Docker Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies the type of the requirement specification.
+  name: type
+  title: Docker Requirements
+  topic: requirements
+  type: String
+- description: Specify which JavaScript packages should be available in order to run
+    the component.
+  example:
+  - example: "setup:\n  - type: javascript\n    npm: packagename\n    git: \"https://some.git.repository/org/repo\"\
+      \n    github: \"owner/repository\"\n    url: \"https://github.com/org/repo/archive/HEAD.zip\"\
+      \n"
+    format: yaml
+  hierarchy:
+  - io.viash.platforms.requirements.JavaScriptRequirements
+  - io.viash.platforms.requirements.Requirements
+  name: __this__
+  title: Javascript Requirements
+  topic: requirements
+  type: JavaScriptRequirements
+- description: Specifies which packages to install using a Git URI.
+  example:
+  - example: 'git: [ https://some.git.repository/org/repo ]'
+    format: yaml
+  name: git
+  title: Javascript Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which packages to install from GitHub.
+  example:
+  - example: 'github: [ owner/repository ]'
+    format: yaml
+  name: github
+  title: Javascript Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which packages to install from npm.
+  example:
+  - example: 'npm: [ packagename ]'
+    format: yaml
+  name: npm
+  title: Javascript Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which packages to install from npm.
+  example:
+  - example: 'packages: [ packagename ]'
+    format: yaml
+  name: packages
+  title: Javascript Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies the type of the requirement specification.
+  name: type
+  title: Javascript Requirements
+  topic: requirements
+  type: String
+- description: Specifies which packages to install using a generic URI.
+  example:
+  - example: 'url: [ https://github.com/org/repo/archive/HEAD.zip ]'
+    format: yaml
+  name: url
+  title: Javascript Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specify which Python packages should be available in order to run the
+    component.
+  example:
+  - example: "setup:\n  - type: python\n    pip: numpy\n    github: [ jkbr/httpie,\
+      \ foo/bar ]\n    url: \"https://github.com/some_org/some_pkg/zipball/master\"\
+      \n"
+    format: yaml
+  hierarchy:
+  - io.viash.platforms.requirements.PythonRequirements
+  - io.viash.platforms.requirements.Requirements
+  name: __this__
+  title: Python Requirements
+  topic: requirements
+  type: PythonRequirements
+- description: Specifies which packages to install using a Bazaar URI.
+  example:
+  - example: 'bazaar: [ http://bazaar.launchpad.net/some_pkg/some_pkg/release-0.1
+      ]'
+    format: yaml
+  name: bazaar
+  title: Python Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which packages to install using a Git URI.
+  example:
+  - example: 'git: [ https://some.git.repository/org/repo ]'
+    format: yaml
+  name: git
+  title: Python Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which packages to install from GitHub.
+  example:
+  - example: 'github: [ jkbr/httpie ]'
+    format: yaml
+  name: github
+  title: Python Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which packages to install from GitLab.
+  example:
+  - example: 'gitlab: [ foo/bar ]'
+    format: yaml
+  name: gitlab
+  title: Python Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which packages to install using a Mercurial URI.
+  example:
+  - example: 'mercurial: [ https://hg.myproject.org/MyProject/#egg=MyProject ]'
+    format: yaml
+  name: mercurial
+  title: Python Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which packages to install from pip.
+  example:
+  - example: 'packages: [ numpy ]'
+    format: yaml
+  name: packages
+  title: Python Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which packages to install from pip.
+  example:
+  - example: 'pip: [ numpy ]'
+    format: yaml
+  name: pip
+  title: Python Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which packages to install from PyPI using pip.
+  example:
+  - example: 'pypi: [ numpy ]'
+    format: yaml
+  name: pypi
+  title: Python Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies a code block to run as part of the build.
+  example:
+  - example: "script: |\n  print(\"Running custom code\")\n  x = 1 + 1 == 2"
+    format: yaml
+  name: script
+  title: Python Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which packages to install using an SVN URI.
+  example:
+  - example: 'svn: [ http://svn.repo/some_pkg/trunk/#egg=SomePackage ]'
+    format: yaml
+  name: svn
+  title: Python Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies the type of the requirement specification.
+  name: type
+  title: Python Requirements
+  topic: requirements
+  type: String
+- description: 'Sets the `--upgrade` flag when set to true. Default: true.'
+  name: upgrade
+  title: Python Requirements
+  topic: requirements
+  type: Boolean
+- description: Specifies which packages to install using a generic URI.
+  example:
+  - example: 'url: [ https://github.com/some_org/some_pkg/zipball/master ]'
+    format: yaml
+  name: url
+  title: Python Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: 'Sets the `--user` flag when set to true. Default: false.'
+  name: user
+  title: Python Requirements
+  topic: requirements
+  type: Boolean
+- description: Specify which R packages should be available in order to run the component.
+  example:
+  - example: "setup: \n  - type: r\n    cran: anndata\n    bioc: [ AnnotationDbi,\
+      \ SingleCellExperiment ]\n    github: rcannood/SCORPIUS\n"
+    format: yaml
+  hierarchy:
+  - io.viash.platforms.requirements.RRequirements
+  - io.viash.platforms.requirements.Requirements
+  name: __this__
+  title: R Requirements
+  topic: requirements
+  type: RRequirements
+- description: Specifies which packages to install from BioConductor.
+  example:
+  - example: 'bioc: [ AnnotationDbi ]'
+    format: yaml
+  name: bioc
+  title: R Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: 'Forces packages specified in `bioc` to be reinstalled, even if they
+    are already present in the container. Default: false.'
+  example:
+  - example: 'bioc_force_install: false'
+    format: yaml
+  name: bioc_force_install
+  title: R Requirements
+  topic: requirements
+  type: Boolean
+- description: Specifies which packages to install from Bitbucket.
+  example:
+  - example: 'bitbucket: [ org/package ]'
+    format: yaml
+  name: bitbucket
+  title: R Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which packages to install from CRAN.
+  example:
+  - example: 'cran: [ anndata, ggplot2 ]'
+    format: yaml
+  name: cran
+  title: R Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which packages to install using a Git URI.
+  example:
+  - example: 'git: [ https://some.git.repository/org/repo ]'
+    format: yaml
+  name: git
+  title: R Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which packages to install from GitHub.
+  example:
+  - example: 'github: [ rcannood/SCORPIUS ]'
+    format: yaml
+  name: github
+  title: R Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which packages to install from GitLab.
+  example:
+  - example: 'gitlab: [ org/package ]'
+    format: yaml
+  name: gitlab
+  title: R Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which packages to install from CRAN.
+  example:
+  - example: 'packages: [ anndata, ggplot2 ]'
+    format: yaml
+  name: packages
+  title: R Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies a code block to run as part of the build.
+  example:
+  - example: "script: |\n  cat(\"Running custom code\n\")\n  install.packages(\"anndata\"\
+      )"
+    format: yaml
+  name: script
+  title: R Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies which packages to install using an SVN URI.
+  example:
+  - example: 'svn: [ https://path.to.svn/group/repo ]'
+    format: yaml
+  name: svn
+  title: R Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies the type of the requirement specification.
+  name: type
+  title: R Requirements
+  topic: requirements
+  type: String
+- description: Specifies which packages to install using a generic URI.
+  example:
+  - example: 'url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]'
+    format: yaml
+  name: url
+  title: R Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specify which Ruby packages should be available in order to run the
+    component.
+  example:
+  - example: "setup:\n  - type: ruby\n    packages: [ rspec ]\n"
+    format: yaml
+  hierarchy:
+  - io.viash.platforms.requirements.RubyRequirements
+  - io.viash.platforms.requirements.Requirements
+  name: __this__
+  title: Ruby Requirements
+  topic: requirements
+  type: RubyRequirements
+- description: Specifies which packages to install.
+  example:
+  - example: 'packages: [ rspec ]'
+    format: yaml
+  name: packages
+  title: Ruby Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies the type of the requirement specification.
+  name: type
+  title: Ruby Requirements
+  topic: requirements
+  type: String
+- description: Specify which yum packages should be available in order to run the
+    component.
+  example:
+  - example: "setup:\n  - type: yum\n    packages: [ sl ]\n"
+    format: yaml
+  hierarchy:
+  - io.viash.platforms.requirements.YumRequirements
+  - io.viash.platforms.requirements.Requirements
+  name: __this__
+  title: Yum Requirements
+  topic: requirements
+  type: YumRequirements
+- description: Specifies which packages to install.
+  example:
+  - example: 'packages: [ sl ]'
+    format: yaml
+  name: packages
+  title: Yum Requirements
+  topic: requirements
+  type: OneOrMore of String
+- description: Specifies the type of the requirement specification.
+  name: type
+  title: Yum Requirements
+  topic: requirements
+  type: String
+pageTitle: Setup Requirements
+title_is_name: true

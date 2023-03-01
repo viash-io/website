@@ -1,14 +1,18 @@
-import git, subprocess, json, csv, re
+import git, subprocess, json, csv, re, yaml
 from pathlib import Path
 
 repo = git.Repo(".", search_parent_directories=True) # Get root dir of repo
 repo_root = repo.working_tree_dir
 
 json_export = "cli_schema_export.json"
-keyword_replace_csv = repo_root + "/_src/automation/keyword_links.csv"
 keyword_regex = r"\@\[(.*?)\]\((.*?)\)"
 
 reference_dir = repo_root + "/reference/"
+
+config_file = Path(repo_root, '_src', 'automation', 'config_pages_settings.yaml')
+config_pages_settings = ''
+with open(config_file, 'r') as infile:
+		config_pages_settings = yaml.safe_load(infile)
 
 def generate_json():
 	""" Calls viash in order to generate a cli export. """
@@ -42,7 +46,7 @@ def create_page(name, json_entry):
 		for subcommand_json in json_entry["subcommands"]:
 			qmd += qmd_add_command(command_json=subcommand_json, is_subcommand=True)
 
-	write_qmd_file("viash", name, qmd)
+	write_qmd_file("cli", name, qmd)
 
 def qmd_add_command(command_json, is_subcommand) -> str:
 	""" Returns the information about the command in markdown form. """
@@ -130,14 +134,8 @@ def replace_keywords(text: str) -> str:
 		keyword_text = match.group(2)
 		link = "no-link"
 
-		# Find keyword in csv
-		keywords_csv = open(keyword_replace_csv)
-		csvreader = csv.reader(keywords_csv)
-		for row in csvreader:
-			if row[0] == keyword:
-				link = row[1]
-				break
-		keywords_csv.close()
+		if keyword in config_pages_settings['keywords']:
+			link = config_pages_settings['keywords'][keyword]
 
 		# Replace match with hyperlink
 		text = text.replace(whole_match, f"[{keyword_text}]({link})")
