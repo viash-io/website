@@ -8,7 +8,7 @@ keyword_regex = r"\@\[(.*?)\]\((.*?)\)"
 
 config_dir = Path(repo_root, "reference", "config")
 json_file = Path(repo_root, "reference", "config_schema_export.json")
-template_file = Path(repo_root, "_src" ,"automation", "template_page.j2.qmd")
+template_file = Path(repo_root, "_src" ,"automation", "template_config_page.j2.qmd")
 
 def generate_json():
 	""" Calls viash in order to generate a config export. """

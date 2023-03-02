@@ -7,6 +7,10 @@ repo_root = repo.working_tree_dir
 json_export = "cli_schema_export.json"
 keyword_regex = r"\@\[(.*?)\]\((.*?)\)"
 
+cli_dir = Path(repo_root, "reference", "cli")
+json_file = Path(repo_root, "reference", "cli_schema_export.json")
+template_file = Path(repo_root, "_src" ,"automation", "template_cli_page.j2.qmd")
+
 reference_dir = repo_root + "/reference/"
 
 config_file = Path(repo_root, '_src', 'automation', 'config_pages_settings.yaml')
@@ -18,13 +22,19 @@ def generate_json():
 	""" Calls viash in order to generate a cli export. """
 
 	# Run bin/viash export cli_schema
-	json = subprocess.run(["viash", "export", "cli_schema"], stdout=subprocess.PIPE).stdout.decode('utf-8')
-	f = open(reference_dir + json_export, "w")
-	f.write(json)
-	f.close()
+	json = subprocess.check_output(["viash", "export", "cli_schema"]).decode('utf-8')
+	with open(json_file, 'w') as outfile:
+		outfile.write(json)
 
-	print(f"Generated {reference_dir}/{json_export}")
+	print(f"Generated {json_file}")
 
+def read_config_page_settings():
+	""" Load the folder structure and keyword replacements file. """
+
+	config_file = Path(repo_root, '_src', 'automation', 'config_pages_settings.yaml')
+	with open(config_file, 'r') as infile:
+			yaml_data = yaml.safe_load(infile)
+	return yaml_data
 
 def generate_pages():
 	""" Load the generated JSON file and creates pages for every command entry. """
@@ -122,20 +132,38 @@ def qmd_create_arguments_table(arguments_list) -> str:
 	qmd += "\n\n"
 	return qmd
 
+def render_jinja_page(folder: str, filename: str, data: dict):
+	""" Write data to yaml file and run jinja. """
+	
+	full_path = Path(folder, filename)
+	base_dir = full_path.parent
+	yaml_file = Path(base_dir, "_" + full_path.name).with_suffix('.yaml')
+	qmd_file = full_path.with_suffix('.qmd')
+
+	base_dir.mkdir(parents=True, exist_ok=True)	
+	
+	with open(yaml_file, 'w') as outfile:
+		yaml.safe_dump(data, outfile, default_flow_style=False)
+
+	qmd = subprocess.check_output(["j2", template_file, yaml_file]).decode('utf-8')
+	with open(qmd_file, 'w') as outfile:
+		outfile.write(qmd)
 
 def replace_keywords(text: str) -> str:
-	""" Finds all keywords in the format @[keyword](text) and returns the replacements based on the keywords CSV. """
+	""" Finds all keywords in the format @[keyword](text) and returns the replacements based on the keywords settings. """
+
 	# Find all keyword links
 	matches = re.finditer(keyword_regex, text, re.MULTILINE)
 
 	for matchNum, match in enumerate(matches, start=1):
 		whole_match = match.group(0)
-		keyword = match.group(1)
-		keyword_text = match.group(2)
-		link = "no-link"
+		keyword, keyword_text = match.groups()
 
-		if keyword in config_pages_settings['keywords']:
+		try:
 			link = config_pages_settings['keywords'][keyword]
+		except KeyError:
+			link = "no-link"
+			print(f"Could not find {keyword} in the cli pages settings keywords")
 
 		# Replace match with hyperlink
 		text = text.replace(whole_match, f"[{keyword_text}]({link})")
@@ -150,4 +178,5 @@ def write_qmd_file(dir_in_reference, file_name, content):
 
 if __name__ == "__main__":
 	generate_json()
+	config_pages_settings = read_config_page_settings()
 	generate_pages()
