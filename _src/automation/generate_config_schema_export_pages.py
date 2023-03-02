@@ -6,11 +6,10 @@ entry_lists = {}
 repo = git.Repo(".", search_parent_directories=True) # Get root dir of repo
 repo_root = repo.working_tree_dir
 
-json_export = "config_schema_export.json"
 keyword_regex = r"\@\[(.*?)\]\((.*?)\)"
 
-reference_dir = repo_root + "/reference/"
-config_dir = reference_dir + "/config"
+config_dir = Path(repo_root, "reference", "config")
+json_file = Path(repo_root, "reference", "config_schema_export.json")
 template_file = Path(repo_root, "_src" ,"automation", "template_page.j2.qmd")
 
 def generate_json():
@@ -18,11 +17,10 @@ def generate_json():
 	
 	# Run bin/viash export config_schema
 	json = subprocess.run(["viash", "export", "config_schema"], stdout=subprocess.PIPE).stdout.decode('utf-8')
-	json_file = Path(repo_root, "reference", json_export)
 	with open(json_file, 'w') as outfile:
 		outfile.write(json)
 
-	print(f"Generated {reference_dir}/{json_export}")
+	print(f"Generated {json_file}")
 
 def read_config_page_settings():
 	global config_pages_settings
@@ -33,7 +31,6 @@ def read_config_page_settings():
 def read_json_entries():
 	""" Load the generated JSON file and pass the entries to be read by the get_json_entries function. """
 
-	json_file = Path(repo_root, "reference", json_export)
 	with open(json_file, 'r') as infile:
 		viash_json = json.load(infile)
 
@@ -76,15 +73,17 @@ def get_json_entries(subtopic, json_entry, topic):
 	else:
 		print(f"Could not find {filename} in the config pages settings structure")
 		
-	print(f"topic: {topic} subtopic: {subtopic}")
 	render_jinja_page(config_dir, filename, page_data)
 	
 def render_jinja_page(folder: str, filename: str, data: dict):
 	""" Write data to yaml file and run jinja. """
-	Path(folder).mkdir(parents=True, exist_ok=True)	
+	
+	full_path = Path(folder, filename)
+	base_dir = full_path.parent
+	yaml_file = Path(base_dir, "_" + full_path.name).with_suffix('.yaml')
+	qmd_file = full_path.with_suffix('.qmd')
 
-	yaml_file = Path(folder, filename).with_suffix('.yaml')
-	qmd_file = Path(folder, filename).with_suffix('.qmd')
+	base_dir.mkdir(parents=True, exist_ok=True)	
 	
 	with open(yaml_file, 'w') as outfile:
 			yaml.safe_dump(data, outfile, default_flow_style=False)
