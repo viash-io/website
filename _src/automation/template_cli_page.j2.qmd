@@ -5,6 +5,10 @@ execute:
   echo: false
   output: asis
 ---
+
+# TODO fix multiple lines in bannerUsage
+# TODO replace_keywords in description
+
 {% for d in data %}
 
 {%- if usesSubcommands %}
@@ -15,34 +19,16 @@ execute:
 
 **Usage:**
 
-# TODO fix multiple lines
 `{{d.bannerUsage}}`
 
 | Argument | Description | Type |
 |-|:----|-:
-{% for arg in d.opts -%}
+{% for arg in d.opts|sort(attribute="name") -%}
 
-{%- if 0 == 1 %}
-if argument['name'] == "config":
-  argument_name = f"`{argument['name']}`"
-else:
-  argument_name = f"`--{argument['name']}`"
+{% if arg.name == "config" %}| `{{arg.name}}`{%- else -%}| `--{{arg.name}}`{% endif -%}
+{%- if arg.short is defined %} `-{{arg.short}}`{% endif %} | {{arg.descr|replace("$", "\\$")}}{% if arg.required %} **This is a required argument.**{% endif %} | `{{arg.type}}` |
 
-if "short" in argument:
-  argument_name += f", `-{argument['short']}`"
-
-description = replace_keywords(argument["descr"])
-description = description.replace(
-  "$", "\$"
-)  # Prevents dollar sign being detected as LaTeX start
-
-if argument["required"]:
-  description += " **This is a required argument.**"
-{% endif -%}
-
-| {argument_name} | {description} | `{argument['type']}` |
-
-{%- endfor %}
+{%- endfor -%}
 | `--help`, `-h` | Show help message |  |
 
 {% endfor %}

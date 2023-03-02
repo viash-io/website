@@ -49,15 +49,12 @@ def generate_page(topic: str, subtopic: str, json_data: list):
 	else:
 		title = re.sub(r"(\w)([A-Z])", r"\1 \2", subtopic).title() # split words and capitalize
 
-	# Sort data entries alphabetically on 'name'
-	sorted_list = sorted(json_data, key=lambda x: x["name"], reverse=False)
-
 	# Fix description markdown keywords to links
-	for d in sorted_list:
+	for d in json_data:
 		if 'description' in d:
 			d['description'] = replace_keywords(d["description"])
 
-	page_data = {"topic": topic, "title": title, "data": sorted_list}
+	page_data = {"topic": topic, "title": title, "data": json_data}
 
 	filename = f"{topic}/{subtopic}"
 
