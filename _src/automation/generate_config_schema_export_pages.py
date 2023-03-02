@@ -1,8 +1,6 @@
 import git, subprocess, json, re, yaml
 from pathlib import Path
 
-entry_lists = {}
-
 repo = git.Repo(".", search_parent_directories=True) # Get root dir of repo
 repo_root = repo.working_tree_dir
 
