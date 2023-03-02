@@ -11,6 +11,7 @@ keyword_regex = r"\@\[(.*?)\]\((.*?)\)"
 
 reference_dir = repo_root + "/reference/"
 config_dir = reference_dir + "/config"
+template_file = Path(repo_root, "_src" ,"automation", "template_page.j2.qmd")
 
 def generate_json():
 	""" Calls viash in order to generate a config export. """
@@ -39,18 +40,17 @@ def read_json_entries():
 	for topic in viash_json:
 		if isinstance(viash_json[topic], dict):
 			for subtopic in viash_json[topic]:
-				get_json_entries(page_title = subtopic, topic = topic, json_entry = viash_json[topic][subtopic])
+				get_json_entries(subtopic = subtopic, topic = topic, json_entry = viash_json[topic][subtopic])
 		else:
-			get_json_entries(page_title= topic, topic = topic, json_entry = viash_json[topic])		
+			get_json_entries(subtopic= topic, topic = topic, json_entry = viash_json[topic])		
 
-
-def get_json_entries(page_title, json_entry, topic):
+def get_json_entries(subtopic, json_entry, topic):
 	""" Reads the generated JSON file and extract all information into instances of the JsonEntryData class. """
 
 	if topic == 'arguments': # Keep title of argument pages as-is
-		title = page_title
+		title = subtopic
 	else:
-		title = clean_title(page_title)
+		title = re.sub(r"(\w)([A-Z])", r"\1 \2", subtopic).title() # split words and capitalize
 
 	# Sort json entries alphabetically and store in a dictionary
 	sorted_dict = sorted(json_entry, key=lambda x: x["name"], reverse=False)
@@ -61,40 +61,30 @@ def get_json_entries(page_title, json_entry, topic):
 	page_data['data'] = []
 
 	for newData in sorted_dict:
+		# Fix our markdown identifiers to proper markdown links
 		if 'description' in newData:
 			newData['description'] = replace_keywords(newData["description"])
 		page_data['data'].append(newData)
 
-	filename = topic
-	if topic != page_title:
-		filename = f"{topic}/{page_title}"
+	if topic != subtopic:
+		filename = f"{topic}/{subtopic}"
+	else:
+		filename = topic
 
 	if filename in config_pages_settings['structure']:
 		filename = config_pages_settings['structure'][filename]
 	else:
 		print(f"Could not find {filename} in the config pages settings structure")
 		
-	if topic == 'functionality' or topic == 'requirements':
-		render_jinja_page("combined_page.j2.qmd", config_dir, filename, page_data)
-	else:
-		render_jinja_page("grouped_page.j2.qmd", config_dir, filename, page_data)
+	print(f"topic: {topic} subtopic: {subtopic}")
+	render_jinja_page(config_dir, filename, page_data)
 	
-def clean_title(title) -> str:
-	""" Returns title with added spaces and capitalization for better readability. """
-	title = title.replace("Platform", " Platform")
-	title = title.replace("Requirements", " Requirements")
-	title = title.replace("Legacy", " Legacy")
-	title = title.replace("Vdsl3", " Vdsl3")
-	title = title.replace("Vdsl3", "VDSL3")
-	return title.title()
-
-def render_jinja_page(template: str, folder: str, filename: str, data: dict):
+def render_jinja_page(folder: str, filename: str, data: dict):
 	""" Write data to yaml file and run jinja. """
 	Path(folder).mkdir(parents=True, exist_ok=True)	
 
 	yaml_file = Path(folder, filename).with_suffix('.yaml')
 	qmd_file = Path(folder, filename).with_suffix('.qmd')
-	template_file = Path(repo_root, "_src" ,"automation", template)
 	
 	with open(yaml_file, 'w') as outfile:
 			yaml.safe_dump(data, outfile, default_flow_style=False)

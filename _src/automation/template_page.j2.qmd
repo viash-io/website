@@ -5,10 +5,9 @@ execute:
   echo: false
   output: asis
 ---
-
 {% for d in data -%}
 
-{%- if not d.name == "__this__" %}
+{% if not d.name == "__this__" %}
 ## {{d.name}}
 {% if "Option of " in d.type %}
 **Type**: `{{d.type|replace("Option of ", "")}}`
@@ -17,9 +16,11 @@ execute:
 {% else %}
 **Type**: `{{d.type}}`
 {% endif %}
+{% else %}
+{% endif -%}
 {% if d.removed is defined -%}
 ::: {.callout-warning}
-{%- if d.removed.deprecation and d.removed.deprecation|length -%}
+{%- if d.removed.deprecation is defined and d.removed.deprecation|length -%}
 Deprecated since {{d.removed.deprecation}}. {% endif %}
 Removed since {{d.removed.removal}}. {{d.removed.message}}
 :::
@@ -31,10 +32,11 @@ Deprecated since {{d.deprecated.deprecation}}.
 {{d.deprecated.message}}
 :::
 {% endif -%}
-{% endif %}
+
 {%- if d.description is defined %}
 {{-d.description}}
 {% endif -%}
+
 {% if d.example is defined %}
 **Example:**
 {% for ex in d.example %}
