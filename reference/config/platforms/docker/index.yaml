@@ -10,8 +10,6 @@ data:
   - io.viash.platforms.DockerPlatform
   - io.viash.platforms.Platform
   name: __this__
-  title: Docker Platform
-  topic: platforms
   type: DockerPlatform
 - deprecated:
     deprecation: 0.5.15
@@ -24,8 +22,6 @@ data:
   - example: "setup:\n  - type: apk\n    packages: [ sl ]\n"
     format: yaml
   name: apk
-  title: Docker Platform
-  topic: platforms
   type: Option of ApkRequirements
 - deprecated:
     deprecation: 0.5.15
@@ -38,8 +34,6 @@ data:
   - example: "setup:\n  - type: apt\n    packages: [ sl ]\n"
     format: yaml
   name: apt
-  title: Docker Platform
-  topic: platforms
   type: Option of AptRequirements
 - description: 'In Linux, files created by a Docker container will be owned by `root`.
     With `chown: true`, Viash will automatically change the ownership of output files
@@ -49,8 +43,6 @@ data:
   - example: 'chown: false'
     format: yaml
   name: chown
-  title: Docker Platform
-  topic: platforms
   type: Boolean
 - deprecated:
     deprecation: 0.5.15
@@ -64,8 +56,6 @@ data:
       \ \"http://foo.bar .\" ]\n    resources: \n      - resource.txt /path/to/resource.txt\n"
     format: yaml
   name: docker
-  title: Docker Platform
-  topic: platforms
   type: Option of DockerRequirements
 - description: 'As with all platforms, you can give a platform a different name. By
     specifying `id: foo`, you can target this platform (only) by specifying `-p foo`
@@ -74,8 +64,6 @@ data:
   - example: 'id: foo'
     format: yaml
   name: id
-  title: Docker Platform
-  topic: platforms
   type: String
 - description: The base container to start from. You can also add the tag here if
     you wish.
@@ -83,21 +71,15 @@ data:
   - example: 'image: "bash:4.0"'
     format: yaml
   name: image
-  title: Docker Platform
-  topic: platforms
   type: String
 - description: The default namespace separator is "_".
   example:
   - example: 'namespace_separator: "+"'
     format: yaml
   name: namespace_separator
-  title: Docker Platform
-  topic: platforms
   type: String
 - description: Name of a container's [organization](https://docs.docker.com/docker-hub/orgs/).
   name: organization
-  title: Docker Platform
-  topic: platforms
   type: Option of String
 - description: A list of enabled ports. This doesn't change the Dockerfile but gets
     added as a command-line argument at runtime.
@@ -105,8 +87,6 @@ data:
   - example: "port:\n  - 80\n  - 8080\n"
     format: yaml
   name: port
-  title: Docker Platform
-  topic: platforms
   type: OneOrMore of String
 - deprecated:
     deprecation: 0.6.3
@@ -115,8 +95,6 @@ data:
     removal: 0.8.0
   description: Adds a `privileged` flag to the docker run.
   name: privileged
-  title: Docker Platform
-  topic: platforms
   type: Option of Boolean
 - deprecated:
     deprecation: 0.5.15
@@ -132,8 +110,6 @@ data:
       \ [ http://... ]\n"
     format: yaml
   name: python
-  title: Docker Platform
-  topic: platforms
   type: Option of PythonRequirements
 - deprecated:
     deprecation: 0.5.15
@@ -149,27 +125,19 @@ data:
       \ [ 'devtools::install(\".\")' ]\n"
     format: yaml
   name: r
-  title: Docker Platform
-  topic: platforms
   type: Option of RRequirements
 - description: The URL to the a [custom Docker registry](https://docs.docker.com/registry/)
   example:
   - example: 'registry: https://my-docker-registry.org'
     format: yaml
   name: registry
-  title: Docker Platform
-  topic: platforms
   type: Option of String
 - description: 'Enables or disables automatic volume mapping. Enabled when set to
     `Automatic` or disabled when set to `Manual`. Default: `Automatic`'
   name: resolve_volume
-  title: Docker Platform
-  topic: platforms
   type: DockerResolveVolume
 - description: Add [docker run](https://docs.docker.com/engine/reference/run/) arguments.
   name: run_args
-  title: Docker Platform
-  topic: platforms
   type: OneOrMore of String
 - description: "A list of requirements for installing the following types of packages:\n\
     \n - [apt](/reference/config/platforms/docker/setup/#apt-requirements)\n - [apk](/reference/config/platforms/docker/setup/#apk-requirements)\n\
@@ -181,8 +149,6 @@ data:
     \ in which these dependencies are specified determines the order in which they\
     \ will be installed.\n"
   name: setup
-  title: Docker Platform
-  topic: platforms
   type: List of Requirements
 - description: 'The Docker setup strategy to use when building a container.
 
@@ -234,16 +200,12 @@ data:
   - example: 'setup_strategy: alwaysbuild'
     format: yaml
   name: setup_strategy
-  title: Docker Platform
-  topic: platforms
   type: DockerSetupStrategy
 - description: Specify a Docker image based on its tag.
   example:
   - example: 'tag: 4.0'
     format: yaml
   name: tag
-  title: Docker Platform
-  topic: platforms
   type: Option of String
 - description: If anything is specified in the setup section, running the `---setup`
     will result in an image with the name of `<target_image>:<version>`. If nothing
@@ -253,8 +215,6 @@ data:
   - example: 'target_image: myfoo'
     format: yaml
   name: target_image
-  title: Docker Platform
-  topic: platforms
   type: Option of String
 - description: The source of the target image. This is used for defining labels in
     the dockerfile.
@@ -262,16 +222,12 @@ data:
   - example: 'target_image_source: https://github.com/foo/bar'
     format: yaml
   name: target_image_source
-  title: Docker Platform
-  topic: platforms
   type: Option of String
 - description: The organization set in the resulting image. Advanced usage only.
   example:
   - example: 'target_organization: viash-io'
     format: yaml
   name: target_organization
-  title: Docker Platform
-  topic: platforms
   type: Option of String
 - description: The URL where the resulting image will be pushed to. Advanced usage
     only.
@@ -279,27 +235,19 @@ data:
   - example: 'target_registry: https://my-docker-registry.org'
     format: yaml
   name: target_registry
-  title: Docker Platform
-  topic: platforms
   type: Option of String
 - description: The tag the resulting image gets. Advanced usage only.
   example:
   - example: 'target_tag: 0.5.0'
     format: yaml
   name: target_tag
-  title: Docker Platform
-  topic: platforms
   type: Option of String
 - description: Additional requirements specific for running unit tests.
   name: test_setup
   since: Viash 0.5.13
-  title: Docker Platform
-  topic: platforms
   type: List of Requirements
 - description: Specifies the type of the platform.
   name: type
-  title: Docker Platform
-  topic: platforms
   type: String
 - description: The working directory when starting the container. This doesn't change
     the Dockerfile but gets added as a command-line argument at runtime.
@@ -307,8 +255,6 @@ data:
   - example: 'workdir: /home/user'
     format: yaml
   name: workdir
-  title: Docker Platform
-  topic: platforms
   type: Option of String
 - deprecated:
     deprecation: 0.5.15
@@ -321,7 +267,6 @@ data:
   - example: "setup:\n  - type: yum\n    packages: [ sl ]\n"
     format: yaml
   name: yum
-  title: Docker Platform
-  topic: platforms
   type: Option of YumRequirements
-pageTitle: Docker Platform
+title: Docker Platform
+topic: platforms

@@ -1,0 +1,30 @@
+data:
+- description: "A Viash configuration is a YAML file which contains metadata to describe\
+    \ the behaviour and build target(s) of a component.  \nWe commonly name this file\
+    \ `config.vsh.yaml` in our examples, but you can name it however you choose. \
+    \ \n"
+  example:
+  - example: "functionality:\n  name: hello_world\n  arguments:\n    - type: string\n\
+      \      name: --input\n      default: \"world\"\n  resources:\n    - type: bash_script\n\
+      \      path: script.sh\n      text: echo Hello $par_input\nplatforms:\n  - type:\
+      \ docker\n    image: \"bash:4.0\"\n"
+    format: yaml
+  hierarchy:
+  - io.viash.config.Config
+  name: __this__
+  type: Config
+- description: 'The [functionality](/reference/config/functionality/index.html) describes
+    the behaviour of the script in terms of arguments and resources.
+
+    By specifying a few restrictions (e.g. mandatory arguments) and adding some descriptions,
+    Viash will automatically generate a stylish command-line interface for you.
+
+    '
+  name: functionality
+  type: Functionality
+- description: "A list of platforms to generate target artifacts for.\n\n - [Native](no-link)\n\
+    \ - [Docker](no-link)\n - [Nextflow VDSL3](no-link)\n"
+  name: platforms
+  type: List of Platform
+title: Config
+topic: config

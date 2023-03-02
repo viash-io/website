@@ -1,5 +1,5 @@
 ---
-title: "{{pageTitle}}"
+title: "{{title}}"
 search: true
 execute:
   echo: false
@@ -7,15 +7,9 @@ execute:
 ---
 {% for d in data -%}
 
-{%- if title_is_name and not d.name == "__this__" %}
-### {{d.name}}
-{% elif title_is_name and d.name == "__this__" %}
-## {{d.title}}
-{% elif not title_is_name and not d.name == "__this__" %}
+{% if not d.name == "__this__" %}
 ## {{d.name}}
-{% endif %}
-{%- if not d.name == "__this__" %}
-{%- if "Option of " in d.type %}
+{% if "Option of " in d.type %}
 **Type**: `{{d.type|replace("Option of ", "")}}`
 {% elif "OneOrMore of " in d.type %}
 **Type**: `{{d.type|replace("OneOrMore of ", "")}}` / `List of {{d.type|replace("OneOrMore of ", "")}}`

@@ -1,5 +1,5 @@
 ---
-title: Docker Requirements
+title: "Docker Requirements"
 search: true
 execute:
   echo: false
@@ -8,19 +8,109 @@ execute:
 
 Specify which Docker commands should be run during setup.
 
-### Example
+**Example:**
 
 ```yaml
 setup:
   - type: docker
-    build_args: [ GITHUB_PAT=hello_world ]
-    run: [ git clone ... ]
-    add: [ "http://foo.bar ." ]
-    copy: [ "http://foo.bar ." ]
-    resources: 
-      - resource.txt /path/to/resource.txt
-
+    build_args: "R_VERSION=hello_world"
+    run: |
+      echo 'Run a custom command'
+      echo 'Foo' > /path/to/file.txt
 ```
 
+## add
 
+**Type**: `String` / `List of String`
+
+Specifies which `ADD` entries to add to the Dockerfile while building it.
+
+**Example:**
+
+```yaml
+add: [ "http://foo/bar ." ]
+```
+
+## build_args
+
+**Type**: `String` / `List of String`
+
+Specifies which `ARG` entries to add to the Dockerfile while building it.
+
+**Example:**
+
+```yaml
+build_args: [ "R_VERSION=4.2" ]
+```
+
+## copy
+
+**Type**: `String` / `List of String`
+
+Specifies which `COPY` entries to add to the Dockerfile while building it.
+
+**Example:**
+
+```yaml
+copy: [ "resource.txt /path/to/resource.txt" ]
+```
+
+## env
+
+**Type**: `String` / `List of String`
+
+Specifies which `ENV` entries to add to the Dockerfile while building it. Unlike `ARG`, `ENV` entries are also accessible from inside the container.
+
+**Example:**
+
+```yaml
+env: [ "R_VERSION=4.2" ]
+```
+
+## label
+
+**Type**: `String` / `List of String`
+
+Specifies which `LABEL` entries to add to the Dockerfile while building it.
+
+**Example:**
+
+```yaml
+label: [ component="foo" ]
+```
+
+## resources
+
+**Type**: `String` / `List of String`
+
+::: {.callout-warning}
+Deprecated since 0.6.3. Planned removal at 0.7.0. `resources` in `setup: {type: docker, resources: ...}` will be removed. Please use `copy` instead.
+:::
+Specifies which `COPY` entries to add to the Dockerfile while building it.
+
+**Example:**
+
+```yaml
+resources: [ "resource.txt /path/to/resource.txt" ]
+```
+
+## run
+
+**Type**: `String` / `List of String`
+
+Specifies which `RUN` entries to add to the Dockerfile while building it.
+
+**Example:**
+
+```yaml
+run: |
+  echo 'Run a custom command'
+  echo 'Foo' > /path/to/file.txt
+```
+
+## type
+
+**Type**: `String`
+
+Specifies the type of the requirement specification.
 

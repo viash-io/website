@@ -1,0 +1,48 @@
+data:
+- description: Specify which JavaScript packages should be available in order to run
+    the component.
+  example:
+  - example: "setup:\n  - type: javascript\n    npm: packagename\n    git: \"https://some.git.repository/org/repo\"\
+      \n    github: \"owner/repository\"\n    url: \"https://github.com/org/repo/archive/HEAD.zip\"\
+      \n"
+    format: yaml
+  hierarchy:
+  - io.viash.platforms.requirements.JavaScriptRequirements
+  - io.viash.platforms.requirements.Requirements
+  name: __this__
+  type: JavaScriptRequirements
+- description: Specifies which packages to install using a Git URI.
+  example:
+  - example: 'git: [ https://some.git.repository/org/repo ]'
+    format: yaml
+  name: git
+  type: OneOrMore of String
+- description: Specifies which packages to install from GitHub.
+  example:
+  - example: 'github: [ owner/repository ]'
+    format: yaml
+  name: github
+  type: OneOrMore of String
+- description: Specifies which packages to install from npm.
+  example:
+  - example: 'npm: [ packagename ]'
+    format: yaml
+  name: npm
+  type: OneOrMore of String
+- description: Specifies which packages to install from npm.
+  example:
+  - example: 'packages: [ packagename ]'
+    format: yaml
+  name: packages
+  type: OneOrMore of String
+- description: Specifies the type of the requirement specification.
+  name: type
+  type: String
+- description: Specifies which packages to install using a generic URI.
+  example:
+  - example: 'url: [ https://github.com/org/repo/archive/HEAD.zip ]'
+    format: yaml
+  name: url
+  type: OneOrMore of String
+title: Javascript Requirements
+topic: requirements

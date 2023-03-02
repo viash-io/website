@@ -1,0 +1,84 @@
+data:
+- description: Specify which R packages should be available in order to run the component.
+  example:
+  - example: "setup: \n  - type: r\n    cran: anndata\n    bioc: [ AnnotationDbi,\
+      \ SingleCellExperiment ]\n    github: rcannood/SCORPIUS\n"
+    format: yaml
+  hierarchy:
+  - io.viash.platforms.requirements.RRequirements
+  - io.viash.platforms.requirements.Requirements
+  name: __this__
+  type: RRequirements
+- description: Specifies which packages to install from BioConductor.
+  example:
+  - example: 'bioc: [ AnnotationDbi ]'
+    format: yaml
+  name: bioc
+  type: OneOrMore of String
+- description: 'Forces packages specified in `bioc` to be reinstalled, even if they
+    are already present in the container. Default: false.'
+  example:
+  - example: 'bioc_force_install: false'
+    format: yaml
+  name: bioc_force_install
+  type: Boolean
+- description: Specifies which packages to install from Bitbucket.
+  example:
+  - example: 'bitbucket: [ org/package ]'
+    format: yaml
+  name: bitbucket
+  type: OneOrMore of String
+- description: Specifies which packages to install from CRAN.
+  example:
+  - example: 'cran: [ anndata, ggplot2 ]'
+    format: yaml
+  name: cran
+  type: OneOrMore of String
+- description: Specifies which packages to install using a Git URI.
+  example:
+  - example: 'git: [ https://some.git.repository/org/repo ]'
+    format: yaml
+  name: git
+  type: OneOrMore of String
+- description: Specifies which packages to install from GitHub.
+  example:
+  - example: 'github: [ rcannood/SCORPIUS ]'
+    format: yaml
+  name: github
+  type: OneOrMore of String
+- description: Specifies which packages to install from GitLab.
+  example:
+  - example: 'gitlab: [ org/package ]'
+    format: yaml
+  name: gitlab
+  type: OneOrMore of String
+- description: Specifies which packages to install from CRAN.
+  example:
+  - example: 'packages: [ anndata, ggplot2 ]'
+    format: yaml
+  name: packages
+  type: OneOrMore of String
+- description: Specifies a code block to run as part of the build.
+  example:
+  - example: "script: |\n  cat(\"Running custom code\n\")\n  install.packages(\"anndata\"\
+      )"
+    format: yaml
+  name: script
+  type: OneOrMore of String
+- description: Specifies which packages to install using an SVN URI.
+  example:
+  - example: 'svn: [ https://path.to.svn/group/repo ]'
+    format: yaml
+  name: svn
+  type: OneOrMore of String
+- description: Specifies the type of the requirement specification.
+  name: type
+  type: String
+- description: Specifies which packages to install using a generic URI.
+  example:
+  - example: 'url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]'
+    format: yaml
+  name: url
+  type: OneOrMore of String
+title: R Requirements
+topic: requirements
