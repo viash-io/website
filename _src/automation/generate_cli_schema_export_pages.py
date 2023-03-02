@@ -38,25 +38,32 @@ def read_config_page_settings():
 
 def generate_pages():
 	""" Load the generated JSON file and creates pages for every command entry. """
-	json_file = open(reference_dir + json_export, "r")
-	viash_json = json.load(json_file)
-	json_file.close()
 
-	for key in viash_json:
-		create_page(key["name"], key)
+	with open(json_file, 'r') as infile:
+		viash_json = json.load(infile)
+
+	for entry in viash_json:
+		create_page(entry["name"], entry)
 
 
-def create_page(name, json_entry):
-	qmd = ""
-	qmd += qmd_header(f"viash {name}")
+def create_page(name, json_data):
+	# qmd = ""
+	# qmd += qmd_header(f"viash {name}")
 
-	if "bannerCommand" in json_entry:  # Info is in top level command
-		qmd += qmd_add_command(command_json=json_entry, is_subcommand=False)
-	else:  # Info is in subcommands
-		for subcommand_json in json_entry["subcommands"]:
-			qmd += qmd_add_command(command_json=subcommand_json, is_subcommand=True)
+	# if "bannerCommand" in json_data:  # Info is in top level command
+	# 	qmd += qmd_add_command(command_json=json_data, is_subcommand=False)
+	# else:  # Info is in subcommands
+	# 	for subcommand_json in json_data["subcommands"]:
+	# 		qmd += qmd_add_command(command_json=subcommand_json, is_subcommand=True)
 
-	write_qmd_file("cli", name, qmd)
+	# write_qmd_file("cli", name, qmd)
+
+	if "bannerCommand" in json_data: # Info is in top level command
+		page_data = {'title': f'viash {name}', 'usesSubcommands': False, 'data': [json_data]}
+	else:
+		page_data = {'title': f'viash {name}', 'usesSubcommands': True, 'data': json_data['subcommands']}
+
+	render_jinja_page(cli_dir, name, page_data)
 
 def qmd_add_command(command_json, is_subcommand) -> str:
 	""" Returns the information about the command in markdown form. """

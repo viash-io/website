@@ -5,49 +5,45 @@ execute:
   echo: false
   output: asis
 ---
-{% for d in data -%}
+{% for d in data %}
 
-{% if not d.name == "__this__" %}
-## {{d.name}}
-{% if "Option of " in d.type %}
-**Type**: `{{d.type|replace("Option of ", "")}}`
-{% elif "OneOrMore of " in d.type %}
-**Type**: `{{d.type|replace("OneOrMore of ", "")}}` / `List of {{d.type|replace("OneOrMore of ", "")}}`
-{% else %}
-**Type**: `{{d.type}}`
+{%- if usesSubcommands %}
+## {{d.bannerCommand}}
 {% endif %}
-{% else %}
-{% endif -%}
-{% if d.removed is defined -%}
-::: {.callout-warning}
-{%- if d.removed.deprecation is defined and d.removed.deprecation|length -%}
-Deprecated since {{d.removed.deprecation}}. {% endif %}
-Removed since {{d.removed.removal}}. {{d.removed.message}}
-:::
-{% endif -%}
-{%- if d.deprecated is defined -%}
-::: {.callout-warning}
-Deprecated since {{d.deprecated.deprecation}}.
-{%- if d.deprecated.removal and d.deprecated.removal|length %} Planned removal at {{d.deprecated.removal}}. {% endif -%}
-{{d.deprecated.message}}
-:::
+
+{{d.bannerDescription}}
+
+**Usage:**
+
+# TODO fix multiple lines
+`{{d.bannerUsage}}`
+
+| Argument | Description | Type |
+|-|:----|-:
+{% for arg in d.opts -%}
+
+{%- if 0 == 1 %}
+if argument['name'] == "config":
+  argument_name = f"`{argument['name']}`"
+else:
+  argument_name = f"`--{argument['name']}`"
+
+if "short" in argument:
+  argument_name += f", `-{argument['short']}`"
+
+description = replace_keywords(argument["descr"])
+description = description.replace(
+  "$", "\$"
+)  # Prevents dollar sign being detected as LaTeX start
+
+if argument["required"]:
+  description += " **This is a required argument.**"
 {% endif -%}
 
-{%- if d.description is defined %}
-{{-d.description}}
-{% endif -%}
-
-{% if d.example is defined %}
-**Example:**
-{% for ex in d.example %}
-{%- if ex.description is defined %}
-{{ex.description}}
-{% endif %}
-```{{ex.format}}
-{{ex.example|replace("\\n", "\n")}}
-```
-{% endfor -%}
-{% endif -%}
+| {argument_name} | {description} | `{argument['type']}` |
 
 {%- endfor %}
+| `--help`, `-h` | Show help message |  |
+
+{% endfor %}
 
