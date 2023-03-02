@@ -14,7 +14,7 @@ def generate_json():
 	""" Calls viash in order to generate a config export. """
 	
 	# Run bin/viash export config_schema
-	json = subprocess.run(["viash", "export", "config_schema"], stdout=subprocess.PIPE).stdout.decode('utf-8')
+	json = subprocess.check_output(["viash", "export", "config_schema"]).decode('utf-8')
 	with open(json_file, 'w') as outfile:
 		outfile.write(json)
 
@@ -23,10 +23,10 @@ def generate_json():
 def read_config_page_settings():
 	""" Load the folder structure and keyword replacements file. """
 
-	global config_pages_settings
 	config_file = Path(repo_root, '_src', 'automation', 'config_pages_settings.yaml')
 	with open(config_file, 'r') as infile:
-			config_pages_settings = yaml.safe_load(infile)
+			yaml_data = yaml.safe_load(infile)
+	return yaml_data
 
 def read_json_entries():
 	""" Load the generated JSON file, split into logical page chunks and generate pages. """
@@ -34,14 +34,14 @@ def read_json_entries():
 	with open(json_file, 'r') as infile:
 		viash_json = json.load(infile)
 
-	for topic in viash_json:
-		if isinstance(viash_json[topic], dict):
-			for subtopic in viash_json[topic]:
-				generate_page(topic, subtopic, viash_json[topic][subtopic])
+	for topic, topic_json in viash_json.items():
+		if isinstance(topic_json, dict):
+			for subtopic in topic_json:
+				generate_page(topic, subtopic, topic_json[subtopic])
 		else:
-			generate_page(".", topic, viash_json[topic])
+			generate_page(".", topic, topic_json)
 
-def generate_page(topic: str, subtopic: str, json_data: dict):
+def generate_page(topic: str, subtopic: str, json_data: list):
 	""" Receives JSON data, does some minor data manipulation and writes to yaml & qmd. """
 
 	if topic == 'arguments': # Keep title of argument pages as-is
@@ -50,23 +50,20 @@ def generate_page(topic: str, subtopic: str, json_data: dict):
 		title = re.sub(r"(\w)([A-Z])", r"\1 \2", subtopic).title() # split words and capitalize
 
 	# Sort data entries alphabetically on 'name'
-	sorted_dict = sorted(json_data, key=lambda x: x["name"], reverse=False)
+	sorted_list = sorted(json_data, key=lambda x: x["name"], reverse=False)
 
 	# Fix description markdown keywords to links
-	for d in sorted_dict:
+	for d in sorted_list:
 		if 'description' in d:
 			d['description'] = replace_keywords(d["description"])
 
-	page_data = {}
-	page_data['topic'] = topic
-	page_data['title'] = title
-	page_data['data'] = sorted_dict
+	page_data = {"topic": topic, "title": title, "data": sorted_list}
 
 	filename = f"{topic}/{subtopic}"
 
-	if filename in config_pages_settings['structure']:
+	try:
 		filename = config_pages_settings['structure'][filename]
-	else:
+	except KeyError:
 		print(f"Could not find {filename} in the config pages settings structure")
 		
 	render_jinja_page(config_dir, filename, page_data)
@@ -84,7 +81,7 @@ def render_jinja_page(folder: str, filename: str, data: dict):
 	with open(yaml_file, 'w') as outfile:
 		yaml.safe_dump(data, outfile, default_flow_style=False)
 
-	qmd = subprocess.run(["j2", template_file, yaml_file], stdout=subprocess.PIPE).stdout.decode('utf-8')
+	qmd = subprocess.check_output(["j2", template_file, yaml_file]).decode('utf-8')
 	with open(qmd_file, 'w') as outfile:
 		outfile.write(qmd)
 
@@ -98,9 +95,9 @@ def replace_keywords(text: str) -> str:
 		whole_match = match.group(0)
 		keyword, keyword_text = match.groups()
 
-		if keyword in config_pages_settings['keywords']:
+		try:
 			link = config_pages_settings['keywords'][keyword]
-		else:
+		except KeyError:
 			link = "no-link"
 			print(f"Could not find {keyword} in the config pages settings keywords")
 
@@ -111,5 +108,5 @@ def replace_keywords(text: str) -> str:
 
 if __name__ == "__main__":
 	generate_json()
-	read_config_page_settings()
+	config_pages_settings = read_config_page_settings()
 	read_json_entries()
