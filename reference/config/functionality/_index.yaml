@@ -83,12 +83,12 @@ data:
     format: yaml
   name: description
   type: Option of String
-- deprecated:
+- description: Setting this to false with disable this component when using namespaces.
+  name: enabled
+  removed:
     deprecation: 0.6.0
     message: Use `status` instead.
-    removal: 0.8.0
-  description: Setting this to false with disable this component when using namespaces.
-  name: enabled
+    removal: 0.7.0
   since: Viash 0.5.13
   type: Boolean
 - description: 'Structured information. Can be any shape: a string, vector, map or
@@ -99,11 +99,7 @@ data:
   name: info
   since: Viash 0.4.0
   type: Json
-- deprecated:
-    deprecation: 0.6.0
-    message: Use `arguments` instead.
-    removal: 0.8.0
-  description: A list of input arguments in addition to the `arguments` list. Any
+- description: A list of input arguments in addition to the `arguments` list. Any
     arguments specified here will have their `type` set to `file` and the `direction`
     set to `input` by default.
   example:
@@ -115,6 +111,10 @@ data:
       \ file\n  \n      another_input\n          type: file"
     format: bash
   name: inputs
+  removed:
+    deprecation: 0.6.0
+    message: Use `arguments` instead.
+    removal: 0.7.0
   since: Viash 0.5.11
   type: List of Argument
 - description: Name of the component and the filename of the executable when built
@@ -131,11 +131,7 @@ data:
     format: yaml
   name: namespace
   type: Option of String
-- deprecated:
-    deprecation: 0.6.0
-    message: Use `arguments` instead.
-    removal: 0.8.0
-  description: A list of output arguments in addition to the `arguments` list. Any
+- description: A list of output arguments in addition to the `arguments` list. Any
     arguments specified here will have their `type` set to `file` and thr `direction`
     set to `output` by default.
   example:
@@ -147,6 +143,10 @@ data:
       \  type: file, output\n  \n      another_output\n          type: file, output"
     format: bash
   name: outputs
+  removed:
+    deprecation: 0.6.0
+    message: Use `arguments` instead.
+    removal: 0.7.0
   since: Viash 0.5.11
   type: List of Argument
 - description: "Computational requirements related to running the component. \n`cpus`\
@@ -164,13 +164,16 @@ data:
     \ executed when the functionality is run. Additional resources will be copied\
     \ to the same directory.\n\nCommon properties:\n\n * type: `file` / `r_script`\
     \ / `python_script` / `bash_script` / `javascript_script` / `scala_script` / `csharp_script`,\
-    \ the type of resource. The first resource cannot be of type `file`. When the\
-    \ type is not specified, the default type is simply `file`.\n * name: filename,\
-    \ the resulting name of the resource.\n * path: `path/to/file`, the path of the\
-    \ input file. Can be a relative or an absolute path, or a URI.\n * text: ...multiline\
-    \ text..., the raw content of the input file. Exactly one of path or text must\
-    \ be defined, the other undefined.\n * is_executable: `true` / `false`, whether\
-    \ the resulting file is made executable.\n"
+    \ specifies the type of the resource. The first resource cannot be of type `file`.\
+    \ When the type is not specified, the default type is simply `file`.\n * dest:\
+    \ filename, the resulting name of the resource.  From within a script, the file\
+    \ can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified,\
+    \ `dest` will be set to the basename of the `path` parameter.\n * path: `path/to/file`,\
+    \ the path of the input file. Can be a relative or an absolute path, or a URI.\
+    \ Mutually exclusive with `text`.\n * text: ...multiline text..., the content\
+    \ of the resulting file specified as a string. Mutually exclusive with `path`.\n\
+    \ * is_executable: `true` / `false`, whether the resulting resource file should\
+    \ be made executable.\n"
   example:
   - example: "resources:\n  - type: r_script\n    path: script.R\n  - type: file\n\
       \    path: resource1.txt\n"
@@ -193,16 +196,16 @@ data:
     format: yaml
   name: test_resources
   type: List of Resource
-- deprecated:
-    deprecation: 0.5.13
-    message: Use `test_resources` instead. No functional difference.
-    removal: 0.7.0
-  description: One or more Bash/R/Python scripts to be used to test the component
+- description: One or more Bash/R/Python scripts to be used to test the component
     behaviour when `viash test` is invoked. Additional files of type `file` will be
     made available only during testing. Each test script should expect no command-line
     inputs, be platform-independent, and return an exit code >0 when unexpected behaviour
     occurs during testing.
   name: tests
+  removed:
+    deprecation: 0.5.13
+    message: Use `test_resources` instead. No functional difference.
+    removal: 0.7.0
   type: List of Resource
 - description: A description on how to use the component. This will be displayed with
     `--help` under the 'Usage:' section.

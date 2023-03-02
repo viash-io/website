@@ -162,8 +162,8 @@ description: |
 
 **Type**: `Boolean`
 
-::: {.callout-warning}
-Deprecated since 0.6.0. Planned removal at 0.8.0. Use `status` instead.
+::: {.callout-warning}Deprecated since 0.6.0. 
+Removed since 0.7.0. Use `status` instead.
 :::
 Setting this to false with disable this component when using namespaces.
 
@@ -185,8 +185,8 @@ info:
 
 **Type**: `List of Argument`
 
-::: {.callout-warning}
-Deprecated since 0.6.0. Planned removal at 0.8.0. Use `arguments` instead.
+::: {.callout-warning}Deprecated since 0.6.0. 
+Removed since 0.7.0. Use `arguments` instead.
 :::
 A list of input arguments in addition to the `arguments` list. Any arguments specified here will have their `type` set to `file` and the `direction` set to `input` by default.
 
@@ -239,8 +239,8 @@ namespace: fancy_components
 
 **Type**: `List of Argument`
 
-::: {.callout-warning}
-Deprecated since 0.6.0. Planned removal at 0.8.0. Use `arguments` instead.
+::: {.callout-warning}Deprecated since 0.6.0. 
+Removed since 0.7.0. Use `arguments` instead.
 :::
 A list of output arguments in addition to the `arguments` list. Any arguments specified here will have their `type` set to `file` and thr `direction` set to `output` by default.
 
@@ -291,11 +291,11 @@ requirements:
 
 Common properties:
 
- * type: `file` / `r_script` / `python_script` / `bash_script` / `javascript_script` / `scala_script` / `csharp_script`, the type of resource. The first resource cannot be of type `file`. When the type is not specified, the default type is simply `file`.
- * name: filename, the resulting name of the resource.
- * path: `path/to/file`, the path of the input file. Can be a relative or an absolute path, or a URI.
- * text: ...multiline text..., the raw content of the input file. Exactly one of path or text must be defined, the other undefined.
- * is_executable: `true` / `false`, whether the resulting file is made executable.
+ * type: `file` / `r_script` / `python_script` / `bash_script` / `javascript_script` / `scala_script` / `csharp_script`, specifies the type of the resource. The first resource cannot be of type `file`. When the type is not specified, the default type is simply `file`.
+ * dest: filename, the resulting name of the resource.  From within a script, the file can be accessed at `meta["resources_dir"] + "/" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter.
+ * path: `path/to/file`, the path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`.
+ * text: ...multiline text..., the content of the resulting file specified as a string. Mutually exclusive with `path`.
+ * is_executable: `true` / `false`, whether the resulting resource file should be made executable.
 
 
 **Example:**
@@ -337,8 +337,8 @@ test_resources:
 
 **Type**: `List of Resource`
 
-::: {.callout-warning}
-Deprecated since 0.5.13. Planned removal at 0.7.0. Use `test_resources` instead. No functional difference.
+::: {.callout-warning}Deprecated since 0.5.13. 
+Removed since 0.7.0. Use `test_resources` instead. No functional difference.
 :::
 One or more Bash/R/Python scripts to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing.
 

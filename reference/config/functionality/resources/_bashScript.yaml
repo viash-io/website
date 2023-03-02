@@ -1,0 +1,35 @@
+data:
+- description: 'An executable Bash script.
+
+    When defined in functionality.resources, only the first entry will be executed
+    when running the built component or when running `viash run`.
+
+    When defined in functionality.test_resources, all entries will be executed during
+    `viash test`.'
+  hierarchy:
+  - io.viash.functionality.resources.BashScript
+  - io.viash.functionality.resources.Script
+  - io.viash.functionality.resources.Resource
+  name: __this__
+  type: BashScript
+- description: Resulting filename of the resource. From within a script, the file
+    can be accessed at `meta["resources_dir"] + "/" + dest`. If unspecified, `dest`
+    will be set to the basename of the `path` parameter.
+  name: dest
+  type: Option of String
+- description: Whether the resulting resource file should be made executable.
+  name: is_executable
+  type: Option of Boolean
+- description: The path of the input file. Can be a relative or an absolute path,
+    or a URI. Mutually exclusive with `text`.
+  name: path
+  type: Option of String
+- description: The content of the resulting file specified as a string. Mutually exclusive
+    with `path`.
+  name: text
+  type: Option of String
+- description: Specifies the resource as a Bash script.
+  name: type
+  type: String
+title: Bash Script
+topic: resources

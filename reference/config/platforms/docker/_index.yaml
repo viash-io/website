@@ -11,29 +11,29 @@ data:
   - io.viash.platforms.Platform
   name: __this__
   type: DockerPlatform
-- deprecated:
-    deprecation: 0.5.15
-    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: apk, ... }]}`.
-      Will be removed.'
-    removal: 0.7.0
-  description: Specify which apk packages should be available in order to run the
+- description: Specify which apk packages should be available in order to run the
     component.
   example:
   - example: "setup:\n  - type: apk\n    packages: [ sl ]\n"
     format: yaml
   name: apk
-  type: Option of ApkRequirements
-- deprecated:
+  removed:
     deprecation: 0.5.15
-    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: apt, ... }]}`.
+    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: apk, ... }]}`.
       Will be removed.'
     removal: 0.7.0
-  description: Specify which apt packages should be available in order to run the
+  type: Option of ApkRequirements
+- description: Specify which apt packages should be available in order to run the
     component.
   example:
   - example: "setup:\n  - type: apt\n    packages: [ sl ]\n"
     format: yaml
   name: apt
+  removed:
+    deprecation: 0.5.15
+    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: apt, ... }]}`.
+      Will be removed.'
+    removal: 0.7.0
   type: Option of AptRequirements
 - description: 'In Linux, files created by a Docker container will be owned by `root`.
     With `chown: true`, Viash will automatically change the ownership of output files
@@ -44,18 +44,18 @@ data:
     format: yaml
   name: chown
   type: Boolean
-- deprecated:
-    deprecation: 0.5.15
-    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: docker, ...
-      }]}`. Will be removed.'
-    removal: 0.7.0
-  description: Specify which Docker commands should be run during setup.
+- description: Specify which Docker commands should be run during setup.
   example:
   - example: "setup:\n  - type: docker\n    build_args: [ GITHUB_PAT=hello_world ]\n\
       \    run: [ git clone ... ]\n    add: [ \"http://foo.bar .\" ]\n    copy: [\
       \ \"http://foo.bar .\" ]\n    resources: \n      - resource.txt /path/to/resource.txt\n"
     format: yaml
   name: docker
+  removed:
+    deprecation: 0.5.15
+    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: docker, ...
+      }]}`. Will be removed.'
+    removal: 0.7.0
   type: Option of DockerRequirements
 - description: 'As with all platforms, you can give a platform a different name. By
     specifying `id: foo`, you can target this platform (only) by specifying `-p foo`
@@ -72,7 +72,8 @@ data:
     format: yaml
   name: image
   type: String
-- description: The default namespace separator is "_".
+- description: The separator between the namespace and the name of the component,
+    used for determining the image name.
   example:
   - example: 'namespace_separator: "+"'
     format: yaml
@@ -88,20 +89,15 @@ data:
     format: yaml
   name: port
   type: OneOrMore of String
-- deprecated:
+- description: Adds a `privileged` flag to the docker run.
+  name: privileged
+  removed:
     deprecation: 0.6.3
     message: 'Add a `privileged` flag in `run_args` instead, e.g. `{type: docker,
       run_args: "--privileged"}`.'
-    removal: 0.8.0
-  description: Adds a `privileged` flag to the docker run.
-  name: privileged
-  type: Option of Boolean
-- deprecated:
-    deprecation: 0.5.15
-    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: python, ...
-      }]}`. Will be removed.'
     removal: 0.7.0
-  description: Specify which Python packages should be available in order to run the
+  type: Option of Boolean
+- description: Specify which Python packages should be available in order to run the
     component.
   example:
   - example: "setup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo\
@@ -110,13 +106,13 @@ data:
       \ [ http://... ]\n"
     format: yaml
   name: python
-  type: Option of PythonRequirements
-- deprecated:
+  removed:
     deprecation: 0.5.15
-    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: r, ... }]}`.
-      Will be removed.'
+    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: python, ...
+      }]}`. Will be removed.'
     removal: 0.7.0
-  description: Specify which R packages should be available in order to run the component.
+  type: Option of PythonRequirements
+- description: Specify which R packages should be available in order to run the component.
   example:
   - example: "setup: \n  - type: r\n    cran: [ dynutils ]\n    bioc: [ AnnotationDbi\
       \ ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ rcannood/SCORPIUS\
@@ -125,6 +121,11 @@ data:
       \ [ 'devtools::install(\".\")' ]\n"
     format: yaml
   name: r
+  removed:
+    deprecation: 0.5.15
+    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: r, ... }]}`.
+      Will be removed.'
+    removal: 0.7.0
   type: Option of RRequirements
 - description: The URL to the a [custom Docker registry](https://docs.docker.com/registry/)
   example:
@@ -256,17 +257,17 @@ data:
     format: yaml
   name: workdir
   type: Option of String
-- deprecated:
-    deprecation: 0.5.15
-    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: yum, ... }]}`.
-      Will be removed.'
-    removal: 0.7.0
-  description: Specify which yum packages should be available in order to run the
+- description: Specify which yum packages should be available in order to run the
     component.
   example:
   - example: "setup:\n  - type: yum\n    packages: [ sl ]\n"
     format: yaml
   name: yum
+  removed:
+    deprecation: 0.5.15
+    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: yum, ... }]}`.
+      Will be removed.'
+    removal: 0.7.0
   type: Option of YumRequirements
 title: Docker Platform
 topic: platforms

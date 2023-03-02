@@ -44,17 +44,17 @@ data:
     format: yaml
   name: label
   type: OneOrMore of String
-- deprecated:
-    deprecation: 0.6.3
-    message: '`resources` in `setup: {type: docker, resources: ...}` will be removed.
-      Please use `copy` instead.'
-    removal: 0.7.0
-  description: Specifies which `COPY` entries to add to the Dockerfile while building
+- description: Specifies which `COPY` entries to add to the Dockerfile while building
     it.
   example:
   - example: 'resources: [ "resource.txt /path/to/resource.txt" ]'
     format: yaml
   name: resources
+  removed:
+    deprecation: 0.6.3
+    message: '`resources` in `setup: {type: docker, resources: ...}` was removed.
+      Please use `copy` instead.'
+    removal: 0.7.0
   type: OneOrMore of String
 - description: Specifies which `RUN` entries to add to the Dockerfile while building
     it.
