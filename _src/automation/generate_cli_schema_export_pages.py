@@ -51,6 +51,11 @@ def create_page(name, json_data):
 		page_data = {'title': f'viash {name}', 'usesSubcommands': True, 'data': json_data['subcommands']}
 
 	# TODO: description = replace_keywords(argument["descr"])
+	for d in page_data['data']:
+		if 'opts' in d:
+			for arg in d['opts']:
+				if 'descr' in arg:
+					arg['descr'] = replace_keywords(arg["descr"])
 
 	render_jinja_page(cli_dir, name, page_data)
 
