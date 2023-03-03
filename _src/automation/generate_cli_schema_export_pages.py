@@ -4,14 +4,11 @@ from pathlib import Path
 repo = git.Repo(".", search_parent_directories=True) # Get root dir of repo
 repo_root = repo.working_tree_dir
 
-json_export = "cli_schema_export.json"
 keyword_regex = r"\@\[(.*?)\]\((.*?)\)"
 
 cli_dir = Path(repo_root, "reference", "cli")
 json_file = Path(repo_root, "reference", "cli_schema_export.json")
 template_file = Path(repo_root, "_src" ,"automation", "template_cli_page.j2.qmd")
-
-reference_dir = repo_root + "/reference/"
 
 config_file = Path(repo_root, '_src', 'automation', 'config_pages_settings.yaml')
 
@@ -42,14 +39,15 @@ def generate_pages():
 	for entry in viash_json:
 		create_page(entry["name"], entry)
 
-
 def create_page(name, json_data):
+	""" Do minor transformations and let jinja do its thing """
 
 	if "bannerCommand" in json_data: # Info is in top level command
 		page_data = {'title': f'viash {name}', 'usesSubcommands': False, 'data': [json_data]}
 	else:
 		page_data = {'title': f'viash {name}', 'usesSubcommands': True, 'data': json_data['subcommands']}
 
+	# replace keywords in 'descr' fields
 	for d in page_data['data']:
 		if 'opts' in d:
 			for arg in d['opts']:
