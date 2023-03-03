@@ -54,15 +54,6 @@ def create_page(name, json_data):
 
 	render_jinja_page(cli_dir, name, page_data)
 
-# TODO
-# def qmd_code_paragraph(text) -> str:
-# 	""" Returns text with newlines and code styling added. """
-# 	qmd = ""
-# 	splitted = text.split("\n")
-# 	for part in splitted:
-# 		qmd += "`" + part + "`\n\n"
-# 	return qmd
-
 def render_jinja_page(folder: str, filename: str, data: dict):
 	""" Write data to yaml file and run jinja. """
 	

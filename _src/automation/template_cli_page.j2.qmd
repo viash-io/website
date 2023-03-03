@@ -6,20 +6,19 @@ execute:
   output: asis
 ---
 
-# TODO fix multiple lines in bannerUsage
 # TODO replace_keywords in description
 
 {% for d in data %}
 
 {%- if usesSubcommands %}
 ## {{d.bannerCommand}}
-{% endif %}
+{%- endif %}
 
 {{d.bannerDescription}}
 
 **Usage:**
 
-`{{d.bannerUsage}}`
+`{{d.bannerUsage|replace("\n", "`\n\n`")}}`
 
 | Argument | Description | Type |
 |-|:----|-:
