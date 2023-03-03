@@ -9,12 +9,19 @@ data:
   - io.viash.platforms.requirements.Requirements
   name: __this__
   type: DockerRequirements
-- description: Specifies which `ADD` entries to add to the Dockerfile while building
+- description: Specifies which `RUN` entries to add to the Dockerfile while building
     it.
   example:
-  - example: 'add: [ "http://foo/bar ." ]'
+  - example: "run: |\n  echo 'Run a custom command'\n  echo 'Foo' > /path/to/file.txt"
     format: yaml
-  name: add
+  name: run
+  type: OneOrMore of String
+- description: Specifies which `LABEL` entries to add to the Dockerfile while building
+    it.
+  example:
+  - example: 'label: [ component="foo" ]'
+    format: yaml
+  name: label
   type: OneOrMore of String
 - description: Specifies which `ARG` entries to add to the Dockerfile while building
     it.
@@ -23,12 +30,15 @@ data:
     format: yaml
   name: build_args
   type: OneOrMore of String
-- description: Specifies which `COPY` entries to add to the Dockerfile while building
+- description: Specifies the type of the requirement specification.
+  name: type
+  type: String
+- description: Specifies which `ADD` entries to add to the Dockerfile while building
     it.
   example:
-  - example: 'copy: [ "resource.txt /path/to/resource.txt" ]'
+  - example: 'add: [ "http://foo/bar ." ]'
     format: yaml
-  name: copy
+  name: add
   type: OneOrMore of String
 - description: Specifies which `ENV` entries to add to the Dockerfile while building
     it. Unlike `ARG`, `ENV` entries are also accessible from inside the container.
@@ -36,13 +46,6 @@ data:
   - example: 'env: [ "R_VERSION=4.2" ]'
     format: yaml
   name: env
-  type: OneOrMore of String
-- description: Specifies which `LABEL` entries to add to the Dockerfile while building
-    it.
-  example:
-  - example: 'label: [ component="foo" ]'
-    format: yaml
-  name: label
   type: OneOrMore of String
 - description: Specifies which `COPY` entries to add to the Dockerfile while building
     it.
@@ -56,15 +59,12 @@ data:
       Please use `copy` instead.'
     removal: 0.7.0
   type: OneOrMore of String
-- description: Specifies which `RUN` entries to add to the Dockerfile while building
+- description: Specifies which `COPY` entries to add to the Dockerfile while building
     it.
   example:
-  - example: "run: |\n  echo 'Run a custom command'\n  echo 'Foo' > /path/to/file.txt"
+  - example: 'copy: [ "resource.txt /path/to/resource.txt" ]'
     format: yaml
-  name: run
+  name: copy
   type: OneOrMore of String
-- description: Specifies the type of the requirement specification.
-  name: type
-  type: String
 title: Docker Requirements
 topic: requirements

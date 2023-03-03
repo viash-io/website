@@ -15,31 +15,6 @@ data:
     format: yaml
   name: bioc
   type: OneOrMore of String
-- description: 'Forces packages specified in `bioc` to be reinstalled, even if they
-    are already present in the container. Default: false.'
-  example:
-  - example: 'bioc_force_install: false'
-    format: yaml
-  name: bioc_force_install
-  type: Boolean
-- description: Specifies which packages to install from Bitbucket.
-  example:
-  - example: 'bitbucket: [ org/package ]'
-    format: yaml
-  name: bitbucket
-  type: OneOrMore of String
-- description: Specifies which packages to install from CRAN.
-  example:
-  - example: 'cran: [ anndata, ggplot2 ]'
-    format: yaml
-  name: cran
-  type: OneOrMore of String
-- description: Specifies which packages to install using a Git URI.
-  example:
-  - example: 'git: [ https://some.git.repository/org/repo ]'
-    format: yaml
-  name: git
-  type: OneOrMore of String
 - description: Specifies which packages to install from GitHub.
   example:
   - example: 'github: [ rcannood/SCORPIUS ]'
@@ -51,6 +26,43 @@ data:
   - example: 'gitlab: [ org/package ]'
     format: yaml
   name: gitlab
+  type: OneOrMore of String
+- description: Specifies which packages to install using a generic URI.
+  example:
+  - example: 'url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]'
+    format: yaml
+  name: url
+  type: OneOrMore of String
+- description: 'Forces packages specified in `bioc` to be reinstalled, even if they
+    are already present in the container. Default: false.'
+  example:
+  - example: 'bioc_force_install: false'
+    format: yaml
+  name: bioc_force_install
+  type: Boolean
+- description: Specifies which packages to install using a Git URI.
+  example:
+  - example: 'git: [ https://some.git.repository/org/repo ]'
+    format: yaml
+  name: git
+  type: OneOrMore of String
+- description: Specifies which packages to install from CRAN.
+  example:
+  - example: 'cran: [ anndata, ggplot2 ]'
+    format: yaml
+  name: cran
+  type: OneOrMore of String
+- description: Specifies which packages to install from Bitbucket.
+  example:
+  - example: 'bitbucket: [ org/package ]'
+    format: yaml
+  name: bitbucket
+  type: OneOrMore of String
+- description: Specifies which packages to install using an SVN URI.
+  example:
+  - example: 'svn: [ https://path.to.svn/group/repo ]'
+    format: yaml
+  name: svn
   type: OneOrMore of String
 - description: Specifies which packages to install from CRAN.
   example:
@@ -65,20 +77,8 @@ data:
     format: yaml
   name: script
   type: OneOrMore of String
-- description: Specifies which packages to install using an SVN URI.
-  example:
-  - example: 'svn: [ https://path.to.svn/group/repo ]'
-    format: yaml
-  name: svn
-  type: OneOrMore of String
 - description: Specifies the type of the requirement specification.
   name: type
   type: String
-- description: Specifies which packages to install using a generic URI.
-  example:
-  - example: 'url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]'
-    format: yaml
-  name: url
-  type: OneOrMore of String
 title: R Requirements
 topic: requirements

@@ -11,6 +11,88 @@ data:
   - io.viash.platforms.Platform
   name: __this__
   type: DockerPlatform
+- description: Name of a container's [organization](https://docs.docker.com/docker-hub/orgs/).
+  name: organization
+  type: Option of String
+- description: The URL to the a [custom Docker registry](https://docs.docker.com/registry/)
+  example:
+  - example: 'registry: https://my-docker-registry.org'
+    format: yaml
+  name: registry
+  type: Option of String
+- description: The base container to start from. You can also add the tag here if
+    you wish.
+  example:
+  - example: 'image: "bash:4.0"'
+    format: yaml
+  name: image
+  type: String
+- description: Specify a Docker image based on its tag.
+  example:
+  - example: 'tag: 4.0'
+    format: yaml
+  name: tag
+  type: Option of String
+- description: The tag the resulting image gets. Advanced usage only.
+  example:
+  - example: 'target_tag: 0.5.0'
+    format: yaml
+  name: target_tag
+  type: Option of String
+- description: Add [docker run](https://docs.docker.com/engine/reference/run/) arguments.
+  name: run_args
+  type: OneOrMore of String
+- description: The separator between the namespace and the name of the component,
+    used for determining the image name.
+  example:
+  - example: 'namespace_separator: "+"'
+    format: yaml
+  name: namespace_separator
+  type: String
+- description: 'Enables or disables automatic volume mapping. Enabled when set to
+    `Automatic` or disabled when set to `Manual`. Default: `Automatic`'
+  name: resolve_volume
+  type: DockerResolveVolume
+- description: A list of enabled ports. This doesn't change the Dockerfile but gets
+    added as a command-line argument at runtime.
+  example:
+  - example: "port:\n  - 80\n  - 8080\n"
+    format: yaml
+  name: port
+  type: OneOrMore of String
+- description: Specify which Python packages should be available in order to run the
+    component.
+  example:
+  - example: "setup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo\
+      \ ]\n    github: [ jkbr/httpie ]\n    gitlab: [ foo/bar ]\n    mercurial: [\
+      \ http://... ]\n    svn: [ http://...]\n    bazaar: [ http://... ]\n    url:\
+      \ [ http://... ]\n"
+    format: yaml
+  name: python
+  removed:
+    deprecation: 0.5.15
+    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: python, ...
+      }]}`. Will be removed.'
+    removal: 0.7.0
+  type: Option of PythonRequirements
+- description: "A list of requirements for installing the following types of packages:\n\
+    \n - [apt](/reference/config/platforms/docker/setup/#apt-requirements)\n - [apk](/reference/config/platforms/docker/setup/#apk-requirements)\n\
+    \ - [Docker setup instructions](/reference/config/platforms/docker/setup/#docker-requirements)\n\
+    \ - [JavaScript](/reference/config/platforms/docker/setup/#javascript-requirements)\n\
+    \ - [Python](/reference/config/platforms/docker/setup/#python-requirements)\n\
+    \ - [R](/reference/config/platforms/docker/setup/#r-requirements)\n - [Ruby](/reference/config/platforms/docker/setup/#ruby-requirements)\n\
+    \ - [yum](/reference/config/platforms/docker/setup/#yum-requirements)\n\nThe order\
+    \ in which these dependencies are specified determines the order in which they\
+    \ will be installed.\n"
+  name: setup
+  type: List of Requirements
+- description: The working directory when starting the container. This doesn't change
+    the Dockerfile but gets added as a command-line argument at runtime.
+  example:
+  - example: 'workdir: /home/user'
+    format: yaml
+  name: workdir
+  type: Option of String
 - description: Specify which apk packages should be available in order to run the
     component.
   example:
@@ -23,27 +105,38 @@ data:
       Will be removed.'
     removal: 0.7.0
   type: Option of ApkRequirements
-- description: Specify which apt packages should be available in order to run the
+- description: If anything is specified in the setup section, running the `---setup`
+    will result in an image with the name of `<target_image>:<version>`. If nothing
+    is specified in the `setup` section, simply `image` will be used. Advanced usage
+    only.
+  example:
+  - example: 'target_image: myfoo'
+    format: yaml
+  name: target_image
+  type: Option of String
+- description: Specify which yum packages should be available in order to run the
     component.
   example:
-  - example: "setup:\n  - type: apt\n    packages: [ sl ]\n"
+  - example: "setup:\n  - type: yum\n    packages: [ sl ]\n"
     format: yaml
-  name: apt
+  name: yum
   removed:
     deprecation: 0.5.15
-    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: apt, ... }]}`.
+    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: yum, ... }]}`.
       Will be removed.'
     removal: 0.7.0
-  type: Option of AptRequirements
-- description: 'In Linux, files created by a Docker container will be owned by `root`.
-    With `chown: true`, Viash will automatically change the ownership of output files
-    (arguments with `type: file` and `direction: output`) to the user running the
-    Viash command after execution of the component. Default value: `true`.'
+  type: Option of YumRequirements
+- description: The source of the target image. This is used for defining labels in
+    the dockerfile.
   example:
-  - example: 'chown: false'
+  - example: 'target_image_source: https://github.com/foo/bar'
     format: yaml
-  name: chown
-  type: Boolean
+  name: target_image_source
+  type: Option of String
+- description: Additional requirements specific for running unit tests.
+  name: test_setup
+  since: Viash 0.5.13
+  type: List of Requirements
 - description: Specify which Docker commands should be run during setup.
   example:
   - example: "setup:\n  - type: docker\n    build_args: [ GITHUB_PAT=hello_world ]\n\
@@ -65,30 +158,25 @@ data:
     format: yaml
   name: id
   type: String
-- description: The base container to start from. You can also add the tag here if
-    you wish.
+- description: Specify which apt packages should be available in order to run the
+    component.
   example:
-  - example: 'image: "bash:4.0"'
+  - example: "setup:\n  - type: apt\n    packages: [ sl ]\n"
     format: yaml
-  name: image
-  type: String
-- description: The separator between the namespace and the name of the component,
-    used for determining the image name.
+  name: apt
+  removed:
+    deprecation: 0.5.15
+    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: apt, ... }]}`.
+      Will be removed.'
+    removal: 0.7.0
+  type: Option of AptRequirements
+- description: The URL where the resulting image will be pushed to. Advanced usage
+    only.
   example:
-  - example: 'namespace_separator: "+"'
+  - example: 'target_registry: https://my-docker-registry.org'
     format: yaml
-  name: namespace_separator
-  type: String
-- description: Name of a container's [organization](https://docs.docker.com/docker-hub/orgs/).
-  name: organization
+  name: target_registry
   type: Option of String
-- description: A list of enabled ports. This doesn't change the Dockerfile but gets
-    added as a command-line argument at runtime.
-  example:
-  - example: "port:\n  - 80\n  - 8080\n"
-    format: yaml
-  name: port
-  type: OneOrMore of String
 - description: Adds a `privileged` flag to the docker run.
   name: privileged
   removed:
@@ -97,60 +185,6 @@ data:
       run_args: "--privileged"}`.'
     removal: 0.7.0
   type: Option of Boolean
-- description: Specify which Python packages should be available in order to run the
-    component.
-  example:
-  - example: "setup:\n  - type: python\n    pip: [ numpy ]\n    git: [ https://some.git.repository/org/repo\
-      \ ]\n    github: [ jkbr/httpie ]\n    gitlab: [ foo/bar ]\n    mercurial: [\
-      \ http://... ]\n    svn: [ http://...]\n    bazaar: [ http://... ]\n    url:\
-      \ [ http://... ]\n"
-    format: yaml
-  name: python
-  removed:
-    deprecation: 0.5.15
-    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: python, ...
-      }]}`. Will be removed.'
-    removal: 0.7.0
-  type: Option of PythonRequirements
-- description: Specify which R packages should be available in order to run the component.
-  example:
-  - example: "setup: \n  - type: r\n    cran: [ dynutils ]\n    bioc: [ AnnotationDbi\
-      \ ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ rcannood/SCORPIUS\
-      \ ]\n    gitlab: [ org/package ]\n    svn: [ https://path.to.svn/group/repo\
-      \ ]\n    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]\n    script:\
-      \ [ 'devtools::install(\".\")' ]\n"
-    format: yaml
-  name: r
-  removed:
-    deprecation: 0.5.15
-    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: r, ... }]}`.
-      Will be removed.'
-    removal: 0.7.0
-  type: Option of RRequirements
-- description: The URL to the a [custom Docker registry](https://docs.docker.com/registry/)
-  example:
-  - example: 'registry: https://my-docker-registry.org'
-    format: yaml
-  name: registry
-  type: Option of String
-- description: 'Enables or disables automatic volume mapping. Enabled when set to
-    `Automatic` or disabled when set to `Manual`. Default: `Automatic`'
-  name: resolve_volume
-  type: DockerResolveVolume
-- description: Add [docker run](https://docs.docker.com/engine/reference/run/) arguments.
-  name: run_args
-  type: OneOrMore of String
-- description: "A list of requirements for installing the following types of packages:\n\
-    \n - [apt](/reference/config/platforms/docker/setup/#apt-requirements)\n - [apk](/reference/config/platforms/docker/setup/#apk-requirements)\n\
-    \ - [Docker setup instructions](/reference/config/platforms/docker/setup/#docker-requirements)\n\
-    \ - [JavaScript](/reference/config/platforms/docker/setup/#javascript-requirements)\n\
-    \ - [Python](/reference/config/platforms/docker/setup/#python-requirements)\n\
-    \ - [R](/reference/config/platforms/docker/setup/#r-requirements)\n - [Ruby](/reference/config/platforms/docker/setup/#ruby-requirements)\n\
-    \ - [yum](/reference/config/platforms/docker/setup/#yum-requirements)\n\nThe order\
-    \ in which these dependencies are specified determines the order in which they\
-    \ will be installed.\n"
-  name: setup
-  type: List of Requirements
 - description: 'The Docker setup strategy to use when building a container.
 
 
@@ -202,72 +236,38 @@ data:
     format: yaml
   name: setup_strategy
   type: DockerSetupStrategy
-- description: Specify a Docker image based on its tag.
+- description: Specify which R packages should be available in order to run the component.
   example:
-  - example: 'tag: 4.0'
+  - example: "setup: \n  - type: r\n    cran: [ dynutils ]\n    bioc: [ AnnotationDbi\
+      \ ]\n    git: [ https://some.git.repository/org/repo ]\n    github: [ rcannood/SCORPIUS\
+      \ ]\n    gitlab: [ org/package ]\n    svn: [ https://path.to.svn/group/repo\
+      \ ]\n    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]\n    script:\
+      \ [ 'devtools::install(\".\")' ]\n"
     format: yaml
-  name: tag
-  type: Option of String
-- description: If anything is specified in the setup section, running the `---setup`
-    will result in an image with the name of `<target_image>:<version>`. If nothing
-    is specified in the `setup` section, simply `image` will be used. Advanced usage
-    only.
-  example:
-  - example: 'target_image: myfoo'
-    format: yaml
-  name: target_image
-  type: Option of String
-- description: The source of the target image. This is used for defining labels in
-    the dockerfile.
-  example:
-  - example: 'target_image_source: https://github.com/foo/bar'
-    format: yaml
-  name: target_image_source
-  type: Option of String
+  name: r
+  removed:
+    deprecation: 0.5.15
+    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: r, ... }]}`.
+      Will be removed.'
+    removal: 0.7.0
+  type: Option of RRequirements
+- description: Specifies the type of the platform.
+  name: type
+  type: String
 - description: The organization set in the resulting image. Advanced usage only.
   example:
   - example: 'target_organization: viash-io'
     format: yaml
   name: target_organization
   type: Option of String
-- description: The URL where the resulting image will be pushed to. Advanced usage
-    only.
+- description: 'In Linux, files created by a Docker container will be owned by `root`.
+    With `chown: true`, Viash will automatically change the ownership of output files
+    (arguments with `type: file` and `direction: output`) to the user running the
+    Viash command after execution of the component. Default value: `true`.'
   example:
-  - example: 'target_registry: https://my-docker-registry.org'
+  - example: 'chown: false'
     format: yaml
-  name: target_registry
-  type: Option of String
-- description: The tag the resulting image gets. Advanced usage only.
-  example:
-  - example: 'target_tag: 0.5.0'
-    format: yaml
-  name: target_tag
-  type: Option of String
-- description: Additional requirements specific for running unit tests.
-  name: test_setup
-  since: Viash 0.5.13
-  type: List of Requirements
-- description: Specifies the type of the platform.
-  name: type
-  type: String
-- description: The working directory when starting the container. This doesn't change
-    the Dockerfile but gets added as a command-line argument at runtime.
-  example:
-  - example: 'workdir: /home/user'
-    format: yaml
-  name: workdir
-  type: Option of String
-- description: Specify which yum packages should be available in order to run the
-    component.
-  example:
-  - example: "setup:\n  - type: yum\n    packages: [ sl ]\n"
-    format: yaml
-  name: yum
-  removed:
-    deprecation: 0.5.15
-    message: 'Use `setup` instead, e.g. `{type: docker, setup: [{ type: yum, ... }]}`.
-      Will be removed.'
-    removal: 0.7.0
-  type: Option of YumRequirements
+  name: chown
+  type: Boolean
 title: Docker Platform
 topic: platforms

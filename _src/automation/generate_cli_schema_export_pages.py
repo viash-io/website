@@ -50,7 +50,6 @@ def create_page(name, json_data):
 	else:
 		page_data = {'title': f'viash {name}', 'usesSubcommands': True, 'data': json_data['subcommands']}
 
-	# TODO: description = replace_keywords(argument["descr"])
 	for d in page_data['data']:
 		if 'opts' in d:
 			for arg in d['opts']:

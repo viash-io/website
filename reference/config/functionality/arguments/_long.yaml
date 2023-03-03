@@ -13,6 +13,14 @@ data:
 - description: List of alternative format variations for this argument.
   name: alternatives
   type: OneOrMore of String
+- description: "The name of the argument. Can be in the formats `--foo`, `-f` or `foo`.\
+    \ The number of dashes determines how values can be passed:  \n\n  - `--foo` is\
+    \ a long option, which can be passed with `executable_name --foo=value` or `executable_name\
+    \ --foo value`\n  - `-f` is a short option, which can be passed with `executable_name\
+    \ -f value`\n  - `foo` is an argument, which can be passed with `executable_name\
+    \ value`  \n"
+  name: name
+  type: String
 - description: Limit the amount of valid values for this argument to those set in
     this list. When set and a value not present in the list is provided, an error
     will be produced.
@@ -21,23 +29,6 @@ data:
     format: yaml
   name: choices
   type: List of Long
-- description: The default value when no argument value is provided. This will not
-    work if the [`required`](#required) property is enabled.
-  example:
-  - example: "- name: --my_long\n  type: long\n  default: 100\n"
-    format: yaml
-  name: default
-  type: OneOrMore of Long
-- description: A description of the argument. This will be displayed with `--help`.
-  name: description
-  type: Option of String
-- description: An example value for this argument. If no [`default`](#default) property
-    was specified, this will be used for that purpose.
-  example:
-  - example: "- name: --my_long\n  type: long\n  example: 100\n"
-    format: yaml
-  name: example
-  type: OneOrMore of Long
 - description: 'Structured information. Can be any shape: a string, vector, map or
     even nested map.'
   example:
@@ -54,6 +45,34 @@ data:
     format: yaml
   name: max
   type: Option of Long
+- description: The default value when no argument value is provided. This will not
+    work if the [`required`](#required) property is enabled.
+  example:
+  - example: "- name: --my_long\n  type: long\n  default: 100\n"
+    format: yaml
+  name: default
+  type: OneOrMore of Long
+- description: An example value for this argument. If no [`default`](#default) property
+    was specified, this will be used for that purpose.
+  example:
+  - example: "- name: --my_long\n  type: long\n  example: 100\n"
+    format: yaml
+  name: example
+  type: OneOrMore of Long
+- description: A description of the argument. This will be displayed with `--help`.
+  name: description
+  type: Option of String
+- description: The delimiter character for providing [`multiple`](#multiple) values.
+    `:` by default.
+  example:
+  - example: "- name: --my_long\n  type: long\n  multiple: true\n  multiple_sep: \"\
+      ,\"\n"
+    format: yaml
+  - description: 'Here''s an example of how to use this:'
+    example: my_component --my_long=10:80:152
+    format: bash
+  name: multiple_sep
+  type: String
 - description: Minimum allowed value for this argument. If set and the provided value
     is lower than the minimum, an error will be produced. Can be combined with [`max`](#max)
     to clamp values.
@@ -74,24 +93,8 @@ data:
     format: bash
   name: multiple
   type: Boolean
-- description: The delimiter character for providing [`multiple`](#multiple) values.
-    `:` by default.
-  example:
-  - example: "- name: --my_long\n  type: long\n  multiple: true\n  multiple_sep: \"\
-      ,\"\n"
-    format: yaml
-  - description: 'Here''s an example of how to use this:'
-    example: my_component --my_long=10:80:152
-    format: bash
-  name: multiple_sep
-  type: String
-- description: "The name of the argument. Can be in the formats `--foo`, `-f` or `foo`.\
-    \ The number of dashes determines how values can be passed:  \n\n  - `--foo` is\
-    \ a long option, which can be passed with `executable_name --foo=value` or `executable_name\
-    \ --foo value`\n  - `-f` is a short option, which can be passed with `executable_name\
-    \ -f value`\n  - `foo` is an argument, which can be passed with `executable_name\
-    \ value`  \n"
-  name: name
+- description: Specifies the type of the argument.
+  name: type
   type: String
 - description: Make the value for this argument required. If set to `true`, an error
     will be produced if no value was provided. `false` by default.
@@ -100,8 +103,5 @@ data:
     format: yaml
   name: required
   type: Boolean
-- description: Specifies the type of the argument.
-  name: type
-  type: String
 title: long
 topic: arguments

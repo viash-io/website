@@ -14,23 +14,13 @@ data:
 - description: List of alternative format variations for this argument.
   name: alternatives
   type: OneOrMore of String
-- description: The default value when no argument value is provided. This will not
-    work if the [`required`](#required) property is enabled.
-  example:
-  - example: "- name: --my_boolean\n  type: boolean\n  default: true\n"
-    format: yaml
-  name: default
-  type: OneOrMore of Boolean
-- description: A description of the argument. This will be displayed with `--help`.
-  name: description
-  type: Option of String
-- description: An example value for this argument. If no [`default`](#default) property
-    was specified, this will be used for that purpose.
-  example:
-  - example: "- name: --my_boolean\n  type: boolean\n  example: true\n"
-    format: yaml
-  name: example
-  type: OneOrMore of Boolean
+- description: "The name of the argument. Can be in the formats `--trim`, `-t` or\
+    \ `trim`. The number of dashes determines how values can be passed:  \n\n  - `--trim`\
+    \ is a long option, which can be passed with `executable_name --trim`\n  - `-t`\
+    \ is a short option, which can be passed with `executable_name -t`\n  - `trim`\
+    \ is an argument, which can be passed with `executable_name trim`  \n"
+  name: name
+  type: String
 - description: 'Structured information. Can be any shape: a string, vector, map or
     even nested map.'
   example:
@@ -39,6 +29,34 @@ data:
   name: info
   since: Viash 0.6.3
   type: Json
+- description: The default value when no argument value is provided. This will not
+    work if the [`required`](#required) property is enabled.
+  example:
+  - example: "- name: --my_boolean\n  type: boolean\n  default: true\n"
+    format: yaml
+  name: default
+  type: OneOrMore of Boolean
+- description: An example value for this argument. If no [`default`](#default) property
+    was specified, this will be used for that purpose.
+  example:
+  - example: "- name: --my_boolean\n  type: boolean\n  example: true\n"
+    format: yaml
+  name: example
+  type: OneOrMore of Boolean
+- description: A description of the argument. This will be displayed with `--help`.
+  name: description
+  type: Option of String
+- description: The delimiter character for providing [`multiple`](#multiple) values.
+    `:` by default.
+  example:
+  - example: "- name: --my_boolean\n  type: boolean\n  multiple: true\n  multiple_sep:\
+      \ \",\"\n"
+    format: yaml
+  - description: 'Here''s an example of how to use this:'
+    example: my_component --my_boolean=true,true,false
+    format: bash
+  name: multiple_sep
+  type: String
 - description: Treat the argument value as an array. Arrays can be passed using the
     delimiter `--foo=1:2:3` or by providing the same argument multiple times `--foo
     1 --foo 2`. You can use a custom delimiter by using the [`multiple_sep`](#multiple_sep)
@@ -51,23 +69,8 @@ data:
     format: bash
   name: multiple
   type: Boolean
-- description: The delimiter character for providing [`multiple`](#multiple) values.
-    `:` by default.
-  example:
-  - example: "- name: --my_boolean\n  type: boolean\n  multiple: true\n  multiple_sep:\
-      \ \",\"\n"
-    format: yaml
-  - description: 'Here''s an example of how to use this:'
-    example: my_component --my_boolean=true,true,false
-    format: bash
-  name: multiple_sep
-  type: String
-- description: "The name of the argument. Can be in the formats `--trim`, `-t` or\
-    \ `trim`. The number of dashes determines how values can be passed:  \n\n  - `--trim`\
-    \ is a long option, which can be passed with `executable_name --trim`\n  - `-t`\
-    \ is a short option, which can be passed with `executable_name -t`\n  - `trim`\
-    \ is an argument, which can be passed with `executable_name trim`  \n"
-  name: name
+- description: Specifies the type of the argument.
+  name: type
   type: String
 - description: Make the value for this argument required. If set to `true`, an error
     will be produced if no value was provided. `false` by default.
@@ -76,8 +79,5 @@ data:
     format: yaml
   name: required
   type: Boolean
-- description: Specifies the type of the argument.
-  name: type
-  type: String
 title: boolean
 topic: arguments

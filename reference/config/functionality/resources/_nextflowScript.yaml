@@ -7,17 +7,6 @@ data:
   - io.viash.functionality.resources.Resource
   name: __this__
   type: NextflowScript
-- description: Resulting filename of the resource. From within a script, the file
-    can be accessed at `meta["resources_dir"] + "/" + dest`. If unspecified, `dest`
-    will be set to the basename of the `path` parameter.
-  name: dest
-  type: Option of String
-- description: The name of the workflow to be executed.
-  name: entrypoint
-  type: Option of String
-- description: Whether the resulting resource file should be made executable.
-  name: is_executable
-  type: Option of Boolean
 - description: The path of the input file. Can be a relative or an absolute path,
     or a URI. Mutually exclusive with `text`.
   name: path
@@ -26,8 +15,19 @@ data:
     with `path`.
   name: text
   type: Option of String
+- description: The name of the workflow to be executed.
+  name: entrypoint
+  type: Option of String
+- description: Whether the resulting resource file should be made executable.
+  name: is_executable
+  type: Option of Boolean
 - description: Specifies the resource as a Nextflow script.
   name: type
   type: String
+- description: Resulting filename of the resource. From within a script, the file
+    can be accessed at `meta["resources_dir"] + "/" + dest`. If unspecified, `dest`
+    will be set to the basename of the `path` parameter.
+  name: dest
+  type: Option of String
 title: Nextflow Script
 topic: resources

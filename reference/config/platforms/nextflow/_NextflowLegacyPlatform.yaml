@@ -10,16 +10,12 @@ data:
     message: 'Nextflow platform with `variant: legacy` was removed'
     removal: 0.7.0
   type: NextflowLegacyPlatform
-- name: executor
-  removed:
-    deprecation: 0.6.3
-    message: Undocumented & stale value
-    removal: 0.7.0
+- description: Name of a container's [organization](https://docs.docker.com/docker-hub/orgs/).
+  example:
+  - example: 'organization: viash-io'
+    format: yaml
+  name: organization
   type: Option of String
-- description: Every platform can be given a specific id that can later be referred
-    to explicitly when running or building the Viash component.
-  name: id
-  type: String
 - description: 'If no image attributes are configured, Viash will use the auto-generated
     image name from the Docker platform:
 
@@ -68,6 +64,12 @@ data:
     '
   name: image
   type: Option of String
+- description: Specify a Docker image based on its tag.
+  example:
+  - example: 'tag: 4.0'
+    format: yaml
+  name: tag
+  type: Option of String
 - description: "When running the module in a cluster context and depending on the\
     \ cluster type, [NextFlow allows for attaching labels](https://www.nextflow.io/docs/latest/process.html#label)\
     \ to the process that can later be used as selectors for associating resources\
@@ -81,6 +83,23 @@ data:
     format: yaml
   name: label
   type: Option of String
+- description: 'By default NextFlow will create a symbolic link to the inputs for
+    a process/module and run the tool at hand using those symbolic links. Some applications
+    do not cope well with this strategy, in that case the files should effectively
+    be copied rather than linked to. This can be achieved by using `stageInMode: copy`.
+
+    This attribute is optional, the default is `symlink`.
+
+    '
+  example:
+  - example: 'stageInMode: copy'
+    format: yaml
+  name: stageInMode
+  type: Option of String
+- description: Every platform can be given a specific id that can later be referred
+    to explicitly when running or building the Viash component.
+  name: id
+  type: String
 - description: "When running the module in a cluster context and depending on the\
     \ cluster type, [NextFlow allows for attaching labels](https://www.nextflow.io/docs/latest/process.html#label)\
     \ to the process that can later be used as selectors for associating resources\
@@ -94,18 +113,29 @@ data:
     format: yaml
   name: labels
   type: OneOrMore of String
-- description: The default namespace separator is "_".
-  example:
-  - example: 'namespace_separator: "+"'
-    format: yaml
-  name: namespace_separator
+- description: Specifies the type of the platform.
+  name: type
   type: String
-- description: Name of a container's [organization](https://docs.docker.com/docker-hub/orgs/).
+- description: The URL to the a [custom Docker registry](https://docs.docker.com/registry/).
   example:
-  - example: 'organization: viash-io'
+  - example: 'registry: https://my-docker-registry.org'
     format: yaml
-  name: organization
+  name: registry
   type: Option of String
+- description: "By default, a subdirectory is created corresponding to the unique\
+    \ ID that is passed in the triplet. Let us illustrate this with an example. The\
+    \ following code snippet uses the value of `--input` as an input of a workflow.\
+    \ The input can include a wildcard so that multiple samples can run in parallel.\
+    \ We use the parent directory name (`.getParent().baseName`) as an identifier\
+    \ for the sample. We pass this as the first entry of the triplet:\n\n```\nChannel.fromPath(params.input)\
+    \ \\\n    | map{ it -> [ it.getParent().baseName , it ] } \\\n    | map{ it ->\
+    \ [ it[0] , it[1], params ] }\n    | ...\n```\nSay the resulting sample names\
+    \ are `SAMPLE1` and `SAMPLE2`. The next step in the pipeline will be published\
+    \ (at least by default) under:\n```\n<publishDir>/SAMPLE1/\n<publishDir>/SAMPLE2/\n\
+    ```\nThese per-ID subdirectories can be avoided by setting:\n```\nper_id: false\n\
+    ```\n"
+  name: per_id
+  type: Option of Boolean
 - description: 'When `publish: true`, this attribute defines where the output is written
     relative to the `params.publishDir` setting. For example, `path: processed` in
     combination with `--output s3://some_bucket/` will store the output of this component
@@ -138,20 +168,19 @@ data:
     '
   name: path
   type: Option of String
-- description: "By default, a subdirectory is created corresponding to the unique\
-    \ ID that is passed in the triplet. Let us illustrate this with an example. The\
-    \ following code snippet uses the value of `--input` as an input of a workflow.\
-    \ The input can include a wildcard so that multiple samples can run in parallel.\
-    \ We use the parent directory name (`.getParent().baseName`) as an identifier\
-    \ for the sample. We pass this as the first entry of the triplet:\n\n```\nChannel.fromPath(params.input)\
-    \ \\\n    | map{ it -> [ it.getParent().baseName , it ] } \\\n    | map{ it ->\
-    \ [ it[0] , it[1], params ] }\n    | ...\n```\nSay the resulting sample names\
-    \ are `SAMPLE1` and `SAMPLE2`. The next step in the pipeline will be published\
-    \ (at least by default) under:\n```\n<publishDir>/SAMPLE1/\n<publishDir>/SAMPLE2/\n\
-    ```\nThese per-ID subdirectories can be avoided by setting:\n```\nper_id: false\n\
-    ```\n"
-  name: per_id
-  type: Option of Boolean
+- description: 'Separates the outputs generated by a Nextflow component with multiple
+    outputs as separate events on the channel. Default value: `true`.'
+  example:
+  - example: 'separate_multiple_outputs: false'
+    format: yaml
+  name: separate_multiple_outputs
+  type: Boolean
+- description: The default namespace separator is "_".
+  example:
+  - example: 'namespace_separator: "+"'
+    format: yaml
+  name: namespace_separator
+  type: String
 - description: "NextFlow uses the autogenerated `work` dirs to manage process IO under\
     \ the hood. In order effectively output something one can publish the results\
     \ a module or step in the pipeline. In order to do this, add `publish: true` to\
@@ -162,45 +191,16 @@ data:
     \ = \"...\"\n```\n"
   name: publish
   type: Option of Boolean
-- description: The URL to the a [custom Docker registry](https://docs.docker.com/registry/).
-  example:
-  - example: 'registry: https://my-docker-registry.org'
-    format: yaml
-  name: registry
-  type: Option of String
-- description: 'Separates the outputs generated by a Nextflow component with multiple
-    outputs as separate events on the channel. Default value: `true`.'
-  example:
-  - example: 'separate_multiple_outputs: false'
-    format: yaml
-  name: separate_multiple_outputs
-  type: Boolean
-- description: 'By default NextFlow will create a symbolic link to the inputs for
-    a process/module and run the tool at hand using those symbolic links. Some applications
-    do not cope well with this strategy, in that case the files should effectively
-    be copied rather than linked to. This can be achieved by using `stageInMode: copy`.
-
-    This attribute is optional, the default is `symlink`.
-
-    '
-  example:
-  - example: 'stageInMode: copy'
-    format: yaml
-  name: stageInMode
-  type: Option of String
-- description: Specify a Docker image based on its tag.
-  example:
-  - example: 'tag: 4.0'
-    format: yaml
-  name: tag
-  type: Option of String
-- description: Specifies the type of the platform.
-  name: type
-  type: String
 - name: version
   removed:
     deprecation: 0.4.0
     message: 'nextflow platform: attribute ''version'' was removed'
+    removal: 0.7.0
+  type: Option of String
+- name: executor
+  removed:
+    deprecation: 0.6.3
+    message: Undocumented & stale value
     removal: 0.7.0
   type: Option of String
 title: Nextflow Legacy Platform
