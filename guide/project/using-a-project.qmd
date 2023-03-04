@@ -106,7 +106,7 @@ target/docker/demo/remove_comments/remove_comments \
 
 ## Run VDSL3 module
 
-```{bash}
+```bash
 nextflow run .
   -main-script target/nextflow/remove_comments/main.nf \
   -profile docker \
@@ -114,13 +114,13 @@ nextflow run .
   --publish_dir output1
 ```
 
-```{bash}
+```bash
 tree output1
 ```
 
 ## Run pipeline
 
-```{bash}
+```bash
 nextflow run . \
   -main-script workflows/demo_pipeline/main.nf \
   -profile docker \
@@ -128,20 +128,20 @@ nextflow run . \
   --publishDir output2
 ```
 
-```{bash}
+```bash
 tree output2
 ```
 
 ## Test components
 
 ```{bash}
-viash ns test --setup cachedbuild --parallel
+viash ns test --parallel
 ```
 
 ## Project config
 
 ```{r, output="asis"}
-cat(paste(readr::read_lines(paste0(proj_dir, "/_viash.yaml")), collapse = "\n"))
+cat(paste(readr::read_lines("_viash.yaml"), collapse = "\n"))
 ```
 
 ## More information
