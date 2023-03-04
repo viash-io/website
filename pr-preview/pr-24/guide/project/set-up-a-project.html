@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="What is VDSL3?">
 
-<title>Viash - Introduction</title>
+<title>Viash - Set up a project *</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../guide/nextflow_vdsl3/create-a-module.html" rel="next">
-<link href="../../guide/component/unit-testing.html" rel="prev">
+<link href="../../guide/project/continuous-integration.html" rel="next">
+<link href="../../guide/nextflow_vdsl3/discussion.html" rel="prev">
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -74,8 +73,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Viash - Introduction">
-<meta property="og:description" content="What is VDSL3?">
+<meta property="og:title" content="Viash - Set up a project *">
 <meta property="og:site-name" content="Viash">
 </head>
 
@@ -155,7 +153,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Introduction</h1>
+      <h1 class="quarto-secondary-nav-title">Set up a project *</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -226,7 +224,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../guide/nextflow_vdsl3/introduction.html" class="sidebar-item-text sidebar-link active">Introduction</a>
+  <a href="../../guide/nextflow_vdsl3/introduction.html" class="sidebar-item-text sidebar-link">Introduction</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -261,7 +259,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../guide/project/set-up-a-project.html" class="sidebar-item-text sidebar-link">Set up a project *</a>
+  <a href="../../guide/project/set-up-a-project.html" class="sidebar-item-text sidebar-link active">Set up a project *</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -283,21 +281,22 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#todo-add" id="toc-todo-add" class="nav-link active" data-scroll-target="#todo-add">Todo: add</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/viash-io/website/edit/main/guide/project/set-up-a-project.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/viash-io/website/blob/main/guide/project/set-up-a-project.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/viash-io/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Introduction</h1>
+<h1 class="title d-none d-lg-block">Set up a project *</h1>
 </div>
 
-<div>
-  <div class="description">
-    What is VDSL3?
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
@@ -310,11 +309,23 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 </header>
 
-<p>Nextflow is a highly popular and widely-used workflow manager in computational biology, featuring outstanding portability, reproducibility and scalability. However, while Nextflow’s advantages are impressive, developing a Nextflow pipeline can be challenging, requiring significant domain knowledge and verbose code that is labour-intensive. Fortunately, Viash provides a solution to the barriers of Nextflow pipeline development.</p>
-<p>Viash can help developers wrap their code into a state-of-the-art Nextflow script called a VDSL3 module. As we will demonstrate in the remainder of this guide, VDSL3 is effectively a separate DSL layer on top of Nextflow enabled by Viash, hence it is called Viash + Nextflow DSL 3, or VDSL3 for short. VDSL3’s benefits extend beyond Nextflow pipeline development, including reusability, test-driven development, separation of concerns, and continuous testing (See <a href="../../guide/nextflow_vdsl3/discussion.html">Discussion</a>).</p>
-<p>In the following sections, we’ll show how to use build Nextflow modules from Viash components and how to put them together in a pipeline.</p>
+<section id="todo-add" class="level2">
+<h2 class="anchored" data-anchor-id="todo-add">Todo: add</h2>
+<ul>
+<li>Clone from the project template (copy from quickstart)</li>
+<li>Project structure - Copy guide/component/namespaces.qmd section “Adding components to a namespace”</li>
+<li>Building many components: Copy guide/component/namespaces.qmd section “Using the viash ns subcommands”</li>
+<li>Test many components</li>
+<li>Customize the Viash project config</li>
+<li>Other commands:
+<ul>
+<li>Listing components</li>
+<li>Ns exec</li>
+</ul></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script type="text/javascript">
@@ -469,13 +480,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../guide/component/unit-testing.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Unit testing</span>
+      <a href="../../guide/nextflow_vdsl3/discussion.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Discussion</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../guide/nextflow_vdsl3/create-a-module.html" class="pagination-link">
-        <span class="nav-page-text">Create a module</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../guide/project/continuous-integration.html" class="pagination-link">
+        <span class="nav-page-text">Continuous integration</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

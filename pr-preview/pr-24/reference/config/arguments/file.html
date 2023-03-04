@@ -386,6 +386,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
    
   <ul>
   <li><a href="#alternatives" id="toc-alternatives" class="nav-link active" data-scroll-target="#alternatives">alternatives</a></li>
+  <li><a href="#create_parent" id="toc-create_parent" class="nav-link" data-scroll-target="#create_parent">create_parent</a></li>
   <li><a href="#default" id="toc-default" class="nav-link" data-scroll-target="#default">default</a></li>
   <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">description</a></li>
   <li><a href="#direction" id="toc-direction" class="nav-link" data-scroll-target="#direction">direction</a></li>
@@ -433,14 +434,24 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p><strong>Type</strong>: <code>String</code> / <code>List of String</code></p>
 <p>List of alternative format variations for this argument.</p>
 </section>
+<section id="create_parent" class="level2">
+<h2 class="anchored" data-anchor-id="create_parent">create_parent</h2>
+<p><strong>Type</strong>: <code>Boolean</code></p>
+<p>If the output filename is a path and it does not exist, create it before executing the script (only for <code>direction: output</code>).</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --my_file</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">create_parent</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+</section>
 <section id="default" class="level2">
 <h2 class="anchored" data-anchor-id="default">default</h2>
 <p><strong>Type</strong>: <code>Path</code> / <code>List of Path</code></p>
 <p>The default value when no argument value is provided. This will not work if the <a href="#required"><code>required</code></a> property is enabled.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --my_file</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">default</span><span class="kw">:</span><span class="at"> data.csv</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --my_file</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">default</span><span class="kw">:</span><span class="at"> data.csv</span></span></code></pre></div>
 </section>
 <section id="description" class="level2">
 <h2 class="anchored" data-anchor-id="description">description</h2>
@@ -452,59 +463,59 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p><strong>Type</strong>: <code>Direction</code></p>
 <p>Makes this argument an <code>input</code> or an <code>output</code>, as in does the file/folder needs to be read or written. <code>input</code> by default.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --my_output_file</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --my_output_file</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span></code></pre></div>
 </section>
 <section id="example" class="level2">
 <h2 class="anchored" data-anchor-id="example">example</h2>
 <p><strong>Type</strong>: <code>Path</code> / <code>List of Path</code></p>
 <p>An example value for this argument. If no <a href="#default"><code>default</code></a> property was specified, this will be used for that purpose.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --my_file</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">example</span><span class="kw">:</span><span class="at"> data.csv</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --my_file</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">example</span><span class="kw">:</span><span class="at"> data.csv</span></span></code></pre></div>
 </section>
 <section id="info" class="level2">
 <h2 class="anchored" data-anchor-id="info">info</h2>
 <p><strong>Type</strong>: <code>Json</code></p>
 <p>Structured information. Can be any shape: a string, vector, map or even nested map.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">info</span><span class="kw">:</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">category</span><span class="kw">:</span><span class="at"> cat1</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">labels</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">one</span><span class="kw">,</span><span class="at"> two</span><span class="kw">,</span><span class="at"> three</span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">info</span><span class="kw">:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">category</span><span class="kw">:</span><span class="at"> cat1</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">labels</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">one</span><span class="kw">,</span><span class="at"> two</span><span class="kw">,</span><span class="at"> three</span><span class="kw">]</span></span></code></pre></div>
 </section>
 <section id="multiple" class="level2">
 <h2 class="anchored" data-anchor-id="multiple">multiple</h2>
 <p><strong>Type</strong>: <code>Boolean</code></p>
 <p>Treat the argument value as an array. Arrays can be passed using the delimiter <code>--foo=1:2:3</code> or by providing the same argument multiple times <code>--foo 1 --foo 2</code>. You can use a custom delimiter by using the <a href="#multiple_sep"><code>multiple_sep</code></a> property. <code>false</code> by default.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --my_files</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">multiple</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --my_files</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">multiple</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
 <p>Here’s an example of how to use this:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_component</span> <span class="at">--my_files</span><span class="op">=</span>firstFile.csv:anotherFile.csv:yetAnother.csv</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_component</span> <span class="at">--my_files</span><span class="op">=</span>firstFile.csv:anotherFile.csv:yetAnother.csv</span></code></pre></div>
 </section>
 <section id="multiple_sep" class="level2">
 <h2 class="anchored" data-anchor-id="multiple_sep">multiple_sep</h2>
 <p><strong>Type</strong>: <code>String</code></p>
 <p>The delimiter character for providing <a href="#multiple"><code>multiple</code></a> values. <code>:</code> by default.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --my_files</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">multiple</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">multiple_sep</span><span class="kw">:</span><span class="at"> </span><span class="st">","</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --my_files</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">multiple</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">multiple_sep</span><span class="kw">:</span><span class="at"> </span><span class="st">","</span></span></code></pre></div>
 <p>Here’s an example of how to use this:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_component</span> <span class="at">--my_files</span><span class="op">=</span>firstFile.csv,anotherFile.csv,yetAnother.csv</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_component</span> <span class="at">--my_files</span><span class="op">=</span>firstFile.csv,anotherFile.csv,yetAnother.csv</span></code></pre></div>
 </section>
 <section id="must_exist" class="level2">
 <h2 class="anchored" data-anchor-id="must_exist">must_exist</h2>
 <p><strong>Type</strong>: <code>Boolean</code></p>
-<p>The file or folder should exist before the start of execution. If set to <code>true</code>, an error will be produced if the file or folder wasn’t found.</p>
+<p>Checks whether the file or folder exists. For input files, this check will happen before the execution of the script, while for output files the check will happen afterwards.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --my_file</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">must_exist</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --my_file</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">must_exist</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
 </section>
 <section id="name" class="level2">
 <h2 class="anchored" data-anchor-id="name">name</h2>
@@ -521,9 +532,9 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p><strong>Type</strong>: <code>Boolean</code></p>
 <p>Make the value for this argument required. If set to <code>true</code>, an error will be produced if no value was provided. <code>false</code> by default.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --my_file</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --my_file</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
 </section>
 <section id="type" class="level2">
 <h2 class="anchored" data-anchor-id="type">type</h2>

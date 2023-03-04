@@ -440,7 +440,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Removed since Viash 0.5.11. Extending the PATH turned out to be not desirable.</p>
+<p>Removed since 0.5.11. Extending the PATH turned out to be not desirable.</p>
 </div>
 </div>
 <p>Adds the resources directory to the PATH variable when set to true. This is set to false by default.</p>
@@ -602,7 +602,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Deprecated since Viash 0.6.0. Use <code>status</code> instead.</p>
+<p>Removed since 0.7.0. Use <code>status</code> instead.</p>
 </div>
 </div>
 <p>Setting this to false with disable this component when using namespaces.</p>
@@ -629,7 +629,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Deprecated since Viash 0.6.0. Use <code>arguments</code> instead.</p>
+<p>Removed since 0.7.0. Use <code>arguments</code> instead.</p>
 </div>
 </div>
 <p>A list of input arguments in addition to the <code>arguments</code> list. Any arguments specified here will have their <code>type</code> set to <code>file</code> and the <code>direction</code> set to <code>input</code> by default.</p>
@@ -674,7 +674,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Deprecated since Viash 0.6.0. Use <code>arguments</code> instead.</p>
+<p>Removed since 0.7.0. Use <code>arguments</code> instead.</p>
 </div>
 </div>
 <p>A list of output arguments in addition to the <code>arguments</code> list. Any arguments specified here will have their <code>type</code> set to <code>file</code> and thr <code>direction</code> set to <code>output</code> by default.</p>
@@ -707,11 +707,11 @@ Warning
 <p><a href="#">Resources</a> are files that support the component. The first resource should be <a href="../../guide/component/languages.html">a script</a> that will be executed when the functionality is run. Additional resources will be copied to the same directory.</p>
 <p>Common properties:</p>
 <ul>
-<li>type: <code>file</code> / <code>r_script</code> / <code>python_script</code> / <code>bash_script</code> / <code>javascript_script</code> / <code>scala_script</code> / <code>csharp_script</code>, the type of resource. The first resource cannot be of type <code>file</code>. When the type is not specified, the default type is simply <code>file</code>.</li>
-<li>name: filename, the resulting name of the resource.</li>
-<li>path: <code>path/to/file</code>, the path of the input file. Can be a relative or an absolute path, or a URI.</li>
-<li>text: …multiline text…, the raw content of the input file. Exactly one of path or text must be defined, the other undefined.</li>
-<li>is_executable: <code>true</code> / <code>false</code>, whether the resulting file is made executable.</li>
+<li>type: <code>file</code> / <code>r_script</code> / <code>python_script</code> / <code>bash_script</code> / <code>javascript_script</code> / <code>scala_script</code> / <code>csharp_script</code>, specifies the type of the resource. The first resource cannot be of type <code>file</code>. When the type is not specified, the default type is simply <code>file</code>.</li>
+<li>dest: filename, the resulting name of the resource. From within a script, the file can be accessed at <code>meta["resources_dir"] + "/" + dest</code>. If unspecified, <code>dest</code> will be set to the basename of the <code>path</code> parameter.</li>
+<li>path: <code>path/to/file</code>, the path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with <code>text</code>.</li>
+<li>text: …multiline text…, the content of the resulting file specified as a string. Mutually exclusive with <code>path</code>.</li>
+<li>is_executable: <code>true</code> / <code>false</code>, whether the resulting resource file should be made executable.</li>
 </ul>
 <p><strong>Example:</strong></p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resources</span><span class="kw">:</span></span>
@@ -750,7 +750,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Deprecated since Viash 0.5.13. Use <code>test_resources</code> instead. No functional difference.</p>
+<p>Removed since 0.7.0. Use <code>test_resources</code> instead. No functional difference.</p>
 </div>
 </div>
 <p>One or more Bash/R/Python scripts to be used to test the component behaviour when <code>viash test</code> is invoked. Additional files of type <code>file</code> will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code &gt;0 when unexpected behaviour occurs during testing.</p>
