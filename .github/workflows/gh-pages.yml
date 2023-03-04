@@ -28,7 +28,7 @@ jobs:
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v6
         with:
-          root-reserve-mb: 5000
+          root-reserve-mb: 4000
 
       - uses: actions/checkout@v3
 
@@ -78,6 +78,7 @@ jobs:
         shell: bash -l {0}  
         run: |
           # source renv/python/virtualenvs/renv-python-3.10/bin/activate
+          export PRUNE_IMAGES
           quarto render
 
       - name: Deploy 🚀
