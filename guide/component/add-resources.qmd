@@ -175,11 +175,4 @@ pwalk(langs, function(id, label, config_path, script_path, ...) {
 ```
 :::
 
-```{bash}
-#| include: false
-# remove example images and prune dangling images
-if [ $PRUNE_IMAGES == "true" ]; then
-  docker rmi $(docker images | grep example_ | gawk -F' ' '{print $3}')
-  docker system prune -f
-fi
-```
+{{< include ../../includes/_prune_all_images.qmd >}}
