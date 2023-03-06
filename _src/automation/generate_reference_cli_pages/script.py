@@ -69,7 +69,7 @@ def replace_keywords(text: str) -> str:
 
 	for matchNum, match in enumerate(matches, start=1):
 		whole_match = match.group(0)
-		keyword, keyword_text = match.groups()
+		keyword_text, keyword = match.groups()
 
 		try:
 			link = config_pages_settings['keywords'][keyword]

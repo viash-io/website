@@ -1,0 +1,39 @@
+data:
+- description: A Viash project configuration file. It's name should be `_viash.yaml`.
+  example:
+  - example: "viash_version: 0.6.4\nsource: src\ntarget: target\nconfig_mods: |\n\
+      \  .platforms[.type == 'docker'].target_registry := 'ghcr.io'\n  .platforms[.type\
+      \ == 'docker'].target_organization := 'viash-io'\n  .platforms[.type == 'docker'].namespace_separator\
+      \ := '/'\n  .platforms[.type == 'docker'].target_image_source := 'https://github.com/viash-io/viash'\n"
+    format: yaml
+  hierarchy:
+  - io.viash.project.ViashProject
+  name: __this__
+  since: Viash 0.6.4
+  type: ViashProject
+- description: Which source directory to use for the `viash ns` commands.
+  example:
+  - example: 'source: src'
+    format: yaml
+  name: source
+  type: Option of String
+- description: Which version of Viash to use.
+  example:
+  - example: 'viash_versions: 0.6.4'
+    format: yaml
+  name: viash_version
+  type: Option of String
+- description: Which config mods to apply.
+  example:
+  - example: 'config_mods: ".functionality.name := ''foo''"'
+    format: yaml
+  name: config_mods
+  type: OneOrMore of String
+- description: Which target directory to use for `viash ns build`.
+  example:
+  - example: 'target: target'
+    format: yaml
+  name: target
+  type: Option of String
+title: Project
+topic: .

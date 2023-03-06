@@ -22,7 +22,7 @@
     {
       "name" : "platforms",
       "type" : "List of Platform",
-      "description" : "A list of platforms to generate target artifacts for.\n\n - @[native_platform](Native)\n - @[docker_platform](Docker)\n - @[nextflow_platform](Nextflow VDSL3)\n"
+      "description" : "A list of platforms to generate target artifacts for.\n\n - @[Native](platform_native)\n - @[Docker](platform_docker)\n - @[Nextflow VDSL3](platform_nextflow)\n"
     }
   ],
   "functionality" : [
@@ -144,7 +144,7 @@
     {
       "name" : "resources",
       "type" : "List of Resource",
-      "description" : "@[resources](Resources) are files that support the component. The first resource should be @[scripting_languages](a script) that will be executed when the functionality is run. Additional resources will be copied to the same directory.\n\nCommon properties:\n\n * type: `file` / `r_script` / `python_script` / `bash_script` / `javascript_script` / `scala_script` / `csharp_script`, specifies the type of the resource. The first resource cannot be of type `file`. When the type is not specified, the default type is simply `file`.\n * dest: filename, the resulting name of the resource.  From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter.\n * path: `path/to/file`, the path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`.\n * text: ...multiline text..., the content of the resulting file specified as a string. Mutually exclusive with `path`.\n * is_executable: `true` / `false`, whether the resulting resource file should be made executable.\n",
+      "description" : "@[Resources](resources) are files that support the component. The first resource should be @[a script](scripting_languages) that will be executed when the functionality is run. Additional resources will be copied to the same directory.\n\nCommon properties:\n\n * type: `file` / `r_script` / `python_script` / `bash_script` / `javascript_script` / `scala_script` / `csharp_script`, specifies the type of the resource. The first resource cannot be of type `file`. When the type is not specified, the default type is simply `file`.\n * dest: filename, the resulting name of the resource.  From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter.\n * path: `path/to/file`, the path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`.\n * text: ...multiline text..., the content of the resulting file specified as a string. Mutually exclusive with `path`.\n * is_executable: `true` / `false`, whether the resulting resource file should be made executable.\n",
       "example" : [
         {
           "example" : "resources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt\n",
@@ -155,7 +155,7 @@
     {
       "name" : "test_resources",
       "type" : "List of Resource",
-      "description" : "One or more @[scripting_language](scripts) to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing. See @[unit_testing](Unit Testing) for more info.",
+      "description" : "One or more @[scripts](scripting_languages) to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing. See @[Unit Testing](unit_testing) for more info.",
       "example" : [
         {
           "example" : "test_resources:\n  - type: bash_script\n    path: tests/test1.sh\n  - type: r_script\n    path: tests/test2.R\n  - path: resource1.txt\n",
@@ -238,7 +238,7 @@
     {
       "name" : "namespace",
       "type" : "Option of String",
-      "description" : "Namespace this component is a part of. See the @[namespace](Namespaces guide) for more information on namespaces.",
+      "description" : "Namespace this component is a part of. See the @[Namespaces guide](namespace) for more information on namespaces.",
       "example" : [
         {
           "example" : "namespace: fancy_components",
@@ -249,7 +249,7 @@
     {
       "name" : "arguments",
       "type" : "List of Argument",
-      "description" : "A list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:  \n\n - @[arg_string](string)\n - @[arg_file](file)\n - @[arg_integer](integer)\n - @[arg_double](double)\n - @[arg_boolean](boolean)\n - @[arg_boolean_true](boolean_true)\n - @[arg_boolean_false](boolean_false)\n",
+      "description" : "A list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:  \n\n - @[string](arg_string)\n - @[file](arg_file)\n - @[integer](arg_integer)\n - @[double](arg_double)\n - @[boolean](arg_boolean)\n - @[boolean_true](arg_boolean_true)\n - @[boolean_false](arg_boolean_false)\n",
       "example" : [
         {
           "example" : "arguments:\n   - name: --foo\n    type: file\n    alternatives: [-f]\n    description: Description of foo\n    default: \"/foo/bar\"\n    must_exist: true\n    direction: output\n    required: false\n    multiple: true\n    multiple_sep: \",\"\n   - name: --bar\n    type: string\n",
@@ -396,7 +396,7 @@
       {
         "name" : "setup",
         "type" : "List of Requirements",
-        "description" : "A list of requirements for installing the following types of packages:\n\n - @[apt_req](apt)\n - @[apk_req](apk)\n - @[docker_req](Docker setup instructions)\n - @[javascript_req](JavaScript)\n - @[python_req](Python)\n - @[r_req](R)\n - @[ruby_req](Ruby)\n - @[yum_req](yum)\n\nThe order in which these dependencies are specified determines the order in which they will be installed.\n"
+        "description" : "A list of requirements for installing the following types of packages:\n\n - @[apt](apt_req)\n - @[apk](apk_req)\n - @[Docker setup instructions](docker_req)\n - @[JavaScript](javascript_req)\n - @[Python](python_req)\n - @[R](r_req)\n - @[Ruby](ruby_req)\n - @[yum](yum_req)\n\nThe order in which these dependencies are specified determines the order in which they will be installed.\n"
       },
       {
         "name" : "workdir",
@@ -536,7 +536,7 @@
       {
         "name" : "setup_strategy",
         "type" : "DockerSetupStrategy",
-        "description" : "The Docker setup strategy to use when building a container.\n\n| Strategy | Description |\n|-----|----------|\n| `alwaysbuild` / `build` / `b` | Always build the image from the dockerfile. This is the default setup strategy.\n| `alwayscachedbuild` / `cachedbuild` / `cb` | Always build the image from the dockerfile, with caching enabled.\n| `ifneedbebuild` |  Build the image if it does not exist locally.\n| `ifneedbecachedbuild` | Build the image with caching enabled if it does not exist locally, with caching enabled.\n| `alwayspull` / `pull` / `p` |  Try to pull the container from [Docker Hub](https://hub.docker.com) or the @[docker_registry](specified docker registry).\n| `alwayspullelsebuild` / `pullelsebuild` |  Try to pull the image from a registry and build it if it doesn't exist.\n| `alwayspullelsecachedbuild` / `pullelsecachedbuild` |  Try to pull the image from a registry and build it with caching if it doesn't exist.\n| `ifneedbepull` |  If the image does not exist locally, pull the image.\n| `ifneedbepullelsebuild` |  If the image does not exist locally, pull the image. If the image does exist, build it.\n| `ifneedbepullelsecachedbuild` | If the image does not exist locally, pull the image. If the image does exist, build it with caching enabled.\n| `push` | Push the container to [Docker Hub](https://hub.docker.com)  or the @[docker_registry](specified docker registry).\n| `pushifnotpresent` | Push the container to [Docker Hub](https://hub.docker.com) or the @[docker_registry](specified docker registry) if the @[docker_tag](tag) does not exist yet.\n| `donothing` / `meh` | Do not build or pull anything.\n\n",
+        "description" : "The Docker setup strategy to use when building a container.\n\n| Strategy | Description |\n|-----|----------|\n| `alwaysbuild` / `build` / `b` | Always build the image from the dockerfile. This is the default setup strategy.\n| `alwayscachedbuild` / `cachedbuild` / `cb` | Always build the image from the dockerfile, with caching enabled.\n| `ifneedbebuild` |  Build the image if it does not exist locally.\n| `ifneedbecachedbuild` | Build the image with caching enabled if it does not exist locally, with caching enabled.\n| `alwayspull` / `pull` / `p` |  Try to pull the container from [Docker Hub](https://hub.docker.com) or the @[specified docker registry](docker_registry).\n| `alwayspullelsebuild` / `pullelsebuild` |  Try to pull the image from a registry and build it if it doesn't exist.\n| `alwayspullelsecachedbuild` / `pullelsecachedbuild` |  Try to pull the image from a registry and build it with caching if it doesn't exist.\n| `ifneedbepull` |  If the image does not exist locally, pull the image.\n| `ifneedbepullelsebuild` |  If the image does not exist locally, pull the image. If the image does exist, build it.\n| `ifneedbepullelsecachedbuild` | If the image does not exist locally, pull the image. If the image does exist, build it with caching enabled.\n| `push` | Push the container to [Docker Hub](https://hub.docker.com)  or the @[specified docker registry](docker_registry).\n| `pushifnotpresent` | Push the container to [Docker Hub](https://hub.docker.com) or the @[specified docker registry](docker_registry) if the @[tag](docker_tag) does not exist yet.\n| `donothing` / `meh` | Do not build or pull anything.\n\n",
         "example" : [
           {
             "example" : "setup_strategy: alwaysbuild",
@@ -2676,5 +2676,66 @@
         "description" : "Resulting filename of the resource. From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter."
       }
     ]
-  }
+  },
+  "project" : [
+    {
+      "name" : "__this__",
+      "type" : "ViashProject",
+      "hierarchy" : [
+        "io.viash.project.ViashProject"
+      ],
+      "description" : "A Viash project configuration file. It's name should be `_viash.yaml`.",
+      "example" : [
+        {
+          "example" : "viash_version: 0.6.4\nsource: src\ntarget: target\nconfig_mods: |\n  .platforms[.type == 'docker'].target_registry := 'ghcr.io'\n  .platforms[.type == 'docker'].target_organization := 'viash-io'\n  .platforms[.type == 'docker'].namespace_separator := '/'\n  .platforms[.type == 'docker'].target_image_source := 'https://github.com/viash-io/viash'\n",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.6.4"
+    },
+    {
+      "name" : "source",
+      "type" : "Option of String",
+      "description" : "Which source directory to use for the `viash ns` commands.",
+      "example" : [
+        {
+          "example" : "source: src",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "viash_version",
+      "type" : "Option of String",
+      "description" : "Which version of Viash to use.",
+      "example" : [
+        {
+          "example" : "viash_versions: 0.6.4",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "config_mods",
+      "type" : "OneOrMore of String",
+      "description" : "Which config mods to apply.",
+      "example" : [
+        {
+          "example" : "config_mods: \".functionality.name := 'foo'\"",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "target",
+      "type" : "Option of String",
+      "description" : "Which target directory to use for `viash ns build`.",
+      "example" : [
+        {
+          "example" : "target: target",
+          "format" : "yaml"
+        }
+      ]
+    }
+  ]
 }
