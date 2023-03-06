@@ -23,7 +23,8 @@ execute:
 {% for arg in d.opts|sort(attribute="name") -%}
 
 {% if arg.name == "config" %}| `{{arg.name}}`{%- else -%}| `--{{arg.name}}`{% endif -%}
-{%- if arg.short is defined %}, `-{{arg.short}}`{% endif %} | {{arg.descr|replace("$", "\\$")}}{% if arg.required %} **This is a required argument.**{% endif %} | `{{arg.type}}` |
+{%- if arg.short is defined %}, `-{{arg.short}}`{% endif %} | {{arg.descr|replace("$", "\\$")|replace("\n", " ")}}
+{%- if arg.required %} **This is a required argument.**{% endif %} | `{{arg.type}}` |
 {% endfor -%}
 | `--help`, `-h` | Show help message |  |
 {% endfor %}
