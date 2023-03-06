@@ -6,6 +6,8 @@ viash run _src/automation/generate_version_blog_pages/config.vsh.yaml -- \
   --input ../viash/CHANGELOG.md \
   --output blog/posts
 
+source renv/python/virtualenvs/renv-python-3.10/bin/activate
+
 echo "Creating cli information"
 viash export cli_schema --output ./reference/cli_schema_export.json
 viash run _src/automation/generate_reference_cli_pages/config.vsh.yaml -- \
