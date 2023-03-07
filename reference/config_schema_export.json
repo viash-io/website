@@ -2090,56 +2090,6 @@
         ]
       }
     ],
-    "boolean_true" : [
-      {
-        "name" : "__this__",
-        "type" : "BooleanTrueArgument",
-        "hierarchy" : [
-          "io.viash.functionality.arguments.BooleanTrueArgument",
-          "io.viash.functionality.arguments.BooleanArgumentBase",
-          "io.viash.functionality.arguments.Argument"
-        ],
-        "description" : "An argument of the `boolean_true` type acts like a `boolean` flag with a default value of `false`. When called as an argument it sets the `boolean` to `true`.",
-        "example" : [
-          {
-            "example" : "arguments:\n  - name: --silent\n    type: boolean_true\n    description: Ignore console output\n    alternatives: [\"-s\"]\n",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "alternatives",
-        "type" : "OneOrMore of String",
-        "description" : "List of alternative format variations for this argument."
-      },
-      {
-        "name" : "name",
-        "type" : "String",
-        "description" : "The name of the argument. Can be in the formats `--silent`, `-s` or `silent`. The number of dashes determines how values can be passed:  \n\n  - `--silent` is a long option, which can be passed with `executable_name --silent`\n  - `-s` is a short option, which can be passed with `executable_name -s`\n  - `silent` is an argument, which can be passed with `executable_name silent`  \n"
-      },
-      {
-        "name" : "info",
-        "type" : "Json",
-        "description" : "Structured information. Can be any shape: a string, vector, map or even nested map.",
-        "example" : [
-          {
-            "example" : "info:\n  category: cat1\n  labels: [one, two, three]",
-            "format" : "yaml"
-          }
-        ],
-        "since" : "Viash 0.6.3"
-      },
-      {
-        "name" : "description",
-        "type" : "Option of String",
-        "description" : "A description of the argument. This will be displayed with `--help`."
-      },
-      {
-        "name" : "type",
-        "type" : "String",
-        "description" : "Specifies the type of the argument."
-      }
-    ],
     "file" : [
       {
         "name" : "__this__",
@@ -2336,6 +2286,72 @@
         "type" : "String",
         "description" : "Specifies the type of the argument."
       }
+    ],
+    "argument" : [
+      {
+        "name" : "__this__",
+        "type" : "Argument",
+        "hierarchy" : [
+          "io.viash.functionality.arguments.Argument"
+        ],
+        "description" : "For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:  \n\n - @[string](arg_string)\n - @[file](arg_file)\n - @[integer](arg_integer)\n - @[double](arg_double)\n - @[boolean](arg_boolean)\n - @[boolean_true](arg_boolean_true)\n - @[boolean_false](arg_boolean_false)\n",
+        "example" : [
+          {
+            "example" : "arguments:\n   - name: --foo\n    type: file\n    alternatives: [-f]\n    description: Description of foo\n    default: \"/foo/bar\"\n    must_exist: true\n    direction: output\n    required: false\n    multiple: true\n    multiple_sep: \",\"\n   - name: --bar\n    type: string\n",
+            "format" : "yaml"
+          }
+        ]
+      }
+    ],
+    "boolean_true" : [
+      {
+        "name" : "__this__",
+        "type" : "BooleanTrueArgument",
+        "hierarchy" : [
+          "io.viash.functionality.arguments.BooleanTrueArgument",
+          "io.viash.functionality.arguments.BooleanArgumentBase",
+          "io.viash.functionality.arguments.Argument"
+        ],
+        "description" : "An argument of the `boolean_true` type acts like a `boolean` flag with a default value of `false`. When called as an argument it sets the `boolean` to `true`.",
+        "example" : [
+          {
+            "example" : "arguments:\n  - name: --silent\n    type: boolean_true\n    description: Ignore console output\n    alternatives: [\"-s\"]\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "alternatives",
+        "type" : "OneOrMore of String",
+        "description" : "List of alternative format variations for this argument."
+      },
+      {
+        "name" : "name",
+        "type" : "String",
+        "description" : "The name of the argument. Can be in the formats `--silent`, `-s` or `silent`. The number of dashes determines how values can be passed:  \n\n  - `--silent` is a long option, which can be passed with `executable_name --silent`\n  - `-s` is a short option, which can be passed with `executable_name -s`\n  - `silent` is an argument, which can be passed with `executable_name silent`  \n"
+      },
+      {
+        "name" : "info",
+        "type" : "Json",
+        "description" : "Structured information. Can be any shape: a string, vector, map or even nested map.",
+        "example" : [
+          {
+            "example" : "info:\n  category: cat1\n  labels: [one, two, three]",
+            "format" : "yaml"
+          }
+        ],
+        "since" : "Viash 0.6.3"
+      },
+      {
+        "name" : "description",
+        "type" : "Option of String",
+        "description" : "A description of the argument. This will be displayed with `--help`."
+      },
+      {
+        "name" : "type",
+        "type" : "String",
+        "description" : "Specifies the type of the argument."
+      }
     ]
   },
   "resources" : {
@@ -2447,6 +2463,22 @@
         "name" : "dest",
         "type" : "Option of String",
         "description" : "Resulting filename of the resource. From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter."
+      }
+    ],
+    "resource" : [
+      {
+        "name" : "__this__",
+        "type" : "Resource",
+        "hierarchy" : [
+          "io.viash.functionality.resources.Resource"
+        ],
+        "description" : "@[Resources](resources) are files that support the component. The first resource should be @[a script](scripting_languages) that will be executed when the functionality is run. Additional resources will be copied to the same directory.\n\nCommon properties:\n\n * type: `file` / `r_script` / `python_script` / `bash_script` / `javascript_script` / `scala_script` / `csharp_script`, specifies the type of the resource. The first resource cannot be of type `file`. When the type is not specified, the default type is simply `file`.\n * dest: filename, the resulting name of the resource.  From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter.\n * path: `path/to/file`, the path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`.\n * text: ...multiline text..., the content of the resulting file specified as a string. Mutually exclusive with `path`.\n * is_executable: `true` / `false`, whether the resulting resource file should be made executable.\n",
+        "example" : [
+          {
+            "example" : "resources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt\n",
+            "format" : "yaml"
+          }
+        ]
       }
     ],
     "bashScript" : [
