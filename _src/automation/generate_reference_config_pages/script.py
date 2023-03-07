@@ -26,8 +26,8 @@ def read_json_entries():
 
 	for topic, topic_json in viash_json.items():
 		if isinstance(topic_json, dict):
-			for subtopic in topic_json:
-				generate_page(topic, subtopic, topic_json[subtopic])
+			for subtopic, subtopic_json in topic_json.items():
+				generate_page(topic, subtopic, subtopic_json)
 		else:
 			generate_page(".", topic, topic_json)
 
