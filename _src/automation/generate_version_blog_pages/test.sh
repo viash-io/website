@@ -1,6 +1,6 @@
 #!/bin/bash
 
-"$meta_executable" --input "test_schangelog.md" --output .
+"$meta_executable" --input "test_changelog.md" --output .
 
 if ! grep -q "Viash 0.0.1" viash-0.0.1/index.qmd ; then
   echo viash-0.0.1/index.qmd should contain "Viash 0.0.1"

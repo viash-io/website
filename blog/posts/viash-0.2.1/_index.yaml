@@ -1,0 +1,61 @@
+changes: '### NEW FEATURES
+
+
+  * `NXF`: Data references in Map form can now have values being lists. In other words,
+  we can have multiple options which have one or more values.
+
+  * `viash ns build`: Added --parallel and --setup flag.
+
+  * `viash build`: Added --setup flag.
+
+  * Allow changing the order of setup commands using the `setup:` variable.
+
+  * (HIDDEN) Do not escape `${VIASH_...}` elements in default values and descriptions!
+
+
+  ### MINOR CHANGES
+
+
+  * Remove `---chown` flag, move to `platform.docker.chown`; is set to true by default.
+
+  * Perform chown during both run and test using a Docker platform.
+
+
+  ### BUG FIXES
+
+
+  * Issue trying to parse positional arguments even when none is provided.
+
+
+  '
+date: '2020-09-11'
+subtitle: Docker chown by default
+version: 0.2.1
+whats_new: "\n### Docker chown by default\n\nRunning a script using a Docker platform\
+  \ will now chown output files by default, as well as any temporary files. You can\
+  \ turn off this feature by specifying `chown: false` in the yaml of a Docker platform.\n\
+  \n### [NXF] Data references\n\nData references in Map form can now have values being\
+  \ lists. In other words, we can have multiple options which have one or more values.\n\
+  \n### viash ns build -P docker --parallel --setup\n\n`viash ns build` has been greatly\
+  \ improved! You can automatically build the docker container by adding `--setup`\
+  \ to the command, as well as make the whole thing run in parallel using the `--parallel`\
+  \ or `-l` flag.\n\nTo build a docker container, you can run either of the following:\n\
+  \n  ```bash\n  viash run -f path/to/config.yaml -P docker -- ---setup\n  viash build\
+  \ -f path/to/functionality.yaml -P docker -o target/docker/path/to --setup\n  ```\n\
+  \nNote that the first will only build the docker container, whereas the second will\
+  \ build the executable and then build the docker container.\n\nTo build a lot of\
+  \ them all at once, run:\n\n  ```bash\n  viash ns build -P docker --parallel --setup\n\
+  \  ```\n\n### Custom order of platform requirements\n\nYou can now choose the order\
+  \ in which platform requirements are installed!\n\nBefore:\n\n  ```yaml\n  type:\
+  \ docker\n  image: rocker/tidyverse\n  target_image: \"viash_test/r\"\n  r:\n  \
+  \  cran:\n    - optparse\n    github:\n    - dynverse/dynutils@devel\n    bioc:\n\
+  \    - limma\n  apt:\n    packages:\n    - libhdf5-serial-dev\n  docker:\n    build_arg:\n\
+  \    - GITHUB_PAT=\"$GITHUB_PAT\"\n    run:\n    - git clone --depth 1 https://github.com/data-intuitive/viash_docs.git\
+  \ && rm -r viash_docs/.git\n  \u2191 in which order will these three components\
+  \ be run? Who knows!\n  ```\n\nNow:\n\n  ```yaml\n  type: docker\n  image: rocker/tidyverse\n\
+  \  target_image: \"viash_test/r\"\n  setup:\n  - type: docker\n    build_arg:\n\
+  \    - GITHUB_PAT=\"$GITHUB_PAT\"\n  - type: apt\n    packages:\n    - libhdf5-serial-dev\n\
+  \  - type: r\n    cran:\n    - optparse\n    - dynutils\n    github:\n    - rcannood/princurve@devel\n\
+  \    bioc:\n    - limma\n  - type: docker\n    run:\n    - git clone --depth 1 https://github.com/data-intuitive/viash_docs.git\
+  \ && rm -r viash_docs/.git\n  ```\n\nThis will ensure that the setup instructions\
+  \ are installed in the given order.\n\n"

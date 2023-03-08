@@ -1,0 +1,78 @@
+changes: "### BREAKING CHANGES\n\n* Viash config: Previously deprecated fields are\
+  \ now removed.\n  - `functionality.inputs`: Use `arguments` or `argument_groups`\
+  \ instead.\n  - `functionality.outputs`: Use `arguments` or `argument_groups` instead.\n\
+  \  - `functionality.tests`: Use `test_resources` instead. No functional difference.\n\
+  \  - `functionality.enabled`: Use `status: enabled` instead.\n  - `functionality.requirements.n_proc`:\
+  \ Use `cpus` instead.\n  - `platforms.DockerPlatform.privileged`: Add a `--privileged`\
+  \ flag in `run_args` instead.\n  - `platforms.DockerPlatform.apk`: Use `setup: [{\
+  \ type: apk, packages: ... }]` instead.\n  - `platforms.DockerPlatform.apt`: Use\
+  \ `setup: [{ type: apt, packages: ... }]` instead.\n  - `platforms.DockerPlatform.yum`:\
+  \ Use `setup: [{ type: yum, packages: ... }]` instead.\n  - `platforms.DockerPlatform.r`:\
+  \ Use `setup: [{ type: r, packages: ... }]` instead.\n  - `platforms.DockerPlatform.python`:\
+  \ Use `setup: [{ type: python, packages: ... }]` instead.\n  - `platforms.DockerPlatform.docker`:\
+  \ Use `setup: [{ type: docker, run: ... }]` instead.\n  - `platforms.DockerPlatform.docker.setup.resources`:\
+  \ Use `setup: [{ type: docker, copy: ... }]` instead.\n  - `platforms.NextflowLegacy`:\
+  \ Use the Nextflow VDSL3 platform instead.\n  - `functionality.ArgumentGroups`:\
+  \ No longer supports strings referring to arguments in the `arguments:` section.\n\
+  \    Instead directly put the arguments inside the argument groups.\n\n* `viash_install`:\
+  \ The bootstrap script has been reworked in line with the project config introduced\
+  \ in 0.6.4:\n\n    * The default location for installing the Viash executable is\
+  \ now `./viash` (was: `bin/viash`).\n    * The new `viash_install` support `--output`\
+  \ and `--tag`.\n    * The various settings that existed in `viash_install` (organisation,\
+  \ tag, ...) are moved to the project config.\n\n  Please note that this new `viash_install`\
+  \ bootstrap script can be run from the CLI using:\n\n    ```\n    curl -fsSL dl.viash.io\
+  \ | bash\n    ```\n  The old `get.viash.io` is still available but points to the\
+  \ version 0.6.7 version of this component and is deprecated.\n\n* `WorkflowHelper`:\
+  \ `paramsToList`, `paramsToChannel` and `viashChannel` are now deprecated and will\
+  \ be removed in a future release.\n\n* `viash (ns) build`: Change the default value\
+  \ of the namespace separator in a Docker platform from `_` to `/`. \n  Add `\".platforms[.type\
+  \ == 'docker'].namespace_separator := '_'\"` to the project config `_viash.yaml`\
+  \ to revert to the previous behaviour.\n\n### MAJOR CHANGES\n\n* `VDSL3`: now uses\
+  \ the newly implemented `channelFromParams` and `preprocessInputs` instead of `viashChannel`.\n\
+  \n### NEW FEATURES\n\n* `WorkflowHelper`: Added `preprocessInputs` and `channelFromParams`\
+  \ to replace `paramsToList`, `paramsToChannel` and `viashChannel`. This refactor\
+  \ allows processing parameters that are already in a Channel using `preprocessInputs`,\
+  \ which is necessary when passing parameters from a workflow to a subworkflow in\
+  \ a Nextflow pipeline.\n\n### MINOR CHANGES\n\n* `Main`: Capture build, setup and\
+  \ push errors and output an exit code.\n\n* `File downloading`: Add check to pre-emptively\
+  \ catch file errors (e.g. 404).\n\n* `Scala`: Updated to Scala 2.13 and updated\
+  \ several dependencies.\n\n* `Main`: Improve `match` completeness in some edge cases\
+  \ and throw exceptions where needed.\n\n* `Changelog`: Reformat the changelog to\
+  \ a more structured format.\n  For every release, there is now a date, title, and\
+  \ summary.\n  This both improves the changelog itself but can then also be used\
+  \ to postprocess the CHANGELOG programmatically.\n\n* `VDSL3`: Add a default value\
+  \ for `id` when running a VDSL3 module as a standalone pipeline.\n\n* `TestBenches`:\n\
+  \  - Verify switching of Viash versions\n  - Prepare ConfigDeriver by copying base\
+  \ resources to the targetFolder. Use cases so far showed that it's always required\
+  \ and it simplifies the usage.\n  - Remove some old & unmaintained IntelliJ Idea\
+  \ `editor-fold` tags. Given that the testbenches were split up, these were broken\
+  \ but also no longer needed.\n  - Add 2 testbenches for computational requirements\
+  \ when running `viash run` or `viash test`.\n  - Added tests for different values\
+  \ for the `--id` and `--param_list` parameters of VDSL3 modules.\n\n* `viash test`:\
+  \ Use `test` as a random tag during testing, instead of `test` plus a random string.\n\
+  \n### BUG FIXES\n\n* `WorkflowHelper`: fixed where passing a relative path as `--param_list`\
+  \ would cause incorrect resolving of input files.\n\n* `Testbenches`: Fix GitTest\
+  \ testbench to correctly increment temporary folder naming and dispose them after\
+  \ the test finishes.\n\n* `viash xxx url`: Fix passing a url to viash as the config\
+  \ file to process. Add a short testbench to test principle functionality.\n\n* `Testbenches`:\
+  \ Simplify `testr` container.\n\n* `Main`: Improve error reporting to the user in\
+  \ some cases where files or folders can't be found. Depending on the thrown exception,\
+  \ more or less context was given.\n\n* `VDSL3`: Create parent directory of output\
+  \ files before starting the script.\n\n"
+date: '2023-02-28'
+subtitle: Major code cleanup and minor improvements to VDSL3
+version: 0.7.0
+whats_new: "\n* Default namespace separator has been changed from `_` to `/`. This\
+  \ means \n  Docker images will be named `<Registry>/<Organization>/<Namespace>/<Name>`\n\
+  \  by default. For example, `ghcr.io/openpipelines-bio/mapping/cellranger_count`\n\
+  \  instead of `ghcr.io/openpipelines-bio/mapping_cellranger_count`.\n\n* Removed\
+  \ deprecated code of unused functionality to simplify code.\n  - Shorthand notation\
+  \ for specitying input/output arguments\n  - Shorthand notation for specifying Docker\
+  \ requirements\n  - Legacy Nextflow platform\n\n* Improvements in VDSL3 and the\
+  \ Nextflow Workflow Helper to make behaviour\n  more predictable and fixing some\
+  \ bugs in the meantime. Run the following\n  to get access to the updated helpers:\n\
+  \n  ```bash\n  WF_DIR=\"src/wf_utils\"\n  [[ -d $WF_DIR ]] || mkdir -p $WF_DIR\n\
+  \  viash export resource platforms/nextflow/ProfilesHelper.config > $WF_DIR/ProfilesHelper.config\n\
+  \  viash export resource platforms/nextflow/WorkflowHelper.nf > $WF_DIR/WorkflowHelper.nf\n\
+  \  viash export resource platforms/nextflow/DataflowHelper.nf > $WF_DIR/DataflowHelper.nf\n\
+  \  ```\n\n* Improvements to test benches and several bug fixes.\n\n"

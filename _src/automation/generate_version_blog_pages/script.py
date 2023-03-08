@@ -1,37 +1,14 @@
-import re
-import os
-import textwrap
-from typing import Tuple
+import subprocess, re, yaml
+from pathlib import Path
 
 ## VIASH START
 par = {
     'input': "_src/automation/generate_version_blog_pages/test_changelog.md",
-    'output': "output/",
-    'verbose': False
+    'output': "output/"
 }
 ## VIASH END
 
-def combine_into_file(version: str, header: str, whats_new: list[str], changes: list[str]) -> None:
-    """ Combine sections into a new file """
-
-    if par['output'] is None or par['verbose']:
-        print("\n---------")
-        print(f"version: {version}")
-        print(f"header:\n{header}")
-        print(f"\n\nwhats_new:\n{whats_new}")
-        print(f"\n\nchanges:\n{changes}")
-
-    if par['output'] is not None:
-        output_dir = par['output'] + "/viash-" + version
-        if not os.path.exists(output_dir):
-            os.makedirs(output_dir)
-
-        with open(output_dir + "/index.qmd", "w", encoding="utf-8") as file:
-            file.write(header)
-            if whats_new:
-                file.writelines(whats_new)
-            if changes:
-                file.writelines(changes)
+template_file = Path(meta['resources_dir'], "template_blog_page.j2.qmd")
 
 def bump_md_line(string: str) -> str:
     """ if header, bump header up one level """
@@ -44,78 +21,44 @@ def bump_markdown_headers(lines: list[str]) -> list[str]:
     out = map(bump_md_line, lines)
     return list(out)
 
-def handle_title(header: str) -> Tuple[str, str]:
-    """ Split the title and create a header section """
-    matches = re.search(r"^# Viash (\d+[\.\d+]+) \(([\dy]{4}-[\dM]{2}-[\dd]{2})\): (.*)$", header)
-
-    version, date, subtitle = matches.group(1, 2, 3)
-
-    # ---
-    # title: "Viash 0.6.2"
-    # subtitle: "Two bug fixes"
-    # date: 2022/10/11
-    # categories:
-    #     - New Release
-    # author: Viash Team
-    # ---
-    header = textwrap.dedent(f"""\
-    ---
-    title: "Viash {version}"
-    subtitle: "{subtitle}"
-    date: "{date}"
-    categories: [ New Release ]
-    author: Viash Team
-    ---
-    """)
-
-    return version, header
-
-
-def handle_whats_new(lines: list[str]) -> list[str]:
-    """ Adapt what's new section to add header and bump headers to higher level """
-
-    if not lines:
-        return lines
-
-    title = "\n## What's new?\n"
-    out = bump_markdown_headers(lines)
-    out.insert(0, title)
-    return out
-
-
-def handle_changes(lines: list[str]) -> list[str]:
-    """ Adapt full changelog section to add header and bump headers to higher level """
-
-    if not lines:
-        return lines
-
-    title = "## Full changelog\n\n"
-    out = bump_markdown_headers(lines)
-    out.insert(0, title)
-    return out
-
-
 def handle_section(lines: list[str]):
-    """ Split version data into title, what's new, and full changelog parts and write to file """
+    """ Split version data into title, what's new, and full changelog parts and render with jinja """
 
     # take first line and process as header
     header = lines.pop(0)
-    parsed_version, parsed_header = handle_title(header)
+    matches = re.search(r"^# Viash (\d+[\.\d+]+) \(([\dy]{4}-[\dM]{2}-[\dd]{2})\): (.*)$", header)
+    version, date, subtitle = matches.group(1, 2, 3)
 
     # take lines while there are lines or we encounter a
     # markdown header, process as "what's new" section
-    buff = []
+    whats_new = []
     while lines and not re.match("^#+ [A-Z ]+$", lines[0]):
-        buff.append(lines.pop(0))
+        whats_new.append(lines.pop(0))
 
-    parsed_whats_new = handle_whats_new(buff)
+    data = {
+        "version": version,
+        "date": date,
+        "subtitle": subtitle,
+        "whats_new": "".join(bump_markdown_headers(whats_new)),
+        "changes": "".join(bump_markdown_headers(lines))
+    }
 
-    # treat remaining list as "changes" section
-    parsed_changes = handle_changes(lines)
+    render_jinja_page(par['output'], f'viash-{version}/index.qmd', data)
 
-    # save output
-    combine_into_file(parsed_version, parsed_header, parsed_whats_new, parsed_changes)
+def render_jinja_page(folder: str, filename: str, data: dict):
+	""" Write data to yaml file and run jinja. """
+	
+	full_path = Path(folder, filename)
+	base_dir = full_path.parent
+	yaml_file = Path(base_dir, "_" + full_path.name).with_suffix('.yaml')
+	qmd_file = full_path.with_suffix('.qmd')
 
+	base_dir.mkdir(parents=True, exist_ok=True)	
+	
+	with open(yaml_file, 'w') as outfile:
+		yaml.safe_dump(data, outfile, default_flow_style=False)
+
+	subprocess.run(["j2", template_file, yaml_file, "-o", qmd_file])
 
 def load_log(changelog_path: str):
     """ Load changelog and split into sections """
