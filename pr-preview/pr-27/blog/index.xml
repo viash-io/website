@@ -17,7 +17,52 @@
 <width>144</width>
 </image>
 <generator>quarto-1.2.335</generator>
-<lastBuildDate>Tue, 28 Feb 2023 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 08 Mar 2023 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Viash 0.7.1</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.7.1/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This is a minor release which improves caching in VDSL3 components and changes the formats of the schema files for the Viash config and CLI.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><code>DataflowHelper</code>: Add assertions and <code>def</code>s.</li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>VDSL3</code>: Only the first two elements from an event in a channel are now passed to a process. This avoids calculating cache entries based on arguments that are not used by the process, causing false-negative cache misses.</p></li>
+<li><p><code>config_schema</code>:</p>
+<ul>
+<li>Correct some incorrect markdown tags.</li>
+<li>Add project config.</li>
+<li>Correct documentation/markdown tags to the correct order.</li>
+<li>Add summary description and example for ‘resource’ and ‘argument’, to be used on the reference website.</li>
+<li>Add documentation for the Nextflow directives.</li>
+</ul></li>
+<li><p><code>cli_schema</code>: Correct documentation/markdown tags to the correct order.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.7.1/index.html</guid>
+  <pubDate>Wed, 08 Mar 2023 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Viash 0.7.0</title>
   <dc:creator>Viash Team</dc:creator>
@@ -1400,60 +1445,6 @@ You can now add yum packages as a requirement:</p>
   <category>New Release</category>
   <guid>https://viash.io/blog/posts/viash-0.5.7/index.html</guid>
   <pubDate>Wed, 16 Feb 2022 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.5.6</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/blog/posts/viash-0.5.6/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="whats-new" class="level2">
-<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<ul>
-<li>Viash can now be installed without Docker needing to be installed on your system. You do need <code>unzip</code> and <code>wget</code> to complete the installation.</li>
-<li>The Docker related messages are more user friendly now.</li>
-</ul>
-</section>
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
-<section id="breaking-changes" class="level3">
-<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
-<ul>
-<li><code>BashWrapper</code>: Forbidden flags <code>-v</code>, <code>--verbose</code>, <code>--verbosity</code> have been renamed to <code>---v</code>, <code>---verbose</code>, <code>---verbosity</code>.</li>
-</ul>
-</section>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li><p>Set version of helper scripts to the same version as Viash.</p></li>
-<li><p><code>DockerPlatform</code>: Produce helpful warning message when Docker image can’t be found remotely (#94).</p></li>
-<li><p><code>DockerPlatform</code>: Produce helpful error message when Docker isn’t installed or the daemon is not running (#94 bis).</p></li>
-</ul>
-</section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
-<ul>
-<li><p><code>viash_install</code>:</p>
-<ul>
-<li>Passing Viash path as a string instead of as a file to ensure the path is not converted to an absolute path</li>
-<li>Switch from Docker backend to a Native backend, ‘unzip’ and ‘wget’ are required.</li>
-<li>Correctly set the log file for viash_test.</li>
-</ul></li>
-<li><p><code>DockerPlatform</code>: Added sleep workaround to avoid concurrency issue where a file is executed to build docker containers but apparently still in the process of being written.</p></li>
-<li><p><code>DockerPlatform</code>: Fix order issue of —verbose flag in combination with —setup, allowing to run <code>viash run config.vsh.yaml -- ---setup cb ---verbose</code> and actually get output.</p></li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/blog/posts/viash-0.5.6/index.html</guid>
-  <pubDate>Thu, 03 Feb 2022 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
