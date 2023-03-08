@@ -41,6 +41,8 @@ def generate_page(topic: str, subtopic: str, json_data: list):
 
 	# Fix description markdown keywords to links
 	for d in json_data:
+		if d['name'] == '__merge__':
+			d['name'] = '`__merge__' # Bump __merge__ behind __this__ when sorted
 		if 'description' in d:
 			d['description'] = replace_keywords(d["description"])
 

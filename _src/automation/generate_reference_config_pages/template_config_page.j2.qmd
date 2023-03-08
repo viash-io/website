@@ -8,7 +8,7 @@ execute:
 {% for d in data|sort(attribute="name") -%}
 
 {% if not d.name == "__this__" %}
-## {{d.name}}
+## {{d.name|replace("`__merge__", "\_\_merge\_\_")}}{# Replace fixes __merge__ being rendered bold and coming before __this__ when sorted #}
 {% if "Option of " in d.type %}
 **Type**: `{{d.type|replace("Option of ", "")}}`
 {% elif "OneOrMore of " in d.type %}
