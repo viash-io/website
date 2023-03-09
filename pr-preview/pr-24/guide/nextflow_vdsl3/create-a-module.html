@@ -323,7 +323,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../guide/project/set-up-a-project.html" class="sidebar-item-text sidebar-link">Set up a project *</a>
+  <a href="../../guide/project/using-a-project.html" class="sidebar-item-text sidebar-link">Using a project</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -646,17 +646,19 @@ Tip
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/main.nf <span class="at">--input</span> config.vsh.yaml <span class="at">--publish_dir</span> output/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>N E X T F L O W  ~  version 22.10.6
-Launching `target/main.nf` [grave_minsky] DSL2 - revision: e314f5df58
+Launching `target/main.nf` [berserk_swirles] DSL2 - revision: e451cd1691
 [-        ] process &gt; example_bash:example_bash_p... -
+input: [run, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/config.vsh.yaml]]
 
 executor &gt;  local (1)
-[ef/847b6d] process &gt; example_bash:example_bash_p... [  0%] 0 of 1
-input: [run, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/config.vsh.yaml]]
+[09/3bd815] process &gt; example_bash:example_bash_p... [  0%] 0 of 1
+input: [run, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/config.vsh.yaml]]
+output: [run, /tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/work/09/3bd8158d95ed4a83039cb7510df4ed/run.example_bash.output.txt]
 
 executor &gt;  local (1)
-[ef/847b6d] process &gt; example_bash:example_bash_p... [100%] 1 of 1 ✔
-input: [run, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/config.vsh.yaml]]
-output: [run, /tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/work/ef/847b6d3e2d040572e61a11a0dea001/run.example_bash.output.txt]</code></pre>
+[09/3bd815] process &gt; example_bash:example_bash_p... [100%] 1 of 1 ✔
+input: [run, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/config.vsh.yaml]]
+output: [run, /tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/work/09/3bd8158d95ed4a83039cb7510df4ed/run.example_bash.output.txt]</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
@@ -685,54 +687,53 @@ output: [run, /tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/work/ef/847b6d3e2
 <p>Next, we create a YAML file <code>param_list.yaml</code> containing an <code>id</code> and an <code>input</code> value for each parameter entry.</p>
 <div class="cell">
 <div class="sourceCode" id="cb16"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample1</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample1.txt</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample1.txt</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample2</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample2.txt</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample2.txt</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample3</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample3.txt</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample3.txt</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample4</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample4.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample4.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can run the pipeline on the list of parameters using the <code>--param_list</code> parameter.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/main.nf <span class="at">--param_list</span> param_list.yaml <span class="at">--publish_dir</span> output2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>N E X T F L O W  ~  version 22.10.6
-Launching `target/main.nf` [gloomy_shannon] DSL2 - revision: e314f5df58
+Launching `target/main.nf` [jovial_hoover] DSL2 - revision: e451cd1691
 [-        ] process &gt; example_bash:example_bash_p... -
-input: [sample4, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample4.txt]]
-input: [sample3, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample3.txt]]
-input: [sample2, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample2.txt]]
-input: [sample1, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample1.txt]]
+input: [sample4, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample4.txt]]
+input: [sample3, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample3.txt]]
+input: [sample2, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample2.txt]]
+input: [sample1, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample1.txt]]
 
 executor &gt;  local (2)
-[ca/6da3e4] process &gt; example_bash:example_bash_p... [  0%] 0 of 4
-input: [sample4, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample4.txt]]
-input: [sample3, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample3.txt]]
-input: [sample2, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample2.txt]]
-input: [sample1, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample1.txt]]
+[50/5c64e8] process &gt; example_bash:example_bash_p... [  0%] 0 of 4
+input: [sample4, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample4.txt]]
+input: [sample3, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample3.txt]]
+input: [sample2, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample2.txt]]
+input: [sample1, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample1.txt]]
 
 executor &gt;  local (4)
-[b3/0902dc] process &gt; example_bash:example_bash_p... [100%] 4 of 4 ✔
-input: [sample4, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample4.txt]]
-input: [sample3, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample3.txt]]
-input: [sample2, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample2.txt]]
-input: [sample1, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample1.txt]]
-output: [sample4, /tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/work/b3/3f7c3e1b1a02e794571ce67f6edad3/sample4.example_bash.output.txt]
-output: [sample3, /tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/work/ca/6da3e4489820e76679378671d8b23f/sample3.example_bash.output.txt]
-output: [sample1, /tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/work/5a/21d21a37af3dcacc082688abf03046/sample1.example_bash.output.txt]
-output: [sample2, /tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/work/b3/0902dc26e140dfeda395c7efaeac72/sample2.example_bash.output.txt]
+[86/f708a8] process &gt; example_bash:example_bash_p... [ 50%] 2 of 4
+input: [sample4, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample4.txt]]
+input: [sample3, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample3.txt]]
+input: [sample2, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample2.txt]]
+input: [sample1, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample1.txt]]
+output: [sample3, /tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/work/50/5c64e84d2b9ea4e3eb4b47d2745278/sample3.example_bash.output.txt]
+output: [sample4, /tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/work/ba/c93f3693bd35f797d45150e0e4583b/sample4.example_bash.output.txt]
+output: [sample1, /tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/work/45/131a677ac0105728c1e5789986662a/sample1.example_bash.output.txt]
 
 executor &gt;  local (4)
-[b3/0902dc] process &gt; example_bash:example_bash_p... [100%] 4 of 4 ✔
-input: [sample4, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample4.txt]]
-input: [sample3, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample3.txt]]
-input: [sample2, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample2.txt]]
-input: [sample1, [output:$id.$key.output.txt, input:/tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/sample1.txt]]
-output: [sample4, /tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/work/b3/3f7c3e1b1a02e794571ce67f6edad3/sample4.example_bash.output.txt]
-output: [sample3, /tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/work/ca/6da3e4489820e76679378671d8b23f/sample3.example_bash.output.txt]
-output: [sample1, /tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/work/5a/21d21a37af3dcacc082688abf03046/sample1.example_bash.output.txt]
-output: [sample2, /tmp/RtmpaclHlA/create-a-module260366dfbec3/bash/work/b3/0902dc26e140dfeda395c7efaeac72/sample2.example_bash.output.txt]</code></pre>
+[86/f708a8] process &gt; example_bash:example_bash_p... [100%] 4 of 4 ✔
+input: [sample4, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample4.txt]]
+input: [sample3, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample3.txt]]
+input: [sample2, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample2.txt]]
+input: [sample1, [output:$id.$key.output.txt, input:/tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/sample1.txt]]
+output: [sample3, /tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/work/50/5c64e84d2b9ea4e3eb4b47d2745278/sample3.example_bash.output.txt]
+output: [sample4, /tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/work/ba/c93f3693bd35f797d45150e0e4583b/sample4.example_bash.output.txt]
+output: [sample1, /tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/work/45/131a677ac0105728c1e5789986662a/sample1.example_bash.output.txt]
+output: [sample2, /tmp/Rtmp9MJ4nm/create-a-module2ba25ad00216/bash/work/86/f708a886793af15d0eb916e1464db6/sample2.example_bash.output.txt]</code></pre>
 </div>
 </div>
 <p>This results in the following outputs:</p>

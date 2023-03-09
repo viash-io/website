@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Viash - Advanced pipeline</title>
+<title>Viash - Using a project</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,8 +93,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../guide/nextflow_vdsl3/discussion.html" rel="next">
-<link href="../../guide/nextflow_vdsl3/create-a-pipeline.html" rel="prev">
+<link href="../../guide/project/continuous-integration.html" rel="next">
+<link href="../../guide/nextflow_vdsl3/discussion.html" rel="prev">
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -136,8 +136,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Viash - Advanced pipeline">
-<meta property="og:description" content="The sections below describe how to create the VDSL3 modules in preparation for creating the pipeline.">
+<meta property="og:title" content="Viash - Using a project">
+<meta property="og:description" content="In this guide, we’ll go into detail on how to use and manage Viash projects. This project may or may not contain Nextflow pipelines, but always contains Viash components ;)">
 <meta property="og:site-name" content="Viash">
 </head>
 
@@ -217,7 +217,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Advanced pipeline</h1>
+      <h1 class="quarto-secondary-nav-title">Using a project</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -303,7 +303,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../guide/nextflow_vdsl3/advanced-pipeline.html" class="sidebar-item-text sidebar-link active">Advanced pipeline</a>
+  <a href="../../guide/nextflow_vdsl3/advanced-pipeline.html" class="sidebar-item-text sidebar-link">Advanced pipeline</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -323,7 +323,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../guide/project/using-a-project.html" class="sidebar-item-text sidebar-link">Using a project</a>
+  <a href="../../guide/project/using-a-project.html" class="sidebar-item-text sidebar-link active">Using a project</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -349,21 +349,26 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#creating-the-modules" id="toc-creating-the-modules" class="nav-link active" data-scroll-target="#creating-the-modules">Creating the modules</a>
-  <ul class="collapse">
-  <li><a href="#preparation" id="toc-preparation" class="nav-link" data-scroll-target="#preparation">Preparation</a></li>
-  </ul></li>
-  <li><a href="#running-the-pipeline" id="toc-running-the-pipeline" class="nav-link" data-scroll-target="#running-the-pipeline">Running the pipeline</a></li>
-  <li><a href="#todo-add" id="toc-todo-add" class="nav-link" data-scroll-target="#todo-add">Todo: add</a></li>
+  <li><a href="#get-the-template-project" id="toc-get-the-template-project" class="nav-link active" data-scroll-target="#get-the-template-project">Get the template project</a></li>
+  <li><a href="#contents-of-this-template" id="toc-contents-of-this-template" class="nav-link" data-scroll-target="#contents-of-this-template">Contents of this template</a></li>
+  <li><a href="#run-component" id="toc-run-component" class="nav-link" data-scroll-target="#run-component">Run component</a></li>
+  <li><a href="#test-component" id="toc-test-component" class="nav-link" data-scroll-target="#test-component">Test component</a></li>
+  <li><a href="#build-all-components" id="toc-build-all-components" class="nav-link" data-scroll-target="#build-all-components">Build all components</a></li>
+  <li><a href="#run-executable" id="toc-run-executable" class="nav-link" data-scroll-target="#run-executable">Run executable</a></li>
+  <li><a href="#run-vdsl3-module" id="toc-run-vdsl3-module" class="nav-link" data-scroll-target="#run-vdsl3-module">Run VDSL3 module</a></li>
+  <li><a href="#run-pipeline" id="toc-run-pipeline" class="nav-link" data-scroll-target="#run-pipeline">Run pipeline</a></li>
+  <li><a href="#test-components" id="toc-test-components" class="nav-link" data-scroll-target="#test-components">Test components</a></li>
+  <li><a href="#project-config" id="toc-project-config" class="nav-link" data-scroll-target="#project-config">Project config</a></li>
+  <li><a href="#more-information" id="toc-more-information" class="nav-link" data-scroll-target="#more-information">More information</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/viash-io/website/edit/main/guide/nextflow_vdsl3/advanced-pipeline.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/viash-io/website/blob/main/guide/nextflow_vdsl3/advanced-pipeline.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/viash-io/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/viash-io/website/edit/main/guide/project/using-a-project.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/viash-io/website/blob/main/guide/project/using-a-project.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/viash-io/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Advanced pipeline</h1>
+<h1 class="title d-none d-lg-block">Using a project</h1>
 </div>
 
 
@@ -378,73 +383,197 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 </header>
 
-<section id="creating-the-modules" class="level2">
-<h2 class="anchored" data-anchor-id="creating-the-modules">Creating the modules</h2>
-<p>The sections below describe how to create the VDSL3 modules in preparation for creating the pipeline.</p>
-<section id="preparation" class="level3">
-<h3 class="anchored" data-anchor-id="preparation">Preparation</h3>
-<p>create a new folder named advanced pipeline, add src folder with a nextflow_module folder inside. Now create three folders inside nextflow_module folder, one per component needed for the pipeline:</p>
-<ul>
-<li><code>combine_columns</code></li>
-<li><code>remove_comments</code></li>
-<li><code>take_columns</code></li>
-</ul>
-<p>The folder structure should look like this now:</p>
-<pre><code>advanced_pipeline
-└── src
-    └── nextflow_modules
-        ├── combine_columns
-        ├── remove_comments
-        └── take_column</code></pre>
-<ol type="1">
-<li>Target directory where the modules are located</li>
-<li>Include the modules from the <code>target</code> directory</li>
-<li>Create a channel based on the <code>input</code> parameter’s path</li>
-<li>Assign a unique ID to each event using <a href="https://www.nextflow.io/docs/latest/operator.html#map"><code>map{}</code></a></li>
-<li>Run <code>remove_comments</code> to remove the comments from the TSV</li>
-<li>Extract a single column from TSV by running <code>take_column</code></li>
-<li>Combine all events into a single List event using <a href="https://www.nextflow.io/docs/latest/operator.html#tolist"><code>toList()</code></a></li>
-<li>Add <strong>unique ID</strong> to the tuple</li>
-<li>Concatenate the TSVs into one by running the <code>combine_columns</code> module with <a href="../../reference/config/platforms/NextflowVdsl3Platform.html#auto">auto publishing</a> enabled using the <code>auto</code> directive</li>
-<li>View the channel contents bu printing it to the console using <a href="https://www.nextflow.io/docs/latest/operator.html?highlight=view#view"><code>view()</code></a></li>
-</ol>
+<p>In this guide, we’ll go into detail on how to use and manage Viash projects. This project may or may not contain Nextflow pipelines, but always contains Viash components ;)</p>
+<section id="get-the-template-project" class="level2">
+<h2 class="anchored" data-anchor-id="get-the-template-project">Get the template project</h2>
+<p>To get started, we provide a <a href="https://github.com/viash-io/viash_project_template">template project</a> which already contains a few components. First create a new repository by clicking the “Use this template” button in the <a href="https://github.com/viash-io/viash_project_template">viash_project_template</a> repository or clicking the button below.</p>
+<p><a href="https://github.com/viash-io/viash_project_template/generate" class="btn btn-info btn-md">Use project template</a></p>
+<p>Then clone the repository using the following command.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/youruser/my_first_pipeline.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
+<section id="contents-of-this-template" class="level2">
+<h2 class="anchored" data-anchor-id="contents-of-this-template">Contents of this template</h2>
+<p>This template repo contains the following content:</p>
+<pre><code>.
+├── LICENSE.md                            License information
+├── README.qmd                            The source qmd file for this readme
+├── README.md                             This readme
+├── _viash.yaml                           Global Viash settings
+├── resources_test/*.tsv                  Sample files to showcase pipeline and
+│   ├── file1.tsv                         run component unit tests.
+│   └── file2.tsv
+├── src/demo                              Source directory with Viash components
+│   ├── combine_columns
+│   ├── remove_comments
+│   └── take_column
+├── target                                Target platform files generated by Viash
+│   ├── docker                            Executables generated from source
+│   └── nextflow                          Nextflow modules generated from source
+└── workflows
+    └── demo_pipeline                     Demo Nextflow pipeline
+        ├── main.nf
+        └── nextflow.config</code></pre>
 </section>
-<section id="running-the-pipeline" class="level2">
-<h2 class="anchored" data-anchor-id="running-the-pipeline">Running the pipeline</h2>
-<p>Before being able to run the pipeline, you’ll need some TSV files to work with. Download the files below and place them in a new directory named <strong>data</strong> in the root of <strong>advanced_pipeline</strong>.</p>
-<p>Now run the following command to run the pipeline using Nextflow:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run main.nf <span class="at">--input</span> <span class="st">"data/file?.tsv"</span> <span class="at">--publishDir</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You should get an output similar to this:</p>
-<pre><code>N E X T F L O W  ~  version 22.04.3
-Launching `workflows/310-realistic_pipeline/main.nf` [stupefied_saha] DSL2 - revision: 6669aefc6c
-[93/232aba] Submitted process &gt; remove_comments:remove_comments_process (2)
-[ef/a28e89] Submitted process &gt; remove_comments:remove_comments_process (1)
-[63/279f98] Submitted process &gt; take_column:take_column_process (1)
-[50/2a17ef] Submitted process &gt; take_column:take_column_process (2)
-[8d/6eeff5] Submitted process &gt; combine_columns:combine_columns_process
-Output: [combined, /home/runner/work/viash_nxf_course/viash_nxf_course/work/8d/6eeff571e9ff2c5389851c6ab3001c/combined.combine_columns.output]</code></pre>
-<p>You can find the final TSV in the <strong>output</strong> directory:</p>
-<pre class="tsv"><code># this is a header      
-# this is also a header     
-one     0.11    123
-two     0.23    456
+<section id="run-component" class="level2">
+<h2 class="anchored" data-anchor-id="run-component">Run component</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run src/demo/remove_comments/config.vsh.yaml <span class="at">--</span> <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--input</span> resources_test/file1.tsv <span class="dt">\</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output</span> output/foo.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[notice] Checking if Docker image is available at 'ghcr.io/viash-io/viash_project_template/demo_remove_comments:dev'
+[warning] Could not pull from 'ghcr.io/viash-io/viash_project_template/demo_remove_comments:dev'. Docker image doesn't exist or is not accessible.
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_remove_comments:dev' with Dockerfile</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> output/foo.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>one 0.11    123
+two 0.23    456
 three   0.35    789
 four    0.47    123</code></pre>
+</div>
+</div>
 </section>
-<section id="todo-add" class="level2">
-<h2 class="anchored" data-anchor-id="todo-add">Todo: add</h2>
+<section id="test-component" class="level2">
+<h2 class="anchored" data-anchor-id="test-component">Test component</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test src/demo/remove_comments/config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_remove_comments14506465453730408281'
+====================================================================
++/tmp/viash_test_remove_comments14506465453730408281/build_executable/remove_comments ---verbosity 6 ---setup cachedbuild
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_remove_comments:test_hlXf94' with Dockerfile
+[info] Running 'docker build -t ghcr.io/viash-io/viash_project_template/demo_remove_comments:test_hlXf94 /tmp/viash_test_remove_comments14506465453730408281/build_executable -f /tmp/viash_test_remove_comments14506465453730408281/build_executable/tmp/dockerbuild-remove_comments-AtTMkt/Dockerfile'
+Sending build context to Docker daemon  39.94kB
+
+Step 1/7 : FROM ubuntu:20.04
+ ---&gt; 61c45d0e9798
+Step 2/7 : RUN :
+ ---&gt; Using cache
+ ---&gt; 001fe766c0b7
+Step 3/7 : LABEL org.opencontainers.image.description="Companion container for running component demo remove_comments"
+ ---&gt; Using cache
+ ---&gt; 4721980628d8
+Step 4/7 : LABEL org.opencontainers.image.created="2023-03-09T08:25:38Z"
+ ---&gt; Running in 55f1ab5d8df8
+Removing intermediate container 55f1ab5d8df8
+ ---&gt; e81d8e7756bc
+Step 5/7 : LABEL org.opencontainers.image.source="https://github.com/viash-io/viash_project_template"
+ ---&gt; Running in e1f5b8a4d161
+Removing intermediate container e1f5b8a4d161
+ ---&gt; 10aa13044b8f
+Step 6/7 : LABEL org.opencontainers.image.revision="847d5a1884d340cd17d1b3d6509ed78920c91333"
+ ---&gt; Running in 8a5494e4c153
+Removing intermediate container 8a5494e4c153
+ ---&gt; c935ef82a846
+Step 7/7 : LABEL org.opencontainers.image.version="test_hlXf94"
+ ---&gt; Running in cf1b44a758e5
+Removing intermediate container cf1b44a758e5
+ ---&gt; f88d506c4b27
+Successfully built f88d506c4b27
+Successfully tagged ghcr.io/viash-io/viash_project_template/demo_remove_comments:test_hlXf94
+====================================================================
++/tmp/viash_test_remove_comments14506465453730408281/test_test/test_executable
+Generate test tsv content
+&gt;&gt;&gt; Running tests with only comments
+&gt;&gt;&gt; Running tests with no comments
+&gt;&gt;&gt; Running tests mixed
+&gt;&gt;&gt; Test finished successfully
+====================================================================
+[32mSUCCESS! All 1 out of 1 test scripts succeeded![0m
+Cleaning up temporary directory</code></pre>
+</div>
+</div>
+</section>
+<section id="build-all-components" class="level2">
+<h2 class="anchored" data-anchor-id="build-all-components">Build all components</h2>
+<p>You can generate your first development build by running:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns build <span class="at">--setup</span> cachedbuild <span class="at">--parallel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Exporting remove_comments (demo) =docker=&gt; /home/runner/work/website/website/guide/project/_viash_project_template/target/docker/demo/remove_comments
+Exporting combine_columns (demo) =nextflow=&gt; /home/runner/work/website/website/guide/project/_viash_project_template/target/nextflow/demo/combine_columns
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_remove_comments:dev' with Dockerfile
+Exporting take_column (demo) =docker=&gt; /home/runner/work/website/website/guide/project/_viash_project_template/target/docker/demo/take_column
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_take_column:dev' with Dockerfile
+Exporting remove_comments (demo) =nextflow=&gt; /home/runner/work/website/website/guide/project/_viash_project_template/target/nextflow/demo/remove_comments
+Exporting combine_columns (demo) =docker=&gt; /home/runner/work/website/website/guide/project/_viash_project_template/target/docker/demo/combine_columns
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_combine_columns:dev' with Dockerfile
+Exporting take_column (demo) =nextflow=&gt; /home/runner/work/website/website/guide/project/_viash_project_template/target/nextflow/demo/take_column
+[32mAll 6 configs built successfully[0m</code></pre>
+</div>
+</div>
+</section>
+<section id="run-executable" class="level2">
+<h2 class="anchored" data-anchor-id="run-executable">Run executable</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/docker/demo/remove_comments/remove_comments</span> <span class="dt">\</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--input</span> resources_test/file1.tsv <span class="dt">\</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output</span> output/bar.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="run-vdsl3-module" class="level2">
+<h2 class="anchored" data-anchor-id="run-vdsl3-module">Run VDSL3 module</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run .</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-main-script</span> target/nextflow/remove_comments/main.nf <span class="dt">\</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--input</span> resources_test/file<span class="pp">*</span>.tsv <span class="dt">\</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--publish_dir</span> output1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> output1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="run-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="run-pipeline">Run pipeline</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run . <span class="dt">\</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> workflows/demo_pipeline/main.nf <span class="dt">\</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--input</span> resources_test/file<span class="pp">*</span>.tsv <span class="dt">\</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--publishDir</span> output2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> output2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="test-components" class="level2">
+<h2 class="anchored" data-anchor-id="test-components">Test components</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns test <span class="at">--parallel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The working directory for the namespace tests is /tmp/viash_ns_test5992027546587778714
+           namespace        functionality             platform            test_name exit_code duration               result[0m
+                demo      remove_comments               docker                start                                        [0m
+                demo      combine_columns               docker                start                                        [0m
+[32m                demo      combine_columns               docker     build_executable         0        3              SUCCESS[0m
+[33m                demo      combine_columns               docker                tests        -1        0              MISSING[0m
+no tests found
+====================================================================
+                demo          take_column               docker                start                                        [0m
+[32m                demo      remove_comments               docker     build_executable         0        3              SUCCESS[0m
+[32m                demo      remove_comments               docker              test.sh         0        1              SUCCESS[0m
+[32m                demo          take_column               docker     build_executable         0        5              SUCCESS[0m
+[33m                demo          take_column               docker                tests        -1        0              MISSING[0m
+no tests found
+====================================================================
+[33mNot all configs built and tested successfully[0m
+  [33m2/6 tests missing[0m
+  [32m4/6 configs built and tested successfully[0m</code></pre>
+</div>
+</div>
+</section>
+<section id="project-config" class="level2">
+<h2 class="anchored" data-anchor-id="project-config">Project config</h2>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(readr<span class="sc">::</span><span class="fu">read_lines</span>(<span class="st">"_viash.yaml"</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>viash_version: 0.6.7</p>
+<p>source: src target: target</p>
+<p>config_mods: | .functionality.version := ‘dev’ .platforms[.type == ‘docker’].target_registry := ‘ghcr.io’ .platforms[.type == ‘docker’].target_organization := ‘viash-io/viash_project_template’ .platforms[.type == ‘docker’].target_image_source := ‘https://github.com/viash-io/viash_project_template’ .platforms[.type == ‘nextflow’].directives.tag := ‘$id’</p>
+</section>
+<section id="more-information" class="level2">
+<h2 class="anchored" data-anchor-id="more-information">More information</h2>
 <ul>
-<li><p>Copy guide/data-workflow/nextflow-pipeline/pipeline-advanced.qmd</p></li>
-<li><p>Use template repository instead of download buttons</p></li>
-<li><p>New content:</p>
+<li>Recommended IDE setup</li>
+<li>Recommended CI setup</li>
+<li>Other commands:
 <ul>
-<li>How to use a module in a pipeline.</li>
-<li>Specify that we assume the user knows how to write a Nextflow pipeline</li>
-<li>Dynamic behaviour (.run()): dynamic directives and auto helper.</li>
-<li>Nextflow Viash config</li>
-<li>Showcase pre-existing pipeline, e.g.&nbsp;guide/data-workflow/nextflow-pipeline/pipeline-advanced.qmd</li>
-<li>Todo: update to latest VDSL3 practices. Let the targetDir use the rootDir. Use the newer WorkflowHelper helper functions.</li>
+<li>Listing components</li>
+<li>Ns exec</li>
 </ul></li>
 </ul>
 
@@ -604,13 +733,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../guide/nextflow_vdsl3/create-a-pipeline.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Create a pipeline</span>
+      <a href="../../guide/nextflow_vdsl3/discussion.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Discussion</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../guide/nextflow_vdsl3/discussion.html" class="pagination-link">
-        <span class="nav-page-text">Discussion</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../guide/project/continuous-integration.html" class="pagination-link">
+        <span class="nav-page-text">Continuous integration</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
