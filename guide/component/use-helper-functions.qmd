@@ -1,0 +1,216 @@
+---
+title: Use helper functions
+description: How to load helper functions.
+order: 30
+---
+
+{{< include ../../includes/_language_chooser.qmd >}}
+
+```{r setup, include=FALSE}
+repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
+source(paste0(repo_path, "/includes/_r_helper.R"))
+source(paste0(repo_path, "/guide/component/_language_examples.R"))
+```
+
+This documentation will walk you through the process of importing and using functions defined in an external file in your Viash component. 
+
+This can be useful for organizing and reusing code across multiple components or even within a single component. 
+
+We'll cover the steps to set up the external file, import the functions, and use them within your Viash component. By the end of this guide, you'll have a better understanding of how to leverage external files to improve your Viash development workflow.
+
+
+
+```{r setup-adding-resources, include=FALSE}
+temp_dir <- tempfile("add-dependencies")
+dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
+on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
+
+# create tempdir with modified files
+add_helper_file <- function(config, extension) {
+  # add helper to resources
+  config$functionality$resources <- c(
+    config$functionality$resources, 
+    list(list(path = paste0("helper.", extension)))
+  )
+  config
+}
+scripts <- list(
+  bash = '#!/bin/bash
+
+## VIASH START
+par_input=path/to/file.txt
+par_output=output.txt
+## VIASH END
+
+# view resource file
+source "$meta_resources_dir/helper.sh"
+
+# copy file
+copy_file "$par_input" "$par_output"
+',
+  csharp = "// No example available yet.",
+  js = "// VIASH START
+let par = {
+  'input': 'path/to/file.txt',
+  'output': 'output.txt'
+};
+// VIASH END
+
+// import helper function
+const helper = require(`${meta['resources_dir']}/helper.js`);
+
+// copy file
+helper.copy_file(par['input'], par['output'])
+",
+  python = "import sys
+
+## VIASH START
+par = {
+  'input': 'file.txt',
+  'output': 'output.txt'
+}
+## VIASH END
+
+# import helper function
+sys.path.append(meta['resources_dir'])
+from helper import copy_file
+
+# copy file
+copy_file(par['input'], par['output'])
+",
+  r = '## VIASH START
+par <- list(
+  "input" = "file.txt",
+  "output" = "output.txt"
+)
+## VIASH END
+
+# import helper function
+source(paste0(meta$resources_dir, "/helper.R"))
+
+# copy file
+copy_file(par$input, par$output)
+',
+  scala = "// No example available yet."
+)
+helpers <- list(
+  bash = 'function copy_file {
+  echo "Copying \'$1\' to \'$2\'."
+  cp -r "$1" "$2"
+}',
+  csharp = "// No example available yet.",
+  js = "const fs = require('fs');
+
+function copy_file(source, dest) {
+  console.log(`Copying '${source}' to '${dest}'`)
+  fs.copyFile(source, dest, (err) => {
+    if (err) throw err;
+  });
+}
+
+module.exports = {
+  copy_file
+}
+",
+  python = "import shutil
+
+def copy_file(source, dest):
+  print(f\"Copying '{source}' to '{dest}'.\")
+  shutil.copyfile(source, dest)
+",
+  r = 'copy_file <- function(source, dest) {
+  cat("Copying \'", source, "\' to \'", dest, "\'.\\n", sep = "")
+  file.copy(source, dest)
+}',
+  scala = "// No example available yet."
+)
+langs <- langs %>%
+  mutate(
+    label = gsub("#", "\\\\#", label),
+    extension = gsub(".*\\.", "", example_script),
+    config_path = paste0(temp_dir, "/", id, "/", basename(example_config)),
+    script_path = paste0(temp_dir, "/", id, "/", basename(example_script)),
+    helper_path = paste0(temp_dir, "/", id, "/helper.", extension),
+  )
+pwalk(langs, function(id, label, extension, example_config, config_path, script_path, helper_path, ...) {
+  # create dir
+  dir.create(paste0(temp_dir, "/", id), recursive = TRUE, showWarnings = FALSE)
+
+  # read config, make modifications, write to file
+  extension <- 
+  conf <- yaml::read_yaml(example_config) %>%
+    add_helper_file(extension)
+  write_yaml(
+    conf,
+    config_path
+  )
+  
+  # modify script and write to file
+  readr::write_lines(scripts[[id]], script_path)
+  readr::write_lines(helpers[[id]], helper_path)
+})
+```
+
+
+## Create helper script
+
+When you want to reuse a function multiple times, it might make sense to store them in a separate file. For example, your helper file could contain the following helper function:
+
+::: {.panel-tabset}
+```{r show-helper, output="asis"}
+pwalk(langs, function(id, label, helper_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```{% id %}
+    |{% paste(readr::read_lines(helper_path), collapse = '\n') %}
+    |```
+    |
+    |")
+})
+```
+:::
+
+## Add resource to component
+
+To add a helper script as an external resource in a Viash component, you can use the
+`resources` section of the component's config file. Not only does your resources
+section contain the main script, but it's also used to specify external resources 
+such as helper scripts and other files that the component needs to function.
+
+Here is an example of what the config file might look after adding the helper script:
+
+::: {.panel-tabset}
+```{r show-config, output="asis"}
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```yaml
+    |{% paste(readr::read_lines(config_path), collapse = '\n    |') %}
+    |```
+    |")
+})
+```
+:::
+
+## Import helper functions
+
+Finally, you need to import the helper functions in your script. The procedure will differ depending on the scripting language used. Below is an example of what the main script might look like after importing the helper file.
+
+::: {.panel-tabset}
+```{r show-script, output="asis"}
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```{% id %}
+    |{% paste(readr::read_lines(script_path), collapse = '\n') %}
+    |```
+    |
+    |")
+})
+```
+:::
+
+{{< include ../../includes/_prune_all_images.qmd >}}

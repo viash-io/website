@@ -1,0 +1,21 @@
+functionality:
+  name: example_js
+  description: A minimal example component.
+  arguments:
+    - type: file
+      name: --input
+      example: file.txt
+      required: true
+    - type: file
+      name: --output
+      direction: output
+      example: output.txt
+      required: true
+  resources:
+    - type: javascript_script
+      path: script.js
+platforms:
+  - type: docker
+    image: "node:19-bullseye"
+  - type: native
+  - type: nextflow

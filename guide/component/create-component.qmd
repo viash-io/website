@@ -1,0 +1,226 @@
+---
+title: Create a new component
+description: Building a reproducible Viash component.
+order: 1
+---
+ 
+{{< include ../../includes/_language_chooser.qmd >}}
+
+```{r setup, include=FALSE}
+repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
+source(paste0(repo_path, "/includes/_r_helper.R"))
+source(paste0(repo_path, "/guide/component/_language_examples.R"))
+
+temp_dir <- tempfile("create_new_component")
+dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
+on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
+
+# create tempdir with files
+langs <- langs %>%
+  mutate(
+    label = gsub("#", "\\\\#", label),
+    config_path = paste0(temp_dir, "/", id, "/", basename(example_config)),
+    script_path = paste0(temp_dir, "/", id, "/", basename(example_script))
+  )
+pwalk(langs, function(id, label, example_config, example_script, config_path, script_path, ...) {
+  # create dir
+  dir.create(paste0(temp_dir, "/", id), recursive = TRUE, showWarnings = FALSE)
+  file.copy(example_config, config_path)
+  file.copy(example_script, script_path)
+})
+```
+
+A Viash component can be translated into one or more platforms: Native, Docker, Nextflow. Each of these platforms result in a different artifact:
+
+* [Native platform](/reference/config/platforms/NativePlatform.html): a single executable is generated which runs natively on the host system. This assumes all dependencies are already installed by the user and is therefore not reproducible. Requirements: Bash.
+* [Docker platform](/reference/config/platforms/DockerPlatform.html): a single executable is generated but it runs inside a Docker container instead. The Docker platform specification can help you install custom dependencies and will take care of auto-mounting input/output files. Requirements: Bash, Docker.
+* [Nextflow platform](/reference/config/platforms/NextflowVdsl3Platform.html): a Nextflow module which can be used as a standalone workflow or as a module in a larger workflow. Requirements: Nextflow and a containerization engine (e.g. Docker, Singularity, Podman).
+
+Below we will create our first Viash component using any of the languages natively supported by Viash. 
+
+## Create a script
+
+When creating a new Viash component, you can write a new script or use a pre-existing script.
+Below is a script that simply copies an input file to an output destination. 
+
+::: {.panel-tabset}
+
+```{r create-script, echo=FALSE, output="asis"}
+pwalk(langs, function(id, label, example_script, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |Create a new file named `{% basename(example_script) %}` and copy the following content inside of it. 
+    |This script will copy an input file to an output destination.
+    |
+    |```{% id %}
+    |{% paste(readr::read_lines(example_script), collapse = '\n') %}
+    |```
+    |")
+})
+```
+
+:::
+
+:::{.callout-note}
+The `par` variable(s) appear to be hard coded, but they're not! When running this script with Viash, Viash will strip away the section between `VIASH START` and `VIASH END`, and replace it with parameter values at runtime. The values included in this script are thus entirely for development and debugging purposes. More information on how this works will be given in [Variables and meta-variables](variables.qmd).
+:::
+
+
+### Create a config
+ 
+A [Viash config file](/reference/config/overview.html) is a YAML file that describes the functionality of a component and the platform(s) it targets.
+
+::: {.panel-tabset}
+
+```{r create-config, echo=FALSE, output="asis"}
+pwalk(langs, function(id, label, example_config, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |Create a file named `{% basename(example_config) %}` and add the contents below based on your chosen scripting language.
+    |
+    |```yaml
+    |{% paste(readr::read_lines(example_config), collapse = '\n    |') %}
+    |```
+    |")
+})
+```
+
+:::
+
+Here's a breakdown of the different sections:
+
+* `functionality`: A description of what the component does.
+  - `name`: The name of the component.
+  - `arguments`: The input and output parameters of the script.
+  - `resources`: References to all necessary files and folders to make the component work.
+* `platforms`: Lists which platforms a component can target (i.e. Native, Docker or Nextflow).
+
+
+## Run the component
+
+That's it! With these two steps, you created your first component. 
+Next, you can use the [`viash run`](/reference/viash/run.qmd) command to test whether it actually works as intended.
+
+::: {.panel-tabset}
+```{r viash-run, echo=FALSE, output="asis"}
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |You can call use the component's `--help` functionality to get an overview its parameters and descriptions.
+    |
+    |```{bash run-help}
+    |viash run config.vsh.yaml -- --help
+    |```
+    |
+    |As expected, this component has an `--input` and `--output` parameter. You can execute the component by providing values for these parameters.
+    |
+    |```{bash run-io}
+    |viash run config.vsh.yaml -- --input config.vsh.yaml --output foo.txt
+    |```
+    |", .dir = paste0(temp_dir, "/", id))
+})
+```
+:::
+
+
+
+:::{.callout-note}
+The double dash (`--`) between the viash command and the arguments is used to signify the end of the arguments passed to Viash and the start of those passed to the script. If you forgot to add these, you'll get an error similar to this:   
+  
+```{bash error=TRUE}
+viash run config.vsh.yaml \
+  --input foo.txt \
+  --output bar.txt
+```
+:::
+
+## Build an executable
+
+We will now turn the Viash component into an executable.
+
+::: {.panel-tabset}
+```{r echo=FALSE, output="asis"}
+
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |Use the [viash build](/reference/viash/build.qmd) command to generate an executable:
+    |
+    |```{bash build-example}
+    |viash build config.vsh.yaml --output target
+    |```
+    |
+    |This will generate an executable in the `target/` directory:
+    |
+    |```{bash view-tree}
+    |tree
+    |```
+    |", 
+    .dir = paste0(temp_dir, "/", id)
+  )
+})
+```
+:::
+
+
+## Displaying the help text
+
+It's often useful to know what arguments an executable expects before trying to run it.
+
+
+::: {.panel-tabset}
+```{r echo=FALSE, output="asis"}
+pwalk(langs, function(id, label, ...) {
+  qrt(
+    "## {% label %}
+    |To display its documentation, run the executable with just the `--help` argument:
+    |
+    |```{bash exec-help}
+    |target/example_{%id%} --help
+    |```
+    |",
+    .dir = paste0(temp_dir, "/", id)
+  )
+})
+```
+:::
+
+
+This executable takes a file as input and will create an output file.
+
+## Running the executable
+
+Running an executable is the same as any other executable on your system.
+
+::: {.panel-tabset}
+```{r viash-run-dont-worry-this-takes-a-long-time, echo=FALSE, output="asis"}
+pwalk(langs, function(id, label, ...) {
+  exec <- paste0("target/my_copy_", id)
+
+  # generate markdown
+  qrt(
+    "## {% label %}
+    |
+    |You can run the executable by providing a value for `--input` and `--output`:
+    |
+    |```{bash exec-run}
+    |target/example_{%id%} --input config.vsh.yaml --output output.txt
+    |```
+    |
+    |This results in the following output:
+    |
+    |```{bash ls-dir}
+    |ls -l
+    |```
+    |",
+    .dir = paste0(temp_dir, "/", id)
+  )
+})
+```
+:::
+
+
+{{< include ../../includes/_prune_all_images.qmd >}}

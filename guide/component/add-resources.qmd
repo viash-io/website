@@ -1,0 +1,178 @@
+---
+title: Add resources
+description: Accessing additional resources inside a Viash component.
+order: 20
+---
+
+{{< include ../../includes/_language_chooser.qmd >}}
+
+```{r setup, include=FALSE}
+repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
+source(paste0(repo_path, "/includes/_r_helper.R"))
+source(paste0(repo_path, "/guide/component/_language_examples.R"))
+```
+
+If a script needs access to an external file, it needs to be added as a resource in the config.
+
+
+```{r setup-adding-resources, include=FALSE}
+temp_dir <- tempfile("add-dependencies")
+dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
+on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
+
+# create tempdir with modified files
+add_text_resource <- function(config) {
+  config$functionality$resources <- c(
+    config$functionality$resources, 
+    list(list(path = "my_file.txt"))
+  )
+  config
+}
+add_line_after_viash_end <- function(...) {
+  function(script) {
+    which_end <- grep("VIASH END", script)
+    c(
+      script[seq_len(which_end)],
+      "",
+      ...,
+      #"",
+      script[-seq_len(which_end)]
+    )    
+  }
+}
+use_text_resource <- list(
+  bash = add_line_after_viash_end(
+    "# view resource file", 
+    "cat \"$meta_resources_dir/my_file.txt\""
+  ),
+  csharp = add_line_after_viash_end(
+    "// view resource file",
+    "string myFile = $\"{meta.resources_dir}/my_file.txt\";",
+    "string text = File.ReadAllText(myFile);",
+    "Console.WriteLine(text);"
+  ),
+  js = add_line_after_viash_end(
+    "// view resource file",
+    "const my_file = `${meta['resources_dir']}/my_file.txt`",
+    "fs.readFile(my_file, 'utf8', (err, data) => {",
+    "  if (err) throw err;",
+    "  console.log(data);",
+    "});"
+  ),
+  python = add_line_after_viash_end(
+    "# view resource file",
+    "my_file = f\"{meta['resources_dir']}/my_file.txt\"",
+    "with open(my_file, \"r\") as f:",
+    "  print(f.read())"
+  ),
+  r = add_line_after_viash_end(
+    "# view resource file",
+    "lines <- readLines(paste0(meta$resources_dir, \"/my_file.txt\"))",
+    "cat(lines, sep = \"\\n\")"
+  ),
+  scala = add_line_after_viash_end(
+    "// view resource file",
+    "val myFile = s\"${meta.resources_dir}/my_file.txt\"",
+    "val src = scala.io.Source.fromFile(myFile)",
+    "src.getLines.foreach(println)"
+  )
+)
+langs <- langs %>%
+  mutate(
+    label = gsub("#", "\\\\#", label),
+    config_path = paste0(temp_dir, "/", id, "/", basename(example_config)),
+    script_path = paste0(temp_dir, "/", id, "/", basename(example_script))
+  )
+pwalk(langs, function(id, label, example_config, example_script, config_path, script_path, ...) {
+  # create dir
+  dir.create(paste0(temp_dir, "/", id), recursive = TRUE, showWarnings = FALSE)
+
+  # todo: create below
+  readr::write_lines("contents of my_file.txt", paste0(temp_dir, "/", id, "/my_file.txt"))
+
+  # read config, make modifications, write to file
+  conf <- yaml::read_yaml(example_config) %>%
+    add_text_resource()
+  write_yaml(
+    conf,
+    config_path
+  )
+  
+  # modify script and write to file
+  script <- readr::read_lines(example_script) %>%
+    use_text_resource[[id]]()
+  readr::write_lines(script, script_path)
+    
+})
+```
+
+First, create a file called `my_file.txt`.
+
+::: {.panel-tabset}
+```{r create-file, output="asis"}
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```{sh}
+    |echo 'Here are the contents of my_file.txt' > my_file.txt
+    |```
+    |
+    |", .dir = paste0(temp_dir, "/", id))
+})
+```
+:::
+
+Next, the file needs to be added to the config as a resource.
+This will let Viash know to copy the new file inside a component's resource directory.
+
+::: {.panel-tabset}
+```{r show-config, output="asis"}
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```yaml
+    |{% paste(readr::read_lines(config_path), collapse = '\n    |') %}
+    |```
+    |")
+})
+```
+:::
+
+Lastly, to access a resource from within the script, 
+use the `resources_dir` [meta-variable](variables.qmd):
+
+::: {.panel-tabset}
+```{r show-script, output="asis"}
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```{% id %}
+    |{% paste(readr::read_lines(script_path), collapse = '\n') %}
+    |```
+    |
+    |")
+})
+```
+:::
+
+Now we can run the component as follows:
+
+::: {.panel-tabset}
+```{r run-component, output="asis"}
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```{bash}
+    |viash run config.vsh.yaml -- --input config.vsh.yaml --output foo.txt
+    |```
+    |
+    |", .dir = paste0(temp_dir, "/", id))
+})
+```
+:::
+
+{{< include ../../includes/_prune_all_images.qmd >}}

@@ -1,0 +1,21 @@
+functionality:
+  name: example_r
+  description: A minimal example component.
+  arguments:
+    - type: file
+      name: --input
+      example: file.txt
+      required: true
+    - type: file
+      name: --output
+      direction: output
+      example: output.txt
+      required: true
+  resources:
+    - type: r_script
+      path: script.R
+platforms:
+  - type: docker
+    image: "eddelbuettel/r2u:22.04"
+  - type: native
+  - type: nextflow

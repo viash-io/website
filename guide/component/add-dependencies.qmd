@@ -1,0 +1,393 @@
+---
+title: Add dependencies
+description: Adding custom dependencies to a component.
+order: 10
+---
+
+{{< include ../../includes/_language_chooser.qmd >}}
+
+```{r setup, include=FALSE}
+repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
+source(paste0(repo_path, "/includes/_r_helper.R"))
+source(paste0(repo_path, "/guide/component/_language_examples.R"))
+
+temp_dir <- tempfile("add-dependencies")
+dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
+on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
+
+# create tempdir with modified files
+add_setup <- function(...) {
+  function(config) {
+    config$functionality$name <-
+      paste0(config$functionality$name, "_with_setup")
+    config$platforms <- map(config$platforms, function(platform) {
+      if (platform$type == "docker") {
+        platform$setup <- list(...)
+      }
+      platform
+    })
+    config
+  }
+}
+config_overrides <- list(
+  bash = add_setup(list(type = "apk", packages = c("curl", "wget"))),
+  csharp = add_setup(list(type = "apk", packages = c("curl", "wget"))),
+  js = add_setup(list(type = "apt", packages = c("curl", "wget"))),
+  python = add_setup(
+    list(type = "apt", packages = c("curl", "wget")),
+    list(type = "python", packages = "anndata")
+  ),
+  r = add_setup(
+    list(type = "apt", packages = c("curl", "wget")),
+    list(type = "r", packages = "tidyverse")
+  ),
+  scala = add_setup(list(type = "apt", packages = c("curl", "wget")))
+)
+langs <- langs %>%
+  mutate(
+    label = gsub("#", "\\\\#", label),
+    config_path = paste0(temp_dir, "/", id, "/", basename(example_config)),
+    script_path = paste0(temp_dir, "/", id, "/", basename(example_script))
+  )
+pwalk(langs, function(id, label, example_config, example_script, config_path, script_path, ...) {
+  # create dir
+  dir.create(paste0(temp_dir, "/", id), recursive = TRUE, showWarnings = FALSE)
+  
+  # copy script
+  file.copy(example_script, script_path)
+
+  # read config, make modifications, write to file
+  conf <- yaml::read_yaml(example_config)
+  conf2 <- config_overrides[[id]](conf)
+  write_yaml(
+    conf2,
+    config_path
+  )
+})
+```
+
+In the previous section, reproducibility of our Viash component was ensured by a predefined Docker image such as `bash:4.0` and `python:3.10`. However, your script might require other software dependencies, such as command-line tools or Python and R packages.
+
+By default, Viash will build component-specific Docker images. This means that every Viash component can have its own set of dependencies.
+
+## Extended example
+
+Below is an example where additional software is added to a base Docker image using the [`setup`]({{< var reference.setup >}}) section of a Docker platform.
+
+::: {.panel-tabset}
+```{r create-config, output="asis"}
+pwalk(langs, function(id, label, config_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |
+    |```yaml
+    |{% paste(readr::read_lines(config_path), collapse = '\n    |') %}
+    |```
+    |
+    |")
+})
+```
+:::
+
+
+You can (re)build a component's Docker image by passing the `---setup` flag to the executable:
+
+::: {.panel-tabset}
+```{r setup-cachedbuild, echo=FALSE, output="asis"}
+for (i in seq_len(nrow(langs))) {
+  list2env(langs[i,], .GlobalEnv)
+# pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |Build the executable:
+    |
+    |```{bash}
+    |viash build config.vsh.yaml --platform docker --output target
+    |```
+    |
+    |Build the Docker image:
+    |
+    |```{bash}
+    |target/example_{% id %}_with_setup ---setup cachedbuild
+    |```
+    |", 
+    .dir = paste0(temp_dir, "/", id)
+  )
+}
+```
+:::
+
+Alternatively, you can also build the executable _and_ it's corresponding Docker image in one go:
+
+::: {.panel-tabset}
+```{r build-cachedbuild, echo=FALSE, output="asis"}
+
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```bash
+    |viash build config.vsh.yaml --platform docker --output target --setup cachedbuild
+    |```
+    |", 
+    .dir = paste0(temp_dir, "/", id)
+  )
+})
+```
+:::
+
+## Steps for creating a custom Docker platform
+
+Here is a series of steps you can follow to add a Docker platform to your Viash component from scratch.
+
+### Step 1: Choose a base image
+
+To start off, you'll need to choose a base Docker image to start working with. In deciding which base image to use, it's important to consider the size of the image and how trustworthy the source image is.
+
+:::{.callout-tip}
+If the container does not have Bash installed, don't forget to install this in Step 2.
+:::
+
+Here is a list of base images we commonly use:
+
+* Bash: [`bash`](https://hub.docker.com/_/bash), [`ubuntu`](https://hub.docker.com/_/ubuntu)
+* C#: [`ghcr.io/data-intuitive/dotnet-script`](https://github.com/data-intuitive/ghcr-dotnet-script/pkgs/container/dotnet-script)
+* JavaScript: [`node`](https://hub.docker.com/_/node)
+* Python: [`python`](https://hub.docker.com/_/python), [`nvcr.io/nvidia/pytorch`](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch)
+* R: [`eddelbuettel/r2u`](https://hub.docker.com/r/eddelbuettel/r2u), [`rocker/tidyverse`](https://hub.docker.com/r/rocker/tidyverse)
+* Scala: [`sbtscala/scala-sbt`](https://hub.docker.com/r/sbtscala/scala-sbt)
+
+See the section on ['minimum requirements'](#minimum-requirements) when building a custom base image.
+
+
+### Step 2: Installing additional dependencies
+
+You can use the `setup` section to many different types of layers. Here are some examples:
+
+- Apk requirements:
+  ```yaml
+  setup:
+    - type: apk
+      packages: [ curl ]
+  ```
+- Apt requirements:
+  ```yaml
+  setup:
+    - type: apk
+      packages: [ curl ]
+  ```
+- Docker requirements:
+  ```yaml
+  setup:
+    - type: docker
+      build_args: "R_VERSION=hello_world"
+      run: |
+        echo 'Run a custom command'
+        echo 'Foo' > /path/to/file.txt
+  ```
+- Javascript requirements:
+  ```yaml
+  setup:
+    - type: javascript
+      packages: [ express ]
+      github: [ "expressjs/express" ]
+  ```
+- Python requirements:
+  ```yaml
+  setup:
+    - type: python
+      packages: [ anndata ]
+    github: [ jkbr/httpie ]
+  ```
+- R requirements:
+  ```yaml
+  setup:
+    - type: r
+      packages: [ anndata ]
+      bioc: [ AnnotationDbi, SingleCellExperiment ]
+      github: rcannood/SCORPIUS
+  ```
+- Ruby requirements:
+  ```yaml
+  setup:
+    - type: ruby
+      packages: [ pry ]
+  ```
+- Yum requirements:
+  ```yaml
+  setup:
+    - type: ruby
+      packages: [ pry ]
+      github: [ "pry/pry" ]
+  ```
+
+For more information on the possible setup entries, check out the [reference documentation]({{< var reference.setup >}}).
+
+:::{.callout-important}
+Don't forget to rebuild the Docker image after making changes to the `setup` section of your Docker platform (see next step).
+:::
+
+### Step 3: Rebuild Docker image
+
+After adding additional setup entries, it's important to **rerun** ```---setup cachedbuild` to rebuild the Docker image, as Viash will not rebuild the Docker image when it already exists.
+
+::: {.panel-tabset}
+```{r rebuild-after-changes, echo=FALSE, output="asis"}
+
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```bash
+    |viash build config.vsh.yaml \
+    |  --platform docker \
+    |  --output target \
+    |  --setup cachedbuild
+    |```
+    |", 
+    .dir = paste0(temp_dir, "/", id)
+  )
+})
+```
+:::
+
+You can choose what strategy to build an executable with when using a Docker backend by passing the `--setup` option followed by one of the strategies below.  
+
+
+Building an image:
+
+* `alwaysbuild` / `build` / `b`: Always build the image from the dockerfile. This is the default setup strategy.
+* `alwayscachedbuild` / `cachedbuild` / `cb`: Always build the image from the dockerfile, with caching enabled.
+* `ifneedbebuild`: Build the image if it does not exist locally.
+* `ifneedbecachedbuild`: Build the image with caching enabled if it does not exist locally.
+
+Pulling an image:
+
+* `alwayspull` / `pull` / `p`: Try to pull the container from [Docker Hub](https://hub.docker.com) or the [specified docker registry](/reference/config/platforms/DockerPlatform.html#registry).
+* `alwayspullelsebuild` / `pullelsebuild`: Try to pull the image from a registry and build it if it doesn't exist.
+* `alwayspullelsecachedbuild` / `pullelsecachedbuild`: Try to pull the image from a registry and build it with caching if it doesn't exist.
+* `ifneedbepull`: If the image does not exist locally, pull the image.
+* `ifneedbepullelsebuild` If the image does not exist locally, pull the image. If the image does exist, build it.
+* `ifneedbepullelsecachedbuild`: If the image does not exist locally, pull the image. If the image does exist, build it with caching enabled.
+
+Pushing an image:
+
+* `push`: Push the container to [Docker Hub](https://hub.docker.com)  or the [specified docker registry](/reference/config/platforms/DockerPlatform.html#registry).
+* `pushifnotpresent` Push the container to [Docker Hub](https://hub.docker.com) or the [specified docker registry](/reference/config/platforms/DockerPlatform.html#registry) if the [specified tag](/reference/config/platforms/DockerPlatform.html#tag) does not exist yet.
+
+Doing nothing:
+
+* `donothing` / `meh`: Do not build or pull anything.
+
+## Troubleshooting
+
+Below are several steps that might help you troubleshoot the image when the setup fails.
+
+### View Dockerfile
+
+You can view the actual Dockerfile used by Viash by passing the `---dockerfile` flag:
+
+::: {.panel-tabset}
+```{r view-dockerfile, echo=FALSE, output="asis"}
+
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```{bash}
+    |target/example_{% id %}_with_setup ---dockerfile
+    |```
+    |", 
+    .dir = paste0(temp_dir, "/", id)
+  )
+})
+```
+:::
+
+### Enter debugging session
+
+You can also hop in a Bash session inside the Docker image using the `---debug` flag:
+
+::: {.panel-tabset}
+```{r debug, echo=FALSE, output="asis"}
+
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```bash
+    |target/example_{% id %}_with_setup ---debug
+    |```
+    |
+    |    [notice] + docker run --entrypoint=bash -i --rm -v `pwd`:/pwd --workdir /pwd -t 'example_{%id%}_with_setup:latest'
+    |    root@93c38006a124:/pwd#
+    |
+    |")
+})
+```
+:::
+
+This is useful for interactively debugging issues inside the container. For example, for figuring out whether you need to use `apk`, `apt` or `yum` to install software and to search for the exact name of packages like `libcurl4-openssl-dev`.
+
+## Alternative solutions
+
+There are multiple ways you might try to find a Docker image which contains the right set of dependencies for your component:
+
+* **Browse Docker Hub**: Look a Docker image on Docker Hub or other Docker registries which has the right set of dependencies.
+  - This is generally not recommended because it might take a long time to find a pre-existing image with the right set of dependencies
+  - Poses a serious security risk. 
+* **Write a custom Dockerfile**: You can write a custom Dockerfile to build your own Docker image and store it in a Docker registry, effectively creating a new 'trusted' base image. 
+  - Requires manual bookkeeping of which Docker images are used in which components.
+  - Not difficult but requires more know-how on how to build custom Docker images.
+* **Use Viash setup to build component-specific images**: The methodology described above.
+  - Easier to add / change dependencies to one component without breaking another
+  - Store images in a centralized container registry
+
+## Behind the scenes
+
+### Auto-mount
+Any executable built by Viash with a Docker platform will automatically mount the directories of files passed to the executable as arguments. For example, when running:
+
+```bash
+./my_executable --input /foo/bar/file.txt --output /dest/path
+```
+
+The executable will automatically mount the `/foo/bar` and `/dest` folder to `/viash_automount/foo/bar/` and `/viash_automount/dest` inside the Docker container.
+
+### Auto-chown
+
+By default, files created and modified by a Docker container are owned by **root**. By default, Viash automatically changes the owner of any files defined in the config file to the user running the executable. This behaviour can be overridden by setting the [chown](/reference/config/platforms/DockerPlatform.html#chown) setting to `false` in your config file.
+
+Example with standard Docker:
+
+```bash
+docker run -v `pwd`:/pwd bash:4.0 touch /pwd/file.txt
+ls -l
+```
+
+    -rw-r--r--. 1 root     root         0 Jan 26 16:03 file.txt
+
+Example with a Viash executable:
+
+```bash
+/my_executable --output file.txt
+```
+
+    -rw-r--r--. 1 myuser   myuser        Jan 26 16:03 file.txt
+
+### Minimum requirements for custom Docker images {#minimum-requirements}
+
+Viash components only require a minimal set of dependencies which need to be available inside the Docker image:
+
+* Bash: `bash`.
+* C#: `bash` and `dotnet-script`.
+* JavaScript: `bash` and `node` (Node.js).
+* Python: `bash`, `python` and `pip`.
+* R: `bash` and `R`.
+* Scala: `bash`, `openjdk-devel` and `sbt`.
+
+:::
+
+{{< include ../../includes/_prune_all_images.qmd >}}
