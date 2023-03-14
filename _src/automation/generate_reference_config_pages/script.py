@@ -70,7 +70,7 @@ def render_jinja_page(folder: str, filename: str, data: dict):
 	with open(yaml_file, 'w') as outfile:
 		yaml.safe_dump(data, outfile, default_flow_style=False)
 
-	subprocess.run(["j2", template_file, yaml_file, "-o", qmd_file])
+	subprocess.run(["jinja2", template_file, yaml_file, "-o", qmd_file])
 
 def replace_keywords(text: str) -> str:
 	""" Finds all keywords in the format @[keyword](text) and returns the replacements based on the keywords settings. """
