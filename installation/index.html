@@ -130,6 +130,41 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </script>
+<script type="application/javascript">
+
+window.document.addEventListener("DOMContentLoaded", function () {
+  
+  openOsTab()
+});
+
+function openOsTab() {
+	const os = guessOS();
+
+  switch (os) {
+    case "Linux":
+      document.getElementById("tabset-1-1-tab").click();
+      break;
+    case "macOS":
+      document.getElementById("tabset-1-2-tab").click();
+      break;
+    case "Windows":
+      document.getElementById("tabset-1-3-tab").click();
+      break;
+
+  }
+}
+
+function guessOS() {
+	const userAgent = window.navigator.userAgent;
+	if (userAgent.includes('Mac')) {
+		return "macOS";
+	} else if (userAgent.includes("Win")) {
+		return "Windows";
+	} else {
+		return "Linux";
+	}
+}
+</script> 
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -197,11 +232,6 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/DataIntuitive"><i class="bi bi-twitter" role="img" aria-label="Viash Twitter">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/viash-io/viash"><i class="bi bi-github" role="img" aria-label="Viash GitHub">
 </i> 
@@ -550,29 +580,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <a class="nav-link" href="../about.html">About</a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="../faq/index.qmd">FAQ</a>
-  </li>  
-    <li class="nav-item">
     <a class="nav-link" href="../privacy.html">Privacy Policy</a>
   </li>  
 </ul>
       </div>
-    <div class="nav-footer-right">
-      <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/DataIntuitive">
-      <i class="bi bi-twitter" role="img" aria-label="Viash Twitter">
-</i> 
-    </a>
-  </li>  
-    <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/viash-io/viash">
-      <i class="bi bi-github" role="img" aria-label="Viash GitHub">
-</i> 
-    </a>
-  </li>  
-</ul>
-    </div>
   </div>
 </footer>
 
