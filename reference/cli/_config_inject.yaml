@@ -1,8 +1,8 @@
 data:
-- bannerCommand: viash build
-  bannerDescription: Build an executable from the provided viash config file.
-  bannerUsage: viash build config.vsh.yaml -o output [-p docker] [-m] [-s]
-  name: build
+- bannerCommand: viash config inject
+  bannerDescription: Inject a Viash header into the main script of a Viash component.
+  bannerUsage: viash config inject config.vsh.yaml
+  name: inject
   opts:
   - argName: arg
     descr: Specifies which platform amongst those specified in the config to use.
@@ -32,34 +32,6 @@ data:
     required: false
     short: c
     type: List[String]
-  - argName: arg
-    default: output/
-    descr: 'Path to directory in which the executable and any resources is built to.
-      Default: "output/".'
-    hidden: false
-    name: output
-    optType: opt
-    required: true
-    short: o
-    type: String
-  - argName: arg
-    descr: Which [setup strategy](/guide/component/add-dependencies.html#step-3-rebuild-docker-image)
-      for creating the container to use [Docker Platform only].
-    hidden: false
-    name: setup
-    optType: opt
-    required: false
-    short: s
-    type: String
-  - argName: arg
-    default: 'false'
-    descr: Whether or not to push the container to a Docker registry [Docker Platform
-      only].
-    hidden: false
-    name: push
-    optType: opt
-    required: false
-    type: Boolean
   subcommands: []
-title: Viash Build
+title: Viash Config Inject
 usesSubcommands: false

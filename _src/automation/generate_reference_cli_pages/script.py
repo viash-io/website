@@ -25,15 +25,20 @@ def generate_pages():
 		viash_json = json.load(infile)
 
 	for entry in viash_json:
-		create_page(entry["name"], entry)
+		# create_page(entry["name"], entry)
+		if "bannerCommand" in entry:		
+			create_page(entry["name"], entry)
+		else:
+			for subcommand in entry['subcommands']:
+				create_page(f"{entry['name']} {subcommand['name']}", subcommand)		
 
 def create_page(name, json_data):
 	""" Do minor transformations and let jinja do its thing """
 
 	if "bannerCommand" in json_data: # Info is in top level command
-		page_data = {'title': f'viash {name}', 'usesSubcommands': False, 'data': [json_data]}
+		page_data = {'title': f'viash {name}'.title(), 'usesSubcommands': False, 'data': [json_data]}
 	else:
-		page_data = {'title': f'viash {name}', 'usesSubcommands': True, 'data': json_data['subcommands']}
+		page_data = {'title': f'viash {name}'.title(), 'usesSubcommands': True, 'data': json_data['subcommands']}
 
 	# replace keywords in 'descr' fields
 	for d in page_data['data']:
@@ -42,7 +47,7 @@ def create_page(name, json_data):
 				if 'descr' in arg:
 					arg['descr'] = replace_keywords(arg["descr"])
 
-	render_jinja_page(par['output'], name, page_data)
+	render_jinja_page(par['output'], name.replace(' ', '_'), page_data)
 
 def render_jinja_page(folder: str, filename: str, data: dict):
 	""" Write data to yaml file and run jinja. """

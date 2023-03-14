@@ -34,10 +34,10 @@ def read_json_entries():
 def generate_page(topic: str, subtopic: str, json_data: list):
 	""" Receives JSON data, does some minor data manipulation and writes to yaml & qmd. """
 
-	if topic == 'arguments': # Keep title of argument pages as-is
-		title = subtopic
-	else:
-		title = re.sub(r"(\w)([A-Z])", r"\1 \2", subtopic).title() # split words and capitalize
+	# if topic == 'arguments': # Keep title of argument pages as-is
+	# 	title = subtopic
+	# else:
+	title = re.sub(r"(\w)([A-Z])", r"\1 \2", subtopic).title() # split words and capitalize
 
 	# Fix description markdown keywords to links
 	for d in json_data:

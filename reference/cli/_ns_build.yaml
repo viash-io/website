@@ -1,0 +1,108 @@
+data:
+- bannerCommand: viash ns build
+  bannerDescription: Build a namespace from many viash config files.
+  bannerUsage: viash ns build [-n nmspc] [-s src] [-t target] [-p docker] [--setup]
+    [--push] [--parallel] [--flatten]
+  name: build
+  opts:
+  - argName: arg
+    descr: 'Filter which components get selected by component and [namespace](/guide/project/getting-started.html#grouping-components-in-namespaces)
+      name. Can be a regex. Example: "^mynamespace/component1$".'
+    hidden: false
+    name: query
+    optType: opt
+    required: false
+    short: q
+    type: String
+  - argName: arg
+    descr: 'Filter which namespaces get selected by [namespace](/guide/project/getting-started.html#grouping-components-in-namespaces)
+      name. Can be a regex. Example: "^mynamespace$".'
+    hidden: false
+    name: query_namespace
+    optType: opt
+    required: false
+    short: n
+    type: String
+  - argName: arg
+    descr: 'Filter which components get selected by component name. Can be a regex.
+      Example: "^component1".'
+    hidden: false
+    name: query_name
+    optType: opt
+    required: false
+    type: String
+  - argName: arg
+    descr: 'A source directory containing viash config files, possibly structured
+      in a hierarchical folder structure. Default: src/.'
+    hidden: false
+    name: src
+    optType: opt
+    required: false
+    short: s
+    type: String
+  - argName: arg
+    descr: Acts as a regular expression to filter the platform ids specified in the
+      found config files. If this is not provided, all platforms will be used. If
+      no platforms are defined in a config, the native platform will be used. In addition,
+      the path to a platform yaml file can also be specified.
+    hidden: false
+    name: platform
+    optType: opt
+    required: false
+    short: p
+    type: String
+  - argName: arg
+    default: 'false'
+    descr: Whether or not to run the process in parallel.
+    hidden: false
+    name: parallel
+    optType: opt
+    required: false
+    short: l
+    type: Boolean
+  - argName: arg
+    default: List()
+    descr: Modify a viash config at runtime using [dynamic config modding](/reference/config_mods/#).
+    hidden: false
+    name: config_mod
+    optType: opt
+    required: false
+    short: c
+    type: List[String]
+  - argName: arg
+    descr: 'A target directory to build the executables into. Default: target/.'
+    hidden: false
+    name: target
+    optType: opt
+    required: false
+    short: t
+    type: String
+  - argName: arg
+    descr: Which [setup strategy](/guide/component/add-dependencies.html#step-3-rebuild-docker-image)
+      for creating the container to use [Docker Platform only].
+    hidden: false
+    name: setup
+    optType: opt
+    required: false
+    type: String
+  - argName: arg
+    default: 'false'
+    descr: Whether or not to push the container to a Docker registry [Docker Platform
+      only].
+    hidden: false
+    name: push
+    optType: opt
+    required: false
+    type: Boolean
+  - argName: arg
+    default: 'false'
+    descr: Flatten the target builds, handy for building one platform to a bin directory.
+    hidden: false
+    name: flatten
+    optType: opt
+    required: false
+    short: f
+    type: Boolean
+  subcommands: []
+title: Viash Ns Build
+usesSubcommands: false

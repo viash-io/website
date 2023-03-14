@@ -1,25 +1,22 @@
 ---
-title: "Viash Build"
+title: "Viash Config Inject"
 search: true
 execute:
   echo: false
   output: asis
 ---
 
-Build an executable from the provided viash config file.
+Inject a Viash header into the main script of a Viash component.
 
 **Usage:**
 
-`viash build config.vsh.yaml -o output [-p docker] [-m] [-s]`
+`viash config inject config.vsh.yaml`
 
 | Argument | Description | Type |
 |-|:----|-:
 | `config` | A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. **This is a required argument.** | `String` |
 | `--config_mod`, `-c` | Modify a viash config at runtime using [dynamic config modding](/reference/config_mods/#). | `List[String]` |
-| `--output`, `-o` | Path to directory in which the executable and any resources is built to. Default: "output/". **This is a required argument.** | `String` |
 | `--platform`, `-p` | Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified. | `String` |
-| `--push` | Whether or not to push the container to a Docker registry [Docker Platform only]. | `Boolean` |
-| `--setup`, `-s` | Which [setup strategy](/guide/component/add-dependencies.html#step-3-rebuild-docker-image) for creating the container to use [Docker Platform only]. | `String` |
 | `--help`, `-h` | Show help message |  |
 
 
