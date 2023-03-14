@@ -1,1 +1,0 @@
-echo "$(($par_num1+$par_num2))"

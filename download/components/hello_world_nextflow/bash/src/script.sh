@@ -1,1 +1,0 @@
-echo "Hello $par_input" > $par_output
