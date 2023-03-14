@@ -15,6 +15,6 @@ langs <- tribble(
   "scala", "Scala", "script.scala", "scala_script", '"sbtscala/scala-sbt:eclipse-temurin-19_36_1.7.2_2.13.10"'
 ) %>%
   mutate(
-    example_config = paste0(repo_path, "/download/examples/example_", id, "/config.vsh.yaml"),
-    example_script = paste0(repo_path, "/download/examples/example_", id, "/", script)
+    example_config = paste0(repo_path, "/_src/component_examples/example_", id, "/config.vsh.yaml"),
+    example_script = paste0(repo_path, "/_src/component_examples/example_", id, "/", script)
   )

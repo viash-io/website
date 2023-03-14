@@ -1,1 +1,0 @@
-println("Hello " + par.input.get)
