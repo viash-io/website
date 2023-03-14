@@ -3,28 +3,7 @@ title: Create a pipeline
 order: 30
 ---
 
-
-```{r setup, include=FALSE}
-repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
-source(paste0(repo_path, "/includes/_r_helper.R"))
-
-# why doesn't this want to work inside a tempdir?
-# temp_dir <- tempfile("create_pipeline")
-# dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
-# on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
-
-proj_dir <- "_viash_project_template"
-
-if (dir.exists(proj_dir)) {
-  unlink(proj_dir, recursive = TRUE)
-}
-processx::run(
-  "git",
-  c("clone", "https://github.com/viash-io/viash_project_template.git", proj_dir)
-)
-
-knitr::opts_knit$set(root.dir = proj_dir)
-```
+{{< include ../_blocks/_clone_repo.qmd >}}
 
 This guide explains how to create an example pipeline that's closer to a typical use-case of a Nextflow bioinformatics pipeline.
 
