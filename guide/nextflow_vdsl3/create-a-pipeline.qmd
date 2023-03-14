@@ -1,0 +1,152 @@
+---
+title: Create a pipeline
+order: 30
+---
+
+{{< include ../_blocks/_clone_repo.qmd >}}
+
+This guide explains how to create an example pipeline that's closer to a typical use-case of a Nextflow bioinformatics pipeline.
+
+:::{.callout-note}
+This page assumes knowledge of how to create and manipulate Nextflow channels using DSL2. For more information, check out the [Nextflow reference docs](https://www.nextflow.io/docs/latest/index.html) or contact [Data Intuitive](https://www.data-intuitive.com/contact) for a complete Nextflow+Viash course.
+:::
+
+## Get the template project
+
+To get started with building a pipeline, we provide a [template project](https://github.com/viash-io/viash_project_template)
+which already contains a few components. First create a new repository by clicking the "Use this template" button in the [viash_project_template](https://github.com/viash-io/viash_project_template) repository or clicking the button below.
+
+[Use project template](https://github.com/viash-io/viash_project_template/generate){class="btn btn-info btn-md"}
+
+Then clone the repository using the following command.
+
+```bash
+git clone https://github.com/youruser/my_first_pipeline.git
+```
+
+The pipeline already contains three components with which we will build the following pipeline:
+
+```{mermaid}
+graph LR
+   A(file?.tsv) --> B[/remove_comments/]
+   B --> C[/take_column/]
+   C --> D[/combine_columns/]
+   D --> E(output)
+```
+
+* `remove_comments` is a Bash script which removes all lines starting with a `#` from a file. 
+* `take_column` is a Python script which extracts one of the columns in a TSV file. 
+* `combine_columns` is an R script which combines multiple files into a TSV.
+
+## Build the VDSL3 modules
+
+First, we need to build the components into VDSL3 modules.
+
+```{bash viash-ns-build}
+viash ns build --setup cachedbuild --parallel
+```
+
+Once everything is built, a new **target** directory has been created containing the executables and modules grouped per platform:
+
+```{bash}
+tree target
+```
+
+## Create a pipeline
+
+Below is a first Nextflow pipeline which uses just one VDSL3 module and with hard-coded input parameters (file1 and file2).
+
+```{bash, include=FALSE}
+cat > main.nf << 'HERE'
+nextflow.enable.dsl=2
+
+include { remove_comments } from "./target/nextflow/demo/remove_comments/main.nf"
+
+workflow {
+  // Create a channel with two events
+  // Each event contains a string (an identifier) and a file (input)
+  Channel.fromList([
+    ["file1", file("resources_test/file1.tsv")],
+    ["file2", file("resources_test/file2.tsv")]
+  ])
+
+    // View channel contents
+    | view { tup -> "Input: $tup" }
+    
+    // Process the input file using the 'remove_comments' module.
+    // This removes comment lines from the input TSV.
+    | remove_comments.run(
+      directives: [
+        publishDir: "output/"
+      ]
+    )
+
+    // View channel contents
+    | view { tup -> "Output: $tup" }
+}
+
+HERE
+```
+
+```{embed, lang="groovy"}
+main.nf
+```
+
+## VDSL3 module interface
+
+It's important to note what the interface of every VDSL3 module is. A VDSL3 module expects an input to be a tuple with the following elements:
+
+* `id` (`String`): A unique identifier used for tracking data objects and for ensuring output filenames are unique.
+* `data` (`Map[String, Any]` or `File`): A named map (or dictionary) used to pass the module's input arguments. If the module only has a 
+  single input file, the file itself can simply be passed.
+* `...` (`Any*`): Any other elements in the tuple simply pass through the module without being altered in any way. For this reason, it is often referred to as the "passthrough" objects.
+
+In turn, a VDSL3 module will return a tuple with the same interface, except that the input data object has been replaced with the output data:
+
+* `id` (`String`): The identifier from the input tuple.
+* `data` (`Map[String, Any]` or `File`): A named map (or dictionary) containing the module's output files. **Important**: If the module only has a single output file, the file itself will be returned.
+* `...` (`Any*`): The passthrough objects from the input tuple (if any).
+
+## What is `.run()`?
+
+Usually, Nextflow processes are quite static objects. For example, changing its directives can be quite tricky.
+
+The `run()` function is a unique feature for every VDSL3 module which allows dynamically altering the behaviour of a module from within the pipeline. In this case, we use it to set the `publishDir` directive to `"output/"` so the output of that step in the pipeline will be stored as output.
+
+## Run the pipeline
+
+Now run the pipeline with Nextflow:
+
+```{bash}
+nextflow run . \
+  -main-script main.nf
+```
+
+```{bash}
+tree output
+```
+
+```{bash}
+cat output/*
+```
+
+## Discussion
+
+The above example pipeline serves as the backbone for creating more advanced pipelines. However, for the sake of simplicity it contained several hardcoded elements:
+
+* Input parameters
+* Output directory
+* VDSL3 module directory
+
+<!-- TODO: refactor using Viash Nxf config -->
+
+
+```{r include=FALSE}
+knitr::opts_knit$set(root.dir = normalizePath("../"))
+```
+
+```{r include=FALSE}
+unlink(proj_dir, recursive = TRUE)
+```
+
+{{< include ../../includes/_prune_all_images.qmd >}}

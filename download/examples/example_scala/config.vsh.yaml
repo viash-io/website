@@ -1,0 +1,21 @@
+functionality:
+  name: example_scala
+  description: A minimal example component.
+  arguments:
+    - type: file
+      name: --input
+      example: file.txt
+      required: true
+    - type: file
+      name: --output
+      direction: output
+      example: output.txt
+      required: true
+  resources:
+    - type: scala_script
+      path: script.scala
+platforms:
+  - type: docker
+    image: "sbtscala/scala-sbt:eclipse-temurin-19_36_1.7.2_2.13.10"
+  - type: native
+  - type: nextflow

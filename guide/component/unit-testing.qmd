@@ -1,116 +1,155 @@
-
 ---
-title: Unit Testing
-search: true
-execute:
-  echo: false
-  output: asis
+title: Unit testing
+description: How to ensure high quality components.
+order: 50
 ---
 
-{{< include ../../includes/_python_helper.qmd >}}
 
-To ensure that your components and namespaces works as expected during its development cycle, writing one or more tests is essential.  
-Viash supports **unit testing**, which is a software testing method by which individual units of source code are tested to determine whether they output data as expected.
+{{< include ../../includes/_language_chooser.qmd >}}
 
-## Unit testing a single component
+```{r setup, include=FALSE}
+repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
+source(paste0(repo_path, "/includes/_r_helper.R"))
+source(paste0(repo_path, "/guide/component/_language_examples.R"))
 
-To write a unit test for a component, you need two things: a definition in the [config file](/reference/config/index.html) and a script that runs the executable and verifies its output.  
-
-This tutorial uses a sample component named **md_url_checker**  to explain how to write a unit test for Viash. To follow along, start by creating a new folder named "**testing**" on your machine.  
-Now create a new file named **Testfile.md** and add the following contents:
-
-```{python}
-# create_download_button("/download/components/md_url_checker/bash/Testfile.md")
-print_file_contents("/download/components/md_url_checker/bash/Testfile.md", "md", False)
-```
- 
-Next, either download or copy the text for the config file and script below and add them to the same folder:
-
-```{python}
-create_download_button("/download/components/md_url_checker/bash/config.vsh.yaml")
-print_file_contents("/download/components/md_url_checker/bash/config.vsh.yaml", "yaml", True)
+langs <- langs %>%
+  mutate(
+    label = gsub("#", "\\\\#", label)
+  )
 ```
 
-```{python}
-create_download_button("/download/components/md_url_checker/bash/script.sh")
-print_file_contents("/download/components/md_url_checker/bash/script.sh", "bash", True)
+We recommend adding unit tests to all of your components in a project as soon as possible.
+Implementing unit tests not only ensures that your component works, but it also makes
+the project more maintainable in the long run as you will be notified when a component breaks.
 
+This page describes how to add a unit test to your component.
+
+```{r setup-adding-resources, include=FALSE}
+temp_dir <- tempfile("unit-testing")
+dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
+on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
+
+# create tempdir with modified files
+add_unit_test <- function(config, type, path) {
+  # add helper to resources
+  config$functionality$test_resources <- list(
+    list(type = type, path = path)
+  )
+  config
+}
+langs <- langs %>%
+  mutate(
+    example_test = gsub("script", "test", example_script),
+    config_path = paste0(temp_dir, "/", id, "/", basename(example_config)),
+    script_path = paste0(temp_dir, "/", id, "/", basename(example_script)),
+    test_path = paste0(temp_dir, "/", id, "/", basename(example_test)),
+  )
+pwalk(langs, function(id, script_type, example_config, example_script, example_test, config_path, script_path, test_path, ...) {
+  # create dir
+  dir.create(paste0(temp_dir, "/", id), recursive = TRUE, showWarnings = FALSE)
+
+  # read config, make modifications, write to file
+  conf <- yaml::read_yaml(example_config) %>%
+    add_unit_test(script_type, basename(test_path))
+  write_yaml(conf, config_path)
+  
+  # copy script
+  file.copy(example_script, script_path)
+  file.copy(example_test, test_path)
+})
 ```
 
-### Configuration
 
-To see where to define your unit tests, open up **config.vsh.yaml** file and take a look at the end of the [functionality](/reference/config/functionality.html) dictionary, between the `path: script.sh` and `platforms:` lines:
+## Create unit test
 
-```yaml
-  test_resources:
-  - type: bash_script
-    path: test.sh
-  - path: Testfile.md
+Below is an example of how to add a unit test to a Viash component.
+
+::: {.panel-tabset}
+```{r show-helper, output="asis"}
+pwalk(langs, function(id, label, test_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```{% id %}
+    |{% paste(readr::read_lines(test_path), collapse = '\n') %}
+    |```
+    |
+    |")
+})
 ```
-
-The [`test_resources`](/reference/config/functionality.html#test_resources) dictionary contains a reference to a test script and all of the files that need to be copied over in order to complete a test:
-
-- The `type` signifies what [scripting language](/guide/component/languages.html) is used for performing the unit test, which doesn't need to be the same language as the main script. The `path` points to the test script.
-- Every file `path` added straight into the `tests` dictionary will be copied over next to the temporary test directory. Any files that are necessary for the test to work correctly can be added here. 
-
-In the case of this example, **test.sh** will be the test script and **Testfile.md** is necessary as an input markdown file for the script to function.  
-
-### Test script
-
-To write the test itself, create a new file named **test.sh** in the **testing** folder and add this as its content:
-
-```{python}
-print_file_contents("/download/components/md_url_checker/bash/test.sh", "bash", False)
-```
-
-:::{.callout-tip}
-As you can see above, you can use the [meta variable](/guide/component/languages.html#meta-variables) `$meta_functionality_name` to automatically get the name of the component (and the generated executable). This way, you can more reuse parts of your test scripts.
 :::
 
-:::{.callout-tip}
-This script uses [grep](https://www.gnu.org/software/grep/manual/grep.html) to search for files and strings. Make sure to read the comments to understand what is happening.
+1. Create an input file "foo.txt" with some sample content.
+2. Run an executable file specified in the "meta" dictionary with the arguments "--input foo.txt" and "--output bar.txt".
+3. Check whether the output file "bar.txt" exists.
+4. Check whether the content of the output file is the same as the content of the input file.
+5. If both checks pass, the script prints "Test finished successfully".
+
+:::{.callout-important}
+A test script doesn't need to be written in the same scripting language as the main script, as long as all of the required dependencies are available. This means the main script could be written in R, but the unit test could be written in Bash.
 :::
 
-The bash script above is just a minimal example of how you can write a test. You can use any of the [supported languages](/guide/component/languages.html) and your favorite testing framework if that's your preference. The most important part is the last line, which uses a 0 [exit code](https://en.wikipedia.org/wiki/Exit_status) to signal a success.
+## Add test to config
 
-### Running a test
+Next, we need to add the unit test to the `test_resources` section in the Viash config.
 
-To run all tests defined in a config file, use the [`viash test`](/reference/viash/test.html) command:
+::: {.panel-tabset}
+```{r show-config, output="asis"}
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```yaml
+    |{% paste(readr::read_lines(config_path), collapse = '\n    |') %}
+    |```
+    |")
+})
+```
+:::
+
+Note that if you can add multiple unit tests to the `test_resources` section,
+they will all be evaluated. You can also add other resources, similar to 
+what is described in the page on [adding resources](add-resources.qmd).
+
+## Run the unit test
+
+You can run the unit test as follows:
+
+::: {.panel-tabset}
+```{r echo=FALSE, output="asis"}
+
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```{bash test-example}
+    |viash test config.vsh.yaml
+    |```
+    |", 
+    .dir = paste0(temp_dir, "/", id)
+  )
+})
+```
+:::
+
+When running `viash test`, Viash will follow the following steps:
+
+1. Create a temporary directory
+2. Build the component into the main executable
+3. (Re-)build the Docker image for the component
+4. Iterate over all unit test scripts:
+  a. Build the unit test into an executable
+  b. Run the unit test, passing the main executable as an argument
+5. Return exit code 0 if all of the above steps succeed, otherwise 0
+
+## Bonus: unit testing all of the components
+
+If you have multiple Viash components located in a directory
+called `src/`, what happens when you run the following?
 
 ```bash
-viash test config.vsh.yaml
+viash ns test --parallel --src src/
 ```
 
-Viash will now automatically build an executable and place it alongside the other defined resources in a temporary working directory. The output should look like this:  
 
-```
-Running tests in temporary directory: '/tmp/viash_test_md_url_checker5828773777380597444'
-====================================================================
-+/tmp/viash_test_md_url_checker5828773777380597444/build_executable/md_url_checker ---setup
-====================================================================
-+/tmp/viash_test_md_url_checker5828773777380597444/test_test.sh/test.sh
->>> Checking whether output is correct
-+ echo '>>> Checking whether output is correct'
-+ ./md_url_checker --inputfile Testfile.md
-+ [[ ! -f test-output.txt ]]
-+ grep -q '1: https://www.google.com' test-output.txt
-+ grep -q 'HTTP/2 404' test-output.txt
->>> Checking whether an output file was created correctly
-+ echo '>>> Checking whether an output file was created correctly'
-+ [[ ! -f output.txt ]]
-+ grep -q 'URL: https://www.google.com' output.txt
-+ grep -q 'Status: ERROR! URL cannot be reached. Status code: HTTP/2 404' output.txt
-+ grep -q 'Link name: install viash here' output.txt
-+ echo '>>> Test finished successfully!'
->>> Test finished successfully!
-+ exit 0
-====================================================================
-[32mSUCCESS! All 1 out of 1 test scripts succeeded![0m
-Cleaning up temporary directory
-```
-
-If the test succeeds, Viash writes the full output to the shell and deletes the temporary files. If there are any issues, the script stops and an error message will appear in red. In this case, you can inspect the temporary files to troubleshoot.  
-
-:::{.callout-tip}
-You can pass the [`--keep true`](/reference/viash/test.html) argument to `viash test` to prevent viash from automatically deleting the temporary files in case of a success: `viash test --keep true config.vsh.yaml`.
-:::
+{{< include ../../includes/_prune_all_images.qmd >}}

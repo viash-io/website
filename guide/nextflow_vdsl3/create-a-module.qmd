@@ -1,0 +1,209 @@
+---
+title: Create a module
+order: 20
+---
+
+
+{{< include ../../includes/_language_chooser.qmd >}}
+
+```{r setup, include=FALSE}
+repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
+source(paste0(repo_path, "/includes/_r_helper.R"))
+source(paste0(repo_path, "/guide/component/_language_examples.R"))
+
+temp_dir <- tempfile("create-a-module")
+dir.create(temp_dir, recursive = TRUE, showWarnings = FALSE)
+on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
+
+# create tempdir with modified files
+langs <- langs %>%
+  mutate(
+    label = gsub("#", "\\\\#", label),
+    config_path = paste0(temp_dir, "/", id, "/", basename(example_config)),
+    script_path = paste0(temp_dir, "/", id, "/", basename(example_script))
+  )
+pwalk(
+  langs %>% filter(id == "bash"),
+  function(id, label, example_config, example_script, config_path, script_path, ...) {
+  # create dir
+  dir.create(paste0(temp_dir, "/", id), recursive = TRUE, showWarnings = FALSE)
+  
+  # copy script
+  file.copy(example_script, script_path)
+  file.copy(example_config, config_path)
+})
+```
+
+Creating a VDSL3 module is as simple as adding `{ type: nextflow }` to the `platforms` section in the Viash config. Luckily, our previous example already contained such an entry:
+
+
+::: {.panel-tabset}
+```{r create-config, output="asis"}
+pwalk(langs, function(id, label, example_config, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```yaml
+    |{% paste(readr::read_lines(example_config), collapse = '\n    |') %}
+    |```
+    |
+    |")
+})
+```
+:::
+
+## Build the VDSL3 module
+
+We will now turn the Viash component into a VDSL3 module. By default, the `viash build` command will select the first platform in the list of platforms. To select the `nextflow` platform, use the `--platform nextflow` argument, or `-p nextflow` for short.
+
+::: {.panel-tabset}
+```{r viash-build-nxf}
+#| echo: false
+#| output: asis
+langs <- langs %>% filter(id == "bash")
+pwalk(langs, function(id, label, config_path, script_path, ...) {
+  qrt(
+    "## {% label %}
+    |
+    |```{bash build-example}
+    |viash build config.vsh.yaml -o target -p nextflow
+    |```
+    |
+    |This will generate a Nextflow module in the `target/` directory:
+    |
+    |```{bash view-tree}
+    |tree target
+    |```
+    |", 
+    .dir = paste0(temp_dir, "/", id)
+  )
+})
+```
+:::
+
+This `main.nf` file is both a **standalone Nextflow pipeline** and a module which can be used as **part of another pipeline**.
+
+:::{.callout-tip}
+You can also use the `viash ns build` command to build all of the platforms in one go. Give it a try! More information in the following section.
+:::
+
+## Module as a standalone pipeline
+
+When VDSL3 modules are used as a standalone pipeline, you need to specify the input parameters and a `--publish_dir` parameter,
+as Nextflow will automatically choose the parameter names of the output files.
+
+```{r nextflow-run, echo=FALSE, output="asis"}
+id <- "bash"
+qrt(
+  "
+  |You can run the executable by providing a value for `--input` and `--publish_dir`:
+  |
+  |```{bash}
+  |nextflow run target/main.nf --input config.vsh.yaml --publish_dir output/
+  |```
+  |
+  |This results in the following output:
+  |
+  |```{bash}
+  |tree output
+  |```
+  |
+  |The pipeline help can be shown by passing the `--help`
+  |parameter (Output not shown).
+  | 
+  |```bash
+  |nextflow run target/main.nf --help
+  |```
+  |",
+  .dir = paste0(temp_dir, "/", id)
+)
+```
+
+
+## Passing a parameter list
+
+Every VDSL3 can accept a list of parameters to populate a Nextflow channel with.
+
+```{r nextflow-run-param-list, echo=FALSE, output="asis"}
+id <- "bash"
+qrt(
+  "
+  |For example, we create a set of input files which we want to process in parallel.
+  |
+  |```{bash}
+  |touch sample1.txt sample2.txt sample3.txt sample4.txt
+  |```
+  |
+  |```{bash, echo=FALSE}
+  |cat > param_list.yaml << HERE
+  |- id: sample1
+  |  input: {% paste0(temp_dir, '/', id) %}/sample1.txt
+  |- id: sample2
+  |  input: {% paste0(temp_dir, '/', id) %}/sample2.txt
+  |- id: sample3
+  |  input: {% paste0(temp_dir, '/', id) %}/sample3.txt
+  |- id: sample4
+  |  input: {% paste0(temp_dir, '/', id) %}/sample4.txt
+  |HERE
+  |```
+  |
+  |Next, we create a YAML file `param_list.yaml` containing an `id` 
+  |and an `input` value for each parameter entry.
+  |
+  |```{embed, lang='yaml'}
+  |param_list.yaml
+  |```
+  |
+  |You can run the pipeline on the list of parameters using the `--param_list`
+  |parameter.
+  | 
+  |```{bash}
+  |nextflow run target/main.nf --param_list param_list.yaml --publish_dir output2
+  |```
+  |
+  |This results in the following outputs:
+  |
+  |```{bash}
+  |tree output2
+  |```
+  |
+  |",
+  .dir = paste0(temp_dir, "/", id)
+)
+```
+
+:::{.callout-tip}
+Instead of a YAML, you can also pass a JSON or a CSV to the `--param_list` 
+parameter.
+:::
+
+## Module as part of a pipeline
+
+This module can also be used as part of a Nextflow pipeline.
+Below is a short preview of what this looks like.
+
+```groovy
+import { example_bash } from "target/main.nf"
+
+Channel.fromList([
+  ["sample1", file("sample1.txt")],
+  ["sample2", file("sample2.txt")],
+  ["sample3", file("sample3.txt")]
+])
+  | view { it -> "input: $it" }
+  | example_bash
+  | view { it -> "output: $it" }
+```
+
+We will discuss building pipelines with VDSL3 modules in more detail in [Create a pipeline](create-a-pipeline.qmd).
+
+## Improvements over standard Nextflow modules
+
+* No need to write any Nextflow Groovy code, just your script and the Viash config.
+* VDSL3 module are also standalone pipelines.
+* Help documentation is automatically generated.
+* Standardized interface for passing parameter lists.
+* Automatically uses the Docker platform's container.
+
+
+{{< include ../../includes/_prune_all_images.qmd >}}
