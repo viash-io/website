@@ -1,1 +1,0 @@
-File.WriteAllText(par.output, "Hello " + par.input);

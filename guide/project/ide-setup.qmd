@@ -1,9 +1,87 @@
 ---
-title: IDE setup *
+title: IDE setup
+order: 30
 ---
 
+Since a Viash components consists of a script in one of the supported languages and a YAML file, you can use any editor of your choosing to create these files.
 
-## Todo: add
+When building a Nextflow pipeline built from Viash components written in Bash, R, and Python, we highly recommend using [Visual Studio Code](https://code.visualstudio.com).
 
+## What is Visual Studio Code?
 
-* Copy guide/dev-environment/vscode.qmd.
+**Visual Studio Code** is an open source code-editor developed by Microsoft for Windows, Linux and macOS. As of 2021, it's the #1 most popular developer environment tool, and for good reason. It's lightweight, supports many languages and has a ton of features. 
+Some of its most prominent features include:
+
+- Syntax highlighting
+- Intelligent code completion 
+- Code refactoring
+- Embedded Git
+- Snippets
+- Extensions and themes
+
+## Installation
+
+VS Code can be downloaded from this page:
+
+[https://code.visualstudio.com/Download](https://code.visualstudio.com/Download)
+
+There are installers available for all major operating systems, so simply download and install the version for your system.
+
+## Recommended extensions
+
+Visual Studio Code supports installing extensions that extend the capabilities and introduce quality of life changes. The lists below are our recommendations for use with Viash. 
+
+### General
+
+These extensions are useful for most languages:
+
+- [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner): This allows you to easily run any selected code and output the results to the built-in terminal. Make sure to take a look at the **Configuration** section of the page to set it up for the languages you'll work with.
+- [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker): A quality of life extension that prevents you from making common spelling mistakes in your code by showing squiggly underlines below typos. 
+- [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens): This extension makes errors and warnings more prominent by highlighting the entire line and adding the message at the end. This can speed up the writing of scripts tremendously.
+- [Prettier code formatter](https://marketplace.visualstudio.com/items?itemName=SimonSiefke.prettier-vscode): Integrates the [prettier](https://prettier.io/) code formatter into VS Code, which makes formatting your code extremely easy.
+
+### YAML
+
+Viash config files are written in YAML, so it makes sense to have an extension for that language:
+
+- [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml): This extension provides YAML validation, syntax highlighting, auto completion and document outlining for YAML. A must have for writing and editing Viash config files!  
+
+## Markdown
+
+If you're planning on writing documentation for components you write, can supplement the description and the CLI with a Markdown document. VS Code has Markdown support built-in, but the extension below makes writing markdown documents even easier!
+
+- [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one): Some of the features include keyboard shortcuts for text formatting, list editing, GitHub flavored Markdown and auto completion for Markdown.
+
+## Bash
+
+- [shell-format](https://marketplace.visualstudio.com/items?itemName=foxundermoon.shell-format): By installing this extension, you get syntax highlighting and code formatting for shell scripts.
+
+## C\#
+
+- [C\#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp): Adds syntax highlighting, IntelliSense and debugging capabilities to VS Code for C\#.
+
+## Python
+
+[Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python): Adds syntax highlighting, IntelliSense, debugging and code formatting. This extension also installs the [PyLance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance) language server and [Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) for **Jupyter Notebook** support.
+
+## Javascript
+
+[Node.js Extension Pack](https://marketplace.visualstudio.com/items?itemName=waderyan.nodejs-extension-pack): VS Code actually already has a lot of Node.js features out of the box, but this extension pack adds adds even more. The extensions adds JS code hints, module search, code snippets and IntelliSense for NPM and paths just to name a few features.
+
+## R 
+
+[R](https://marketplace.visualstudio.com/items?itemName=REditorSupport.r): This extension adds syntax highlighting, code analysis, keyboard shortcuts, package management and a lot more for the R language.
+
+> **Note**: This extension requires you to install [R](https://cloud.r-project.org/) and the [languageserver](https://github.com/REditorSupport/languageserver) CRAN package which depends on `libxml2-dev`, `libcurl4-openssl-dev` and `libssl-dev` before the extension will work. 
+
+## Scala
+
+- [Scala Syntax (official)](https://marketplace.visualstudio.com/items?itemName=scala-lang.scala): Adds syntax highlighting for Scala 2 and 3.
+- [Scala (Metals)](https://marketplace.visualstudio.com/items?itemName=scalameta.metals): Adds code completion, debugging, formatting, renaming and much more for Scala.
+
+## WSL2
+
+If you're using [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install), you'll probably want to install the [Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) extension. This extension lets you use your Windows version of VS Code in WSL2, as if it was running native.  
+The commands, extensions and the terminal will run on WSL, which makes for an ideal hybrid environment.   
+  
+Once installed, you can connect to WSL2 by clicking the green remote button at the bottom left and choosing **New WSL Window** in the list that pops up. Alternatively, you can use the command `code FOLDER/FILE` (e.g. `code .`) on the WSL2 side to open that file or folder in a remote VS Code session.
