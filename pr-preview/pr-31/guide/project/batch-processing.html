@@ -370,7 +370,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>Luckily, Viash provides a set of commands for building, testing or inspecting all Viash components in the current namespace (ns).</p>
 <section id="build-all-components" class="level2">
 <h2 class="anchored" data-anchor-id="build-all-components">Build all components</h2>
-<p>You can generate your first full development build using the <a href="../../reference/cli/ns.html#viash-ns-build"><code>viash ns build</code></a> command.</p>
+<p>You can generate your first full development build using the <a href="../../reference/cli/ns.qmd#viash-ns-build"><code>viash ns build</code></a> command.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns build <span class="at">--setup</span> cachedbuild <span class="at">--parallel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <details>
 <summary>
@@ -378,12 +378,12 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Exporting take_column (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/take_column
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_take_column:dev' with Dockerfile
-Exporting take_column (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/take_column
-Exporting remove_comments (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/remove_comments
+<pre><code>Exporting remove_comments (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/remove_comments
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_remove_comments:dev' with Dockerfile
 Exporting remove_comments (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/remove_comments
+Exporting take_column (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/take_column
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_take_column:dev' with Dockerfile
+Exporting take_column (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/take_column
 Exporting combine_columns (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/combine_columns
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_combine_columns:dev' with Dockerfile
 Exporting combine_columns (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/combine_columns
@@ -400,7 +400,7 @@ Exporting combine_columns (demo) =nextflow=&gt; /home/runner/work/website/websit
 </section>
 <section id="test-all-components" class="level2">
 <h2 class="anchored" data-anchor-id="test-all-components">Test all components</h2>
-<p>You can run all of the component tests in parallel using the <a href="../../reference/cli/ns.html#viash-ns-test"><code>viash ns test</code></a> command.</p>
+<p>You can run all of the component tests in parallel using the <a href="../../reference/cli/ns.qmd#viash-ns-test"><code>viash ns test</code></a> command.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns test <span class="at">--parallel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <details>
 <summary>
@@ -409,6 +409,109 @@ Output
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>- functionality:
+    name: "remove_comments"
+    namespace: "demo"
+    version: "dev"
+    authors: []
+    inputs: []
+    outputs: []
+    arguments:
+    - type: "file"
+      name: "--input"
+      alternatives:
+      - "-i"
+      example:
+      - "file.tsv"
+      default: []
+      must_exist: true
+      create_parent: true
+      required: true
+      direction: "input"
+      multiple: false
+      multiple_sep: ":"
+      dest: "par"
+    - type: "file"
+      name: "--output"
+      alternatives:
+      - "-o"
+      example:
+      - "file.tsv"
+      default: []
+      must_exist: true
+      create_parent: true
+      required: true
+      direction: "output"
+      multiple: false
+      multiple_sep: ":"
+      dest: "par"
+    - type: "string"
+      name: "--id"
+      alternatives: []
+      example: []
+      default:
+      - "remove_comments"
+      required: false
+      choices: []
+      direction: "input"
+      multiple: false
+      multiple_sep: ":"
+      dest: "par"
+    argument_groups: []
+    resources:
+    - type: "bash_script"
+      path: "script.sh"
+      is_executable: true
+      parent: "file:/home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml"
+    test_resources:
+    - type: "bash_script"
+      path: "test.sh"
+      is_executable: true
+      parent: "file:/home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml"
+    status: "enabled"
+    requirements:
+      commands: []
+    set_wd_to_resources_dir: false
+  platforms:
+  - type: "docker"
+    id: "docker"
+    image: "ubuntu:20.04"
+    target_organization: "viash-io/viash_project_template"
+    target_registry: "ghcr.io"
+    namespace_separator: "_"
+    resolve_volume: "Automatic"
+    chown: true
+    port: []
+    setup_strategy: "ifneedbepullelsecachedbuild"
+    run_args: []
+    target_image_source: "https://github.com/viash-io/viash_project_template"
+    setup: []
+    test_setup: []
+  - type: "nextflow"
+    id: "nextflow"
+    variant: "vdsl3"
+    directives:
+      accelerator: {}
+      conda: []
+      containerOptions: []
+      label: []
+      module: []
+      pod: []
+      publishDir: []
+      queue: []
+      tag: "$id"
+    auto:
+      simplifyInput: true
+      simplifyOutput: true
+      transcript: false
+      publish: false
+    debug: false
+    container: "docker"
+  info:
+    config: "/home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml"
+    viash_version: "0.6.7"
+    git_commit: "847d5a1884d340cd17d1b3d6509ed78920c91333"
+    git_remote: "https://github.com/viash-io/viash_project_template.git"
+- functionality:
     name: "take_column"
     namespace: "demo"
     version: "dev"
@@ -529,110 +632,6 @@ Output
     container: "docker"
   info:
     config: "/home/runner/work/website/website/guide/_viash_project_template/src/demo/take_column/config.vsh.yaml"
-    viash_version: "0.6.7"
-    git_commit: "847d5a1884d340cd17d1b3d6509ed78920c91333"
-    git_remote: "https://github.com/viash-io/viash_project_template.git"
-- functionality:
-    name: "remove_comments"
-    namespace: "demo"
-    version: "dev"
-    authors: []
-    inputs: []
-    outputs: []
-    arguments:
-    - type: "file"
-      name: "--input"
-      alternatives:
-      - "-i"
-      example:
-      - "file.tsv"
-      default: []
-      must_exist: true
-      create_parent: true
-      required: true
-      direction: "input"
-      multiple: false
-      multiple_sep: ":"
-      dest: "par"
-    - type: "file"
-      name: "--output"
-      alternatives:
-      - "-o"
-      example:
-      - "file.tsv"
-      default: []
-      must_exist: true
-      create_parent: true
-      required: true
-      direction: "output"
-      multiple: false
-      multiple_sep: ":"
-      dest: "par"
-    - type: "string"
-      name: "--id"
-      alternatives: []
-      example: []
-      default:
-      - "remove_comments"
-      required: false
-      choices: []
-      direction: "input"
-      multiple: false
-      multiple_sep: ":"
-      dest: "par"
-    argument_groups: []
-    resources:
-    - type: "bash_script"
-      path: "script.sh"
-      is_executable: true
-      parent: "file:/home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml"
-    test_resources:
-    - type: "bash_script"
-      path: "test.sh"
-      is_executable: true
-      parent: "file:/home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml"
-    status: "enabled"
-    requirements:
-      commands: []
-    set_wd_to_resources_dir: false
-  platforms:
-  - type: "docker"
-    id: "docker"
-    image: "ubuntu:20.04"
-    target_organization: "viash-io/viash_project_template"
-    target_registry: "ghcr.io"
-    namespace_separator: "_"
-    resolve_volume: "Automatic"
-    chown: true
-    port: []
-    setup_strategy: "ifneedbepullelsecachedbuild"
-    run_args: []
-    target_image_source: "https://github.com/viash-io/viash_project_template"
-    setup: []
-    test_setup: []
-  - type: "nextflow"
-    id: "nextflow"
-    variant: "vdsl3"
-    directives:
-      accelerator: {}
-      conda: [][32mAll 3 configs parsed successfully[0m
-
-      containerOptions: []
-      label: []
-      module: []
-      pod: []
-      publishDir: []
-      queue: []
-      tag: "$id"
-    auto:
-      simplifyInput: true
-      simplifyOutput: true
-      transcript: false
-      publish: false
-    debug: false
-    container: "docker"
-  info:
-    config: "/home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml"
     viash_version: "0.6.7"
     git_commit: "847d5a1884d340cd17d1b3d6509ed78920c91333"
     git_remote: "https://github.com/viash-io/viash_project_template.git"
@@ -732,14 +731,16 @@ Output
     config: "/home/runner/work/website/website/guide/_viash_project_template/src/demo/combine_columns/config.vsh.yaml"
     viash_version: "0.6.7"
     git_commit: "847d5a1884d340cd17d1b3d6509ed78920c91333"
-    git_remote: "https://github.com/viash-io/viash_project_template.git"</code></pre>
+    git_remote: "https://github.com/viash-io/viash_project_template.git"
+
+[32mAll 3 configs parsed successfully[0m</code></pre>
 </div>
 </div>
 </details>
 </section>
 <section id="listing-components" class="level2">
 <h2 class="anchored" data-anchor-id="listing-components">Listing components</h2>
-<p>You can run list all components using the <a href="../../reference/cli/ns.html#viash-ns-list/"><code>viash ns list</code></a> command.</p>
+<p>You can run list all components using the <a href="../../reference/cli/ns.qmd#viash-ns-list/"><code>viash ns list</code></a> command.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <details>
 <summary>
@@ -748,6 +749,109 @@ Output
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>- functionality:
+    name: "remove_comments"
+    namespace: "demo"
+    version: "dev"
+    authors: []
+    inputs: []
+    outputs: []
+    arguments:
+    - type: "file"
+      name: "--input"
+      alternatives:
+      - "-i"
+      example:
+      - "file.tsv"
+      default: []
+      must_exist: true
+      create_parent: true
+      required: true
+      direction: "input"
+      multiple: false
+      multiple_sep: ":"
+      dest: "par"
+    - type: "file"
+      name: "--output"
+      alternatives:
+      - "-o"
+      example:
+      - "file.tsv"
+      default: []
+      must_exist: true
+      create_parent: true
+      required: true
+      direction: "output"
+      multiple: false
+      multiple_sep: ":"
+      dest: "par"
+    - type: "string"
+      name: "--id"
+      alternatives: []
+      example: []
+      default:
+      - "remove_comments"
+      required: false
+      choices: []
+      direction: "input"
+      multiple: false
+      multiple_sep: ":"
+      dest: "par"
+    argument_groups: []
+    resources:
+    - type: "bash_script"
+      path: "script.sh"
+      is_executable: true
+      parent: "file:/home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml"
+    test_resources:
+    - type: "bash_script"
+      path: "test.sh"
+      is_executable: true
+      parent: "file:/home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml"
+    status: "enabled"
+    requirements:
+      commands: []
+    set_wd_to_resources_dir: false
+  platforms:
+  - type: "docker"
+    id: "docker"
+    image: "ubuntu:20.04"
+    target_organization: "viash-io/viash_project_template"
+    target_registry: "ghcr.io"
+    namespace_separator: "_"
+    resolve_volume: "Automatic"
+    chown: true
+    port: []
+    setup_strategy: "ifneedbepullelsecachedbuild"
+    run_args: []
+    target_image_source: "https://github.com/viash-io/viash_project_template"
+    setup: []
+    test_setup: []
+  - type: "nextflow"
+    id: "nextflow"
+    variant: "vdsl3"
+    directives:
+      accelerator: {}
+      conda: []
+      containerOptions: []
+      label: []
+      module: []
+      pod: []
+      publishDir: []
+      queue: []
+      tag: "$id"
+    auto:
+      simplifyInput: true
+      simplifyOutput: true
+      transcript: false
+      publish: false
+    debug: false
+    container: "docker"
+  info:
+    config: "/home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml"
+    viash_version: "0.6.7"
+    git_commit: "847d5a1884d340cd17d1b3d6509ed78920c91333"
+    git_remote: "https://github.com/viash-io/viash_project_template.git"
+- functionality:
     name: "take_column"
     namespace: "demo"
     version: "dev"
@@ -868,109 +972,6 @@ Output
     container: "docker"
   info:
     config: "/home/runner/work/website/website/guide/_viash_project_template/src/demo/take_column/config.vsh.yaml"
-    viash_version: "0.6.7"
-    git_commit: "847d5a1884d340cd17d1b3d6509ed78920c91333"
-    git_remote: "https://github.com/viash-io/viash_project_template.git"
-- functionality:
-    name: "remove_comments"
-    namespace: "demo"
-    version: "dev"
-    authors: []
-    inputs: []
-    outputs: []
-    arguments:
-    - type: "file"
-      name: "--input"
-      alternatives:
-      - "-i"
-      example:
-      - "file.tsv"
-      default: []
-      must_exist: true
-      create_parent: true
-      required: true
-      direction: "input"
-      multiple: false
-      multiple_sep: ":"
-      dest: "par"
-    - type: "file"
-      name: "--output"
-      alternatives:
-      - "-o"
-      example:
-      - "file.tsv"
-      default: []
-      must_exist: true
-      create_parent: true
-      required: true
-      direction: "output"
-      multiple: false
-      multiple_sep: ":"
-      dest: "par"
-    - type: "string"
-      name: "--id"
-      alternatives: []
-      example: []
-      default:
-      - "remove_comments"
-      required: false
-      choices: []
-      direction: "input"
-      multiple: false
-      multiple_sep: ":"
-      dest: "par"
-    argument_groups: []
-    resources:
-    - type: "bash_script"
-      path: "script.sh"
-      is_executable: true
-      parent: "file:/home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml"
-    test_resources:
-    - type: "bash_script"
-      path: "test.sh"
-      is_executable: true
-      parent: "file:/home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml"
-    status: "enabled"
-    requirements:
-      commands: []
-    set_wd_to_resources_dir: false
-  platforms:
-  - type: "docker"
-    id: "docker"
-    image: "ubuntu:20.04"
-    target_organization: "viash-io/viash_project_template"
-    target_registry: "ghcr.io"
-    namespace_separator: "_"
-    resolve_volume: "Automatic"
-    chown: true
-    port: []
-    setup_strategy: "ifneedbepullelsecachedbuild"
-    run_args: []
-    target_image_source: "https://github.com/viash-io/viash_project_template"
-    setup: []
-    test_setup: []
-  - type: "nextflow"
-    id: "nextflow"
-    variant: "vdsl3"
-    directives:
-      accelerator: {}
-      conda: []
-      containerOptions: []
-      label: []
-      module: []
-      pod: []
-      publishDir: []
-      queue: []
-      tag: "$id"
-    auto:
-      simplifyInput: true
-      simplifyOutput: true
-      transcript: false
-      publish: false
-    debug: false
-    container: "docker"
-  info:
-    config: "/home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml"
     viash_version: "0.6.7"
     git_commit: "847d5a1884d340cd17d1b3d6509ed78920c91333"
     git_remote: "https://github.com/viash-io/viash_project_template.git"
@@ -1079,7 +1080,7 @@ Output
 </section>
 <section id="custom-batch-processing" class="level2">
 <h2 class="anchored" data-anchor-id="custom-batch-processing">Custom batch processing</h2>
-<p>The <a href="../../reference/cli/ns.html#viash-ns-exec"><code>viash ns exec</code></a> command can be used to run a command on every component.</p>
+<p>The <a href="../../reference/cli/ns.qmd#viash-ns-exec"><code>viash ns exec</code></a> command can be used to run a command on every component.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns exec <span class="st">"echo Hello {}"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <details>
 <summary>
@@ -1087,23 +1088,24 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>+ echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/take_column/config.vsh.yaml
+<pre><code>+ echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml
   Exit code: 0
 
   Output:
-+ echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml
++ echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/take_column/config.vsh.yaml
+Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml
+
 Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/take_column/config.vsh.yaml
 
   Exit code: 0
 
   Output:
 + echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/combine_columns/config.vsh.yaml
-Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml
+Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/combine_columns/config.vsh.yaml
 
   Exit code: 0
 
-  Output:
-Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/combine_columns/config.vsh.yaml</code></pre>
+  Output:</code></pre>
 </div>
 </div>
 </details>
