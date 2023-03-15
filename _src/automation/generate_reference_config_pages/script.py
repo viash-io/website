@@ -51,6 +51,11 @@ def generate_page(topic: str, subtopic: str, json_data: list):
 	filename = f"{topic}/{subtopic}"
 
 	try:
+		page_data['order'] = config_pages_settings['order'][filename]
+	except:
+		pass
+
+	try:
 		filename = config_pages_settings['structure'][filename]
 	except KeyError:
 		print(f"Could not find {filename} in the config pages settings structure")

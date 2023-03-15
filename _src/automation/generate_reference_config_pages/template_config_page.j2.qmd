@@ -1,9 +1,9 @@
 ---
 title: "{{title}}"
 search: true
-execute:
-  echo: false
-  output: asis
+{%- if order is defined %}
+order: {{order}}
+{%- endif %}
 ---
 {% for d in data|sort(attribute="name") -%}
 
