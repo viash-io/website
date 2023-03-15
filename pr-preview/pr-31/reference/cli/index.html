@@ -31,8 +31,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../reference/cli/build.html" rel="next">
-<link href="../../reference/project/index.html" rel="prev">
+<link href="../../reference/config_mods/index.html" rel="prev">
 <link href="../../favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -61,6 +63,35 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-cli .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-filters','listing-format','listing-search','listing-title','listing-path','listing-author','listing-description','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      
+      searchColumns: ["listing-filters","listing-format","listing-search","listing-title","listing-path","listing-author","listing-description","listing-filename","listing-file-modified","listing-reading-time"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-cli'] = new List('listing-cli', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GDS2XT0DDG"></script>
 
 <script type="text/javascript">
@@ -71,11 +102,12 @@ gtag('js', new Date());
 gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 <link rel="stylesheet" href="../reference.css">
 <meta property="og:title" content="Viash - CLI">
-<meta property="og:description" content="TODO">
+<meta property="og:description" content="These are the available commands available on the Command Line Interface:">
 <meta property="og:site-name" content="Viash">
 </head>
 
@@ -174,7 +206,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../reference/config_mods/index.html" class="sidebar-item-text sidebar-link">Dynamic Config Modding</a>
+  <a href="../../reference/project/index.html" class="sidebar-item-text sidebar-link">Project</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -184,7 +216,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../reference/project/index.html" class="sidebar-item-text sidebar-link">Project</a>
+  <a href="../../reference/config_mods/index.html" class="sidebar-item-text sidebar-link">Dynamic Config Modding</a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
@@ -491,7 +523,42 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 </header>
 
-<p>TODO</p>
+<p>These are the available commands available on the Command Line Interface:</p>
+<div id="listing-cli" class="quarto-listing quarto-listing-container-custom">
+<ul>
+  <li>
+    <a href="../../reference/cli/build.html">Viash Build</a>: Build an executable from the provided viash config file.
+  </li>
+  <li>
+    <a href="../../reference/cli/config_inject.html">Viash Config Inject</a>: Inject a Viash header into the main script of a Viash component.
+  </li>
+  <li>
+    <a href="../../reference/cli/config_view.html">Viash Config View</a>: View the config file after parsing.
+  </li>
+  <li>
+    <a href="../../reference/cli/ns_build.html">Viash Ns Build</a>: Build a namespace from many viash config files.
+  </li>
+  <li>
+    <a href="../../reference/cli/ns_exec.html">Viash Ns Exec</a>: Execute a command for all found Viash components. The syntax of this command is inspired by <code>find . -exec echo {} \;</code>.
+  </li>
+  <li>
+    <a href="../../reference/cli/ns_list.html">Viash Ns List</a>: List a namespace containing many viash config files.
+  </li>
+  <li>
+    <a href="../../reference/cli/ns_test.html">Viash Ns Test</a>: Test a namespace containing many viash config files.
+  </li>
+  <li>
+    <a href="../../reference/cli/run.html">Viash Run</a>: Executes a viash component from the provided viash config file. viash generates a temporary executable and immediately executes it with the given parameters.
+  </li>
+  <li>
+    <a href="../../reference/cli/test.html">Viash Test</a>: Test the component using the tests defined in the viash config file.
+  </li>
+</ul>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+
 
 
 
@@ -610,8 +677,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../reference/project/index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Project</span>
+      <a href="../../reference/config_mods/index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Dynamic Config Modding</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
