@@ -14,7 +14,7 @@ Luckily, Viash provides a set of commands for building, testing or inspecting al
 You can generate your first full development build using the [`viash ns build`](/reference/viash/ns.qmd#viash-ns-build) command.
 
 ```bash
-viash ns build --setup cachedbuild --parallel
+viash ns build --setup cachedbuild
 ```
 <details>
 <summary>Output</summary>
@@ -25,22 +25,21 @@ viash ns build --setup cachedbuild
 
 Here are some useful optional arguments:
 
-* `--parallel`: Run multiple builds in parallel.
 * `--setup cachedbuild`: Build Docker images using the [`cachedbuild`](/reference/config/platforms/DockerPlatform.qmd#setup_strategy) strategy.
 * `--query demo`: Only select components that have 'demo' in the namespace or name.
 
 ## Test all components
 
-You can run all of the component tests in parallel using the [`viash ns test`](/reference/viash/ns.qmd#viash-ns-test) command.
+You can run all of the component tests using the [`viash ns test`](/reference/viash/ns.qmd#viash-ns-test) command.
 
 
 ```bash
-viash ns test --parallel
+viash ns test
 ```
 <details>
 <summary>Output</summary>
 ```{bash echo=FALSE}
-viash ns list
+viash ns test
 ```
 </details>
 
@@ -72,3 +71,41 @@ viash ns exec "echo Hello {}"
 viash ns exec "echo Hello {}"
 ```
 </details>
+
+## Tips
+
+### Parallel builds
+
+Some commands shown above can be optimized by adding the [`--parallel`](/reference/viash/ns.qmd) option:
+
+- `viash ns build --parallel` will build in parallel
+- `viash ns test --parallel` will test in parallel
+
+For example:
+
+
+```bash
+viash ns test --parallel
+```
+<details>
+<summary>Output</summary>
+```{bash echo=FALSE}
+viash ns test --parallel
+```
+</details>
+
+### Subset to components or namespaces
+
+In a development context, one often needs to rebuild one or a few components rather than the full repository. For this situation, `viash ns` has the option to specify query arguments: `--query`, `query_name` and `query_namespace`. We refer to the [reference](/reference/viash/ns.qmd) documentation for details and illustrate the use using an example:
+
+```bash
+viash ns build --query "^.*columns$"
+```
+<details>
+<summary>Output</summary>
+```{bash echo=FALSE}
+viash ns build --query "^.*columns$"
+```
+</details>
+
+As shown here, the query arguments accept regular expressions.
