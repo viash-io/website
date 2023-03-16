@@ -111,7 +111,7 @@ Meta-variables offer information on the runtime environment which you can use fr
 
 * `resources_dir` (string): Path to where the resources are stored.
 
-* `temp_dir` (string): A temporary directory in which your script is allowed to create new temporary files / directories. By default, this will be set to the `VIASH_TEMP` environment variable. When the `VIASH_TEMP` variable is undefined, `/tmp` is used instead.
+* `temp_dir` (string): A temporary directory in which your script is allowed to create new temporary files / directories. By default, this will be set to the `VIASH_TEMP` environment variable. When the `VIASH_TEMP` variable is undefined, POSIX `TMPDIR` or `/tmp` is used instead.
 
 
 ### `cpus` (integer)
@@ -217,36 +217,59 @@ output/my_executable ---cpus 10
 
 ### `config` (string)
 
-Path to the processed Viash config YAML. This file is usually called `.config.vsh.yaml` and resides next to the wrapped executable (see below). This YAML file is useful for doing some runtime introspection of the component for writing generic unit tests.
-
-<!-- TODO: Write a bit more indepth description -->
+Path to the processed Viash config YAML.
+This file is usually called `.config.vsh.yaml` and resides next to the wrapped executable (see below).
+This YAML file is useful for doing some runtime introspection of the component for writing generic unit tests.
 
 ### `executable` (string)
 
 The executable being used at runtime; that is, the wrapped script. This variable is used in unit tests.
 
-<!-- TODO: Write a bit more indepth description -->
+```bash
+#!/usr/bin/env bash
+set -x
+
+"$meta_executable" --input input.txt > output.txt
+
+[[ ! -f output.txt ]] && echo "Output file could not be found!" && exit 1
+cat output.txt
+grep -q 'expected output' output.txt
+
+echo Done
+```
 
 ### `functionality_name` (string)
 
 The name of the component, useful for logging.
 
-<!-- TODO: Write a bit more indepth description -->
-
 ### `memory_*` (long)
 
-The maximum amount of memory a component is allowed to allocate. The following denominations are provided: `memory_b`, `memory_kb`, `memory_mb`, `memory_gb`, `memory_tb`, `memory_pb`. By default, this value will be undefined.
+The maximum amount of memory a component is allowed to allocate.
+The following denominations are provided: `memory_b`, `memory_kb`, `memory_mb`, `memory_gb`, `memory_tb`, `memory_pb`.
+By default, this value will be undefined.
 
-<!-- TODO: Write a bit more indepth description -->
+You can set the amount of memory in your component using any of the following approaches:
+
+```bash
+# as a parameter of viash run
+viash run config.vsh.yaml --memory 2GB -- <my component arguments>
+
+# as a parameter of viash test
+viash test config.vsh.yaml --memory 2GB
+
+# or as a parameter of the executable
+viash build config.vsh.yaml -o output
+output/my_executable ---memory 2GB
+#                     ↑ notice the triple dash
+```
 
 ### `resources_dir` (string)
 
-Path to where the resources are stored.
-
-<!-- TODO: Write a bit more indepth description -->
+This field specifies the absolute path to where the resources are stored.
+During the build phase resources are copied or fetched into this directory so they are ready to be read during execution of the script or test scripts.
 
 ### `temp_dir` (string)
 
-A temporary directory in which your script is allowed to create new temporary files / directories. By default, this will be set to the `VIASH_TEMP` environment variable. When the `VIASH_TEMP` variable is undefined, `/tmp` is used instead.
-
-<!-- TODO: Write a bit more indepth description -->
+A temporary directory in which your script is allowed to create new temporary files / directories.
+By default, this will be set to the `VIASH_TEMP` environment variable.
+When the `VIASH_TEMP` variable is undefined, the POSIX `TMPDIR` and other common misspellings will be checked and ultimately `/tmp` is used as fallback.
