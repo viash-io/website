@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Viash - Getting started</title>
+<title>Viash - Structure</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -139,8 +139,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Viash - Getting started">
-<meta property="og:description" content="In this guide, we’ll go into detail on how to use and manage Viash projects.">
+<meta property="og:title" content="Viash - Structure">
+<meta property="og:description" content="The project already contains three components which are used to create a Nextflow pipeline with the following topology:">
 <meta property="og:site-name" content="Viash">
 </head>
 
@@ -215,7 +215,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Getting started</h1>
+      <h1 class="quarto-secondary-nav-title">Structure</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -286,7 +286,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../guide/project/getting-started.html" class="sidebar-item-text sidebar-link active">Getting started</a>
+  <a href="../../guide/project/structure.html" class="sidebar-item-text sidebar-link active">Structure</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -342,20 +342,18 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#get-the-template-project" id="toc-get-the-template-project" class="nav-link active" data-scroll-target="#get-the-template-project">Get the template project</a></li>
-  <li><a href="#project-structure" id="toc-project-structure" class="nav-link" data-scroll-target="#project-structure">Project structure</a></li>
-  <li><a href="#demo-pipeline" id="toc-demo-pipeline" class="nav-link" data-scroll-target="#demo-pipeline">Demo pipeline</a></li>
+  <li><a href="#demo-pipeline" id="toc-demo-pipeline" class="nav-link active" data-scroll-target="#demo-pipeline">Demo pipeline</a></li>
   <li><a href="#grouping-components-in-namespaces" id="toc-grouping-components-in-namespaces" class="nav-link" data-scroll-target="#grouping-components-in-namespaces">Grouping components in namespaces</a></li>
   <li><a href="#namespace-property" id="toc-namespace-property" class="nav-link" data-scroll-target="#namespace-property">Namespace property</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/viash-io/website/edit/main/guide/project/getting-started.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/viash-io/website/blob/main/guide/project/getting-started.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/viash-io/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/viash-io/website/edit/main/guide/project/structure.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/viash-io/website/blob/main/guide/project/structure.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/viash-io/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Getting started</h1>
+<h1 class="title d-none d-lg-block">Structure</h1>
 </div>
 
 
@@ -370,37 +368,6 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 </header>
 
-<p>In this guide, we’ll go into detail on how to use and manage Viash projects.</p>
-<section id="get-the-template-project" class="level2">
-<h2 class="anchored" data-anchor-id="get-the-template-project">Get the template project</h2>
-<p>To get started, please create a new repository using our template project. You can do so by clicking the “Use this template” button in the <a href="https://github.com/viash-io/viash_project_template">viash_project_template</a> repository or clicking the button below.</p>
-<p><a href="https://github.com/viash-io/viash_project_template/generate" class="btn btn-info btn-md">Use project template</a></p>
-<p>Then clone the repository using the following command.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/youruser/my_first_pipeline.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="project-structure" class="level2">
-<h2 class="anchored" data-anchor-id="project-structure">Project structure</h2>
-<p>This template repo contains the following content:</p>
-<pre><code>.
-├── LICENSE.md                            License information
-├── README.qmd                            The source qmd file for this readme
-├── README.md                             This readme
-├── _viash.yaml                           Global Viash settings
-├── resources_test/*.tsv                  Sample files to showcase pipeline and
-│   ├── file1.tsv                         run component unit tests.
-│   └── file2.tsv
-├── src/demo                              Source directory with Viash components
-│   ├── combine_columns
-│   ├── remove_comments
-│   └── take_column
-├── target                                Target platform files generated by Viash
-│   ├── docker                            Executables generated from source
-│   └── nextflow                          Nextflow modules generated from source
-└── workflows
-    └── demo_pipeline                     Demo Nextflow pipeline
-        ├── main.nf
-        └── nextflow.config</code></pre>
-</section>
 <section id="demo-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="demo-pipeline">Demo pipeline</h2>
 <p>The project already contains three components which are used to create a Nextflow pipeline with the following topology:</p>
@@ -441,10 +408,10 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <section id="namespace-property" class="level2">
 <h2 class="anchored" data-anchor-id="namespace-property">Namespace property</h2>
 <p>You can assign a component to a namespace by defining its namespace attribute in the Viash config file:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> some_component</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> some_namespace/subnamespace</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> some_component</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">namespace</span><span class="kw">:</span><span class="at"> some_namespace/subnamespace</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Typically, the Viash config for this component will be located at <code>src/some_namespace/subnamespace/some_component/config.vsh.yaml</code>.</p>
 
 

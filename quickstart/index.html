@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Viash - Quickstart</title>
+<title>Viash - Welcome to Viash!</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -137,8 +137,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="Viash - Quickstart">
-<meta property="og:description" content="This tutorial will guide you through using our Viash template project to run a data pipeline.">
+<meta property="og:title" content="Viash - Welcome to Viash!">
+<meta property="og:description" content="Viash is your go-to script wrapper for building data pipelines from modular software components. All you need is your trusty script and a metadata file to embark on this journey.">
 <meta property="og:site-name" content="Viash">
 </head>
 
@@ -222,7 +222,6 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
    
   <ul>
   <li><a href="#requirements" id="toc-requirements" class="nav-link active" data-scroll-target="#requirements">Requirements</a></li>
-  <li><a href="#what-is-viash" id="toc-what-is-viash" class="nav-link" data-scroll-target="#what-is-viash">What is Viash?</a></li>
   <li><a href="#quickstart-example-project" id="toc-quickstart-example-project" class="nav-link" data-scroll-target="#quickstart-example-project">Quickstart example project</a></li>
   <li><a href="#step-1-get-the-template" id="toc-step-1-get-the-template" class="nav-link" data-scroll-target="#step-1-get-the-template">Step 1: Get the template</a></li>
   <li><a href="#step-2-build-the-viash-components" id="toc-step-2-build-the-viash-components" class="nav-link" data-scroll-target="#step-2-build-the-viash-components">Step 2: Build the Viash components</a></li>
@@ -236,7 +235,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Quickstart</h1>
+<h1 class="title">Welcome to Viash!</h1>
 </div>
 
 
@@ -251,26 +250,23 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 </header>
 
-<p>This tutorial will guide you through using our Viash template project to run a data pipeline.</p>
+<p></p>
+<p><strong>Viash</strong> is your go-to script wrapper for building data pipelines from modular software components. All you need is your trusty script and a metadata file to embark on this journey.</p>
+<p>Check out some of Viash’s key features:</p>
+<ul>
+<li>Code in your <a href="../guide/component/create-component.html">favorite scripting language</a>. Mix and match scripting between multiple components to suit your needs. Viash supports a wide range of languages, including Bash, Python, R, Scala, JS, and C#.</li>
+<li>A <strong>custom Docker container</strong> is auto-generated based on the dependencies you’ve outlined in your metadata, meaning you don’t need to be a Docker expert.</li>
+<li>Viash also generates a <strong>Nextflow module</strong> from your script, so no need to be a Nextflow guru either.</li>
+<li>Effortlessly combine Nextflow modules to design and run scalable, reproducible data pipelines.</li>
+<li>Test every component on your local workstation using the convenient built-in development kit.</li>
+</ul>
 <section id="requirements" class="level2">
 <h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
 <p>This guide assumes you’ve already installed <a href="../installation">Viash</a>, <a href="https://docs.docker.com/get-docker">Docker</a> and <a href="https://www.nextflow.io/index.html#GetStarted">Nextflow</a>.</p>
 </section>
-<section id="what-is-viash" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-viash">What is Viash?</h2>
-<p><strong>Viash</strong> is a script code wrapper for building modular software components that serve as building blocks to develop (Nextflow) data pipelines. All you need is your script and a metadata file to get started.<br>
-Here are a few of Viash’s key features:</p>
-<ul>
-<li>You can use your <a href="../guide/component/create-component.html#create-a-script">preferred scripting language</a> per component, and mix and match scripts between multiple components as you please. Supported languages include: Bash, Python, R, Scala, JS and C#.</li>
-<li>A <strong>custom Docker container</strong> is automatically generated based on your dependencies described in your metadata. No expert Docker knowledge is required.</li>
-<li>Viash generates a <strong>Nextflow module</strong> from your script. No expert Nextflow knowledge is required.</li>
-<li>You can simply script the nextflow modules to create and run your scalable and reproducible data pipeline.</li>
-<li>You can test every single module on your local workstation through the built-in development kit.</li>
-</ul>
-</section>
 <section id="quickstart-example-project" class="level2">
 <h2 class="anchored" data-anchor-id="quickstart-example-project">Quickstart example project</h2>
-<p>This page helps you get started with creating scalable and reproducible Nextflow data pipelines. Here’s the flow of the pipeline you’ll be using:</p>
+<p>To get up and running fast, we provide a <a href="https://github.com/viash-io/viash_project_template">template project</a> for you to use. It contains three components, which are combined into a Nextflow pipeline as follows:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -288,31 +284,18 @@ Here are a few of Viash’s key features:</p>
 </div>
 </div>
 </div>
-<p>One or more TSV files are taken as the input and will be processed through a series of modules. At the end, the output is written away to a folder.</p>
+<p>This pipeline takes one or more TSV files as input and stores its output in an output folder.</p>
 </section>
 <section id="step-1-get-the-template" class="level2">
 <h2 class="anchored" data-anchor-id="step-1-get-the-template">Step 1: Get the template</h2>
-<p>To get up and running fast, we provide a <a href="https://github.com/viash-io/viash_project_template">template project</a> for you to use.</p>
-<div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Use GitHub template</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Zip download</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>First create a new repository by clicking the “Use this template” button in the <a href="https://github.com/viash-io/viash_project_template">viash_project_template</a> repository or clicking the button below.</p>
-<p><a href="https://github.com/viash-io/viash_project_template/generate" class="btn btn-info btn-md">Use project template</a></p>
-<p>Then clone the repository using the following command.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/youruser/my_first_pipeline.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>Click the button below to download a zip file containing the template project. Once downloaded, unzip the file and rename the root directory to <strong>my_first_pipeline</strong>.</p>
-<p><a href="https://github.com/viash-io/viash_project_template/archive/refs/heads/main.zip" class="btn btn-info btn-md">Download template</a></p>
-</div>
-</div>
-</div>
-<p>The template repo contains the following files:</p>
+<p>First create a new repository by clicking the “Use this template” button. If you can’t see the “Use this template” button, log into GitHub first.</p>
+<p>Next, clone the repository using the following command.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/youruser/my_first_pipeline.git <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> my_first_pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Your new repository should contain the following files:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> my_first_pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>.
 ├── LICENSE.md                            License information
-├── README.qmd                            The source qmd file for this readme
-├── README.md                             This readme
+├── README.md                             A readme.
 ├── _viash.yaml                           Global Viash settings
 ├── resources_test/*.tsv                  Sample files to showcase pipeline and
 │&nbsp;  ├── file1.tsv                         run component unit tests.
@@ -329,63 +312,97 @@ Here are a few of Viash’s key features:</p>
 <section id="step-2-build-the-viash-components" class="level2">
 <h2 class="anchored" data-anchor-id="step-2-build-the-viash-components">Step 2: Build the Viash components</h2>
 <p>With Viash you can turn the components in <code>src/</code> into Dockerized Nextflow modules by running:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns build <span class="at">--setup</span> cachedbuild <span class="at">--parallel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>While building, this will result in the following output:</p>
-<pre><code>Exporting take_column (demo) =docker=&gt; target/docker/demo/take_column
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_take_column:dev' with Dockerfile
-Exporting take_column (demo) =nextflow=&gt; target/nextflow/demo/take_column
-Exporting remove_comments (demo) =docker=&gt; target/docker/demo/remove_comments
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_remove_comments:dev' with Dockerfile
-Exporting remove_comments (demo) =nextflow=&gt; target/nextflow/demo/remove_comments
-Exporting combine_columns (demo) =docker=&gt; target/docker/demo/combine_columns
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_combine_columns:dev' with Dockerfile
-Exporting combine_columns (demo) =nextflow=&gt; target/nextflow/demo/combine_columns
-All 6 configs built successfully</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns build <span class="at">--setup</span> cachedbuild <span class="at">--parallel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>
+Output
+</summary>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Exporting example_scala  =docker=&gt; /home/runner/work/website/website/_target/docker/example_scala
+Exporting example_js  =native=&gt; /home/runner/work/website/website/_target/native/example_js
+Exporting example_js  =nextflow=&gt; /home/runner/work/website/website/_target/nextflow/example_js
+[notice] Building container 'example_scala:latest' with Dockerfile
+Exporting example_bash  =docker=&gt; /home/runner/work/website/website/_target/docker/example_bash
+[notice] Building container 'example_bash:latest' with Dockerfile
+Exporting example_bash  =native=&gt; /home/runner/work/website/website/_target/native/example_bash
+Exporting example_bash  =nextflow=&gt; /home/runner/work/website/website/_target/nextflow/example_bash
+Exporting example_python  =docker=&gt; /home/runner/work/website/website/_target/docker/example_python
+[notice] Building container 'example_python:latest' with Dockerfile
+Exporting example_scala  =native=&gt; /home/runner/work/website/website/_target/native/example_scala
+Exporting example_scala  =nextflow=&gt; /home/runner/work/website/website/_target/nextflow/example_scala
+Exporting example_r  =docker=&gt; /home/runner/work/website/website/_target/docker/example_r
+[notice] Building container 'example_r:latest' with Dockerfile
+Exporting example_python  =native=&gt; /home/runner/work/website/website/_target/native/example_python
+Exporting example_python  =nextflow=&gt; /home/runner/work/website/website/_target/nextflow/example_python
+Exporting generate_reference_config_pages  =native=&gt; /home/runner/work/website/website/_target/native/generate_reference_config_pages
+Exporting generate_reference_cli_pages  =native=&gt; /home/runner/work/website/website/_target/native/generate_reference_cli_pages
+Exporting generate_version_blog_pages  =native=&gt; /home/runner/work/website/website/_target/native/generate_version_blog_pages
+Exporting example_r  =nextflow=&gt; /home/runner/work/website/website/_target/nextflow/example_r
+Exporting example_csharp  =docker=&gt; /home/runner/work/website/website/_target/docker/example_csharp
+[notice] Building container 'example_csharp:latest' with Dockerfile
+Exporting example_csharp  =native=&gt; /home/runner/work/website/website/_target/native/example_csharp
+Exporting example_r  =native=&gt; /home/runner/work/website/website/_target/native/example_r
+Exporting example_csharp  =nextflow=&gt; /home/runner/work/website/website/_target/nextflow/example_csharp
+Exporting example_js  =docker=&gt; /home/runner/work/website/website/_target/docker/example_js
+[notice] Building container 'example_js:latest' with Dockerfile
+[32mAll 21 configs built successfully[0m</code></pre>
+</div>
+</div>
+</details>
 <p>Once everything is built, a new <strong>target</strong> directory has been created containing the executables and modules grouped per platform:</p>
-<pre><code>target/
-├── docker
-│&nbsp;&nbsp; └── demo
-│&nbsp;&nbsp;     ├── combine_columns
-│&nbsp;&nbsp;     │&nbsp;&nbsp; ├── combine_columns
-│&nbsp;&nbsp;     │&nbsp;&nbsp; └── viash.yaml
-│&nbsp;&nbsp;     ├── remove_comments
-│&nbsp;&nbsp;     │&nbsp;&nbsp; ├── remove_comments
-│&nbsp;&nbsp;     │&nbsp;&nbsp; └── viash.yaml
-│&nbsp;&nbsp;     └── take_column
-│&nbsp;&nbsp;         ├── take_column
-│&nbsp;&nbsp;         └── viash.yaml
-└── nextflow
-    └── demo
-        ├── combine_columns
-        │&nbsp;&nbsp; ├── main.nf
-        │&nbsp;&nbsp; ├── nextflow.config
-        │&nbsp;&nbsp; └── viash.yaml
-        ├── remove_comments
-        │&nbsp;&nbsp; ├── main.nf
-        │&nbsp;&nbsp; ├── nextflow.config
-        │&nbsp;&nbsp; └── viash.yaml
-        └── take_column
-            ├── main.nf
-            ├── nextflow.config
-            └── viash.yaml</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>
+Output
+</summary>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>total 16
+-rw-r--r-- 1 runner docker 5175 Mar 17 09:59 index.qmd
+-rw-r--r-- 1 runner docker 5186 Mar 17 10:19 index.rmarkdown</code></pre>
+</div>
+</div>
+</details>
 </section>
 <section id="step-3-run-the-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="step-3-run-the-pipeline">Step 3: Run the pipeline</h2>
 <p>Now run the pipeline with Nextflow:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run . <span class="dt">\</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> workflows/demo_pipeline/main.nf <span class="dt">\</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-with-docker</span> <span class="dt">\</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--input</span> resources_test/file<span class="pp">*</span>.tsv <span class="dt">\</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--publishDir</span> temp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run . <span class="dt">\</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> workflows/demo_pipeline/main.nf <span class="dt">\</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--input</span> resources_test/file<span class="pp">*</span>.tsv <span class="dt">\</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--publish_dir</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>
+Output
+</summary>
+<div class="cell">
+
+</div>
+</details>
 <p>This will run the three modules in sequence, with the final result result being stored in a file named <strong>combined.combine_columns.output.tsv</strong> in a new <strong>temp</strong> directory:</p>
-<pre><code>"1"     0.11
-"2"     0.23
-"3"     0.35
-"4"     0.47</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> output/combined.combine_columns.output.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>
+Output
+</summary>
+<div class="cell">
+
+</div>
+</details>
 </section>
 <section id="whats-next" class="level2">
 <h2 class="anchored" data-anchor-id="whats-next">What’s next?</h2>
-<p>Now that you’ve had a taste of what Viash can do for you, take a look at our <a href="../guide/">Guide</a> and <a href="../reference/">Reference</a> pages to learn more about how to use Viash. If you want to start simple, we suggest to take a look at the <a href="../guide/component/create-component.html">Native component creation guide</a>.</p>
+<p>Congratulations, you’ve reached the end of this quickstart tutorial, and we’re excited for you to delve deeper into the world of Viash! Our comprehensive <a href="../guide/">guide</a> and <a href="../reference/">reference documentation</a> is here to help you explore various topics, such as:</p>
+<ul>
+<li><a href="../guide/component/create-component.html">Creating a Viash component and converting it into a standalone executable</a></li>
+<li><a href="../guide/component/add-dependencies.html">Ensuring reproducibility and designing customised Docker images</a></li>
+<li><a href="../guide/component/unit-testing.html">Ensuring code reliability with unit testing for Viash</a></li>
+<li><a href="../guide/project/batch-processing.html">Streamlining your workflow by performing batch operations on Viash projects</a></li>
+<li><a href="../guide/nextflow_vdsl3/introduction.html">Building Nextflow pipelines using Viash components</a></li>
+</ul>
+<p>So, get ready to enhance your skills and create outstanding solutions with Viash!</p>
 
 
 </section>
