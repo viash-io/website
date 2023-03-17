@@ -1,30 +1,32 @@
 ---
-title: Quickstart
+title: Welcome to Viash!
 search: true
 engine: knitr
 ---
   
+{{< ../guide/_blocks/_clone_repo.qmd >}}
 
-This tutorial will guide you through using our Viash template project to run a data pipeline.
+
+**Viash** is your go-to script wrapper for building data pipelines from modular software components. All you need is your trusty script and a metadata file to embark on this journey.
+
+Check out some of Viash's key features:
+
+- Code in your [favorite scripting language](/guide/component/create-component.html). Mix and match scripting  between multiple components to suit your needs. Viash supports a wide range of languages, including Bash, Python, R, Scala, JS, and C#.
+- A **custom Docker container** is auto-generated based on the dependencies you've outlined in your metadata, meaning you don't need to be a Docker expert.
+- Viash also generates a **Nextflow module** from your script, so no need to be a Nextflow guru either. 
+- Effortlessly combine Nextflow modules to design and run scalable, reproducible data pipelines.
+- Test every component on your local workstation using the convenient built-in development kit.
+
+
 
 ## Requirements
 
 This guide assumes you've already installed [Viash](/installation), [Docker](https://docs.docker.com/get-docker) and [Nextflow](https://www.nextflow.io/index.html#GetStarted).
 
-## What is Viash?
-
-**Viash** is a script code wrapper for building modular software components that serve as building blocks to develop (Nextflow) data pipelines. All you need is your script and a metadata file to get started.  
-Here are a few of Viash's key features:
-
-- You can use your [preferred scripting language](/guide/component/create-component.html#create-a-script) per component, and mix and match scripts between multiple components as you please. Supported languages include: Bash, Python, R, Scala, JS and C#.
-- A **custom Docker container** is automatically generated based on your dependencies described in your metadata. No expert Docker knowledge is required.
-- Viash generates a **Nextflow module** from your script. No expert Nextflow knowledge is required. 
-- You can simply script the nextflow modules to create and run your scalable and reproducible data pipeline.
-- You can test every single module on your local workstation through the built-in development kit.
 
 ## Quickstart example project
 
-This page helps you get started with creating scalable and reproducible Nextflow data pipelines. Here's the flow of the pipeline you'll be using:
+To get up and running fast, we provide a [template project](https://github.com/viash-io/viash_project_template) for you to use. It contains three components, which are combined into a Nextflow pipeline as follows:
 
 ```{mermaid}
 graph LR
@@ -34,41 +36,23 @@ graph LR
    D --> E(output)
 ```
 
-One or more TSV files are taken as the input and will be processed through a series of modules. At the end, the output is written away to a folder.
+This pipeline takes one or more TSV files as input and stores its output in an output folder.
 
 ## Step 1: Get the template
 
-To get up and running fast, we provide a [template project](https://github.com/viash-io/viash_project_template) for you to use. 
+First create a new repository by clicking the "Use this template" button. If you can't see the "Use this template" button, log into GitHub first.
 
-::: {.panel-tabset}
-
-## Use GitHub template
-
-First create a new repository by clicking the "Use this template" button in the [viash_project_template](https://github.com/viash-io/viash_project_template) repository or clicking the button below.
-
-[Use project template](https://github.com/viash-io/viash_project_template/generate){class="btn btn-info btn-md"}
-
-Then clone the repository using the following command.
+Next, clone the repository using the following command.
 
 ```bash
 git clone https://github.com/youruser/my_first_pipeline.git
 ```
 
-## Zip download
-
-Click the button below to download a zip file containing the template project. Once downloaded, unzip the file and rename the root directory to **my_first_pipeline**.
-
-[Download template](https://github.com/viash-io/viash_project_template/archive/refs/heads/main.zip){class="btn btn-info btn-md"}
-
-:::
-
-
-The template repo contains the following files:
+Your new repository should contain the following files:
 
     .
     ├── LICENSE.md                            License information
-    ├── README.qmd                            The source qmd file for this readme
-    ├── README.md                             This readme
+    ├── README.md                             A readme.
     ├── _viash.yaml                           Global Viash settings
     ├── resources_test/*.tsv                  Sample files to showcase pipeline and
     │   ├── file1.tsv                         run component unit tests.
@@ -90,52 +74,24 @@ With Viash you can turn the components in `src/` into Dockerized Nextflow module
 ```bash
 viash ns build --setup cachedbuild --parallel
 ```
-
-While building, this will result in the following output:
-
+<details>
+<summary>Output</summary>
+```{bash echo=FALSE}
+viash ns build --setup cachedbuild --parallel
 ```
-Exporting take_column (demo) =docker=> target/docker/demo/take_column
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_take_column:dev' with Dockerfile
-Exporting take_column (demo) =nextflow=> target/nextflow/demo/take_column
-Exporting remove_comments (demo) =docker=> target/docker/demo/remove_comments
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_remove_comments:dev' with Dockerfile
-Exporting remove_comments (demo) =nextflow=> target/nextflow/demo/remove_comments
-Exporting combine_columns (demo) =docker=> target/docker/demo/combine_columns
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_combine_columns:dev' with Dockerfile
-Exporting combine_columns (demo) =nextflow=> target/nextflow/demo/combine_columns
-All 6 configs built successfully
-```
+</details>
 
 Once everything is built, a new **target** directory has been created containing the executables and modules grouped per platform:
 
+```bash
+tree target/
 ```
-target/
-├── docker
-│   └── demo
-│       ├── combine_columns
-│       │   ├── combine_columns
-│       │   └── viash.yaml
-│       ├── remove_comments
-│       │   ├── remove_comments
-│       │   └── viash.yaml
-│       └── take_column
-│           ├── take_column
-│           └── viash.yaml
-└── nextflow
-    └── demo
-        ├── combine_columns
-        │   ├── main.nf
-        │   ├── nextflow.config
-        │   └── viash.yaml
-        ├── remove_comments
-        │   ├── main.nf
-        │   ├── nextflow.config
-        │   └── viash.yaml
-        └── take_column
-            ├── main.nf
-            ├── nextflow.config
-            └── viash.yaml
+<details>
+<summary>Output</summary>
+```{bash echo=FALSE}
+tree target/
 ```
+</details>
 
 ## Step 3: Run the pipeline
 
@@ -146,18 +102,40 @@ nextflow run . \
   -main-script workflows/demo_pipeline/main.nf \
   -with-docker \
   --input resources_test/file*.tsv \
-  --publishDir temp
+  --publishDir output
 ```
+<details>
+<summary>Output</summary>
+```{bash echo=FALSE}
+nextflow run . \
+  -main-script workflows/demo_pipeline/main.nf \
+  -with-docker \
+  --input resources_test/file*.tsv \
+  --publishDir output
+```
+</details>
 
 This will run the three modules in sequence, with the final result result being stored in a file named **combined.combine_columns.output.tsv** in a new **temp** directory:
 
+```bash
+cat output/combined.combine_columns.output.tsv
 ```
-"1"     0.11
-"2"     0.23
-"3"     0.35
-"4"     0.47
+<details>
+<summary>Output</summary>
+```{bash echo=FALSE}
+cat output/combined.combine_columns.output.tsv
 ```
+</details>
 
 ## What's next?
 
-Now that you've had a taste of what Viash can do for you, take a look at our [Guide](/guide/) and [Reference](/reference/) pages to learn more about how to use Viash. If you want to start simple, we suggest to take a look at the [Native component creation guide](/guide/component/create-component.html).
+Congratulations, you've reached the end of this quickstart tutorial, and we're excited for you to delve deeper into the world of Viash!
+Our comprehensive [guide](/guide/) and [reference documentation](/reference/) is here to help you explore various topics, such as:
+
+* [Creating a Viash component and converting it into a standalone executable](/guide/component/create-component.qmd)
+* [Ensuring reproducibility and designing customised Docker images](/guide/component/add-dependencies.qmd)
+* [Ensuring code reliability with unit testing for Viash](/guide/component/unit-testing.qmd)
+* [Streamlining your workflow by performing batch operations on Viash projects](/guide/project/batch-processing.qmd)
+* [Building Nextflow pipelines using Viash components](/guide/nextflow_vdsl3/introduction.qmd)
+
+So, get ready to enhance your skills and create outstanding solutions with Viash!
