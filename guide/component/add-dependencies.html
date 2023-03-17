@@ -548,7 +548,7 @@ function invertDictionary(dict){
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.js</span></span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> node:19-bullseye</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> node:19-bullseye-slim</span></span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">setup</span><span class="kw">:</span></span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> apt</span></span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">packages</span><span class="kw">:</span></span>
@@ -576,7 +576,7 @@ function invertDictionary(dict){
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.py</span></span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> python:3.10</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> python:3.10-slim</span></span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">setup</span><span class="kw">:</span></span>
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> apt</span></span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">packages</span><span class="kw">:</span></span>
@@ -936,7 +936,7 @@ Important
 RUN apk add --no-cache curl wget
 
 LABEL org.opencontainers.image.description="Companion container for running component example_bash_with_setup"
-LABEL org.opencontainers.image.created="2023-03-17T08:08:51Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-03-17T08:19:55Z"</code></pre>
 </div>
 </div>
 </div>
@@ -949,7 +949,7 @@ LABEL org.opencontainers.image.created="2023-03-17T08:08:51Z"</code></pre>
 RUN apk add --no-cache curl wget
 
 LABEL org.opencontainers.image.description="Companion container for running component example_csharp_with_setup"
-LABEL org.opencontainers.image.created="2023-03-17T08:09:01Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-03-17T08:20:06Z"</code></pre>
 </div>
 </div>
 </div>
@@ -957,14 +957,14 @@ LABEL org.opencontainers.image.created="2023-03-17T08:09:01Z"</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_js_with_setup</span> <span class="at">---dockerfile</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>FROM node:19-bullseye
+<pre><code>FROM node:19-bullseye-slim
 
 RUN apt-get update &amp;&amp; \
   DEBIAN_FRONTEND=noninteractive apt-get install -y curl wget &amp;&amp; \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component example_js_with_setup"
-LABEL org.opencontainers.image.created="2023-03-17T08:09:20Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-03-17T08:20:27Z"</code></pre>
 </div>
 </div>
 </div>
@@ -972,7 +972,7 @@ LABEL org.opencontainers.image.created="2023-03-17T08:09:20Z"</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_python_with_setup</span> <span class="at">---dockerfile</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>FROM python:3.10
+<pre><code>FROM python:3.10-slim
 
 RUN apt-get update &amp;&amp; \
   DEBIAN_FRONTEND=noninteractive apt-get install -y curl wget &amp;&amp; \
@@ -982,7 +982,7 @@ RUN pip install --upgrade pip &amp;&amp; \
   pip install --upgrade --no-cache-dir "anndata"
 
 LABEL org.opencontainers.image.description="Companion container for running component example_python_with_setup"
-LABEL org.opencontainers.image.created="2023-03-17T08:09:51Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-03-17T08:20:48Z"</code></pre>
 </div>
 </div>
 </div>
@@ -1000,7 +1000,7 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_cran(c("tidyverse"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component example_r_with_setup"
-LABEL org.opencontainers.image.created="2023-03-17T08:10:26Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-03-17T08:21:27Z"</code></pre>
 </div>
 </div>
 </div>
@@ -1015,7 +1015,7 @@ RUN apt-get update &amp;&amp; \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component example_scala_with_setup"
-LABEL org.opencontainers.image.created="2023-03-17T08:11:22Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-03-17T08:22:22Z"</code></pre>
 </div>
 </div>
 </div>
