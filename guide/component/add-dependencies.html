@@ -469,7 +469,7 @@ function invertDictionary(dict){
 <p>By default, Viash will build component-specific Docker images. This means that every Viash component can have its own set of dependencies.</p>
 <section id="extended-example" class="level2">
 <h2 class="anchored" data-anchor-id="extended-example">Extended example</h2>
-<p>Below is an example where additional software is added to a base Docker image using the <a href="../../reference/config/requirements.html"><code>setup</code></a> section of a Docker platform.</p>
+<p>Below is an example where additional software is added to a base Docker image using the <a href="../../reference/config/platforms/docker/#setup"><code>setup</code></a> section of a Docker platform.</p>
 <div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Bash</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">C#</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">JavaScript</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Python</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-6" role="tab" aria-controls="tabset-1-6" aria-selected="false">Scala</a></li></ul>
 <div class="tab-content">
@@ -831,7 +831,7 @@ Tip
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">packages</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> pry </span><span class="kw">]</span></span>
 <span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">github</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="st">"pry/pry"</span><span class="at"> </span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<p>For more information on the possible setup entries, check out the <a href="../../reference/config/requirements.html">reference documentation</a>.</p>
+<p>For more information on the possible setup entries, check out the <a href="../../reference/config/platforms/docker/#setup">reference documentation</a>.</p>
 <div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -900,7 +900,7 @@ Important
 </ul>
 <p>Pulling an image:</p>
 <ul>
-<li><code>alwayspull</code> / <code>pull</code> / <code>p</code>: Try to pull the container from <a href="https://hub.docker.com">Docker Hub</a> or the <a href="../../reference/config/platforms/DockerPlatform.html#registry">specified docker registry</a>.</li>
+<li><code>alwayspull</code> / <code>pull</code> / <code>p</code>: Try to pull the container from <a href="https://hub.docker.com">Docker Hub</a> or the <a href="../../reference/config/platforms/docker/#registry">specified docker registry</a>.</li>
 <li><code>alwayspullelsebuild</code> / <code>pullelsebuild</code>: Try to pull the image from a registry and build it if it doesn’t exist.</li>
 <li><code>alwayspullelsecachedbuild</code> / <code>pullelsecachedbuild</code>: Try to pull the image from a registry and build it with caching if it doesn’t exist.</li>
 <li><code>ifneedbepull</code>: If the image does not exist locally, pull the image.</li>
@@ -909,8 +909,8 @@ Important
 </ul>
 <p>Pushing an image:</p>
 <ul>
-<li><code>push</code>: Push the container to <a href="https://hub.docker.com">Docker Hub</a> or the <a href="../../reference/config/platforms/DockerPlatform.html#registry">specified docker registry</a>.</li>
-<li><code>pushifnotpresent</code> Push the container to <a href="https://hub.docker.com">Docker Hub</a> or the <a href="../../reference/config/platforms/DockerPlatform.html#registry">specified docker registry</a> if the <a href="../../reference/config/platforms/DockerPlatform.html#tag">specified tag</a> does not exist yet.</li>
+<li><code>push</code>: Push the container to <a href="https://hub.docker.com">Docker Hub</a> or the <a href="../../reference/config/platforms/docker/#registry">specified docker registry</a>.</li>
+<li><code>pushifnotpresent</code> Push the container to <a href="https://hub.docker.com">Docker Hub</a> or the <a href="../../reference/config/platforms/docker/#registry">specified docker registry</a> if the <a href="../../reference/config/platforms/docker/#tag">specified tag</a> does not exist yet.</li>
 </ul>
 <p>Doing nothing:</p>
 <ul>
@@ -936,7 +936,7 @@ Important
 RUN apk add --no-cache curl wget
 
 LABEL org.opencontainers.image.description="Companion container for running component example_bash_with_setup"
-LABEL org.opencontainers.image.created="2023-03-17T06:14:55Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-03-17T08:08:51Z"</code></pre>
 </div>
 </div>
 </div>
@@ -949,7 +949,7 @@ LABEL org.opencontainers.image.created="2023-03-17T06:14:55Z"</code></pre>
 RUN apk add --no-cache curl wget
 
 LABEL org.opencontainers.image.description="Companion container for running component example_csharp_with_setup"
-LABEL org.opencontainers.image.created="2023-03-17T06:15:05Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-03-17T08:09:01Z"</code></pre>
 </div>
 </div>
 </div>
@@ -964,7 +964,7 @@ RUN apt-get update &amp;&amp; \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component example_js_with_setup"
-LABEL org.opencontainers.image.created="2023-03-17T06:15:24Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-03-17T08:09:20Z"</code></pre>
 </div>
 </div>
 </div>
@@ -982,7 +982,7 @@ RUN pip install --upgrade pip &amp;&amp; \
   pip install --upgrade --no-cache-dir "anndata"
 
 LABEL org.opencontainers.image.description="Companion container for running component example_python_with_setup"
-LABEL org.opencontainers.image.created="2023-03-17T06:15:54Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-03-17T08:09:51Z"</code></pre>
 </div>
 </div>
 </div>
@@ -1000,7 +1000,7 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_cran(c("tidyverse"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component example_r_with_setup"
-LABEL org.opencontainers.image.created="2023-03-17T06:16:30Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-03-17T08:10:26Z"</code></pre>
 </div>
 </div>
 </div>
@@ -1015,7 +1015,7 @@ RUN apt-get update &amp;&amp; \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component example_scala_with_setup"
-LABEL org.opencontainers.image.created="2023-03-17T06:17:21Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-03-17T08:11:22Z"</code></pre>
 </div>
 </div>
 </div>
@@ -1094,7 +1094,7 @@ root@93c38006a124:/pwd#</code></pre>
 </section>
 <section id="auto-chown" class="level3">
 <h3 class="anchored" data-anchor-id="auto-chown">Auto-chown</h3>
-<p>By default, files created and modified by a Docker container are owned by <strong>root</strong>. By default, Viash automatically changes the owner of any files defined in the config file to the user running the executable. This behaviour can be overridden by setting the <a href="../../reference/config/platforms/DockerPlatform.html#chown">chown</a> setting to <code>false</code> in your config file.</p>
+<p>By default, files created and modified by a Docker container are owned by <strong>root</strong>. By default, Viash automatically changes the owner of any files defined in the config file to the user running the executable. This behaviour can be overridden by setting the <a href="../../reference/config/platforms/docker/#chown">chown</a> setting to <code>false</code> in your config file.</p>
 <p>Example with standard Docker:</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-v</span> <span class="kw">`</span><span class="bu">pwd</span><span class="kw">`</span>:/pwd bash:4.0 touch /pwd/file.txt</span>
 <span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

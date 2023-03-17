@@ -456,9 +456,9 @@ function invertDictionary(dict){
 </script>
 <p>A Viash component can be translated into one or more platforms: Native, Docker, Nextflow. Each of these platforms result in a different artifact:</p>
 <ul>
-<li><a href="../../reference/config/platforms/NativePlatform.html">Native platform</a>: a single executable is generated which runs natively on the host system. This assumes all dependencies are already installed by the user and is therefore not reproducible. Requirements: Bash.</li>
-<li><a href="../../reference/config/platforms/DockerPlatform.html">Docker platform</a>: a single executable is generated but it runs inside a Docker container instead. The Docker platform specification can help you install custom dependencies and will take care of auto-mounting input/output files. Requirements: Bash, Docker.</li>
-<li><a href="../../reference/config/platforms/NextflowVdsl3Platform.html">Nextflow platform</a>: a Nextflow module which can be used as a standalone workflow or as a module in a larger workflow. Requirements: Nextflow and a containerization engine (e.g.&nbsp;Docker, Singularity, Podman).</li>
+<li><a href="../../reference/config/platforms/native/#">Native platform</a>: a single executable is generated which runs natively on the host system. This assumes all dependencies are already installed by the user and is therefore not reproducible. Requirements: Bash.</li>
+<li><a href="../../reference/config/platforms/docker/#">Docker platform</a>: a single executable is generated but it runs inside a Docker container instead. The Docker platform specification can help you install custom dependencies and will take care of auto-mounting input/output files. Requirements: Bash, Docker.</li>
+<li><a href="../../reference/config/platforms/nextflow/#">Nextflow platform</a>: a Nextflow module which can be used as a standalone workflow or as a module in a larger workflow. Requirements: Nextflow and a containerization engine (e.g.&nbsp;Docker, Singularity, Podman).</li>
 </ul>
 <p>Below we will create our first Viash component using any of the languages natively supported by Viash.</p>
 <section id="create-a-script" class="level2">
@@ -577,7 +577,7 @@ Note
 </div>
 <section id="create-a-config" class="level3">
 <h3 class="anchored" data-anchor-id="create-a-config">Create a config</h3>
-<p>A <a href="../../reference/config/overview.html">Viash config file</a> is a YAML file that describes the functionality of a component and the platform(s) it targets.</p>
+<p>A <a href="../../reference/config/#">Viash config file</a> is a YAML file that describes the functionality of a component and the platform(s) it targets.</p>
 <div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Bash</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">C#</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">JavaScript</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-4" role="tab" aria-controls="tabset-2-4" aria-selected="false">Python</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-5" role="tab" aria-controls="tabset-2-5" aria-selected="false">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-6" role="tab" aria-controls="tabset-2-6" aria-selected="false">Scala</a></li></ul>
 <div class="tab-content">
@@ -741,7 +741,7 @@ Note
 </section>
 <section id="run-the-component" class="level2">
 <h2 class="anchored" data-anchor-id="run-the-component">Run the component</h2>
-<p>That’s it! With these two steps, you created your first component. Next, you can use the <a href="../../reference/viash/run.html"><code>viash run</code></a> command to test whether it actually works as intended.</p>
+<p>That’s it! With these two steps, you created your first component. Next, you can use the <a href="../../reference/cli/run.html"><code>viash run</code></a> command to test whether it actually works as intended.</p>
 <div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Bash</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">C#</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false">JavaScript</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-4" role="tab" aria-controls="tabset-3-4" aria-selected="false">Python</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-5" role="tab" aria-controls="tabset-3-5" aria-selected="false">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-6" role="tab" aria-controls="tabset-3-6" aria-selected="false">Scala</a></li></ul>
 <div class="tab-content">
@@ -771,7 +771,7 @@ Arguments:
 <pre><code>[notice] Checking if Docker image is available at 'example_bash:latest'
 [warning] Could not pull from 'example_bash:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_bash:latest' with Dockerfile
-Copying '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/bash/config.vsh.yaml' to '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/bash/foo.txt'.</code></pre>
+Copying '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/bash/config.vsh.yaml' to '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/bash/foo.txt'.</code></pre>
 </div>
 </div>
 </div>
@@ -801,7 +801,7 @@ Arguments:
 <pre><code>[notice] Checking if Docker image is available at 'example_csharp:latest'
 [warning] Could not pull from 'example_csharp:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_csharp:latest' with Dockerfile
-Copying '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/csharp/config.vsh.yaml' to '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/csharp/foo.txt'.</code></pre>
+Copying '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/csharp/config.vsh.yaml' to '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/csharp/foo.txt'.</code></pre>
 </div>
 </div>
 </div>
@@ -831,7 +831,7 @@ Arguments:
 <pre><code>[notice] Checking if Docker image is available at 'example_js:latest'
 [warning] Could not pull from 'example_js:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_js:latest' with Dockerfile
-Copying '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/js/config.vsh.yaml' to '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/js/foo.txt'</code></pre>
+Copying '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/js/config.vsh.yaml' to '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/js/foo.txt'</code></pre>
 </div>
 </div>
 </div>
@@ -861,7 +861,7 @@ Arguments:
 <pre><code>[notice] Checking if Docker image is available at 'example_python:latest'
 [warning] Could not pull from 'example_python:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_python:latest' with Dockerfile
-Copying '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/python/config.vsh.yaml' to '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/python/foo.txt'.</code></pre>
+Copying '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/python/config.vsh.yaml' to '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/python/foo.txt'.</code></pre>
 </div>
 </div>
 </div>
@@ -891,7 +891,7 @@ Arguments:
 <pre><code>[notice] Checking if Docker image is available at 'example_r:latest'
 [warning] Could not pull from 'example_r:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_r:latest' with Dockerfile
-Copying '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/r/config.vsh.yaml' to '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/r/foo.txt'.
+Copying '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/r/config.vsh.yaml' to '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/r/foo.txt'.
 [1] TRUE</code></pre>
 </div>
 </div>
@@ -923,7 +923,7 @@ Arguments:
 [warning] Could not pull from 'example_scala:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_scala:latest' with Dockerfile
 warning: 1 deprecation; re-run with -deprecation for details
-Copying '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/scala/config.vsh.yaml' to '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/scala/foo.txt'.</code></pre>
+Copying '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/scala/config.vsh.yaml' to '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/scala/foo.txt'.</code></pre>
 </div>
 </div>
 </div>
@@ -958,7 +958,7 @@ Note
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Bash</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">C#</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" role="tab" aria-controls="tabset-4-3" aria-selected="false">JavaScript</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-4" role="tab" aria-controls="tabset-4-4" aria-selected="false">Python</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-5" role="tab" aria-controls="tabset-4-5" aria-selected="false">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-6" role="tab" aria-controls="tabset-4-6" aria-selected="false">Scala</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
-<p>Use the <a href="../../reference/viash/build.html">viash build</a> command to generate an executable:</p>
+<p>Use the <a href="../../reference/cli/build.html">viash build</a> command to generate an executable:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">--output</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -978,7 +978,7 @@ Note
 </div>
 </div>
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
-<p>Use the <a href="../../reference/viash/build.html">viash build</a> command to generate an executable:</p>
+<p>Use the <a href="../../reference/cli/build.html">viash build</a> command to generate an executable:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">--output</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -998,7 +998,7 @@ Note
 </div>
 </div>
 <div id="tabset-4-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-3-tab">
-<p>Use the <a href="../../reference/viash/build.html">viash build</a> command to generate an executable:</p>
+<p>Use the <a href="../../reference/cli/build.html">viash build</a> command to generate an executable:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">--output</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1018,7 +1018,7 @@ Note
 </div>
 </div>
 <div id="tabset-4-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-4-tab">
-<p>Use the <a href="../../reference/viash/build.html">viash build</a> command to generate an executable:</p>
+<p>Use the <a href="../../reference/cli/build.html">viash build</a> command to generate an executable:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">--output</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1038,7 +1038,7 @@ Note
 </div>
 </div>
 <div id="tabset-4-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-5-tab">
-<p>Use the <a href="../../reference/viash/build.html">viash build</a> command to generate an executable:</p>
+<p>Use the <a href="../../reference/cli/build.html">viash build</a> command to generate an executable:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">--output</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1058,7 +1058,7 @@ Note
 </div>
 </div>
 <div id="tabset-4-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-6-tab">
-<p>Use the <a href="../../reference/viash/build.html">viash build</a> command to generate an executable:</p>
+<p>Use the <a href="../../reference/cli/build.html">viash build</a> command to generate an executable:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">--output</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1221,7 +1221,7 @@ Arguments:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_bash</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Copying '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/bash/config.vsh.yaml' to '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/bash/output.txt'.</code></pre>
+<pre><code>Copying '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/bash/config.vsh.yaml' to '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/bash/output.txt'.</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
@@ -1229,11 +1229,11 @@ Arguments:
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  428 Mar 17 06:18 config.vsh.yaml
--rw-r--r-- 1 runner docker  428 Mar 17 06:18 foo.txt
--rw-r--r-- 1 runner docker  428 Mar 17 06:21 output.txt
--rwxr-xr-x 1 runner docker  181 Mar 17 06:18 script.sh
-drwxr-xr-x 2 runner docker 4096 Mar 17 06:21 target</code></pre>
+-rw-r--r-- 1 runner docker  428 Mar 17 08:13 config.vsh.yaml
+-rw-r--r-- 1 runner docker  428 Mar 17 08:13 foo.txt
+-rw-r--r-- 1 runner docker  428 Mar 17 08:16 output.txt
+-rwxr-xr-x 1 runner docker  181 Mar 17 08:13 script.sh
+drwxr-xr-x 2 runner docker 4096 Mar 17 08:15 target</code></pre>
 </div>
 </div>
 </div>
@@ -1242,7 +1242,7 @@ drwxr-xr-x 2 runner docker 4096 Mar 17 06:21 target</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_csharp</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Copying '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/csharp/config.vsh.yaml' to '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/csharp/output.txt'.</code></pre>
+<pre><code>Copying '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/csharp/config.vsh.yaml' to '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/csharp/output.txt'.</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
@@ -1250,11 +1250,11 @@ drwxr-xr-x 2 runner docker 4096 Mar 17 06:21 target</code></pre>
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  467 Mar 17 06:18 config.vsh.yaml
--rw-r--r-- 1 runner docker  467 Mar 17 06:18 foo.txt
--rw-r--r-- 1 runner docker  467 Mar 17 06:18 output.txt
--rw-r--r-- 1 runner docker  237 Mar 17 06:18 script.csx
-drwxr-xr-x 2 runner docker 4096 Mar 17 06:21 target</code></pre>
+-rw-r--r-- 1 runner docker  467 Mar 17 08:13 config.vsh.yaml
+-rw-r--r-- 1 runner docker  467 Mar 17 08:13 foo.txt
+-rw-r--r-- 1 runner docker  467 Mar 17 08:13 output.txt
+-rw-r--r-- 1 runner docker  237 Mar 17 08:13 script.csx
+drwxr-xr-x 2 runner docker 4096 Mar 17 08:16 target</code></pre>
 </div>
 </div>
 </div>
@@ -1263,7 +1263,7 @@ drwxr-xr-x 2 runner docker 4096 Mar 17 06:21 target</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb77"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_js</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Copying '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/js/config.vsh.yaml' to '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/js/output.txt'</code></pre>
+<pre><code>Copying '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/js/config.vsh.yaml' to '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/js/output.txt'</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
@@ -1271,11 +1271,11 @@ drwxr-xr-x 2 runner docker 4096 Mar 17 06:21 target</code></pre>
 <div class="sourceCode cell-code" id="cb79"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  440 Mar 17 06:18 config.vsh.yaml
--rw-r--r-- 1 runner docker  440 Mar 17 06:19 foo.txt
--rw-r--r-- 1 runner docker  440 Mar 17 06:22 output.txt
--rwxr-xr-x 1 runner docker  282 Mar 17 06:18 script.js
-drwxr-xr-x 2 runner docker 4096 Mar 17 06:21 target</code></pre>
+-rw-r--r-- 1 runner docker  440 Mar 17 08:13 config.vsh.yaml
+-rw-r--r-- 1 runner docker  440 Mar 17 08:14 foo.txt
+-rw-r--r-- 1 runner docker  440 Mar 17 08:16 output.txt
+-rwxr-xr-x 1 runner docker  282 Mar 17 08:13 script.js
+drwxr-xr-x 2 runner docker 4096 Mar 17 08:16 target</code></pre>
 </div>
 </div>
 </div>
@@ -1284,7 +1284,7 @@ drwxr-xr-x 2 runner docker 4096 Mar 17 06:21 target</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_python</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Copying '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/python/config.vsh.yaml' to '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/python/output.txt'.</code></pre>
+<pre><code>Copying '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/python/config.vsh.yaml' to '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/python/output.txt'.</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
@@ -1292,11 +1292,11 @@ drwxr-xr-x 2 runner docker 4096 Mar 17 06:21 target</code></pre>
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  435 Mar 17 06:18 config.vsh.yaml
--rw-r--r-- 1 runner docker  435 Mar 17 06:20 foo.txt
--rw-r--r-- 1 runner docker  435 Mar 17 06:22 output.txt
--rwxr-xr-x 1 runner docker  216 Mar 17 06:18 script.py
-drwxr-xr-x 2 runner docker 4096 Mar 17 06:21 target</code></pre>
+-rw-r--r-- 1 runner docker  435 Mar 17 08:13 config.vsh.yaml
+-rw-r--r-- 1 runner docker  435 Mar 17 08:14 foo.txt
+-rw-r--r-- 1 runner docker  435 Mar 17 08:16 output.txt
+-rwxr-xr-x 1 runner docker  216 Mar 17 08:13 script.py
+drwxr-xr-x 2 runner docker 4096 Mar 17 08:16 target</code></pre>
 </div>
 </div>
 </div>
@@ -1305,7 +1305,7 @@ drwxr-xr-x 2 runner docker 4096 Mar 17 06:21 target</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_r</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Copying '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/r/config.vsh.yaml' to '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/r/output.txt'.
+<pre><code>Copying '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/r/config.vsh.yaml' to '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/r/output.txt'.
 [1] TRUE</code></pre>
 </div>
 </div>
@@ -1314,11 +1314,11 @@ drwxr-xr-x 2 runner docker 4096 Mar 17 06:21 target</code></pre>
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  435 Mar 17 06:18 config.vsh.yaml
--rw-r--r-- 1 runner docker  435 Mar 17 06:20 foo.txt
--rw-r--r-- 1 runner docker  435 Mar 17 06:22 output.txt
--rwxr-xr-x 1 runner docker  207 Mar 17 06:18 script.R
-drwxr-xr-x 2 runner docker 4096 Mar 17 06:21 target</code></pre>
+-rw-r--r-- 1 runner docker  435 Mar 17 08:13 config.vsh.yaml
+-rw-r--r-- 1 runner docker  435 Mar 17 08:15 foo.txt
+-rw-r--r-- 1 runner docker  435 Mar 17 08:16 output.txt
+-rwxr-xr-x 1 runner docker  207 Mar 17 08:13 script.R
+drwxr-xr-x 2 runner docker 4096 Mar 17 08:16 target</code></pre>
 </div>
 </div>
 </div>
@@ -1328,7 +1328,7 @@ drwxr-xr-x 2 runner docker 4096 Mar 17 06:21 target</code></pre>
 <div class="sourceCode cell-code" id="cb89"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_scala</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>warning: 1 deprecation; re-run with -deprecation for details
-Copying '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/scala/config.vsh.yaml' to '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/scala/output.txt'.</code></pre>
+Copying '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/scala/config.vsh.yaml' to '/viash_automount/tmp/RtmpU4HsCd/create_new_component5ee429e6b11e/scala/output.txt'.</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
@@ -1336,11 +1336,11 @@ Copying '/viash_automount/tmp/RtmpY5PJsQ/create_new_component84b97c762c45/scala/
 <div class="sourceCode cell-code" id="cb91"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  479 Mar 17 06:18 config.vsh.yaml
--rw-r--r-- 1 runner docker  479 Mar 17 06:21 foo.txt
--rw-r--r-- 1 runner docker  479 Mar 17 06:22 output.txt
--rw-r--r-- 1 runner docker  435 Mar 17 06:18 script.scala
-drwxr-xr-x 2 runner docker 4096 Mar 17 06:21 target</code></pre>
+-rw-r--r-- 1 runner docker  479 Mar 17 08:13 config.vsh.yaml
+-rw-r--r-- 1 runner docker  479 Mar 17 08:15 foo.txt
+-rw-r--r-- 1 runner docker  479 Mar 17 08:16 output.txt
+-rw-r--r-- 1 runner docker  435 Mar 17 08:13 script.scala
+drwxr-xr-x 2 runner docker 4096 Mar 17 08:16 target</code></pre>
 </div>
 </div>
 </div>
