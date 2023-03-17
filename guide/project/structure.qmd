@@ -1,0 +1,45 @@
+---
+title: Structure
+order: 5
+---
+
+
+## Demo pipeline
+
+The project already contains three components which are used to create a Nextflow pipeline with the following topology:
+
+```{mermaid}
+%%| fig-cap: "Diagram of the pipeline topology"
+graph LR
+   A(file?.tsv) --> B[/remove_comments/]
+   B --> C[/take_column/]
+   C --> D[/combine_columns/]
+   D --> E(output)
+```
+
+* `remove_comments` is a Bash script which removes all lines starting with a `#` from a file. 
+* `take_column` is a Python script which extracts one of the columns in a TSV file. 
+* `combine_columns` is an R script which combines multiple files into a TSV.
+
+## Grouping components in namespaces
+
+A namespace is effectively a hierarchical grouping of the components in the `src/` directory. Here are some benefits of grouping your components:
+
+* Grouping components in namespaces allows for categorizing components.
+* Each teams of developers can work on a different set of components in parallel, which improves the [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns).
+* Generating build targets and unit testing can be done in bulk, with optional filtering by namespace using the viash ns commands.
+
+This guide will cover how to define a namespace and use it with Viash.
+
+## Namespace property
+
+You can assign a component to a namespace by defining its namespace attribute in the Viash config file:
+
+```yaml
+functionality:
+  name: some_component
+  namespace: some_namespace/subnamespace
+...
+```
+
+Typically, the Viash config for this component will be located at `src/some_namespace/subnamespace/some_component/config.vsh.yaml`.

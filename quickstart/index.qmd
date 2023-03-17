@@ -4,7 +4,7 @@ search: true
 engine: knitr
 ---
   
-{{< ../guide/_blocks/_clone_repo.qmd >}}
+{{< ../_includes/_clone_template.qmd >}}
 
 
 **Viash** is your go-to script wrapper for building data pipelines from modular software components. All you need is your trusty script and a metadata file to embark on this journey.
@@ -45,10 +45,14 @@ First create a new repository by clicking the "Use this template" button. If you
 Next, clone the repository using the following command.
 
 ```bash
-git clone https://github.com/youruser/my_first_pipeline.git
+git clone https://github.com/youruser/my_first_pipeline.git && cd my_first_pipeline
 ```
 
 Your new repository should contain the following files:
+
+```bash
+tree my_first_pipeline
+```
 
     .
     ├── LICENSE.md                            License information
@@ -84,12 +88,12 @@ viash ns build --setup cachedbuild --parallel
 Once everything is built, a new **target** directory has been created containing the executables and modules grouped per platform:
 
 ```bash
-tree target/
+ls -l
 ```
 <details>
 <summary>Output</summary>
 ```{bash echo=FALSE}
-tree target/
+ls -l
 ```
 </details>
 
@@ -100,18 +104,18 @@ Now run the pipeline with Nextflow:
 ```bash
 nextflow run . \
   -main-script workflows/demo_pipeline/main.nf \
-  -with-docker \
+  -profile docker \
   --input resources_test/file*.tsv \
-  --publishDir output
+  --publish_dir output
 ```
 <details>
 <summary>Output</summary>
-```{bash echo=FALSE}
+```{bash echo=FALSE, eval=FALSE}
 nextflow run . \
   -main-script workflows/demo_pipeline/main.nf \
-  -with-docker \
+  -profile docker \
   --input resources_test/file*.tsv \
-  --publishDir output
+  --publish_dir output
 ```
 </details>
 
@@ -122,7 +126,7 @@ cat output/combined.combine_columns.output.tsv
 ```
 <details>
 <summary>Output</summary>
-```{bash echo=FALSE}
+```{bash echo=FALSE, eval=FALSE}
 cat output/combined.combine_columns.output.tsv
 ```
 </details>
