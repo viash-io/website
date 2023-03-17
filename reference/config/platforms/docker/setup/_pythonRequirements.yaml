@@ -1,0 +1,91 @@
+data:
+- description: Specify which Python packages should be available in order to run the
+    component.
+  example:
+  - example: "setup:\n  - type: python\n    pip: numpy\n    github: [ jkbr/httpie,\
+      \ foo/bar ]\n    url: \"https://github.com/some_org/some_pkg/zipball/master\"\
+      \n"
+    format: yaml
+  hierarchy:
+  - io.viash.platforms.requirements.PythonRequirements
+  - io.viash.platforms.requirements.Requirements
+  name: __this__
+  type: PythonRequirements
+- description: Specifies which packages to install from GitHub.
+  example:
+  - example: 'github: [ jkbr/httpie ]'
+    format: yaml
+  name: github
+  type: OneOrMore of String
+- description: Specifies which packages to install from GitLab.
+  example:
+  - example: 'gitlab: [ foo/bar ]'
+    format: yaml
+  name: gitlab
+  type: OneOrMore of String
+- description: Specifies which packages to install from pip.
+  example:
+  - example: 'pip: [ numpy ]'
+    format: yaml
+  name: pip
+  type: OneOrMore of String
+- description: Specifies which packages to install from PyPI using pip.
+  example:
+  - example: 'pypi: [ numpy ]'
+    format: yaml
+  name: pypi
+  type: OneOrMore of String
+- description: Specifies which packages to install using a Git URI.
+  example:
+  - example: 'git: [ https://some.git.repository/org/repo ]'
+    format: yaml
+  name: git
+  type: OneOrMore of String
+- description: 'Sets the `--upgrade` flag when set to true. Default: true.'
+  name: upgrade
+  type: Boolean
+- description: Specifies which packages to install from pip.
+  example:
+  - example: 'packages: [ numpy ]'
+    format: yaml
+  name: packages
+  type: OneOrMore of String
+- description: Specifies which packages to install using a generic URI.
+  example:
+  - example: 'url: [ https://github.com/some_org/some_pkg/zipball/master ]'
+    format: yaml
+  name: url
+  type: OneOrMore of String
+- description: Specifies which packages to install using an SVN URI.
+  example:
+  - example: 'svn: [ http://svn.repo/some_pkg/trunk/#egg=SomePackage ]'
+    format: yaml
+  name: svn
+  type: OneOrMore of String
+- description: Specifies which packages to install using a Bazaar URI.
+  example:
+  - example: 'bazaar: [ http://bazaar.launchpad.net/some_pkg/some_pkg/release-0.1
+      ]'
+    format: yaml
+  name: bazaar
+  type: OneOrMore of String
+- description: Specifies a code block to run as part of the build.
+  example:
+  - example: "script: |\n  print(\"Running custom code\")\n  x = 1 + 1 == 2"
+    format: yaml
+  name: script
+  type: OneOrMore of String
+- description: Specifies the type of the requirement specification.
+  name: type
+  type: String
+- description: Specifies which packages to install using a Mercurial URI.
+  example:
+  - example: 'mercurial: [ https://hg.myproject.org/MyProject/#egg=MyProject ]'
+    format: yaml
+  name: mercurial
+  type: OneOrMore of String
+- description: 'Sets the `--user` flag when set to true. Default: false.'
+  name: user
+  type: Boolean
+title: Python Requirements
+topic: requirements

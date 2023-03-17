@@ -1,0 +1,64 @@
+changes: "### BREAKING CHANGES\n\n* `DockerPlatform`: A Docker setup will be performed\
+  \ by default. Default strategy has been changed to `ifneedbepullelsecachedbuild`\
+  \ (#57).\n  `---setup` strategy has been removed and `---docker_setup_strategy`\
+  \ has been renamed to `---setup`.\n  This change allows running a component for\
+  \ the first time. During first time setup, the Docker container will be pulled or\
+  \ built automatically. \n\n* `NativePlatform`: Deprecated the native setup field.\n\
+  \n### MAJOR CHANGES\n\n* `NXF`: This version changes the handling logic for arguments.\
+  \ An argument can be either `required` or not and can have a `default: ...` value\
+  \ or not. Checks are implemented to verify that required arguments are effectively\
+  \ provided _during_ pipeline running.\n\n* `NXF`: If one sticks to long-option argments\
+  \ in the viash config, for all arguments that are _required_, the way of specifying\
+  \ the arguments on the CLI is identical for the Docker and Nextflow platforms. Non-required\
+  \ arguments can still be accessed from CLI using `--<component_name>__<argument_name>\
+  \ ...`.\n\n* `NXF`: Running a module as a standalone pipeline has become easier.\n\
+  \n* `viash run`: Implement verbosity levels (#58). viash executables now have 7\
+  \ levels of verbosity: emergency, alert, critical, error, warning, notice, info,\
+  \ debug.\n  The default verbosity level is 'notice'. Passing `-v` or `--verbose`\
+  \ bumps up the verbosity level by one, `-vv` by two. The verbosity level can be\
+  \ set manually by passing `--verbosity x`.\n\n### MINOR CHANGES\n\n* `Docker Platform`:\
+  \ Added `privileged` argument, allowing to run docker with the `--privileged` flag.\n\
+  \n* `Docker Requirements`: Allow specifying environment variables in the Dockerfile.\n\
+  \n* Config modding: Added a `+0=` operator to prepend items to a list.\n\n* `viash\
+  \ run`: Added a `--version` flag to viash executables for viewing the version of\
+  \ the component.\n\n* `Functionality`: Added checks on the functionality and argument\
+  \ names.\n\n* `viash run`: Added examples to functionality and arguments. Reworked\
+  \ `--help` formatting to include more information and be more consistent (#56).\n\
+  \n### BUG FIXES\n\n* `Docker R Requirements`: Install `remotes` when using `{ type:\
+  \ r, packages: [ foo ] }`.\n\n* `config`: Throw error when user made a typo in the\
+  \ viash config (#62). \n\n### TESTING\n\n* `NXF`: Add an end-to-end test for running\
+  \ a nextflow pipeline using viash components.\n\n* `Docker`: Reorganized viash docker\
+  \ build testbench into a main testbench with smaller auxiliary testbenches to keep\
+  \ them more manageable and clear what happens where.\n\n* `viash ns`: Added a basic\
+  \ testbench for namespace tests.\n\n"
+date: '2021-08-16'
+subtitle: Improvements to running Docker executables, and Nextflow platform argument
+  changes
+version: 0.5.0
+whats_new: "\nHere are the most important changes:\n\n* **Improvements to Docker backend**:\
+  \ In the past, you needed to perform `--setup` on your Docker-based components and\
+  \ executables in order for the image to be built before you could run the component\
+  \ or executable. Now you can simply run your component or executable and Viash will\
+  \ do the image building automatically by default if it detects an image isn't present\
+  \ yet. This behaviour can be changed by using a Docker setup strategy. For example:\n\
+  \n  ```bash\n  viash build config.vsh.yaml -p docker --setup alwayscachedbuild\n\
+  \  ```\n\n* **Nextflow gets some argument changes**: Arguments for the Nextflow\
+  \ platform now have optional `required` and `default` values, just like their native\
+  \ and Docker counterparts. For example:\n\n  ```yaml\n    arguments:\n      - name:\
+  \ --name\n        type: string\n        description: Input name\n        required:\
+  \ true\n      - name: --repeat\n        type: integer\n        description: Times\
+  \ to repeat the name\n        default: 100\n  ```\n\n  Take a look at the Functionality\
+  \ page for more information on arguments and their properties.  \n  As long as you\
+  \ use long-option arguments (e.g. `--my-option`) in the config file for required\
+  \ arguments, the way of specifying argument values for the Nextflow platform is\
+  \ identical to the Docker platform. You still access non-required arguments via\
+  \ this syntax: `--<component_name>__<argument_name> <value>`. For example:\n\n \
+  \ ```bash\n  my_component -- --my_component__input Hello!\n  ```\n\n* **Verbosity\
+  \ levels for viash run**: Executables now have 8 levels of verbosity\n\n  0. emergency\n\
+  \  1. alert\n  2. critical\n  3. error\n  4. warning\n  5. notice\n  6. info\n \
+  \ 7. debug\n\n  The default verbosity level is **notice**.\n  You can pass the `-v`\
+  \ or `--verbose` option to bump up the verbosity by one level. By passing `-vv`\
+  \ the verbosity goes up by two levels. You can manually set the verbosity by using\
+  \ the `--verbosity <int_level>` option. For example, if you wanted to only show\
+  \ errors or worse:\n\n  ```bash\n  viash run config.vsh.yaml -- --verbosity 3\n\
+  \  ```\n\n"

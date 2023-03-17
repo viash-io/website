@@ -1,0 +1,32 @@
+changes: "### NEW FUNCTIONALITY\n\n* `DockerPlatform`: Allow defining a container's\
+  \ organisation. Example:\n  ```yaml\n    - type: docker\n      registry: ghcr.io\n\
+  \      organisation: viash-io\n      image: viash\n      tag: \"1.0\"\n      target_registry:\
+  \ ghcr.io\n      target_organization: viash-io\n  ```\n\n* `DockerRequirement`:\
+  \ Add label instructions. Example:\n  `setup: [ [ type: docker, label: [ \"foo BAR\"\
+  \ ]]]`\n\n* `Config`: In specific places, allow parsing a value as a list of values.\
+  \ Fixes #97.\n  This mostly applies to list values in `DockerPlatform`, but also\
+  \ to author roles.\n  Examples:\n  ```yaml\n  functionality:\n    name: foo\n  \
+  \  authors:\n      - name: Alice\n        role: author # can be a string or a list\n\
+  \  platforms:\n    - type: docker\n      port: \"80:80\" # can be a string or a\
+  \ list\n      setup:\n        - type: r\n          packages: incgraph # can be a\
+  \ string or a list\n  ```\n  \n### BREAKING CHANGES\n\n* `viash test`: This command\
+  \ doesn't automatically add the resources dir to the path.\n\n### BUG FIXES\n\n\
+  * `Functionality`: Fix `.functionality.add_resources_to_path` not being picked up\
+  \ correctly.\n\n* `AptRequirement`: Set `DEBIAN_FRONTEND=noninteractive` by default.\
+  \ This can be turned off by specifying:\n  ```yaml\n    - type: apt\n      packages:\
+  \ [ foo, bar ]\n      interactive: true\n  ```\n\n### MINOR CHANGES\n\n* `Main`:\
+  \ Slightly better error messages when parsing of viash yaml file fails.\n  Before:\n\
+  \  ```\n  $ viash test src/test/resources/testbash/config_failed_build.vsh.yaml\
+  \ \n  Exception in thread \"main\" DecodingFailure(Unexpected field: [package];\
+  \ valid fields: packages, interactive, type, List(DownField(apt), DownArray, DownField(platforms)))\n\
+  \  ```\n  \n  After:\n  ```\n  $ viash test src/test/resources/testbash/config_failed_build.vsh.yaml\
+  \ \n  Error parsing 'file:///path/to/viash/src/test/resources/testbash/config_failed_build.vsh.yaml'.\
+  \ Details:\n  Unexpected field: [package]; valid fields: packages, interactive,\
+  \ type: DownField(apt),DownArray,DownField(platforms)\n  ```\n\n"
+date: '2022-02-28'
+subtitle: Allow defining a Docker image organization, and single values can be used
+  in place of lists
+version: 0.5.8
+whats_new: '
+
+  '

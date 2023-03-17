@@ -1,0 +1,26 @@
+data:
+- description: "[Resources](/reference/config/functionality/resources/#) are files\
+    \ that support the component. The first resource should be [a script](/guide/component/create-component.html#create-a-script)\
+    \ that will be executed when the functionality is run. Additional resources will\
+    \ be copied to the same directory.\n\nCommon properties:\n\n * type: `file` /\
+    \ `r_script` / `python_script` / `bash_script` / `javascript_script` / `scala_script`\
+    \ / `csharp_script`, specifies the type of the resource. The first resource cannot\
+    \ be of type `file`. When the type is not specified, the default type is simply\
+    \ `file`.\n * dest: filename, the resulting name of the resource.  From within\
+    \ a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`.\
+    \ If unspecified, `dest` will be set to the basename of the `path` parameter.\n\
+    \ * path: `path/to/file`, the path of the input file. Can be a relative or an\
+    \ absolute path, or a URI. Mutually exclusive with `text`.\n * text: ...multiline\
+    \ text..., the content of the resulting file specified as a string. Mutually exclusive\
+    \ with `path`.\n * is_executable: `true` / `false`, whether the resulting resource\
+    \ file should be made executable.\n"
+  example:
+  - example: "resources:\n  - type: r_script\n    path: script.R\n  - type: file\n\
+      \    path: resource1.txt\n"
+    format: yaml
+  hierarchy:
+  - io.viash.functionality.resources.Resource
+  name: __this__
+  type: Resource
+title: Resource
+topic: resources

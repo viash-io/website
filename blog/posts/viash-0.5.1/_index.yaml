@@ -1,0 +1,76 @@
+changes: '### NEW FEATURES
+
+
+  * `CSharpScript`: Added support for C# scripts (`type: "csharp_script"`) to viash.
+
+
+  ### MINOR CHANGES
+
+
+  * `NextflowPlatform`: Added `directive_cpus`, `directive_max_forks`, `directive_memory`
+  and `directive_time` parameters.
+
+
+  ### BUG FIXES
+
+
+  * `BashWrapper`: Refactor escaping descriptions, usages, defaults, and examples
+  (#34).
+
+
+  * `NextflowPlatform`: Refactor escaping descriptions, usages, defaults and examples
+  (#75).
+
+
+  * `NextflowPlatform`: Add argument to output path to avoid naming conflicts for
+  components with multiple output files (#76).
+
+
+  * `NextflowPlatform`, `renderCLI()`: Only add flag to rendered command when boolean_true
+  is actually true (#78).
+
+
+  * `DockerPlatform`: Only chown when output file exists.
+
+
+  ### TESTING
+
+
+  * `viash build`: Capture stdout messages when errors are expected, so that they
+  don''t clutter the expected output.
+
+
+  * `viash build`: Check `--help` description output on the whole text instead of
+  per letter or word basis.
+
+
+  * `TestingAllComponentsSuite`: Only testing bash natively, because other dependencies
+  might not be available.
+
+
+  '
+date: '2021-07-14'
+subtitle: Viash 0.5.1 adds support for C# scripts and fixes a few bugs
+version: 0.5.1
+whats_new: "\n### C# script support\n\nWe've added C# scripts (.csx) as a supported\
+  \ language using **dotnet-script**.  \nTo run C# scripts natively, you'll need to\
+  \ install .NET Core and execute the following command in a terminal:\n\n  ```bash\n\
+  \  dotnet tool install -g dotnet-script\n  ```\n\nYou can now run C# scripts like\
+  \ this:\n\n  ```bash\n  dotnet script hello_viash.csx\n  ```\n\nTo use C# scripts\
+  \ as components, use the new `csharp_script` type in the functionality section of\
+  \ your config file:\n\n  ```yaml\n    resources:\n    - type: csharp_script\n  \
+  \    path: script.csx\n  ```\n\nHere's an example of a simple C# script with Viash\
+  \ in mind:\n\n  ```csharp\n  // VIASH START\n  var par = new {\n    input = \"Hello\
+  \ World\",\n    name = \"Mike\"\n  };\n  // VIASH END\n\n  System.Console.WriteLine(input\
+  \ + \", \" + name + \"!\");\n  ```\n\nThe language-specific guide for creating C#\
+  \ script components will be added in the near future.\n\n### Bug fixes\n\nFirst\
+  \ off, these special characters  can now be used in the description, usage, default\
+  \ and example fields of components:\n\n- \"\n- \\`\n- \\\\\n- \\n\n- $\n\nNextflow\
+  \ output files with the same extension won't overwrite each other any more, like\
+  \ it was the case for arguments like this:\n\n  ```yaml\n  functionality:\n    name:\
+  \ bar\n    arguments:\n      - name: \"--input\"\n        type: file\n        example:\
+  \ input.txt\n      - name: \"--output1\"\n        type: file\n        direction:\
+  \ output\n        required: true\n        example: output.txt\n      - name: \"\
+  --output2\"\n        type: file\n        direction: output\n        required: true\n\
+  \        example: optional.txt\n  ```\n\nIn this case, the two output files would\
+  \ have been identical in the past.\n___\n\n"

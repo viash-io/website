@@ -1,0 +1,37 @@
+data:
+- bannerCommand: viash config inject
+  bannerDescription: Inject a Viash header into the main script of a Viash component.
+  bannerUsage: viash config inject config.vsh.yaml
+  name: inject
+  opts:
+  - argName: arg
+    descr: Specifies which platform amongst those specified in the config to use.
+      If this is not provided, the first platform will be used. If no platforms are
+      defined in the config, the native platform will be used. In addition, the path
+      to a platform yaml file can also be specified.
+    hidden: false
+    name: platform
+    optType: opt
+    required: false
+    short: p
+    type: String
+  - default: config.vsh.yaml
+    descr: 'A viash config file (example: config.vsh.yaml). This argument can also
+      be a script with the config as a header.'
+    hidden: false
+    name: config
+    optType: trailArgs
+    required: true
+    type: String
+  - argName: arg
+    default: List()
+    descr: Modify a viash config at runtime using [dynamic config modding](/reference/config_mods/#).
+    hidden: false
+    name: config_mod
+    optType: opt
+    required: false
+    short: c
+    type: List[String]
+  subcommands: []
+title: Viash Config Inject
+usesSubcommands: false

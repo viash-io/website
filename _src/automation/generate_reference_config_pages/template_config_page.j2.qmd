@@ -1,0 +1,52 @@
+---
+title: "{{title}}"
+search: true
+{%- if order is defined %}
+order: {{order}}
+{%- endif %}
+---
+{% for d in data|sort(attribute="name") -%}
+
+{% if not d.name == "__this__" %}
+## {{d.name|replace("`__merge__", "\_\_merge\_\_")}}{# Replace fixes __merge__ being rendered bold and coming before __this__ when sorted #}
+{% if "Option of " in d.type %}
+**Type**: `{{d.type|replace("Option of ", "")}}`
+{% elif "OneOrMore of " in d.type %}
+**Type**: `{{d.type|replace("OneOrMore of ", "")}}` / `List of {{d.type|replace("OneOrMore of ", "")}}`
+{% else %}
+**Type**: `{{d.type}}`
+{% endif %}
+{% else %}
+{% endif -%}
+{% if d.removed is defined -%}
+::: {.callout-warning}
+{% if d.removed.deprecation is defined and d.removed.deprecation|length -%}
+Deprecated since {{d.removed.deprecation}}. {% endif %}
+Removed since {{d.removed.removal}}. {{d.removed.message}}
+:::
+{% endif -%}
+{%- if d.deprecated is defined -%}
+::: {.callout-warning}
+Deprecated since {{d.deprecated.deprecation}}.
+{%- if d.deprecated.removal and d.deprecated.removal|length %} Planned removal at {{d.deprecated.removal}}. {% endif -%}
+{{d.deprecated.message}}
+:::
+{% endif -%}
+
+{%- if d.description is defined %}
+{{-d.description}}
+{% endif -%}
+
+{% if d.example is defined %}
+**Example{% if d.example|length > 1 %}s{% endif %}:**
+{% for ex in d.example %}
+{%- if ex.description is defined %}
+{{ex.description}}
+{% endif %}
+```{{ex.format}}
+{{ex.example|replace("\\n", "\n")}}
+```
+{% endfor -%}
+{% endif -%}
+
+{%- endfor %}

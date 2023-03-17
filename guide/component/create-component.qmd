@@ -32,9 +32,9 @@ pwalk(langs, function(id, label, example_config, example_script, config_path, sc
 
 A Viash component can be translated into one or more platforms: Native, Docker, Nextflow. Each of these platforms result in a different artifact:
 
-* [Native platform](/reference/config/platforms/NativePlatform.html): a single executable is generated which runs natively on the host system. This assumes all dependencies are already installed by the user and is therefore not reproducible. Requirements: Bash.
-* [Docker platform](/reference/config/platforms/DockerPlatform.html): a single executable is generated but it runs inside a Docker container instead. The Docker platform specification can help you install custom dependencies and will take care of auto-mounting input/output files. Requirements: Bash, Docker.
-* [Nextflow platform](/reference/config/platforms/NextflowVdsl3Platform.html): a Nextflow module which can be used as a standalone workflow or as a module in a larger workflow. Requirements: Nextflow and a containerization engine (e.g. Docker, Singularity, Podman).
+* [Native platform](/reference/config/platforms/native/#): a single executable is generated which runs natively on the host system. This assumes all dependencies are already installed by the user and is therefore not reproducible. Requirements: Bash.
+* [Docker platform](/reference/config/platforms/docker/#): a single executable is generated but it runs inside a Docker container instead. The Docker platform specification can help you install custom dependencies and will take care of auto-mounting input/output files. Requirements: Bash, Docker.
+* [Nextflow platform](/reference/config/platforms/nextflow/#): a Nextflow module which can be used as a standalone workflow or as a module in a larger workflow. Requirements: Nextflow and a containerization engine (e.g. Docker, Singularity, Podman).
 
 Below we will create our first Viash component using any of the languages natively supported by Viash. 
 
@@ -69,7 +69,7 @@ The `par` variable(s) appear to be hard coded, but they're not! When running thi
 
 ### Create a config
  
-A [Viash config file](/reference/config/overview.html) is a YAML file that describes the functionality of a component and the platform(s) it targets.
+A [Viash config file](/reference/config/#) is a YAML file that describes the functionality of a component and the platform(s) it targets.
 
 ::: {.panel-tabset}
 
@@ -101,7 +101,7 @@ Here's a breakdown of the different sections:
 ## Run the component
 
 That's it! With these two steps, you created your first component. 
-Next, you can use the [`viash run`](/reference/viash/run.qmd) command to test whether it actually works as intended.
+Next, you can use the [`viash run`](/reference/cli/run.qmd) command to test whether it actually works as intended.
 
 ::: {.panel-tabset}
 ```{r viash-run, echo=FALSE, output="asis"}
@@ -147,7 +147,7 @@ pwalk(langs, function(id, label, config_path, script_path, ...) {
   qrt(
     "## {% label %}
     |
-    |Use the [viash build](/reference/viash/build.qmd) command to generate an executable:
+    |Use the [viash build](/reference/cli/build.qmd) command to generate an executable:
     |
     |```{bash build-example}
     |viash build config.vsh.yaml --output target

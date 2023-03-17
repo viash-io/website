@@ -11,7 +11,7 @@ Luckily, Viash provides a set of commands for building, testing or inspecting al
 
 ## Build all components
 
-You can generate your first full development build using the [`viash ns build`](/reference/viash/ns.qmd#viash-ns-build) command.
+You can generate your first full development build using the [`viash ns build`](/reference/cli/ns_build.qmd) command.
 
 ```bash
 viash ns build --setup cachedbuild
@@ -25,13 +25,13 @@ viash ns build --setup cachedbuild
 
 Here are some useful optional arguments:
 
-* `--setup cachedbuild`: Build Docker images using the [`cachedbuild`](/reference/config/platforms/DockerPlatform.qmd#setup_strategy) strategy.
+* `--parallel`: Run multiple builds in parallel.
+* `--setup cachedbuild`: Build Docker images using the [`cachedbuild`](/reference/config/platforms/docker/#setup_strategy) strategy.
 * `--query demo`: Only select components that have 'demo' in the namespace or name.
 
 ## Test all components
 
-You can run all of the component tests using the [`viash ns test`](/reference/viash/ns.qmd#viash-ns-test) command.
-
+You can run all of the component tests using the [`viash ns test`](/reference/cli/ns_test.qmd) command.
 
 ```bash
 viash ns test
@@ -46,7 +46,7 @@ viash ns test
 
 ## Listing components
 
-You can run list all components using the [`viash ns list`](/reference/viash/ns.qmd#viash-ns-list/) command.
+You can run list all components using the [`viash ns list`](/reference/cli/ns_list.qmd) command.
 
 ```bash
 viash ns list
@@ -60,7 +60,7 @@ viash ns list
 
 ## Custom batch processing
 
-The [`viash ns exec`](/reference/viash/ns.qmd#viash-ns-exec) command can be used to run a command on every component.
+The [`viash ns exec`](/reference/cli/ns_exec.qmd) command can be used to run a command on every component.
 
 ```bash
 viash ns exec "echo Hello {}"

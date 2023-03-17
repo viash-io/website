@@ -9,7 +9,11 @@ viash run _src/automation/generate_version_blog_pages/config.vsh.yaml -- \
 source renv/python/virtualenvs/renv-python-3.10/bin/activate
 
 echo "Creating cli information"
-python _src/automation/generate_cli_schema_export_pages.py
+viash export cli_schema --output ./reference/cli_schema_export.json
+viash run _src/automation/generate_reference_cli_pages/config.vsh.yaml -- \
+  --input ./reference/cli_schema_export.json
 
 echo "Creating config information"
-python _src/automation/generate_config_schema_export_pages.py
+viash export config_schema --output ./reference/config_schema_export.json
+viash run _src/automation/generate_reference_config_pages/config.vsh.yaml -- \
+  --input ./reference/config_schema_export.json

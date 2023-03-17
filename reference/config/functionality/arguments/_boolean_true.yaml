@@ -1,0 +1,41 @@
+data:
+- description: An argument of the `boolean_true` type acts like a `boolean` flag with
+    a default value of `false`. When called as an argument it sets the `boolean` to
+    `true`.
+  example:
+  - example: "arguments:\n  - name: --silent\n    type: boolean_true\n    description:\
+      \ Ignore console output\n    alternatives: [\"-s\"]\n"
+    format: yaml
+  hierarchy:
+  - io.viash.functionality.arguments.BooleanTrueArgument
+  - io.viash.functionality.arguments.BooleanArgumentBase
+  - io.viash.functionality.arguments.Argument
+  name: __this__
+  type: BooleanTrueArgument
+- description: List of alternative format variations for this argument.
+  name: alternatives
+  type: OneOrMore of String
+- description: "The name of the argument. Can be in the formats `--silent`, `-s` or\
+    \ `silent`. The number of dashes determines how values can be passed:  \n\n  -\
+    \ `--silent` is a long option, which can be passed with `executable_name --silent`\n\
+    \  - `-s` is a short option, which can be passed with `executable_name -s`\n \
+    \ - `silent` is an argument, which can be passed with `executable_name silent`\
+    \  \n"
+  name: name
+  type: String
+- description: 'Structured information. Can be any shape: a string, vector, map or
+    even nested map.'
+  example:
+  - example: "info:\n  category: cat1\n  labels: [one, two, three]"
+    format: yaml
+  name: info
+  since: Viash 0.6.3
+  type: Json
+- description: A description of the argument. This will be displayed with `--help`.
+  name: description
+  type: Option of String
+- description: Specifies the type of the argument.
+  name: type
+  type: String
+title: Boolean_True
+topic: arguments

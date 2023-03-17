@@ -22,7 +22,19 @@
     {
       "name" : "platforms",
       "type" : "List of Platform",
-      "description" : "A list of platforms to generate target artifacts for.\n\n - @[native_platform](Native)\n - @[docker_platform](Docker)\n - @[nextflow_platform](Nextflow VDSL3)\n"
+      "description" : "A list of platforms to generate target artifacts for.\n\n - @[Native](platform_native)\n - @[Docker](platform_docker)\n - @[Nextflow VDSL3](platform_nextflow)\n"
+    },
+    {
+      "name" : "__merge__",
+      "type" : "Option of File",
+      "description" : "Config inheritance by including YAML partials. This is useful for defining common APIs in\nseparate files. `__merge__` can be used in any level of the YAML. For example,\nnot just in the config but also in the functionality or any of the platforms.\n",
+      "example" : [
+        {
+          "example" : "__merge__: ../api/common_interface.yaml",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.6.3"
     }
   ],
   "functionality" : [
@@ -144,7 +156,7 @@
     {
       "name" : "resources",
       "type" : "List of Resource",
-      "description" : "@[resources](Resources) are files that support the component. The first resource should be @[scripting_languages](a script) that will be executed when the functionality is run. Additional resources will be copied to the same directory.\n\nCommon properties:\n\n * type: `file` / `r_script` / `python_script` / `bash_script` / `javascript_script` / `scala_script` / `csharp_script`, specifies the type of the resource. The first resource cannot be of type `file`. When the type is not specified, the default type is simply `file`.\n * dest: filename, the resulting name of the resource.  From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter.\n * path: `path/to/file`, the path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`.\n * text: ...multiline text..., the content of the resulting file specified as a string. Mutually exclusive with `path`.\n * is_executable: `true` / `false`, whether the resulting resource file should be made executable.\n",
+      "description" : "@[Resources](resources) are files that support the component. The first resource should be @[a script](scripting_languages) that will be executed when the functionality is run. Additional resources will be copied to the same directory.\n\nCommon properties:\n\n * type: `file` / `r_script` / `python_script` / `bash_script` / `javascript_script` / `scala_script` / `csharp_script`, specifies the type of the resource. The first resource cannot be of type `file`. When the type is not specified, the default type is simply `file`.\n * dest: filename, the resulting name of the resource.  From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter.\n * path: `path/to/file`, the path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`.\n * text: ...multiline text..., the content of the resulting file specified as a string. Mutually exclusive with `path`.\n * is_executable: `true` / `false`, whether the resulting resource file should be made executable.\n",
       "example" : [
         {
           "example" : "resources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt\n",
@@ -155,7 +167,7 @@
     {
       "name" : "test_resources",
       "type" : "List of Resource",
-      "description" : "One or more @[scripting_language](scripts) to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing. See @[unit_testing](Unit Testing) for more info.",
+      "description" : "One or more @[scripts](scripting_languages) to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing. See @[Unit Testing](unit_testing) for more info.",
       "example" : [
         {
           "example" : "test_resources:\n  - type: bash_script\n    path: tests/test1.sh\n  - type: r_script\n    path: tests/test2.R\n  - path: resource1.txt\n",
@@ -238,7 +250,7 @@
     {
       "name" : "namespace",
       "type" : "Option of String",
-      "description" : "Namespace this component is a part of. See the @[namespace](Namespaces guide) for more information on namespaces.",
+      "description" : "Namespace this component is a part of. See the @[Namespaces guide](namespace) for more information on namespaces.",
       "example" : [
         {
           "example" : "namespace: fancy_components",
@@ -249,10 +261,10 @@
     {
       "name" : "arguments",
       "type" : "List of Argument",
-      "description" : "A list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:  \n\n - @[arg_string](string)\n - @[arg_file](file)\n - @[arg_integer](integer)\n - @[arg_double](double)\n - @[arg_boolean](boolean)\n - @[arg_boolean_true](boolean_true)\n - @[arg_boolean_false](boolean_false)\n",
+      "description" : "A list of arguments for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:  \n\n - @[string](arg_string)\n - @[file](arg_file)\n - @[integer](arg_integer)\n - @[double](arg_double)\n - @[boolean](arg_boolean)\n - @[boolean_true](arg_boolean_true)\n - @[boolean_false](arg_boolean_false)\n",
       "example" : [
         {
-          "example" : "arguments:\n   - name: --foo\n    type: file\n    alternatives: [-f]\n    description: Description of foo\n    default: \"/foo/bar\"\n    must_exist: true\n    direction: output\n    required: false\n    multiple: true\n    multiple_sep: \",\"\n   - name: --bar\n    type: string\n",
+          "example" : "arguments:\n  - name: --foo\n    type: file\n    alternatives: [-f]\n    description: Description of foo\n    default: \"/foo/bar\"\n    must_exist: true\n    direction: output\n    required: false\n    multiple: true\n    multiple_sep: \",\"\n  - name: --bar\n    type: string\n",
           "format" : "yaml"
         }
       ]
@@ -396,7 +408,7 @@
       {
         "name" : "setup",
         "type" : "List of Requirements",
-        "description" : "A list of requirements for installing the following types of packages:\n\n - @[apt_req](apt)\n - @[apk_req](apk)\n - @[docker_req](Docker setup instructions)\n - @[javascript_req](JavaScript)\n - @[python_req](Python)\n - @[r_req](R)\n - @[ruby_req](Ruby)\n - @[yum_req](yum)\n\nThe order in which these dependencies are specified determines the order in which they will be installed.\n"
+        "description" : "A list of requirements for installing the following types of packages:\n\n - @[apt](apt_req)\n - @[apk](apk_req)\n - @[Docker setup instructions](docker_req)\n - @[JavaScript](javascript_req)\n - @[Python](python_req)\n - @[R](r_req)\n - @[Ruby](ruby_req)\n - @[yum](yum_req)\n\nThe order in which these dependencies are specified determines the order in which they will be installed.\n"
       },
       {
         "name" : "workdir",
@@ -536,7 +548,7 @@
       {
         "name" : "setup_strategy",
         "type" : "DockerSetupStrategy",
-        "description" : "The Docker setup strategy to use when building a container.\n\n| Strategy | Description |\n|-----|----------|\n| `alwaysbuild` / `build` / `b` | Always build the image from the dockerfile. This is the default setup strategy.\n| `alwayscachedbuild` / `cachedbuild` / `cb` | Always build the image from the dockerfile, with caching enabled.\n| `ifneedbebuild` |  Build the image if it does not exist locally.\n| `ifneedbecachedbuild` | Build the image with caching enabled if it does not exist locally, with caching enabled.\n| `alwayspull` / `pull` / `p` |  Try to pull the container from [Docker Hub](https://hub.docker.com) or the @[docker_registry](specified docker registry).\n| `alwayspullelsebuild` / `pullelsebuild` |  Try to pull the image from a registry and build it if it doesn't exist.\n| `alwayspullelsecachedbuild` / `pullelsecachedbuild` |  Try to pull the image from a registry and build it with caching if it doesn't exist.\n| `ifneedbepull` |  If the image does not exist locally, pull the image.\n| `ifneedbepullelsebuild` |  If the image does not exist locally, pull the image. If the image does exist, build it.\n| `ifneedbepullelsecachedbuild` | If the image does not exist locally, pull the image. If the image does exist, build it with caching enabled.\n| `push` | Push the container to [Docker Hub](https://hub.docker.com)  or the @[docker_registry](specified docker registry).\n| `pushifnotpresent` | Push the container to [Docker Hub](https://hub.docker.com) or the @[docker_registry](specified docker registry) if the @[docker_tag](tag) does not exist yet.\n| `donothing` / `meh` | Do not build or pull anything.\n\n",
+        "description" : "The Docker setup strategy to use when building a container.\n\n| Strategy | Description |\n|-----|----------|\n| `alwaysbuild` / `build` / `b` | Always build the image from the dockerfile. This is the default setup strategy.\n| `alwayscachedbuild` / `cachedbuild` / `cb` | Always build the image from the dockerfile, with caching enabled.\n| `ifneedbebuild` |  Build the image if it does not exist locally.\n| `ifneedbecachedbuild` | Build the image with caching enabled if it does not exist locally, with caching enabled.\n| `alwayspull` / `pull` / `p` |  Try to pull the container from [Docker Hub](https://hub.docker.com) or the @[specified docker registry](docker_registry).\n| `alwayspullelsebuild` / `pullelsebuild` |  Try to pull the image from a registry and build it if it doesn't exist.\n| `alwayspullelsecachedbuild` / `pullelsecachedbuild` |  Try to pull the image from a registry and build it with caching if it doesn't exist.\n| `ifneedbepull` |  If the image does not exist locally, pull the image.\n| `ifneedbepullelsebuild` |  If the image does not exist locally, pull the image. If the image does exist, build it.\n| `ifneedbepullelsecachedbuild` | If the image does not exist locally, pull the image. If the image does exist, build it with caching enabled.\n| `push` | Push the container to [Docker Hub](https://hub.docker.com)  or the @[specified docker registry](docker_registry).\n| `pushifnotpresent` | Push the container to [Docker Hub](https://hub.docker.com) or the @[specified docker registry](docker_registry) if the @[tag](docker_tag) does not exist yet.\n| `donothing` / `meh` | Do not build or pull anything.\n\n",
         "example" : [
           {
             "example" : "setup_strategy: alwaysbuild",
@@ -613,7 +625,7 @@
       {
         "name" : "directives",
         "type" : "NextflowDirectives",
-        "description" : "Directives are optional settings that affect the execution of the process. These mostly match up with the Nextflow counterparts that are linked below:  \n\n - [`accelerator`](https://www.nextflow.io/docs/latest/process.html#accelerator)\n - [`afterScript`](https://www.nextflow.io/docs/latest/process.html#afterscript)\n - [`beforeScript`](https://www.nextflow.io/docs/latest/process.html#beforeScript)\n - [`cache`](https://www.nextflow.io/docs/latest/process.html#cache)\n - [`conda`](https://www.nextflow.io/docs/latest/process.html#conda)\n - [`container`](https://www.nextflow.io/docs/latest/process.html#container)\n - [`containerOptions`](https://www.nextflow.io/docs/latest/process.html#containeroptions)\n - [`cpus`](https://www.nextflow.io/docs/latest/process.html#cpus)\n - [`disk`](https://www.nextflow.io/docs/latest/process.html#disk)\n - [`echo`](https://www.nextflow.io/docs/latest/process.html#echo)\n - [`errorStrategy`](https://www.nextflow.io/docs/latest/process.html#errorstrategy)\n - [`executor`](https://www.nextflow.io/docs/latest/process.html#executor)\n - [`machineType`](https://www.nextflow.io/docs/latest/process.html#machinetype)\n - [`maxErrors`](https://www.nextflow.io/docs/latest/process.html#maxerrors)\n - [`maxForks`](https://www.nextflow.io/docs/latest/process.html#maxforks)\n - [`maxRetries`](https://www.nextflow.io/docs/latest/process.html#maxretries)\n - [`memory`](https://www.nextflow.io/docs/latest/process.html#memory)\n - [`module`](https://www.nextflow.io/docs/latest/process.html#module)\n - [`penv`](https://www.nextflow.io/docs/latest/process.html#penv)\n - [`publishDir`](https://www.nextflow.io/docs/latest/process.html#publishdir)\n - [`queue`](https://www.nextflow.io/docs/latest/process.html#queue)\n - [`scratch`](https://www.nextflow.io/docs/latest/process.html#scratch)\n - [`storeDir`](https://www.nextflow.io/docs/latest/process.html#storeDir)\n - [`stageInMode`](https://www.nextflow.io/docs/latest/process.html#stageinmode)\n - [`stageOutMode`](https://www.nextflow.io/docs/latest/process.html#stageoutmode)\n - [`tag`](https://www.nextflow.io/docs/latest/process.html#tag)\n - [`time`](https://www.nextflow.io/docs/latest/process.html#time)",
+        "description" : "@[Directives](nextflow_directives) are optional settings that affect the execution of the process. These mostly match up with the Nextflow counterparts.  \n",
         "example" : [
           {
             "example" : "directives:\n    container: rocker/r-ver:4.1\n    label: highcpu\n    cpus: 4\n    memory: 16 GB",
@@ -2090,56 +2102,6 @@
         ]
       }
     ],
-    "boolean_true" : [
-      {
-        "name" : "__this__",
-        "type" : "BooleanTrueArgument",
-        "hierarchy" : [
-          "io.viash.functionality.arguments.BooleanTrueArgument",
-          "io.viash.functionality.arguments.BooleanArgumentBase",
-          "io.viash.functionality.arguments.Argument"
-        ],
-        "description" : "An argument of the `boolean_true` type acts like a `boolean` flag with a default value of `false`. When called as an argument it sets the `boolean` to `true`.",
-        "example" : [
-          {
-            "example" : "arguments:\n  - name: --silent\n    type: boolean_true\n    description: Ignore console output\n    alternatives: [\"-s\"]\n",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "alternatives",
-        "type" : "OneOrMore of String",
-        "description" : "List of alternative format variations for this argument."
-      },
-      {
-        "name" : "name",
-        "type" : "String",
-        "description" : "The name of the argument. Can be in the formats `--silent`, `-s` or `silent`. The number of dashes determines how values can be passed:  \n\n  - `--silent` is a long option, which can be passed with `executable_name --silent`\n  - `-s` is a short option, which can be passed with `executable_name -s`\n  - `silent` is an argument, which can be passed with `executable_name silent`  \n"
-      },
-      {
-        "name" : "info",
-        "type" : "Json",
-        "description" : "Structured information. Can be any shape: a string, vector, map or even nested map.",
-        "example" : [
-          {
-            "example" : "info:\n  category: cat1\n  labels: [one, two, three]",
-            "format" : "yaml"
-          }
-        ],
-        "since" : "Viash 0.6.3"
-      },
-      {
-        "name" : "description",
-        "type" : "Option of String",
-        "description" : "A description of the argument. This will be displayed with `--help`."
-      },
-      {
-        "name" : "type",
-        "type" : "String",
-        "description" : "Specifies the type of the argument."
-      }
-    ],
     "file" : [
       {
         "name" : "__this__",
@@ -2336,6 +2298,72 @@
         "type" : "String",
         "description" : "Specifies the type of the argument."
       }
+    ],
+    "argument" : [
+      {
+        "name" : "__this__",
+        "type" : "Argument",
+        "hierarchy" : [
+          "io.viash.functionality.arguments.Argument"
+        ],
+        "description" : "For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:  \n\n - @[string](arg_string)\n - @[file](arg_file)\n - @[integer](arg_integer)\n - @[double](arg_double)\n - @[boolean](arg_boolean)\n - @[boolean_true](arg_boolean_true)\n - @[boolean_false](arg_boolean_false)\n",
+        "example" : [
+          {
+            "example" : "arguments:\n  - name: --foo\n    type: file\n    alternatives: [-f]\n    description: Description of foo\n    default: \"/foo/bar\"\n    must_exist: true\n    direction: output\n    required: false\n    multiple: true\n    multiple_sep: \",\"\n  - name: --bar\n    type: string\n",
+            "format" : "yaml"
+          }
+        ]
+      }
+    ],
+    "boolean_true" : [
+      {
+        "name" : "__this__",
+        "type" : "BooleanTrueArgument",
+        "hierarchy" : [
+          "io.viash.functionality.arguments.BooleanTrueArgument",
+          "io.viash.functionality.arguments.BooleanArgumentBase",
+          "io.viash.functionality.arguments.Argument"
+        ],
+        "description" : "An argument of the `boolean_true` type acts like a `boolean` flag with a default value of `false`. When called as an argument it sets the `boolean` to `true`.",
+        "example" : [
+          {
+            "example" : "arguments:\n  - name: --silent\n    type: boolean_true\n    description: Ignore console output\n    alternatives: [\"-s\"]\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "alternatives",
+        "type" : "OneOrMore of String",
+        "description" : "List of alternative format variations for this argument."
+      },
+      {
+        "name" : "name",
+        "type" : "String",
+        "description" : "The name of the argument. Can be in the formats `--silent`, `-s` or `silent`. The number of dashes determines how values can be passed:  \n\n  - `--silent` is a long option, which can be passed with `executable_name --silent`\n  - `-s` is a short option, which can be passed with `executable_name -s`\n  - `silent` is an argument, which can be passed with `executable_name silent`  \n"
+      },
+      {
+        "name" : "info",
+        "type" : "Json",
+        "description" : "Structured information. Can be any shape: a string, vector, map or even nested map.",
+        "example" : [
+          {
+            "example" : "info:\n  category: cat1\n  labels: [one, two, three]",
+            "format" : "yaml"
+          }
+        ],
+        "since" : "Viash 0.6.3"
+      },
+      {
+        "name" : "description",
+        "type" : "Option of String",
+        "description" : "A description of the argument. This will be displayed with `--help`."
+      },
+      {
+        "name" : "type",
+        "type" : "String",
+        "description" : "Specifies the type of the argument."
+      }
     ]
   },
   "resources" : {
@@ -2447,6 +2475,22 @@
         "name" : "dest",
         "type" : "Option of String",
         "description" : "Resulting filename of the resource. From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter."
+      }
+    ],
+    "resource" : [
+      {
+        "name" : "__this__",
+        "type" : "Resource",
+        "hierarchy" : [
+          "io.viash.functionality.resources.Resource"
+        ],
+        "description" : "@[Resources](resources) are files that support the component. The first resource should be @[a script](scripting_languages) that will be executed when the functionality is run. Additional resources will be copied to the same directory.\n\nCommon properties:\n\n * type: `file` / `r_script` / `python_script` / `bash_script` / `javascript_script` / `scala_script` / `csharp_script`, specifies the type of the resource. The first resource cannot be of type `file`. When the type is not specified, the default type is simply `file`.\n * dest: filename, the resulting name of the resource.  From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter.\n * path: `path/to/file`, the path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`.\n * text: ...multiline text..., the content of the resulting file specified as a string. Mutually exclusive with `path`.\n * is_executable: `true` / `false`, whether the resulting resource file should be made executable.\n",
+        "example" : [
+          {
+            "example" : "resources:\n  - type: r_script\n    path: script.R\n  - type: file\n    path: resource1.txt\n",
+            "format" : "yaml"
+          }
+        ]
       }
     ],
     "bashScript" : [
@@ -2676,5 +2720,569 @@
         "description" : "Resulting filename of the resource. From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter."
       }
     ]
-  }
+  },
+  "project" : [
+    {
+      "name" : "__this__",
+      "type" : "ViashProject",
+      "hierarchy" : [
+        "io.viash.project.ViashProject"
+      ],
+      "description" : "A Viash project configuration file. It's name should be `_viash.yaml`.",
+      "example" : [
+        {
+          "example" : "viash_version: 0.6.4\nsource: src\ntarget: target\nconfig_mods: |\n  .platforms[.type == 'docker'].target_registry := 'ghcr.io'\n  .platforms[.type == 'docker'].target_organization := 'viash-io'\n  .platforms[.type == 'docker'].namespace_separator := '/'\n  .platforms[.type == 'docker'].target_image_source := 'https://github.com/viash-io/viash'\n",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.6.4"
+    },
+    {
+      "name" : "source",
+      "type" : "Option of String",
+      "description" : "Which source directory to use for the `viash ns` commands.",
+      "example" : [
+        {
+          "example" : "source: src",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "viash_version",
+      "type" : "Option of String",
+      "description" : "Which version of Viash to use.",
+      "example" : [
+        {
+          "example" : "viash_versions: 0.6.4",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "config_mods",
+      "type" : "OneOrMore of String",
+      "description" : "Which config mods to apply.",
+      "example" : [
+        {
+          "example" : "config_mods: \".functionality.name := 'foo'\"",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "target",
+      "type" : "Option of String",
+      "description" : "Which target directory to use for `viash ns build`.",
+      "example" : [
+        {
+          "example" : "target: target",
+          "format" : "yaml"
+        }
+      ]
+    }
+  ],
+  "nextflowDirectives" : [
+    {
+      "name" : "__this__",
+      "type" : "NextflowDirectives",
+      "hierarchy" : [
+        "io.viash.platforms.nextflow.NextflowDirectives"
+      ],
+      "description" : "Directives are optional settings that affect the execution of the process.\n",
+      "example" : [
+        {
+          "example" : "directives:\n    container: rocker/r-ver:4.1\n    label: highcpu\n    cpus: 4\n    memory: 16 GB",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "beforeScript",
+      "type" : "Option of String",
+      "description" : "The `beforeScript` directive allows you to execute a custom (Bash) snippet before the main process script is run. This may be useful to initialise the underlying cluster environment or for other custom initialisation.\n\nSee [`beforeScript`](https://www.nextflow.io/docs/latest/process.html#beforeScript).\n",
+      "example" : [
+        {
+          "example" : "source /cluster/bin/setup",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "module",
+      "type" : "OneOrMore of String",
+      "description" : "Environment Modules is a package manager that allows you to dynamically configure your execution environment and easily switch between multiple versions of the same software tool.\n\nIf it is available in your system you can use it with Nextflow in order to configure the processes execution environment in your pipeline.\n\nIn a process definition you can use the `module` directive to load a specific module version to be used in the process execution environment.\n\nSee [`module`](https://www.nextflow.io/docs/latest/process.html#module).\n",
+      "example" : [
+        {
+          "example" : "\"ncbi-blast/2.2.27\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"ncbi-blast/2.2.27:t_coffee/10.0\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "[\"ncbi-blast/2.2.27\", \"t_coffee/10.0\"]",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "queue",
+      "type" : "OneOrMore of String",
+      "description" : "The `queue` directory allows you to set the queue where jobs are scheduled when using a grid based executor in your pipeline.\n\nSee [`queue`](https://www.nextflow.io/docs/latest/process.html#queue).\n",
+      "example" : [
+        {
+          "example" : "\"long\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"short,long\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "[\"short\", \"long\"]",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "label",
+      "type" : "OneOrMore of String",
+      "description" : "The `label` directive allows the annotation of processes with mnemonic identifier of your choice.\n\nSee [`label`](https://www.nextflow.io/docs/latest/process.html#label).\n",
+      "example" : [
+        {
+          "example" : "\"big_mem\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"big_cpu\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "[\"big_mem\", \"big_cpu\"]",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "container",
+      "type" : "Option[Either[Map of String,String,String]]",
+      "description" : "The `container` directive allows you to execute the process script in a Docker container.\n\nIt requires the Docker daemon to be running in machine where the pipeline is executed, i.e. the local machine when using the local executor or the cluster nodes when the pipeline is deployed through a grid executor.\n\nViash implements allows either a string value or a map. In case a map is used, the allowed keys are: `registry`, `image`, and `tag`. The `image` value must be specified.\n\nSee [`container`](https://www.nextflow.io/docs/latest/process.html#container).\n",
+      "example" : [
+        {
+          "example" : "\"foo/bar:tag\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "[ registry: \"reg\", image: \"im\", tag: \"ta\" ]",
+          "format" : "yaml",
+          "description" : "This is transformed to `\"reg/im:ta\"`:"
+        },
+        {
+          "example" : "[ image: \"im\" ]",
+          "format" : "yaml",
+          "description" : "This is transformed to `\"im:latest\"`:"
+        }
+      ]
+    },
+    {
+      "name" : "publishDir",
+      "type" : "OneOrMore[Either[String,Map of String,String]]",
+      "description" : "The `publishDir` directive allows you to publish the process output files to a specified folder.\n\nViash implements this directive as a plain string or a map. The allowed keywords for the map are: `path`, `mode`, `overwrite`, `pattern`, `saveAs`, `enabled`. The `path` key and value are required.\nThe allowed values for `mode` are: `symlink`, `rellink`, `link`, `copy`, `copyNoFollow`, `move`.\n\nSee [`publishDir`](https://www.nextflow.io/docs/latest/process.html#publishdir).\n",
+      "example" : [
+        {
+          "example" : "[]",
+          "format" : "yaml"
+        },
+        {
+          "example" : "[ [ path: \"foo\", enabled: true ], [ path: \"bar\", enabled: false ] ]",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"/path/to/dir\"",
+          "format" : "yaml",
+          "description" : "This is transformed to `[[ path: \"/path/to/dir\" ]]`:"
+        },
+        {
+          "example" : "[ path: \"/path/to/dir\", mode: \"cache\" ]",
+          "format" : "yaml",
+          "description" : "This is transformed to `[[ path: \"/path/to/dir\", mode: \"cache\" ]]`:"
+        }
+      ]
+    },
+    {
+      "name" : "maxForks",
+      "type" : "Option[Either of String,Int]",
+      "description" : "The `maxForks` directive allows you to define the maximum number of process instances that can be executed in parallel. By default this value is equals to the number of CPU cores available minus 1.\n\nIf you want to execute a process in a sequential manner, set this directive to one.\n\nSee [`maxForks`](https://www.nextflow.io/docs/latest/process.html#maxforks).\n",
+      "example" : [
+        {
+          "example" : "1",
+          "format" : "yaml"
+        },
+        {
+          "example" : "3",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "maxErrors",
+      "type" : "Option[Either of String,Int]",
+      "description" : "The `maxErrors` directive allows you to specify the maximum number of times a process can fail when using the `retry` error strategy. By default this directive is disabled.\n\nSee [`maxErrors`](https://www.nextflow.io/docs/latest/process.html#maxerrors).\n",
+      "example" : [
+        {
+          "example" : "1",
+          "format" : "yaml"
+        },
+        {
+          "example" : "3",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "cpus",
+      "type" : "Option[Either of Int,String]",
+      "description" : "The `cpus` directive allows you to define the number of (logical) CPU required by the process' task.\n\nSee [`cpus`](https://www.nextflow.io/docs/latest/process.html#cpus).\n",
+      "example" : [
+        {
+          "example" : "1",
+          "format" : "yaml"
+        },
+        {
+          "example" : "10",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "accelerator",
+      "type" : "Map of String,String",
+      "description" : "The `accelerator` directive allows you to specify the hardware accelerator requirement for the task execution e.g. GPU processor.\n\nViash implements this directive as a map with accepted keywords: `type`, `limit`, `request`, and `runtime`.\n\nSee [`accelerator`](https://www.nextflow.io/docs/latest/process.html#accelerator).\n",
+      "example" : [
+        {
+          "example" : "[ limit: 4, type: \"nvidia-tesla-k80\" ]",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "time",
+      "type" : "Option of String",
+      "description" : "The `time` directive allows you to define how long a process is allowed to run.\n\nSee [`time`](https://www.nextflow.io/docs/latest/process.html#time).\n",
+      "example" : [
+        {
+          "example" : "\"1h\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"2days\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"1day 6hours 3minutes 30seconds\"",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "afterScript",
+      "type" : "Option of String",
+      "description" : "The `afterScript` directive allows you to execute a custom (Bash) snippet immediately after the main process has run. This may be useful to clean up your staging area.\n\nSee [`afterScript`](https://www.nextflow.io/docs/latest/process.html#afterscript).\n",
+      "example" : [
+        {
+          "example" : "source /cluster/bin/cleanup",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "executor",
+      "type" : "Option of String",
+      "description" : "The `executor` defines the underlying system where processes are executed. By default a process uses the executor defined globally in the nextflow.config file.\n\nThe `executor` directive allows you to configure what executor has to be used by the process, overriding the default configuration. The following values can be used:\n\n| Name | Executor |\n|------|----------|\n| awsbatch | The process is executed using the AWS Batch service. | \n| azurebatch | The process is executed using the Azure Batch service. | \n| condor | The process is executed using the HTCondor job scheduler. | \n| google-lifesciences | The process is executed using the Google Genomics Pipelines service. | \n| ignite | The process is executed using the Apache Ignite cluster. | \n| k8s | The process is executed using the Kubernetes cluster. | \n| local | The process is executed in the computer where Nextflow is launched. | \n| lsf | The process is executed using the Platform LSF job scheduler. | \n| moab | The process is executed using the Moab job scheduler. | \n| nqsii | The process is executed using the NQSII job scheduler. | \n| oge | Alias for the sge executor. | \n| pbs | The process is executed using the PBS/Torque job scheduler. | \n| pbspro | The process is executed using the PBS Pro job scheduler. | \n| sge | The process is executed using the Sun Grid Engine / Open Grid Engine. | \n| slurm | The process is executed using the SLURM job scheduler. | \n| tes | The process is executed using the GA4GH TES service. | \n| uge | Alias for the sge executor. |\n\nSee [`executor`](https://www.nextflow.io/docs/latest/process.html#executor).\n",
+      "example" : [
+        {
+          "example" : "\"local\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"sge\"",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "containerOptions",
+      "type" : "OneOrMore of String",
+      "description" : "The `containerOptions` directive allows you to specify any container execution option supported by the underlying container engine (ie. Docker, Singularity, etc). This can be useful to provide container settings only for a specific process e.g. mount a custom path.\n\nSee [`containerOptions`](https://www.nextflow.io/docs/latest/process.html#containeroptions).\n",
+      "example" : [
+        {
+          "example" : "\"--foo bar\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "[\"--foo bar\", \"-f b\"]",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "disk",
+      "type" : "Option of String",
+      "description" : "The `disk` directive allows you to define how much local disk storage the process is allowed to use.\n\nSee [`disk`](https://www.nextflow.io/docs/latest/process.html#disk).\n",
+      "example" : [
+        {
+          "example" : "\"1 GB\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"2TB\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"3.2KB\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"10.B\"",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "tag",
+      "type" : "Option of String",
+      "description" : "The `tag` directive allows you to associate each process execution with a custom label, so that it will be easier to identify them in the log file or in the trace execution report.\n\nSee [`tag`](https://www.nextflow.io/docs/latest/process.html#tag).\n",
+      "example" : [
+        {
+          "example" : "\"foo\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "'$id'",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "conda",
+      "type" : "OneOrMore of String",
+      "description" : "The `conda` directive allows for the definition of the process dependencies using the Conda package manager.\n\nNextflow automatically sets up an environment for the given package names listed by in the `conda` directive.\n\nSee [`conda`](https://www.nextflow.io/docs/latest/process.html#conda).\n",
+      "example" : [
+        {
+          "example" : "\"bwa=0.7.15\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"bwa=0.7.15 fastqc=0.11.5\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "[\"bwa=0.7.15\", \"fastqc=0.11.5\"]",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "machineType",
+      "type" : "Option of String",
+      "description" : " The `machineType` can be used to specify a predefined Google Compute Platform machine type when running using the Google Life Sciences executor.\n\nSee [`machineType`](https://www.nextflow.io/docs/latest/process.html#machinetype).\n",
+      "example" : [
+        {
+          "example" : "\"n1-highmem-8\"",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "stageInMode",
+      "type" : "Option of String",
+      "description" : "The `stageInMode` directive defines how input files are staged-in to the process work directory. The following values are allowed:\n\n| Value | Description |\n|-------|-------------| \n| copy | Input files are staged in the process work directory by creating a copy. | \n| link | Input files are staged in the process work directory by creating an (hard) link for each of them. | \n| symlink | Input files are staged in the process work directory by creating a symbolic link with an absolute path for each of them (default). | \n| rellink | Input files are staged in the process work directory by creating a symbolic link with a relative path for each of them. | \n\nSee [`stageInMode`](https://www.nextflow.io/docs/latest/process.html#stageinmode).\n",
+      "example" : [
+        {
+          "example" : "\"copy\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"link\"",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "cache",
+      "type" : "Option[Either of Boolean,String]",
+      "description" : "The `cache` directive allows you to store the process results to a local cache. When the cache is enabled and the pipeline is launched with the resume option, any following attempt to execute the process, along with the same inputs, will cause the process execution to be skipped, producing the stored data as the actual results.\n\nThe caching feature generates a unique key by indexing the process script and inputs. This key is used to identify univocally the outputs produced by the process execution.\n\nThe `cache` is enabled by default, you can disable it for a specific process by setting the cache directive to `false`.\n\nAccepted values are: `true`, `false`, `\"deep\"`, and `\"lenient\"`.\n\nSee [`cache`](https://www.nextflow.io/docs/latest/process.html#cache).\n",
+      "example" : [
+        {
+          "example" : "true",
+          "format" : "yaml"
+        },
+        {
+          "example" : "false",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"deep\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"lenient\"",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "pod",
+      "type" : "OneOrMore[Map of String,String]",
+      "description" : "The `pod` directive allows the definition of pods specific settings, such as environment variables, secrets and config maps when using the Kubernetes executor.\n\nSee [`pod`](https://www.nextflow.io/docs/latest/process.html#pod).\n",
+      "example" : [
+        {
+          "example" : "[ label: \"key\", value: \"val\" ]",
+          "format" : "yaml"
+        },
+        {
+          "example" : "[ annotation: \"key\", value: \"val\" ]",
+          "format" : "yaml"
+        },
+        {
+          "example" : "[ env: \"key\", value: \"val\" ]",
+          "format" : "yaml"
+        },
+        {
+          "example" : "[ [label: \"l\", value: \"v\"], [env: \"e\", value: \"v\"]]",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "penv",
+      "type" : "Option of String",
+      "description" : "The `penv` directive allows you to define the parallel environment to be used when submitting a parallel task to the SGE resource manager.\n\nSee [`penv`](https://www.nextflow.io/docs/latest/process.html#penv).\n",
+      "example" : [
+        {
+          "example" : "\"smp\"",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "scratch",
+      "type" : "Option[Either of Boolean,String]",
+      "description" : "The `scratch` directive allows you to execute the process in a temporary folder that is local to the execution node.\n\nSee [`scratch`](https://www.nextflow.io/docs/latest/process.html#scratch).\n",
+      "example" : [
+        {
+          "example" : "true",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"/path/to/scratch\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "'$MY_PATH_TO_SCRATCH'",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"ram-disk\"",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "storeDir",
+      "type" : "Option of String",
+      "description" : "The `storeDir` directive allows you to define a directory that is used as a permanent cache for your process results.\n\nSee [`storeDir`](https://www.nextflow.io/docs/latest/process.html#storeDir).\n",
+      "example" : [
+        {
+          "example" : "\"/path/to/storeDir\"",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "maxRetries",
+      "type" : "Option[Either of String,Int]",
+      "description" : "The `maxRetries` directive allows you to define the maximum number of times a process instance can be re-submitted in case of failure. This value is applied only when using the retry error strategy. By default only one retry is allowed.\n\nSee [`maxRetries`](https://www.nextflow.io/docs/latest/process.html#maxretries).\n",
+      "example" : [
+        {
+          "example" : "1",
+          "format" : "yaml"
+        },
+        {
+          "example" : "3",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "echo",
+      "type" : "Option[Either of Boolean,String]",
+      "description" : "By default the stdout produced by the commands executed in all processes is ignored. By setting the `echo` directive to true, you can forward the process stdout to the current top running process stdout file, showing it in the shell terminal.\n \nSee [`echo`](https://www.nextflow.io/docs/latest/process.html#echo).\n",
+      "example" : [
+        {
+          "example" : "true",
+          "format" : "yaml"
+        },
+        {
+          "example" : "false",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "errorStrategy",
+      "type" : "Option of String",
+      "description" : "The `errorStrategy` directive allows you to define how an error condition is managed by the process. By default when an error status is returned by the executed script, the process stops immediately. This in turn forces the entire pipeline to terminate.\n\nTable of available error strategies:\n| Name | Executor |\n|------|----------|\n| `terminate` | Terminates the execution as soon as an error condition is reported. Pending jobs are killed (default) |\n| `finish` | Initiates an orderly pipeline shutdown when an error condition is raised, waiting the completion of any submitted job. |\n| `ignore` | Ignores processes execution errors. |\n| `retry` | Re-submit for execution a process returning an error condition. |\n\nSee [`errorStrategy`](https://www.nextflow.io/docs/latest/process.html#errorstrategy).\n",
+      "example" : [
+        {
+          "example" : "\"terminate\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"finish\"",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "memory",
+      "type" : "Option of String",
+      "description" : "The `memory` directive allows you to define how much memory the process is allowed to use.\n\nSee [`memory`](https://www.nextflow.io/docs/latest/process.html#memory).\n",
+      "example" : [
+        {
+          "example" : "\"1 GB\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"2TB\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"3.2KB\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"10.B\"",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "stageOutMode",
+      "type" : "Option of String",
+      "description" : "The `stageOutMode` directive defines how output files are staged-out from the scratch directory to the process work directory. The following values are allowed:\n\n| Value | Description |\n|-------|-------------| \n| copy | Output files are copied from the scratch directory to the work directory. | \n| move | Output files are moved from the scratch directory to the work directory. | \n| rsync | Output files are copied from the scratch directory to the work directory by using the rsync utility. |\n\nSee [`stageOutMode`](https://www.nextflow.io/docs/latest/process.html#stageoutmode).\n",
+      "example" : [
+        {
+          "example" : "\"copy\"",
+          "format" : "yaml"
+        },
+        {
+          "example" : "\"link\"",
+          "format" : "yaml"
+        }
+      ]
+    }
+  ]
 }

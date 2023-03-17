@@ -1,0 +1,38 @@
+changes: "### MAJOR CHANGES\n\n* `Functionality`: Now also accepts 'inputs' and 'outputs'\
+  \ in addition to 'arguments'. For inputs and outputs,\n  any specified arguments\
+  \ will have default `type: file` and `direction: input` or `direction: output` respectively.\n\
+  \n### MINOR CHANGES\n\n* `DockerPlatform`: Move description labels to the end of\
+  \ the Dockerfile to improve cross-component caching.\n\n* `Functionality`: Arguments\
+  \ where `.multiple` is `true` can now have lists as `default` and `example`.\n\n\
+  * `viash_build`: Added unit test for this component.\n\n* `viash_test`: Added unit\
+  \ test for this component.\n\n* `PythonRequirements`: Allow upgrading dependencies.\
+  \ Example: `[ type: python. pypi: anndata, upgrade: true ]`.\n\n* `NextflowLegacyPlatform`:\
+  \ Remove annoying messages when building Nxf modules.\n\n* `ConfigMods`: Expanded\
+  \ the DSL to allow specifying at which point to apply a config mod.\n  This functionality\
+  \ was necessary to allow for setting fields which alter the way configs are parsed.\n\
+  \  Example of when this is useful: `<preparse> .platforms[.type == \"nextflow\"\
+  ].variant := \"vdsl3\"`.\n  Updating workflow of parsing a config file is:\n   \
+  \ - read Yaml from file\n    - apply preparse config mods\n    - parse resulting\
+  \ Json as Config, thereby instantiating default values etc.\n    - convert Config\
+  \ back to Json\n    - apply postparse config mods (original config mods)\n    -\
+  \ convert final Json back to Config\n\n### BETA FUNCTIONALITY\n\n* `NextflowVdsl3Platform`:\
+  \ A beta implementation of the next-generation Viash+Nextflow platform.\n  See https://github.com/viash-io/viash/issues/82\
+  \ for more information. You can access the previous Nextflow\n  platform by using\
+  \ the `variant` parameter:\n  ```yaml\n  - type: nextflow\n    variant: legacy\n\
+  \    separate_multiple_outputs: false\n  ```\n\n### BUG FIXES\n\n* `viash_build`\
+  \ and `viash_test`: The `query_name` and `query_namespace` arguments were switched\
+  \ around. These arguments are now passed correctly.\n\n* `BashScript`, `JavaScriptScript`,\
+  \ `PythonScript`, `RScript`: Correctly escape `'` (#113). Update unit tests accordingly.\n\
+  \n* `CSharpScript`, `ScalaScript`: Correctly escape `\"` (#113). Update unit tests\
+  \ accordingly.\n\n* `viash_build`, `viash_test`, `viash_push`: Don't try to remove\
+  \ log files if they don't exist.\n\n### INTERNAL CHANGES\n\n* `DataObject`: \n \
+  \ - Renamed `otype` to `flags`.\n  - Renamed `oType` to `type`\n  - Deprecated `tag`\
+  \ (unused feature).\n\n* All abstract / inherited classes: Renamed `oType` to `type`.\n\
+  \n### DEPRECATION\n\n* `Functionality`: Deprecated `function_type` and `add_resources_to_path`.\
+  \ These should be \n  unused features, by now.\n  \n"
+date: '2022-05-09'
+subtitle: Nextflow VDSL3 is here!
+version: 0.5.11
+whats_new: "\nThis release contains additional sugar syntax for specifying inputs\
+  \ and outputs in a Viash config, \na beta implementation for the next-generation\
+  \ Viash platform, and several other minor improvements.\n\n"

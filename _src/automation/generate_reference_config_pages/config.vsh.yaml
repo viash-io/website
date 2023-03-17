@@ -1,0 +1,27 @@
+functionality:
+  name: generate_reference_config_pages
+  description: |
+    The script reads the viash config schema json schema and splits it into multiple quarto pages
+  arguments:
+    - name: "--input"
+      type: file
+      alternatives: "-i"
+      direction: input
+      description: The json file to use as input
+      required: true
+      must_exist: true
+    - name: "--output"
+      type: file
+      alternatives: "-o"
+      direction: output
+      default: 'reference/config'
+      description: Base path to use to store the pages
+  resources:
+    - type: python_script
+      path: script.py
+    - type: file
+      path: ../config_pages_settings.yaml
+    - type: file
+      path: template_config_page.j2.qmd
+platforms:
+  - type: native

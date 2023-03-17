@@ -1,0 +1,72 @@
+data:
+- bannerCommand: viash run
+  bannerDescription: Executes a viash component from the provided viash config file.
+    viash generates a temporary executable and immediately executes it with the given
+    parameters.
+  bannerUsage: viash run config.vsh.yaml [-p docker] [-k true/false]  -- [arguments
+    for script]
+  footer: "  -- param1 param2 ...    Extra parameters to be passed to the component\
+    \ itself.\n                          -- is used to separate viash arguments from\
+    \ the arguments\n                          of the component.\n\nThe temporary\
+    \ directory can be altered by setting the VIASH_TEMP directory. Example:\n  export\
+    \ VIASH_TEMP=/home/myuser/.viash_temp\n  viash run config.vsh.yaml"
+  name: run
+  opts:
+  - argName: arg
+    descr: Specifies which platform amongst those specified in the config to use.
+      If this is not provided, the first platform will be used. If no platforms are
+      defined in the config, the native platform will be used. In addition, the path
+      to a platform yaml file can also be specified.
+    hidden: false
+    name: platform
+    optType: opt
+    required: false
+    short: p
+    type: String
+  - default: config.vsh.yaml
+    descr: 'A viash config file (example: config.vsh.yaml). This argument can also
+      be a script with the config as a header.'
+    hidden: false
+    name: config
+    optType: trailArgs
+    required: true
+    type: String
+  - argName: arg
+    default: List()
+    descr: Modify a viash config at runtime using [dynamic config modding](/reference/config_mods/#).
+    hidden: false
+    name: config_mod
+    optType: opt
+    required: false
+    short: c
+    type: List[String]
+  - argName: arg
+    descr: Whether or not to keep temporary files. By default, files will be deleted
+      if all goes well but remain when an error occurs. By specifying --keep true,
+      the temporary files will always be retained, whereas --keep false will always
+      delete them. The temporary directory can be overwritten by setting defining
+      a VIASH_TEMP directory.
+    hidden: false
+    name: keep
+    optType: opt
+    required: false
+    short: k
+    type: String
+  - argName: arg
+    descr: The maximum number of (logical) cpus a component is allowed to use.
+    hidden: false
+    name: cpus
+    optType: opt
+    required: false
+    type: Int
+  - argName: arg
+    descr: The maximum amount of memory a component is allowed to allocate. Unit must
+      be one of B, KB, MB, GB, TB or PB.
+    hidden: false
+    name: memory
+    optType: opt
+    required: false
+    type: String
+  subcommands: []
+title: Viash Run
+usesSubcommands: false

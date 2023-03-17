@@ -1,0 +1,29 @@
+changes: "### NEW FEATURES\n\n* Similar to `par`, each script now also has a `meta`\
+  \ list. `meta` contains meta information about the component\n  or the execution\
+  \ thereof. It currently has the following fields:\n  - `meta[\"resources_dir\"]`:\
+  \ Path to the directory containing the resources\n  - `meta[\"functionality_name\"\
+  ]`: Name of the component\n\n* `NextflowPlatform`: Export `VIASH_TEMP` environment\
+  \ variable. \n\n### BUG FIXES\n\n* `NextflowPlatform`: Fix output formatting when\
+  \ `separate_multiple_outputs` is `false`.\n\n"
+date: '2021-09-02'
+subtitle: New meta data list for scripts, VIASH_TEMP environment variable for Nextflow,
+  fixed output formatting with separate outputs
+version: 0.5.3
+whats_new: "\nThis release provides more information to scripts with the new `meta`\
+  \ list. This list contains two values for now:\n\n  - `meta[\"resources_dir\"]`:\
+  \ Path to the directory containing the resources\n  - `meta[\"functionality_name\"\
+  ]`: Name of the component\n\nA new environment variable is now available for export\
+  \ when working with the Nextflow platform: `VIASH_TEMP`.\n\n### Resources directory\n\
+  \nAll resources defined in the config file are copied over to a temporary location\
+  \ right before a Viash component is executed. This location is can now be easily\
+  \ accessed in your scripts, allowing you to modify and copy the files as needed.\
+  \  \nHere are some examples in different scripting languages on how to access the\
+  \ meta data, it works similarly to the `par` list:\n\nBash:  \n\n  ```bash\n  echo\
+  \ $meta_resources_dir \n  ```\n\nPython:  \n\n  ```python\n  print(meta[\"resources_dir\"\
+  ])\n  ```\n\nR:\n\n  ```r\n  cat(meta$resources_dir)\n  ```\n\n### Functionality\
+  \ name\n\nThe name of the component can now be accessed in the same way as the resources\
+  \ directory. This allows you to print the name of the component out to a console\
+  \ window for example.\nHere's how to access this data in different scripting languages:\n\
+  \nBash:\n\n  ```bash\n  echo $meta_functionality_name\n  ```\n\nPython:  \n\n  ```python\n\
+  \  print(meta[\"functionality_name\"])\n  ```\n\nR:\n\n  ```r\n  cat(meta$functionality_name)\n\
+  \  ```\n\n"
