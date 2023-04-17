@@ -17,7 +17,64 @@
 <width>144</width>
 </image>
 <generator>quarto-1.2.475</generator>
-<lastBuildDate>Wed, 08 Mar 2023 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 17 Apr 2023 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Viash 0.7.2</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.7.2/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This update adds functionality to resolve paths starting with a slash as relative to the project directory, improves handling of info metadata in the config, and fixes to the operator precedence of config mods.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="new-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
+<ul>
+<li><p>Resolve resource and merge paths starting with a slash (<code>/</code>) as relative to the project directory (#380). To define absolute paths (which is not recommended anyway), prefix the path with the <code>file://</code> protocol. Examples:</p>
+<ul>
+<li><code>/foo</code> is a file or directory called <code>foo</code> in the current project directory.</li>
+<li><code>file:/foo</code> is a file or directory called <code>foo</code> in the system root.</li>
+</ul></li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><code>config yaml</code>: Do not modify (e.g.&nbsp;strip empty fields) of the <code>.functionality.info</code> and <code>.functionality.arguments[].info</code> fields (#386).</li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><code>ConfigMods</code>: Fix operator precedence issues with conditions in the config mod parsers (#390).</li>
+</ul>
+</section>
+<section id="internal-changes" class="level3">
+<h3 class="anchored" data-anchor-id="internal-changes">INTERNAL CHANGES</h3>
+<ul>
+<li><p>Clean up unused code (#380).</p></li>
+<li><p>Move circe encoders/decoders for File and Path from <code>io.viash.functionality.arguments</code> to <code>io.viash.helpers.circe</code> (#380).</p></li>
+<li><p>Store the project root directory (that is, the directory of the <code>_viash.yaml</code>) in a ViashProject object (#380).</p></li>
+<li><p>Tests: Reworked language tests to be grouped in their own subfolder and split off the bash language test from the general <code>testbash</code> folder (#381).</p></li>
+<li><p>Tests: Add additional language tests for <code>viash config inject</code> (#381).</p></li>
+<li><p>Tests: Added test for <code>io.viash.helpers.IO</code> (#380).</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.7.2/index.html</guid>
+  <pubDate>Mon, 17 Apr 2023 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Viash 0.7.1</title>
   <dc:creator>Viash Team</dc:creator>
@@ -1372,7 +1429,7 @@
 Exception in thread "main" DecodingFailure(Unexpected field: [package]; valid fields: packages, interactive, type, List(DownField(apt), DownArray, DownField(platforms)))</code></pre>
 <p>After:</p>
 <pre><code>$ viash test src/test/resources/testbash/config_failed_build.vsh.yaml 
-Error parsing 'file:///path/to/viash/src/test/resources/testbash/config_failed_build.vsh.yaml'. Details:
+Error parsing 'file:/path/to/viash/src/test/resources/testbash/config_failed_build.vsh.yaml'. Details:
 Unexpected field: [package]; valid fields: packages, interactive, type: DownField(apt),DownArray,DownField(platforms)</code></pre></li>
 </ul>
 
@@ -1384,67 +1441,6 @@ Unexpected field: [package]; valid fields: packages, interactive, type: DownFiel
   <category>New Release</category>
   <guid>https://viash.io/blog/posts/viash-0.5.8/index.html</guid>
   <pubDate>Mon, 28 Feb 2022 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.5.7</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/blog/posts/viash-0.5.7/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="whats-new" class="level2">
-<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<p>Examples for arguments now need to be of the same type as the argument itself. You can’t provide an <code>integer</code> for a <code>string</code>-based argument for example.<br>
-A handy new command has been added: <code>viash config inject</code>. This can be used to inject a Viash header into a script based on the arguments of the config file.</p>
-<p>There have been some improvements to the Docker platform as well.<br>
-You can now add yum packages as a requirement:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;">platforms</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb1-2"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> docker</span></span>
-<span id="cb1-3"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">image</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> bash:latest</span></span>
-<span id="cb1-4"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">setup</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb1-5"><span class="at" style="color: #657422;">      </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> yum</span></span>
-<span id="cb1-6"><span class="at" style="color: #657422;">        </span><span class="fu" style="color: #4758AB;">packages</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="kw" style="color: #003B4F;">[</span><span class="at" style="color: #657422;"> wget </span><span class="kw" style="color: #003B4F;">]</span></span></code></pre></div>
-<p>You can now include ADD and COPY instructions in the config file:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><span class="fu" style="color: #4758AB;">platforms</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb2-2"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> docker</span></span>
-<span id="cb2-3"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">image</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> bash:latest</span></span>
-<span id="cb2-4"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">setup</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb2-5"><span class="at" style="color: #657422;">      </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> docker</span></span>
-<span id="cb2-6"><span class="at" style="color: #657422;">        </span><span class="fu" style="color: #4758AB;">add</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="kw" style="color: #003B4F;">[</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"http://foo.bar ."</span><span class="at" style="color: #657422;"> </span><span class="kw" style="color: #003B4F;">]</span></span></code></pre></div>
-</section>
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
-<section id="breaking-changes" class="level3">
-<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
-<ul>
-<li><code>viash config</code>: An argument’s example now needs to be of the same type as the argument itself. For example, <code>[ type: integer, name: foo, example: 10 ]</code> is valid, whereas <code>[ type: integer, name: foo, example: bar ]</code> is not, as ‘bar’ cannot be cast to an integer.</li>
-</ul>
-</section>
-<section id="new-functionality" class="level3">
-<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
-<ul>
-<li><p><code>viash config inject</code>: A command for inserting a Viash header into your script.</p></li>
-<li><p><code>YumRequirement</code>: Added a requirement setup for installing through yum. Example: <code>setup: [ [ type: yum, packages: [ wget] ] ]</code></p></li>
-<li><p><code>DockerRequirement</code>: Allow using copy and add instructions. Example: <code>setup: [ [ type: docker, add: [ "http://foo.bar ." ]]]</code></p></li>
-</ul>
-</section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
-<ul>
-<li><p><code>ViashTest</code>: Fix verbosity passthrough.</p></li>
-<li><p><code>--help</code>: Fix repeated usage flag when printing the help.</p></li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/blog/posts/viash-0.5.7/index.html</guid>
-  <pubDate>Wed, 16 Feb 2022 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
