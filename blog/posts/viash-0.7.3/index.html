@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Viash Team">
-<meta name="dcterms.date" content="2023-04-17">
+<meta name="dcterms.date" content="2023-04-19">
 
-<title>Viash - Viash 0.7.2</title>
+<title>Viash - Viash 0.7.3</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -78,8 +78,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="../../../styles.css">
-<meta property="og:title" content="Viash - Viash 0.7.2">
-<meta property="og:description" content="Project-relative paths and improved metadata handling">
+<meta property="og:title" content="Viash - Viash 0.7.3">
+<meta property="og:description" content="Minor bug fixes in documentation and config view">
 <meta property="og:site-name" content="Viash">
 </head>
 
@@ -157,8 +157,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Viash 0.7.2</h1>
-            <p class="subtitle lead">Project-relative paths and improved metadata handling</p>
+      <h1 class="title">Viash 0.7.3</h1>
+            <p class="subtitle lead">Minor bug fixes in documentation and config view</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">New Release</div>
               </div>
@@ -178,7 +178,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">April 17, 2023</p>
+        <p class="date">April 19, 2023</p>
       </div>
     </div>
     
@@ -196,13 +196,10 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   <li><a href="#whats-new" id="toc-whats-new" class="nav-link active" data-scroll-target="#whats-new">What’s new?</a></li>
   <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link" data-scroll-target="#full-changelog">Full changelog</a>
   <ul class="collapse">
-  <li><a href="#new-functionality" id="toc-new-functionality" class="nav-link" data-scroll-target="#new-functionality">NEW FUNCTIONALITY</a></li>
-  <li><a href="#minor-changes" id="toc-minor-changes" class="nav-link" data-scroll-target="#minor-changes">MINOR CHANGES</a></li>
   <li><a href="#bug-fixes" id="toc-bug-fixes" class="nav-link" data-scroll-target="#bug-fixes">BUG FIXES</a></li>
-  <li><a href="#internal-changes" id="toc-internal-changes" class="nav-link" data-scroll-target="#internal-changes">INTERNAL CHANGES</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/viash-io/website/edit/main/blog/posts/viash-0.7.2/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/viash-io/website/blob/main/blog/posts/viash-0.7.2/index.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/viash-io/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/viash-io/website/edit/main/blog/posts/viash-0.7.3/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/viash-io/website/blob/main/blog/posts/viash-0.7.3/index.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/viash-io/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -215,41 +212,15 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <section id="whats-new" class="level2">
 <h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<p>This update adds functionality to resolve paths starting with a slash as relative to the project directory, improves handling of info metadata in the config, and fixes to the operator precedence of config mods.</p>
+<p>Fix minor issues in the documentation and with the way parent paths of resources are printed a config view.</p>
 </section>
 <section id="full-changelog" class="level2">
 <h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
-<section id="new-functionality" class="level3">
-<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
-<ul>
-<li><p>Resolve resource and merge paths starting with a slash (<code>/</code>) as relative to the project directory (#380). To define absolute paths (which is not recommended anyway), prefix the path with the <code>file://</code> protocol. Examples:</p>
-<ul>
-<li><code>/foo</code> is a file or directory called <code>foo</code> in the current project directory.</li>
-<li><code>file:/foo</code> is a file or directory called <code>foo</code> in the system root.</li>
-</ul></li>
-</ul>
-</section>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li><code>viash config view</code>: Do not modify (e.g.&nbsp;strip empty fields) of the <code>.functionality.info</code> and <code>.functionality.arguments[].info</code> fields (#386).</li>
-</ul>
-</section>
 <section id="bug-fixes" class="level3">
 <h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
 <ul>
-<li><code>ConfigMods</code>: Fix operator precedence issues with conditions in the config mod parsers (#390).</li>
-</ul>
-</section>
-<section id="internal-changes" class="level3">
-<h3 class="anchored" data-anchor-id="internal-changes">INTERNAL CHANGES</h3>
-<ul>
-<li><p>Clean up unused code (#380).</p></li>
-<li><p>Move circe encoders/decoders for File and Path from <code>io.viash.functionality.arguments</code> to <code>io.viash.helpers.circe</code> (#380).</p></li>
-<li><p>Store the project root directory (that is, the directory of the <code>_viash.yaml</code>) in a ViashProject object (#380).</p></li>
-<li><p>Tests: Reworked language tests to be grouped in their own subfolder and split off the bash language test from the general <code>testbash</code> folder (#381).</p></li>
-<li><p>Tests: Add additional language tests for <code>viash config inject</code> (#381).</p></li>
-<li><p>Tests: Added test for <code>io.viash.helpers.IO</code> (#380).</p></li>
+<li><p><code>DockerPlatform</code>: Fixed example in documentation for the <code>namespace_separator</code> parameter (#396).</p></li>
+<li><p><code>viash config view</code>: Resource parent paths should be directories and not file (#398).</p></li>
 </ul>
 
 

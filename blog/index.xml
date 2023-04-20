@@ -17,7 +17,38 @@
 <width>144</width>
 </image>
 <generator>quarto-1.2.475</generator>
-<lastBuildDate>Mon, 17 Apr 2023 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 19 Apr 2023 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Viash 0.7.3</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.7.3/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>Fix minor issues in the documentation and with the way parent paths of resources are printed a config view.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>DockerPlatform</code>: Fixed example in documentation for the <code>namespace_separator</code> parameter (#396).</p></li>
+<li><p><code>viash config view</code>: Resource parent paths should be directories and not file (#398).</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.7.3/index.html</guid>
+  <pubDate>Wed, 19 Apr 2023 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Viash 0.7.2</title>
   <dc:creator>Viash Team</dc:creator>
@@ -46,7 +77,7 @@
 <section id="minor-changes" class="level3">
 <h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
 <ul>
-<li><code>config yaml</code>: Do not modify (e.g.&nbsp;strip empty fields) of the <code>.functionality.info</code> and <code>.functionality.arguments[].info</code> fields (#386).</li>
+<li><code>viash config view</code>: Do not modify (e.g.&nbsp;strip empty fields) of the <code>.functionality.info</code> and <code>.functionality.arguments[].info</code> fields (#386).</li>
 </ul>
 </section>
 <section id="bug-fixes" class="level3">
@@ -1364,83 +1395,6 @@
   <category>New Release</category>
   <guid>https://viash.io/blog/posts/viash-0.5.9/index.html</guid>
   <pubDate>Sat, 12 Mar 2022 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.5.8</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/blog/posts/viash-0.5.8/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="whats-new" class="level2">
-<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-</section>
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
-<section id="new-functionality" class="level3">
-<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
-<ul>
-<li><p><code>DockerPlatform</code>: Allow defining a container’s organisation. Example:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> docker</span></span>
-<span id="cb1-2"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">registry</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> ghcr.io</span></span>
-<span id="cb1-3"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">organisation</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> viash-io</span></span>
-<span id="cb1-4"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">image</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> viash</span></span>
-<span id="cb1-5"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">tag</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"1.0"</span></span>
-<span id="cb1-6"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">target_registry</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> ghcr.io</span></span>
-<span id="cb1-7"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">target_organization</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> viash-io</span></span></code></pre></div></li>
-<li><p><code>DockerRequirement</code>: Add label instructions. Example: <code>setup: [ [ type: docker, label: [ "foo BAR" ]]]</code></p></li>
-<li><p><code>Config</code>: In specific places, allow parsing a value as a list of values. Fixes #97. This mostly applies to list values in <code>DockerPlatform</code>, but also to author roles. Examples:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb2-2"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> foo</span></span>
-<span id="cb2-3"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">authors</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb2-4"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> Alice</span></span>
-<span id="cb2-5"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">role</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> author</span><span class="co" style="color: #5E5E5E;"> # can be a string or a list</span></span>
-<span id="cb2-6"><span class="fu" style="color: #4758AB;">platforms</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb2-7"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> docker</span></span>
-<span id="cb2-8"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">port</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"80:80"</span><span class="co" style="color: #5E5E5E;"> # can be a string or a list</span></span>
-<span id="cb2-9"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">setup</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb2-10"><span class="at" style="color: #657422;">      </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> r</span></span>
-<span id="cb2-11"><span class="at" style="color: #657422;">        </span><span class="fu" style="color: #4758AB;">packages</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> incgraph</span><span class="co" style="color: #5E5E5E;"> # can be a string or a list</span></span></code></pre></div></li>
-</ul>
-</section>
-<section id="breaking-changes" class="level3">
-<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
-<ul>
-<li><code>viash test</code>: This command doesn’t automatically add the resources dir to the path.</li>
-</ul>
-</section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
-<ul>
-<li><p><code>Functionality</code>: Fix <code>.functionality.add_resources_to_path</code> not being picked up correctly.</p></li>
-<li><p><code>AptRequirement</code>: Set <code>DEBIAN_FRONTEND=noninteractive</code> by default. This can be turned off by specifying:</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> apt</span></span>
-<span id="cb3-2"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">packages</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="kw" style="color: #003B4F;">[</span><span class="at" style="color: #657422;"> foo</span><span class="kw" style="color: #003B4F;">,</span><span class="at" style="color: #657422;"> bar </span><span class="kw" style="color: #003B4F;">]</span></span>
-<span id="cb3-3"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">interactive</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="ch" style="color: #20794D;">true</span></span></code></pre></div></li>
-</ul>
-</section>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li><p><code>Main</code>: Slightly better error messages when parsing of viash yaml file fails. Before:</p>
-<pre><code>$ viash test src/test/resources/testbash/config_failed_build.vsh.yaml 
-Exception in thread "main" DecodingFailure(Unexpected field: [package]; valid fields: packages, interactive, type, List(DownField(apt), DownArray, DownField(platforms)))</code></pre>
-<p>After:</p>
-<pre><code>$ viash test src/test/resources/testbash/config_failed_build.vsh.yaml 
-Error parsing 'file:/path/to/viash/src/test/resources/testbash/config_failed_build.vsh.yaml'. Details:
-Unexpected field: [package]; valid fields: packages, interactive, type: DownField(apt),DownArray,DownField(platforms)</code></pre></li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/blog/posts/viash-0.5.8/index.html</guid>
-  <pubDate>Mon, 28 Feb 2022 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
