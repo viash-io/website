@@ -288,15 +288,15 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Exporting take_column (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/take_column
+<pre><code>Exporting remove_comments (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/remove_comments
+Exporting combine_columns (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/combine_columns
+Exporting take_column (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/take_column
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/remove_comments:dev' with Dockerfile
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/take_column:dev' with Dockerfile
 Exporting remove_comments (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/remove_comments
 Exporting combine_columns (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/combine_columns
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/take_column:dev' with Dockerfile
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/combine_columns:dev' with Dockerfile
-Exporting combine_columns (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/combine_columns
 Exporting take_column (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/take_column
-Exporting remove_comments (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/remove_comments
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/remove_comments:dev' with Dockerfile
 [32mAll 6 configs built successfully[0m</code></pre>
 </div>
 </div>
@@ -310,17 +310,17 @@ Output
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>total 72
--rw-r--r-- 1 runner docker   747 May  4 10:58 CHANGELOG.md
--rw-r--r-- 1 runner docker 32219 May  4 10:58 LICENSE.md
--rw-r--r-- 1 runner docker  1094 May  4 10:58 README.md
--rw-r--r-- 1 runner docker  1125 May  4 10:58 README.qmd
--rw-r--r-- 1 runner docker   415 May  4 10:58 _viash.yaml
--rw-r--r-- 1 runner docker   245 May  4 10:58 main.nf
--rw-r--r-- 1 runner docker   222 May  4 10:58 nextflow.config
-drwxr-xr-x 2 runner docker  4096 May  4 10:58 resources_test
-drwxr-xr-x 3 runner docker  4096 May  4 10:58 src
-drwxr-xr-x 4 runner docker  4096 May  4 10:58 target
-drwxr-xr-x 3 runner docker  4096 May  4 10:58 workflows</code></pre>
+-rw-r--r-- 1 runner docker   747 May  4 13:29 CHANGELOG.md
+-rw-r--r-- 1 runner docker 32219 May  4 13:29 LICENSE.md
+-rw-r--r-- 1 runner docker  1094 May  4 13:29 README.md
+-rw-r--r-- 1 runner docker  1125 May  4 13:29 README.qmd
+-rw-r--r-- 1 runner docker   415 May  4 13:29 _viash.yaml
+-rw-r--r-- 1 runner docker   245 May  4 13:29 main.nf
+-rw-r--r-- 1 runner docker   222 May  4 13:29 nextflow.config
+drwxr-xr-x 2 runner docker  4096 May  4 13:29 resources_test
+drwxr-xr-x 3 runner docker  4096 May  4 13:29 src
+drwxr-xr-x 4 runner docker  4096 May  4 13:29 target
+drwxr-xr-x 3 runner docker  4096 May  4 13:29 workflows</code></pre>
 </div>
 </div>
 </details>
@@ -330,20 +330,66 @@ drwxr-xr-x 3 runner docker  4096 May  4 10:58 workflows</code></pre>
 <p>Now run the pipeline with Nextflow:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run . <span class="dt">\</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> workflows/demo_pipeline/main.nf <span class="dt">\</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-profile</span> docker <span class="dt">\</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-with-docker</span> <span class="dt">\</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--input</span> resources_test/file<span class="pp">*</span>.tsv <span class="dt">\</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--publish_dir</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <details>
 <summary>
 Output
 </summary>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>N E X T F L O W  ~  version 22.10.6
+Launching `workflows/demo_pipeline/main.nf` [insane_wozniak] DSL2 - revision: c65d4e7bba
+[-        ] process &gt; remove_comments:remove_comm... -
+[-        ] process &gt; take_column:take_column_pro... -
+
+[-        ] process &gt; remove_comments:remove_comm... -
+[-        ] process &gt; take_column:take_column_pro... -
+[-        ] process &gt; combine_columns:combine_col... -
+
+executor &gt;  local (1)
+[c2/0d9de6] process &gt; remove_comments:remove_comm... [  0%] 0 of 1
+[-        ] process &gt; take_column:take_column_pro... -
+[-        ] process &gt; combine_columns:combine_col... -
+
+executor &gt;  local (2)
+[c2/0d9de6] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
+[c2/c41af1] process &gt; take_column:take_column_pro... [  0%] 0 of 1
+[-        ] process &gt; combine_columns:combine_col... -
+
+executor &gt;  local (2)
+[c2/0d9de6] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
+[c2/c41af1] process &gt; take_column:take_column_pro... [100%] 1 of 1 ✔
+[-        ] process &gt; combine_columns:combine_col... -
+
+executor &gt;  local (3)
+[c2/0d9de6] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
+[c2/c41af1] process &gt; take_column:take_column_pro... [100%] 1 of 1 ✔
+[42/b3091d] process &gt; combine_columns:combine_col... [  0%] 0 of 1
+
+executor &gt;  local (3)
+[c2/0d9de6] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
+[c2/c41af1] process &gt; take_column:take_column_pro... [100%] 1 of 1 ✔
+[42/b3091d] process &gt; combine_columns:combine_col... [100%] 1 of 1 ✔
+Output: [combined, /home/runner/work/website/website/guide/_viash_project_template/work/42/b3091d51e16a0c831026794556e631/combined.combine_columns.output]</code></pre>
+</div>
+</div>
 </details>
-<p>This will run the three modules in sequence, with the final result result being stored in a file named <strong>combined.combine_columns.output.tsv</strong> in a new <strong>temp</strong> directory:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> output/combined.combine_columns.output.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will run the three modules in sequence, with the final result result being stored in a file named <strong>combined.combine_columns.output</strong> in a new <strong>temp</strong> directory:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> output/combined.combine_columns.output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <details>
 <summary>
 Output
 </summary>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>"1" 0.11
+"2" 0.23
+"3" 0.35
+"4" 0.47</code></pre>
+</div>
+</div>
 </details>
 </section>
 <section id="whats-next" class="level2">
