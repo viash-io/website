@@ -16,7 +16,7 @@
 <height>38</height>
 <width>144</width>
 </image>
-<generator>quarto-1.2.475</generator>
+<generator>quarto-1.3.340</generator>
 <lastBuildDate>Wed, 19 Apr 2023 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Viash 0.7.3</title>
@@ -171,11 +171,51 @@
 <li>Legacy Nextflow platform</li>
 </ul></li>
 <li><p>Improvements in VDSL3 and the Nextflow Workflow Helper to make behaviour more predictable and fixing some bugs in the meantime. Run the following to get access to the updated helpers:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="va" style="color: #111111;">WF_DIR</span><span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">"src/wf_utils"</span></span>
-<span id="cb1-2"><span class="kw" style="color: #003B4F;">[[</span> <span class="ot" style="color: #003B4F;">-d</span> <span class="va" style="color: #111111;">$WF_DIR</span> <span class="kw" style="color: #003B4F;">]]</span> <span class="kw" style="color: #003B4F;">||</span> <span class="fu" style="color: #4758AB;">mkdir</span> <span class="at" style="color: #657422;">-p</span> <span class="va" style="color: #111111;">$WF_DIR</span></span>
-<span id="cb1-3"><span class="ex" style="color: null;">viash</span> export resource platforms/nextflow/ProfilesHelper.config <span class="op" style="color: #5E5E5E;">&gt;</span> <span class="va" style="color: #111111;">$WF_DIR</span>/ProfilesHelper.config</span>
-<span id="cb1-4"><span class="ex" style="color: null;">viash</span> export resource platforms/nextflow/WorkflowHelper.nf <span class="op" style="color: #5E5E5E;">&gt;</span> <span class="va" style="color: #111111;">$WF_DIR</span>/WorkflowHelper.nf</span>
-<span id="cb1-5"><span class="ex" style="color: null;">viash</span> export resource platforms/nextflow/DataflowHelper.nf <span class="op" style="color: #5E5E5E;">&gt;</span> <span class="va" style="color: #111111;">$WF_DIR</span>/DataflowHelper.nf</span></code></pre></div></li>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">WF_DIR</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"src/wf_utils"</span></span>
+<span id="cb1-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[[</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-d</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$WF_DIR</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]]</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">||</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mkdir</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-p</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$WF_DIR</span></span>
+<span id="cb1-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">viash</span> export resource platforms/nextflow/ProfilesHelper.config <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$WF_DIR</span>/ProfilesHelper.config</span>
+<span id="cb1-4"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">viash</span> export resource platforms/nextflow/WorkflowHelper.nf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$WF_DIR</span>/WorkflowHelper.nf</span>
+<span id="cb1-5"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">viash</span> export resource platforms/nextflow/DataflowHelper.nf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$WF_DIR</span>/DataflowHelper.nf</span></code></pre></div></li>
 <li><p>Improvements to test benches and several bug fixes.</p></li>
 </ul>
 </section>
@@ -382,27 +422,165 @@
 <p>The most notable changes are:</p>
 <ul>
 <li><p>You can switch versions of Viash using the <code>VIASH_VERSION</code> environment variable! Example:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="va" style="color: #111111;">VIASH_VERSION</span><span class="op" style="color: #5E5E5E;">=</span>0.6.0 <span class="ex" style="color: null;">viash</span> <span class="at" style="color: #657422;">--version</span></span></code></pre></div>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">VIASH_VERSION</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>0.6.0 <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">viash</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--version</span></span></code></pre></div>
 <p>More importantly, you can specify the version of Viash you want in a project config. See below for more info.</p></li>
 <li><p>Introducing Viash project config files as an experimental feature. It allows storing project-related settings in a <code>_viash.yaml</code> config file which you should store at the root of your repository. Example:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><span class="fu" style="color: #4758AB;">viash_version</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="fl" style="color: #AD0000;">0.6.4</span></span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;">source</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> src</span></span>
-<span id="cb2-3"><span class="fu" style="color: #4758AB;">target</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> target</span></span>
-<span id="cb2-4"><span class="fu" style="color: #4758AB;">config_mods</span><span class="kw" style="color: #003B4F;">: </span><span class="ch" style="color: #20794D;">|</span></span>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">viash_version</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.6.4</span></span>
+<span id="cb2-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">source</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> src</span></span>
+<span id="cb2-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">target</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> target</span></span>
+<span id="cb2-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">config_mods</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">: </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">|</span></span>
 <span id="cb2-5">  .platforms[.type == 'docker'].target_registry := 'ghcr.io'</span>
 <span id="cb2-6">  .platforms[.type == 'docker'].target_organization := 'viash-io'</span>
 <span id="cb2-7">  .platforms[.type == 'docker'].namespace_separator := '/'</span>
 <span id="cb2-8">  .platforms[.type == 'docker'].target_image_source := 'https://github.com/viash-io/viash'</span></code></pre></div></li>
 <li><p>It’s now possible to specify in which order Viash will merge Viash configs. Example:</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb3-2"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> foo</span></span>
-<span id="cb3-3"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb3-4"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">__merge__</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> obj_input.yaml</span></span>
-<span id="cb3-5"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--one"</span></span>
-<span id="cb3-6"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">__merge__</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="kw" style="color: #003B4F;">[</span><span class="at" style="color: #657422;">.</span><span class="kw" style="color: #003B4F;">,</span><span class="at" style="color: #657422;"> obj_input.yaml</span><span class="kw" style="color: #003B4F;">]</span></span>
-<span id="cb3-7"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--two"</span></span>
-<span id="cb3-8"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">__merge__</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="kw" style="color: #003B4F;">[</span><span class="at" style="color: #657422;">obj_input.yaml</span><span class="kw" style="color: #003B4F;">,</span><span class="at" style="color: #657422;"> .</span><span class="kw" style="color: #003B4F;">]</span></span>
-<span id="cb3-9"><span class="at" style="color: #657422;">     </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--three"</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb3-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> foo</span></span>
+<span id="cb3-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb3-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__merge__</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> obj_input.yaml</span></span>
+<span id="cb3-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--one"</span></span>
+<span id="cb3-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__merge__</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> obj_input.yaml</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span>
+<span id="cb3-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--two"</span></span>
+<span id="cb3-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__merge__</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">obj_input.yaml</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> .</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span>
+<span id="cb3-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">     </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--three"</span></span></code></pre></div></li>
 </ul>
 <p>Please take note of the following breaking changes:</p>
 <ul>
@@ -425,7 +603,15 @@
 <h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
 <ul>
 <li><p>You can switch versions of Viash using the <code>VIASH_VERSION</code> environment variable (#304)! Example:</p>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="va" style="color: #111111;">VIASH_VERSION</span><span class="op" style="color: #5E5E5E;">=</span>0.6.0 <span class="ex" style="color: null;">viash</span> <span class="at" style="color: #657422;">--version</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">VIASH_VERSION</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>0.6.0 <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">viash</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--version</span></span></code></pre></div></li>
 <li><p>Traceability: Running <code>viash build</code> and <code>viash test</code> creates a <code>.config.vsh.yaml</code> file by default, which contains the processed config of the component. As a side effect, this allows for reading in the <code>.config.vsh.yaml</code> from within the component to learn more about the component being tested (#291 and #293).</p></li>
 <li><p><code>FileArgument</code>: Added <code>create_parent</code> option, which will check if the directory of an output file exists and create it if necessary (#295).</p></li>
 </ul>
@@ -438,12 +624,52 @@
 <li><p>NextflowPlatform: During a stubrun, argument requirements are turned off and the <code>publishDir</code>, <code>cpus</code>, <code>memory</code>, and <code>label</code> directives are also removed from the process (#301).</p></li>
 <li><p><code>NextflowPlatform</code>: Added a <code>filter</code> processing argument to filter the incoming channel after the <code>map</code>, <code>mapData</code>, <code>mapId</code> and <code>mapPassthrough</code> have been applied (#296).</p></li>
 <li><p><code>NextflowPlatform</code>: Added the Viash config to the Nextflow module for later introspection (#296). For example:</p>
-<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb5-1">include <span class="op" style="color: #5E5E5E;">{</span> foo <span class="op" style="color: #5E5E5E;">}</span> from <span class="st" style="color: #20794D;">"</span><span class="ss" style="color: #20794D;">$targetDir</span><span class="st" style="color: #20794D;">/path/foo/main.nf"</span></span>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb5-1">include <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span> foo <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span> from <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">$targetDir</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">/path/foo/main.nf"</span></span>
 <span id="cb5-2"></span>
-<span id="cb5-3">foo<span class="op" style="color: #5E5E5E;">.</span><span class="fu" style="color: #4758AB;">run</span><span class="op" style="color: #5E5E5E;">(</span>filter<span class="op" style="color: #5E5E5E;">:</span> <span class="op" style="color: #5E5E5E;">{</span> tup <span class="op" style="color: #5E5E5E;">-&gt;</span></span>
-<span id="cb5-4">  <span class="dt" style="color: #AD0000;">def</span> preferredNormalization <span class="op" style="color: #5E5E5E;">=</span> foo<span class="op" style="color: #5E5E5E;">.</span>config<span class="op" style="color: #5E5E5E;">.</span>functionality<span class="op" style="color: #5E5E5E;">.</span>info<span class="op" style="color: #5E5E5E;">.</span>preferred_normalization</span>
-<span id="cb5-5">  tup<span class="op" style="color: #5E5E5E;">.</span>normalization_id <span class="op" style="color: #5E5E5E;">==</span> preferredNormalization</span>
-<span id="cb5-6"><span class="op" style="color: #5E5E5E;">})</span></span></code></pre></div>
+<span id="cb5-3">foo<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">run</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>filter<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span> tup <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span></span>
+<span id="cb5-4">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">def</span> preferredNormalization <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> foo<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>config<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>functionality<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>info<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>preferred_normalization</span>
+<span id="cb5-5">  tup<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>normalization_id <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> preferredNormalization</span>
+<span id="cb5-6"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">})</span></span></code></pre></div>
 <h3 id="bug-fixes" class="anchored">BUG FIXES</h3></li>
 <li><p><code>BashWrapper</code>: Don’t overwrite meta values when trailing arguments are provided (#295).</p></li>
 </ul>
@@ -453,40 +679,292 @@
 <ul>
 <li><p>Viash Project: Viash will automatically search for a <code>_viash.yaml</code> file in the directory of a component and its parent directories (#294).</p>
 <p>Contents of <code>_viash.yaml</code>:</p>
-<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><span class="fu" style="color: #4758AB;">source</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> src</span></span>
-<span id="cb6-2"><span class="fu" style="color: #4758AB;">target</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> target</span></span>
-<span id="cb6-3"><span class="fu" style="color: #4758AB;">config_mods</span><span class="kw" style="color: #003B4F;">: </span><span class="ch" style="color: #20794D;">|</span></span>
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">source</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> src</span></span>
+<span id="cb6-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">target</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> target</span></span>
+<span id="cb6-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">config_mods</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">: </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">|</span></span>
 <span id="cb6-4">  .platforms[.type == 'docker'].target_registry := 'ghcr.io'</span>
 <span id="cb6-5">  .platforms[.type == 'docker'].target_organization := 'viash-io'</span>
 <span id="cb6-6">  .platforms[.type == 'docker'].namespace_separator := '/'</span>
 <span id="cb6-7">  .platforms[.type == 'docker'].target_image_source := 'https://github.com/viash-io/viash'</span></code></pre></div></li>
 <li><p>Config merging: Allow specifying the order in which Viash will merge configs (#289). If <code>.</code> is not in the list of inherited objects, it will be added at the end.</p>
 <p>Contents of <code>config.vsh.yaml</code>:</p>
-<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb7-2"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> foo</span></span>
-<span id="cb7-3"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb7-4"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">__merge__</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> obj_input.yaml</span></span>
-<span id="cb7-5"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--one"</span></span>
-<span id="cb7-6"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">__merge__</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="kw" style="color: #003B4F;">[</span><span class="at" style="color: #657422;">.</span><span class="kw" style="color: #003B4F;">,</span><span class="at" style="color: #657422;"> obj_input.yaml</span><span class="kw" style="color: #003B4F;">]</span></span>
-<span id="cb7-7"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--two"</span></span>
-<span id="cb7-8"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">__merge__</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="kw" style="color: #003B4F;">[</span><span class="at" style="color: #657422;">obj_input.yaml</span><span class="kw" style="color: #003B4F;">,</span><span class="at" style="color: #657422;"> .</span><span class="kw" style="color: #003B4F;">]</span></span>
-<span id="cb7-9"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--three"</span></span></code></pre></div>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb7-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> foo</span></span>
+<span id="cb7-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb7-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__merge__</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> obj_input.yaml</span></span>
+<span id="cb7-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--one"</span></span>
+<span id="cb7-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__merge__</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> obj_input.yaml</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span>
+<span id="cb7-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--two"</span></span>
+<span id="cb7-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__merge__</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">obj_input.yaml</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> .</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span>
+<span id="cb7-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--three"</span></span></code></pre></div>
 <p>Contents of <code>obj_input.yaml</code>:</p>
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> file</span></span>
-<span id="cb8-2"><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> --input</span></span>
-<span id="cb8-3"><span class="fu" style="color: #4758AB;">description</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> A h5ad file</span></span></code></pre></div>
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb8-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> --input</span></span>
+<span id="cb8-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">description</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> A h5ad file</span></span></code></pre></div>
 <p>Output of <code>viash config view config.vsh.yaml</code> (stripped irrelevant bits):</p>
-<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb9-2"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb9-3"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"file"</span></span>
-<span id="cb9-4"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--one"</span></span>
-<span id="cb9-5"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">description</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"A h5ad file"</span></span>
-<span id="cb9-6"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"file"</span></span>
-<span id="cb9-7"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--input"</span></span>
-<span id="cb9-8"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">description</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"A h5ad file"</span></span>
-<span id="cb9-9"><span class="at" style="color: #657422;">  </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"file"</span></span>
-<span id="cb9-10"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--three"</span></span>
-<span id="cb9-11"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">description</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"A h5ad file"</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb9-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb9-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"file"</span></span>
+<span id="cb9-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--one"</span></span>
+<span id="cb9-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">description</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A h5ad file"</span></span>
+<span id="cb9-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"file"</span></span>
+<span id="cb9-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--input"</span></span>
+<span id="cb9-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">description</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A h5ad file"</span></span>
+<span id="cb9-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"file"</span></span>
+<span id="cb9-10"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--three"</span></span>
+<span id="cb9-11"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">description</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A h5ad file"</span></span></code></pre></div></li>
 </ul>
 
 
@@ -524,19 +1002,121 @@
 <ul>
 <li><p><code>Config</code>: Made major internal changes w.r.t. how config files are read and at which point a platform (native, docker, nextflow) is applied to the functionality script. The only visible side effect is that <code>viash ns list</code> will output each config only once instead of multiple times.</p></li>
 <li><p><code>Functionality</code>: Structured annotation can be added to a functionality and its arguments using the <code>info</code> field. Example:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb1-2"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> foo</span></span>
-<span id="cb1-3"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">info</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb1-4"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">site</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> https://abc.xyz</span></span>
-<span id="cb1-5"><span class="at" style="color: #657422;">    </span><span class="fu" style="color: #4758AB;">tags</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="kw" style="color: #003B4F;">[</span><span class="at" style="color: #657422;"> one</span><span class="kw" style="color: #003B4F;">,</span><span class="at" style="color: #657422;"> two</span><span class="kw" style="color: #003B4F;">,</span><span class="at" style="color: #657422;"> three </span><span class="kw" style="color: #003B4F;">]</span></span>
-<span id="cb1-6"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb1-7"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> --foo</span></span>
-<span id="cb1-8"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> string</span></span>
-<span id="cb1-9"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">info</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb1-10"><span class="at" style="color: #657422;">        </span><span class="fu" style="color: #4758AB;">foo</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> bar</span></span>
-<span id="cb1-11"><span class="at" style="color: #657422;">        </span><span class="fu" style="color: #4758AB;">a</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb1-12"><span class="at" style="color: #657422;">          </span><span class="fu" style="color: #4758AB;">b</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb1-13"><span class="at" style="color: #657422;">            c</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> foo</span></span>
+<span id="cb1-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">info</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">site</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> https://abc.xyz</span></span>
+<span id="cb1-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tags</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> one</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> two</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> three </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span>
+<span id="cb1-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> --foo</span></span>
+<span id="cb1-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> string</span></span>
+<span id="cb1-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">info</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-10"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">foo</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> bar</span></span>
+<span id="cb1-11"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">a</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-12"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">b</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-13"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">            c</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="minor-changes" class="level3">
@@ -573,36 +1153,250 @@
 <h3 class="anchored" data-anchor-id="experimental-functionality">EXPERIMENTAL FUNCTIONALITY</h3>
 <ul>
 <li><p><code>Config</code>: Any part of a Viash config can use inheritance to fill data (#271). For example: Contents of <code>src/test/config.vsh.yaml</code>:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><span class="fu" style="color: #4758AB;">__inherits__</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> ../api/base.yaml</span></span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb2-3"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> test</span></span>
-<span id="cb2-4"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">resources</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb2-5"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> bash_script</span></span>
-<span id="cb2-6"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">path</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> script.sh</span></span>
-<span id="cb2-7"><span class="fu" style="color: #4758AB;">      text</span><span class="kw" style="color: #003B4F;">: </span><span class="ch" style="color: #20794D;">|</span></span>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__inherits__</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> ../api/base.yaml</span></span>
+<span id="cb2-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb2-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> test</span></span>
+<span id="cb2-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">resources</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb2-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> bash_script</span></span>
+<span id="cb2-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">path</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> script.sh</span></span>
+<span id="cb2-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">      text</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">: </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">|</span></span>
 <span id="cb2-8">        echo Copying $par_input to $par_output</span>
 <span id="cb2-9">        cp $par_input $par_output</span></code></pre></div>
 <p>Contents of <code>src/api/base.yaml</code>:</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb3-2"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb3-3"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--input"</span></span>
-<span id="cb3-4"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> file</span></span>
-<span id="cb3-5"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--output"</span></span>
-<span id="cb3-6"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> file</span></span>
-<span id="cb3-7"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">direction</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> output</span></span></code></pre></div>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb3-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb3-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--input"</span></span>
+<span id="cb3-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb3-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--output"</span></span>
+<span id="cb3-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb3-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">direction</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> output</span></span></code></pre></div>
 <p>The resulting yaml will be:</p>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb4-2"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> test</span></span>
-<span id="cb4-3"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb4-4"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--input"</span></span>
-<span id="cb4-5"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> file</span></span>
-<span id="cb4-6"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--output"</span></span>
-<span id="cb4-7"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> file</span></span>
-<span id="cb4-8"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">direction</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> output</span></span>
-<span id="cb4-9"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">resources</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb4-10"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> bash_script</span></span>
-<span id="cb4-11"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">path</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> script.sh</span></span>
-<span id="cb4-12"><span class="fu" style="color: #4758AB;">      text</span><span class="kw" style="color: #003B4F;">: </span><span class="ch" style="color: #20794D;">|</span></span>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb4-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> test</span></span>
+<span id="cb4-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb4-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--input"</span></span>
+<span id="cb4-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb4-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--output"</span></span>
+<span id="cb4-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb4-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">direction</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> output</span></span>
+<span id="cb4-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">resources</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb4-10"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> bash_script</span></span>
+<span id="cb4-11"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">path</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> script.sh</span></span>
+<span id="cb4-12"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">      text</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">: </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">|</span></span>
 <span id="cb4-13">        echo Copying $par_input to $par_output</span>
 <span id="cb4-14">        cp $par_input $par_output</span></code></pre></div></li>
 </ul>
@@ -777,60 +1571,474 @@
 <ul>
 <li><p><code>NextflowPlatform</code>: <code>variant: vdsl3</code> is now the default NextflowPlatform. <code>variant: legacy</code> has been deprecated.</p></li>
 <li><p><code>Functionality</code>: Fields <code>.inputs</code> and <code>.outputs</code> has been deprecated. Please use <code>.argument_groups</code> instead (#186). Before:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb1-2"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">inputs</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb1-3"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--foo"</span></span>
-<span id="cb1-4"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">outputs</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb1-5"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--bar"</span></span></code></pre></div>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">inputs</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--foo"</span></span>
+<span id="cb1-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">outputs</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--bar"</span></span></code></pre></div>
 <p>Now:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb2-2"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">argument_groups</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb2-3"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> Inputs</span></span>
-<span id="cb2-4"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb2-5"><span class="at" style="color: #657422;">        </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--foo"</span></span>
-<span id="cb2-6"><span class="at" style="color: #657422;">          </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> file</span></span>
-<span id="cb2-7"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> Outputs</span></span>
-<span id="cb2-8"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb2-9"><span class="at" style="color: #657422;">        </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--bar"</span></span>
-<span id="cb2-10"><span class="at" style="color: #657422;">          </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> file</span></span>
-<span id="cb2-11"><span class="at" style="color: #657422;">          </span><span class="fu" style="color: #4758AB;">direction</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> output</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb2-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">argument_groups</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb2-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Inputs</span></span>
+<span id="cb2-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb2-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--foo"</span></span>
+<span id="cb2-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb2-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Outputs</span></span>
+<span id="cb2-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb2-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--bar"</span></span>
+<span id="cb2-10"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb2-11"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">direction</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> output</span></span></code></pre></div></li>
 <li><p>Passing strings to an argument group’s arguments has been deprecated. Please simply copy the argument itself into the argument group (#186). Before:</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb3-2"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb3-3"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--foo"</span></span>
-<span id="cb3-4"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> file</span></span>
-<span id="cb3-5"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--bar"</span></span>
-<span id="cb3-6"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> file</span></span>
-<span id="cb3-7"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">direction</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> output</span></span>
-<span id="cb3-8"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">argument_groups</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb3-9"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> Inputs</span></span>
-<span id="cb3-10"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="kw" style="color: #003B4F;">[</span><span class="at" style="color: #657422;"> foo </span><span class="kw" style="color: #003B4F;">]</span></span>
-<span id="cb3-11"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> Outputs</span></span>
-<span id="cb3-12"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="kw" style="color: #003B4F;">[</span><span class="at" style="color: #657422;"> bar </span><span class="kw" style="color: #003B4F;">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb3-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb3-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--foo"</span></span>
+<span id="cb3-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb3-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--bar"</span></span>
+<span id="cb3-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb3-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">direction</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> output</span></span>
+<span id="cb3-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">argument_groups</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb3-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Inputs</span></span>
+<span id="cb3-10"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> foo </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span>
+<span id="cb3-11"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Outputs</span></span>
+<span id="cb3-12"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> bar </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span></code></pre></div>
 <p>Now:</p>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb4-2"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">argument_groups</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb4-3"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> Inputs</span></span>
-<span id="cb4-4"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb4-5"><span class="at" style="color: #657422;">        </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--foo"</span></span>
-<span id="cb4-6"><span class="at" style="color: #657422;">          </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> file</span></span>
-<span id="cb4-7"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> Outputs</span></span>
-<span id="cb4-8"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb4-9"><span class="at" style="color: #657422;">        </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="st" style="color: #20794D;">"--bar"</span></span>
-<span id="cb4-10"><span class="at" style="color: #657422;">          </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> file</span></span>
-<span id="cb4-11"><span class="at" style="color: #657422;">          </span><span class="fu" style="color: #4758AB;">direction</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> output</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb4-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">argument_groups</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb4-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Inputs</span></span>
+<span id="cb4-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb4-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--foo"</span></span>
+<span id="cb4-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb4-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Outputs</span></span>
+<span id="cb4-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb4-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--bar"</span></span>
+<span id="cb4-10"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb4-11"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">direction</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> output</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="new-functionality" class="level3">
 <h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
 <ul>
 <li><p>Allow setting the number of processes and memory limit from within the Viash config, as well as a list of required commands. Example:</p>
-<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb5-2"><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> foo</span></span>
-<span id="cb5-3"><span class="fu" style="color: #4758AB;">requirements</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb5-4"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">cpus</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="dv" style="color: #AD0000;">10</span></span>
-<span id="cb5-5"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">memory</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> 10GB</span></span>
-<span id="cb5-6"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">commands</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="kw" style="color: #003B4F;">[</span><span class="at" style="color: #657422;"> bash</span><span class="kw" style="color: #003B4F;">,</span><span class="at" style="color: #657422;"> r</span><span class="kw" style="color: #003B4F;">,</span><span class="at" style="color: #657422;"> perl </span><span class="kw" style="color: #003B4F;">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb5-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> foo</span></span>
+<span id="cb5-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">requirements</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb5-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cpus</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span></span>
+<span id="cb5-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">memory</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> 10GB</span></span>
+<span id="cb5-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">commands</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> bash</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> r</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> perl </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span></code></pre></div>
 <p>You can override the default requirements at runtime:</p>
 <ul>
 <li><code>./foo ---cpus 4 ---memory 100PB</code> (for NativePlatform or DockerPlatform)</li>
@@ -992,17 +2200,87 @@
 <h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
 <ul>
 <li><p><code>Functionality</code>: Allow specifying argument groups. Example:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;">functionality</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb1-2"><span class="at" style="color: #657422;">  ...</span></span>
-<span id="cb1-3"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">argument_groups</span><span class="kw" style="color: #003B4F;">:</span></span>
-<span id="cb1-4"><span class="at" style="color: #657422;">    </span><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">name</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> First group</span></span>
-<span id="cb1-5"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">arguments</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="kw" style="color: #003B4F;">[</span><span class="at" style="color: #657422;">foo</span><span class="kw" style="color: #003B4F;">,</span><span class="at" style="color: #657422;"> bar</span><span class="kw" style="color: #003B4F;">]</span></span>
-<span id="cb1-6"><span class="at" style="color: #657422;">      </span><span class="fu" style="color: #4758AB;">description</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> Description</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  ...</span></span>
+<span id="cb1-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">argument_groups</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> First group</span></span>
+<span id="cb1-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">foo</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> bar</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span>
+<span id="cb1-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">description</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Description</span></span></code></pre></div></li>
 <li><p>Addition of the <code>viash_nxf_schema</code> component for converting a Viash config (for a workflow) into a nextflow schema file.</p></li>
 <li><p><code>NextflowVdsl3Platform</code>: Use <code>--param_list</code> to initialise a Nextflow channel with multiple parameter sets. Possible formats are csv, json, yaml, or simply a yaml_blob. A csv should have column names which correspond to the different arguments of this pipeline. A json or a yaml file should be a list of maps, each of which has keys corresponding to the arguments of the pipeline. A yaml blob can also be passed directly as a parameter. Inside the Nextflow pipeline code, params.param_list can also be used to directly a list of parameter sets. When passing a csv, json or yaml, relative path names are relativized to the location of the parameter file.</p>
 <p>Examples:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;">nextflow</span> run <span class="st" style="color: #20794D;">"target/foo/bar/main.nf"</span> <span class="at" style="color: #657422;">--param_list</span> <span class="st" style="color: #20794D;">'[{"id": "foo", "input": "/path/to/bar"}]'</span></span>
-<span id="cb2-2"><span class="ex" style="color: null;">nextflow</span> run <span class="st" style="color: #20794D;">"target/foo/bar/main.nf"</span> <span class="at" style="color: #657422;">--param_list</span> <span class="st" style="color: #20794D;">"params.csv"</span> <span class="at" style="color: #657422;">--reference</span> <span class="st" style="color: #20794D;">"/path/to/ref"</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">nextflow</span> run <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"target/foo/bar/main.nf"</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--param_list</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'[{"id": "foo", "input": "/path/to/bar"}]'</span></span>
+<span id="cb2-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">nextflow</span> run <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"target/foo/bar/main.nf"</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--param_list</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"params.csv"</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--reference</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/path/to/ref"</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="major-changes" class="level3">
@@ -1209,9 +2487,37 @@
 <h3 class="anchored" data-anchor-id="beta-functionality">BETA FUNCTIONALITY</h3>
 <ul>
 <li><p><code>NextflowVdsl3Platform</code>: A beta implementation of the next-generation Viash+Nextflow platform. See https://github.com/viash-io/viash/issues/82 for more information. You can access the previous Nextflow platform by using the <code>variant</code> parameter:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="kw" style="color: #003B4F;">-</span><span class="at" style="color: #657422;"> </span><span class="fu" style="color: #4758AB;">type</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> nextflow</span></span>
-<span id="cb1-2"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">variant</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> legacy</span></span>
-<span id="cb1-3"><span class="at" style="color: #657422;">  </span><span class="fu" style="color: #4758AB;">separate_multiple_outputs</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> </span><span class="ch" style="color: #20794D;">false</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> nextflow</span></span>
+<span id="cb1-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">variant</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> legacy</span></span>
+<span id="cb1-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">separate_multiple_outputs</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">false</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="bug-fixes" class="level3">
@@ -1369,7 +2675,13 @@
 <li><p><code>viash run</code>: A long running Viash component can be interrupted by pressing CTRL-C or by sending it an <code>INT</code> or <code>SIGINT</code> signal.</p></li>
 <li><p><code>DockerPlatform</code>: Automatically add a few labels based on metadata to Dockerfile.</p></li>
 <li><p><code>DockerPlatform</code>: Added value <code>target_image_source</code> for setting the source of the target image. This is used for defining labels in the dockerfile. Example:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;">target_image_source</span><span class="kw" style="color: #003B4F;">:</span><span class="at" style="color: #657422;"> https://github.com/foo/bar</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">target_image_source</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> https://github.com/foo/bar</span></span></code></pre></div></li>
 </ul>
 </section>
 <section id="minor-changes" class="level3">
