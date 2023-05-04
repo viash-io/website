@@ -104,30 +104,30 @@ Now run the pipeline with Nextflow:
 ```bash
 nextflow run . \
   -main-script workflows/demo_pipeline/main.nf \
-  -profile docker \
+  -with-docker \
   --input resources_test/file*.tsv \
   --publish_dir output
 ```
 <details>
 <summary>Output</summary>
-```{bash echo=FALSE, eval=FALSE}
+```{bash echo=FALSE}
 nextflow run . \
   -main-script workflows/demo_pipeline/main.nf \
-  -profile docker \
+  -with-docker \
   --input resources_test/file*.tsv \
   --publish_dir output
 ```
 </details>
 
-This will run the three modules in sequence, with the final result result being stored in a file named **combined.combine_columns.output.tsv** in a new **temp** directory:
+This will run the three modules in sequence, with the final result result being stored in a file named **combined.combine_columns.output** in a new **temp** directory:
 
 ```bash
-cat output/combined.combine_columns.output.tsv
+cat output/combined.combine_columns.output
 ```
 <details>
 <summary>Output</summary>
-```{bash echo=FALSE, eval=FALSE}
-cat output/combined.combine_columns.output.tsv
+```{bash echo=FALSE}
+cat output/combined.combine_columns.output
 ```
 </details>
 
