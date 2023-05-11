@@ -1,0 +1,95 @@
+
+Below is an example of a very simple Viash component which simply copies an input file to an output destination.
+
+::: {.grid}
+::: {.g-col-lg-6 .g-col-12}
+
+Contents of `config.vsh.yaml`
+
+```yaml
+functionality:
+  name: my_copy_component
+  arguments:
+    - name: --input
+      type: file
+    - name: --output
+      type: file
+      direction: output
+  resources:
+    - type: bash_script
+      path: script.sh
+  test_resources:
+    - type: bash_script
+      path: test.sh
+platforms:
+  - type: docker
+    image: "bash:4.0"
+  - type: nextflow
+```
+
+:::
+::: {.g-col-lg-6 .g-col-12}
+
+Contents of `script.sh`
+
+```bash
+cp -r "$par_input" "$par_output"
+```
+
+Contents of `test.sh`
+
+```bash
+# create test input file
+echo "foo" > input.txt
+
+# run executable
+$meta_executable \
+  --input input.txt
+  --output output.txt
+
+# check for output
+if [ ! -f output.txt ]; then
+  echo "Output not found!"
+  exit 1
+fi
+
+exit 0
+```
+
+:::
+:::
+
+
+Even though this component appears so simple, there's a lot going on behind the screens and a lot you can do with it.
+
+* Run the component: 
+  ```bash
+  viash run config.vsh.yaml -- \
+    --input myinput.txt \
+    --output myoutput.txt
+  ```
+* View the CLI help:
+  ```bash
+  viash run config.vsh.yaml -- --help
+  ```
+* Build the component into a dockerized standalone executable:
+  ```bash
+  # build executable
+  viash build config.vsh.yaml --output bin
+
+  # view cli help
+  bin/my_copy_component --help
+
+  # use executable
+  bin/my_copy_component --input input.txt --output output.txt
+  ```
+* Unit test the component
+  ```bash
+  viash test config.vsh.yaml
+  ```
+* View the Dockerfile used for this component
+  ```bash
+  viash run config.vsh.yaml -- ---dockerfile
+  ```
+
+</details>
