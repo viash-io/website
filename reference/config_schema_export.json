@@ -437,20 +437,59 @@
     ]
   },
   "platforms" : {
-    "nativePlatform" : [
+    "nextflowVdsl3Platform" : [
       {
         "name" : "__this__",
-        "type" : "NativePlatform",
+        "type" : "NextflowVdsl3Platform",
         "hierarchy" : [
-          "io.viash.platforms.NativePlatform",
+          "io.viash.platforms.NextflowVdsl3Platform",
+          "io.viash.platforms.NextflowPlatform",
           "io.viash.platforms.Platform"
         ],
-        "description" : "Running a Viash component on a native platform means that the script will be executed in your current environment.\nAny dependencies are assumed to have been installed by the user, so the native platform is meant for developers (who know what they're doing) or for simple bash scripts (which have no extra dependencies).\n"
+        "description" : "Next-gen platform for generating NextFlow VDSL3 modules.",
+        "example" : [
+          {
+            "example" : "platforms:\n  - type: nextflow\n    directives:\n      label: [lowcpu, midmem]\n",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "auto",
+        "type" : "NextflowAuto",
+        "description" : "@[Automated processing flags](nextflow_auto) which can be toggled on or off:\n\n| Flag | Description | Default |\n|---|---------|----|\n| `simplifyInput` | If `true`, an input tuple only containing only a single File (e.g. `[\"foo\", file(\"in.h5ad\")]`) is automatically transformed to a map (i.e. `[\"foo\", [ input: file(\"in.h5ad\") ] ]`). | `true` |\n| `simplifyOutput` | If `true`, an output tuple containing a map with a File (e.g. `[\"foo\", [ output: file(\"out.h5ad\") ] ]`) is automatically transformed to a map (i.e. `[\"foo\", file(\"out.h5ad\")]`). | `true` |\n| `transcript` | If `true`, the module's transcripts from `work/` are automatically published to `params.transcriptDir`. If not defined, `params.publishDir + \"/_transcripts\"` will be used. Will throw an error if neither are defined. | `false` |\n| `publish` | If `true`, the module's outputs are automatically published to `params.publishDir`.  Will throw an error if `params.publishDir` is not defined. | `false` |\n\n",
+        "example" : [
+          {
+            "example" : "auto:\n  publish: true",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "directives",
+        "type" : "NextflowDirectives",
+        "description" : "@[Directives](nextflow_directives) are optional settings that affect the execution of the process. These mostly match up with the Nextflow counterparts.  \n",
+        "example" : [
+          {
+            "example" : "directives:\n  container: rocker/r-ver:4.1\n  label: highcpu\n  cpus: 4\n  memory: 16 GB",
+            "format" : "yaml"
+          }
+        ]
+      },
+      {
+        "name" : "container",
+        "type" : "String",
+        "description" : "Specifies the Docker platform id to be used to run Nextflow."
+      },
+      {
+        "name" : "debug",
+        "type" : "Boolean",
+        "description" : "Whether or not to print debug messages."
       },
       {
         "name" : "id",
         "type" : "String",
-        "description" : "As with all platforms, you can give a platform a different name. By specifying `id: foo`, you can target this platform (only) by specifying `-p foo` in any of the Viash commands.",
+        "description" : "Every platform can be given a specific id that can later be referred to explicitly when running or building the Viash component.",
         "example" : [
           {
             "example" : "id: foo",
@@ -462,6 +501,11 @@
         "name" : "type",
         "type" : "String",
         "description" : "Specifies the type of the platform."
+      },
+      {
+        "name" : "config",
+        "type" : "NextflowConfig",
+        "description" : "Allows tweaking how the @[Nextflow Config](nextflow_config) file is generated."
       }
     ],
     "dockerPlatform" : [
@@ -472,7 +516,13 @@
           "io.viash.platforms.DockerPlatform",
           "io.viash.platforms.Platform"
         ],
-        "description" : "Run a Viash component on a Docker backend platform.\nBy specifying which dependencies your component needs, users will be able to build a docker container from scratch using the setup flag, or pull it from a docker repository.\n"
+        "description" : "Run a Viash component on a Docker backend platform.\nBy specifying which dependencies your component needs, users will be able to build a docker container from scratch using the setup flag, or pull it from a docker repository.\n",
+        "example" : [
+          {
+            "example" : "platforms:\n  - type: docker\n    image: \"bash:4.0\"\n    setup:\n      - type: apt\n        packages: [ curl ]\n",
+            "format" : "yaml"
+          }
+        ]
       },
       {
         "name" : "organization",
@@ -766,53 +816,26 @@
         ]
       }
     ],
-    "nextflowVdsl3Platform" : [
+    "nativePlatform" : [
       {
         "name" : "__this__",
-        "type" : "NextflowVdsl3Platform",
+        "type" : "NativePlatform",
         "hierarchy" : [
-          "io.viash.platforms.NextflowVdsl3Platform",
-          "io.viash.platforms.NextflowPlatform",
+          "io.viash.platforms.NativePlatform",
           "io.viash.platforms.Platform"
         ],
-        "description" : "Next-gen platform for generating NextFlow VDSL3 modules."
-      },
-      {
-        "name" : "auto",
-        "type" : "NextflowAuto",
-        "description" : "@[Automated processing flags](nextflow_auto) which can be toggled on or off:\n\n| Flag | Description | Default |\n|---|---------|----|\n| `simplifyInput` | If `true`, an input tuple only containing only a single File (e.g. `[\"foo\", file(\"in.h5ad\")]`) is automatically transformed to a map (i.e. `[\"foo\", [ input: file(\"in.h5ad\") ] ]`). | `true` |\n| `simplifyOutput` | If `true`, an output tuple containing a map with a File (e.g. `[\"foo\", [ output: file(\"out.h5ad\") ] ]`) is automatically transformed to a map (i.e. `[\"foo\", file(\"out.h5ad\")]`). | `true` |\n| `transcript` | If `true`, the module's transcripts from `work/` are automatically published to `params.transcriptDir`. If not defined, `params.publishDir + \"/_transcripts\"` will be used. Will throw an error if neither are defined. | `false` |\n| `publish` | If `true`, the module's outputs are automatically published to `params.publishDir`.  Will throw an error if `params.publishDir` is not defined. | `false` |\n\n",
+        "description" : "Running a Viash component on a native platform means that the script will be executed in your current environment.\nAny dependencies are assumed to have been installed by the user, so the native platform is meant for developers (who know what they're doing) or for simple bash scripts (which have no extra dependencies).\n",
         "example" : [
           {
-            "example" : "auto:\n  publish: true",
+            "example" : "platforms:\n  - type: native\n",
             "format" : "yaml"
           }
         ]
-      },
-      {
-        "name" : "directives",
-        "type" : "NextflowDirectives",
-        "description" : "@[Directives](nextflow_directives) are optional settings that affect the execution of the process. These mostly match up with the Nextflow counterparts.  \n",
-        "example" : [
-          {
-            "example" : "directives:\n  container: rocker/r-ver:4.1\n  label: highcpu\n  cpus: 4\n  memory: 16 GB",
-            "format" : "yaml"
-          }
-        ]
-      },
-      {
-        "name" : "container",
-        "type" : "String",
-        "description" : "Specifies the Docker platform id to be used to run Nextflow."
-      },
-      {
-        "name" : "debug",
-        "type" : "Boolean",
-        "description" : "Whether or not to print debug messages."
       },
       {
         "name" : "id",
         "type" : "String",
-        "description" : "Every platform can be given a specific id that can later be referred to explicitly when running or building the Viash component.",
+        "description" : "As with all platforms, you can give a platform a different name. By specifying `id: foo`, you can target this platform (only) by specifying `-p foo` in any of the Viash commands.",
         "example" : [
           {
             "example" : "id: foo",
@@ -824,11 +847,6 @@
         "name" : "type",
         "type" : "String",
         "description" : "Specifies the type of the platform."
-      },
-      {
-        "name" : "config",
-        "type" : "NextflowConfig",
-        "description" : "Allows tweaking how the @[Nextflow Config](nextflow_config) file is generated."
       }
     ],
     "nextflowLegacyPlatform" : [
@@ -982,6 +1000,22 @@
           "deprecation" : "0.6.3",
           "removal" : "0.7.0"
         }
+      }
+    ],
+    "platform" : [
+      {
+        "name" : "__this__",
+        "type" : "Platform",
+        "hierarchy" : [
+          "io.viash.platforms.Platform"
+        ],
+        "description" : "A list of platforms to generate target artifacts for.\n\n * @[Native](platform_native)\n * @[Docker](platform_docker)\n * @[Nextflow VDSL3](platform_nextflow)\n",
+        "example" : [
+          {
+            "example" : "platforms:\n  - type: docker\n    image: \"bash:4.0\"\n  - type: native\n  - type: nextflow\n    directives:\n      label: [lowcpu, midmem]\n",
+            "format" : "yaml"
+          }
+        ]
       }
     ]
   },
