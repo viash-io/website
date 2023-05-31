@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.340">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -93,7 +93,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GDS2XT0DDG"></script>
@@ -926,10 +927,13 @@ Important
 <div class="cell-output cell-output-stdout">
 <pre><code>FROM bash:4.0
 
+ENTRYPOINT []
+
+
 RUN apk add --no-cache curl wget
 
 LABEL org.opencontainers.image.description="Companion container for running component example_bash_with_setup"
-LABEL org.opencontainers.image.created="2023-05-08T06:46:01Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-05-31T15:08:39Z"</code></pre>
 </div>
 </div>
 </div>
@@ -939,10 +943,13 @@ LABEL org.opencontainers.image.created="2023-05-08T06:46:01Z"</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>FROM ghcr.io/data-intuitive/dotnet-script:1.3.1
 
+ENTRYPOINT []
+
+
 RUN apk add --no-cache curl wget
 
 LABEL org.opencontainers.image.description="Companion container for running component example_csharp_with_setup"
-LABEL org.opencontainers.image.created="2023-05-08T06:46:11Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-05-31T15:08:51Z"</code></pre>
 </div>
 </div>
 </div>
@@ -952,12 +959,15 @@ LABEL org.opencontainers.image.created="2023-05-08T06:46:11Z"</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>FROM node:19-bullseye-slim
 
+ENTRYPOINT []
+
+
 RUN apt-get update &amp;&amp; \
   DEBIAN_FRONTEND=noninteractive apt-get install -y curl wget &amp;&amp; \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component example_js_with_setup"
-LABEL org.opencontainers.image.created="2023-05-08T06:46:30Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-05-31T15:09:15Z"</code></pre>
 </div>
 </div>
 </div>
@@ -967,6 +977,9 @@ LABEL org.opencontainers.image.created="2023-05-08T06:46:30Z"</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>FROM python:3.10-slim
 
+ENTRYPOINT []
+
+
 RUN apt-get update &amp;&amp; \
   DEBIAN_FRONTEND=noninteractive apt-get install -y curl wget &amp;&amp; \
   rm -rf /var/lib/apt/lists/*
@@ -975,7 +988,7 @@ RUN pip install --upgrade pip &amp;&amp; \
   pip install --upgrade --no-cache-dir "anndata"
 
 LABEL org.opencontainers.image.description="Companion container for running component example_python_with_setup"
-LABEL org.opencontainers.image.created="2023-05-08T06:46:48Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-05-31T15:09:38Z"</code></pre>
 </div>
 </div>
 </div>
@@ -985,6 +998,9 @@ LABEL org.opencontainers.image.created="2023-05-08T06:46:48Z"</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>FROM eddelbuettel/r2u:22.04
 
+ENTRYPOINT []
+
+
 RUN apt-get update &amp;&amp; \
   DEBIAN_FRONTEND=noninteractive apt-get install -y curl wget &amp;&amp; \
   rm -rf /var/lib/apt/lists/*
@@ -993,7 +1009,7 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_cran(c("tidyverse"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component example_r_with_setup"
-LABEL org.opencontainers.image.created="2023-05-08T06:47:23Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-05-31T15:10:22Z"</code></pre>
 </div>
 </div>
 </div>
@@ -1003,12 +1019,15 @@ LABEL org.opencontainers.image.created="2023-05-08T06:47:23Z"</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>FROM sbtscala/scala-sbt:eclipse-temurin-19_36_1.7.2_2.13.10
 
+ENTRYPOINT []
+
+
 RUN apt-get update &amp;&amp; \
   DEBIAN_FRONTEND=noninteractive apt-get install -y curl wget &amp;&amp; \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component example_scala_with_setup"
-LABEL org.opencontainers.image.created="2023-05-08T06:48:10Z"</code></pre>
+LABEL org.opencontainers.image.created="2023-05-31T15:12:20Z"</code></pre>
 </div>
 </div>
 </div>

@@ -16,8 +16,74 @@
 <height>38</height>
 <width>144</width>
 </image>
-<generator>quarto-1.3.340</generator>
-<lastBuildDate>Wed, 19 Apr 2023 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.3.361</generator>
+<lastBuildDate>Wed, 31 May 2023 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Viash 0.7.4</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.7.4/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>Some small fixes and consistency improvements. A few Quality of Life improvements were made e.g.&nbsp;to override the Docker <code>entrypoint</code> when working with Nextflow and providing default labels when building a Nextflow workflow.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="new-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
+<ul>
+<li><p>Add default labels in Nextflow config files that set default values for cpu and memory settings (PR #412). Values are more or less logarithmically spaced (1, 2, 5, 10, …).</p></li>
+<li><p><code>Author</code>: Added <code>info</code> field to authors. Deprecated <code>props</code> field (PR #423).</p></li>
+<li><p><code>viash config view</code> and <code>viash ns list</code>: Set the <code>.info.output</code> path when a platform argument is provided.</p></li>
+<li><p><code>viash ns exec</code>: Added two more fields:</p>
+<ul>
+<li><code>{output}</code>: path to the destination directory when building the component</li>
+<li><code>{abs-output}</code>: absolute path to the destination directory when building the component</li>
+</ul></li>
+<li><p><code>DockerPlatform</code>: Add <code>entrypoint</code> and <code>cmd</code> parameters to the docker platform config that allows overriding the default docker container settings (PR #432).</p></li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>Nextflow VDSL3</code>:</p>
+<ul>
+<li>Add profiles to the Nextflow Config file when the main script is a <code>NextflowScript</code> (#408).</li>
+<li>Add a <code>script</code> parameter in Nextflow Config file to add a single string or list of strings to the <code>nextflow.config</code> (PR #430).</li>
+</ul></li>
+<li><p><code>Scripts</code>: Remove the <code>entrypoint</code> parameter for all script types except <code>NextflowScript</code> (#409). All these scripts had to check individually whether the parameter was unset, now it can be done in the <code>Script</code> apply method.</p></li>
+<li><p><code>schema export</code>:</p>
+<ul>
+<li>Restructure Nextflow-Directives, -Auto and -Config into a <code>nextflowParameters</code> group (PR #412). Previously only NextflowDirectives was exposed.</li>
+<li>Restructure the format to group authors &amp; computational requirements together with functionality (PR #426).</li>
+<li>Restructure the Viash Config and Project Config pages under a <code>config</code> category (PR #426).</li>
+<li>Add references in Functionality and Nextflow VDSL3 to the new documentation pages (PR #426).</li>
+<li>Add description and/or examples for platforms and requirements (PR #428).</li>
+</ul></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>viash config inject</code>: Fix an empty line being added at the script start for each time <code>viash config inject</code> was run (#377).</p></li>
+<li><p><code>WorkflowHelper</code>: Fixed an issue where passing a remote file URI (for example <code>http://</code> or <code>s3://</code>) as <code>param_list</code> caused <code>No such file</code> errors.</p></li>
+<li><p><code>BashWrapper</code>: Fix escaping of the included script where a line starting with a pipe character with optional leading spaces is stripped of the leading spaces and pipe character. This was quite unlikely to happen except when <code>viash config inject</code> was called on a Nextflow Script, which lead to no real config code being injected however workflows were getting corrupted. (#421)</p></li>
+<li><p><code>Deprecation testbench</code>: Add missing classes to be checked (PR #426).</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.7.4/index.html</guid>
+  <pubDate>Wed, 31 May 2023 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Viash 0.7.3</title>
   <dc:creator>Viash Team</dc:creator>
@@ -36,8 +102,8 @@
 <section id="bug-fixes" class="level3">
 <h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
 <ul>
-<li><p><code>DockerPlatform</code>: Fixed example in documentation for the <code>namespace_separator</code> parameter (#396).</p></li>
-<li><p><code>viash config view</code>: Resource parent paths should be directories and not file (#398).</p></li>
+<li><p><code>DockerPlatform</code>: Fixed example in documentation for the <code>namespace_separator</code> parameter (PR #396).</p></li>
+<li><p><code>viash config view</code>: Resource parent paths should be directories and not file (PR #398).</p></li>
 </ul>
 
 
@@ -67,7 +133,7 @@
 <section id="new-functionality" class="level3">
 <h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
 <ul>
-<li><p>Resolve resource and merge paths starting with a slash (<code>/</code>) as relative to the project directory (#380). To define absolute paths (which is not recommended anyway), prefix the path with the <code>file://</code> protocol. Examples:</p>
+<li><p>Resolve resource and merge paths starting with a slash (<code>/</code>) as relative to the project directory (PR #380). To define absolute paths (which is not recommended anyway), prefix the path with the <code>file://</code> protocol. Examples:</p>
 <ul>
 <li><code>/foo</code> is a file or directory called <code>foo</code> in the current project directory.</li>
 <li><code>file:/foo</code> is a file or directory called <code>foo</code> in the system root.</li>
@@ -83,18 +149,18 @@
 <section id="bug-fixes" class="level3">
 <h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
 <ul>
-<li><code>ConfigMods</code>: Fix operator precedence issues with conditions in the config mod parsers (#390).</li>
+<li><code>ConfigMods</code>: Fix operator precedence issues with conditions in the config mod parsers (PR #390).</li>
 </ul>
 </section>
 <section id="internal-changes" class="level3">
 <h3 class="anchored" data-anchor-id="internal-changes">INTERNAL CHANGES</h3>
 <ul>
-<li><p>Clean up unused code (#380).</p></li>
-<li><p>Move circe encoders/decoders for File and Path from <code>io.viash.functionality.arguments</code> to <code>io.viash.helpers.circe</code> (#380).</p></li>
-<li><p>Store the project root directory (that is, the directory of the <code>_viash.yaml</code>) in a ViashProject object (#380).</p></li>
-<li><p>Tests: Reworked language tests to be grouped in their own subfolder and split off the bash language test from the general <code>testbash</code> folder (#381).</p></li>
-<li><p>Tests: Add additional language tests for <code>viash config inject</code> (#381).</p></li>
-<li><p>Tests: Added test for <code>io.viash.helpers.IO</code> (#380).</p></li>
+<li><p>Clean up unused code (PR #380).</p></li>
+<li><p>Move circe encoders/decoders for File and Path from <code>io.viash.functionality.arguments</code> to <code>io.viash.helpers.circe</code> (PR #380).</p></li>
+<li><p>Store the project root directory (that is, the directory of the <code>_viash.yaml</code>) in a ViashProject object (PR #380).</p></li>
+<li><p>Tests: Reworked language tests to be grouped in their own subfolder and split off the bash language test from the general <code>testbash</code> folder (PR #381).</p></li>
+<li><p>Tests: Add additional language tests for <code>viash config inject</code> (PR #381).</p></li>
+<li><p>Tests: Added test for <code>io.viash.helpers.IO</code> (PR #380).</p></li>
 </ul>
 
 
@@ -325,17 +391,17 @@ font-style: inherit;">$WF_DIR</span>/DataflowHelper.nf</span></code></pre></div>
 <section id="minor-changes" class="level3">
 <h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
 <ul>
-<li><p><code>NextflowPlatform</code>: Create directories during a stub run when output path is a nested directory (#314).</p></li>
+<li><p><code>NextflowPlatform</code>: Create directories during a stub run when output path is a nested directory (PR #314).</p></li>
 <li><p>Automatically generate a warning for deprecated parameters while parsing a .viash.yaml configuration file using the inline documentation deprecation annotations.</p></li>
 <li><p>Add a “planned removal” field in the deprecation annotations.</p></li>
 <li><p>Add testbenches to verify proper formatting of the deprecation versions and compare current version to the planned removal version so no deprecated parameters get to stick around beyond what was planned.</p></li>
-<li><p><code>NextflowPlatform</code>: Nextflow processes are created lazily; that is, only when running a Nextflow workflow (#321).</p></li>
+<li><p><code>NextflowPlatform</code>: Nextflow processes are created lazily; that is, only when running a Nextflow workflow (PR #321).</p></li>
 </ul>
 </section>
 <section id="bug-fixes" class="level3">
 <h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
 <ul>
-<li><code>NextflowPlatform</code>: Automatically split Viash config strings into strings of length 65000 since the JVM has a limit (65536) on the length of string constants (#323).</li>
+<li><code>NextflowPlatform</code>: Automatically split Viash config strings into strings of length 65000 since the JVM has a limit (65536) on the length of string constants (PR #323).</li>
 </ul>
 
 
@@ -593,16 +659,16 @@ font-style: inherit;">"--three"</span></span></code></pre></div></li>
 <section id="breaking-changes" class="level3">
 <h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
 <ul>
-<li><p>Config: Viash configs whose filenames start with a <code>.</code> are ignored (#291).</p></li>
-<li><p><code>viash build</code>: <code>--write_meta/-m</code> and <code>--meta/-m</code> arguments have been removed. Instead, the <code>.config.vsh.yaml</code> file is always created when building Viash components (#293).</p></li>
-<li><p><code>FileArgument</code>: Default setting of <code>must_exist</code> was changed from <code>false</code> to <code>true</code>. As such, the component will throw an error by default if an input file or output file is missing (#295).</p></li>
+<li><p>Config: Viash configs whose filenames start with a <code>.</code> are ignored (PR #291).</p></li>
+<li><p><code>viash build</code>: <code>--write_meta/-m</code> and <code>--meta/-m</code> arguments have been removed. Instead, the <code>.config.vsh.yaml</code> file is always created when building Viash components (PR #293).</p></li>
+<li><p><code>FileArgument</code>: Default setting of <code>must_exist</code> was changed from <code>false</code> to <code>true</code>. As such, the component will throw an error by default if an input file or output file is missing (PR #295).</p></li>
 <li><p>Config merging: <code>__inherits__</code> has been renamed to <code>__merge__</code>.</p></li>
 </ul>
 </section>
 <section id="new-functionality" class="level3">
 <h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
 <ul>
-<li><p>You can switch versions of Viash using the <code>VIASH_VERSION</code> environment variable (#304)! Example:</p>
+<li><p>You can switch versions of Viash using the <code>VIASH_VERSION</code> environment variable (PR #304)! Example:</p>
 <div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">VIASH_VERSION</span><span class="op" style="color: #5E5E5E;
@@ -612,18 +678,18 @@ background-color: null;
 font-style: inherit;">viash</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--version</span></span></code></pre></div></li>
-<li><p>Traceability: Running <code>viash build</code> and <code>viash test</code> creates a <code>.config.vsh.yaml</code> file by default, which contains the processed config of the component. As a side effect, this allows for reading in the <code>.config.vsh.yaml</code> from within the component to learn more about the component being tested (#291 and #293).</p></li>
-<li><p><code>FileArgument</code>: Added <code>create_parent</code> option, which will check if the directory of an output file exists and create it if necessary (#295).</p></li>
+<li><p>Traceability: Running <code>viash build</code> and <code>viash test</code> creates a <code>.config.vsh.yaml</code> file by default, which contains the processed config of the component. As a side effect, this allows for reading in the <code>.config.vsh.yaml</code> from within the component to learn more about the component being tested (PR #291 and PR #293).</p></li>
+<li><p><code>FileArgument</code>: Added <code>create_parent</code> option, which will check if the directory of an output file exists and create it if necessary (PR #295).</p></li>
 </ul>
 </section>
 <section id="minor-changes" class="level3">
 <h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
 <ul>
-<li><p><code>viash run</code>, <code>viash test</code>: When running or testing a component, Viash will add an extension to the temporary file that is created. Before: <code>/tmp/viash-run-wdckjnce</code>, now: <code>/tmp/viash-run-wdckjnce.py</code> (#302).</p></li>
-<li><p>NextflowPlatform: Add <code>DataflowHelper.nf</code> as a retrievable resource in Viash (#301).</p></li>
-<li><p>NextflowPlatform: During a stubrun, argument requirements are turned off and the <code>publishDir</code>, <code>cpus</code>, <code>memory</code>, and <code>label</code> directives are also removed from the process (#301).</p></li>
-<li><p><code>NextflowPlatform</code>: Added a <code>filter</code> processing argument to filter the incoming channel after the <code>map</code>, <code>mapData</code>, <code>mapId</code> and <code>mapPassthrough</code> have been applied (#296).</p></li>
-<li><p><code>NextflowPlatform</code>: Added the Viash config to the Nextflow module for later introspection (#296). For example:</p>
+<li><p><code>viash run</code>, <code>viash test</code>: When running or testing a component, Viash will add an extension to the temporary file that is created. Before: <code>/tmp/viash-run-wdckjnce</code>, now: <code>/tmp/viash-run-wdckjnce.py</code> (PR #302).</p></li>
+<li><p>NextflowPlatform: Add <code>DataflowHelper.nf</code> as a retrievable resource in Viash (PR #301).</p></li>
+<li><p>NextflowPlatform: During a stubrun, argument requirements are turned off and the <code>publishDir</code>, <code>cpus</code>, <code>memory</code>, and <code>label</code> directives are also removed from the process (PR #301).</p></li>
+<li><p><code>NextflowPlatform</code>: Added a <code>filter</code> processing argument to filter the incoming channel after the <code>map</code>, <code>mapData</code>, <code>mapId</code> and <code>mapPassthrough</code> have been applied (PR #296).</p></li>
+<li><p><code>NextflowPlatform</code>: Added the Viash config to the Nextflow module for later introspection (PR #296). For example:</p>
 <div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb5-1">include <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">{</span> foo <span class="op" style="color: #5E5E5E;
@@ -671,13 +737,13 @@ font-style: inherit;">==</span> preferredNormalization</span>
 background-color: null;
 font-style: inherit;">})</span></span></code></pre></div>
 <h3 id="bug-fixes" class="anchored">BUG FIXES</h3></li>
-<li><p><code>BashWrapper</code>: Don’t overwrite meta values when trailing arguments are provided (#295).</p></li>
+<li><p><code>BashWrapper</code>: Don’t overwrite meta values when trailing arguments are provided (PR #295).</p></li>
 </ul>
 </section>
 <section id="experimental-features" class="level3">
 <h3 class="anchored" data-anchor-id="experimental-features">EXPERIMENTAL FEATURES</h3>
 <ul>
-<li><p>Viash Project: Viash will automatically search for a <code>_viash.yaml</code> file in the directory of a component and its parent directories (#294).</p>
+<li><p>Viash Project: Viash will automatically search for a <code>_viash.yaml</code> file in the directory of a component and its parent directories (PR #294).</p>
 <p>Contents of <code>_viash.yaml</code>:</p>
 <div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -704,7 +770,7 @@ font-style: inherit;">|</span></span>
 <span id="cb6-5">  .platforms[.type == 'docker'].target_organization := 'viash-io'</span>
 <span id="cb6-6">  .platforms[.type == 'docker'].namespace_separator := '/'</span>
 <span id="cb6-7">  .platforms[.type == 'docker'].target_image_source := 'https://github.com/viash-io/viash'</span></code></pre></div></li>
-<li><p>Config merging: Allow specifying the order in which Viash will merge configs (#289). If <code>.</code> is not in the list of inherited objects, it will be added at the end.</p>
+<li><p>Config merging: Allow specifying the order in which Viash will merge configs (PR #289). If <code>.</code> is not in the list of inherited objects, it will be added at the end.</p>
 <p>Contents of <code>config.vsh.yaml</code>:</p>
 <div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1152,7 +1218,7 @@ font-style: inherit;">            c</span></span></code></pre></div></li>
 <section id="experimental-functionality" class="level3">
 <h3 class="anchored" data-anchor-id="experimental-functionality">EXPERIMENTAL FUNCTIONALITY</h3>
 <ul>
-<li><p><code>Config</code>: Any part of a Viash config can use inheritance to fill data (#271). For example: Contents of <code>src/test/config.vsh.yaml</code>:</p>
+<li><p><code>Config</code>: Any part of a Viash config can use inheritance to fill data (PR #271). For example: Contents of <code>src/test/config.vsh.yaml</code>:</p>
 <div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">__inherits__</span><span class="kw" style="color: #003B4F;
@@ -1513,7 +1579,7 @@ font-style: inherit;">|</span></span>
 <section id="bug-fixes" class="level3">
 <h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
 <ul>
-<li><p><code>viash ns</code>: Reverse exit code outputs, was returning 1 when everything was OK and 0 when errors were detected (#227).</p></li>
+<li><p><code>viash ns</code>: Reverse exit code outputs, was returning 1 when everything was OK and 0 when errors were detected (PR #227).</p></li>
 <li><p><code>viash config inject</code>: Fix processing of arguments when argument groups are defined (#231).</p></li>
 <li><p>Fixed a few typos in the CLI.</p></li>
 <li><p>Fixed the formatting of <code>ns exec</code> documentation.</p></li>
@@ -2092,7 +2158,7 @@ font-style: inherit;">]</span></span></code></pre></div>
 <ul>
 <li><p><code>ConfigMod</code>: Added unit tests for condition config mods.</p></li>
 <li><p><code>MainTestDockerSuite</code>: Derive config alternatives from the base <code>vsh.yaml</code> instead of adding the changes in separate files. This both reduces file clutter and prevents having to change several files when there are updates in the config format.</p></li>
-<li><p><code>GitTest</code>: Added unit tests for Git helper (#216).</p></li>
+<li><p><code>GitTest</code>: Added unit tests for Git helper (PR #216).</p></li>
 </ul>
 </section>
 <section id="bug-fixes" class="level3">
@@ -2101,7 +2167,7 @@ font-style: inherit;">]</span></span></code></pre></div>
 <li><p><code>csharp_script</code>, <code>javascript_script</code>, <code>python_script</code>, <code>r_script</code>, <code>scala_script</code>: Make meta fields for <code>memory</code> and <code>cpus</code> optional.</p></li>
 <li><p><code>NextflowVdsl3Platform</code>: Don’t generate an error when <code>--publish_dir</code> is not defined and <code>-profile no_publish</code> is used.</p></li>
 <li><p><code>Viash run</code>: Viash now properly returns the exit code from the executed script.</p></li>
-<li><p><code>Git</code>: Fix incorrect metadata when git repository is empty (#216).</p></li>
+<li><p><code>Git</code>: Fix incorrect metadata when git repository is empty (PR #216).</p></li>
 </ul>
 
 
@@ -2653,60 +2719,6 @@ font-style: inherit;">false</span></span></code></pre></div></li>
   <category>New Release</category>
   <guid>https://viash.io/blog/posts/viash-0.5.10/index.html</guid>
   <pubDate>Tue, 15 Mar 2022 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.5.9</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/blog/posts/viash-0.5.9/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="whats-new" class="level2">
-<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<p>The biggest change in this release is that long running Viash components (VS Code server or R Studio server for example) can now be interrupted by pressing CTRL-C or by sending it an <code>INT</code> or <code>SIGINT</code> signal. Before this release, you had to manually stop the Docker container to get the component to terminate.</p>
-</section>
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
-<section id="new-features" class="level3">
-<h3 class="anchored" data-anchor-id="new-features">NEW FEATURES</h3>
-<ul>
-<li><p><code>viash run</code>: A long running Viash component can be interrupted by pressing CTRL-C or by sending it an <code>INT</code> or <code>SIGINT</code> signal.</p></li>
-<li><p><code>DockerPlatform</code>: Automatically add a few labels based on metadata to Dockerfile.</p></li>
-<li><p><code>DockerPlatform</code>: Added value <code>target_image_source</code> for setting the source of the target image. This is used for defining labels in the dockerfile. Example:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">target_image_source</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> https://github.com/foo/bar</span></span></code></pre></div></li>
-</ul>
-</section>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li><p><code>viash ns list</code>: Added <code>--format yaml/json</code> argument to be able to return the output as a json as well. Useful for when <code>jq</code> is installed but <code>yq</code> is not. Example:</p>
-<pre><code>  viash ns list -p docker -f json | jq '.[] | .info.config'</code></pre></li>
-<li><p><code>viash config view</code>: Same as above.</p></li>
-</ul>
-</section>
-<section id="deprecation" class="level3">
-<h3 class="anchored" data-anchor-id="deprecation">DEPRECATION</h3>
-<ul>
-<li><p><code>CLI</code>: Deprecated <code>-P</code> flag use <code>-p</code> intead.</p></li>
-<li><p><code>DockerPlatform</code>: Deprecated <code>version</code> value.</p></li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/blog/posts/viash-0.5.9/index.html</guid>
-  <pubDate>Sat, 12 Mar 2022 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

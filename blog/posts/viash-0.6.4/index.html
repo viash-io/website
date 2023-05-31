@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.340">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -92,7 +92,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GDS2XT0DDG"></script>
@@ -129,7 +130,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     <img src="../../../viash.png" alt="" class="navbar-logo">
     </a>
   </div>
-            <div id="quarto-search" class="" title="false"></div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -290,29 +291,29 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <section id="breaking-changes" class="level3">
 <h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
 <ul>
-<li><p>Config: Viash configs whose filenames start with a <code>.</code> are ignored (#291).</p></li>
-<li><p><code>viash build</code>: <code>--write_meta/-m</code> and <code>--meta/-m</code> arguments have been removed. Instead, the <code>.config.vsh.yaml</code> file is always created when building Viash components (#293).</p></li>
-<li><p><code>FileArgument</code>: Default setting of <code>must_exist</code> was changed from <code>false</code> to <code>true</code>. As such, the component will throw an error by default if an input file or output file is missing (#295).</p></li>
+<li><p>Config: Viash configs whose filenames start with a <code>.</code> are ignored (PR #291).</p></li>
+<li><p><code>viash build</code>: <code>--write_meta/-m</code> and <code>--meta/-m</code> arguments have been removed. Instead, the <code>.config.vsh.yaml</code> file is always created when building Viash components (PR #293).</p></li>
+<li><p><code>FileArgument</code>: Default setting of <code>must_exist</code> was changed from <code>false</code> to <code>true</code>. As such, the component will throw an error by default if an input file or output file is missing (PR #295).</p></li>
 <li><p>Config merging: <code>__inherits__</code> has been renamed to <code>__merge__</code>.</p></li>
 </ul>
 </section>
 <section id="new-functionality" class="level3">
 <h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
 <ul>
-<li><p>You can switch versions of Viash using the <code>VIASH_VERSION</code> environment variable (#304)! Example:</p>
+<li><p>You can switch versions of Viash using the <code>VIASH_VERSION</code> environment variable (PR #304)! Example:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="va">VIASH_VERSION</span><span class="op">=</span>0.6.0 <span class="ex">viash</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>Traceability: Running <code>viash build</code> and <code>viash test</code> creates a <code>.config.vsh.yaml</code> file by default, which contains the processed config of the component. As a side effect, this allows for reading in the <code>.config.vsh.yaml</code> from within the component to learn more about the component being tested (#291 and #293).</p></li>
-<li><p><code>FileArgument</code>: Added <code>create_parent</code> option, which will check if the directory of an output file exists and create it if necessary (#295).</p></li>
+<li><p>Traceability: Running <code>viash build</code> and <code>viash test</code> creates a <code>.config.vsh.yaml</code> file by default, which contains the processed config of the component. As a side effect, this allows for reading in the <code>.config.vsh.yaml</code> from within the component to learn more about the component being tested (PR #291 and PR #293).</p></li>
+<li><p><code>FileArgument</code>: Added <code>create_parent</code> option, which will check if the directory of an output file exists and create it if necessary (PR #295).</p></li>
 </ul>
 </section>
 <section id="minor-changes" class="level3">
 <h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
 <ul>
-<li><p><code>viash run</code>, <code>viash test</code>: When running or testing a component, Viash will add an extension to the temporary file that is created. Before: <code>/tmp/viash-run-wdckjnce</code>, now: <code>/tmp/viash-run-wdckjnce.py</code> (#302).</p></li>
-<li><p>NextflowPlatform: Add <code>DataflowHelper.nf</code> as a retrievable resource in Viash (#301).</p></li>
-<li><p>NextflowPlatform: During a stubrun, argument requirements are turned off and the <code>publishDir</code>, <code>cpus</code>, <code>memory</code>, and <code>label</code> directives are also removed from the process (#301).</p></li>
-<li><p><code>NextflowPlatform</code>: Added a <code>filter</code> processing argument to filter the incoming channel after the <code>map</code>, <code>mapData</code>, <code>mapId</code> and <code>mapPassthrough</code> have been applied (#296).</p></li>
-<li><p><code>NextflowPlatform</code>: Added the Viash config to the Nextflow module for later introspection (#296). For example:</p>
+<li><p><code>viash run</code>, <code>viash test</code>: When running or testing a component, Viash will add an extension to the temporary file that is created. Before: <code>/tmp/viash-run-wdckjnce</code>, now: <code>/tmp/viash-run-wdckjnce.py</code> (PR #302).</p></li>
+<li><p>NextflowPlatform: Add <code>DataflowHelper.nf</code> as a retrievable resource in Viash (PR #301).</p></li>
+<li><p>NextflowPlatform: During a stubrun, argument requirements are turned off and the <code>publishDir</code>, <code>cpus</code>, <code>memory</code>, and <code>label</code> directives are also removed from the process (PR #301).</p></li>
+<li><p><code>NextflowPlatform</code>: Added a <code>filter</code> processing argument to filter the incoming channel after the <code>map</code>, <code>mapData</code>, <code>mapId</code> and <code>mapPassthrough</code> have been applied (PR #296).</p></li>
+<li><p><code>NextflowPlatform</code>: Added the Viash config to the Nextflow module for later introspection (PR #296). For example:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> foo <span class="op">}</span> from <span class="st">"</span><span class="ss">$targetDir</span><span class="st">/path/foo/main.nf"</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>foo<span class="op">.</span><span class="fu">run</span><span class="op">(</span>filter<span class="op">:</span> <span class="op">{</span> tup <span class="op">-&gt;</span></span>
@@ -320,13 +321,13 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  tup<span class="op">.</span>normalization_id <span class="op">==</span> preferredNormalization</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="op">})</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <h3 id="bug-fixes" class="anchored">BUG FIXES</h3></li>
-<li><p><code>BashWrapper</code>: Don’t overwrite meta values when trailing arguments are provided (#295).</p></li>
+<li><p><code>BashWrapper</code>: Don’t overwrite meta values when trailing arguments are provided (PR #295).</p></li>
 </ul>
 </section>
 <section id="experimental-features" class="level3">
 <h3 class="anchored" data-anchor-id="experimental-features">EXPERIMENTAL FEATURES</h3>
 <ul>
-<li><p>Viash Project: Viash will automatically search for a <code>_viash.yaml</code> file in the directory of a component and its parent directories (#294).</p>
+<li><p>Viash Project: Viash will automatically search for a <code>_viash.yaml</code> file in the directory of a component and its parent directories (PR #294).</p>
 <p>Contents of <code>_viash.yaml</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span><span class="kw">:</span><span class="at"> src</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">target</span><span class="kw">:</span><span class="at"> target</span></span>
@@ -335,7 +336,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  .platforms[.type == 'docker'].target_organization := 'viash-io'</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  .platforms[.type == 'docker'].namespace_separator := '/'</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  .platforms[.type == 'docker'].target_image_source := 'https://github.com/viash-io/viash'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>Config merging: Allow specifying the order in which Viash will merge configs (#289). If <code>.</code> is not in the list of inherited objects, it will be added at the end.</p>
+<li><p>Config merging: Allow specifying the order in which Viash will merge configs (PR #289). If <code>.</code> is not in the list of inherited objects, it will be added at the end.</p>
 <p>Contents of <code>config.vsh.yaml</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> foo</span></span>
