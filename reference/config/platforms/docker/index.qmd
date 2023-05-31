@@ -70,6 +70,26 @@ In Linux, files created by a Docker container will be owned by `root`. With `cho
 chown: false
 ```
 
+## cmd
+
+**Type**: `Option[Either[String,List of String]]`
+
+Set the default command being executed when running the Docker container.
+
+**Examples:**
+
+Set CMD using the exec format, which is the prefered form.
+
+```yaml
+cmd: ["echo", "$HOME"]
+```
+
+Set CMD using the shell format.
+
+```yaml
+cmd: "echo $HOME"
+```
+
 ## docker
 
 **Type**: `DockerRequirements`
@@ -92,6 +112,32 @@ setup:
     resources: 
       - resource.txt /path/to/resource.txt
 
+```
+
+## entrypoint
+
+**Type**: `Option[Either[String,List of String]]`
+
+Override the entrypoint of the base container. Default set `ENTRYPOINT []`.
+
+**Examples:**
+
+Disable the default override.
+
+```yaml
+entrypoint: 
+```
+
+Entrypoint of the container in the exec format, which is the prefered form.
+
+```yaml
+entrypoint: ["top", "-b"]
+```
+
+Entrypoint of the container in the shell format.
+
+```yaml
+entrypoint: "top -b"
 ```
 
 ## id

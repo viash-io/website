@@ -3,6 +3,7 @@ data:
   hierarchy:
   - io.viash.platforms.nextflow.NextflowConfig
   name: __this__
+  since: Viash 0.7.4
   type: NextflowConfig
 - description: 'A series of default labels to specify memory and cpu constraints.
 
@@ -47,5 +48,18 @@ data:
     format: viash_project_file
   name: labels
   type: ListMap of String,String
+- description: 'Includes a single string or list of strings into the nextflow.config
+    file.
+
+    This can be used to add custom profiles or include an additional config file.
+
+    '
+  example:
+  - example: "script:\n  - |\n    profiles {\n    ...\n    }\n"
+    format: yaml
+  - example: 'script: includeConfig("config.config")'
+    format: yaml
+  name: script
+  type: OneOrMore of String
 title: Nextflow Config
 topic: nextflowParameters

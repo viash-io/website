@@ -505,7 +505,8 @@
       {
         "name" : "config",
         "type" : "NextflowConfig",
-        "description" : "Allows tweaking how the @[Nextflow Config](nextflow_config) file is generated."
+        "description" : "Allows tweaking how the @[Nextflow Config](nextflow_config) file is generated.",
+        "since" : "Viash 0.7.4"
       }
     ],
     "dockerPlatform" : [
@@ -665,6 +666,24 @@
         ]
       },
       {
+        "name" : "cmd",
+        "type" : "Option[Either[String,List of String]]",
+        "description" : "Set the default command being executed when running the Docker container.",
+        "example" : [
+          {
+            "example" : "cmd: [\"echo\", \"$HOME\"]",
+            "format" : "yaml",
+            "description" : "Set CMD using the exec format, which is the prefered form."
+          },
+          {
+            "example" : "cmd: \"echo $HOME\"",
+            "format" : "yaml",
+            "description" : "Set CMD using the shell format."
+          }
+        ],
+        "since" : "Viash 0.7.4"
+      },
+      {
         "name" : "yum",
         "type" : "Option of YumRequirements",
         "description" : "Specify which yum packages should be available in order to run the component.",
@@ -696,6 +715,29 @@
         "type" : "List of Requirements",
         "description" : "Additional requirements specific for running unit tests.",
         "since" : "Viash 0.5.13"
+      },
+      {
+        "name" : "entrypoint",
+        "type" : "Option[Either[String,List of String]]",
+        "description" : "Override the entrypoint of the base container. Default set `ENTRYPOINT []`.",
+        "example" : [
+          {
+            "example" : "entrypoint: ",
+            "format" : "yaml",
+            "description" : "Disable the default override."
+          },
+          {
+            "example" : "entrypoint: [\"top\", \"-b\"]",
+            "format" : "yaml",
+            "description" : "Entrypoint of the container in the exec format, which is the prefered form."
+          },
+          {
+            "example" : "entrypoint: \"top -b\"",
+            "format" : "yaml",
+            "description" : "Entrypoint of the container in the shell format."
+          }
+        ],
+        "since" : "Viash 0.7.4"
       },
       {
         "name" : "docker",
@@ -1248,6 +1290,16 @@
         "name" : "user",
         "type" : "Boolean",
         "description" : "Sets the `--user` flag when set to true. Default: false."
+      }
+    ],
+    "requirements" : [
+      {
+        "name" : "__this__",
+        "type" : "Requirements",
+        "hierarchy" : [
+          "io.viash.platforms.requirements.Requirements"
+        ],
+        "description" : "Requirements for installing the following types of packages:\n\n - @[apt](apt_req)\n - @[apk](apk_req)\n - @[Docker setup instructions](docker_req)\n - @[JavaScript](javascript_req)\n - @[Python](python_req)\n - @[R](r_req)\n - @[Ruby](ruby_req)\n - @[yum](yum_req)\n"
       }
     ],
     "rRequirements" : [
@@ -3467,7 +3519,8 @@
         "hierarchy" : [
           "io.viash.platforms.nextflow.NextflowConfig"
         ],
-        "description" : "Allows tweaking how the Nextflow Config file is generated."
+        "description" : "Allows tweaking how the Nextflow Config file is generated.",
+        "since" : "Viash 0.7.4"
       },
       {
         "name" : "labels",
@@ -3493,6 +3546,21 @@
             "example" : "config_mods: |\n  .platforms[.type == \"nextflow\"].config.labels := { lowmem: \"memory = 4.GB\", lowcpu: \"cpus = 4\", midmem: \"memory = 25.GB\", midcpu: \"cpus = 10\", highmem: \"memory = 50.GB\", highcpu: \"cpus = 20\", vhighmem: \"memory = 100.GB\", vhighcpu: \"cpus = 40\" }\n",
             "format" : "viash_project_file",
             "description" : "Replace the default labels with a different set of labels by using the Viash Project file"
+          }
+        ]
+      },
+      {
+        "name" : "script",
+        "type" : "OneOrMore of String",
+        "description" : "Includes a single string or list of strings into the nextflow.config file.\nThis can be used to add custom profiles or include an additional config file.\n",
+        "example" : [
+          {
+            "example" : "script:\n  - |\n    profiles {\n    ...\n    }\n",
+            "format" : "yaml"
+          },
+          {
+            "example" : "script: includeConfig(\"config.config\")",
+            "format" : "yaml"
           }
         ]
       }
