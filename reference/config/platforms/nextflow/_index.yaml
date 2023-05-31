@@ -1,26 +1,43 @@
 data:
 - description: Next-gen platform for generating NextFlow VDSL3 modules.
+  example:
+  - example: "platforms:\n  - type: nextflow\n    directives:\n      label: [lowcpu,\
+      \ midmem]\n"
+    format: yaml
   hierarchy:
   - io.viash.platforms.NextflowVdsl3Platform
   - io.viash.platforms.NextflowPlatform
   - io.viash.platforms.Platform
   name: __this__
   type: NextflowVdsl3Platform
-- description: "Automated processing flags which can be toggled on or off:  \n\n|\
-    \ Flag | Description | Default |\n|---|---------|----|\n| `simplifyInput` | If\
-    \ `true`, an input tuple only containing only a single File (e.g. `[\"foo\", file(\"\
-    in.h5ad\")]`) is automatically transformed to a map (i.e. `[\"foo\", [ input:\
-    \ file(\"in.h5ad\") ] ]`). | `true` |\n| `simplifyOutput` | If `true`, an output\
-    \ tuple containing a map with a File (e.g. `[\"foo\", [ output: file(\"out.h5ad\"\
-    ) ] ]`) is automatically transformed to a map (i.e. `[\"foo\", file(\"out.h5ad\"\
-    )]`). | `true` |\n| `transcript` | If `true`, the module's transcripts from `work/`\
-    \ are automatically published to `params.transcriptDir`. If not defined, `params.publishDir\
-    \ + \"/_transcripts\"` will be used. Will throw an error if neither are defined.\
-    \ | `false` |\n| `publish` | If `true`, the module's outputs are automatically\
-    \ published to `params.publishDir`.  Will throw an error if `params.publishDir`\
-    \ is not defined. | `false` |\n\n"
+- description: '[Automated processing flags](/reference/config/platforms/nextflow/auto.html)
+    which can be toggled on or off:
+
+
+    | Flag | Description | Default |
+
+    |---|---------|----|
+
+    | `simplifyInput` | If `true`, an input tuple only containing only a single File
+    (e.g. `["foo", file("in.h5ad")]`) is automatically transformed to a map (i.e.
+    `["foo", [ input: file("in.h5ad") ] ]`). | `true` |
+
+    | `simplifyOutput` | If `true`, an output tuple containing a map with a File (e.g.
+    `["foo", [ output: file("out.h5ad") ] ]`) is automatically transformed to a map
+    (i.e. `["foo", file("out.h5ad")]`). | `true` |
+
+    | `transcript` | If `true`, the module''s transcripts from `work/` are automatically
+    published to `params.transcriptDir`. If not defined, `params.publishDir + "/_transcripts"`
+    will be used. Will throw an error if neither are defined. | `false` |
+
+    | `publish` | If `true`, the module''s outputs are automatically published to
+    `params.publishDir`.  Will throw an error if `params.publishDir` is not defined.
+    | `false` |
+
+
+    '
   example:
-  - example: "auto:\n    publish: true"
+  - example: "auto:\n  publish: true"
     format: yaml
   name: auto
   type: NextflowAuto
@@ -28,8 +45,8 @@ data:
     \ are optional settings that affect the execution of the process. These mostly\
     \ match up with the Nextflow counterparts.  \n"
   example:
-  - example: "directives:\n    container: rocker/r-ver:4.1\n    label: highcpu\n \
-      \   cpus: 4\n    memory: 16 GB"
+  - example: "directives:\n  container: rocker/r-ver:4.1\n  label: highcpu\n  cpus:\
+      \ 4\n  memory: 16 GB"
     format: yaml
   name: directives
   type: NextflowDirectives
@@ -49,6 +66,11 @@ data:
 - description: Specifies the type of the platform.
   name: type
   type: String
+- description: Allows tweaking how the [Nextflow Config](/reference/config/platforms/nextflow/config.html)
+    file is generated.
+  name: config
+  since: Viash 0.7.4
+  type: NextflowConfig
 order: 30
 title: Nextflow Vdsl3 Platform
 topic: platforms
