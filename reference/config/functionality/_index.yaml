@@ -69,12 +69,13 @@ data:
     removal: 0.7.0
   since: Viash 0.5.11
   type: List of Argument
-- description: "A list of authors. An author must at least have a name, but can also\
-    \ have a list of roles, an e-mail address, and a map of custom properties.\n\n\
-    Suggested values for roles are:\n \n| Role | Abbrev. | Description |\n|------|---------|-------------|\n\
-    | maintainer | mnt | for the maintainer of the code. Ideally, exactly one maintainer\
-    \ is specified. |\n| author | aut | for persons who have made substantial contributions\
-    \ to the software. |\n| contributor | ctb| for persons who have made smaller contributions\
+- description: "A list of [authors](/reference/config/functionality/author.html).\
+    \ An author must at least have a name, but can also have a list of roles, an e-mail\
+    \ address, and a map of custom properties.\n\nSuggested values for roles are:\n\
+    \ \n| Role | Abbrev. | Description |\n|------|---------|-------------|\n| maintainer\
+    \ | mnt | for the maintainer of the code. Ideally, exactly one maintainer is specified.\
+    \ |\n| author | aut | for persons who have made substantial contributions to the\
+    \ software. |\n| contributor | ctb| for persons who have made smaller contributions\
     \ (such as code patches).\n| datacontributor | dtc | for persons or organisations\
     \ that contributed data sets for the software\n| copyrightholder | cph | for all\
     \ copyright holders. This is a legal concept so should use the legal name of an\
@@ -83,9 +84,10 @@ data:
     \ [full list of roles](https://www.loc.gov/marc/relators/relaterm.html) is extremely\
     \ comprehensive.\n"
   example:
-  - example: "authors:\n  - name: Bob Cando\n    roles: [maintainer, author]\n   \
-      \ email: bob@can.do\n    props: {github: bobcando, orcid: 0000-0001-0002-0003}\n\
-      \  - name: Tim Farbe\n    roles: [author]\n    email: tim@far.be"
+  - example: "authors:\n  - name: Jane Doe\n    role: [author, maintainer]\n    email:\
+      \ jane@doe.com\n    info:\n      github: janedoe\n      twitter: janedoe\n \
+      \     orcid: XXAABBCCXX\n      groups: [ one, two, three ]\n  - name: Tim Farbe\n\
+      \    roles: [author]\n    email: tim@far.be\n"
     format: yaml
   name: authors
   since: Viash 0.3.1
@@ -94,10 +96,11 @@ data:
   name: status
   since: Viash 0.6.0
   type: Status
-- description: "Computational requirements related to running the component. \n`cpus`\
-    \ specifies the maximum number of (logical) cpus a component is allowed to use.,\
-    \ whereas\n`memory` specifies the maximum amount of memory a component is allowed\
-    \ to allicate. Memory units must be\nin B, KB, MB, GB, TB or PB."
+- description: "[Computational requirements](/reference/config/functionality/computationalRequirements.html)\
+    \ related to running the component. \n`cpus` specifies the maximum number of (logical)\
+    \ cpus a component is allowed to use., whereas\n`memory` specifies the maximum\
+    \ amount of memory a component is allowed to allicate. Memory units must be\n\
+    in B, KB, MB, GB, TB or PB."
   example:
   - example: "requirements:\n  cpus: 5\n  memory: 10GB\n"
     format: yaml
@@ -137,10 +140,11 @@ data:
     format: yaml
   name: test_resources
   type: List of Resource
-- description: "A grouping of the arguments, used to display the help message.\n\n\
-    \ - `name: foo`, the name of the argument group. \n - `description: Description\
-    \ of foo`, a description of the argument group. Multiline descriptions are supported.\n\
-    \ - `arguments: [arg1, arg2, ...]`, list of the arguments names.\n\n"
+- description: "A grouping of the [arguments](/reference/config/functionality/arguments/#),\
+    \ used to display the help message.\n\n - `name: foo`, the name of the argument\
+    \ group. \n - `description: Description of foo`, a description of the argument\
+    \ group. Multiline descriptions are supported.\n - `arguments: [arg1, arg2, ...]`,\
+    \ list of the arguments names.\n\n"
   example:
   - example: "argument_groups:\n  - name: \"Input\"\n    arguments:\n      - name:\
       \ \"--id\"\n        type: string\n        required: true\n      - name: \"--input\"\
@@ -207,12 +211,13 @@ data:
     format: yaml
   name: namespace
   type: Option of String
-- description: "A list of arguments for this component. For each argument, a type\
-    \ and a name must be specified. Depending on the type of argument, different properties\
-    \ can be set. See these reference pages per type for more information:  \n\n -\
-    \ [string](/reference/config/functionality/arguments/string.html)\n - [file](/reference/config/functionality/arguments/file.html)\n\
-    \ - [integer](/reference/config/functionality/arguments/integer.html)\n - [double](/reference/config/functionality/arguments/double.html)\n\
-    \ - [boolean](/reference/config/functionality/arguments/boolean.html)\n - [boolean_true](/reference/config/functionality/arguments/boolean_true.html)\n\
+- description: "A list of [arguments](/reference/config/functionality/arguments/#)\
+    \ for this component. For each argument, a type and a name must be specified.\
+    \ Depending on the type of argument, different properties can be set. See these\
+    \ reference pages per type for more information:  \n\n - [string](/reference/config/functionality/arguments/string.html)\n\
+    \ - [file](/reference/config/functionality/arguments/file.html)\n - [integer](/reference/config/functionality/arguments/integer.html)\n\
+    \ - [double](/reference/config/functionality/arguments/double.html)\n - [boolean](/reference/config/functionality/arguments/boolean.html)\n\
+    \ - [boolean_true](/reference/config/functionality/arguments/boolean_true.html)\n\
     \ - [boolean_false](/reference/config/functionality/arguments/boolean_false.html)\n"
   example:
   - example: "arguments:\n  - name: --foo\n    type: file\n    alternatives: [-f]\n\
@@ -222,5 +227,6 @@ data:
     format: yaml
   name: arguments
   type: List of Argument
+order: 10
 title: Functionality
-topic: .
+topic: functionality

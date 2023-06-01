@@ -6,6 +6,10 @@ data:
     repository.
 
     '
+  example:
+  - example: "platforms:\n  - type: docker\n    image: \"bash:4.0\"\n    setup:\n\
+      \      - type: apt\n        packages: [ curl ]\n"
+    format: yaml
   hierarchy:
   - io.viash.platforms.DockerPlatform
   - io.viash.platforms.Platform
@@ -42,15 +46,15 @@ data:
 - description: Add [docker run](https://docs.docker.com/engine/reference/run/) arguments.
   name: run_args
   type: OneOrMore of String
-- description: The separator between the namespace and the name of the component,
-    used for determining the image name.
+- description: 'The separator between the namespace and the name of the component,
+    used for determining the image name. Default: `"/"`.'
   example:
-  - example: 'namespace_separator: "+"'
+  - example: 'namespace_separator: "_"'
     format: yaml
   name: namespace_separator
   type: String
 - description: 'Enables or disables automatic volume mapping. Enabled when set to
-    `Automatic` or disabled when set to `Manual`. Default: `Automatic`'
+    `Automatic` or disabled when set to `Manual`. Default: `Automatic`.'
   name: resolve_volume
   type: DockerResolveVolume
 - description: A list of enabled ports. This doesn't change the Dockerfile but gets
@@ -115,6 +119,17 @@ data:
     format: yaml
   name: target_image
   type: Option of String
+- description: Set the default command being executed when running the Docker container.
+  example:
+  - description: Set CMD using the exec format, which is the prefered form.
+    example: 'cmd: ["echo", "$HOME"]'
+    format: yaml
+  - description: Set CMD using the shell format.
+    example: 'cmd: "echo $HOME"'
+    format: yaml
+  name: cmd
+  since: Viash 0.7.4
+  type: Option[Either[String,List of String]]
 - description: Specify which yum packages should be available in order to run the
     component.
   example:
@@ -138,6 +153,22 @@ data:
   name: test_setup
   since: Viash 0.5.13
   type: List of Requirements
+- description: Override the entrypoint of the base container. Default set `ENTRYPOINT
+    []`.
+  example:
+  - description: Disable the default override.
+    example: 'entrypoint: '
+    format: yaml
+  - description: Entrypoint of the container in the exec format, which is the prefered
+      form.
+    example: 'entrypoint: ["top", "-b"]'
+    format: yaml
+  - description: Entrypoint of the container in the shell format.
+    example: 'entrypoint: "top -b"'
+    format: yaml
+  name: entrypoint
+  since: Viash 0.7.4
+  type: Option[Either[String,List of String]]
 - description: Specify which Docker commands should be run during setup.
   example:
   - example: "setup:\n  - type: docker\n    build_args: [ GITHUB_PAT=hello_world ]\n\
