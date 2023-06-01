@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.340">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -93,7 +93,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GDS2XT0DDG"></script>
@@ -143,10 +144,6 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
  <span class="menu-text">Quickstart</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../cheatsheet/index.html" rel="" target="">
- <span class="menu-text">Cheatsheet</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link active" href="../../guide/index.html" rel="" target="" aria-current="page">
  <span class="menu-text">Guide</span></a>
   </li>  
@@ -172,6 +169,11 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     <a class="dropdown-item" href="https://github.com/viash-io/website/issues" rel="" target=""><i class="bi bi-bug" role="img">
 </i> 
  <span class="dropdown-text">Report a website issue</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../cheatsheet/viash_cheatsheet_v1_0.pdf" rel="" target=""><i class="bi bi-card-list" role="img">
+</i> 
+ <span class="dropdown-text">Cheat sheet</span></a>
   </li>  
     </ul>
   </li>
@@ -891,21 +893,20 @@ Important
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_bash6493606546775227004'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_bash4199429174323392066'
 ====================================================================
-+/tmp/viash_test_example_bash6493606546775227004/build_executable/example_bash ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_bash4199429174323392066/build_executable/example_bash ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_bash:test' with Dockerfile
-[info] Running 'docker build -t example_bash:test /tmp/viash_test_example_bash6493606546775227004/build_executable -f /tmp/viash_test_example_bash6493606546775227004/build_executable/tmp/dockerbuild-example_bash-ag9MAd/Dockerfile'
+[info] Running 'docker build -t example_bash:test /tmp/viash_test_example_bash4199429174323392066/build_executable -f /tmp/viash_test_example_bash4199429174323392066/build_executable/tmp/dockerbuild-example_bash-JhcB4o/Dockerfile'
 Sending build context to Docker daemon  37.38kB
 
-Step 1/5 : FROM bash:4.0
+Step 1/6 : FROM bash:4.0
 4.0: Pulling from library/bash
 8a49fdb3b6a5: Pulling fs layer
 011a3955de72: Pulling fs layer
 e7e50c41cbf1: Pulling fs layer
 e7e50c41cbf1: Verifying Checksum
 e7e50c41cbf1: Download complete
-011a3955de72: Verifying Checksum
 011a3955de72: Download complete
 8a49fdb3b6a5: Verifying Checksum
 8a49fdb3b6a5: Download complete
@@ -915,26 +916,30 @@ e7e50c41cbf1: Pull complete
 Digest: sha256:7fe064540034d08ec7019b23f44af13b785d9fd630a91fd9fd2b4517e561525a
 Status: Downloaded newer image for bash:4.0
  ---&gt; 57a8199dc6a3
-Step 2/5 : RUN :
- ---&gt; Running in 854f8288ea8c
-Removing intermediate container 854f8288ea8c
- ---&gt; 695b5b881ed0
-Step 3/5 : LABEL org.opencontainers.image.description="Companion container for running component example_bash"
- ---&gt; Running in 18dd2a3e08f5
-Removing intermediate container 18dd2a3e08f5
- ---&gt; c5d6e3af0ae5
-Step 4/5 : LABEL org.opencontainers.image.created="2023-05-11T11:25:44Z"
- ---&gt; Running in e082fefd738a
-Removing intermediate container e082fefd738a
- ---&gt; 9f07ff6e455c
-Step 5/5 : LABEL org.opencontainers.image.version="test"
- ---&gt; Running in d4de2c0923bd
-Removing intermediate container d4de2c0923bd
- ---&gt; 7e331d852e6e
-Successfully built 7e331d852e6e
+Step 2/6 : ENTRYPOINT []
+ ---&gt; Running in 35982917eb09
+Removing intermediate container 35982917eb09
+ ---&gt; 2535b9e09f88
+Step 3/6 : RUN :
+ ---&gt; Running in 3116995f3342
+Removing intermediate container 3116995f3342
+ ---&gt; fc1cf210c670
+Step 4/6 : LABEL org.opencontainers.image.description="Companion container for running component example_bash"
+ ---&gt; Running in 340bb1632017
+Removing intermediate container 340bb1632017
+ ---&gt; abaeb3afa377
+Step 5/6 : LABEL org.opencontainers.image.created="2023-06-01T09:01:45Z"
+ ---&gt; Running in cbfe7f07b9c8
+Removing intermediate container cbfe7f07b9c8
+ ---&gt; db6bc144e543
+Step 6/6 : LABEL org.opencontainers.image.version="test"
+ ---&gt; Running in d15fbf88c836
+Removing intermediate container d15fbf88c836
+ ---&gt; 973f16455913
+Successfully built 973f16455913
 Successfully tagged example_bash:test
 ====================================================================
-+/tmp/viash_test_example_bash6493606546775227004/test_test/test_executable
++/tmp/viash_test_example_bash4199429174323392066/test_test/test_executable
 &gt;&gt;&gt; Create input test file
 &gt;&gt;&gt; Run executable
 Copying 'foo.txt' to 'bar.txt'.
@@ -951,14 +956,14 @@ Cleaning up temporary directory</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_csharp18369209644505788521'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_csharp3276828720918685130'
 ====================================================================
-+/tmp/viash_test_example_csharp18369209644505788521/build_executable/example_csharp ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_csharp3276828720918685130/build_executable/example_csharp ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_csharp:test' with Dockerfile
-[info] Running 'docker build -t example_csharp:test /tmp/viash_test_example_csharp18369209644505788521/build_executable -f /tmp/viash_test_example_csharp18369209644505788521/build_executable/tmp/dockerbuild-example_csharp-dOQB1s/Dockerfile'
+[info] Running 'docker build -t example_csharp:test /tmp/viash_test_example_csharp3276828720918685130/build_executable -f /tmp/viash_test_example_csharp3276828720918685130/build_executable/tmp/dockerbuild-example_csharp-sou7Ku/Dockerfile'
 Sending build context to Docker daemon  36.86kB
 
-Step 1/5 : FROM ghcr.io/data-intuitive/dotnet-script:1.3.1
+Step 1/6 : FROM ghcr.io/data-intuitive/dotnet-script:1.3.1
 1.3.1: Pulling from data-intuitive/dotnet-script
 df9b9388f04a: Pulling fs layer
 3ae3a38ed752: Pulling fs layer
@@ -970,22 +975,22 @@ d772c6b09cca: Pulling fs layer
 4937da28ea60: Pulling fs layer
 16def9f17d8d: Pulling fs layer
 03ac08f8f1d3: Pulling fs layer
-2c56128c63bd: Waiting
-6c2be9941089: Waiting
 5a0c86bcd85d: Waiting
 5e733ff9c308: Waiting
 4937da28ea60: Waiting
 16def9f17d8d: Waiting
 03ac08f8f1d3: Waiting
+2c56128c63bd: Waiting
+6c2be9941089: Waiting
 df9b9388f04a: Verifying Checksum
 df9b9388f04a: Download complete
 3ae3a38ed752: Verifying Checksum
 3ae3a38ed752: Download complete
-df9b9388f04a: Pull complete
 d772c6b09cca: Verifying Checksum
 d772c6b09cca: Download complete
 2c56128c63bd: Verifying Checksum
 2c56128c63bd: Download complete
+df9b9388f04a: Pull complete
 6c2be9941089: Verifying Checksum
 6c2be9941089: Download complete
 3ae3a38ed752: Pull complete
@@ -1010,26 +1015,30 @@ d772c6b09cca: Pull complete
 Digest: sha256:d95bf2a2b3e095e5b02960ab4ddd4674d798a1493ed0dc5cf427c77a5ed90ed3
 Status: Downloaded newer image for ghcr.io/data-intuitive/dotnet-script:1.3.1
  ---&gt; 1102243946ae
-Step 2/5 : RUN :
- ---&gt; Running in 25d6281f5d84
-Removing intermediate container 25d6281f5d84
- ---&gt; 6701dbe62ec8
-Step 3/5 : LABEL org.opencontainers.image.description="Companion container for running component example_csharp"
- ---&gt; Running in 76ef6b7af2eb
-Removing intermediate container 76ef6b7af2eb
- ---&gt; 0852e3eca968
-Step 4/5 : LABEL org.opencontainers.image.created="2023-05-11T11:25:55Z"
- ---&gt; Running in e3beccf68122
-Removing intermediate container e3beccf68122
- ---&gt; 55e969ed1d75
-Step 5/5 : LABEL org.opencontainers.image.version="test"
- ---&gt; Running in c0aa8b93fcb0
-Removing intermediate container c0aa8b93fcb0
- ---&gt; 3b065c65d6fd
-Successfully built 3b065c65d6fd
+Step 2/6 : ENTRYPOINT []
+ ---&gt; Running in 001508146f78
+Removing intermediate container 001508146f78
+ ---&gt; 3e364bbb12ee
+Step 3/6 : RUN :
+ ---&gt; Running in 2c6fd45e14e4
+Removing intermediate container 2c6fd45e14e4
+ ---&gt; a6e4a0783c36
+Step 4/6 : LABEL org.opencontainers.image.description="Companion container for running component example_csharp"
+ ---&gt; Running in b64e3ffdb7b9
+Removing intermediate container b64e3ffdb7b9
+ ---&gt; bc866c144dc5
+Step 5/6 : LABEL org.opencontainers.image.created="2023-06-01T09:01:56Z"
+ ---&gt; Running in ef4637813d30
+Removing intermediate container ef4637813d30
+ ---&gt; fcae16ebc679
+Step 6/6 : LABEL org.opencontainers.image.version="test"
+ ---&gt; Running in 52d5559e2af0
+Removing intermediate container 52d5559e2af0
+ ---&gt; fc6ade8b08da
+Successfully built fc6ade8b08da
 Successfully tagged example_csharp:test
 ====================================================================
-+/tmp/viash_test_example_csharp18369209644505788521/test_test/test_executable
++/tmp/viash_test_example_csharp3276828720918685130/test_test/test_executable
 &gt;&gt;&gt; Create input test file
 &gt;&gt;&gt; Run executable
 &gt;&gt;&gt; Check whether output file exists
@@ -1045,60 +1054,64 @@ Cleaning up temporary directory</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_js10862893393069569506'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_js14153155447386196715'
 ====================================================================
-+/tmp/viash_test_example_js10862893393069569506/build_executable/example_js ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_js14153155447386196715/build_executable/example_js ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_js:test' with Dockerfile
-[info] Running 'docker build -t example_js:test /tmp/viash_test_example_js10862893393069569506/build_executable -f /tmp/viash_test_example_js10862893393069569506/build_executable/tmp/dockerbuild-example_js-X6cpqS/Dockerfile'
+[info] Running 'docker build -t example_js:test /tmp/viash_test_example_js14153155447386196715/build_executable -f /tmp/viash_test_example_js14153155447386196715/build_executable/tmp/dockerbuild-example_js-1NajCg/Dockerfile'
 Sending build context to Docker daemon  37.38kB
 
-Step 1/5 : FROM node:19-bullseye-slim
+Step 1/6 : FROM node:19-bullseye-slim
 19-bullseye-slim: Pulling from library/node
-9e3ea8720c6d: Pulling fs layer
-22cee24855b2: Pulling fs layer
-73bcd5a2d134: Pulling fs layer
-8b90380c171f: Pulling fs layer
-4c6e2e4c8445: Pulling fs layer
-8b90380c171f: Waiting
-4c6e2e4c8445: Waiting
-22cee24855b2: Verifying Checksum
-22cee24855b2: Download complete
-9e3ea8720c6d: Verifying Checksum
-9e3ea8720c6d: Download complete
-8b90380c171f: Verifying Checksum
-8b90380c171f: Download complete
-4c6e2e4c8445: Verifying Checksum
-4c6e2e4c8445: Download complete
-73bcd5a2d134: Verifying Checksum
-73bcd5a2d134: Download complete
-9e3ea8720c6d: Pull complete
-22cee24855b2: Pull complete
-73bcd5a2d134: Pull complete
-8b90380c171f: Pull complete
-4c6e2e4c8445: Pull complete
-Digest: sha256:f770c8e133e259556fcbd64d852a1e39ffe2da2814ee58bab3ac985fa9b50da5
+f03b40093957: Pulling fs layer
+0bfad7312c25: Pulling fs layer
+56db04c463e9: Pulling fs layer
+477c7ebfb850: Pulling fs layer
+8bb4aa3e51be: Pulling fs layer
+477c7ebfb850: Waiting
+8bb4aa3e51be: Waiting
+0bfad7312c25: Verifying Checksum
+0bfad7312c25: Download complete
+f03b40093957: Verifying Checksum
+f03b40093957: Download complete
+477c7ebfb850: Verifying Checksum
+477c7ebfb850: Download complete
+8bb4aa3e51be: Verifying Checksum
+8bb4aa3e51be: Download complete
+56db04c463e9: Verifying Checksum
+56db04c463e9: Download complete
+f03b40093957: Pull complete
+0bfad7312c25: Pull complete
+56db04c463e9: Pull complete
+477c7ebfb850: Pull complete
+8bb4aa3e51be: Pull complete
+Digest: sha256:f58f1fcf5c9ff9e3752993edb4ed6dbd35697124c85a43f3b97aa054500b0534
 Status: Downloaded newer image for node:19-bullseye-slim
- ---&gt; 52d086ee59d6
-Step 2/5 : RUN :
- ---&gt; Running in adee3302a238
-Removing intermediate container adee3302a238
- ---&gt; 6cab0081b119
-Step 3/5 : LABEL org.opencontainers.image.description="Companion container for running component example_js"
- ---&gt; Running in 3ba0c157ff2d
-Removing intermediate container 3ba0c157ff2d
- ---&gt; 6810ce8ae3f8
-Step 4/5 : LABEL org.opencontainers.image.created="2023-05-11T11:26:24Z"
- ---&gt; Running in fe5077b15d3c
-Removing intermediate container fe5077b15d3c
- ---&gt; 05d907e742fa
-Step 5/5 : LABEL org.opencontainers.image.version="test"
- ---&gt; Running in cbdc56aff9d9
-Removing intermediate container cbdc56aff9d9
- ---&gt; 6fcc1fb32360
-Successfully built 6fcc1fb32360
+ ---&gt; adbc02574b52
+Step 2/6 : ENTRYPOINT []
+ ---&gt; Running in 4c2b5047ae74
+Removing intermediate container 4c2b5047ae74
+ ---&gt; d83d6ba08995
+Step 3/6 : RUN :
+ ---&gt; Running in cd414507dc4a
+Removing intermediate container cd414507dc4a
+ ---&gt; 1b72711013b0
+Step 4/6 : LABEL org.opencontainers.image.description="Companion container for running component example_js"
+ ---&gt; Running in 30b8c28992c3
+Removing intermediate container 30b8c28992c3
+ ---&gt; f8db7a82829c
+Step 5/6 : LABEL org.opencontainers.image.created="2023-06-01T09:02:26Z"
+ ---&gt; Running in 222156743f02
+Removing intermediate container 222156743f02
+ ---&gt; 56709a649d00
+Step 6/6 : LABEL org.opencontainers.image.version="test"
+ ---&gt; Running in 4b80a3c2165f
+Removing intermediate container 4b80a3c2165f
+ ---&gt; 16d8a78c723a
+Successfully built 16d8a78c723a
 Successfully tagged example_js:test
 ====================================================================
-+/tmp/viash_test_example_js10862893393069569506/test_test/test_executable
++/tmp/viash_test_example_js14153155447386196715/test_test/test_executable
 &gt;&gt;&gt; Create input test file
 &gt;&gt;&gt; Run executable
 &gt;&gt;&gt; Check whether output file exists
@@ -1114,56 +1127,60 @@ Cleaning up temporary directory</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_python8929734930247904165'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_python155515485611652823'
 ====================================================================
-+/tmp/viash_test_example_python8929734930247904165/build_executable/example_python ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_python155515485611652823/build_executable/example_python ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_python:test' with Dockerfile
-[info] Running 'docker build -t example_python:test /tmp/viash_test_example_python8929734930247904165/build_executable -f /tmp/viash_test_example_python8929734930247904165/build_executable/tmp/dockerbuild-example_python-4HsIQL/Dockerfile'
-Sending build context to Docker daemon  36.86kB
+[info] Running 'docker build -t example_python:test /tmp/viash_test_example_python155515485611652823/build_executable -f /tmp/viash_test_example_python155515485611652823/build_executable/tmp/dockerbuild-example_python-Me88PZ/Dockerfile'
+Sending build context to Docker daemon  37.38kB
 
-Step 1/5 : FROM python:3.10-slim
+Step 1/6 : FROM python:3.10-slim
 3.10-slim: Pulling from library/python
-9e3ea8720c6d: Already exists
-fe9f5cfcf49b: Pulling fs layer
-76b1f1a2fcef: Pulling fs layer
-d573939d7fe2: Pulling fs layer
-184536648910: Pulling fs layer
-184536648910: Waiting
-d573939d7fe2: Verifying Checksum
-d573939d7fe2: Download complete
-fe9f5cfcf49b: Verifying Checksum
-fe9f5cfcf49b: Download complete
-76b1f1a2fcef: Verifying Checksum
-76b1f1a2fcef: Download complete
-184536648910: Verifying Checksum
-184536648910: Download complete
-fe9f5cfcf49b: Pull complete
-76b1f1a2fcef: Pull complete
-d573939d7fe2: Pull complete
-184536648910: Pull complete
-Digest: sha256:12af6fa557c55d85754107e59d0e21530d7a253757e128b3682d138e58712e54
+f03b40093957: Already exists
+05c2151a829c: Pulling fs layer
+94970648c551: Pulling fs layer
+cf2e0f30894f: Pulling fs layer
+661be8ca6397: Pulling fs layer
+661be8ca6397: Waiting
+cf2e0f30894f: Verifying Checksum
+cf2e0f30894f: Download complete
+05c2151a829c: Verifying Checksum
+05c2151a829c: Download complete
+94970648c551: Verifying Checksum
+94970648c551: Download complete
+661be8ca6397: Verifying Checksum
+661be8ca6397: Download complete
+05c2151a829c: Pull complete
+94970648c551: Pull complete
+cf2e0f30894f: Pull complete
+661be8ca6397: Pull complete
+Digest: sha256:fd86924ba14682eb11a3c244f60a35b5dfe3267cbf26d883fb5c14813ce926f1
 Status: Downloaded newer image for python:3.10-slim
- ---&gt; bacfe8322034
-Step 2/5 : RUN :
- ---&gt; Running in a31514cc131f
-Removing intermediate container a31514cc131f
- ---&gt; e428b4ef338a
-Step 3/5 : LABEL org.opencontainers.image.description="Companion container for running component example_python"
- ---&gt; Running in 7919b8407507
-Removing intermediate container 7919b8407507
- ---&gt; 5d1c8d0b4ad3
-Step 4/5 : LABEL org.opencontainers.image.created="2023-05-11T11:26:39Z"
- ---&gt; Running in 760bff504dbe
-Removing intermediate container 760bff504dbe
- ---&gt; 06f0a75a7ab9
-Step 5/5 : LABEL org.opencontainers.image.version="test"
- ---&gt; Running in 5fc72b2dedc9
-Removing intermediate container 5fc72b2dedc9
- ---&gt; 87e7bdfd9489
-Successfully built 87e7bdfd9489
+ ---&gt; 2167e148c9f0
+Step 2/6 : ENTRYPOINT []
+ ---&gt; Running in d4070ffdca32
+Removing intermediate container d4070ffdca32
+ ---&gt; 1d77ff6af87a
+Step 3/6 : RUN :
+ ---&gt; Running in 529ec6f8ca82
+Removing intermediate container 529ec6f8ca82
+ ---&gt; 4f64c3572cc5
+Step 4/6 : LABEL org.opencontainers.image.description="Companion container for running component example_python"
+ ---&gt; Running in 94d34a77d326
+Removing intermediate container 94d34a77d326
+ ---&gt; 45b095dbf5fd
+Step 5/6 : LABEL org.opencontainers.image.created="2023-06-01T09:02:43Z"
+ ---&gt; Running in f12d1acd4508
+Removing intermediate container f12d1acd4508
+ ---&gt; c2d31185c8d5
+Step 6/6 : LABEL org.opencontainers.image.version="test"
+ ---&gt; Running in 9613930aa095
+Removing intermediate container 9613930aa095
+ ---&gt; 1a04dc1cb4e5
+Successfully built 1a04dc1cb4e5
 Successfully tagged example_python:test
 ====================================================================
-+/tmp/viash_test_example_python8929734930247904165/test_test/test_executable
++/tmp/viash_test_example_python155515485611652823/test_test/test_executable
 Copying 'foo.txt' to 'bar.txt'.
 &gt;&gt;&gt; Create input test file
 &gt;&gt;&gt; Run executable
@@ -1180,14 +1197,14 @@ Cleaning up temporary directory</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_r7975531219655670964'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_r17321885022306223444'
 ====================================================================
-+/tmp/viash_test_example_r7975531219655670964/build_executable/example_r ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_r17321885022306223444/build_executable/example_r ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_r:test' with Dockerfile
-[info] Running 'docker build -t example_r:test /tmp/viash_test_example_r7975531219655670964/build_executable -f /tmp/viash_test_example_r7975531219655670964/build_executable/tmp/dockerbuild-example_r-hfWUUT/Dockerfile'
+[info] Running 'docker build -t example_r:test /tmp/viash_test_example_r17321885022306223444/build_executable -f /tmp/viash_test_example_r17321885022306223444/build_executable/tmp/dockerbuild-example_r-Py8nYP/Dockerfile'
 Sending build context to Docker daemon  37.89kB
 
-Step 1/5 : FROM eddelbuettel/r2u:22.04
+Step 1/6 : FROM eddelbuettel/r2u:22.04
 22.04: Pulling from eddelbuettel/r2u
 e96e057aae67: Pulling fs layer
 be5c01dc0d74: Pulling fs layer
@@ -1204,26 +1221,30 @@ a829daef3697: Pull complete
 Digest: sha256:4140b831802b488a4fb6be1e4ec9f85d226b788aacd5b3e9b891abab7fcecbb4
 Status: Downloaded newer image for eddelbuettel/r2u:22.04
  ---&gt; f1e8042fc279
-Step 2/5 : RUN :
- ---&gt; Running in 459e558dde07
-Removing intermediate container 459e558dde07
- ---&gt; e3389b70fc85
-Step 3/5 : LABEL org.opencontainers.image.description="Companion container for running component example_r"
- ---&gt; Running in 18eba6517062
-Removing intermediate container 18eba6517062
- ---&gt; c1c70bb19fdb
-Step 4/5 : LABEL org.opencontainers.image.created="2023-05-11T11:26:50Z"
- ---&gt; Running in d38fe6f236cd
-Removing intermediate container d38fe6f236cd
- ---&gt; cb12d1cf73da
-Step 5/5 : LABEL org.opencontainers.image.version="test"
- ---&gt; Running in 9617e1aa04d2
-Removing intermediate container 9617e1aa04d2
- ---&gt; 8e3a0d209a03
-Successfully built 8e3a0d209a03
+Step 2/6 : ENTRYPOINT []
+ ---&gt; Running in fd6962eba48b
+Removing intermediate container fd6962eba48b
+ ---&gt; 4316ed35679a
+Step 3/6 : RUN :
+ ---&gt; Running in 9c065ba67691
+Removing intermediate container 9c065ba67691
+ ---&gt; ba4be8a0782b
+Step 4/6 : LABEL org.opencontainers.image.description="Companion container for running component example_r"
+ ---&gt; Running in 99d3a307bef3
+Removing intermediate container 99d3a307bef3
+ ---&gt; 7a05c7cf275e
+Step 5/6 : LABEL org.opencontainers.image.created="2023-06-01T09:02:55Z"
+ ---&gt; Running in 099873a768fc
+Removing intermediate container 099873a768fc
+ ---&gt; e63ac7a5ce23
+Step 6/6 : LABEL org.opencontainers.image.version="test"
+ ---&gt; Running in 297bb0438308
+Removing intermediate container 297bb0438308
+ ---&gt; d74e8dc311c5
+Successfully built d74e8dc311c5
 Successfully tagged example_r:test
 ====================================================================
-+/tmp/viash_test_example_r7975531219655670964/test_test/test_executable
++/tmp/viash_test_example_r17321885022306223444/test_test/test_executable
 &gt;&gt;&gt; Create input test file
 &gt;&gt;&gt; Run executable
 Copying 'foo.txt' to 'bar.txt'.
@@ -1241,14 +1262,14 @@ Cleaning up temporary directory</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_scala13267584675608611387'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_scala18304840316104432082'
 ====================================================================
-+/tmp/viash_test_example_scala13267584675608611387/build_executable/example_scala ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_scala18304840316104432082/build_executable/example_scala ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_scala:test' with Dockerfile
-[info] Running 'docker build -t example_scala:test /tmp/viash_test_example_scala13267584675608611387/build_executable -f /tmp/viash_test_example_scala13267584675608611387/build_executable/tmp/dockerbuild-example_scala-pEo5iv/Dockerfile'
+[info] Running 'docker build -t example_scala:test /tmp/viash_test_example_scala18304840316104432082/build_executable -f /tmp/viash_test_example_scala18304840316104432082/build_executable/tmp/dockerbuild-example_scala-h25L5E/Dockerfile'
 Sending build context to Docker daemon  37.38kB
 
-Step 1/5 : FROM sbtscala/scala-sbt:eclipse-temurin-19_36_1.7.2_2.13.10
+Step 1/6 : FROM sbtscala/scala-sbt:eclipse-temurin-19_36_1.7.2_2.13.10
 eclipse-temurin-19_36_1.7.2_2.13.10: Pulling from sbtscala/scala-sbt
 301a8b74f71f: Pulling fs layer
 c5c735a83dbd: Pulling fs layer
@@ -1262,31 +1283,31 @@ c9480a4b593f: Pulling fs layer
 4f4fb700ef54: Pulling fs layer
 bb7a0c6ab9c1: Pulling fs layer
 2c0021742fe2: Pulling fs layer
-2af8e2a543d8: Waiting
-14d68137d870: Waiting
-320659737461: Waiting
 1dea7716181a: Waiting
-2c0021742fe2: Waiting
+c9480a4b593f: Waiting
 812216efaf87: Waiting
 4f4fb700ef54: Waiting
 bb7a0c6ab9c1: Waiting
+2c0021742fe2: Waiting
+2af8e2a543d8: Waiting
+14d68137d870: Waiting
+320659737461: Waiting
 c5c735a83dbd: Verifying Checksum
 c5c735a83dbd: Download complete
 301a8b74f71f: Verifying Checksum
 301a8b74f71f: Download complete
 2af8e2a543d8: Verifying Checksum
 2af8e2a543d8: Download complete
-320659737461: Verifying Checksum
-320659737461: Download complete
 14d68137d870: Verifying Checksum
 14d68137d870: Download complete
+320659737461: Verifying Checksum
+320659737461: Download complete
 c9480a4b593f: Verifying Checksum
 c9480a4b593f: Download complete
 812216efaf87: Verifying Checksum
 812216efaf87: Download complete
 4f4fb700ef54: Verifying Checksum
 4f4fb700ef54: Download complete
-301a8b74f71f: Pull complete
 1dea7716181a: Verifying Checksum
 1dea7716181a: Download complete
 2c0021742fe2: Verifying Checksum
@@ -1295,6 +1316,7 @@ c9480a4b593f: Download complete
 5fb9fa7513e6: Download complete
 bb7a0c6ab9c1: Verifying Checksum
 bb7a0c6ab9c1: Download complete
+301a8b74f71f: Pull complete
 c5c735a83dbd: Pull complete
 5fb9fa7513e6: Pull complete
 2af8e2a543d8: Pull complete
@@ -1309,26 +1331,30 @@ bb7a0c6ab9c1: Pull complete
 Digest: sha256:440234e283754375d5ab6bcb35e2d470f9dabeaaeb639d8c0708fac2d3707e0c
 Status: Downloaded newer image for sbtscala/scala-sbt:eclipse-temurin-19_36_1.7.2_2.13.10
  ---&gt; 76808e2ea8df
-Step 2/5 : RUN :
- ---&gt; Running in 987ca2eb9ad7
-Removing intermediate container 987ca2eb9ad7
- ---&gt; 71ebe5d9b4dd
-Step 3/5 : LABEL org.opencontainers.image.description="Companion container for running component example_scala"
- ---&gt; Running in f0c0995bdc3b
-Removing intermediate container f0c0995bdc3b
- ---&gt; e507daa3eaae
-Step 4/5 : LABEL org.opencontainers.image.created="2023-05-11T11:27:14Z"
- ---&gt; Running in 625c76d14a27
-Removing intermediate container 625c76d14a27
- ---&gt; 69c7469a1ca7
-Step 5/5 : LABEL org.opencontainers.image.version="test"
- ---&gt; Running in 4f0e8fc6ff76
-Removing intermediate container 4f0e8fc6ff76
- ---&gt; 6da2b4e453ae
-Successfully built 6da2b4e453ae
+Step 2/6 : ENTRYPOINT []
+ ---&gt; Running in fac6b4ea9fef
+Removing intermediate container fac6b4ea9fef
+ ---&gt; 50c9c38fba1f
+Step 3/6 : RUN :
+ ---&gt; Running in 9d3afecdf6c4
+Removing intermediate container 9d3afecdf6c4
+ ---&gt; 03319d516d35
+Step 4/6 : LABEL org.opencontainers.image.description="Companion container for running component example_scala"
+ ---&gt; Running in 9e3d6c4f7d63
+Removing intermediate container 9e3d6c4f7d63
+ ---&gt; c1f803c60f7f
+Step 5/6 : LABEL org.opencontainers.image.created="2023-06-01T09:03:19Z"
+ ---&gt; Running in 906232f9f2ee
+Removing intermediate container 906232f9f2ee
+ ---&gt; 0949efb29b30
+Step 6/6 : LABEL org.opencontainers.image.version="test"
+ ---&gt; Running in e6d5931f1823
+Removing intermediate container e6d5931f1823
+ ---&gt; 63e879164ff7
+Successfully built 63e879164ff7
 Successfully tagged example_scala:test
 ====================================================================
-+/tmp/viash_test_example_scala13267584675608611387/test_test/test_executable
++/tmp/viash_test_example_scala18304840316104432082/test_test/test_executable
 warning: 1 deprecation
 warning: 1 deprecation (since 2.13.3)
 warning: 2 deprecations in total; re-run with -deprecation for details
