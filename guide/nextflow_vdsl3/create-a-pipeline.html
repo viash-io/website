@@ -172,7 +172,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
  <span class="dropdown-text">Report a website issue</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../cheatsheet/viash_cheatsheet_v1_0.pdf" rel="" target=""><i class="bi bi-card-list" role="img">
+    <a class="dropdown-item" href="../../cheatsheet/viash_cheatsheet_v1_1.pdf" rel="" target=""><i class="bi bi-card-list" role="img">
 </i> 
  <span class="dropdown-text">Cheat sheet</span></a>
   </li>  
@@ -417,8 +417,8 @@ Note
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns build <span class="at">--setup</span> cachedbuild <span class="at">--parallel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Exporting take_column (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/take_column
-Exporting combine_columns (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/combine_columns
+<pre><code>Exporting combine_columns (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/combine_columns
+Exporting take_column (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/take_column
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/take_column:dev' with Dockerfile
 Exporting remove_comments (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/remove_comments
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/remove_comments:dev' with Dockerfile
@@ -516,44 +516,39 @@ Exporting combine_columns (demo) =docker=&gt; /home/runner/work/website/website/
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> main.nf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>N E X T F L O W  ~  version 22.10.6
-Launching `main.nf` [agitated_montalcini] DSL2 - revision: 111508427e
+Launching `main.nf` [curious_ekeblad] DSL2 - revision: 111508427e
 [-        ] process &gt; remove_comments:remove_comm... -
 Input: [file1, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]
 Input: [file2, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]
 
 executor &gt;  local (2)
-[72/b353bd] process &gt; remove_comments:remove_comm... [ 50%] 1 of 2
+[51/72e5d2] process &gt; remove_comments:remove_comm... [  0%] 0 of 2
 Input: [file1, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]
 Input: [file2, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]
-Output: [file1, /home/runner/work/website/website/guide/_viash_project_template/work/72/b353bd3f28e7e3678ee230367c2cea/file1.remove_comments.output.tsv]
+Output: [file2, /home/runner/work/website/website/guide/_viash_project_template/work/51/72e5d2910d51b15d37d67ba141fb14/file2.remove_comments.output.tsv]
 
 executor &gt;  local (2)
-[43/e74198] process &gt; remove_comments:remove_comm... [100%] 2 of 2 ✔
+[27/d2896e] process &gt; remove_comments:remove_comm... [100%] 2 of 2 ✔
 Input: [file1, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]
 Input: [file2, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]
-Output: [file1, /home/runner/work/website/website/guide/_viash_project_template/work/72/b353bd3f28e7e3678ee230367c2cea/file1.remove_comments.output.tsv]
-Output: [file2, /home/runner/work/website/website/guide/_viash_project_template/work/43/e7419849a656b24aea1217964daac7/file2.remove_comments.output.tsv]</code></pre>
+Output: [file2, /home/runner/work/website/website/guide/_viash_project_template/work/51/72e5d2910d51b15d37d67ba141fb14/file2.remove_comments.output.tsv]
+Output: [file1, /home/runner/work/website/website/guide/_viash_project_template/work/27/d2896e2cffe79a7980c17d09e15974/file1.remove_comments.output.tsv]</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>output
-├── combined.combine_columns.output
-├── file1.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/72/b353bd3f28e7e3678ee230367c2cea/file1.remove_comments.output.tsv
-└── file2.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/43/e7419849a656b24aea1217964daac7/file2.remove_comments.output.tsv
+├── file1.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/27/d2896e2cffe79a7980c17d09e15974/file1.remove_comments.output.tsv
+└── file2.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/51/72e5d2910d51b15d37d67ba141fb14/file2.remove_comments.output.tsv
 
-0 directories, 3 files</code></pre>
+0 directories, 2 files</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> output/<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>"1" 0.11
-"2" 0.23
-"3" 0.35
-"4" 0.47
-one 0.11    123
+<pre><code>one 0.11    123
 two 0.23    456
 three   0.35    789
 four    0.47    123
