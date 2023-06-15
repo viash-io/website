@@ -1,14 +1,22 @@
 import re
 from pathlib import Path
+import jinja2
 
 ## VIASH START
 par = {
-    'input': "_src/automation/generate_version_blog_pages/test_changelog.md",
-    'output': "output/"
+    'input': '../viash/CHANGELOG.md',
+    'output': 'blog/posts'
+}
+meta = {
+    "resources_dir": "_src/automation/generate_version_blog_pages"
 }
 ## VIASH END
 
+output = Path(par["output"])
 template_file = Path(meta['resources_dir'], "template_blog_page.j2.qmd")
+
+with open(template_file) as f:
+	template = jinja2.Template(f.read())
 
 def bump_md_line(string: str) -> str:
     """ if header, bump header up one level """
@@ -43,21 +51,14 @@ def handle_section(lines: list[str]):
         "changes": "".join(bump_markdown_headers(lines))
     }
 
-    render_jinja_page(par['output'], f'viash-{version}/index.qmd', data)
+    qmd_file = output / f'viash-{version}/index.qmd'
+    render_jinja_page(qmd_file, data)
 
-def render_jinja_page(folder: str, filename: str, data: dict):
-	""" Write data to yaml file and run jinja. """
-	import jinja2
-	
-	qmd_file = Path(folder, filename).with_suffix('.qmd')
-
-	qmd_file.parent.mkdir(parents=True, exist_ok=True)	
-	
-	with open(template_file) as f:
-		template = jinja2.Template(f.read())
-	qmd_content = template.render(kwargs=data)
-	with open(qmd_file, 'w') as f:
-		f.write(qmd_content)
+def render_jinja_page(path: Path, data: dict):
+	"""Run jinja on data and write results to file."""
+	path.parent.mkdir(parents=True, exist_ok=True)	
+	content = template.render(**data)
+	path.write_text(content)
 
 def load_log(changelog_path: str):
     """ Load changelog and split into sections """
