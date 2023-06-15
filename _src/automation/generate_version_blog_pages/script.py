@@ -1,4 +1,4 @@
-import subprocess, re, yaml
+import re
 from pathlib import Path
 
 ## VIASH START
@@ -47,18 +47,17 @@ def handle_section(lines: list[str]):
 
 def render_jinja_page(folder: str, filename: str, data: dict):
 	""" Write data to yaml file and run jinja. """
+	import jinja2
 	
-	full_path = Path(folder, filename)
-	base_dir = full_path.parent
-	yaml_file = Path(base_dir, "_" + full_path.name).with_suffix('.yaml')
-	qmd_file = full_path.with_suffix('.qmd')
+	qmd_file = Path(folder, filename).with_suffix('.qmd')
 
-	base_dir.mkdir(parents=True, exist_ok=True)	
+	qmd_file.parent.mkdir(parents=True, exist_ok=True)	
 	
-	with open(yaml_file, 'w') as outfile:
-		yaml.safe_dump(data, outfile, default_flow_style=False)
-
-	subprocess.run(["jinja2", template_file, yaml_file, "-o", qmd_file])
+	with open(template_file) as f:
+		template = jinja2.Template(f.read())
+	qmd_content = template.render(kwargs=data)
+	with open(qmd_file, 'w') as f:
+		f.write(qmd_content)
 
 def load_log(changelog_path: str):
     """ Load changelog and split into sections """
