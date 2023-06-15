@@ -20,12 +20,6 @@ jobs:
       RENV_PATHS_ROOT: ~/.local/share/renv
 
     steps:
-      # need to maximise build space for docker images
-      - name: Maximize build disk space
-        uses: easimon/maximize-build-space@v7
-        with:
-          root-reserve-mb: 16000
-          temp-reserve-mb: 1000
 
       - uses: actions/checkout@v3
 
@@ -48,7 +42,7 @@ jobs:
       #   with:
       #     python-version: "3.10"
 
-      - uses: data-intuitive/setup-nextflow@v1.3.1
+      - uses: data-intuitive/setup-nextflow@test
       
       - uses: viash-io/viash-actions/setup@v3
 
@@ -60,6 +54,13 @@ jobs:
         uses: quarto-dev/quarto-actions/setup@v2
         with:
           tinytex: true 
+
+      # need to maximise build space for docker images
+      - name: Maximize build disk space
+        uses: easimon/maximize-build-space@v7
+        with:
+          root-reserve-mb: 16000
+          temp-reserve-mb: 1000
 
       - name: Render with Quarto
         shell: bash -l {0}  
