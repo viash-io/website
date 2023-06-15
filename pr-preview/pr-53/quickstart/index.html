@@ -294,15 +294,15 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Exporting remove_comments (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/remove_comments
-Exporting combine_columns (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/combine_columns
-Exporting take_column (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/take_column
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/take_column:dev' with Dockerfile
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/remove_comments:dev' with Dockerfile
+<pre><code>Exporting take_column (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/take_column
 Exporting remove_comments (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/remove_comments
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/take_column:dev' with Dockerfile
 Exporting combine_columns (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/combine_columns
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/combine_columns:dev' with Dockerfile
+Exporting combine_columns (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/combine_columns
 Exporting take_column (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/take_column
+Exporting remove_comments (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/remove_comments
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/remove_comments:dev' with Dockerfile
 [32mAll 6 configs built successfully[0m</code></pre>
 </div>
 </div>
@@ -316,17 +316,17 @@ Output
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>total 72
--rw-r--r-- 1 runner docker   747 Jun 15 12:29 CHANGELOG.md
--rw-r--r-- 1 runner docker 32219 Jun 15 12:29 LICENSE.md
--rw-r--r-- 1 runner docker  1094 Jun 15 12:29 README.md
--rw-r--r-- 1 runner docker  1125 Jun 15 12:29 README.qmd
--rw-r--r-- 1 runner docker   415 Jun 15 12:29 _viash.yaml
--rw-r--r-- 1 runner docker   245 Jun 15 12:29 main.nf
--rw-r--r-- 1 runner docker   222 Jun 15 12:29 nextflow.config
-drwxr-xr-x 2 runner docker  4096 Jun 15 12:29 resources_test
-drwxr-xr-x 3 runner docker  4096 Jun 15 12:29 src
-drwxr-xr-x 4 runner docker  4096 Jun 15 12:30 target
-drwxr-xr-x 3 runner docker  4096 Jun 15 12:29 workflows</code></pre>
+-rw-r--r-- 1 runner docker   747 Jun 15 12:45 CHANGELOG.md
+-rw-r--r-- 1 runner docker 32219 Jun 15 12:45 LICENSE.md
+-rw-r--r-- 1 runner docker  1094 Jun 15 12:45 README.md
+-rw-r--r-- 1 runner docker  1125 Jun 15 12:45 README.qmd
+-rw-r--r-- 1 runner docker   415 Jun 15 12:45 _viash.yaml
+-rw-r--r-- 1 runner docker   245 Jun 15 12:45 main.nf
+-rw-r--r-- 1 runner docker   222 Jun 15 12:45 nextflow.config
+drwxr-xr-x 2 runner docker  4096 Jun 15 12:45 resources_test
+drwxr-xr-x 3 runner docker  4096 Jun 15 12:45 src
+drwxr-xr-x 4 runner docker  4096 Jun 15 12:45 target
+drwxr-xr-x 3 runner docker  4096 Jun 15 12:45 workflows</code></pre>
 </div>
 </div>
 </details>
@@ -346,44 +346,49 @@ Output
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>N E X T F L O W  ~  version 23.04.2
-Launching `workflows/demo_pipeline/main.nf` [boring_jepsen] DSL2 - revision: c65d4e7bba
+Launching `workflows/demo_pipeline/main.nf` [modest_kimura] DSL2 - revision: c65d4e7bba
 [-        ] process &gt; remove_comments:remove_comm... -
+[-        ] process &gt; take_column:take_column_pro... -
 
 [-        ] process &gt; remove_comments:remove_comm... -
+[-        ] process &gt; take_column:take_column_pro... -
+[-        ] process &gt; combine_columns:combine_col... -
+
+[-        ] process &gt; remove_comments:remove_comm... [  0%] 0 of 1
 [-        ] process &gt; take_column:take_column_pro... -
 [-        ] process &gt; combine_columns:combine_col... -
 
 executor &gt;  local (1)
-[3b/130496] process &gt; remove_comments:remove_comm... [  0%] 0 of 1
+[c2/d742cf] process &gt; remove_comments:remove_comm... [  0%] 0 of 1
 [-        ] process &gt; take_column:take_column_pro... -
 [-        ] process &gt; combine_columns:combine_col... -
 
 executor &gt;  local (2)
-[3b/130496] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
-[73/3bc0f3] process &gt; take_column:take_column_pro... [  0%] 0 of 1
+[c2/d742cf] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
+[68/bf55a7] process &gt; take_column:take_column_pro... [  0%] 0 of 1
 [-        ] process &gt; combine_columns:combine_col... -
 
 executor &gt;  local (2)
-[3b/130496] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
-[73/3bc0f3] process &gt; take_column:take_column_pro... [  0%] 0 of 1
+[c2/d742cf] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
+[68/bf55a7] process &gt; take_column:take_column_pro... [  0%] 0 of 1
 [-        ] process &gt; combine_columns:combine_col... -
 
 executor &gt;  local (3)
-[3b/130496] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
-[73/3bc0f3] process &gt; take_column:take_column_pro... [100%] 1 of 1 ✔
-[9d/069f78] process &gt; combine_columns:combine_col... [  0%] 0 of 1
+[c2/d742cf] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
+[68/bf55a7] process &gt; take_column:take_column_pro... [100%] 1 of 1 ✔
+[20/118214] process &gt; combine_columns:combine_col... [  0%] 0 of 1
 
 executor &gt;  local (3)
-[3b/130496] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
-[73/3bc0f3] process &gt; take_column:take_column_pro... [100%] 1 of 1 ✔
-[9d/069f78] process &gt; combine_columns:combine_col... [100%] 1 of 1 ✔
-Output: [combined, /home/runner/work/website/website/guide/_viash_project_template/work/9d/069f78e1b25a98e963187e039daf41/combined.combine_columns.output]
+[c2/d742cf] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
+[68/bf55a7] process &gt; take_column:take_column_pro... [100%] 1 of 1 ✔
+[20/118214] process &gt; combine_columns:combine_col... [100%] 1 of 1 ✔
+Output: [combined, /home/runner/work/website/website/guide/_viash_project_template/work/20/11821407fbef76a2926fe1a5b85d42/combined.combine_columns.output]
 
 executor &gt;  local (3)
-[3b/130496] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
-[73/3bc0f3] process &gt; take_column:take_column_pro... [100%] 1 of 1 ✔
-[9d/069f78] process &gt; combine_columns:combine_col... [100%] 1 of 1 ✔
-Output: [combined, /home/runner/work/website/website/guide/_viash_project_template/work/9d/069f78e1b25a98e963187e039daf41/combined.combine_columns.output]</code></pre>
+[c2/d742cf] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
+[68/bf55a7] process &gt; take_column:take_column_pro... [100%] 1 of 1 ✔
+[20/118214] process &gt; combine_columns:combine_col... [100%] 1 of 1 ✔
+Output: [combined, /home/runner/work/website/website/guide/_viash_project_template/work/20/11821407fbef76a2926fe1a5b85d42/combined.combine_columns.output]</code></pre>
 </div>
 </div>
 </details>
