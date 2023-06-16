@@ -20,9 +20,8 @@ jobs:
       RENV_PATHS_ROOT: ~/.local/share/renv
 
     steps:
-      # need to maximise build space for docker images
-      - name: Maximize build disk space
-        uses: data-intuitive/maximize-build-space@master
+      # need to get more space for docker images
+      - uses: data-intuitive/reclaim-the-bytes@v1
         
       - uses: actions/checkout@v3
 
@@ -45,7 +44,7 @@ jobs:
       #   with:
       #     python-version: "3.10"
 
-      - uses: data-intuitive/setup-nextflow@test
+      - uses: nf-core/setup-nextflow@v1
       
       - uses: viash-io/viash-actions/setup@v3
 
