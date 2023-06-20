@@ -20,12 +20,9 @@ jobs:
       RENV_PATHS_ROOT: ~/.local/share/renv
 
     steps:
-      # need to maximise build space for docker images
-      - name: Maximize build disk space
-        uses: easimon/maximize-build-space@v6
-        with:
-          root-reserve-mb: 4000
-
+      # need to get more space for docker images
+      - uses: data-intuitive/reclaim-the-bytes@v1
+        
       - uses: actions/checkout@v3
 
       - name: Replace Docker with podman
@@ -47,17 +44,7 @@ jobs:
       #   with:
       #     python-version: "3.10"
 
-      # - uses: nf-core/setup-nextflow@v1.2.0
-      - name: Install Nextflow
-        env:
-            CAPSULE_LOG: none
-            NXF_VER: "22.10.6"
-        run: |
-          mkdir $RUNNER_TEMP/nextflow
-          cd $RUNNER_TEMP/nextflow
-          wget -qO- get.nextflow.io | bash
-          sudo ln -s $RUNNER_TEMP/nextflow/nextflow /usr/local/bin/nextflow
-          nextflow -version
+      - uses: nf-core/setup-nextflow@v1
       
       - uses: viash-io/viash-actions/setup@v3
 
