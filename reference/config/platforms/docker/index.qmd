@@ -24,6 +24,8 @@ platforms:
 
 **Type**: `ApkRequirements`
 
+**Default**: `Empty`
+
 ::: {.callout-warning}
 Deprecated since 0.5.15. 
 Removed since 0.7.0. Use `setup` instead, e.g. `{type: docker, setup: [{ type: apk, ... }]}`. Will be removed.
@@ -42,6 +44,8 @@ setup:
 ## apt
 
 **Type**: `AptRequirements`
+
+**Default**: `Empty`
 
 ::: {.callout-warning}
 Deprecated since 0.5.15. 
@@ -62,6 +66,8 @@ setup:
 
 **Type**: `Boolean`
 
+**Default**: `True`
+
 In Linux, files created by a Docker container will be owned by `root`. With `chown: true`, Viash will automatically change the ownership of output files (arguments with `type: file` and `direction: output`) to the user running the Viash command after execution of the component. Default value: `true`.
 
 **Example:**
@@ -72,7 +78,11 @@ chown: false
 
 ## cmd
 
-**Type**: `Option[Either[String,List of String]]`
+**Type**: `Either
+  - String
+  - List of String`
+
+**Default**: `Empty`
 
 Set the default command being executed when running the Docker container.
 
@@ -93,6 +103,8 @@ cmd: "echo $HOME"
 ## docker
 
 **Type**: `DockerRequirements`
+
+**Default**: `Empty`
 
 ::: {.callout-warning}
 Deprecated since 0.5.15. 
@@ -116,7 +128,11 @@ setup:
 
 ## entrypoint
 
-**Type**: `Option[Either[String,List of String]]`
+**Type**: `Either
+  - String
+  - List of String`
+
+**Default**: `[]`
 
 Override the entrypoint of the base container. Default set `ENTRYPOINT []`.
 
@@ -144,6 +160,8 @@ entrypoint: "top -b"
 
 **Type**: `String`
 
+**Default**: `docker`
+
 As with all platforms, you can give a platform a different name. By specifying `id: foo`, you can target this platform (only) by specifying `-p foo` in any of the Viash commands.
 
 **Example:**
@@ -168,6 +186,8 @@ image: "bash:4.0"
 
 **Type**: `String`
 
+**Default**: `/`
+
 The separator between the namespace and the name of the component, used for determining the image name. Default: `"/"`.
 
 **Example:**
@@ -180,11 +200,15 @@ namespace_separator: "_"
 
 **Type**: `String`
 
+**Default**: `Empty`
+
 Name of a container's [organization](https://docs.docker.com/docker-hub/orgs/).
 
 ## port
 
 **Type**: `String` / `List of String`
+
+**Default**: `Empty`
 
 A list of enabled ports. This doesn't change the Dockerfile but gets added as a command-line argument at runtime.
 
@@ -201,6 +225,8 @@ port:
 
 **Type**: `Boolean`
 
+**Default**: `Empty`
+
 ::: {.callout-warning}
 Deprecated since 0.6.3. 
 Removed since 0.7.0. Add a `privileged` flag in `run_args` instead, e.g. `{type: docker, run_args: "--privileged"}`.
@@ -210,6 +236,8 @@ Adds a `privileged` flag to the docker run.
 ## python
 
 **Type**: `PythonRequirements`
+
+**Default**: `Empty`
 
 ::: {.callout-warning}
 Deprecated since 0.5.15. 
@@ -237,6 +265,8 @@ setup:
 
 **Type**: `RRequirements`
 
+**Default**: `Empty`
+
 ::: {.callout-warning}
 Deprecated since 0.5.15. 
 Removed since 0.7.0. Use `setup` instead, e.g. `{type: docker, setup: [{ type: r, ... }]}`. Will be removed.
@@ -263,6 +293,8 @@ setup:
 
 **Type**: `String`
 
+**Default**: `Empty`
+
 The URL to the a [custom Docker registry](https://docs.docker.com/registry/)
 
 **Example:**
@@ -275,17 +307,23 @@ registry: https://my-docker-registry.org
 
 **Type**: `DockerResolveVolume`
 
+**Default**: `Automatic`
+
 Enables or disables automatic volume mapping. Enabled when set to `Automatic` or disabled when set to `Manual`. Default: `Automatic`.
 
 ## run_args
 
 **Type**: `String` / `List of String`
 
+**Default**: `Empty`
+
 Add [docker run](https://docs.docker.com/engine/reference/run/) arguments.
 
 ## setup
 
 **Type**: `List of Requirements`
+
+**Default**: `Empty`
 
 A list of requirements for installing the following types of packages:
 
@@ -304,6 +342,8 @@ The order in which these dependencies are specified determines the order in whic
 ## setup_strategy
 
 **Type**: `DockerSetupStrategy`
+
+**Default**: `ifneedbepullelsecachedbuild`
 
 The Docker setup strategy to use when building a container.
 
@@ -335,6 +375,8 @@ setup_strategy: alwaysbuild
 
 **Type**: `String`
 
+**Default**: `Empty`
+
 Specify a Docker image based on its tag.
 
 **Example:**
@@ -346,6 +388,8 @@ tag: 4.0
 ## target_image
 
 **Type**: `String`
+
+**Default**: `Empty`
 
 If anything is specified in the setup section, running the `---setup` will result in an image with the name of `<target_image>:<version>`. If nothing is specified in the `setup` section, simply `image` will be used. Advanced usage only.
 
@@ -359,6 +403,8 @@ target_image: myfoo
 
 **Type**: `String`
 
+**Default**: `Empty`
+
 The source of the target image. This is used for defining labels in the dockerfile.
 
 **Example:**
@@ -370,6 +416,8 @@ target_image_source: https://github.com/foo/bar
 ## target_organization
 
 **Type**: `String`
+
+**Default**: `Empty`
 
 The organization set in the resulting image. Advanced usage only.
 
@@ -383,6 +431,8 @@ target_organization: viash-io
 
 **Type**: `String`
 
+**Default**: `Empty`
+
 The URL where the resulting image will be pushed to. Advanced usage only.
 
 **Example:**
@@ -394,6 +444,8 @@ target_registry: https://my-docker-registry.org
 ## target_tag
 
 **Type**: `String`
+
+**Default**: `Empty`
 
 The tag the resulting image gets. Advanced usage only.
 
@@ -407,6 +459,8 @@ target_tag: 0.5.0
 
 **Type**: `List of Requirements`
 
+**Default**: `Empty`
+
 Additional requirements specific for running unit tests.
 
 ## type
@@ -419,6 +473,8 @@ Specifies the type of the platform.
 
 **Type**: `String`
 
+**Default**: `Empty`
+
 The working directory when starting the container. This doesn't change the Dockerfile but gets added as a command-line argument at runtime.
 
 **Example:**
@@ -430,6 +486,8 @@ workdir: /home/user
 ## yum
 
 **Type**: `YumRequirements`
+
+**Default**: `Empty`
 
 ::: {.callout-warning}
 Deprecated since 0.5.15. 
@@ -445,4 +503,3 @@ setup:
     packages: [ sl ]
 
 ```
-

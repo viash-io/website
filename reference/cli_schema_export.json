@@ -143,7 +143,7 @@
     "name" : "test",
     "bannerCommand" : "viash test",
     "bannerDescription" : "Test the component using the tests defined in the viash config file.",
-    "bannerUsage" : "viash test config.vsh.yaml [-p docker] [-k true/false]",
+    "bannerUsage" : "viash test config.vsh.yaml [-p docker] [-k true/false] [--setup cachedbuild]",
     "footer" : "\nThe temporary directory can be altered by setting the VIASH_TEMP directory. Example:\n  export VIASH_TEMP=/home/myuser/.viash_temp\n  viash run meta.vsh.yaml",
     "subcommands" : [
     ],
@@ -200,6 +200,16 @@
       {
         "name" : "memory",
         "descr" : "The maximum amount of memory a component is allowed to allocate. Unit must be one of B, KB, MB, GB, TB or PB.",
+        "required" : false,
+        "argName" : "arg",
+        "hidden" : false,
+        "type" : "String",
+        "optType" : "opt"
+      },
+      {
+        "name" : "setup",
+        "short" : "s",
+        "descr" : "Which @[setup strategy](docker_setup_strategy) for creating the container to use [Docker Platform only].",
         "required" : false,
         "argName" : "arg",
         "hidden" : false,
@@ -336,7 +346,7 @@
         "name" : "test",
         "bannerCommand" : "viash ns test",
         "bannerDescription" : "Test a namespace containing many viash config files.",
-        "bannerUsage" : "viash ns test [-n nmspc] [-s src] [-p docker] [--parallel] [--tsv file.tsv] [--append]",
+        "bannerUsage" : "viash ns test [-n nmspc] [-s src] [-p docker] [--parallel] [--tsv file.tsv] [--setup cachedbuild] [--append]",
         "subcommands" : [
         ],
         "opts" : [
@@ -433,6 +443,15 @@
           {
             "name" : "memory",
             "descr" : "The maximum amount of memory a component is allowed to allocate. Unit must be one of B, KB, MB, GB, TB or PB.",
+            "required" : false,
+            "argName" : "arg",
+            "hidden" : false,
+            "type" : "String",
+            "optType" : "opt"
+          },
+          {
+            "name" : "setup",
+            "descr" : "Which @[setup strategy](docker_setup_strategy) for creating the container to use [Docker Platform only].",
             "required" : false,
             "argName" : "arg",
             "hidden" : false,

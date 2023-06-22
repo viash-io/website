@@ -22,11 +22,13 @@ Adds the resources directory to the PATH variable when set to true. This is set 
 
 **Type**: `List of ArgumentGroup`
 
+**Default**: `Empty`
+
 A grouping of the [arguments](/reference/config/functionality/arguments/#), used to display the help message.
 
  - `name: foo`, the name of the argument group. 
  - `description: Description of foo`, a description of the argument group. Multiline descriptions are supported.
- - `arguments: [arg1, arg2, ...]`, list of the arguments names.
+ - `arguments: [arg1, arg2, ...]`, list of the arguments.
 
 
 
@@ -79,6 +81,8 @@ component_name
 
 **Type**: `List of Argument`
 
+**Default**: `Empty`
+
 A list of [arguments](/reference/config/functionality/arguments/#) for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:  
 
  - [string](/reference/config/functionality/arguments/string.html)
@@ -112,6 +116,8 @@ arguments:
 ## authors
 
 **Type**: `List of Author`
+
+**Default**: `Empty`
 
 A list of [authors](/reference/config/functionality/author.html). An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.
 
@@ -151,6 +157,8 @@ authors:
 
 **Type**: `String`
 
+**Default**: `Empty`
+
 A description of the component. This will be displayed with `--help`.
 
 **Example:**
@@ -175,6 +183,8 @@ Setting this to false with disable this component when using namespaces.
 ## info
 
 **Type**: `Json`
+
+**Default**: `Empty`
 
 Structured information. Can be any shape: a string, vector, map or even nested map.
 
@@ -233,6 +243,8 @@ name: this_is_my_component
 
 **Type**: `String`
 
+**Default**: `Empty`
+
 Namespace this component is a part of. See the [Namespaces guide](/guide/project/structure.html#grouping-components-in-namespaces) for more information on namespaces.
 
 **Example:**
@@ -276,6 +288,8 @@ component_with_outputs
 
 **Type**: `ComputationalRequirements`
 
+**Default**: `Empty`
+
 [Computational requirements](/reference/config/functionality/computationalRequirements.html) related to running the component. 
 `cpus` specifies the maximum number of (logical) cpus a component is allowed to use., whereas
 `memory` specifies the maximum amount of memory a component is allowed to allicate. Memory units must be
@@ -293,6 +307,8 @@ requirements:
 ## resources
 
 **Type**: `List of Resource`
+
+**Default**: `Empty`
 
 [Resources](/reference/config/functionality/resources/#) are files that support the component. The first resource should be [a script](/guide/component/create-component.html#create-a-script) that will be executed when the functionality is run. Additional resources will be copied to the same directory.
 
@@ -320,11 +336,15 @@ resources:
 
 **Type**: `Status`
 
+**Default**: `Enabled`
+
 Allows setting a component to active, deprecated or disabled.
 
 ## test_resources
 
 **Type**: `List of Resource`
+
+**Default**: `Empty`
 
 One or more [scripts](/guide/component/create-component.html#create-a-script) to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing. See [Unit Testing](/guide/component/unit-testing.html) for more info.
 
@@ -354,6 +374,8 @@ One or more Bash/R/Python scripts to be used to test the component behaviour whe
 
 **Type**: `String`
 
+**Default**: `Empty`
+
 A description on how to use the component. This will be displayed with `--help` under the 'Usage:' section.
 
 **Example:**
@@ -366,6 +388,8 @@ usage: Place the executable in a directory containing TSV files and run it
 
 **Type**: `String`
 
+**Default**: `Empty`
+
 Version of the component. This field will be used to version the executable and the Docker container.
 
 **Example:**
@@ -373,4 +397,3 @@ Version of the component. This field will be used to version the executable and 
 ```yaml
 version: 0.8
 ```
-
