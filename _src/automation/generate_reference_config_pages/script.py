@@ -30,31 +30,33 @@ def read_json_entries():
 	with open(par['input'], 'r') as infile:
 		viash_json = json.load(infile)
 
-	for topic, topic_json in viash_json.items():
-		if isinstance(topic_json, dict):
-			for subtopic, subtopic_json in topic_json.items():
-				generate_page(topic, subtopic, subtopic_json)
-		else:
-			generate_page(".", topic, topic_json)
+	for topic_json in viash_json:
+		generate_page(topic_json)
 
-def generate_page(topic: str, subtopic: str, json_data: list):
+def generate_page(json_data: list):
 	""" Receives JSON data, does some minor data manipulation and writes to yaml & qmd. """
 
-	# if topic == 'arguments': # Keep title of argument pages as-is
-	# 	title = subtopic
-	# else:
-	title = re.sub(r"(\w)([A-Z])", r"\1 \2", subtopic).title() # split words and capitalize
-
+	this_parameter = {}
 	# Fix description markdown keywords to links
 	for d in json_data:
 		if d['name'] == '__merge__':
 			d['name'] = '`__merge__' # Bump __merge__ behind __this__ when sorted
+		if d['name'] == '__this__':
+			this_parameter = d
 		if 'description' in d:
 			d['description'] = replace_keywords(d["description"])
 
-	page_data = {"topic": topic, "title": title, "data": json_data}
+	topic = this_parameter['type']
 
-	filename = f"{topic}/{subtopic}"
+	# split words and capitalize
+	# do some extra substitutions to clean things up a bit
+	title = re.sub(r"(\w)([A-Z])", r"\1 \2", topic).title() \
+		.replace("Java Script", "JavaScript") \
+		.replace("C Sharp", "C#") \
+		.replace(" Argument", "")
+	filename = topic
+
+	page_data = {"title": title, "data": json_data}
 
 	try:
 		page_data['order'] = config_pages_settings['order'][filename]
