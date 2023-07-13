@@ -20,48 +20,6 @@ platforms:
 
 ```
 
-## apk
-
-**Type**: `ApkRequirements`
-
-**Default**: `Empty`
-
-::: {.callout-warning}
-Deprecated since 0.5.15. 
-Removed since 0.7.0. Use `setup` instead, e.g. `{type: docker, setup: [{ type: apk, ... }]}`. Will be removed.
-:::
-Specify which apk packages should be available in order to run the component.
-
-**Example:**
-
-```yaml
-setup:
-  - type: apk
-    packages: [ sl ]
-
-```
-
-## apt
-
-**Type**: `AptRequirements`
-
-**Default**: `Empty`
-
-::: {.callout-warning}
-Deprecated since 0.5.15. 
-Removed since 0.7.0. Use `setup` instead, e.g. `{type: docker, setup: [{ type: apt, ... }]}`. Will be removed.
-:::
-Specify which apt packages should be available in order to run the component.
-
-**Example:**
-
-```yaml
-setup:
-  - type: apt
-    packages: [ sl ]
-
-```
-
 ## chown
 
 **Type**: `Boolean`
@@ -98,32 +56,6 @@ Set CMD using the shell format.
 
 ```yaml
 cmd: "echo $HOME"
-```
-
-## docker
-
-**Type**: `DockerRequirements`
-
-**Default**: `Empty`
-
-::: {.callout-warning}
-Deprecated since 0.5.15. 
-Removed since 0.7.0. Use `setup` instead, e.g. `{type: docker, setup: [{ type: docker, ... }]}`. Will be removed.
-:::
-Specify which Docker commands should be run during setup.
-
-**Example:**
-
-```yaml
-setup:
-  - type: docker
-    build_args: [ GITHUB_PAT=hello_world ]
-    run: [ git clone ... ]
-    add: [ "http://foo.bar ." ]
-    copy: [ "http://foo.bar ." ]
-    resources: 
-      - resource.txt /path/to/resource.txt
-
 ```
 
 ## entrypoint
@@ -218,74 +150,6 @@ A list of enabled ports. This doesn't change the Dockerfile but gets added as a 
 port:
   - 80
   - 8080
-
-```
-
-## privileged
-
-**Type**: `Boolean`
-
-**Default**: `Empty`
-
-::: {.callout-warning}
-Deprecated since 0.6.3. 
-Removed since 0.7.0. Add a `privileged` flag in `run_args` instead, e.g. `{type: docker, run_args: "--privileged"}`.
-:::
-Adds a `privileged` flag to the docker run.
-
-## python
-
-**Type**: `PythonRequirements`
-
-**Default**: `Empty`
-
-::: {.callout-warning}
-Deprecated since 0.5.15. 
-Removed since 0.7.0. Use `setup` instead, e.g. `{type: docker, setup: [{ type: python, ... }]}`. Will be removed.
-:::
-Specify which Python packages should be available in order to run the component.
-
-**Example:**
-
-```yaml
-setup:
-  - type: python
-    pip: [ numpy ]
-    git: [ https://some.git.repository/org/repo ]
-    github: [ jkbr/httpie ]
-    gitlab: [ foo/bar ]
-    mercurial: [ http://... ]
-    svn: [ http://...]
-    bazaar: [ http://... ]
-    url: [ http://... ]
-
-```
-
-## r
-
-**Type**: `RRequirements`
-
-**Default**: `Empty`
-
-::: {.callout-warning}
-Deprecated since 0.5.15. 
-Removed since 0.7.0. Use `setup` instead, e.g. `{type: docker, setup: [{ type: r, ... }]}`. Will be removed.
-:::
-Specify which R packages should be available in order to run the component.
-
-**Example:**
-
-```yaml
-setup: 
-  - type: r
-    cran: [ dynutils ]
-    bioc: [ AnnotationDbi ]
-    git: [ https://some.git.repository/org/repo ]
-    github: [ rcannood/SCORPIUS ]
-    gitlab: [ org/package ]
-    svn: [ https://path.to.svn/group/repo ]
-    url: [ https://github.com/hadley/stringr/archive/HEAD.zip ]
-    script: [ 'devtools::install(".")' ]
 
 ```
 
@@ -481,25 +345,4 @@ The working directory when starting the container. This doesn't change the Docke
 
 ```yaml
 workdir: /home/user
-```
-
-## yum
-
-**Type**: `YumRequirements`
-
-**Default**: `Empty`
-
-::: {.callout-warning}
-Deprecated since 0.5.15. 
-Removed since 0.7.0. Use `setup` instead, e.g. `{type: docker, setup: [{ type: yum, ... }]}`. Will be removed.
-:::
-Specify which yum packages should be available in order to run the component.
-
-**Example:**
-
-```yaml
-setup:
-  - type: yum
-    packages: [ sl ]
-
 ```
