@@ -1,6 +1,6 @@
 ---
-title: Create a module
-order: 20
+title: Create and use a module
+order: 10
 ---
 
 
@@ -52,45 +52,41 @@ pwalk(langs, function(id, label, example_config, ...) {
 ```
 :::
 
-## Build the VDSL3 module
+## Generating a VDSL3 module
 
 We will now turn the Viash component into a VDSL3 module. By default, the `viash build` command will select the first platform in the list of platforms. To select the `nextflow` platform, use the `--platform nextflow` argument, or `-p nextflow` for short.
 
-::: {.panel-tabset}
 ```{r viash-build-nxf}
 #| echo: false
 #| output: asis
-langs <- langs %>% filter(id == "bash")
-pwalk(langs, function(id, label, config_path, script_path, ...) {
-  qrt(
-    "## {% label %}
-    |
-    |```{bash build-example}
-    |viash build config.vsh.yaml -o target -p nextflow
-    |```
-    |
-    |This will generate a Nextflow module in the `target/` directory:
-    |
-    |```{bash view-tree}
-    |tree target
-    |```
-    |", 
-    .dir = paste0(temp_dir, "/", id)
-  )
-})
+id <- "bash"
+qrt(
+  "```{bash build-example}
+  |viash build config.vsh.yaml -o target -p nextflow
+  |```
+  |
+  |This will generate a Nextflow module in the `target/` directory:
+  |
+  |```{bash view-tree}
+  |tree target
+  |```
+  |", 
+  .dir = paste0(temp_dir, "/", id)
+)
 ```
-:::
 
-This `main.nf` file is both a **standalone Nextflow pipeline** and a module which can be used as **part of another pipeline**.
+This `main.nf` file is both a [**standalone Nextflow pipeline**](run-a-module.qmd) and a module which can be imported as [**part of another pipeline**](import-a-module.qmd).
 
 :::{.callout-tip}
-You can also use the `viash ns build` command to build all of the platforms in one go. Give it a try! More information in the following section.
+In larger proejcts it's recommended to use the [`viash ns build`](/reference/cli/ns_build.qmd) command to [build all of the components](/guide/project/batch-processing.qmd) in one go. Give it a try!
 :::
 
-## Module as a standalone pipeline
+## Running a module as a standalone pipeline
 
-When VDSL3 modules are used as a standalone pipeline, you need to specify the input parameters and a `--publish_dir` parameter,
-as Nextflow will automatically choose the parameter names of the output files.
+
+Unlike typical Nextflow modules, VDSL3 modules can actually be used as a standalone pipeline.
+
+To run a VDSL3 module as a standalone pipeline, you need to specify the input parameters and a `--publish_dir` parameter, as Nextflow will automatically choose the parameter names of the output files.
 
 ```{r nextflow-run, echo=FALSE, output="asis"}
 id <- "bash"
@@ -177,33 +173,58 @@ Instead of a YAML, you can also pass a JSON or a CSV to the `--param_list`
 parameter.
 :::
 
+
 ## Module as part of a pipeline
 
 This module can also be used as part of a Nextflow pipeline.
 Below is a short preview of what this looks like.
 
 ```groovy
-import { example_bash } from "target/main.nf"
+include { mymodule1 } from 'target/nextflow/mymodule1/main.nf'
+include { mymodule2 } from 'target/nextflow/mymodule2/main.nf'
 
-Channel.fromList([
-  ["sample1", file("sample1.txt")],
-  ["sample2", file("sample2.txt")],
-  ["sample3", file("sample3.txt")]
-])
-  | view { it -> "input: $it" }
-  | example_bash
-  | view { it -> "output: $it" }
+workflow {
+  Channel.fromList([
+    [
+      // a unique identifier for this tuple
+      "myid", 
+      // the state for this tuple
+      [
+        input: file("in.txt"),
+        module1_k: 10,
+        module2_k: 4
+      ]
+    ]
+  ])
+    | mymodule1.run(
+      // use a hashmap to define which part of the state is used to run mymodule1
+      fromState: [
+        input: "input",
+        k: "module1_k"
+      ],
+      // use a hashmap to define how the output of mymodule1 is stored back into the state
+      toState: [
+        module1_output: "output"
+      ]
+    )
+    | mymodule2.run(
+      // use a closure to define which data is used to run mymodule2
+      fromState: { id, state -> 
+        [
+          input: state.module1_output,
+          k: state.module2_k
+        ]
+      },
+      // use a closure to return only the output of module2 as a new state
+      toState: { id, output, state ->
+        output
+      },
+      auto: [
+        publish: true
+      ]
+    )
+}
 ```
 
 We will discuss building pipelines with VDSL3 modules in more detail in [Create a pipeline](create-a-pipeline.qmd).
 
-## Improvements over standard Nextflow modules
-
-* No need to write any Nextflow Groovy code, just your script and the Viash config.
-* VDSL3 module are also standalone pipelines.
-* Help documentation is automatically generated.
-* Standardized interface for passing parameter lists.
-* Automatically uses the Docker platform's container.
-
-
-{{< include ../../_includes/_prune_all_images.qmd >}}
