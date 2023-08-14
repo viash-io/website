@@ -1,6 +1,6 @@
 ---
 title: Create a pipeline
-order: 30
+order: 40
 ---
 
 {{< include ../../_includes/_clone_template.qmd >}}
@@ -52,6 +52,40 @@ Once everything is built, a new **target** directory has been created containing
 tree target
 ```
 
+
+## Importing a VDSL3 module
+
+After building a VDSL3 module from A VDSL3 module can be imported just like any other Nextflow module. 
+
+**Example:**
+
+```groovy
+include { mymodule } from 'target/nextflow/mymodule/main.nf'
+```
+
+
+## VDSL3 module interface
+
+VDSL3 modules are actually workflows which take one channel and emit one channel. It expects the channel events to be tuples containing an 'id' and a 'state': `[id, state]`, where `id` is a unique String and `state` is a `Map[String, Object]`. The resulting channel then consists of tuples `[id, new_state]`. 
+
+**Example:**
+
+```groovy
+workflow {
+  Channel.fromList([
+    ["myid", [input: file("in.txt")]]
+  ])
+    | mymodule
+}
+```
+
+:::{.callout-note}
+If the input tuple has more than two elements, the elements after the second element are passed through to the output tuple.
+That is, an input tuple `[id, input, ...]` will result in a tuple `[id, output, ...]` after running the module.
+For example, an input tuple `["foo", [input: file("in.txt")], "bar"]` will result in an output tuple `["foo", [output: file("out.txt")], "bar"]`.
+:::
+
+
 ## Create a pipeline
 
 Below is a first Nextflow pipeline which uses just one VDSL3 module and with hard-coded input parameters (file1 and file2).
@@ -92,26 +126,17 @@ HERE
 main.nf
 ```
 
-## VDSL3 module interface
+<!-- TODO: refactor using the new fromState/toState args -->
 
-It's important to note what the interface of every VDSL3 module is. A VDSL3 module expects an input to be a tuple with the following elements:
-
-* `id` (`String`): A unique identifier used for tracking data objects and for ensuring output filenames are unique.
-* `data` (`Map[String, Any]` or `File`): A named map (or dictionary) used to pass the module's input arguments. If the module only has a 
-  single input file, the file itself can simply be passed.
-* `...` (`Any*`): Any other elements in the tuple simply pass through the module without being altered in any way. For this reason, it is often referred to as the "passthrough" objects.
-
-In turn, a VDSL3 module will return a tuple with the same interface, except that the input data object has been replaced with the output data:
-
-* `id` (`String`): The identifier from the input tuple.
-* `data` (`Map[String, Any]` or `File`): A named map (or dictionary) containing the module's output files. **Important**: If the module only has a single output file, the file itself will be returned.
-* `...` (`Any*`): The passthrough objects from the input tuple (if any).
-
-## What is `.run()`?
+## Customizing VDSL3 modules on the fly
 
 Usually, Nextflow processes are quite static objects. For example, changing its directives can be quite tricky.
 
-The `run()` function is a unique feature for every VDSL3 module which allows dynamically altering the behaviour of a module from within the pipeline. In this case, we use it to set the `publishDir` directive to `"output/"` so the output of that step in the pipeline will be stored as output.
+The `un()` function is a unique feature for every VDSL3 module which allows dynamically altering the behaviour of a module from within the pipeline. For example, we use it to set the `publishDir` directive to `"output/"` so the output of that step in the pipeline will be stored as output.
+
+See the [reference documentation](/reference/nextflow_vdsl3/import_module.qmd#customizing-vdsl3-modules-on-the-fly) for a complete list of arguments of `.run()`.
+
+
 
 ## Run the pipeline
 
