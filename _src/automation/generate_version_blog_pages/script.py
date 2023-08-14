@@ -1,14 +1,22 @@
-import subprocess, re, yaml
+import re
 from pathlib import Path
+import jinja2
 
 ## VIASH START
 par = {
-    'input': "_src/automation/generate_version_blog_pages/test_changelog.md",
-    'output': "output/"
+    'input': '../viash/CHANGELOG.md',
+    'output': 'blog/posts'
+}
+meta = {
+    "resources_dir": "_src/automation/generate_version_blog_pages"
 }
 ## VIASH END
 
+output = Path(par["output"])
 template_file = Path(meta['resources_dir'], "template_blog_page.j2.qmd")
+
+with open(template_file) as f:
+	template = jinja2.Template(f.read())
 
 def bump_md_line(string: str) -> str:
     """ if header, bump header up one level """
@@ -43,22 +51,14 @@ def handle_section(lines: list[str]):
         "changes": "".join(bump_markdown_headers(lines))
     }
 
-    render_jinja_page(par['output'], f'viash-{version}/index.qmd', data)
+    qmd_file = output / f'viash-{version}/index.qmd'
+    render_jinja_page(qmd_file, data)
 
-def render_jinja_page(folder: str, filename: str, data: dict):
-	""" Write data to yaml file and run jinja. """
-	
-	full_path = Path(folder, filename)
-	base_dir = full_path.parent
-	yaml_file = Path(base_dir, "_" + full_path.name).with_suffix('.yaml')
-	qmd_file = full_path.with_suffix('.qmd')
-
-	base_dir.mkdir(parents=True, exist_ok=True)	
-	
-	with open(yaml_file, 'w') as outfile:
-		yaml.safe_dump(data, outfile, default_flow_style=False)
-
-	subprocess.run(["jinja2", template_file, yaml_file, "-o", qmd_file])
+def render_jinja_page(path: Path, data: dict):
+	"""Run jinja on data and write results to file."""
+	path.parent.mkdir(parents=True, exist_ok=True)	
+	content = template.render(**data)
+	path.write_text(content)
 
 def load_log(changelog_path: str):
     """ Load changelog and split into sections """
