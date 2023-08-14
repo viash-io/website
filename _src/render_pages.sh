@@ -12,7 +12,7 @@ echo "Removing reference subfolders but leaving top level files in place"
 rm -rf ./reference/*/
 
 echo "Copying static reference pages"
-cp -r ../viash/static_reference_pages/* ./reference
+cp -r ../viash/docs/reference/* ./reference
 
 echo "Creating cli information"
 viash export cli_schema --output ./reference/cli_schema_export.json --format json
