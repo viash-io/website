@@ -18,7 +18,9 @@ directives:
 
 ## accelerator
 
-**Type**: `Map of String,String`
+**Type**: `Map of String to String`
+
+**Default**: `Empty`
 
 The `accelerator` directive allows you to specify the hardware accelerator requirement for the task execution e.g. GPU processor.
 
@@ -37,6 +39,8 @@ See [`accelerator`](https://www.nextflow.io/docs/latest/process.html#accelerator
 
 **Type**: `String`
 
+**Default**: `Empty`
+
 The `afterScript` directive allows you to execute a custom (Bash) snippet immediately after the main process has run. This may be useful to clean up your staging area.
 
 See [`afterScript`](https://www.nextflow.io/docs/latest/process.html#afterscript).
@@ -52,6 +56,8 @@ source /cluster/bin/cleanup
 
 **Type**: `String`
 
+**Default**: `Empty`
+
 The `beforeScript` directive allows you to execute a custom (Bash) snippet before the main process script is run. This may be useful to initialise the underlying cluster environment or for other custom initialisation.
 
 See [`beforeScript`](https://www.nextflow.io/docs/latest/process.html#beforeScript).
@@ -65,7 +71,11 @@ source /cluster/bin/setup
 
 ## cache
 
-**Type**: `Option[Either of Boolean,String]`
+**Type**: `Either
+  - Boolean
+  - String`
+
+**Default**: `Empty`
 
 The `cache` directive allows you to store the process results to a local cache. When the cache is enabled and the pipeline is launched with the resume option, any following attempt to execute the process, along with the same inputs, will cause the process execution to be skipped, producing the stored data as the actual results.
 
@@ -100,6 +110,8 @@ false
 
 **Type**: `String` / `List of String`
 
+**Default**: `Empty`
+
 The `conda` directive allows for the definition of the process dependencies using the Conda package manager.
 
 Nextflow automatically sets up an environment for the given package names listed by in the `conda` directive.
@@ -123,7 +135,11 @@ See [`conda`](https://www.nextflow.io/docs/latest/process.html#conda).
 
 ## container
 
-**Type**: `Option[Either[Map of String,String,String]]`
+**Type**: `Either
+  - Map of String to String
+  - String`
+
+**Default**: `Empty`
 
 The `container` directive allows you to execute the process script in a Docker container.
 
@@ -156,6 +172,8 @@ This is transformed to `"im:latest"`:
 
 **Type**: `String` / `List of String`
 
+**Default**: `Empty`
+
 The `containerOptions` directive allows you to specify any container execution option supported by the underlying container engine (ie. Docker, Singularity, etc). This can be useful to provide container settings only for a specific process e.g. mount a custom path.
 
 See [`containerOptions`](https://www.nextflow.io/docs/latest/process.html#containeroptions).
@@ -173,7 +191,11 @@ See [`containerOptions`](https://www.nextflow.io/docs/latest/process.html#contai
 
 ## cpus
 
-**Type**: `Option[Either of Int,String]`
+**Type**: `Either
+  - Int
+  - String`
+
+**Default**: `Empty`
 
 The `cpus` directive allows you to define the number of (logical) CPU required by the process' task.
 
@@ -193,6 +215,8 @@ See [`cpus`](https://www.nextflow.io/docs/latest/process.html#cpus).
 ## disk
 
 **Type**: `String`
+
+**Default**: `Empty`
 
 The `disk` directive allows you to define how much local disk storage the process is allowed to use.
 
@@ -219,7 +243,11 @@ See [`disk`](https://www.nextflow.io/docs/latest/process.html#disk).
 
 ## echo
 
-**Type**: `Option[Either of Boolean,String]`
+**Type**: `Either
+  - Boolean
+  - String`
+
+**Default**: `Empty`
 
 By default the stdout produced by the commands executed in all processes is ignored. By setting the `echo` directive to true, you can forward the process stdout to the current top running process stdout file, showing it in the shell terminal.
  
@@ -239,6 +267,8 @@ false
 ## errorStrategy
 
 **Type**: `String`
+
+**Default**: `Empty`
 
 The `errorStrategy` directive allows you to define how an error condition is managed by the process. By default when an error status is returned by the executed script, the process stops immediately. This in turn forces the entire pipeline to terminate.
 
@@ -266,6 +296,8 @@ See [`errorStrategy`](https://www.nextflow.io/docs/latest/process.html#errorstra
 ## executor
 
 **Type**: `String`
+
+**Default**: `Empty`
 
 The `executor` defines the underlying system where processes are executed. By default a process uses the executor defined globally in the nextflow.config file.
 
@@ -308,6 +340,8 @@ See [`executor`](https://www.nextflow.io/docs/latest/process.html#executor).
 
 **Type**: `String` / `List of String`
 
+**Default**: `Empty`
+
 The `label` directive allows the annotation of processes with mnemonic identifier of your choice.
 
 See [`label`](https://www.nextflow.io/docs/latest/process.html#label).
@@ -331,6 +365,8 @@ See [`label`](https://www.nextflow.io/docs/latest/process.html#label).
 
 **Type**: `String`
 
+**Default**: `Empty`
+
  The `machineType` can be used to specify a predefined Google Compute Platform machine type when running using the Google Life Sciences executor.
 
 See [`machineType`](https://www.nextflow.io/docs/latest/process.html#machinetype).
@@ -344,7 +380,11 @@ See [`machineType`](https://www.nextflow.io/docs/latest/process.html#machinetype
 
 ## maxErrors
 
-**Type**: `Option[Either of String,Int]`
+**Type**: `Either
+  - String
+  - Int`
+
+**Default**: `Empty`
 
 The `maxErrors` directive allows you to specify the maximum number of times a process can fail when using the `retry` error strategy. By default this directive is disabled.
 
@@ -363,7 +403,11 @@ See [`maxErrors`](https://www.nextflow.io/docs/latest/process.html#maxerrors).
 
 ## maxForks
 
-**Type**: `Option[Either of String,Int]`
+**Type**: `Either
+  - String
+  - Int`
+
+**Default**: `Empty`
 
 The `maxForks` directive allows you to define the maximum number of process instances that can be executed in parallel. By default this value is equals to the number of CPU cores available minus 1.
 
@@ -384,7 +428,11 @@ See [`maxForks`](https://www.nextflow.io/docs/latest/process.html#maxforks).
 
 ## maxRetries
 
-**Type**: `Option[Either of String,Int]`
+**Type**: `Either
+  - String
+  - Int`
+
+**Default**: `Empty`
 
 The `maxRetries` directive allows you to define the maximum number of times a process instance can be re-submitted in case of failure. This value is applied only when using the retry error strategy. By default only one retry is allowed.
 
@@ -404,6 +452,8 @@ See [`maxRetries`](https://www.nextflow.io/docs/latest/process.html#maxretries).
 ## memory
 
 **Type**: `String`
+
+**Default**: `Empty`
 
 The `memory` directive allows you to define how much memory the process is allowed to use.
 
@@ -432,6 +482,8 @@ See [`memory`](https://www.nextflow.io/docs/latest/process.html#memory).
 
 **Type**: `String` / `List of String`
 
+**Default**: `Empty`
+
 Environment Modules is a package manager that allows you to dynamically configure your execution environment and easily switch between multiple versions of the same software tool.
 
 If it is available in your system you can use it with Nextflow in order to configure the processes execution environment in your pipeline.
@@ -459,6 +511,8 @@ See [`module`](https://www.nextflow.io/docs/latest/process.html#module).
 
 **Type**: `String`
 
+**Default**: `Empty`
+
 The `penv` directive allows you to define the parallel environment to be used when submitting a parallel task to the SGE resource manager.
 
 See [`penv`](https://www.nextflow.io/docs/latest/process.html#penv).
@@ -472,7 +526,9 @@ See [`penv`](https://www.nextflow.io/docs/latest/process.html#penv).
 
 ## pod
 
-**Type**: `OneOrMore[Map of String,String]`
+**Type**: `Map of String to String` / `List of Map of String to String`
+
+**Default**: `Empty`
 
 The `pod` directive allows the definition of pods specific settings, such as environment variables, secrets and config maps when using the Kubernetes executor.
 
@@ -499,7 +555,13 @@ See [`pod`](https://www.nextflow.io/docs/latest/process.html#pod).
 
 ## publishDir
 
-**Type**: `OneOrMore[Either[String,Map of String,String]]`
+**Type**: `Either
+  - String
+  - Map of String to String` / `List of Either
+  - String
+  - Map of String to String`
+
+**Default**: `Empty`
 
 The `publishDir` directive allows you to publish the process output files to a specified folder.
 
@@ -535,6 +597,8 @@ This is transformed to `[[ path: "/path/to/dir", mode: "cache" ]]`:
 
 **Type**: `String` / `List of String`
 
+**Default**: `Empty`
+
 The `queue` directory allows you to set the queue where jobs are scheduled when using a grid based executor in your pipeline.
 
 See [`queue`](https://www.nextflow.io/docs/latest/process.html#queue).
@@ -556,7 +620,11 @@ See [`queue`](https://www.nextflow.io/docs/latest/process.html#queue).
 
 ## scratch
 
-**Type**: `Option[Either of Boolean,String]`
+**Type**: `Either
+  - Boolean
+  - String`
+
+**Default**: `Empty`
 
 The `scratch` directive allows you to execute the process in a temporary folder that is local to the execution node.
 
@@ -585,6 +653,8 @@ true
 
 **Type**: `String`
 
+**Default**: `Empty`
+
 The `stageInMode` directive defines how input files are staged-in to the process work directory. The following values are allowed:
 
 | Value | Description |
@@ -611,6 +681,8 @@ See [`stageInMode`](https://www.nextflow.io/docs/latest/process.html#stageinmode
 
 **Type**: `String`
 
+**Default**: `Empty`
+
 The `stageOutMode` directive defines how output files are staged-out from the scratch directory to the process work directory. The following values are allowed:
 
 | Value | Description |
@@ -636,6 +708,8 @@ See [`stageOutMode`](https://www.nextflow.io/docs/latest/process.html#stageoutmo
 
 **Type**: `String`
 
+**Default**: `Empty`
+
 The `storeDir` directive allows you to define a directory that is used as a permanent cache for your process results.
 
 See [`storeDir`](https://www.nextflow.io/docs/latest/process.html#storeDir).
@@ -650,6 +724,8 @@ See [`storeDir`](https://www.nextflow.io/docs/latest/process.html#storeDir).
 ## tag
 
 **Type**: `String`
+
+**Default**: `Empty`
 
 The `tag` directive allows you to associate each process execution with a custom label, so that it will be easier to identify them in the log file or in the trace execution report.
 
@@ -670,6 +746,8 @@ See [`tag`](https://www.nextflow.io/docs/latest/process.html#tag).
 
 **Type**: `String`
 
+**Default**: `Empty`
+
 The `time` directive allows you to define how long a process is allowed to run.
 
 See [`time`](https://www.nextflow.io/docs/latest/process.html#time).
@@ -688,4 +766,3 @@ See [`time`](https://www.nextflow.io/docs/latest/process.html#time).
 ```yaml
 "1day 6hours 3minutes 30seconds"
 ```
-

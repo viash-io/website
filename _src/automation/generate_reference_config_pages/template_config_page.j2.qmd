@@ -9,12 +9,15 @@ order: {{order}}
 
 {% if not d.name == "__this__" %}
 ## {{d.name|replace("`__merge__", "\_\_merge\_\_")}}{# Replace fixes __merge__ being rendered bold and coming before __this__ when sorted #}
-{% if "Option of " in d.type %}
-**Type**: `{{d.type|replace("Option of ", "")}}`
-{% elif "OneOrMore of " in d.type %}
-**Type**: `{{d.type|replace("OneOrMore of ", "")}}` / `List of {{d.type|replace("OneOrMore of ", "")}}`
+{% if "Option of " in d.niceType %}
+**Type**: `{{d.niceType|replace("Option of ", "")}}`
+{% elif "OneOrMore of " in d.niceType %}
+**Type**: `{{d.niceType|replace("OneOrMore of ", "")}}` / `List of {{d.niceType|replace("OneOrMore of ", "")}}`
 {% else %}
-**Type**: `{{d.type}}`
+**Type**: `{{d.niceType}}`
+{% endif %}
+{%- if d.default is defined %}
+**Default**: `{{d.default}}`
 {% endif %}
 {% else %}
 {% endif -%}

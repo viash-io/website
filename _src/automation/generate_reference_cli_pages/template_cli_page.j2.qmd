@@ -17,7 +17,7 @@ search: true
 
 | Argument | Description | Type |
 |-|:----|-:
-{% for arg in d.opts|sort(attribute="name") -%}
+{% for arg in d.opts|sort(attribute="name") if not arg.hidden -%}
 
 {% if arg.name == "config" %}| `{{arg.name}}`{%- else -%}| `--{{arg.name}}`{% endif -%}
 {%- if arg.short is defined %}, `-{{arg.short}}`{% endif %} | {{arg.descr|replace("$", "\\$")|replace("\n", " ")}}

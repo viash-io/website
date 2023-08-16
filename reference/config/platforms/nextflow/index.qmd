@@ -1,10 +1,10 @@
 ---
-title: "Nextflow Vdsl3 Platform"
+title: "Nextflow Platform"
 search: true
 order: 30
 ---
 
-Next-gen platform for generating NextFlow VDSL3 modules.
+Platform for generating Nextflow VDSL3 modules.
 
 **Example:**
 
@@ -19,6 +19,12 @@ platforms:
 ## auto
 
 **Type**: `NextflowAuto`
+
+**Default**: `simplifyInput: true
+simplifyOutput: true
+transcript: false
+publish: false
+`
 
 [Automated processing flags](/reference/config/platforms/nextflow/auto.html) which can be toggled on or off:
 
@@ -42,11 +48,15 @@ auto:
 
 **Type**: `NextflowConfig`
 
+**Default**: `A series of default labels to specify memory and cpu constraints`
+
 Allows tweaking how the [Nextflow Config](/reference/config/platforms/nextflow/config.html) file is generated.
 
 ## container
 
 **Type**: `String`
+
+**Default**: `docker`
 
 Specifies the Docker platform id to be used to run Nextflow.
 
@@ -54,11 +64,15 @@ Specifies the Docker platform id to be used to run Nextflow.
 
 **Type**: `Boolean`
 
+**Default**: `False`
+
 Whether or not to print debug messages.
 
 ## directives
 
 **Type**: `NextflowDirectives`
+
+**Default**: `Empty`
 
 [Directives](/reference/config/platforms/nextflow/directives.html) are optional settings that affect the execution of the process. These mostly match up with the Nextflow counterparts.  
 
@@ -77,6 +91,8 @@ directives:
 
 **Type**: `String`
 
+**Default**: `nextflow`
+
 Every platform can be given a specific id that can later be referred to explicitly when running or building the Viash component.
 
 **Example:**
@@ -90,4 +106,3 @@ id: foo
 **Type**: `String`
 
 Specifies the type of the platform.
-
