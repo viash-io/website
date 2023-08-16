@@ -299,8 +299,8 @@ Exporting combine_columns (demo) =nextflow=&gt; /home/runner/work/website/websit
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/take_column:dev' with Dockerfile
 Exporting remove_comments (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/remove_comments
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/remove_comments:dev' with Dockerfile
-Exporting remove_comments (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/remove_comments
 Exporting take_column (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/take_column
+Exporting remove_comments (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/remove_comments
 Exporting combine_columns (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/combine_columns
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/combine_columns:dev' with Dockerfile
 [32mAll 6 configs built successfully[0m</code></pre>
@@ -316,17 +316,17 @@ Output
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>total 72
--rw-r--r-- 1 runner docker   747 Aug 11 07:38 CHANGELOG.md
--rw-r--r-- 1 runner docker 32219 Aug 11 07:38 LICENSE.md
--rw-r--r-- 1 runner docker  1094 Aug 11 07:38 README.md
--rw-r--r-- 1 runner docker  1125 Aug 11 07:38 README.qmd
--rw-r--r-- 1 runner docker   415 Aug 11 07:40 _viash.yaml
--rw-r--r-- 1 runner docker   245 Aug 11 07:38 main.nf
--rw-r--r-- 1 runner docker   222 Aug 11 07:38 nextflow.config
-drwxr-xr-x 2 runner docker  4096 Aug 11 07:38 resources_test
-drwxr-xr-x 3 runner docker  4096 Aug 11 07:38 src
-drwxr-xr-x 4 runner docker  4096 Aug 11 07:39 target
-drwxr-xr-x 3 runner docker  4096 Aug 11 07:38 workflows</code></pre>
+-rw-r--r-- 1 runner docker   747 Aug 16 07:20 CHANGELOG.md
+-rw-r--r-- 1 runner docker 32219 Aug 16 07:20 LICENSE.md
+-rw-r--r-- 1 runner docker  1094 Aug 16 07:20 README.md
+-rw-r--r-- 1 runner docker  1125 Aug 16 07:20 README.qmd
+-rw-r--r-- 1 runner docker   415 Aug 16 07:21 _viash.yaml
+-rw-r--r-- 1 runner docker   245 Aug 16 07:20 main.nf
+-rw-r--r-- 1 runner docker   222 Aug 16 07:20 nextflow.config
+drwxr-xr-x 2 runner docker  4096 Aug 16 07:20 resources_test
+drwxr-xr-x 3 runner docker  4096 Aug 16 07:20 src
+drwxr-xr-x 4 runner docker  4096 Aug 16 07:20 target
+drwxr-xr-x 3 runner docker  4096 Aug 16 07:20 workflows</code></pre>
 </div>
 </div>
 </details>
@@ -345,8 +345,8 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>N E X T F L O W  ~  version 23.04.2
-Launching `workflows/demo_pipeline/main.nf` [chaotic_curry] DSL2 - revision: c65d4e7bba
+<pre><code>N E X T F L O W  ~  version 23.04.3
+Launching `workflows/demo_pipeline/main.nf` [special_becquerel] DSL2 - revision: c65d4e7bba
 [-        ] process &gt; remove_comments:remove_comm... -
 
 [-        ] process &gt; remove_comments:remove_comm... -
@@ -357,30 +357,36 @@ Launching `workflows/demo_pipeline/main.nf` [chaotic_curry] DSL2 - revision: c65
 [-        ] process &gt; combine_columns:combine_col... -
 
 executor &gt;  local (1)
-[cb/2a93fd] process &gt; remove_comments:remove_comm... [  0%] 0 of 1
+[2f/c94062] process &gt; remove_comments:remove_comm... [  0%] 0 of 1
+[-        ] process &gt; take_column:take_column_pro... -
+[-        ] process &gt; combine_columns:combine_col... -
+
+executor &gt;  local (1)
+[2f/c94062] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
 [-        ] process &gt; take_column:take_column_pro... -
 [-        ] process &gt; combine_columns:combine_col... -
 
 executor &gt;  local (2)
-[cb/2a93fd] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
-[5f/deb58b] process &gt; take_column:take_column_pro... [  0%] 0 of 1
-[-        ] process &gt; combine_columns:combine_col... -
-
-executor &gt;  local (2)
-[cb/2a93fd] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
-[5f/deb58b] process &gt; take_column:take_column_pro... [100%] 1 of 1 ✔
+[2f/c94062] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
+[e3/ec1b83] process &gt; take_column:take_column_pro... [  0%] 0 of 1
 [-        ] process &gt; combine_columns:combine_col... -
 
 executor &gt;  local (3)
-[cb/2a93fd] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
-[5f/deb58b] process &gt; take_column:take_column_pro... [100%] 1 of 1 ✔
-[db/343e4a] process &gt; combine_columns:combine_col... [  0%] 0 of 1
+[2f/c94062] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
+[e3/ec1b83] process &gt; take_column:take_column_pro... [100%] 1 of 1 ✔
+[aa/b7e893] process &gt; combine_columns:combine_col... [  0%] 0 of 1
 
 executor &gt;  local (3)
-[cb/2a93fd] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
-[5f/deb58b] process &gt; take_column:take_column_pro... [100%] 1 of 1 ✔
-[db/343e4a] process &gt; combine_columns:combine_col... [100%] 1 of 1 ✔
-Output: [combined, /home/runner/work/website/website/guide/_viash_project_template/work/db/343e4a9ad5ba72eee4ba612b9df2c4/combined.combine_columns.output]</code></pre>
+[2f/c94062] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
+[e3/ec1b83] process &gt; take_column:take_column_pro... [100%] 1 of 1 ✔
+[aa/b7e893] process &gt; combine_columns:combine_col... [100%] 1 of 1 ✔
+Output: [combined, /home/runner/work/website/website/guide/_viash_project_template/work/aa/b7e893af694ae94096a8686f7a78e9/combined.combine_columns.output]
+
+executor &gt;  local (3)
+[2f/c94062] process &gt; remove_comments:remove_comm... [100%] 1 of 1 ✔
+[e3/ec1b83] process &gt; take_column:take_column_pro... [100%] 1 of 1 ✔
+[aa/b7e893] process &gt; combine_columns:combine_col... [100%] 1 of 1 ✔
+Output: [combined, /home/runner/work/website/website/guide/_viash_project_template/work/aa/b7e893af694ae94096a8686f7a78e9/combined.combine_columns.output]</code></pre>
 </div>
 </div>
 </details>
@@ -408,7 +414,7 @@ Output
 <li><a href="../guide/component/add-dependencies.html">Ensuring reproducibility and designing customised Docker images</a></li>
 <li><a href="../guide/component/unit-testing.html">Ensuring code reliability with unit testing for Viash</a></li>
 <li><a href="../guide/project/batch-processing.html">Streamlining your workflow by performing batch operations on Viash projects</a></li>
-<li><a href="../guide/nextflow_vdsl3/introduction.html">Building Nextflow pipelines using Viash components</a></li>
+<li><a href="../guide/nextflow_vdsl3/index.html">Building Nextflow pipelines using Viash components</a></li>
 </ul>
 <p>So, get ready to enhance your skills and create outstanding solutions with Viash!</p>
 

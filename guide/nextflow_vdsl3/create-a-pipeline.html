@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../guide/nextflow_vdsl3/create-a-module.html" rel="prev">
+<link href="../../guide/nextflow_vdsl3/create-and-use-a-module.html" rel="prev">
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -310,14 +310,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../guide/nextflow_vdsl3/introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../guide/nextflow_vdsl3/create-a-module.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Create a module</span></a>
+  <a href="../../guide/nextflow_vdsl3/create-and-use-a-module.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Create and use a module</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -342,9 +336,10 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   <ul>
   <li><a href="#get-the-template-project" id="toc-get-the-template-project" class="nav-link active" data-scroll-target="#get-the-template-project">Get the template project</a></li>
   <li><a href="#build-the-vdsl3-modules" id="toc-build-the-vdsl3-modules" class="nav-link" data-scroll-target="#build-the-vdsl3-modules">Build the VDSL3 modules</a></li>
-  <li><a href="#create-a-pipeline" id="toc-create-a-pipeline" class="nav-link" data-scroll-target="#create-a-pipeline">Create a pipeline</a></li>
+  <li><a href="#importing-a-vdsl3-module" id="toc-importing-a-vdsl3-module" class="nav-link" data-scroll-target="#importing-a-vdsl3-module">Importing a VDSL3 module</a></li>
   <li><a href="#vdsl3-module-interface" id="toc-vdsl3-module-interface" class="nav-link" data-scroll-target="#vdsl3-module-interface">VDSL3 module interface</a></li>
-  <li><a href="#what-is-.run" id="toc-what-is-.run" class="nav-link" data-scroll-target="#what-is-.run">What is <code>.run()</code>?</a></li>
+  <li><a href="#create-a-pipeline" id="toc-create-a-pipeline" class="nav-link" data-scroll-target="#create-a-pipeline">Create a pipeline</a></li>
+  <li><a href="#customizing-vdsl3-modules-on-the-fly" id="toc-customizing-vdsl3-modules-on-the-fly" class="nav-link" data-scroll-target="#customizing-vdsl3-modules-on-the-fly">Customizing VDSL3 modules on the fly</a></li>
   <li><a href="#run-the-pipeline" id="toc-run-the-pipeline" class="nav-link" data-scroll-target="#run-the-pipeline">Run the pipeline</a></li>
   <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
   </ul>
@@ -419,8 +414,8 @@ Note
 <div class="cell-output cell-output-stdout">
 <pre><code>Exporting take_column (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/take_column
 Exporting combine_columns (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/combine_columns
-Exporting remove_comments (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/remove_comments
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/take_column:dev' with Dockerfile
+Exporting remove_comments (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/remove_comments
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/remove_comments:dev' with Dockerfile
 Exporting remove_comments (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/remove_comments
 Exporting take_column (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/take_column
@@ -458,99 +453,118 @@ Exporting combine_columns (demo) =docker=&gt; /home/runner/work/website/website/
 </div>
 </div>
 </section>
-<section id="create-a-pipeline" class="level2">
-<h2 class="anchored" data-anchor-id="create-a-pipeline">Create a pipeline</h2>
-<p>Below is a first Nextflow pipeline which uses just one VDSL3 module and with hard-coded input parameters (file1 and file2).</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>nextflow<span class="op">.</span>enable<span class="op">.</span>dsl<span class="op">=</span><span class="dv">2</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> remove_comments <span class="op">}</span> from <span class="st">"./target/nextflow/demo/remove_comments/main.nf"</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>workflow <span class="op">{</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Create a channel with two events</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Each event contains a string (an identifier) and a file (input)</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">Channel</span><span class="op">.</span><span class="fu">fromList</span><span class="op">([</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">[</span><span class="st">"file1"</span><span class="op">,</span> <span class="fu">file</span><span class="op">(</span><span class="st">"resources_test/file1.tsv"</span><span class="op">)],</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">[</span><span class="st">"file2"</span><span class="op">,</span> <span class="fu">file</span><span class="op">(</span><span class="st">"resources_test/file2.tsv"</span><span class="op">)]</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">])</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// View channel contents</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> view <span class="op">{</span> tup <span class="op">-&gt;</span> <span class="st">"Input: </span><span class="ss">$tup</span><span class="st">"</span> <span class="op">}</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Process the input file using the 'remove_comments' module.</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// This removes comment lines from the input TSV.</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> remove_comments<span class="op">.</span><span class="fu">run</span><span class="op">(</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>      directives<span class="op">:</span> <span class="op">[</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        publishDir<span class="op">:</span> <span class="st">"output/"</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>      <span class="op">]</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">)</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">// View channel contents</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> view <span class="op">{</span> tup <span class="op">-&gt;</span> <span class="st">"Output: </span><span class="ss">$tup</span><span class="st">"</span> <span class="op">}</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="importing-a-vdsl3-module" class="level2">
+<h2 class="anchored" data-anchor-id="importing-a-vdsl3-module">Importing a VDSL3 module</h2>
+<p>After building a VDSL3 module from A VDSL3 module can be imported just like any other Nextflow module.</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> mymodule <span class="op">}</span> from <span class="st">'target/nextflow/mymodule/main.nf'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="vdsl3-module-interface" class="level2">
 <h2 class="anchored" data-anchor-id="vdsl3-module-interface">VDSL3 module interface</h2>
-<p>It’s important to note what the interface of every VDSL3 module is. A VDSL3 module expects an input to be a tuple with the following elements:</p>
-<ul>
-<li><code>id</code> (<code>String</code>): A unique identifier used for tracking data objects and for ensuring output filenames are unique.</li>
-<li><code>data</code> (<code>Map[String, Any]</code> or <code>File</code>): A named map (or dictionary) used to pass the module’s input arguments. If the module only has a single input file, the file itself can simply be passed.</li>
-<li><code>...</code> (<code>Any*</code>): Any other elements in the tuple simply pass through the module without being altered in any way. For this reason, it is often referred to as the “passthrough” objects.</li>
-</ul>
-<p>In turn, a VDSL3 module will return a tuple with the same interface, except that the input data object has been replaced with the output data:</p>
-<ul>
-<li><code>id</code> (<code>String</code>): The identifier from the input tuple.</li>
-<li><code>data</code> (<code>Map[String, Any]</code> or <code>File</code>): A named map (or dictionary) containing the module’s output files. <strong>Important</strong>: If the module only has a single output file, the file itself will be returned.</li>
-<li><code>...</code> (<code>Any*</code>): The passthrough objects from the input tuple (if any).</li>
-</ul>
+<p>VDSL3 modules are actually workflows which take one channel and emit one channel. It expects the channel events to be tuples containing an ‘id’ and a ‘state’: <code>[id, state]</code>, where <code>id</code> is a unique String and <code>state</code> is a <code>Map[String, Object]</code>. The resulting channel then consists of tuples <code>[id, new_state]</code>.</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>workflow <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">Channel</span><span class="op">.</span><span class="fu">fromList</span><span class="op">([</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">[</span><span class="st">"myid"</span><span class="op">,</span> <span class="op">[</span>input<span class="op">:</span> <span class="fu">file</span><span class="op">(</span><span class="st">"in.txt"</span><span class="op">)]]</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">])</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> mymodule</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If the input tuple has more than two elements, the elements after the second element are passed through to the output tuple. That is, an input tuple <code>[id, input, ...]</code> will result in a tuple <code>[id, output, ...]</code> after running the module. For example, an input tuple <code>["foo", [input: file("in.txt")], "bar"]</code> will result in an output tuple <code>["foo", [output: file("out.txt")], "bar"]</code>.</p>
+</div>
+</div>
 </section>
-<section id="what-is-.run" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-.run">What is <code>.run()</code>?</h2>
+<section id="create-a-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-pipeline">Create a pipeline</h2>
+<p>Below is a first Nextflow pipeline which uses just one VDSL3 module and with hard-coded input parameters (file1 and file2).</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>nextflow<span class="op">.</span>enable<span class="op">.</span>dsl<span class="op">=</span><span class="dv">2</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> remove_comments <span class="op">}</span> from <span class="st">"./target/nextflow/demo/remove_comments/main.nf"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>workflow <span class="op">{</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Create a channel with two events</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Each event contains a string (an identifier) and a file (input)</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">Channel</span><span class="op">.</span><span class="fu">fromList</span><span class="op">([</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">[</span><span class="st">"file1"</span><span class="op">,</span> <span class="fu">file</span><span class="op">(</span><span class="st">"resources_test/file1.tsv"</span><span class="op">)],</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">[</span><span class="st">"file2"</span><span class="op">,</span> <span class="fu">file</span><span class="op">(</span><span class="st">"resources_test/file2.tsv"</span><span class="op">)]</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">])</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// View channel contents</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> view <span class="op">{</span> tup <span class="op">-&gt;</span> <span class="st">"Input: </span><span class="ss">$tup</span><span class="st">"</span> <span class="op">}</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Process the input file using the 'remove_comments' module.</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// This removes comment lines from the input TSV.</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> remove_comments<span class="op">.</span><span class="fu">run</span><span class="op">(</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>      directives<span class="op">:</span> <span class="op">[</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        publishDir<span class="op">:</span> <span class="st">"output/"</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>      <span class="op">]</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">)</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">// View channel contents</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> view <span class="op">{</span> tup <span class="op">-&gt;</span> <span class="st">"Output: </span><span class="ss">$tup</span><span class="st">"</span> <span class="op">}</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!-- TODO: refactor using the new fromState/toState args -->
+</section>
+<section id="customizing-vdsl3-modules-on-the-fly" class="level2">
+<h2 class="anchored" data-anchor-id="customizing-vdsl3-modules-on-the-fly">Customizing VDSL3 modules on the fly</h2>
 <p>Usually, Nextflow processes are quite static objects. For example, changing its directives can be quite tricky.</p>
-<p>The <code>run()</code> function is a unique feature for every VDSL3 module which allows dynamically altering the behaviour of a module from within the pipeline. In this case, we use it to set the <code>publishDir</code> directive to <code>"output/"</code> so the output of that step in the pipeline will be stored as output.</p>
+<p>The <code>un()</code> function is a unique feature for every VDSL3 module which allows dynamically altering the behaviour of a module from within the pipeline. For example, we use it to set the <code>publishDir</code> directive to <code>"output/"</code> so the output of that step in the pipeline will be stored as output.</p>
+<p>See the <a href="../../reference/nextflow_vdsl3/import_module.html#customizing-vdsl3-modules-on-the-fly">reference documentation</a> for a complete list of arguments of <code>.run()</code>.</p>
 </section>
 <section id="run-the-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="run-the-pipeline">Run the pipeline</h2>
 <p>Now run the pipeline with Nextflow:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run . <span class="dt">\</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> main.nf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run . <span class="dt">\</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> main.nf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>N E X T F L O W  ~  version 23.04.2
-Launching `main.nf` [elated_picasso] DSL2 - revision: 111508427e
+<pre><code>N E X T F L O W  ~  version 23.04.3
+Launching `main.nf` [peaceful_liskov] DSL2 - revision: 111508427e
 [-        ] process &gt; remove_comments:remove_comm... -
 Input: [file1, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]
 Input: [file2, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]
 
-[-        ] process &gt; remove_comments:remove_comm... [  0%] 0 of 2
+executor &gt;  local (2)
+[c7/fde616] process &gt; remove_comments:remove_comm... [  0%] 0 of 2
 Input: [file1, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]
 Input: [file2, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]
 
 executor &gt;  local (2)
-[12/d5c164] process &gt; remove_comments:remove_comm... [  0%] 0 of 2
+[c7/fde616] process &gt; remove_comments:remove_comm... [100%] 2 of 2 ✔
 Input: [file1, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]
 Input: [file2, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]
-Output: [file1, /home/runner/work/website/website/guide/_viash_project_template/work/4e/8430164910105077c634cdd57a5389/file1.remove_comments.output.tsv]
+Output: [file1, /home/runner/work/website/website/guide/_viash_project_template/work/8e/69bc050a02d52f05e7f025fce7f566/file1.remove_comments.output.tsv]
+Output: [file2, /home/runner/work/website/website/guide/_viash_project_template/work/c7/fde616605b1af810041a793c6fe704/file2.remove_comments.output.tsv]
 
 executor &gt;  local (2)
-[12/d5c164] process &gt; remove_comments:remove_comm... [100%] 2 of 2 ✔
+[c7/fde616] process &gt; remove_comments:remove_comm... [100%] 2 of 2 ✔
 Input: [file1, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]
 Input: [file2, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]
-Output: [file1, /home/runner/work/website/website/guide/_viash_project_template/work/4e/8430164910105077c634cdd57a5389/file1.remove_comments.output.tsv]
-Output: [file2, /home/runner/work/website/website/guide/_viash_project_template/work/12/d5c164433096347e2f2843158b1764/file2.remove_comments.output.tsv]</code></pre>
+Output: [file1, /home/runner/work/website/website/guide/_viash_project_template/work/8e/69bc050a02d52f05e7f025fce7f566/file1.remove_comments.output.tsv]
+Output: [file2, /home/runner/work/website/website/guide/_viash_project_template/work/c7/fde616605b1af810041a793c6fe704/file2.remove_comments.output.tsv]</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>output
-├── file1.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/4e/8430164910105077c634cdd57a5389/file1.remove_comments.output.tsv
-└── file2.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/12/d5c164433096347e2f2843158b1764/file2.remove_comments.output.tsv
+├── file1.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/8e/69bc050a02d52f05e7f025fce7f566/file1.remove_comments.output.tsv
+└── file2.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/c7/fde616605b1af810041a793c6fe704/file2.remove_comments.output.tsv
 
 0 directories, 2 files</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> output/<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> output/<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>one 0.11    123
 two 0.23    456
@@ -829,8 +843,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../guide/nextflow_vdsl3/create-a-module.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Create a module</span>
+      <a href="../../guide/nextflow_vdsl3/create-and-use-a-module.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Create and use a module</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
