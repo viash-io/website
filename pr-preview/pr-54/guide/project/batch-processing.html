@@ -308,14 +308,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../guide/nextflow_vdsl3/introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../guide/nextflow_vdsl3/create-a-module.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Create a module</span></a>
+  <a href="../../guide/nextflow_vdsl3/create-and-use-a-module.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Create and use a module</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -412,10 +406,10 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>The working directory for the namespace tests is /tmp/viash_ns_test10035291914817489701
-           namespace        functionality             platform            test_name exit_code duration               result[0m
+<pre><code>           namespace        functionality             platform            test_name exit_code duration               result[0m
                 demo          take_column               docker                start                                        [0m
-[32m                demo          take_column               docker     build_executable         0        1              SUCCESS[0m
+The working directory for the namespace tests is /tmp/viash_ns_test7655800807344352315
+[32m                demo          take_column               docker     build_executable         0        0              SUCCESS[0m
 [33m                demo          take_column               docker                tests        -1        0              MISSING[0m
 no tests found
 ====================================================================
@@ -425,7 +419,7 @@ no tests found
 no tests found
 ====================================================================
                 demo      remove_comments               docker                start                                        [0m
-[32m                demo      remove_comments               docker     build_executable         0        1              SUCCESS[0m
+[32m                demo      remove_comments               docker     build_executable         0        0              SUCCESS[0m
 [32m                demo      remove_comments               docker              test.sh         0        1              SUCCESS[0m
 [33mNot all configs built and tested successfully[0m
   [33m2/6 tests missing[0m
@@ -492,7 +486,8 @@ Output
       name: "--id"
       alternatives: []
       example: []
-      default:
+      default:[32mAll 3 configs parsed successfully[0m
+
       - "take_column"
       required: false
       choices: []
@@ -551,8 +546,7 @@ Output
       label: []
       module: []
       pod: []
-[32mAll 3 configs parsed successfully[0m      publishDir: []
-
+      publishDir: []
       queue: []
       tag: "$id"
     auto:
@@ -778,23 +772,22 @@ Output
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>+ echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/take_column/config.vsh.yaml
+Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/take_column/config.vsh.yaml
+
   Exit code: 0
 
   Output:
 + echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/combine_columns/config.vsh.yaml
-Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/take_column/config.vsh.yaml
+  Exit code: 0
 
+  Output:
++ echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml
 Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/combine_columns/config.vsh.yaml
 
   Exit code: 0
 
   Output:
-+ echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml
-Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml
-
-  Exit code: 0
-
-  Output:</code></pre>
+Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml</code></pre>
 </div>
 </div>
 </details>
@@ -816,8 +809,8 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>The working directory for the namespace tests is /tmp/viash_ns_test14549876800684662860
-           namespace        functionality             platform            test_name exit_code duration               result[0m
+<pre><code>           namespace        functionality             platform            test_name exit_code duration               result[0m
+The working directory for the namespace tests is /tmp/viash_ns_test2864848329613617478
                 demo          take_column               docker                start                                        [0m
                 demo      combine_columns               docker                start                                        [0m
 [32m                demo      combine_columns               docker     build_executable         0        1              SUCCESS[0m
@@ -829,7 +822,7 @@ no tests found
 [33m                demo          take_column               docker                tests        -1        0              MISSING[0m
 no tests found
 ====================================================================
-[32m                demo      remove_comments               docker     build_executable         0        1              SUCCESS[0m
+[32m                demo      remove_comments               docker     build_executable         0        0              SUCCESS[0m
 [32m                demo      remove_comments               docker              test.sh         0        1              SUCCESS[0m
 [33mNot all configs built and tested successfully[0m
   [33m2/6 tests missing[0m

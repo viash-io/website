@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../guide/nextflow_vdsl3/introduction.html" rel="next">
+<link href="../../guide/nextflow_vdsl3/create-and-use-a-module.html" rel="next">
 <link href="../../guide/project/ide-setup.html" rel="prev">
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
@@ -75,6 +75,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Viash - Nextflow VDSL3">
+<meta property="og:description" content="">
 <meta property="og:site-name" content="Viash">
 </head>
 
@@ -273,14 +274,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../guide/nextflow_vdsl3/introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../guide/nextflow_vdsl3/create-a-module.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Create a module</span></a>
+  <a href="../../guide/nextflow_vdsl3/create-and-use-a-module.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Create and use a module</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -299,7 +294,13 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#improvements-of-vdsl3-modules-over-standard-nextflow-modules" id="toc-improvements-of-vdsl3-modules-over-standard-nextflow-modules" class="nav-link active" data-scroll-target="#improvements-of-vdsl3-modules-over-standard-nextflow-modules">Improvements of VDSL3 modules over standard Nextflow modules</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/viash-io/website/edit/main/guide/nextflow_vdsl3/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/viash-io/website/blob/main/guide/nextflow_vdsl3/index.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/viash-io/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -321,8 +322,27 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 </header>
 
+<p>Nextflow is a highly popular and widely-used workflow manager in computational biology, featuring outstanding portability, reproducibility and scalability. However, while Nextflow’s advantages are impressive, developing a Nextflow pipeline can be challenging, requiring significant domain knowledge and verbose code that is labour-intensive. Fortunately, Viash provides a solution to the barriers of Nextflow pipeline development.</p>
+<p>Viash can help developers wrap their code into a state-of-the-art Nextflow script called a VDSL3 module. As we will demonstrate in the remainder of this guide, VDSL3 is effectively a separate DSL layer on top of Nextflow enabled by Viash, hence it is called Viash + Nextflow DSL 3, or VDSL3 for short. VDSL3’s benefits extend beyond Nextflow pipeline development, including reusability, test-driven development, separation of concerns, and continuous testing.</p>
+<p>You can use Viash to speed up or replace your pipeline development processes in the following steps:</p>
+<ul>
+<li><a href="../../guide/nextflow_vdsl3/create-and-use-a-module.html#build-the-vdsl3-module">Use Viash to generate VDSL3 modules</a></li>
+<li><a href="../../guide/nextflow_vdsl3/create-and-use-a-module.html#running-a-module-as-a-standalone-pipeline">Run a module as a standaline pipeline</a></li>
+<li><a href="../../guide/nextflow_vdsl3/create-and-use-a-module.html#module-as-part-of-a-pipeline">Import a VDSL3 module</a></li>
+<li><a href="../../guide/nextflow_vdsl3/create-a-pipeline.html">Create a Nextflow workflow</a> using one or more modules</li>
+</ul>
+<section id="improvements-of-vdsl3-modules-over-standard-nextflow-modules" class="level2">
+<h2 class="anchored" data-anchor-id="improvements-of-vdsl3-modules-over-standard-nextflow-modules">Improvements of VDSL3 modules over standard Nextflow modules</h2>
+<ul>
+<li>No need to write any Nextflow Groovy code, just your script and the Viash config.</li>
+<li>VDSL3 module are also standalone pipelines.</li>
+<li>Help documentation is automatically generated.</li>
+<li>Standardized interface for passing parameter lists.</li>
+<li>Automatically uses the Docker platform’s container.</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script type="text/javascript">
@@ -582,8 +602,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../guide/nextflow_vdsl3/introduction.html" class="pagination-link">
-        <span class="nav-page-text">Introduction</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../guide/nextflow_vdsl3/create-and-use-a-module.html" class="pagination-link">
+        <span class="nav-page-text">Create and use a module</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -602,7 +622,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <a class="nav-link" href="../../privacy.html">Privacy Policy</a>
   </li>  
 </ul>
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/viash-io/website/edit/main/guide/nextflow_vdsl3/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/viash-io/website/blob/main/guide/nextflow_vdsl3/index.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/viash-io/website/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

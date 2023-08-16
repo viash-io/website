@@ -17,7 +17,98 @@
 <width>144</width>
 </image>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Wed, 31 May 2023 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 11 Aug 2023 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Viash 0.7.5</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.7.5/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This release contains minor breaking change due to deprecated or outdated functionality being removed.</p>
+<p>New functionality includes:</p>
+<ul>
+<li><p>Export a JSON schema for the Viash config with <code>viash export json_schema</code></p></li>
+<li><p>Export a Bash or Zsh autocomplete script with <code>viash export cli_autocomplete</code></p></li>
+<li><p>Nextflow VDSL3 modules now have a <code>fromState</code> and <code>toState</code> argument to allow for better control of the data that gets passed to the module and how the state is managed in a Nextflow workflow.</p></li>
+</ul>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="breaking-changes" class="level3">
+<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
+<ul>
+<li><p><code>viash export cli_schema</code>: Added <code>--format yaml/json</code> argument, default format is now a YAML (PR #448).</p></li>
+<li><p><code>viash export config_schema</code>: Added <code>--format yaml/json</code> argument, default format is now a YAML (PR #448).</p></li>
+<li><p><code>NextflowLegacyPlatform</code>: Removed deprecated code (PR #469).</p></li>
+<li><p><code>viash_*</code>: Remove legacy viash_build, viash_test and viash_push components (PR #470).</p></li>
+<li><p><code>ComputationalRequirements</code>, <code>Functionality</code>, <code>DockerPlatform</code>, <code>DockerRequirements</code>: Remove documentation of removed fields (PR #477).</p></li>
+</ul>
+</section>
+<section id="new-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
+<ul>
+<li><p><code>viash export json_schema</code>: Export a json schema derived from the class reflections and annotations already used by the <code>config_schema</code> (PR #446).</p></li>
+<li><p><code>viash export config_schema</code>: Output <code>default</code> values of member fields (PR #446).</p></li>
+<li><p><code>CI</code>: Test support for different Java versions on GitHub Actions (PR #456). Focussing on LTS releases starting from 11, so this is 11 and 17. Also test latest Java version, currently 20.</p></li>
+<li><p><code>viash test</code> and <code>viash ns test</code>: add <code>--setup</code> argument to determine the docker build strategy before a component is tested (PR #451).</p></li>
+<li><p><code>viash export cli_autocomplete</code>: Export a Bash or Zsh autocomplete script (PR #465 &amp; #482).</p></li>
+<li><p><code>help message</code>: Print the relevant help message of (sub-)command when <code>--help</code> is given as an argument instead of only printing the help message when it is the leading argument and otherwise silently disregarding it (initially added in PR #472, replaced by PR #496). This is a new feature implemented in Scallop 5.0.0.</p></li>
+<li><p><code>Logging</code>: Add a Logger helper class (PR #485 &amp; #490). Allows manually enabling or disabling colorizing TTY output by using <code>--colorize</code>. Add provisions for adding debugging or trace code which is not outputted by default. Changing logging level can be changed with <code>--loglevel</code>. These CLI arguments are currently hidden.</p></li>
+<li><p><code>NextflowPlatform</code>: Nextflow VDSL3 modules now have a <code>fromState</code> and <code>toState</code> argument to allow for better control of the data that gets passed to the module and how the state is managed in a Nextflow workflow (#479, PR #501).</p></li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>PythonScript</code>: Pass <code>-B</code> to Python to avoid creating <code>*.pyc</code> and <code>*.pyo</code> files on importing helper functions (PR #442).</p></li>
+<li><p><code>viash config</code>: Special double values now support <code>+.inf</code>, <code>-.inf</code> or <code>.nan</code> values (PR #446 and PR #450). The stringified versions <code>"+.inf"</code>, <code>"-.inf"</code> or <code>".nan"</code> are supported as well. This is in line with the yaml spec.</p></li>
+<li><p><code>system environment variables</code>: Add wrapper around <code>sys.env</code> and provide access to specific variables (PR #457). Has advantages for documentation output and testbenches.</p></li>
+<li><p><code>testbench</code>: Added some minor testbenches to tackle missing coverage (PR #459, #486, #488, #489, #492 &amp; #494).</p></li>
+<li><p><code>viash export config_schema</code>: Simplify file structure (PR #464).</p></li>
+<li><p><code>helpers.Format</code>: Add a helper for the Format helper object (PR #466).</p></li>
+<li><p><code>testbench</code>: Use config deriver to create config variants for testing (PR #498). This reduces the amount of config files that need to be maintained.</p></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>viash config</code>: Validate Viash config Yaml files better and try to give a more informative error message back to the user instead of a stack trace (PR #443).</p></li>
+<li><p><code>viash ns build</code>: Fix the error summary when a setup or push failure occurs. These conditions were not displayed and could cause confusion (PR #447).</p></li>
+<li><p><code>testbench</code>: Fix the viash version switch test bench not working for newer Java versions (PR #452).</p></li>
+<li><p><code>malformed input exception</code>: Capture MalformedInputExceptions when thrown by reading files with invalid Ascii characters when unsupported by Java (PR #458).</p></li>
+<li><p><code>viash project file parsing</code>: Give a more informative message when the viash project file fails to parse correctly (PR #475).</p></li>
+<li><p><code>DockerPlatform</code>: Fix issue when mounting an input or output folder containing spaces (PR #484).</p></li>
+<li><p><code>Config mod</code>: Fix a config mod where the filter should execute multiple deletes (PR #503).</p></li>
+</ul>
+</section>
+<section id="documentation" class="level3">
+<h3 class="anchored" data-anchor-id="documentation">DOCUMENTATION</h3>
+<ul>
+<li><code>NextflowPlatform</code>: Add documentation for the usage and arguments of a VDSL3 module (PR #501).</li>
+</ul>
+</section>
+<section id="internal-changes" class="level3">
+<h3 class="anchored" data-anchor-id="internal-changes">INTERNAL CHANGES</h3>
+<ul>
+<li><p><code>NextflowVDSL3Platform</code>: Renamed to <code>NextflowPlatform</code> (PR #469).</p></li>
+<li><p>Rename mentions of <code>NextFlow</code> to <code>Nextflow</code> (PR #476).</p></li>
+<li><p><code>Reference static pages</code>: Move <code>.qmd</code> files from the website to a local folder here; <code>docs/reference</code> (PR #504). This way we can track behaviour changes that need to be documented locally.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.7.5/index.html</guid>
+  <pubDate>Fri, 11 Aug 2023 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Viash 0.7.4</title>
   <dc:creator>Viash Team</dc:creator>
@@ -2651,74 +2742,6 @@ font-style: inherit;">false</span></span></code></pre></div></li>
   <category>New Release</category>
   <guid>https://viash.io/blog/posts/viash-0.5.10.1/index.html</guid>
   <pubDate>Wed, 16 Mar 2022 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.5.10</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/blog/posts/viash-0.5.10/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="whats-new" class="level2">
-<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<p>The <code>viash_install</code>, <code>viash_build</code>, <code>viash_test</code> and <code>viash_push</code> components have been reworked.</p>
-</section>
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
-<section id="major-changes" class="level3">
-<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
-<ul>
-<li><code>viash_install</code>:
-<ul>
-<li>Added <code>--log_prefix</code>: This prefix is used to determine the path of the log files for <code>viash_build</code>, <code>viash_test</code> and <code>viash_push</code>.</li>
-<li>Added <code>--organization</code>: Id of the organisation to be used in the Docker image name, i.e.&nbsp;<code>&lt;registry&gt;/&lt;organization&gt;/&lt;namespace&gt;&lt;namespace_sep&gt;&lt;name&gt;</code>.</li>
-<li>Added <code>--target_image_source</code>: Url to the Git repo in which this project resides.</li>
-<li>Removed <code>--log</code>.</li>
-</ul></li>
-<li><code>viash_build</code>:
-<ul>
-<li>Reduce code duplication by contructing the command with Bash Arrays.</li>
-<li>Renamed <code>--platforms</code> to <code>--platform</code>.</li>
-<li>Added <code>--organization</code>: Id of the organisation to be used in the Docker image name, i.e.&nbsp;<code>&lt;registry&gt;/&lt;organization&gt;/&lt;namespace&gt;&lt;namespace_sep&gt;&lt;name&gt;</code>.</li>
-<li>Added <code>--target_image_source</code>: Url to the Git repo in which this project resides.</li>
-<li>Changed default of <code>--log</code> from <code>log.txt</code> to <code>.viash_build_log.txt</code>.</li>
-<li>Added <code>--verbose</code>: Print out the underlying <code>viash ns build</code> command before running it.</li>
-</ul></li>
-<li><code>viash_test</code>:
-<ul>
-<li>Reduce code duplication by contructing the command with Bash Arrays.</li>
-<li>Renamed <code>--platforms</code> to <code>--platform</code>.</li>
-<li>Added <code>--organization</code>: Id of the organisation to be used in the Docker image name, i.e.&nbsp;<code>&lt;registry&gt;/&lt;organization&gt;/&lt;namespace&gt;&lt;namespace_sep&gt;&lt;name&gt;</code>.</li>
-<li>Added <code>--target_image_source</code>: Url to the Git repo in which this project resides.</li>
-<li>Changed default of <code>--log</code> from <code>log.txt</code> to <code>.viash_test_log.txt</code>.</li>
-<li>Changed default of <code>--tsv</code> from <code>log.tsv</code> to <code>.viash_test_log.tsv</code>.</li>
-<li>Added <code>--verbose</code>: Print out the underlying <code>viash ns test</code> command before running it.</li>
-</ul></li>
-<li><code>viash_push</code>:
-<ul>
-<li>Reduce code duplication by contructing the command with Bash Arrays.</li>
-<li>Added <code>--organization</code>: Id of the organisation to be used in the Docker image name, i.e.&nbsp;<code>&lt;registry&gt;/&lt;organization&gt;/&lt;namespace&gt;&lt;namespace_sep&gt;&lt;name&gt;</code>.</li>
-<li>Changed default of <code>--log</code> from <code>log.txt</code> to <code>.viash_push_log.txt</code>.</li>
-<li>Added <code>--verbose</code>: Print out the underlying <code>viash ns build</code> command before running it.</li>
-</ul></li>
-</ul>
-</section>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li><code>NextflowPlatform</code>: Added the <code>organization</code> field to the nextflow platform as well.</li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/blog/posts/viash-0.5.10/index.html</guid>
-  <pubDate>Tue, 15 Mar 2022 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
