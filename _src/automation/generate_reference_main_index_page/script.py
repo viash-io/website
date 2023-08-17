@@ -39,7 +39,7 @@ def generate_reference_page():
 		if "bannerCommand" in entry:
 			name = f'Viash {entry["name"]}'.title()
 			filename = entry["name"]
-			add_entry("Viash CLI Commands", name, f'./reference/cli/{filename}')
+			add_entry("Viash CLI Commands", name, f'/reference/cli/{filename}')
 		else:
 			for subcommand in entry['subcommands']:
 				name = f'Viash {entry["name"]} {subcommand["name"]}'.title()
@@ -47,9 +47,14 @@ def generate_reference_page():
 				add_entry("Viash CLI Commands", name, f'/reference/cli/{filename}')
 
 	# Add some static pages :(
-	add_entry("Viash Config", "Viash Config Overview", "/reference/config/index")
+	add_entry("Viash Config", "Config Overview", "/reference/config/index")
 	add_entry("Viash Config", "Functionality", "/reference/config/functionality/index")
-	add_entry("Viash Config", "Viash Project Config", "/reference/project/index")
+	add_entry("Viash Config", "Platforms", "/reference/config/platforms/index")
+	add_entry("Miscellaneous", "Project Config", "/reference/project/index")
+	add_entry("Miscellaneous", "Environment Variables", "/reference/config/environmentVariables")
+	add_entry("Miscellaneous", "Config Mods", "/reference/config_mods/index")
+	add_entry("Miscellaneous", "Viash Code Block", "/reference/viash_code_block/index")
+	
 
 	# Add config pages highlighting field groups
 	with open(par['config'], 'r') as infile:
