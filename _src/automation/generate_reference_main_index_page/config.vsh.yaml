@@ -1,0 +1,30 @@
+functionality:
+  name: generate_reference_main_index_page
+  description: |
+    The script reads the viash cli & config schema json schemas and assembles it to the main reference page listing
+  arguments:
+    - name: "--cli"
+      type: file
+      direction: input
+      description: The cli json file to use as input
+      required: true
+      must_exist: true
+    - name: "--config"
+      type: file
+      direction: input
+      description: The config json file to use as input
+      required: true
+      must_exist: true
+    - name: "--output"
+      type: file
+      alternatives: "-o"
+      direction: output
+      default: 'reference/reference.yml'
+      description: Path to use to store the index page listing
+  resources:
+    - type: python_script
+      path: script.py
+    - type: file
+      path: ../config_pages_settings.yaml
+platforms:
+  - type: native
