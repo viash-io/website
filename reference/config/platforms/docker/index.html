@@ -108,7 +108,6 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="../../../../styles.css">
-<link rel="stylesheet" href="../../../reference.css">
 <meta property="og:title" content="Viash - Docker Platform">
 <meta property="og:description" content="">
 <meta property="og:site-name" content="Viash">
@@ -674,19 +673,19 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <p>Run a Viash component on a Docker backend platform. By specifying which dependencies your component needs, users will be able to build a docker container from scratch using the setup flag, or pull it from a docker repository.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"bash:4.0"</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">setup</span><span class="kw">:</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> apt</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">packages</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> curl </span><span class="kw">]</span></span></code></pre></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">packages</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> curl </span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="chown" class="level2">
 <h2 class="anchored" data-anchor-id="chown">chown</h2>
 <p><strong>Type</strong>: <code>Boolean</code></p>
 <p><strong>Default</strong>: <code>True</code></p>
 <p>In Linux, files created by a Docker container will be owned by <code>root</code>. With <code>chown: true</code>, Viash will automatically change the ownership of output files (arguments with <code>type: file</code> and <code>direction: output</code>) to the user running the Viash command after execution of the component. Default value: <code>true</code>.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="cmd" class="level2">
 <h2 class="anchored" data-anchor-id="cmd">cmd</h2>
@@ -695,9 +694,9 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>Set the default command being executed when running the Docker container.</p>
 <p><strong>Examples:</strong></p>
 <p>Set CMD using the exec format, which is the prefered form.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmd</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"echo"</span><span class="kw">,</span><span class="at"> </span><span class="st">"$HOME"</span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmd</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"echo"</span><span class="kw">,</span><span class="at"> </span><span class="st">"$HOME"</span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Set CMD using the shell format.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmd</span><span class="kw">:</span><span class="at"> </span><span class="st">"echo $HOME"</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmd</span><span class="kw">:</span><span class="at"> </span><span class="st">"echo $HOME"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="entrypoint" class="level2">
 <h2 class="anchored" data-anchor-id="entrypoint">entrypoint</h2>
@@ -706,11 +705,11 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>Override the entrypoint of the base container. Default set <code>ENTRYPOINT []</code>.</p>
 <p><strong>Examples:</strong></p>
 <p>Disable the default override.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">entrypoint</span><span class="kw">:</span><span class="at"> </span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">entrypoint</span><span class="kw">:</span><span class="at"> </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Entrypoint of the container in the exec format, which is the prefered form.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">entrypoint</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"top"</span><span class="kw">,</span><span class="at"> </span><span class="st">"-b"</span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">entrypoint</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"top"</span><span class="kw">,</span><span class="at"> </span><span class="st">"-b"</span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Entrypoint of the container in the shell format.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">entrypoint</span><span class="kw">:</span><span class="at"> </span><span class="st">"top -b"</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">entrypoint</span><span class="kw">:</span><span class="at"> </span><span class="st">"top -b"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="id" class="level2">
 <h2 class="anchored" data-anchor-id="id">id</h2>
@@ -718,14 +717,14 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p><strong>Default</strong>: <code>docker</code></p>
 <p>As with all platforms, you can give a platform a different name. By specifying <code>id: foo</code>, you can target this platform (only) by specifying <code>-p foo</code> in any of the Viash commands.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> foo</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> foo</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="image" class="level2">
 <h2 class="anchored" data-anchor-id="image">image</h2>
 <p><strong>Type</strong>: <code>String</code></p>
 <p>The base container to start from. You can also add the tag here if you wish.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"bash:4.0"</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"bash:4.0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="namespace_separator" class="level2">
 <h2 class="anchored" data-anchor-id="namespace_separator">namespace_separator</h2>
@@ -733,7 +732,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p><strong>Default</strong>: <code>/</code></p>
 <p>The separator between the namespace and the name of the component, used for determining the image name. Default: <code>"/"</code>.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">namespace_separator</span><span class="kw">:</span><span class="at"> </span><span class="st">"_"</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">namespace_separator</span><span class="kw">:</span><span class="at"> </span><span class="st">"_"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="organization" class="level2">
 <h2 class="anchored" data-anchor-id="organization">organization</h2>
@@ -747,9 +746,9 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>A list of enabled ports. This doesn’t change the Dockerfile but gets added as a command-line argument at runtime.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">port</span><span class="kw">:</span></span>
+<div class="sourceCode" id="cb11"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">port</span><span class="kw">:</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="dv">80</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="dv">8080</span></span></code></pre></div>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="dv">8080</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="registry" class="level2">
 <h2 class="anchored" data-anchor-id="registry">registry</h2>
@@ -757,7 +756,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>The URL to the a <a href="https://docs.docker.com/registry/">custom Docker registry</a></p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">registry</span><span class="kw">:</span><span class="at"> https://my-docker-registry.org</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">registry</span><span class="kw">:</span><span class="at"> https://my-docker-registry.org</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="resolve_volume" class="level2">
 <h2 class="anchored" data-anchor-id="resolve_volume">resolve_volume</h2>
@@ -856,7 +855,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </tbody>
 </table>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup_strategy</span><span class="kw">:</span><span class="at"> alwaysbuild</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup_strategy</span><span class="kw">:</span><span class="at"> alwaysbuild</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="tag" class="level2">
 <h2 class="anchored" data-anchor-id="tag">tag</h2>
@@ -864,7 +863,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>Specify a Docker image based on its tag.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tag</span><span class="kw">:</span><span class="at"> </span><span class="fl">4.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tag</span><span class="kw">:</span><span class="at"> </span><span class="fl">4.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="target_image" class="level2">
 <h2 class="anchored" data-anchor-id="target_image">target_image</h2>
@@ -872,7 +871,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>If anything is specified in the setup section, running the <code>---setup</code> will result in an image with the name of <code>&lt;target_image&gt;:&lt;version&gt;</code>. If nothing is specified in the <code>setup</code> section, simply <code>image</code> will be used. Advanced usage only.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_image</span><span class="kw">:</span><span class="at"> myfoo</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_image</span><span class="kw">:</span><span class="at"> myfoo</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="target_image_source" class="level2">
 <h2 class="anchored" data-anchor-id="target_image_source">target_image_source</h2>
@@ -880,7 +879,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>The source of the target image. This is used for defining labels in the dockerfile.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_image_source</span><span class="kw">:</span><span class="at"> https://github.com/foo/bar</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_image_source</span><span class="kw">:</span><span class="at"> https://github.com/foo/bar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="target_organization" class="level2">
 <h2 class="anchored" data-anchor-id="target_organization">target_organization</h2>
@@ -888,7 +887,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>The organization set in the resulting image. Advanced usage only.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_organization</span><span class="kw">:</span><span class="at"> viash-io</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_organization</span><span class="kw">:</span><span class="at"> viash-io</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="target_registry" class="level2">
 <h2 class="anchored" data-anchor-id="target_registry">target_registry</h2>
@@ -896,7 +895,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>The URL where the resulting image will be pushed to. Advanced usage only.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_registry</span><span class="kw">:</span><span class="at"> https://my-docker-registry.org</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_registry</span><span class="kw">:</span><span class="at"> https://my-docker-registry.org</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="target_tag" class="level2">
 <h2 class="anchored" data-anchor-id="target_tag">target_tag</h2>
@@ -904,7 +903,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>The tag the resulting image gets. Advanced usage only.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_tag</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.5.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_tag</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.5.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="test_setup" class="level2">
 <h2 class="anchored" data-anchor-id="test_setup">test_setup</h2>
@@ -923,7 +922,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>The working directory when starting the container. This doesn’t change the Dockerfile but gets added as a command-line argument at runtime.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">workdir</span><span class="kw">:</span><span class="at"> /home/user</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">workdir</span><span class="kw">:</span><span class="at"> /home/user</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
@@ -959,6 +958,58 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
   function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,

@@ -108,7 +108,6 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="../../../styles.css">
-<link rel="stylesheet" href="../../reference.css">
 <meta property="og:title" content="Viash - Computational Requirements">
 <meta property="og:description" content="">
 <meta property="og:site-name" content="Viash">
@@ -660,7 +659,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>A list of commands which should be present on the system for the script to function.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">commands</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> which</span><span class="kw">,</span><span class="at"> bash</span><span class="kw">,</span><span class="at"> awk</span><span class="kw">,</span><span class="at"> date</span><span class="kw">,</span><span class="at"> grep</span><span class="kw">,</span><span class="at"> egrep</span><span class="kw">,</span><span class="at"> ps</span><span class="kw">,</span><span class="at"> sed</span><span class="kw">,</span><span class="at"> tail</span><span class="kw">,</span><span class="at"> tee </span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">commands</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> which</span><span class="kw">,</span><span class="at"> bash</span><span class="kw">,</span><span class="at"> awk</span><span class="kw">,</span><span class="at"> date</span><span class="kw">,</span><span class="at"> grep</span><span class="kw">,</span><span class="at"> egrep</span><span class="kw">,</span><span class="at"> ps</span><span class="kw">,</span><span class="at"> sed</span><span class="kw">,</span><span class="at"> tail</span><span class="kw">,</span><span class="at"> tee </span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="cpus" class="level2">
 <h2 class="anchored" data-anchor-id="cpus">cpus</h2>
@@ -668,7 +667,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>The maximum number of (logical) cpus a component is allowed to use.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cpus</span><span class="kw">:</span><span class="at"> </span><span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cpus</span><span class="kw">:</span><span class="at"> </span><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="memory" class="level2">
 <h2 class="anchored" data-anchor-id="memory">memory</h2>
@@ -676,7 +675,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>The maximum amount of memory a component is allowed to allocate. Unit must be one of B, KB, MB, GB, TB or PB.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">memory</span><span class="kw">:</span><span class="at"> 10GB</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">memory</span><span class="kw">:</span><span class="at"> 10GB</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
@@ -712,6 +711,58 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
   function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,

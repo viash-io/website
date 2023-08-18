@@ -108,7 +108,6 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="../../../../styles.css">
-<link rel="stylesheet" href="../../../reference.css">
 <meta property="og:title" content="Viash - Nextflow Directives">
 <meta property="og:description" content="">
 <meta property="og:site-name" content="Viash">
@@ -681,11 +680,11 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <p>Directives are optional settings that affect the execution of the process.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">directives</span><span class="kw">:</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">directives</span><span class="kw">:</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">container</span><span class="kw">:</span><span class="at"> rocker/r-ver:4.1</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">label</span><span class="kw">:</span><span class="at"> highcpu</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cpus</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">memory</span><span class="kw">:</span><span class="at"> 16 GB</span></span></code></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">memory</span><span class="kw">:</span><span class="at"> 16 GB</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="accelerator" class="level2">
 <h2 class="anchored" data-anchor-id="accelerator">accelerator</h2>
 <p><strong>Type</strong>: <code>Map of String to String</code></p>
@@ -694,7 +693,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>Viash implements this directive as a map with accepted keywords: <code>type</code>, <code>limit</code>, <code>request</code>, and <code>runtime</code>.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#accelerator"><code>accelerator</code></a>.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="fu">limit</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span><span class="kw">,</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"nvidia-tesla-k80"</span><span class="at"> </span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="fu">limit</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span><span class="kw">,</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"nvidia-tesla-k80"</span><span class="at"> </span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="afterscript" class="level2">
 <h2 class="anchored" data-anchor-id="afterscript">afterScript</h2>
@@ -703,7 +702,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The <code>afterScript</code> directive allows you to execute a custom (Bash) snippet immediately after the main process has run. This may be useful to clean up your staging area.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#afterscript"><code>afterScript</code></a>.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="at">source /cluster/bin/cleanup</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="at">source /cluster/bin/cleanup</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="beforescript" class="level2">
 <h2 class="anchored" data-anchor-id="beforescript">beforeScript</h2>
@@ -712,7 +711,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The <code>beforeScript</code> directive allows you to execute a custom (Bash) snippet before the main process script is run. This may be useful to initialise the underlying cluster environment or for other custom initialisation.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#beforeScript"><code>beforeScript</code></a>.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="at">source /cluster/bin/setup</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="at">source /cluster/bin/setup</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="cache" class="level2">
 <h2 class="anchored" data-anchor-id="cache">cache</h2>
@@ -724,10 +723,10 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>Accepted values are: <code>true</code>, <code>false</code>, <code>"deep"</code>, and <code>"lenient"</code>.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#cache"><code>cache</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ch">true</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ch">false</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="st">"deep"</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="st">"lenient"</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ch">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ch">false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="st">"deep"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="st">"lenient"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="conda" class="level2">
 <h2 class="anchored" data-anchor-id="conda">conda</h2>
@@ -737,9 +736,9 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>Nextflow automatically sets up an environment for the given package names listed by in the <code>conda</code> directive.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#conda"><code>conda</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="st">"bwa=0.7.15"</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="st">"bwa=0.7.15 fastqc=0.11.5"</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="st">"bwa=0.7.15"</span><span class="kw">,</span><span class="at"> </span><span class="st">"fastqc=0.11.5"</span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="st">"bwa=0.7.15"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="st">"bwa=0.7.15 fastqc=0.11.5"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="st">"bwa=0.7.15"</span><span class="kw">,</span><span class="at"> </span><span class="st">"fastqc=0.11.5"</span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="container" class="level2">
 <h2 class="anchored" data-anchor-id="container">container</h2>
@@ -750,11 +749,11 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>Viash implements allows either a string value or a map. In case a map is used, the allowed keys are: <code>registry</code>, <code>image</code>, and <code>tag</code>. The <code>image</code> value must be specified.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#container"><code>container</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="st">"foo/bar:tag"</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="st">"foo/bar:tag"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This is transformed to <code>"reg/im:ta"</code>:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="fu">registry</span><span class="kw">:</span><span class="at"> </span><span class="st">"reg"</span><span class="kw">,</span><span class="at"> </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"im"</span><span class="kw">,</span><span class="at"> </span><span class="fu">tag</span><span class="kw">:</span><span class="at"> </span><span class="st">"ta"</span><span class="at"> </span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="fu">registry</span><span class="kw">:</span><span class="at"> </span><span class="st">"reg"</span><span class="kw">,</span><span class="at"> </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"im"</span><span class="kw">,</span><span class="at"> </span><span class="fu">tag</span><span class="kw">:</span><span class="at"> </span><span class="st">"ta"</span><span class="at"> </span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This is transformed to <code>"im:latest"</code>:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"im"</span><span class="at"> </span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"im"</span><span class="at"> </span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="containeroptions" class="level2">
 <h2 class="anchored" data-anchor-id="containeroptions">containerOptions</h2>
@@ -763,8 +762,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The <code>containerOptions</code> directive allows you to specify any container execution option supported by the underlying container engine (ie. Docker, Singularity, etc). This can be useful to provide container settings only for a specific process e.g.&nbsp;mount a custom path.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#containeroptions"><code>containerOptions</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="st">"--foo bar"</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="st">"--foo bar"</span><span class="kw">,</span><span class="at"> </span><span class="st">"-f b"</span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="st">"--foo bar"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="st">"--foo bar"</span><span class="kw">,</span><span class="at"> </span><span class="st">"-f b"</span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="cpus" class="level2">
 <h2 class="anchored" data-anchor-id="cpus">cpus</h2>
@@ -773,8 +772,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The <code>cpus</code> directive allows you to define the number of (logical) CPU required by the process’ task.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#cpus"><code>cpus</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span></span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="disk" class="level2">
 <h2 class="anchored" data-anchor-id="disk">disk</h2>
@@ -783,10 +782,10 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The <code>disk</code> directive allows you to define how much local disk storage the process is allowed to use.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#disk"><code>disk</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="st">"1 GB"</span></span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="st">"2TB"</span></span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="st">"3.2KB"</span></span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="st">"10.B"</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="st">"1 GB"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="st">"2TB"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="st">"3.2KB"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="st">"10.B"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="echo" class="level2">
 <h2 class="anchored" data-anchor-id="echo">echo</h2>
@@ -795,8 +794,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>By default the stdout produced by the commands executed in all processes is ignored. By setting the <code>echo</code> directive to true, you can forward the process stdout to the current top running process stdout file, showing it in the shell terminal.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#echo"><code>echo</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ch">true</span></span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ch">false</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ch">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ch">false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="errorstrategy" class="level2">
 <h2 class="anchored" data-anchor-id="errorstrategy">errorStrategy</h2>
@@ -806,8 +805,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>Table of available error strategies: | Name | Executor | |——|———-| | <code>terminate</code> | Terminates the execution as soon as an error condition is reported. Pending jobs are killed (default) | | <code>finish</code> | Initiates an orderly pipeline shutdown when an error condition is raised, waiting the completion of any submitted job. | | <code>ignore</code> | Ignores processes execution errors. | | <code>retry</code> | Re-submit for execution a process returning an error condition. |</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#errorstrategy"><code>errorStrategy</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="st">"terminate"</span></span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="st">"finish"</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="st">"terminate"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="st">"finish"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="executor" class="level2">
 <h2 class="anchored" data-anchor-id="executor">executor</h2>
@@ -899,8 +898,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </table>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#executor"><code>executor</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="st">"local"</span></span></code></pre></div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="st">"sge"</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="st">"local"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="st">"sge"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="label" class="level2">
 <h2 class="anchored" data-anchor-id="label">label</h2>
@@ -909,9 +908,9 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The <code>label</code> directive allows the annotation of processes with mnemonic identifier of your choice.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#label"><code>label</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="st">"big_mem"</span></span></code></pre></div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="st">"big_cpu"</span></span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="st">"big_mem"</span><span class="kw">,</span><span class="at"> </span><span class="st">"big_cpu"</span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="st">"big_mem"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="st">"big_cpu"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="st">"big_mem"</span><span class="kw">,</span><span class="at"> </span><span class="st">"big_cpu"</span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="machinetype" class="level2">
 <h2 class="anchored" data-anchor-id="machinetype">machineType</h2>
@@ -920,7 +919,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The <code>machineType</code> can be used to specify a predefined Google Compute Platform machine type when running using the Google Life Sciences executor.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#machinetype"><code>machineType</code></a>.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="st">"n1-highmem-8"</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="st">"n1-highmem-8"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="maxerrors" class="level2">
 <h2 class="anchored" data-anchor-id="maxerrors">maxErrors</h2>
@@ -929,8 +928,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The <code>maxErrors</code> directive allows you to specify the maximum number of times a process can fail when using the <code>retry</code> error strategy. By default this directive is disabled.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#maxerrors"><code>maxErrors</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span></span></code></pre></div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="maxforks" class="level2">
 <h2 class="anchored" data-anchor-id="maxforks">maxForks</h2>
@@ -940,8 +939,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>If you want to execute a process in a sequential manner, set this directive to one.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#maxforks"><code>maxForks</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span></span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="maxretries" class="level2">
 <h2 class="anchored" data-anchor-id="maxretries">maxRetries</h2>
@@ -950,8 +949,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The <code>maxRetries</code> directive allows you to define the maximum number of times a process instance can be re-submitted in case of failure. This value is applied only when using the retry error strategy. By default only one retry is allowed.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#maxretries"><code>maxRetries</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span></span></code></pre></div>
-<div class="sourceCode" id="cb38"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="memory" class="level2">
 <h2 class="anchored" data-anchor-id="memory">memory</h2>
@@ -960,10 +959,10 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The <code>memory</code> directive allows you to define how much memory the process is allowed to use.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#memory"><code>memory</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="st">"1 GB"</span></span></code></pre></div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="st">"2TB"</span></span></code></pre></div>
-<div class="sourceCode" id="cb41"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="st">"3.2KB"</span></span></code></pre></div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="st">"10.B"</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="st">"1 GB"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="st">"2TB"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="st">"3.2KB"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="st">"10.B"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="module" class="level2">
 <h2 class="anchored" data-anchor-id="module">module</h2>
@@ -974,9 +973,9 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>In a process definition you can use the <code>module</code> directive to load a specific module version to be used in the process execution environment.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#module"><code>module</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="st">"ncbi-blast/2.2.27"</span></span></code></pre></div>
-<div class="sourceCode" id="cb44"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="st">"ncbi-blast/2.2.27:t_coffee/10.0"</span></span></code></pre></div>
-<div class="sourceCode" id="cb45"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="st">"ncbi-blast/2.2.27"</span><span class="kw">,</span><span class="at"> </span><span class="st">"t_coffee/10.0"</span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="st">"ncbi-blast/2.2.27"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="st">"ncbi-blast/2.2.27:t_coffee/10.0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="st">"ncbi-blast/2.2.27"</span><span class="kw">,</span><span class="at"> </span><span class="st">"t_coffee/10.0"</span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="penv" class="level2">
 <h2 class="anchored" data-anchor-id="penv">penv</h2>
@@ -985,7 +984,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The <code>penv</code> directive allows you to define the parallel environment to be used when submitting a parallel task to the SGE resource manager.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#penv"><code>penv</code></a>.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="st">"smp"</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="st">"smp"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="pod" class="level2">
 <h2 class="anchored" data-anchor-id="pod">pod</h2>
@@ -994,10 +993,10 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The <code>pod</code> directive allows the definition of pods specific settings, such as environment variables, secrets and config maps when using the Kubernetes executor.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#pod"><code>pod</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="fu">label</span><span class="kw">:</span><span class="at"> </span><span class="st">"key"</span><span class="kw">,</span><span class="at"> </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">"val"</span><span class="at"> </span><span class="kw">]</span></span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="fu">annotation</span><span class="kw">:</span><span class="at"> </span><span class="st">"key"</span><span class="kw">,</span><span class="at"> </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">"val"</span><span class="at"> </span><span class="kw">]</span></span></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="fu">env</span><span class="kw">:</span><span class="at"> </span><span class="st">"key"</span><span class="kw">,</span><span class="at"> </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">"val"</span><span class="at"> </span><span class="kw">]</span></span></code></pre></div>
-<div class="sourceCode" id="cb50"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="kw">[</span><span class="fu">label</span><span class="kw">:</span><span class="at"> </span><span class="st">"l"</span><span class="kw">,</span><span class="at"> </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">"v"</span><span class="kw">],</span><span class="at"> </span><span class="kw">[</span><span class="fu">env</span><span class="kw">:</span><span class="at"> </span><span class="st">"e"</span><span class="kw">,</span><span class="at"> </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">"v"</span><span class="kw">]]</span></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="fu">label</span><span class="kw">:</span><span class="at"> </span><span class="st">"key"</span><span class="kw">,</span><span class="at"> </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">"val"</span><span class="at"> </span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="fu">annotation</span><span class="kw">:</span><span class="at"> </span><span class="st">"key"</span><span class="kw">,</span><span class="at"> </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">"val"</span><span class="at"> </span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="fu">env</span><span class="kw">:</span><span class="at"> </span><span class="st">"key"</span><span class="kw">,</span><span class="at"> </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">"val"</span><span class="at"> </span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="kw">[</span><span class="fu">label</span><span class="kw">:</span><span class="at"> </span><span class="st">"l"</span><span class="kw">,</span><span class="at"> </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">"v"</span><span class="kw">],</span><span class="at"> </span><span class="kw">[</span><span class="fu">env</span><span class="kw">:</span><span class="at"> </span><span class="st">"e"</span><span class="kw">,</span><span class="at"> </span><span class="fu">value</span><span class="kw">:</span><span class="at"> </span><span class="st">"v"</span><span class="kw">]]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="publishdir" class="level2">
 <h2 class="anchored" data-anchor-id="publishdir">publishDir</h2>
@@ -1007,12 +1006,12 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>Viash implements this directive as a plain string or a map. The allowed keywords for the map are: <code>path</code>, <code>mode</code>, <code>overwrite</code>, <code>pattern</code>, <code>saveAs</code>, <code>enabled</code>. The <code>path</code> key and value are required. The allowed values for <code>mode</code> are: <code>symlink</code>, <code>rellink</code>, <code>link</code>, <code>copy</code>, <code>copyNoFollow</code>, <code>move</code>.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#publishdir"><code>publishDir</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[]</span></span></code></pre></div>
-<div class="sourceCode" id="cb52"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"foo"</span><span class="kw">,</span><span class="at"> </span><span class="fu">enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="at"> </span><span class="kw">],</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"bar"</span><span class="kw">,</span><span class="at"> </span><span class="fu">enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span><span class="at"> </span><span class="kw">]</span><span class="at"> </span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"foo"</span><span class="kw">,</span><span class="at"> </span><span class="fu">enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="at"> </span><span class="kw">],</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"bar"</span><span class="kw">,</span><span class="at"> </span><span class="fu">enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span><span class="at"> </span><span class="kw">]</span><span class="at"> </span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This is transformed to <code>[[ path: "/path/to/dir" ]]</code>:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="st">"/path/to/dir"</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="st">"/path/to/dir"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This is transformed to <code>[[ path: "/path/to/dir", mode: "cache" ]]</code>:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"/path/to/dir"</span><span class="kw">,</span><span class="at"> </span><span class="fu">mode</span><span class="kw">:</span><span class="at"> </span><span class="st">"cache"</span><span class="at"> </span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at"> </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"/path/to/dir"</span><span class="kw">,</span><span class="at"> </span><span class="fu">mode</span><span class="kw">:</span><span class="at"> </span><span class="st">"cache"</span><span class="at"> </span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="queue" class="level2">
 <h2 class="anchored" data-anchor-id="queue">queue</h2>
@@ -1021,9 +1020,9 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The <code>queue</code> directory allows you to set the queue where jobs are scheduled when using a grid based executor in your pipeline.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#queue"><code>queue</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="st">"long"</span></span></code></pre></div>
-<div class="sourceCode" id="cb56"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="st">"short,long"</span></span></code></pre></div>
-<div class="sourceCode" id="cb57"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="st">"short"</span><span class="kw">,</span><span class="at"> </span><span class="st">"long"</span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="st">"long"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="st">"short,long"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="st">"short"</span><span class="kw">,</span><span class="at"> </span><span class="st">"long"</span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="scratch" class="level2">
 <h2 class="anchored" data-anchor-id="scratch">scratch</h2>
@@ -1032,10 +1031,10 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The <code>scratch</code> directive allows you to execute the process in a temporary folder that is local to the execution node.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#scratch"><code>scratch</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="ch">true</span></span></code></pre></div>
-<div class="sourceCode" id="cb59"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="st">"/path/to/scratch"</span></span></code></pre></div>
-<div class="sourceCode" id="cb60"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="st">'$MY_PATH_TO_SCRATCH'</span></span></code></pre></div>
-<div class="sourceCode" id="cb61"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="st">"ram-disk"</span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="ch">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="st">"/path/to/scratch"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="st">'$MY_PATH_TO_SCRATCH'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="st">"ram-disk"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="stageinmode" class="level2">
 <h2 class="anchored" data-anchor-id="stageinmode">stageInMode</h2>
@@ -1074,8 +1073,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </table>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#stageinmode"><code>stageInMode</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="st">"copy"</span></span></code></pre></div>
-<div class="sourceCode" id="cb63"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="st">"link"</span></span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="st">"copy"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="st">"link"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="stageoutmode" class="level2">
 <h2 class="anchored" data-anchor-id="stageoutmode">stageOutMode</h2>
@@ -1110,8 +1109,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </table>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#stageoutmode"><code>stageOutMode</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="st">"copy"</span></span></code></pre></div>
-<div class="sourceCode" id="cb65"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="st">"link"</span></span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="st">"copy"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="st">"link"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="storedir" class="level2">
 <h2 class="anchored" data-anchor-id="storedir">storeDir</h2>
@@ -1120,7 +1119,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The <code>storeDir</code> directive allows you to define a directory that is used as a permanent cache for your process results.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#storeDir"><code>storeDir</code></a>.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="st">"/path/to/storeDir"</span></span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="st">"/path/to/storeDir"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="tag" class="level2">
 <h2 class="anchored" data-anchor-id="tag">tag</h2>
@@ -1129,8 +1128,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The <code>tag</code> directive allows you to associate each process execution with a custom label, so that it will be easier to identify them in the log file or in the trace execution report.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#tag"><code>tag</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="st">"foo"</span></span></code></pre></div>
-<div class="sourceCode" id="cb68"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="st">'$id'</span></span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="st">"foo"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="st">'$id'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="time" class="level2">
 <h2 class="anchored" data-anchor-id="time">time</h2>
@@ -1139,9 +1138,9 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The <code>time</code> directive allows you to define how long a process is allowed to run.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#time"><code>time</code></a>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="st">"1h"</span></span></code></pre></div>
-<div class="sourceCode" id="cb70"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="st">"2days"</span></span></code></pre></div>
-<div class="sourceCode" id="cb71"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="st">"1day 6hours 3minutes 30seconds"</span></span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="st">"1h"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="st">"2days"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="st">"1day 6hours 3minutes 30seconds"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
@@ -1177,6 +1176,58 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
   function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
