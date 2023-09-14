@@ -1,24 +1,15 @@
 import json, re, yaml
 from pathlib import Path
+import glob
 
 ## VIASH START
 par = {
-  'cli': 'reference/cli_schema_export.json',
-  'config': 'reference/config_schema_export.json',
   'output': 'reference/cli'
 }
 meta = {
 	"resources_dir": "_src/automation/generate_reference_cli_pages"
 }
 ## VIASH END
-
-output = Path(par["output"])
-# keyword_regex = r"\@\[(.*?)\]\((.*?)\)"
-
-config_file = Path(meta['resources_dir'], 'config_pages_settings.yaml')
-
-with open(config_file, 'r') as infile:
-	config_pages_settings = yaml.safe_load(infile)
 
 ref_dict = {}
 def add_entry(topic, name, href):
@@ -28,23 +19,27 @@ def add_entry(topic, name, href):
 	else:
 		ref_dict[topic] = [{ 'text': name, 'href': href + '.html' }]
 
+def get_topic_from_qmd(qmd_file):
+	""" Get the topic from the qmd file. """
+	# TODO: Read the header from the qmd file and parse as YAML
+	with open(qmd_file, 'r') as infile:
+		for line in infile:
+			if line.startswith('title:'):
+				return line.split(':')[1].strip().strip('"')
+
+def add_entries_from_glob(glob_pattern, topic, skip_index):
+	""" Add entries from a glob pattern. """
+	files = glob.glob(glob_pattern)
+	for file in sorted(files):
+		if skip_index and file.endswith('index.qmd'):
+			continue
+		add_entry(topic, get_topic_from_qmd(file), "/" + file.replace('.qmd', ''))
+
 def generate_reference_page():
 	""" Load the generated JSON files and create reference entries. """
 
 	# List the CLI commands
-	with open(par['cli'], 'r') as infile:
-		cli_json = json.load(infile)
-
-	for entry in cli_json:
-		if "bannerCommand" in entry:
-			name = f'Viash {entry["name"]}'.title()
-			filename = entry["name"]
-			add_entry("Viash CLI Commands", name, f'/reference/cli/{filename}')
-		else:
-			for subcommand in entry['subcommands']:
-				name = f'Viash {entry["name"]} {subcommand["name"]}'.title()
-				filename = f'{entry["name"]}_{subcommand["name"]}'
-				add_entry("Viash CLI Commands", name, f'/reference/cli/{filename}')
+	add_entries_from_glob('reference/cli/*.qmd', "Viash CLI Commands", True)
 
 	# Add some static pages :(
 	add_entry("Viash Config", "Config Overview", "/reference/config/index")
@@ -55,38 +50,12 @@ def generate_reference_page():
 	add_entry("Miscellaneous", "Config Mods", "/reference/config_mods/index")
 	add_entry("Miscellaneous", "Viash Code Block", "/reference/viash_code_block/index")
 	
-
-	# Add config pages highlighting field groups
-	with open(par['config'], 'r') as infile:
-		config_json = json.load(infile)
-
-	# Regex filters. Platforms are not simply contained in a main folder, grab index files. For other matches, skip the index files.
-	to_document = {
-		'\./platforms/\w*/index': "Platforms",
-		'\./functionality/arguments/(?!index$)\w*': "Argument Types",
-		'\./functionality/resources/(?!index$)\w*': "Resource Types",
-		'\./platforms/docker/setup/(?!index$)\w*': "Docker Setup Requirements"
-	}
-
-	for entry in config_json:
-		this_parameter = {}
-		# Get the __this__ parameter
-		for d in entry:
-			if d['name'] == '__this__':
-				this_parameter = d
-				break
-
-		topic = this_parameter['type']
-		title = re.sub(r"(\w)([A-Z])", r"\1 \2", topic).title() \
-			.replace("Java Script", "JavaScript") \
-			.replace("C Sharp", "C#") \
-			.replace(" Argument", "")
-		filename = config_pages_settings['structure'][topic]
-		for key, value in to_document.items():
-			if re.match(key, filename):
-				add_entry(value, title, f'/reference/config{filename.strip(".")}')
-				break
-
+	# Platforms are not simply contained in a main folder, grab index files. For other matches, skip the index files.
+	add_entries_from_glob('reference/config/platforms/*/index.qmd', "Platforms", False)
+	add_entries_from_glob('reference/config/platforms/docker/setup/*.qmd', "Docker Setup Requirements", True)
+	add_entries_from_glob('reference/config/functionality/arguments/*.qmd', "Argument Types", True)
+	add_entries_from_glob('reference/config/functionality/resources/*.qmd', "Resource Types", True)
+	
 	# Minor final touch on the output and save to file
 	output = []
 	for key, value in ref_dict.items():
