@@ -25,6 +25,4 @@ viash run _src/automation/generate_reference_config_pages/config.vsh.yaml -- \
   --input ./reference/config_schema_export.json
 
 echo "Creating reference main page"
-viash run ./_src/automation/generate_reference_main_index_page/config.vsh.yaml -- \
-  --cli ./reference/cli_schema_export.json \
-  --config ./reference/config_schema_export.json
+viash run ./_src/automation/generate_reference_main_index_page/config.vsh.yaml
