@@ -376,15 +376,15 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Exporting take_column (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/take_column
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/take_column:dev' with Dockerfile
-Exporting take_column (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/take_column
+<pre><code>Exporting remove_comments (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/remove_comments
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/remove_comments:dev' with Dockerfile
+Exporting remove_comments (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/remove_comments
 Exporting combine_columns (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/combine_columns
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/combine_columns:dev' with Dockerfile
 Exporting combine_columns (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/combine_columns
-Exporting remove_comments (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/remove_comments
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/remove_comments:dev' with Dockerfile
-Exporting remove_comments (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/remove_comments
+Exporting take_column (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/take_column
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/take_column:dev' with Dockerfile
+Exporting take_column (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/take_column
 [32mAll 6 configs built successfully[0m</code></pre>
 </div>
 </div>
@@ -406,21 +406,21 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>The working directory for the namespace tests is /tmp/viash_ns_test12260365206567647482
-           namespace        functionality             platform            test_name exit_code duration               result[0m
+<pre><code>           namespace        functionality             platform            test_name exit_code duration               result[0m
+The working directory for the namespace tests is /tmp/viash_ns_test2728778613477523057
+                demo      remove_comments               docker                start                                        [0m
+[32m                demo      remove_comments               docker     build_executable         0        0              SUCCESS[0m
+[32m                demo      remove_comments               docker              test.sh         0        1              SUCCESS[0m
+                demo      combine_columns               docker                start                                        [0m
+no tests found
+====================================================================
+[32m                demo      combine_columns               docker     build_executable         0        0              SUCCESS[0m
+[33m                demo      combine_columns               docker                tests        -1        0              MISSING[0m
                 demo          take_column               docker                start                                        [0m
 [32m                demo          take_column               docker     build_executable         0        0              SUCCESS[0m
 [33m                demo          take_column               docker                tests        -1        0              MISSING[0m
 no tests found
 ====================================================================
-                demo      combine_columns               docker                start                                        [0m
-[32m                demo      combine_columns               docker     build_executable         0        0              SUCCESS[0m
-[33m                demo      combine_columns               docker                tests        -1        0              MISSING[0m
-no tests found
-====================================================================
-                demo      remove_comments               docker                start                                        [0m
-[32m                demo      remove_comments               docker     build_executable         0        0              SUCCESS[0m
-[32m                demo      remove_comments               docker              test.sh         0        1              SUCCESS[0m
 [33mNot all configs built and tested successfully[0m
   [33m2/6 tests missing[0m
   [32m4/6 configs built and tested successfully[0m</code></pre>
@@ -438,225 +438,8 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>- functionality:
-    name: "take_column"
-    namespace: "demo"
-    version: "dev"
-    authors: []
-    arguments:
-    - type: "file"
-      name: "--input"
-      alternatives:
-      - "-i"
-      example: []
-      default: []
-      must_exist: true
-      create_parent: true
-      required: true
-      direction: "input"
-      multiple: false
-      multiple_sep: ":"
-      dest: "par"
-    - type: "file"
-      name: "--output"
-      alternatives:
-      - "-o"
-      example: []
-      default: []
-      must_exist: true
-      create_parent: true
-      required: true
-      direction: "output"
-      multiple: false
-[32mAll 3 configs parsed successfully[0m
-      multiple_sep: ":"
-      dest: "par"
-    - type: "integer"
-      name: "--column"
-      alternatives: []
-      example: []
-      default:
-      - 2
-      required: false
-      choices: []
-      direction: "input"
-      multiple: false
-      multiple_sep: ":"
-      dest: "par"
-    - type: "string"
-      name: "--id"
-      alternatives: []
-      example: []
-      default:
-      - "take_column"
-      required: false
-      choices: []
-      direction: "input"
-      multiple: false
-      multiple_sep: ":"
-      dest: "par"
-    argument_groups: []
-    resources:
-    - type: "python_script"
-      path: "script.py"
-      is_executable: true
-      parent: "file:/home/runner/work/website/website/guide/_viash_project_template/src/demo/take_column/config.vsh.yaml"
-    test_resources: []
-    status: "enabled"
-    requirements:
-      commands: []
-    set_wd_to_resources_dir: false
-  platforms:
-  - type: "docker"
-    id: "docker"
-    image: "python:3.10-slim"
-    target_organization: "viash-io/viash_project_template"
-    target_registry: "ghcr.io"
-    namespace_separator: "/"
-    resolve_volume: "Automatic"
-    chown: true
-    port: []
-    setup_strategy: "ifneedbepullelsecachedbuild"
-    run_args: []
-    target_image_source: "https://github.com/viash-io/viash_project_template"
-    setup:
-    - type: "python"
-      user: false
-      packages:
-      - "pandas"
-      pip: []
-      pypi: []
-      git: []
-      github: []
-      gitlab: []
-      mercurial: []
-      svn: []
-      bazaar: []
-      url: []
-      script: []
-      upgrade: true
-    test_setup: []
-  - type: "nextflow"
-    id: "nextflow"
-    variant: "vdsl3"
-    directives:
-      accelerator: {}
-      conda: []
-      containerOptions: []
-      label: []
-      module: []
-      pod: []
-      publishDir: []
-      queue: []
-      tag: "$id"
-    auto:
-      simplifyInput: true
-      simplifyOutput: true
-      transcript: false
-      publish: false
-    debug: false
-    container: "docker"
-  info:
-    config: "/home/runner/work/website/website/guide/_viash_project_template/src/demo/take_column/config.vsh.yaml"
-    viash_version: "0.7.1"
-    git_commit: "ffa7b1bee3fb192bec568a772b44c6b527cd941b"
-    git_remote: "https://github.com/viash-io/viash_project_template.git"
-- functionality:
-    name: "combine_columns"
-    namespace: "demo"
-    version: "dev"
-    authors: []
-    arguments:
-    - type: "file"
-      name: "--input"
-      alternatives:
-      - "-i"
-      example: []
-      default: []
-      must_exist: true
-      create_parent: true
-      required: true
-      direction: "input"
-      multiple: true
-      multiple_sep: ":"
-      dest: "par"
-    - type: "file"
-      name: "--output"
-      alternatives:
-      - "-o"
-      example: []
-      default: []
-      must_exist: true
-      create_parent: true
-      required: true
-      direction: "output"
-      multiple: false
-      multiple_sep: ":"
-      dest: "par"
-    - type: "string"
-      name: "--id"
-      alternatives: []
-      example: []
-      default:
-      - "combine_columns"
-      required: false
-      choices: []
-      direction: "input"
-      multiple: false
-      multiple_sep: ":"
-      dest: "par"
-    argument_groups: []
-    resources:
-    - type: "r_script"
-      path: "script.R"
-      is_executable: true
-      parent: "file:/home/runner/work/website/website/guide/_viash_project_template/src/demo/combine_columns/config.vsh.yaml"
-    test_resources: []
-    status: "enabled"
-    requirements:
-      commands: []
-    set_wd_to_resources_dir: false
-  platforms:
-  - type: "docker"
-    id: "docker"
-    image: "eddelbuettel/r2u:22.04"
-    target_organization: "viash-io/viash_project_template"
-    target_registry: "ghcr.io"
-    namespace_separator: "/"
-    resolve_volume: "Automatic"
-    chown: true
-    port: []
-    setup_strategy: "ifneedbepullelsecachedbuild"
-    run_args: []
-    target_image_source: "https://github.com/viash-io/viash_project_template"
-    setup: []
-    test_setup: []
-  - type: "nextflow"
-    id: "nextflow"
-    variant: "vdsl3"
-    directives:
-      accelerator: {}
-      conda: []
-      containerOptions: []
-      label: []
-      module: []
-      pod: []
-      publishDir: []
-      queue: []
-      tag: "$id"
-    auto:
-      simplifyInput: true
-      simplifyOutput: true
-      transcript: false
-      publish: false
-    debug: false
-    container: "docker"
-  info:
-    config: "/home/runner/work/website/website/guide/_viash_project_template/src/demo/combine_columns/config.vsh.yaml"
-    viash_version: "0.7.1"
-    git_commit: "ffa7b1bee3fb192bec568a772b44c6b527cd941b"
-    git_remote: "https://github.com/viash-io/viash_project_template.git"
-- functionality:
+<pre><code>- functionality:[32mAll 3 configs parsed successfully[0m
+
     name: "remove_comments"
     namespace: "demo"
     version: "dev"
@@ -756,6 +539,223 @@ Output
     config: "/home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml"
     viash_version: "0.7.1"
     git_commit: "ffa7b1bee3fb192bec568a772b44c6b527cd941b"
+    git_remote: "https://github.com/viash-io/viash_project_template.git"
+- functionality:
+    name: "combine_columns"
+    namespace: "demo"
+    version: "dev"
+    authors: []
+    arguments:
+    - type: "file"
+      name: "--input"
+      alternatives:
+      - "-i"
+      example: []
+      default: []
+      must_exist: true
+      create_parent: true
+      required: true
+      direction: "input"
+      multiple: true
+      multiple_sep: ":"
+      dest: "par"
+    - type: "file"
+      name: "--output"
+      alternatives:
+      - "-o"
+      example: []
+      default: []
+      must_exist: true
+      create_parent: true
+      required: true
+      direction: "output"
+      multiple: false
+      multiple_sep: ":"
+      dest: "par"
+    - type: "string"
+      name: "--id"
+      alternatives: []
+      example: []
+      default:
+      - "combine_columns"
+      required: false
+      choices: []
+      direction: "input"
+      multiple: false
+      multiple_sep: ":"
+      dest: "par"
+    argument_groups: []
+    resources:
+    - type: "r_script"
+      path: "script.R"
+      is_executable: true
+      parent: "file:/home/runner/work/website/website/guide/_viash_project_template/src/demo/combine_columns/config.vsh.yaml"
+    test_resources: []
+    status: "enabled"
+    requirements:
+      commands: []
+    set_wd_to_resources_dir: false
+  platforms:
+  - type: "docker"
+    id: "docker"
+    image: "eddelbuettel/r2u:22.04"
+    target_organization: "viash-io/viash_project_template"
+    target_registry: "ghcr.io"
+    namespace_separator: "/"
+    resolve_volume: "Automatic"
+    chown: true
+    port: []
+    setup_strategy: "ifneedbepullelsecachedbuild"
+    run_args: []
+    target_image_source: "https://github.com/viash-io/viash_project_template"
+    setup: []
+    test_setup: []
+  - type: "nextflow"
+    id: "nextflow"
+    variant: "vdsl3"
+    directives:
+      accelerator: {}
+      conda: []
+      containerOptions: []
+      label: []
+      module: []
+      pod: []
+      publishDir: []
+      queue: []
+      tag: "$id"
+    auto:
+      simplifyInput: true
+      simplifyOutput: true
+      transcript: false
+      publish: false
+    debug: false
+    container: "docker"
+  info:
+    config: "/home/runner/work/website/website/guide/_viash_project_template/src/demo/combine_columns/config.vsh.yaml"
+    viash_version: "0.7.1"
+    git_commit: "ffa7b1bee3fb192bec568a772b44c6b527cd941b"
+    git_remote: "https://github.com/viash-io/viash_project_template.git"
+- functionality:
+    name: "take_column"
+    namespace: "demo"
+    version: "dev"
+    authors: []
+    arguments:
+    - type: "file"
+      name: "--input"
+      alternatives:
+      - "-i"
+      example: []
+      default: []
+      must_exist: true
+      create_parent: true
+      required: true
+      direction: "input"
+      multiple: false
+      multiple_sep: ":"
+      dest: "par"
+    - type: "file"
+      name: "--output"
+      alternatives:
+      - "-o"
+      example: []
+      default: []
+      must_exist: true
+      create_parent: true
+      required: true
+      direction: "output"
+      multiple: false
+      multiple_sep: ":"
+      dest: "par"
+    - type: "integer"
+      name: "--column"
+      alternatives: []
+      example: []
+      default:
+      - 2
+      required: false
+      choices: []
+      direction: "input"
+      multiple: false
+      multiple_sep: ":"
+      dest: "par"
+    - type: "string"
+      name: "--id"
+      alternatives: []
+      example: []
+      default:
+      - "take_column"
+      required: false
+      choices: []
+      direction: "input"
+      multiple: false
+      multiple_sep: ":"
+      dest: "par"
+    argument_groups: []
+    resources:
+    - type: "python_script"
+      path: "script.py"
+      is_executable: true
+      parent: "file:/home/runner/work/website/website/guide/_viash_project_template/src/demo/take_column/config.vsh.yaml"
+    test_resources: []
+    status: "enabled"
+    requirements:
+      commands: []
+    set_wd_to_resources_dir: false
+  platforms:
+  - type: "docker"
+    id: "docker"
+    image: "python:3.10-slim"
+    target_organization: "viash-io/viash_project_template"
+    target_registry: "ghcr.io"
+    namespace_separator: "/"
+    resolve_volume: "Automatic"
+    chown: true
+    port: []
+    setup_strategy: "ifneedbepullelsecachedbuild"
+    run_args: []
+    target_image_source: "https://github.com/viash-io/viash_project_template"
+    setup:
+    - type: "python"
+      user: false
+      packages:
+      - "pandas"
+      pip: []
+      pypi: []
+      git: []
+      github: []
+      gitlab: []
+      mercurial: []
+      svn: []
+      bazaar: []
+      url: []
+      script: []
+      upgrade: true
+    test_setup: []
+  - type: "nextflow"
+    id: "nextflow"
+    variant: "vdsl3"
+    directives:
+      accelerator: {}
+      conda: []
+      containerOptions: []
+      label: []
+      module: []
+      pod: []
+      publishDir: []
+      queue: []
+      tag: "$id"
+    auto:
+      simplifyInput: true
+      simplifyOutput: true
+      transcript: false
+      publish: false
+    debug: false
+    container: "docker"
+  info:
+    config: "/home/runner/work/website/website/guide/_viash_project_template/src/demo/take_column/config.vsh.yaml"
+    viash_version: "0.7.1"
+    git_commit: "ffa7b1bee3fb192bec568a772b44c6b527cd941b"
     git_remote: "https://github.com/viash-io/viash_project_template.git"</code></pre>
 </div>
 </div>
@@ -771,23 +771,24 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>+ echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/take_column/config.vsh.yaml
+<pre><code>+ echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml
   Exit code: 0
 
   Output:
 + echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/combine_columns/config.vsh.yaml
-Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/take_column/config.vsh.yaml
+Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml
 
-  Exit code: 0
-
-  Output:
-+ echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml
 Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/combine_columns/config.vsh.yaml
 
   Exit code: 0
 
   Output:
-Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/remove_comments/config.vsh.yaml</code></pre>
++ echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/take_column/config.vsh.yaml
+Hello /home/runner/work/website/website/guide/_viash_project_template/src/demo/take_column/config.vsh.yaml
+
+  Exit code: 0
+
+  Output:</code></pre>
 </div>
 </div>
 </details>
@@ -809,16 +810,16 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>The working directory for the namespace tests is /tmp/viash_ns_test15473572591299013318
+<pre><code>The working directory for the namespace tests is /tmp/viash_ns_test17001601582897994254
            namespace        functionality             platform            test_name exit_code duration               result[0m
-                demo          take_column               docker                start                                        [0m
+                demo      remove_comments               docker                start                                        [0m
                 demo      combine_columns               docker                start                                        [0m
-[32m                demo      combine_columns               docker     build_executable         0        1              SUCCESS[0m
+[32m                demo      combine_columns               docker     build_executable         0        0              SUCCESS[0m
 [33m                demo      combine_columns               docker                tests        -1        0              MISSING[0m
 no tests found
 ====================================================================
-                demo      remove_comments               docker                start                                        [0m
-[32m                demo          take_column               docker     build_executable         0        1              SUCCESS[0m
+                demo          take_column               docker                start                                        [0m
+[32m                demo          take_column               docker     build_executable         0        0              SUCCESS[0m
 [33m                demo          take_column               docker                tests        -1        0              MISSING[0m
 no tests found
 ====================================================================
