@@ -11,11 +11,12 @@ Build an executable from the provided viash config file.
 
 | Argument | Description | Type |
 |-|:----|-:
-| `config` | A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header. **This is a required argument.** | `String` |
+| `config` | A viash config file (example: `config.vsh.yaml`). This argument can also be a script with the config as a header. **This is a required argument.** | `String` |
 | `--config_mod`, `-c` | Modify a viash config at runtime using [dynamic config modding](/reference/config_mods/#). | `List[String]` |
+| `--engine` | A regex to determine which engines amongst those specified in the config to use. If this is not provided, all engines will be used. If no engines are defined in the config, the native engine will be used. | `String` |
 | `--output`, `-o` | Path to directory in which the executable and any resources is built to. Default: "output/". **This is a required argument.** | `String` |
-| `--platform`, `-p` | Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified. | `String` |
-| `--push` | Whether or not to push the container to a Docker registry [Docker Platform only]. | `Boolean` |
-| `--setup`, `-s` | Which [setup strategy](/guide/component/add-dependencies.html#step-3-rebuild-docker-image) for creating the container to use [Docker Platform only]. | `String` |
+| `--push` | Whether or not to push the container to a Docker registry [Docker Engine only]. | `Boolean` |
+| `--runner` | Specifies which runner amongst those specified in the config to use. If this is not provided, the first runner will be used. If no runners are defined in the config, the executable runner will be used. | `String` |
+| `--setup`, `-s` | Which [setup strategy](/guide/component/add-dependencies.html#step-3-rebuild-docker-image) for creating the container to use [Docker Engine only]. | `String` |
 | `--help`, `-h` | Show help message |  |
 

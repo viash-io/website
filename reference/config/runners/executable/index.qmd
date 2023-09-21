@@ -1,0 +1,117 @@
+---
+title: "Executable Runner"
+search: true
+---
+
+Run code as an executable.
+
+This runner is the default runner. It will generate a bash script that can be run directly.
+
+This runner is also used for the [native](/reference/config/engines/native/#) engine.
+
+This runner is also used for the [docker](/reference/config/engines/docker/#) engine.
+
+
+**Example:**
+
+```yaml
+runners:
+  - type: executable
+    port: 8080
+
+```
+
+## docker_run_args
+
+**Type**: `String` / `List of String`
+
+**Default**: `Empty`
+
+Provide runtime arguments to Docker. See the documentation on [`docker run`](https://docs.docker.com/engine/reference/run/) for more information.
+
+## docker_setup_strategy
+
+**Type**: `DockerSetupStrategy`
+
+**Default**: `ifneedbepullelsecachedbuild`
+
+The Docker setup strategy to use when building a docker engine enrivonment.
+
+| Strategy | Description |
+|-----|----------|
+| `alwaysbuild` / `build` / `b` | Always build the image from the dockerfile. This is the default setup strategy.
+| `alwayscachedbuild` / `cachedbuild` / `cb` | Always build the image from the dockerfile, with caching enabled.
+| `ifneedbebuild` |  Build the image if it does not exist locally.
+| `ifneedbecachedbuild` | Build the image with caching enabled if it does not exist locally, with caching enabled.
+| `alwayspull` / `pull` / `p` |  Try to pull the container from [Docker Hub](https://hub.docker.com) or the [specified docker registry](/reference/config/engines/docker/#registry).
+| `alwayspullelsebuild` / `pullelsebuild` |  Try to pull the image from a registry and build it if it doesn't exist.
+| `alwayspullelsecachedbuild` / `pullelsecachedbuild` |  Try to pull the image from a registry and build it with caching if it doesn't exist.
+| `ifneedbepull` |  If the image does not exist locally, pull the image.
+| `ifneedbepullelsebuild` |  If the image does not exist locally, pull the image. If the image does exist, build it.
+| `ifneedbepullelsecachedbuild` | If the image does not exist locally, pull the image. If the image does exist, build it with caching enabled.
+| `push` | Push the container to [Docker Hub](https://hub.docker.com)  or the [specified docker registry](/reference/config/engines/docker/#registry).
+| `pushifnotpresent` | Push the container to [Docker Hub](https://hub.docker.com) or the [specified docker registry](/reference/config/engines/docker/#registry) if the [tag](/reference/config/engines/docker/#tag) does not exist yet.
+| `donothing` / `meh` | Do not build or pull anything.
+
+
+
+**Example:**
+
+```yaml
+setup_strategy: alwaysbuild
+```
+
+## id
+
+**Type**: `String`
+
+**Default**: `executable`
+
+Name of the runner. As with all runners, you can give an runner a different name. By specifying `id: foo`, you can target this executor (only) by specifying `...` in any of the Viash commands.
+
+**Examples:**
+
+```yaml
+id: foo
+```
+
+```yaml
+id: foo
+```
+
+## port
+
+**Type**: `String` / `List of String`
+
+**Default**: `Empty`
+
+A list of enabled ports. This doesn't change the Dockerfile but gets added as a command-line argument at runtime.
+
+**Example:**
+
+```yaml
+port:
+  - 80
+  - 8080
+
+```
+
+## type
+
+**Type**: `String`
+
+Specifies the type of the runner.
+
+## workdir
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+The working directory when starting the engine. This doesn't change the Dockerfile but gets added as a command-line argument at runtime.
+
+**Example:**
+
+```yaml
+workdir: /home/user
+```

@@ -1,21 +1,16 @@
 ---
-title: "Nextflow Platform"
+title: "Nextflow Runner"
 search: true
-order: 30
 ---
 
-::: {.callout-warning}
-Deprecated since 0.8.0. Planned removal at 0.9.0. Use 'engines' and 'runners' instead.
-:::
-Platform for generating Nextflow VDSL3 modules.
+Run a Viash component on a Nextflow backend engine.
+
 
 **Example:**
 
 ```yaml
-platforms:
+runners:
   - type: nextflow
-    directives:
-      label: [lowcpu, midmem]
 
 ```
 
@@ -61,7 +56,7 @@ Allows tweaking how the [Nextflow Config](/reference/config/runners/nextflow/con
 
 **Default**: `docker`
 
-Specifies the Docker platform id to be used to run Nextflow.
+Specifies the Docker engine id to be used to run Nextflow.
 
 ## debug
 
@@ -96,9 +91,13 @@ directives:
 
 **Default**: `nextflow`
 
-Every platform can be given a specific id that can later be referred to explicitly when running or building the Viash component.
+Name of the runner. As with all runners, you can give an runner a different name. By specifying `id: foo`, you can target this runner (only) by specifying `...` in any of the Viash commands.
 
-**Example:**
+**Examples:**
+
+```yaml
+id: foo
+```
 
 ```yaml
 id: foo
@@ -108,4 +107,4 @@ id: foo
 
 **Type**: `String`
 
-Specifies the type of the platform.
+Specifies the type of the runner.
