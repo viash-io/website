@@ -52,7 +52,7 @@ pwalk(langs, function(id, label, example_config, ...) {
 ```
 :::
 
-## Generating a VDSL3 module
+## Generating a VDSL3 module {#generate-module}
 
 We will now turn the Viash component into a VDSL3 module. By default, the `viash build` command will select the first platform in the list of platforms. To select the `nextflow` platform, use the `--platform nextflow` argument, or `-p nextflow` for short.
 
@@ -75,13 +75,13 @@ qrt(
 )
 ```
 
-This `main.nf` file is both a [**standalone Nextflow pipeline**](run-a-module.qmd) and a module which can be imported as [**part of another pipeline**](import-a-module.qmd).
+This `main.nf` file is both a [standalone Nextflow pipeline](#run-module) and a module which can be imported as [part of another pipeline](#include-module).
 
 :::{.callout-tip}
-In larger proejcts it's recommended to use the [`viash ns build`](/reference/cli/ns_build.qmd) command to [build all of the components](/guide/project/batch-processing.qmd) in one go. Give it a try!
+In larger projects it's recommended to use the [`viash ns build`](/reference/cli/ns_build.qmd) command to [build all of the components](/guide/project/batch-processing.qmd) in one go. Give it a try!
 :::
 
-## Running a module as a standalone pipeline
+## Running a module as a standalone pipeline {#run-module}
 
 
 Unlike typical Nextflow modules, VDSL3 modules can actually be used as a standalone pipeline.
@@ -116,7 +116,7 @@ qrt(
 ```
 
 
-## Passing a parameter list
+## Passing a parameter list {#param-list}
 
 Every VDSL3 can accept a list of parameters to populate a Nextflow channel with.
 
@@ -174,7 +174,7 @@ parameter.
 :::
 
 
-## Module as part of a pipeline
+## Module as part of a pipeline {#include-module}
 
 This module can also be used as part of a Nextflow pipeline.
 Below is a short preview of what this looks like.
