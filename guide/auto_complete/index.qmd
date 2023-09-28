@@ -1,0 +1,67 @@
+---
+title: Auto Complete
+order: 40
+hidden: true
+---
+
+Viash can export auto complete scripts for both Bash and Zsh.
+
+**Example in Bash:**
+
+```
+# viash build --<TAB>
+--colorize    --help        --output      --push
+--config_mod  --loglevel    --platform    --setup
+```
+
+**Example in Zsh:**
+
+```
+# viash build --<TAB>
+--config_mod  -- Modify a viash config at runtime using dynamic config modding
+--help        -- Show help message
+--output      -- Path to directory in which the executable and any resources is built to
+--platform    -- Specifies which platform amongst those specified in the config to use
+--push        -- Whether or not to push the container to a Docker registry [Docker Platform only]
+--setup       -- Which setup strategy for creating the container to use [Docker Platform only]
+```
+
+## Auto complete with Bash
+
+An autocomplete script for Bash can be generated with `viash export cli_autocomplete`.
+Alternatively, the output can be written directly to a file with e.g. `viash export cli_autocomplete --format bash --output ./viash_autocomplete`.
+
+Loading the autocomplete configuration can be done by running `source ./viash_autocomplete`.
+
+:::{.callout-note}
+The settings will need to be reapplied after each restart of the shell or opening a new terminal.
+:::
+
+### Automatically applying the Bash autocomplete definitions
+
+The location where the file will be picked up automatically may differ between distributions.
+
+A common location where user definitions are picked up is `~/.local/share/bash-completion`.
+If your distribution defines `XDG_DATA_HOME`, you may need to store it under `$XDG_DATA_HOME/bash-completion`.
+
+```bash
+mkdir -p ~/.local/share/bash-completion/completions
+cp ./viash_autocomplete ~/.local/share/bash-completion/completions/viash
+```
+
+## Auto complete with Zsh
+
+An autocomplete script for Zsh can be generated with `viash export cli_autocomplete --format zsh`.
+Alternatively, the output can be written directly to a file with e.g. `viash export cli_autocomplete --format zsh --output ./viash_autocomplete`.
+
+### Installing
+
+There are quite few possible options depending on what plugins and/or plugin-managers are already used.
+
+In case of a basic configuration, the settings are
+
+- Copy/move the autocomplete file in under `~/.zsh/completions/_viash`. It may be necessary to create the folder first.
+
+- Add `fpath=(~/.zsh/completions $fpath)` in `~/.zshrc`. Make sure the line is added before `compinit` is called.
+  Note that `compinit` may be called in subscripts in the `~/.zshrc` script.
+  Adding the `fpath=(~/.zsh/completions $fpath)` line as first line can help to guarantee it is run before `compinit` is called.
