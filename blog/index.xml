@@ -17,7 +17,106 @@
 <width>144</width>
 </image>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Fri, 11 Aug 2023 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 23 Oct 2023 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Viash 0.8.0</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.8.0/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>Nextflow workflows definitions are picked up by Viash and assembled into a functional Nextflow workflow, reducing the amount of boilerplate code needed to be written by the user. It also adds a new <code>runIf</code> argument to the <code>NextflowPlatform</code> which allows for conditional execution of modules. We added new ‘dependencies’ functionality to allow for more advanced functionality to be offloaded and re-used in components and workflows.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="breaking-changes" class="level3">
+<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
+<ul>
+<li><p><code>NextflowPlatform</code>: Changed the default value of <code>auto.simplifyOutput</code> from <code>true</code> to <code>false</code> (#522, PR #518). With <code>simplifyOutput</code> set to <code>true</code>, the resulting Map could be simplified into a <code>File</code> or a <code>List[File]</code> depending on the number of outputs. To replicate the previous behaviour, add the following config mod to <code>_viash.yaml</code>:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">config_mods</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">: </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="cb1-2">  .platforms[.type == 'nextflow'].auto.simplifyOutput := true</span></code></pre></div></li>
+<li><p><code>VDSL3Helper.nf</code>: Removed from the Viash jar file (PR #518). Its functions have been moved to <code>WorkflowHelper.nf</code>.</p></li>
+<li><p><code>DataflowHelper.nf</code>: Added deprecation warning to functions from this file (PR #518).</p></li>
+<li><p><code>preprocessInputs()</code> in <code>WorkflowHelper.nf</code>: Added deprecation warning to <code>preprocessInputs()</code> because this function causes a synchronisation event (PR #518).</p></li>
+<li><p><code>author.props</code>: Removed deprecated <code>props</code> field (PR #536). Deprecated since 0.7.4.</p></li>
+</ul>
+</section>
+<section id="new-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
+<ul>
+<li><p><code>dependencies</code>: Add <code>dependencies</code> and <code>repositories</code> to <code>functionality</code> (PR #509). The new functionality allows specifying dependencies and where to retrieve (repositories) them in a component, and subsequentially allows advanced functionality to be offloaded and re-used in scripts and projects. This is alike e.g.&nbsp;<code>npm</code>, <code>pip</code> and many others. A big difference is that we aim to provide the needed boilerplate code to ease the usage of the dependencies in scripts, workflows and pipelines. Note that the dependency is required to be a built Viash component or project and not a random file or code project found externally. This is needed to provide the necessary background information to correctly link dependencies into a component.</p></li>
+<li><p><code>NextflowScript</code> &amp; <code>NextflowPlatform</code>: Merged code for merging the <code>main.nf</code> files for VDSL3 components and wrapped Nextflow workflows (PR #518). By aligning the codebase for these two, wrapped Nextflow workflows are more similar to VDSL3 components. For example, you can override the behaviour of a wrapped Nextflow workflow using the <code>.run()</code> method. Status of a workflows <code>.run()</code> arguments:</p>
+<ul>
+<li>Works as intended: <code>auto.simplifyInput</code>, <code>auto.simplifyOutput</code>, <code>fromState</code>, <code>toState</code>, <code>map</code>, <code>mapData</code>, <code>mapPassthrough</code>, <code>filter</code>, <code>auto.publish = "state"</code></li>
+<li>Does not work (yet): <code>auto.transcript</code>, <code>auto.publish = true</code>, <code>directives</code>, <code>debug</code>.</li>
+</ul>
+<p>In a next PR, each of the dependencies will have their values overridden by the arguments of the <code>.run</code>.</p></li>
+<li><p><code>NextflowPlatform</code>: The data passed to the input of a component and produced as output by the component are now validated against the arguments defined in the Viash config (PR #518).</p></li>
+<li><p><code>NextflowPlatform</code>: Use <code>stageAs</code> to allow duplicate filenames to be used automatigically (PR #518).</p></li>
+<li><p><code>NextflowPlatform</code>: When wrapping Nextflow workflows, throw an error if the IDs of the output channel doesn’t match the IDs of the input channel (PR #518). If they don’t, the workflow should store the original ID of the input tuple in the in the <code>_meta.join_id</code> field inside the state as follows: Example input event: <code>["id", [input: file(...)]]</code>, Example output event: <code>["newid", [output: file(...), _meta: [join_id: "id"]]]</code></p></li>
+<li><p><code>NextflowPlatform</code>: Added new <code>.run()</code> argument <code>runIf</code> - a function that determines whether the module should be run or not (PR #553). If the <code>runIf</code> closure evaluates to <code>true</code>, then the module will be run. Otherwise it will be passed through without running.</p></li>
+</ul>
+</section>
+<section id="major-changes" class="level3">
+<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
+<ul>
+<li><p><code>WorkflowHelper.nf</code>: The workflow helper was split into different helper files for each of the helper functions (PR #518). For now, these helper files are pasted together to recreate the <code>WorkflowHelper.nf</code>. In Viash development environments, don’t forget to run <code>./configure</code> to start using the updated Makefile.</p></li>
+<li><p><code>NextflowPlatform</code>: Set default tag to <code>"$id"</code> (#521, PR #518).</p></li>
+<li><p><code>NextflowPlatform</code>: Refactoring of helper functions (PR #557).</p>
+<ul>
+<li>Cleaned up <code>processConfig()</code>: Removed support for <code>functionality.inputs</code> and <code>functionality.outputs</code></li>
+<li>Cleaned up <code>processConfig()</code>: Removed support for <code>.functionality.argument_groups[].argument</code> containing a list of argument ids as opposed to the arguments themselves.</li>
+<li>Rewrote <code>--param_list</code> parser.</li>
+<li>Removed unused function <code>applyConfig()</code> and <code>applyConfigToOneParamSet()</code>.</li>
+<li>Refactored <code>channelFromParams()</code> to make use of new helper functions.</li>
+<li>Removed deprecated <code>paramsToChannel()</code>, <code>paramsToList()</code>, <code>viashChannel()</code>.</li>
+<li>Deprecated <code>preprocessInputs()</code> – use the wrapped Viash Nextflow functionality instead.</li>
+<li>Refactored <code>preprocessInputs()</code> to make use of new helper functions.</li>
+<li>Reprecated run arguments <code>map</code>, <code>mapData</code>, <code>mapPassthrough</code>, <code>renameKeys</code>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>NextflowPlatform</code>: Throw error when unexpected keys are passed to the <code>.run()</code> method (#512, PR #518).</p></li>
+<li><p><code>NextflowPlatform</code>: Use <code>moduleDir</code> instead of <code>projectDir</code> to determine the resource directory.</p></li>
+<li><p><code>NextflowPlatform</code>: Rename internal VDSL3 variables to be more consistent with regular Viash component variables and avoid naming clashes (PR #553).</p></li>
+</ul>
+</section>
+<section id="documentation" class="level3">
+<h3 class="anchored" data-anchor-id="documentation">DOCUMENTATION</h3>
+<ul>
+<li>Minor fixes to VDSL3 reference documentation (PR #508).</li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>WorkflowHelper.nf</code>: Only set default values of output files which are <strong>not already set</strong>, and if the output file argument is <strong>not required</strong> (PR #514).</p></li>
+<li><p><code>NextflowPlatform</code>: When using <code>fromState</code> and <code>toState</code>, do not throw an error when the state or output is missing an optional argument (PR #515).</p></li>
+<li><p><code>export cli_autocomplete</code>: Fix output script format and hide <code>--loglevel</code> and <code>--colorize</code> (PR #544). Masked arguments are usable but might not be very useful to always display in help messages.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.8.0/index.html</guid>
+  <pubDate>Mon, 23 Oct 2023 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Viash 0.7.5</title>
   <dc:creator>Viash Team</dc:creator>
@@ -2712,36 +2811,6 @@ font-style: inherit;">false</span></span></code></pre></div></li>
   <category>New Release</category>
   <guid>https://viash.io/blog/posts/viash-0.5.11/index.html</guid>
   <pubDate>Mon, 09 May 2022 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.5.10.1</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/blog/posts/viash-0.5.10.1/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="whats-new" class="level2">
-<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<p>This quick release fixes a bug that prevented the correct passthrough of the new <code>organization</code> field.</p>
-</section>
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
-<section id="bug-fix" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fix">BUG FIX</h3>
-<ul>
-<li><code>NextflowPlatform</code>: Fix passthrough of <code>organization</code> field.</li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/blog/posts/viash-0.5.10.1/index.html</guid>
-  <pubDate>Wed, 16 Mar 2022 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
