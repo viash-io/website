@@ -7,11 +7,14 @@ Automated processing flags which can be toggled on or off.
 
 ## publish
 
-**Type**: `Boolean`
+**Type**: `Either
+  - Boolean
+  - String`
 
 **Default**: `False`
 
 If `true`, the module's outputs are automatically published to `params.publishDir`.
+If equal to `"state"`, also a `.state.yaml` file will be published in the publish dir.
 Will throw an error if `params.publishDir` is not defined.
 
 Default: `false`.
@@ -32,11 +35,11 @@ Default: `true`.
 
 **Type**: `Boolean`
 
-**Default**: `True`
+**Default**: `False`
 
 If `true`, an output tuple containing a map with a File (e.g. `["foo", [ output: file("out.h5ad") ] ]`) is automatically transformed to a map (i.e. `["foo", file("out.h5ad")]`).
 
-Default: `true`.
+Default: `false`.
 
 
 ## transcript

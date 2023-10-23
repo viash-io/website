@@ -294,6 +294,19 @@
       "default" : "Empty"
     },
     {
+      "name" : "repositories",
+      "type" : "List[Repository]",
+      "niceType" : "List of Repository",
+      "description" : "(Pre-)defines repositories that can be used as repository in dependencies.\nAllows reusing repository definitions in case it is used in multiple dependencies.",
+      "example" : [
+        {
+          "example" : "repositories:\n  - name: openpipelines-bio\n    type: github\n    uri: openpipelines-bio/modules\n    tag: 0.3.0\n",
+          "format" : "yaml"
+        }
+      ],
+      "default" : "Empty"
+    },
+    {
       "name" : "resources",
       "type" : "List[Resource]",
       "niceType" : "List of Resource",
@@ -315,6 +328,30 @@
         {
           "example" : "test_resources:\n  - type: bash_script\n    path: tests/test1.sh\n  - type: r_script\n    path: tests/test2.R\n  - path: resource1.txt\n",
           "format" : "yaml"
+        }
+      ],
+      "default" : "Empty"
+    },
+    {
+      "name" : "dependencies",
+      "type" : "List[Dependency]",
+      "niceType" : "List of Dependency",
+      "description" : "Allows listing Viash components required by this Viash component",
+      "example" : [
+        {
+          "example" : "dependencies:\n  - name: qc/multiqc\n    repository: \n      type: github\n      uri: openpipelines-bio/modules\n      tag: 0.3.0\n",
+          "format" : "yaml",
+          "description" : "Full specification of a repository"
+        },
+        {
+          "example" : "dependencies:\n  - name: qc/multiqc\n    repository: \"github://openpipelines-bio/modules:0.3.0\"\n",
+          "format" : "yaml",
+          "description" : "Full specification of a repository using sugar syntax"
+        },
+        {
+          "example" : "dependencies:\n  - name: qc/multiqc\n    repository: \"openpipelines-bio\"\n",
+          "format" : "yaml",
+          "description" : "Reference to a repository fully specified under 'repositories'"
         }
       ],
       "default" : "Empty"
@@ -441,7 +478,7 @@
       "type" : "Map[String,String]",
       "niceType" : "Map of String to String",
       "description" : "Author properties. Must be a map of strings.",
-      "deprecated" : {
+      "removed" : {
         "message" : "Use `info` instead.",
         "deprecation" : "0.7.4",
         "removal" : "0.8.0"
@@ -905,14 +942,14 @@
       "name" : "auto",
       "type" : "NextflowAuto",
       "niceType" : "NextflowAuto",
-      "description" : "@[Automated processing flags](nextflow_auto) which can be toggled on or off:\n\n| Flag | Description | Default |\n|---|---------|----|\n| `simplifyInput` | If `true`, an input tuple only containing only a single File (e.g. `[\"foo\", file(\"in.h5ad\")]`) is automatically transformed to a map (i.e. `[\"foo\", [ input: file(\"in.h5ad\") ] ]`). | `true` |\n| `simplifyOutput` | If `true`, an output tuple containing a map with a File (e.g. `[\"foo\", [ output: file(\"out.h5ad\") ] ]`) is automatically transformed to a map (i.e. `[\"foo\", file(\"out.h5ad\")]`). | `true` |\n| `transcript` | If `true`, the module's transcripts from `work/` are automatically published to `params.transcriptDir`. If not defined, `params.publishDir + \"/_transcripts\"` will be used. Will throw an error if neither are defined. | `false` |\n| `publish` | If `true`, the module's outputs are automatically published to `params.publishDir`.  Will throw an error if `params.publishDir` is not defined. | `false` |\n\n",
+      "description" : "@[Automated processing flags](nextflow_auto) which can be toggled on or off:\n\n| Flag | Description | Default |\n|---|---------|----|\n| `simplifyInput` | If `true`, an input tuple only containing only a single File (e.g. `[\"foo\", file(\"in.h5ad\")]`) is automatically transformed to a map (i.e. `[\"foo\", [ input: file(\"in.h5ad\") ] ]`). | `true` |\n| `simplifyOutput` | If `true`, an output tuple containing a map with a File (e.g. `[\"foo\", [ output: file(\"out.h5ad\") ] ]`) is automatically transformed to a map (i.e. `[\"foo\", file(\"out.h5ad\")]`). | `false` |\n| `transcript` | If `true`, the module's transcripts from `work/` are automatically published to `params.transcriptDir`. If not defined, `params.publishDir + \"/_transcripts\"` will be used. Will throw an error if neither are defined. | `false` |\n| `publish` | If `true`, the module's outputs are automatically published to `params.publishDir`. If equal to `\"state\"`, also a `.state.yaml` file will be published in the publish dir. Will throw an error if `params.publishDir` is not defined. | `false` |\n\n",
       "example" : [
         {
           "example" : "auto:\n  publish: true",
           "format" : "yaml"
         }
       ],
-      "default" : "simplifyInput: true\nsimplifyOutput: true\ntranscript: false\npublish: false\n"
+      "default" : "simplifyInput: true\nsimplifyOutput: false\ntranscript: false\npublish: false\n"
     },
     {
       "name" : "directives",
@@ -3092,10 +3129,9 @@
     },
     {
       "name" : "entrypoint",
-      "type" : "Option[String]",
-      "niceType" : "Option of String",
-      "description" : "The name of the workflow to be executed.",
-      "default" : "Empty"
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "The name of the workflow to be wrapped."
     },
     {
       "name" : "is_executable",
@@ -3620,18 +3656,14 @@
       "name" : "tag",
       "type" : "Option[String]",
       "niceType" : "Option of String",
-      "description" : "The `tag` directive allows you to associate each process execution with a custom label, so that it will be easier to identify them in the log file or in the trace execution report.\n\nSee [`tag`](https://www.nextflow.io/docs/latest/process.html#tag).\n",
+      "description" : "The `tag` directive allows you to associate each process execution with a custom label, so that it will be easier to identify them in the log file or in the trace execution report.\n\nFor ease of use, the default tag is set to `\"$id\"`, which allows tracking the progression of the channel events through the workflow more easily.\n\nSee [`tag`](https://www.nextflow.io/docs/latest/process.html#tag).\n",
       "example" : [
         {
           "example" : "\"foo\"",
           "format" : "yaml"
-        },
-        {
-          "example" : "'$id'",
-          "format" : "yaml"
         }
       ],
-      "default" : "Empty"
+      "default" : "'$id'"
     },
     {
       "name" : "conda",
@@ -3900,14 +3932,14 @@
       "name" : "simplifyOutput",
       "type" : "Boolean",
       "niceType" : "Boolean",
-      "description" : "If `true`, an output tuple containing a map with a File (e.g. `[\"foo\", [ output: file(\"out.h5ad\") ] ]`) is automatically transformed to a map (i.e. `[\"foo\", file(\"out.h5ad\")]`).\n\nDefault: `true`.\n",
-      "default" : "True"
+      "description" : "If `true`, an output tuple containing a map with a File (e.g. `[\"foo\", [ output: file(\"out.h5ad\") ] ]`) is automatically transformed to a map (i.e. `[\"foo\", file(\"out.h5ad\")]`).\n\nDefault: `false`.\n",
+      "default" : "False"
     },
     {
       "name" : "publish",
-      "type" : "Boolean",
-      "niceType" : "Boolean",
-      "description" : "If `true`, the module's outputs are automatically published to `params.publishDir`.\nWill throw an error if `params.publishDir` is not defined.\n\nDefault: `false`.\n",
+      "type" : "Either[Boolean,String]",
+      "niceType" : "Either\n  - Boolean\n  - String",
+      "description" : "If `true`, the module's outputs are automatically published to `params.publishDir`.\nIf equal to `\"state\"`, also a `.state.yaml` file will be published in the publish dir.\nWill throw an error if `params.publishDir` is not defined.\n\nDefault: `false`.\n",
       "default" : "False"
     },
     {
@@ -3974,6 +4006,333 @@
         }
       ],
       "default" : "Empty"
+    }
+  ],
+  [
+    {
+      "name" : "__this__",
+      "type" : "Dependency",
+      "niceType" : "Dependency",
+      "hierarchy" : [
+        "io.viash.functionality.dependencies.Dependency"
+      ],
+      "description" : "Specifies a Viash component (script or executable) that should be made available for the code defined in the functionality.\nThe dependency components are collected and copied to the output folder during the Viash build step.\n",
+      "example" : [
+        {
+          "example" : "name: qc/multiqc\nrepository: \n  type: github\n  repo: openpipelines-bio/modules\n  tag: 0.3.0\n",
+          "format" : "yaml",
+          "description" : "Definition of dependency with a fully defined repository"
+        },
+        {
+          "example" : "name: qc/multiqc\nrepository: \"github://openpipelines-bio/modules:0.3.0\"\n",
+          "format" : "yaml",
+          "description" : "Definition of a dependency with a repository using sugar syntax."
+        },
+        {
+          "example" : "name: qc/multiqc\nrepository: \"openpipelines-bio\"\n",
+          "format" : "yaml",
+          "description" : "Definition of a dependency with a repository defined as 'openpipelines-bio' under `.functionality.repositories`."
+        },
+        {
+          "example" : "name: qc/multiqc\n",
+          "format" : "yaml",
+          "description" : "Definition of a local dependency. This dependency is present in the current code base and will be built when `viash ns build` is run."
+        }
+      ]
+    },
+    {
+      "name" : "name",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "The full name of the dependency component. This should include the namespace.",
+      "example" : [
+        {
+          "example" : "name: \"my_namespace\"component",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "repository",
+      "type" : "Either[String,Repository]",
+      "niceType" : "Either\n  - String\n  - Repository",
+      "description" : "Specifies the location where the dependency component can be found.\nThis must either be a full definition of the repository or the name of a repository refenced as it is defined under functionality.repositories.\nAdditionally, the full definition can be specified as a single string where all parameters such as repository type, url, branch or tag are specified.\n",
+      "default" : "Empty"
+    },
+    {
+      "name" : "alias",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "An alternative name for the dependency component. This can include a namespace if so needed.",
+      "example" : [
+        {
+          "example" : "alias: my_alias",
+          "format" : "yaml"
+        }
+      ],
+      "default" : "Empty"
+    }
+  ],
+  [
+    {
+      "name" : "__this__",
+      "type" : "Repository",
+      "niceType" : "Repository",
+      "hierarchy" : [
+        "io.viash.functionality.dependencies.Repository",
+        "io.viash.functionality.dependencies.CopyableRepo"
+      ],
+      "description" : "Specifies a repository where dependency components can be found.",
+      "subclass" : [
+        "LocalRepository",
+        "GitRepository",
+        "GithubRepository",
+        "ViashhubRepository"
+      ]
+    }
+  ],
+  [
+    {
+      "name" : "__this__",
+      "type" : "LocalRepository",
+      "niceType" : "LocalRepository",
+      "hierarchy" : [
+        "io.viash.functionality.dependencies.LocalRepository",
+        "io.viash.functionality.dependencies.Repository",
+        "io.viash.functionality.dependencies.CopyableRepo"
+      ],
+      "description" : "Defines a locally present and available repository.\nThis can be used to define components from the same code base as the current component.\nAlternatively, this can be used to refer to a code repository present on the local hard-drive instead of fetchable remotely, for example during development.\n",
+      "example" : [
+        {
+          "example" : "name: my_local_code\ntype: local\npath: /additional_code/src\n",
+          "format" : "yaml",
+          "description" : "Refer to a local code repository under `additional_code/src` referenced to the Viash Project Config file."
+        }
+      ],
+      "subclass" : [
+        "local"
+      ]
+    },
+    {
+      "name" : "name",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "The identifier used to refer to this repository from dependencies."
+    },
+    {
+      "name" : "path",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines a subfolder of the repository to use as base to look for the dependency components.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "tag",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines which version of the dependency component to use. Typically this can be a specific tag, branch or commit hash.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "type",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Defines the repository as a locally present and available repository."
+    }
+  ],
+  [
+    {
+      "name" : "__this__",
+      "type" : "GitRepository",
+      "niceType" : "GitRepository",
+      "hierarchy" : [
+        "io.viash.functionality.dependencies.GitRepository",
+        "io.viash.functionality.dependencies.AbstractGitRepository",
+        "io.viash.functionality.dependencies.Repository",
+        "io.viash.functionality.dependencies.CopyableRepo"
+      ],
+      "description" : "A Git repository where remote dependency components can be found.",
+      "example" : [
+        {
+          "example" : "type: git\nuri: git+https://github.com/openpipelines-bio/openpipeline.git\ntag: 0.8.0\n",
+          "format" : "yaml"
+        },
+        {
+          "example" : "name: viash-testns\ntype: git\nuri: git+https://gitlab.com/viash-io/viash.git\ntag: 0.7.1\npath: src/test/resources/testns\n",
+          "format" : "yaml"
+        }
+      ],
+      "subclass" : [
+        "git"
+      ]
+    },
+    {
+      "name" : "name",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "The identifier used to refer to this repository from dependencies."
+    },
+    {
+      "name" : "path",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines a subfolder of the repository to use as base to look for the dependency components.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "tag",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines which version of the dependency component to use. Typically this can be a specific tag, branch or commit hash.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "uri",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "The URI of the Git repository.",
+      "example" : [
+        {
+          "example" : "uri: \"git+https://github.com/openpipelines-bio/openpipeline.git\"",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "type",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Defines the repository as a Git repository."
+    }
+  ],
+  [
+    {
+      "name" : "__this__",
+      "type" : "GithubRepository",
+      "niceType" : "GithubRepository",
+      "hierarchy" : [
+        "io.viash.functionality.dependencies.GithubRepository",
+        "io.viash.functionality.dependencies.AbstractGitRepository",
+        "io.viash.functionality.dependencies.Repository",
+        "io.viash.functionality.dependencies.CopyableRepo"
+      ],
+      "description" : "A GitHub repository where remote dependency components can be found.",
+      "example" : [
+        {
+          "example" : "type: github\nrepo: openpipelines-bio/openpipeline\ntag: 0.8.0\n",
+          "format" : "yaml"
+        },
+        {
+          "example" : "name: viash-testns\ntype: github\nrepo: viash-io/viash\ntag: 0.7.1\npath: src/test/resources/testns\n",
+          "format" : "yaml"
+        }
+      ],
+      "subclass" : [
+        "github"
+      ]
+    },
+    {
+      "name" : "name",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "The identifier used to refer to this repository from dependencies."
+    },
+    {
+      "name" : "path",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines a subfolder of the repository to use as base to look for the dependency components.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "tag",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines which version of the dependency component to use. Typically this can be a specific tag, branch or commit hash.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "repo",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "The name of the GitHub repository.",
+      "example" : [
+        {
+          "example" : "repo: viash-io/viash",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "type",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Defines the repository as a GitHub repository."
+    }
+  ],
+  [
+    {
+      "name" : "__this__",
+      "type" : "ViashhubRepository",
+      "niceType" : "ViashhubRepository",
+      "hierarchy" : [
+        "io.viash.functionality.dependencies.ViashhubRepository",
+        "io.viash.functionality.dependencies.AbstractGitRepository",
+        "io.viash.functionality.dependencies.Repository",
+        "io.viash.functionality.dependencies.CopyableRepo"
+      ],
+      "description" : "A Viash-Hub repository where remote dependency components can be found.",
+      "example" : [
+        {
+          "example" : "type: viashhub\nrepo: openpipelines-bio/openpipeline\ntag: 0.8.0\n",
+          "format" : "yaml"
+        },
+        {
+          "example" : "name: viash-testns\ntype: viashhub\nrepo: openpipelines-bio/openpipeline\ntag: 0.7.1\npath: src/test/resources/testns\n",
+          "format" : "yaml"
+        }
+      ],
+      "subclass" : [
+        "viashhub"
+      ]
+    },
+    {
+      "name" : "name",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "The identifier used to refer to this repository from dependencies."
+    },
+    {
+      "name" : "path",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines a subfolder of the repository to use as base to look for the dependency components.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "tag",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines which version of the dependency component to use. Typically this can be a specific tag, branch or commit hash.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "repo",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "The name of the Viash-Hub repository.",
+      "example" : [
+        {
+          "example" : "repo: openpipelines-bio/openpipeline",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "type",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Defines the repository as a Viash-Hub repository."
     }
   ]
 ]
