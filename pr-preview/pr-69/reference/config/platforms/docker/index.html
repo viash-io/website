@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Viash - Docker Platform</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<link href="../../../../reference/config/platforms/docker/setup/index.html" rel="next">
+<link href="../../../../reference/config/platforms/native/index.html" rel="prev">
+<link href="../../../../favicon.png" rel="icon" type="image/png">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GDS2XT0DDG"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../../../../styles.css">
+<meta property="og:title" content="Viash - Docker Platform">
+<meta property="og:description" content="">
+<meta property="og:site-name" content="Viash">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../../viash.png" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html" rel="" target="">
+ <span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../installation/index.html" rel="" target="">
+ <span class="menu-text">Installation</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../quickstart/index.html" rel="" target="">
+ <span class="menu-text">Quickstart</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../guide/index.html" rel="" target="">
+ <span class="menu-text">Guide</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../../reference/index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Reference</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../blog/index.html" rel="" target="">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Help</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-help">    
+        <li>
+    <a class="dropdown-item" href="https://github.com/viash-io/viash/issues" rel="" target=""><i class="bi bi-bug" role="img">
+</i> 
+ <span class="dropdown-text">Report a Viash issue</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/viash-io/website/issues" rel="" target=""><i class="bi bi-bug" role="img">
+</i> 
+ <span class="dropdown-text">Report a website issue</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../cheatsheet/viash_cheatsheet_v1_1.pdf" rel="" target=""><i class="bi bi-card-list" role="img">
+</i> 
+ <span class="dropdown-text">Cheat sheet</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/viash-io/viash" rel="" target=""><i class="bi bi-github" role="img" aria-label="Viash GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../reference/index.html">Reference</a></li><li class="breadcrumb-item"><a href="../../../../reference/config/index.html">Config</a></li><li class="breadcrumb-item"><a href="../../../../reference/config/platforms/index.html">Platform</a></li><li class="breadcrumb-item"><a href="../../../../reference/config/platforms/docker/index.html">Docker Platform</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../reference/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reference</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../reference/cli/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CLI</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/cli/build.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Viash Build</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/cli/config_inject.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Viash Config Inject</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/cli/config_view.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Viash Config View</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/cli/ns_build.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Viash Ns Build</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/cli/ns_exec.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Viash Ns Exec</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/cli/ns_list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Viash Ns List</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/cli/ns_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Viash Ns Test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/cli/run.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Viash Run</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/cli/test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Viash Test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../reference/config/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Config</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../reference/config/functionality/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functionality</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/argumentGroup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Argument Group</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/author.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Author</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/computationalRequirements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Computational Requirements</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../reference/config/functionality/dependencies/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dependency</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth4 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/dependencies/githubRepository.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Github Repository</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/dependencies/gitRepository.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Git Repository</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/dependencies/localRepository.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Local Repository</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/dependencies/repository.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Repository</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/dependencies/viashhubRepository.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Viashhub Repository</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../reference/config/functionality/arguments/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Argument</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth4 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/arguments/boolean.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Boolean</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/arguments/boolean_false.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Boolean False</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/arguments/boolean_true.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Boolean True</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/arguments/double.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Double</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/arguments/file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">File</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/arguments/integer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Integer</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/arguments/long.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Long</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/arguments/string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">String</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../reference/config/functionality/resources/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resource</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth4 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/resources/bashScript.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bash Script</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/resources/cSharpScript.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">C# Script</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/resources/executable.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Executable</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/resources/javaScriptScript.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JavaScript Script</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/resources/nextflowScript.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nextflow Script</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/resources/plainFile.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Plain File</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/resources/pythonScript.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python Script</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/resources/rScript.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Script</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/functionality/resources/scalaScript.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scala Script</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../reference/config/platforms/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Platform</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/platforms/native/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Native Platform</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../reference/config/platforms/docker/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Docker Platform</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth4 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../reference/config/platforms/docker/setup/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Requirements</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth5 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/platforms/docker/setup/apkRequirements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Apk Requirements</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/platforms/docker/setup/aptRequirements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Apt Requirements</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/platforms/docker/setup/dockerRequirements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Docker Requirements</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/platforms/docker/setup/javascriptRequirements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JavaScript Requirements</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/platforms/docker/setup/pythonRequirements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python Requirements</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/platforms/docker/setup/rRequirements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Requirements</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/platforms/docker/setup/rubyRequirements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ruby Requirements</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/platforms/docker/setup/yumRequirements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Yum Requirements</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../reference/config/platforms/nextflow/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nextflow Platform</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth4 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/platforms/nextflow/auto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nextflow Auto</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/platforms/nextflow/config.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nextflow Config</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/platforms/nextflow/directives.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nextflow Directives</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/info.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Info</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config/environmentVariables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environment Variables</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/project/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../reference/nextflow_vdsl3/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nextflow VDSL3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/nextflow_vdsl3/import_module.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Import a VDSL3 module</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/nextflow_vdsl3/run_module.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Run a VDSL3 module</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/viash_code_block/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Viash Code Block</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../reference/config_mods/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dynamic Config Modding</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#chown" id="toc-chown" class="nav-link active" data-scroll-target="#chown">chown</a></li>
+  <li><a href="#cmd" id="toc-cmd" class="nav-link" data-scroll-target="#cmd">cmd</a></li>
+  <li><a href="#entrypoint" id="toc-entrypoint" class="nav-link" data-scroll-target="#entrypoint">entrypoint</a></li>
+  <li><a href="#id" id="toc-id" class="nav-link" data-scroll-target="#id">id</a></li>
+  <li><a href="#image" id="toc-image" class="nav-link" data-scroll-target="#image">image</a></li>
+  <li><a href="#namespace_separator" id="toc-namespace_separator" class="nav-link" data-scroll-target="#namespace_separator">namespace_separator</a></li>
+  <li><a href="#organization" id="toc-organization" class="nav-link" data-scroll-target="#organization">organization</a></li>
+  <li><a href="#port" id="toc-port" class="nav-link" data-scroll-target="#port">port</a></li>
+  <li><a href="#registry" id="toc-registry" class="nav-link" data-scroll-target="#registry">registry</a></li>
+  <li><a href="#resolve_volume" id="toc-resolve_volume" class="nav-link" data-scroll-target="#resolve_volume">resolve_volume</a></li>
+  <li><a href="#run_args" id="toc-run_args" class="nav-link" data-scroll-target="#run_args">run_args</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">setup</a></li>
+  <li><a href="#setup_strategy" id="toc-setup_strategy" class="nav-link" data-scroll-target="#setup_strategy">setup_strategy</a></li>
+  <li><a href="#tag" id="toc-tag" class="nav-link" data-scroll-target="#tag">tag</a></li>
+  <li><a href="#target_image" id="toc-target_image" class="nav-link" data-scroll-target="#target_image">target_image</a></li>
+  <li><a href="#target_image_source" id="toc-target_image_source" class="nav-link" data-scroll-target="#target_image_source">target_image_source</a></li>
+  <li><a href="#target_organization" id="toc-target_organization" class="nav-link" data-scroll-target="#target_organization">target_organization</a></li>
+  <li><a href="#target_registry" id="toc-target_registry" class="nav-link" data-scroll-target="#target_registry">target_registry</a></li>
+  <li><a href="#target_tag" id="toc-target_tag" class="nav-link" data-scroll-target="#target_tag">target_tag</a></li>
+  <li><a href="#test_setup" id="toc-test_setup" class="nav-link" data-scroll-target="#test_setup">test_setup</a></li>
+  <li><a href="#type" id="toc-type" class="nav-link" data-scroll-target="#type">type</a></li>
+  <li><a href="#workdir" id="toc-workdir" class="nav-link" data-scroll-target="#workdir">workdir</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/viash-io/website/edit/main/reference/config/platforms/docker/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/viash-io/website/blob/main/reference/config/platforms/docker/index.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/viash-io/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Docker Platform</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Run a Viash component on a Docker backend platform. By specifying which dependencies your component needs, users will be able to build a docker container from scratch using the setup flag, or pull it from a docker repository.</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"bash:4.0"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">setup</span><span class="kw">:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> apt</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">packages</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> curl </span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="chown" class="level2">
+<h2 class="anchored" data-anchor-id="chown">chown</h2>
+<p><strong>Type</strong>: <code>Boolean</code></p>
+<p><strong>Default</strong>: <code>True</code></p>
+<p>In Linux, files created by a Docker container will be owned by <code>root</code>. With <code>chown: true</code>, Viash will automatically change the ownership of output files (arguments with <code>type: file</code> and <code>direction: output</code>) to the user running the Viash command after execution of the component. Default value: <code>true</code>.</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="cmd" class="level2">
+<h2 class="anchored" data-anchor-id="cmd">cmd</h2>
+<p><strong>Type</strong>: <code>Either   - String   - List of String</code></p>
+<p><strong>Default</strong>: <code>Empty</code></p>
+<p>Set the default command being executed when running the Docker container.</p>
+<p><strong>Examples:</strong></p>
+<p>Set CMD using the exec format, which is the prefered form.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmd</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"echo"</span><span class="kw">,</span><span class="at"> </span><span class="st">"$HOME"</span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Set CMD using the shell format.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmd</span><span class="kw">:</span><span class="at"> </span><span class="st">"echo $HOME"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="entrypoint" class="level2">
+<h2 class="anchored" data-anchor-id="entrypoint">entrypoint</h2>
+<p><strong>Type</strong>: <code>Either   - String   - List of String</code></p>
+<p><strong>Default</strong>: <code>[]</code></p>
+<p>Override the entrypoint of the base container. Default set <code>ENTRYPOINT []</code>.</p>
+<p><strong>Examples:</strong></p>
+<p>Disable the default override.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">entrypoint</span><span class="kw">:</span><span class="at"> </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Entrypoint of the container in the exec format, which is the prefered form.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">entrypoint</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"top"</span><span class="kw">,</span><span class="at"> </span><span class="st">"-b"</span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Entrypoint of the container in the shell format.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">entrypoint</span><span class="kw">:</span><span class="at"> </span><span class="st">"top -b"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="id" class="level2">
+<h2 class="anchored" data-anchor-id="id">id</h2>
+<p><strong>Type</strong>: <code>String</code></p>
+<p><strong>Default</strong>: <code>docker</code></p>
+<p>As with all platforms, you can give a platform a different name. By specifying <code>id: foo</code>, you can target this platform (only) by specifying <code>-p foo</code> in any of the Viash commands.</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> foo</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="image" class="level2">
+<h2 class="anchored" data-anchor-id="image">image</h2>
+<p><strong>Type</strong>: <code>String</code></p>
+<p>The base container to start from. You can also add the tag here if you wish.</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"bash:4.0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="namespace_separator" class="level2">
+<h2 class="anchored" data-anchor-id="namespace_separator">namespace_separator</h2>
+<p><strong>Type</strong>: <code>String</code></p>
+<p><strong>Default</strong>: <code>/</code></p>
+<p>The separator between the namespace and the name of the component, used for determining the image name. Default: <code>"/"</code>.</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">namespace_separator</span><span class="kw">:</span><span class="at"> </span><span class="st">"_"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="organization" class="level2">
+<h2 class="anchored" data-anchor-id="organization">organization</h2>
+<p><strong>Type</strong>: <code>String</code></p>
+<p><strong>Default</strong>: <code>Empty</code></p>
+<p>Name of a container’s <a href="https://docs.docker.com/docker-hub/orgs/">organization</a>.</p>
+</section>
+<section id="port" class="level2">
+<h2 class="anchored" data-anchor-id="port">port</h2>
+<p><strong>Type</strong>: <code>String</code> / <code>List of String</code></p>
+<p><strong>Default</strong>: <code>Empty</code></p>
+<p>A list of enabled ports. This doesn’t change the Dockerfile but gets added as a command-line argument at runtime.</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">port</span><span class="kw">:</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="dv">80</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="dv">8080</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="registry" class="level2">
+<h2 class="anchored" data-anchor-id="registry">registry</h2>
+<p><strong>Type</strong>: <code>String</code></p>
+<p><strong>Default</strong>: <code>Empty</code></p>
+<p>The URL to the a <a href="https://docs.docker.com/registry/">custom Docker registry</a></p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">registry</span><span class="kw">:</span><span class="at"> https://my-docker-registry.org</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="resolve_volume" class="level2">
+<h2 class="anchored" data-anchor-id="resolve_volume">resolve_volume</h2>
+<p><strong>Type</strong>: <code>DockerResolveVolume</code></p>
+<p><strong>Default</strong>: <code>Automatic</code></p>
+<p>Enables or disables automatic volume mapping. Enabled when set to <code>Automatic</code> or disabled when set to <code>Manual</code>. Default: <code>Automatic</code>.</p>
+</section>
+<section id="run_args" class="level2">
+<h2 class="anchored" data-anchor-id="run_args">run_args</h2>
+<p><strong>Type</strong>: <code>String</code> / <code>List of String</code></p>
+<p><strong>Default</strong>: <code>Empty</code></p>
+<p>Add <a href="https://docs.docker.com/engine/reference/run/">docker run</a> arguments.</p>
+</section>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">setup</h2>
+<p><strong>Type</strong>: <code>List of Requirements</code></p>
+<p><strong>Default</strong>: <code>Empty</code></p>
+<p>A list of requirements for installing the following types of packages:</p>
+<ul>
+<li><a href="../../../../reference/config/platforms/docker/setup/aptRequirements.html">apt</a></li>
+<li><a href="../../../../reference/config/platforms/docker/setup/apkRequirements.html">apk</a></li>
+<li><a href="../../../../reference/config/platforms/docker/setup/dockerRequirements.html">Docker setup instructions</a></li>
+<li><a href="../../../../reference/config/platforms/docker/setup/javascriptRequirements.html">JavaScript</a></li>
+<li><a href="../../../../reference/config/platforms/docker/setup/pythonRequirements.html">Python</a></li>
+<li><a href="../../../../reference/config/platforms/docker/setup/rRequirements.html">R</a></li>
+<li><a href="../../../../reference/config/platforms/docker/setup/rubyRequirements.html">Ruby</a></li>
+<li><a href="../../../../reference/config/platforms/docker/setup/yumRequirements.html">yum</a></li>
+</ul>
+<p>The order in which these dependencies are specified determines the order in which they will be installed.</p>
+</section>
+<section id="setup_strategy" class="level2">
+<h2 class="anchored" data-anchor-id="setup_strategy">setup_strategy</h2>
+<p><strong>Type</strong>: <code>DockerSetupStrategy</code></p>
+<p><strong>Default</strong>: <code>ifneedbepullelsecachedbuild</code></p>
+<p>The Docker setup strategy to use when building a container.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Strategy</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>alwaysbuild</code> / <code>build</code> / <code>b</code></td>
+<td>Always build the image from the dockerfile. This is the default setup strategy.</td>
+</tr>
+<tr class="even">
+<td><code>alwayscachedbuild</code> / <code>cachedbuild</code> / <code>cb</code></td>
+<td>Always build the image from the dockerfile, with caching enabled.</td>
+</tr>
+<tr class="odd">
+<td><code>ifneedbebuild</code></td>
+<td>Build the image if it does not exist locally.</td>
+</tr>
+<tr class="even">
+<td><code>ifneedbecachedbuild</code></td>
+<td>Build the image with caching enabled if it does not exist locally, with caching enabled.</td>
+</tr>
+<tr class="odd">
+<td><code>alwayspull</code> / <code>pull</code> / <code>p</code></td>
+<td>Try to pull the container from <a href="https://hub.docker.com">Docker Hub</a> or the <a href="../../../../reference/config/platforms/docker/#registry">specified docker registry</a>.</td>
+</tr>
+<tr class="even">
+<td><code>alwayspullelsebuild</code> / <code>pullelsebuild</code></td>
+<td>Try to pull the image from a registry and build it if it doesn’t exist.</td>
+</tr>
+<tr class="odd">
+<td><code>alwayspullelsecachedbuild</code> / <code>pullelsecachedbuild</code></td>
+<td>Try to pull the image from a registry and build it with caching if it doesn’t exist.</td>
+</tr>
+<tr class="even">
+<td><code>ifneedbepull</code></td>
+<td>If the image does not exist locally, pull the image.</td>
+</tr>
+<tr class="odd">
+<td><code>ifneedbepullelsebuild</code></td>
+<td>If the image does not exist locally, pull the image. If the image does exist, build it.</td>
+</tr>
+<tr class="even">
+<td><code>ifneedbepullelsecachedbuild</code></td>
+<td>If the image does not exist locally, pull the image. If the image does exist, build it with caching enabled.</td>
+</tr>
+<tr class="odd">
+<td><code>push</code></td>
+<td>Push the container to <a href="https://hub.docker.com">Docker Hub</a> or the <a href="../../../../reference/config/platforms/docker/#registry">specified docker registry</a>.</td>
+</tr>
+<tr class="even">
+<td><code>pushifnotpresent</code></td>
+<td>Push the container to <a href="https://hub.docker.com">Docker Hub</a> or the <a href="../../../../reference/config/platforms/docker/#registry">specified docker registry</a> if the <a href="../../../../reference/config/platforms/docker/#tag">tag</a> does not exist yet.</td>
+</tr>
+<tr class="odd">
+<td><code>donothing</code> / <code>meh</code></td>
+<td>Do not build or pull anything.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup_strategy</span><span class="kw">:</span><span class="at"> alwaysbuild</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="tag" class="level2">
+<h2 class="anchored" data-anchor-id="tag">tag</h2>
+<p><strong>Type</strong>: <code>String</code></p>
+<p><strong>Default</strong>: <code>Empty</code></p>
+<p>Specify a Docker image based on its tag.</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tag</span><span class="kw">:</span><span class="at"> </span><span class="fl">4.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="target_image" class="level2">
+<h2 class="anchored" data-anchor-id="target_image">target_image</h2>
+<p><strong>Type</strong>: <code>String</code></p>
+<p><strong>Default</strong>: <code>Empty</code></p>
+<p>If anything is specified in the setup section, running the <code>---setup</code> will result in an image with the name of <code>&lt;target_image&gt;:&lt;version&gt;</code>. If nothing is specified in the <code>setup</code> section, simply <code>image</code> will be used. Advanced usage only.</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_image</span><span class="kw">:</span><span class="at"> myfoo</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="target_image_source" class="level2">
+<h2 class="anchored" data-anchor-id="target_image_source">target_image_source</h2>
+<p><strong>Type</strong>: <code>String</code></p>
+<p><strong>Default</strong>: <code>Empty</code></p>
+<p>The source of the target image. This is used for defining labels in the dockerfile.</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_image_source</span><span class="kw">:</span><span class="at"> https://github.com/foo/bar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="target_organization" class="level2">
+<h2 class="anchored" data-anchor-id="target_organization">target_organization</h2>
+<p><strong>Type</strong>: <code>String</code></p>
+<p><strong>Default</strong>: <code>Empty</code></p>
+<p>The organization set in the resulting image. Advanced usage only.</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_organization</span><span class="kw">:</span><span class="at"> viash-io</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="target_registry" class="level2">
+<h2 class="anchored" data-anchor-id="target_registry">target_registry</h2>
+<p><strong>Type</strong>: <code>String</code></p>
+<p><strong>Default</strong>: <code>Empty</code></p>
+<p>The URL where the resulting image will be pushed to. Advanced usage only.</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_registry</span><span class="kw">:</span><span class="at"> https://my-docker-registry.org</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="target_tag" class="level2">
+<h2 class="anchored" data-anchor-id="target_tag">target_tag</h2>
+<p><strong>Type</strong>: <code>String</code></p>
+<p><strong>Default</strong>: <code>Empty</code></p>
+<p>The tag the resulting image gets. Advanced usage only.</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">target_tag</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.5.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="test_setup" class="level2">
+<h2 class="anchored" data-anchor-id="test_setup">test_setup</h2>
+<p><strong>Type</strong>: <code>List of Requirements</code></p>
+<p><strong>Default</strong>: <code>Empty</code></p>
+<p>Additional requirements specific for running unit tests.</p>
+</section>
+<section id="type" class="level2">
+<h2 class="anchored" data-anchor-id="type">type</h2>
+<p><strong>Type</strong>: <code>String</code></p>
+<p>Specifies the type of the platform.</p>
+</section>
+<section id="workdir" class="level2">
+<h2 class="anchored" data-anchor-id="workdir">workdir</h2>
+<p><strong>Type</strong>: <code>String</code></p>
+<p><strong>Default</strong>: <code>Empty</code></p>
+<p>The working directory when starting the container. This doesn’t change the Dockerfile but gets added as a command-line argument at runtime.</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">workdir</span><span class="kw">:</span><span class="at"> /home/user</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script type="text/javascript">
+// Anything in this script block will be included on every page
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp("https:\/\/viash\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../../reference/config/platforms/native/index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Native Platform</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../../reference/config/platforms/docker/setup/index.html" class="pagination-link">
+        <span class="nav-page-text">Requirements</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html">About</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../../../privacy.html">Privacy Policy</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
