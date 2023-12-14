@@ -17,7 +17,35 @@
 <width>144</width>
 </image>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Mon, 23 Oct 2023 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 20 Nov 2023 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Viash 0.8.1</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.8.1/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This release fixes a bug in the Nextflow platform where calling a workflow with the <code>.run()</code> function without specifying the <code>fromState</code> argument would result in an error when the input channel contained tuples with more than two elements.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<p><code>NextflowPlatform</code>: Fix error when using <code>.run()</code> without using <code>fromState</code> and the input channel holds tuples with more than two elements (PR #587).</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.8.1/index.html</guid>
+  <pubDate>Mon, 20 Nov 2023 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Viash 0.8.0</title>
   <dc:creator>Viash Team</dc:creator>
@@ -2697,120 +2725,6 @@ font-style: inherit;">"/path/to/ref"</span></span></code></pre></div></li>
   <category>New Release</category>
   <guid>https://viash.io/blog/posts/viash-0.5.12/index.html</guid>
   <pubDate>Tue, 24 May 2022 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.5.11</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/blog/posts/viash-0.5.11/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="whats-new" class="level2">
-<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<p>This release contains additional sugar syntax for specifying inputs and outputs in a Viash config, a beta implementation for the next-generation Viash platform, and several other minor improvements.</p>
-</section>
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
-<section id="major-changes" class="level3">
-<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
-<ul>
-<li><code>Functionality</code>: Now also accepts ‘inputs’ and ‘outputs’ in addition to ‘arguments’. For inputs and outputs, any specified arguments will have default <code>type: file</code> and <code>direction: input</code> or <code>direction: output</code> respectively.</li>
-</ul>
-</section>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li><p><code>DockerPlatform</code>: Move description labels to the end of the Dockerfile to improve cross-component caching.</p></li>
-<li><p><code>Functionality</code>: Arguments where <code>.multiple</code> is <code>true</code> can now have lists as <code>default</code> and <code>example</code>.</p></li>
-<li><p><code>viash_build</code>: Added unit test for this component.</p></li>
-<li><p><code>viash_test</code>: Added unit test for this component.</p></li>
-<li><p><code>PythonRequirements</code>: Allow upgrading dependencies. Example: <code>[ type: python. pypi: anndata, upgrade: true ]</code>.</p></li>
-<li><p><code>NextflowLegacyPlatform</code>: Remove annoying messages when building Nxf modules.</p></li>
-<li><p><code>ConfigMods</code>: Expanded the DSL to allow specifying at which point to apply a config mod. This functionality was necessary to allow for setting fields which alter the way configs are parsed. Example of when this is useful: <code>&lt;preparse&gt; .platforms[.type == "nextflow"].variant := "vdsl3"</code>. Updating workflow of parsing a config file is:</p>
-<ul>
-<li>read Yaml from file</li>
-<li>apply preparse config mods</li>
-<li>parse resulting Json as Config, thereby instantiating default values etc.</li>
-<li>convert Config back to Json</li>
-<li>apply postparse config mods (original config mods)</li>
-<li>convert final Json back to Config</li>
-</ul></li>
-</ul>
-</section>
-<section id="beta-functionality" class="level3">
-<h3 class="anchored" data-anchor-id="beta-functionality">BETA FUNCTIONALITY</h3>
-<ul>
-<li><p><code>NextflowVdsl3Platform</code>: A beta implementation of the next-generation Viash+Nextflow platform. See https://github.com/viash-io/viash/issues/82 for more information. You can access the previous Nextflow platform by using the <code>variant</code> parameter:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> nextflow</span></span>
-<span id="cb1-2"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">variant</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> legacy</span></span>
-<span id="cb1-3"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">separate_multiple_outputs</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="ch" style="color: #20794D;
-background-color: null;
-font-style: inherit;">false</span></span></code></pre></div></li>
-</ul>
-</section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
-<ul>
-<li><p><code>viash_build</code> and <code>viash_test</code>: The <code>query_name</code> and <code>query_namespace</code> arguments were switched around. These arguments are now passed correctly.</p></li>
-<li><p><code>BashScript</code>, <code>JavaScriptScript</code>, <code>PythonScript</code>, <code>RScript</code>: Correctly escape <code>'</code> (#113). Update unit tests accordingly.</p></li>
-<li><p><code>CSharpScript</code>, <code>ScalaScript</code>: Correctly escape <code>"</code> (#113). Update unit tests accordingly.</p></li>
-<li><p><code>viash_build</code>, <code>viash_test</code>, <code>viash_push</code>: Don’t try to remove log files if they don’t exist.</p></li>
-</ul>
-</section>
-<section id="internal-changes" class="level3">
-<h3 class="anchored" data-anchor-id="internal-changes">INTERNAL CHANGES</h3>
-<ul>
-<li><code>DataObject</code>:
-<ul>
-<li>Renamed <code>otype</code> to <code>flags</code>.</li>
-<li>Renamed <code>oType</code> to <code>type</code></li>
-<li>Deprecated <code>tag</code> (unused feature).</li>
-</ul></li>
-<li>All abstract / inherited classes: Renamed <code>oType</code> to <code>type</code>.</li>
-</ul>
-</section>
-<section id="deprecation" class="level3">
-<h3 class="anchored" data-anchor-id="deprecation">DEPRECATION</h3>
-<ul>
-<li><code>Functionality</code>: Deprecated <code>function_type</code> and <code>add_resources_to_path</code>. These should be unused features, by now.</li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/blog/posts/viash-0.5.11/index.html</guid>
-  <pubDate>Mon, 09 May 2022 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
