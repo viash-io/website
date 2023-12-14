@@ -295,8 +295,8 @@
     },
     {
       "name" : "repositories",
-      "type" : "List[Repository]",
-      "niceType" : "List of Repository",
+      "type" : "List[RepositoryWithName]",
+      "niceType" : "List of RepositoryWithName",
       "description" : "(Pre-)defines repositories that can be used as repository in dependencies.\nAllows reusing repository definitions in case it is used in multiple dependencies.",
       "example" : [
         {
@@ -4098,13 +4098,14 @@
       "niceType" : "LocalRepository",
       "hierarchy" : [
         "io.viash.functionality.dependencies.LocalRepository",
+        "io.viash.functionality.dependencies.LocalRepositoryTrait",
         "io.viash.functionality.dependencies.Repository",
         "io.viash.functionality.dependencies.CopyableRepo"
       ],
       "description" : "Defines a locally present and available repository.\nThis can be used to define components from the same code base as the current component.\nAlternatively, this can be used to refer to a code repository present on the local hard-drive instead of fetchable remotely, for example during development.\n",
       "example" : [
         {
-          "example" : "name: my_local_code\ntype: local\npath: /additional_code/src\n",
+          "example" : "type: local\npath: /additional_code/src\n",
           "format" : "yaml",
           "description" : "Refer to a local code repository under `additional_code/src` referenced to the Viash Project Config file."
         }
@@ -4112,12 +4113,6 @@
       "subclass" : [
         "local"
       ]
-    },
-    {
-      "name" : "name",
-      "type" : "String",
-      "niceType" : "String",
-      "description" : "The identifier used to refer to this repository from dependencies."
     },
     {
       "name" : "path",
@@ -4147,6 +4142,7 @@
       "niceType" : "GitRepository",
       "hierarchy" : [
         "io.viash.functionality.dependencies.GitRepository",
+        "io.viash.functionality.dependencies.GitRepositoryTrait",
         "io.viash.functionality.dependencies.AbstractGitRepository",
         "io.viash.functionality.dependencies.Repository",
         "io.viash.functionality.dependencies.CopyableRepo"
@@ -4158,12 +4154,263 @@
           "format" : "yaml"
         },
         {
-          "example" : "name: viash-testns\ntype: git\nuri: git+https://gitlab.com/viash-io/viash.git\ntag: 0.7.1\npath: src/test/resources/testns\n",
+          "example" : "type: git\nuri: git+https://gitlab.com/viash-io/viash.git\ntag: 0.7.1\npath: src/test/resources/testns\n",
           "format" : "yaml"
         }
       ],
       "subclass" : [
         "git"
+      ]
+    },
+    {
+      "name" : "path",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines a subfolder of the repository to use as base to look for the dependency components.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "tag",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines which version of the dependency component to use. Typically this can be a specific tag, branch or commit hash.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "uri",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "The URI of the Git repository.",
+      "example" : [
+        {
+          "example" : "uri: \"git+https://github.com/openpipelines-bio/openpipeline.git\"",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "type",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Defines the repository as a Git repository."
+    }
+  ],
+  [
+    {
+      "name" : "__this__",
+      "type" : "GithubRepository",
+      "niceType" : "GithubRepository",
+      "hierarchy" : [
+        "io.viash.functionality.dependencies.GithubRepository",
+        "io.viash.functionality.dependencies.GithubRepositoryTrait",
+        "io.viash.functionality.dependencies.AbstractGitRepository",
+        "io.viash.functionality.dependencies.Repository",
+        "io.viash.functionality.dependencies.CopyableRepo"
+      ],
+      "description" : "A GitHub repository where remote dependency components can be found.",
+      "example" : [
+        {
+          "example" : "type: github\nrepo: openpipelines-bio/openpipeline\ntag: 0.8.0\n",
+          "format" : "yaml"
+        },
+        {
+          "example" : "type: github\nrepo: viash-io/viash\ntag: 0.7.1\npath: src/test/resources/testns\n",
+          "format" : "yaml"
+        }
+      ],
+      "subclass" : [
+        "github"
+      ]
+    },
+    {
+      "name" : "path",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines a subfolder of the repository to use as base to look for the dependency components.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "tag",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines which version of the dependency component to use. Typically this can be a specific tag, branch or commit hash.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "repo",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "The name of the GitHub repository.",
+      "example" : [
+        {
+          "example" : "repo: viash-io/viash",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "type",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Defines the repository as a GitHub repository."
+    }
+  ],
+  [
+    {
+      "name" : "__this__",
+      "type" : "ViashhubRepository",
+      "niceType" : "ViashhubRepository",
+      "hierarchy" : [
+        "io.viash.functionality.dependencies.ViashhubRepository",
+        "io.viash.functionality.dependencies.ViashhubRepositoryTrait",
+        "io.viash.functionality.dependencies.AbstractGitRepository",
+        "io.viash.functionality.dependencies.Repository",
+        "io.viash.functionality.dependencies.CopyableRepo"
+      ],
+      "description" : "A Viash-Hub repository where remote dependency components can be found.",
+      "example" : [
+        {
+          "example" : "type: viashhub\nrepo: openpipelines-bio/openpipeline\ntag: 0.8.0\n",
+          "format" : "yaml"
+        },
+        {
+          "example" : "type: viashhub\nrepo: openpipelines-bio/openpipeline\ntag: 0.7.1\npath: src/test/resources/testns\n",
+          "format" : "yaml"
+        }
+      ],
+      "subclass" : [
+        "viashhub"
+      ]
+    },
+    {
+      "name" : "path",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines a subfolder of the repository to use as base to look for the dependency components.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "tag",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines which version of the dependency component to use. Typically this can be a specific tag, branch or commit hash.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "repo",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "The name of the Viash-Hub repository.",
+      "example" : [
+        {
+          "example" : "repo: openpipelines-bio/openpipeline",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "type",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Defines the repository as a Viash-Hub repository."
+    }
+  ],
+  [
+    {
+      "name" : "__this__",
+      "type" : "RepositoryWithName",
+      "niceType" : "RepositoryWithName",
+      "hierarchy" : [
+        "io.viash.functionality.dependencies.RepositoryWithName",
+        "io.viash.functionality.dependencies.Repository",
+        "io.viash.functionality.dependencies.CopyableRepo"
+      ],
+      "description" : "Specifies a repository where dependency components can be found.",
+      "subclass" : [
+        "LocalRepositoryWithName",
+        "GitRepositoryWithName",
+        "GithubRepositoryWithName",
+        "ViashhubRepositoryWithName"
+      ]
+    }
+  ],
+  [
+    {
+      "name" : "__this__",
+      "type" : "LocalRepositoryWithName",
+      "niceType" : "LocalRepositoryWithName",
+      "hierarchy" : [
+        "io.viash.functionality.dependencies.LocalRepositoryWithName",
+        "io.viash.functionality.dependencies.LocalRepositoryTrait",
+        "io.viash.functionality.dependencies.RepositoryWithName",
+        "io.viash.functionality.dependencies.Repository",
+        "io.viash.functionality.dependencies.CopyableRepo"
+      ],
+      "description" : "Defines a locally present and available repository.\nThis can be used to define components from the same code base as the current component.\nAlternatively, this can be used to refer to a code repository present on the local hard-drive instead of fetchable remotely, for example during development.\n",
+      "example" : [
+        {
+          "example" : "name: my_local_code\ntype: local\npath: /additional_code/src\n",
+          "format" : "yaml",
+          "description" : "Refer to a local code repository under `additional_code/src` referenced to the Viash Project Config file."
+        }
+      ],
+      "subclass" : [
+        "localwithname"
+      ]
+    },
+    {
+      "name" : "name",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "The identifier used to refer to this repository from dependencies."
+    },
+    {
+      "name" : "path",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines a subfolder of the repository to use as base to look for the dependency components.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "tag",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines which version of the dependency component to use. Typically this can be a specific tag, branch or commit hash.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "type",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Defines the repository type. This determines how the repository will be fetched and handled."
+    }
+  ],
+  [
+    {
+      "name" : "__this__",
+      "type" : "GitRepositoryWithName",
+      "niceType" : "GitRepositoryWithName",
+      "hierarchy" : [
+        "io.viash.functionality.dependencies.GitRepositoryWithName",
+        "io.viash.functionality.dependencies.GitRepositoryTrait",
+        "io.viash.functionality.dependencies.AbstractGitRepository",
+        "io.viash.functionality.dependencies.RepositoryWithName",
+        "io.viash.functionality.dependencies.Repository",
+        "io.viash.functionality.dependencies.CopyableRepo"
+      ],
+      "description" : "A Git repository where remote dependency components can be found.",
+      "example" : [
+        {
+          "example" : "name: openpipeline\ntype: git\nuri: git+https://github.com/openpipelines-bio/openpipeline.git\ntag: 0.8.0\n",
+          "format" : "yaml"
+        },
+        {
+          "example" : "name: viash-testns\ntype: git\nuri: git+https://gitlab.com/viash-io/viash.git\ntag: 0.7.1\npath: src/test/resources/testns\n",
+          "format" : "yaml"
+        }
+      ],
+      "subclass" : [
+        "gitwithname"
       ]
     },
     {
@@ -4208,18 +4455,20 @@
   [
     {
       "name" : "__this__",
-      "type" : "GithubRepository",
-      "niceType" : "GithubRepository",
+      "type" : "GithubRepositoryWithName",
+      "niceType" : "GithubRepositoryWithName",
       "hierarchy" : [
-        "io.viash.functionality.dependencies.GithubRepository",
+        "io.viash.functionality.dependencies.GithubRepositoryWithName",
+        "io.viash.functionality.dependencies.GithubRepositoryTrait",
         "io.viash.functionality.dependencies.AbstractGitRepository",
+        "io.viash.functionality.dependencies.RepositoryWithName",
         "io.viash.functionality.dependencies.Repository",
         "io.viash.functionality.dependencies.CopyableRepo"
       ],
       "description" : "A GitHub repository where remote dependency components can be found.",
       "example" : [
         {
-          "example" : "type: github\nrepo: openpipelines-bio/openpipeline\ntag: 0.8.0\n",
+          "example" : "name: openpipeline\ntype: github\nrepo: openpipelines-bio/openpipeline\ntag: 0.8.0\n",
           "format" : "yaml"
         },
         {
@@ -4228,7 +4477,7 @@
         }
       ],
       "subclass" : [
-        "github"
+        "githubwithname"
       ]
     },
     {
@@ -4273,18 +4522,20 @@
   [
     {
       "name" : "__this__",
-      "type" : "ViashhubRepository",
-      "niceType" : "ViashhubRepository",
+      "type" : "ViashhubRepositoryWithName",
+      "niceType" : "ViashhubRepositoryWithName",
       "hierarchy" : [
-        "io.viash.functionality.dependencies.ViashhubRepository",
+        "io.viash.functionality.dependencies.ViashhubRepositoryWithName",
+        "io.viash.functionality.dependencies.ViashhubRepositoryTrait",
         "io.viash.functionality.dependencies.AbstractGitRepository",
+        "io.viash.functionality.dependencies.RepositoryWithName",
         "io.viash.functionality.dependencies.Repository",
         "io.viash.functionality.dependencies.CopyableRepo"
       ],
       "description" : "A Viash-Hub repository where remote dependency components can be found.",
       "example" : [
         {
-          "example" : "type: viashhub\nrepo: openpipelines-bio/openpipeline\ntag: 0.8.0\n",
+          "example" : "name: openpipeline\ntype: viashhub\nrepo: openpipelines-bio/openpipeline\ntag: 0.8.0\n",
           "format" : "yaml"
         },
         {
@@ -4293,7 +4544,7 @@
         }
       ],
       "subclass" : [
-        "viashhub"
+        "viashhubwithname"
       ]
     },
     {
