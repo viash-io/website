@@ -412,14 +412,14 @@ Note
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns build <span class="at">--setup</span> cachedbuild <span class="at">--parallel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Exporting combine_columns (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/combine_columns
-Exporting combine_columns (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/combine_columns
-Exporting remove_comments (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/remove_comments
+<pre><code>Exporting combine_columns (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/combine_columns
+Exporting combine_columns (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/combine_columns
 Exporting take_column (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/take_column
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/combine_columns:dev' with Dockerfile
+Exporting remove_comments (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/remove_comments
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/take_column:dev' with Dockerfile
-Exporting take_column (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/take_column
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/combine_columns:dev' with Dockerfile
 Exporting remove_comments (demo) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/demo/remove_comments
+Exporting take_column (demo) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/demo/take_column
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo/remove_comments:dev' with Dockerfile
 [32mAll 6 configs built successfully[0m</code></pre>
 </div>
@@ -517,7 +517,7 @@ Note
 <section id="customizing-vdsl3-modules-on-the-fly" class="level2">
 <h2 class="anchored" data-anchor-id="customizing-vdsl3-modules-on-the-fly">Customizing VDSL3 modules on the fly</h2>
 <p>Usually, Nextflow processes are quite static objects. For example, changing its directives can be quite tricky.</p>
-<p>The <code>un()</code> function is a unique feature for every VDSL3 module which allows dynamically altering the behaviour of a module from within the pipeline. For example, we use it to set the <code>publishDir</code> directive to <code>"output/"</code> so the output of that step in the pipeline will be stored as output.</p>
+<p>The <code>run()</code> function is a unique feature for every VDSL3 module which allows dynamically altering the behaviour of a module from within the pipeline. For example, we use it to set the <code>publishDir</code> directive to <code>"output/"</code> so the output of that step in the pipeline will be stored as output.</p>
 <p>See the <a href="../../reference/nextflow_vdsl3/import_module.html#customizing-vdsl3-modules-on-the-fly">reference documentation</a> for a complete list of arguments of <code>.run()</code>.</p>
 </section>
 <section id="run-the-pipeline" class="level2">
@@ -528,22 +528,22 @@ Note
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> main.nf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>N E X T F L O W  ~  version 23.10.0
-Launching `main.nf` [distraught_watson] DSL2 - revision: 111508427e
+Launching `main.nf` [big_goodall] DSL2 - revision: 111508427e
 [-        ] process &gt; remove_comments:remove_comm... -
 Input: [file1, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]
 Input: [file2, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]
 
 executor &gt;  local (2)
-[65/0ba16e] process &gt; remove_comments:remove_comm... [  0%] 0 of 2
+[cc/250f95] process &gt; remove_comments:remove_comm... [  0%] 0 of 2
 Input: [file1, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]
 Input: [file2, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]
 
 executor &gt;  local (2)
-[65/0ba16e] process &gt; remove_comments:remove_comm... [100%] 2 of 2 ✔
+[cc/250f95] process &gt; remove_comments:remove_comm... [100%] 2 of 2 ✔
 Input: [file1, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]
 Input: [file2, /home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]
-Output: [file1, /home/runner/work/website/website/guide/_viash_project_template/work/ba/0140fd7999812046834945991c5ae4/file1.remove_comments.output.tsv]
-Output: [file2, /home/runner/work/website/website/guide/_viash_project_template/work/65/0ba16ebf5fca0722b70b20f6c5e202/file2.remove_comments.output.tsv]</code></pre>
+Output: [file1, /home/runner/work/website/website/guide/_viash_project_template/work/d0/7066d5546ba671cc080f7bded1fcb8/file1.remove_comments.output.tsv]
+Output: [file2, /home/runner/work/website/website/guide/_viash_project_template/work/cc/250f95c4d24e05a55a3d98bf2d4b35/file2.remove_comments.output.tsv]</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -551,8 +551,8 @@ Output: [file2, /home/runner/work/website/website/guide/_viash_project_template/
 <div class="cell-output cell-output-stdout">
 <pre><code>output
 ├── combined.combine_columns.output
-├── file1.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/ba/0140fd7999812046834945991c5ae4/file1.remove_comments.output.tsv
-└── file2.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/65/0ba16ebf5fca0722b70b20f6c5e202/file2.remove_comments.output.tsv
+├── file1.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/d0/7066d5546ba671cc080f7bded1fcb8/file1.remove_comments.output.tsv
+└── file2.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/cc/250f95c4d24e05a55a3d98bf2d4b35/file2.remove_comments.output.tsv
 
 0 directories, 3 files</code></pre>
 </div>
