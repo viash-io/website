@@ -104,11 +104,16 @@ For example, an input tuple `["foo", [input: file("in.txt")], "bar"]` will resul
 
 ## Create a pipeline
 
-Below is a first example Nextflow pipeline which uses just one VDSL3 module and with hard-coded input parameters (file1 and file2).
+### Conventional Nextflow pipeline
+
+We can use a module in a conventional Nextflow pipeline which takes two input files (`file1` and `file2`) and removes the lines that contain comments:
 
 ```{bash, include=FALSE}
 cat > main.nf << 'HERE'
+include { remove_comments } from "./target/nextflow/demo/remove_comments/main.nf"
+
 workflow {
+
   // Create a channel with two events
   // Each event contains a string (an identifier) and a file (input)
   Channel.fromList([
@@ -130,11 +135,9 @@ workflow {
 HERE
 ```
 
-```{embed, lang="groovy"}
-main.nf
-```
+### Pipeline as a component
 
-Please note that in order to run the above workflow in a VDSL3 context, one should use the following extended version:
+We can do the same but this time encoding the pipeline as a Viash compoment itself:
 
 ```{embed, lang=groovy}
 workflow run_wf {
