@@ -71,6 +71,8 @@ run_quarto <- function(src_qmd, wdir, engine = "knitr") {
     )
   )
 
+  message(out)
+
   # strip header
   paste0(out$stdout, "\n") %>%
     paste(collapse = "") %>%
