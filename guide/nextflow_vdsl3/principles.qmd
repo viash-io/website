@@ -1,0 +1,45 @@
+---
+title: VDSL3 principles
+order: 1
+---
+
+:::{.callout-note}
+This section assumes knowledge of how to create and manipulate Nextflow channels using DSL2. For more information, check out the [Nextflow reference docs](https://www.nextflow.io/docs/latest/index.html) or contact [Data Intuitive](https://www.data-intuitive.com/contact) for a complete Nextflow+Viash course.
+:::
+
+
+## VDSL3 module interface
+
+VDSL3 modules are actually workflows which take one channel and emit one channel. It expects the channel events to be tuples containing an 'id' and a 'state':
+
+```
+[ id, state ]
+```
+
+where `id` is a unique String and `state` is a `Map[String, Object]`. The resulting channel then consists of tuples `[id, new_state]`. 
+
+**Example:**
+
+```groovy
+workflow {
+  Channel.fromList([
+    ["myid", [input: file("in.txt")]]
+  ])
+    | mymodule
+}
+```
+
+:::{.callout-note}
+If the input tuple has more than two elements, the elements after the second element are passed through to the output tuple.
+That is, an input tuple `[id, input, ...]` will result in a tuple `[id, output, ...]` after running the module.
+For example, an input tuple `["foo", [input: file("in.txt")], "bar"]` will result in an output tuple `["foo", [output: file("out.txt")], "bar"]`.
+:::
+
+## Customizing VDSL3 modules on the fly
+
+Usually, Nextflow processes are quite static objects. For example, changing its directives can be tricky. Per-sample settings are practically impossible to achieve with vanilla Nextflow.
+
+The `run()` function is a unique feature for every VDSL3 module which allows dynamically altering the behaviour of a module from within the pipeline. For example, we use it to set the `publishDir` directive to `"output/"` so the output of that step in the pipeline will be stored as output.
+
+See the [reference documentation](/reference/nextflow_vdsl3/import_module.qmd#customizing-vdsl3-modules-on-the-fly) for a complete list of arguments of `.run()`.
+
