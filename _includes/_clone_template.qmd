@@ -2,16 +2,23 @@
 ```{r setup, include=FALSE}
 repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
 proj_dir <- paste0(repo_path, "/guide/_viash_project_template")
+branch <- "upgrade/viash_0.8.2"
 if (!dir.exists(proj_dir)) {
   processx::run(
     "git",
-    c("clone", "https://github.com/viash-io/viash_project_template.git", basename(proj_dir)),
+    c(
+        "clone",
+        "--single-branch",
+        "--branch", branch,
+        "https://github.com/viash-io/viash_project_template.git",
+        basename(proj_dir)
+    ),
     wd = dirname(proj_dir)
   )
 } else {
   processx::run(
     "git", 
-    c("reset", "--hard", "origin/main"),
+    c("reset", "--hard", branch),
     wd = proj_dir
   )
 }
