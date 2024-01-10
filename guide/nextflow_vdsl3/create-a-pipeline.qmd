@@ -2,7 +2,7 @@
 title: Create a pipeline
 order: 40
 ---
-  
+
 {{< include ../../_includes/_clone_template.qmd >}}
 
 This guide explains how to create an example pipeline that's closer to a typical use-case of a Nextflow bioinformatics pipeline.
@@ -45,7 +45,7 @@ First, we need to build the components into VDSL3 modules. Since Viash version 0
 
 ```{bash viash-ns-build}
 # This line is a workaround for a known issue with Viash 0.8.2+
-mkdir -p target/dependencies/vsh/data-intuitive/vsh-pipeline-operators/v0.1.0/
+mkdir -p target/dependencies/vsh/data-intuitive/vsh-pipeline-operators/v0.2.0/
 viash ns build --setup cachedbuild --parallel
 ```
 
@@ -229,6 +229,15 @@ Now run the pipeline with Nextflow:
 nextflow run . \
   -main-script main.nf
 ```
+
+<details>
+<summary>On the example data:</summary>
+```{bash}
+cat resources_test/file?.tsv
+```
+</details>
+
+This results in the following output:
 
 ```{bash}
 tree output
