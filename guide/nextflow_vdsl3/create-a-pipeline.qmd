@@ -45,7 +45,7 @@ First, we need to build the components into VDSL3 modules. Since Viash version 0
 
 ```{bash viash-ns-build}
 # This line is a workaround for a known issue with Viash 0.8.2+
-mkdir -p target/dependencies/vsh/data-intuitive/vsh_utils/v0.1.0
+mkdir -p target/dependencies/vsh/data-intuitive/vsh-pipeline-operators/v0.1.0/
 viash ns build --setup cachedbuild --parallel
 ```
 
@@ -55,7 +55,7 @@ The output of `viash ns build` tells us that
 
 1. two dependencies are fetched (from [Viash Hub](https://viash-hub.com))
 2. the locally defined components are built into Nextflow modules
-3. the locally defined worfklow `demo_pipeline` is built (see later)
+3. the locally defined worfklow `template/workflow` is built (see later)
 4. containers are built for the local modules
 
 Once `viash ns build` is finished, a new **target** directory has been created containing the executables and modules grouped per platform:
@@ -77,7 +77,7 @@ In order to use a module or subworkflow one simply has to add the module (either
 ```yaml
 functionality:
   dependencies: 
-    - name: demo/combine_columns
+    - name: template/combine_columns
       repository: local
 
   repositories:
@@ -92,7 +92,7 @@ After that, the module will be `include`d automatically during the Viash build s
 As illustrated by the `tree` output above, a module can be included by pointing to its location. This approach can be used for any Nextflow module (that exposes a compatible API):
 
 ```groovy
-include { remove_comments } from "./target/nextflow/demo/remove_comments/main.nf"
+include { remove_comments } from "./target/nextflow/template/remove_comments/main.nf"
 ```
 
 ## Create a pipeline
@@ -103,7 +103,7 @@ We can use a module in a conventional Nextflow pipeline which takes two input fi
 
 ```{bash, include=FALSE}
 cat > main.nf << 'HERE'
-include { remove_comments } from "./target/nextflow/demo/remove_comments/main.nf"
+include { remove_comments } from "./target/nextflow/template/remove_comments/main.nf"
 
 workflow {
 
@@ -191,7 +191,7 @@ Together with a config file like this one:
 ```yaml
 functionality:
   name: test
-  namespace: workflows
+  namespace: template
   description: |
     An example pipeline and project template.
 
@@ -210,7 +210,7 @@ functionality:
       entrypoint: run_wf
 
   dependencies: 
-    - name: demo/remove_comments
+    - name: template/remove_comments
       repository: local
 
   repositories:
