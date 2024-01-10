@@ -26,17 +26,17 @@ The pipeline contains three components and uses two utility components from [`vs
 
 ```{mermaid}
 graph TD
-   A(file?.tsv) --> X[expand] 
+   A(file?.tsv) --> X[vsh_flatten] 
    X --file1.tsv--> B1[/remove_comments/] --> C1[/take_column/] --> Y
    X --file2.tsv--> B2[/remove_comments/] --> C2[/take_column/] --> Y
    Y[vsh_toList] --> D[/combine_columns/]
    D --> E(output)
 ```
 
-* `expand` is a component to transform a Channel event containing multiple files (in this case using a glob `?`) into multiple Channel events each containing one file to operate on.
+* `vsh_flatten` is a component to transform a Channel event containing multiple files (in this case using a glob `?`) into multiple Channel events each containing one file to operate on. It is a Viash-compatible version of the Nextflow `flatten` operator.
 * `remove_comments` is a Bash script which removes all lines starting with a `#` from a file. 
 * `take_column` is a Python script which extracts one of the columns in a TSV file. 
-* `vsh_toList` is a component/module that does the oposite as `expand`: turn multiple Channel items into one Channel item containing a list.
+* `vsh_toList` is a component/module that does the oposite as `vsh_flatten`: turn multiple Channel items into one Channel item containing a list.
 * `combine_columns` is an R script which combines multiple files into a TSV.
 
 ## Build the VDSL3 modules and workflow
