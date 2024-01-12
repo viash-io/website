@@ -55,3 +55,70 @@ Defines which version of the dependency component to use. Typically this can be 
 **Type**: `String`
 
 Defines the repository as a Viash-Hub repository.
+
+# Viashhub Repository With Name
+
+:::{.callout-note}
+When defining repositories under `.functionality.repositories`, the repository definition needs a `name` field so it can be refered to from a dependency.
+:::
+
+A Viash-Hub repository where remote dependency components can be found.
+
+**Examples:**
+
+```yaml
+name: openpipeline
+type: viashhub
+repo: openpipelines-bio/openpipeline
+tag: 0.8.0
+
+```
+
+```yaml
+name: viash-testns
+type: viashhub
+repo: openpipelines-bio/openpipeline
+tag: 0.7.1
+path: src/test/resources/testns
+
+```
+
+## name
+
+**Type**: `String`
+
+The identifier used to refer to this repository from dependencies.
+
+## path
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+Defines a subfolder of the repository to use as base to look for the dependency components.
+
+## repo
+
+**Type**: `String`
+
+The name of the Viash-Hub repository.
+
+**Example:**
+
+```yaml
+repo: openpipelines-bio/openpipeline
+```
+
+## tag
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+Defines which version of the dependency component to use. Typically this can be a specific tag, branch or commit hash.
+
+## type
+
+**Type**: `String`
+
+Defines the repository as a Viash-Hub repository.
