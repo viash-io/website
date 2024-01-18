@@ -56,8 +56,9 @@ def generate_page(json_data: list):
 		.replace(" Argument", "")
 	filename = topic
 
-	if topic.endswith("Repository"):
+	if topic.endswith("RepositoryWithName"):
 		json_data = patch_repository(json_data)
+		title = title.removesuffix(" With Name")
 
 	page_data = {"title": title, "data": json_data}
 
@@ -114,18 +115,14 @@ def fudge_named_examples(this_info):
 	for example in examples:
 		ex = example.copy()
 		ex['description'] = "Example without `name` field in case used in `.functionality.dependencies`"
+		# strip name field from the example
+		ex['example'] = re.sub(r"^name:.*\n", "", ex['example'])
 		examples_orig.append(ex)
 
 	examples_new = []
 	for example in examples:
 		ex = example.copy()
 		ex['description'] = "Example with `name` field in case used in `.functionality.repositories`"
-		if 'path: src/test/resources/testns' in ex['example']:
-			ex['example'] = "name: viash-testns\n" + ex['example']
-		elif 'openpipeline' in ex['example']:
-			ex['example'] = "name: openpipeline\n" + ex['example']
-		elif 'type: local' in ex['example']:
-			ex['example'] = "name: my_local_code\n" + ex['example']
 		examples_new.append(ex)
 
 	this_info['example'] = examples_orig + examples_new
@@ -136,15 +133,18 @@ def patch_repository(info: list) -> list:
 When defining repositories under `.functionality.repositories`, the repository definition needs a `name` field so it can be refered to from a dependency.
 
 When defining a repository directly in a dependency under `.functionality.dependencies`, the `name` field must be omitted.
-:::
-
-The identifier used to refer to this repository from dependencies."""
+:::"""
 
 	# print(f"json_data before {info}")
 	# duplicate examples for named repositories
 	info = list(map(lambda x: fudge_named_examples(x) if x['name'] == '__this__' else x, info))
-	# add name field
-	info.append({'name': 'name', 'type': 'String', 'niceType': 'String', 'description': descr})
+	# add extra text to the name field
+	for field in info:
+		if field['name'] == 'name':
+			field['description'] = descr + "\n\n" + field['description']
+		if field['name'] == 'type' and field['description'] == "Defines the repository type. This determines how the repository will be fetched and handled.":
+			field['description'] = "Defines the repository as a locally present and available repository."
+
 	print(f"json_data after {info}")
 	return info
 
