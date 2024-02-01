@@ -44,6 +44,7 @@ def generate_page(json_data: list):
 		if d['name'] == '__this__':
 			this_parameter = d
 		if 'description' in d:
+			d['description'] = inject_project_config_copying_notes(this_parameter['niceType'], d['name'], d['description'])
 			d['description'] = replace_keywords(d["description"])
 
 	topic = this_parameter['type']
@@ -100,6 +101,30 @@ def replace_keywords(text: str) -> str:
 
 		# Replace match with hyperlink
 		text = text.replace(whole_match, f"[{keyword_text}]({link})")
+
+	return text
+
+def inject_project_config_copying_notes(class_name: str, parameter_name: str, text: str) -> str:
+	""" Injects a note about copying the project config when using the parameter. """
+
+	# print(f"Injecting project config copying notes for {class_name}.{parameter_name}")
+
+	note = None
+
+	match f"{class_name}.{parameter_name}":
+		case "Functionality.version" | "Functionality.license" | "Functionality.organization":
+			note = f"When the `{parameter_name}` field is left empty in a component's `.functionality` configuration, the value of `.version` in the @[project config](project_config) will be copied during build."
+		case "ProjectConfig.version" | "ProjectConfig.license" | "ProjectConfig.organization":
+			note = f"When the `{parameter_name}` field is left empty in a component's `.functionality` @[configuration](functionality), the value of `.version` in the project config will be copied during build."
+		case "Functionality.repositories":
+			note = "Any repositories defined under `.repositories` in the @[project config](project_config) will be prepended to the repositories defined in a component's @[configuration](functionality) of the `.functionality.repositories` field."
+		case "ProjectConfig.repositories":
+			note = "Any repositories defined under `.repositories` in the project config will be prepended to the list of repositories defined in a component's `.functionality.repositories` field."
+		case "Links.repository" | "Links.docker_registry":
+			note = f"When the `{parameter_name}` field is left empty in a component's `.functionality.links` @[configuration](functionality), the value of `.links.repository` in the @[project config](project_config) will be copied during build."
+
+	if note is not None:
+		return text + "\n\n:::{.callout-note}\n" + note + "\n:::\n\n"
 
 	return text
 
