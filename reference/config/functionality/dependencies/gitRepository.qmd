@@ -7,12 +7,16 @@ A Git repository where remote dependency components can be found.
 
 **Examples:**
 
+Example without `name` field in case used in `.functionality.dependencies`
+
 ```yaml
 type: git
 uri: git+https://github.com/openpipelines-bio/openpipeline.git
 tag: 0.8.0
 
 ```
+
+Example without `name` field in case used in `.functionality.dependencies`
 
 ```yaml
 type: git
@@ -21,6 +25,39 @@ tag: 0.7.1
 path: src/test/resources/testns
 
 ```
+
+Example with `name` field in case used in `.functionality.repositories`
+
+```yaml
+name: openpipeline
+type: git
+uri: git+https://github.com/openpipelines-bio/openpipeline.git
+tag: 0.8.0
+
+```
+
+Example with `name` field in case used in `.functionality.repositories`
+
+```yaml
+name: viash-testns
+type: git
+uri: git+https://gitlab.com/viash-io/viash.git
+tag: 0.7.1
+path: src/test/resources/testns
+
+```
+
+## name
+
+**Type**: `String`
+
+:::{.callout-warning}
+When defining repositories under `.functionality.repositories`, the repository definition needs a `name` field so it can be refered to from a dependency.
+
+When defining a repository directly in a dependency under `.functionality.dependencies`, the `name` field must be omitted.
+:::
+
+The identifier used to refer to this repository from dependencies.
 
 ## path
 
