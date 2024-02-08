@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -23,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -83,7 +83,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -92,6 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -111,16 +118,17 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Viash - Unit testing">
 <meta property="og:description" content="How to ensure high quality components.">
-<meta property="og:site-name" content="Viash">
+<meta property="og:image" content="https://viash.io/guide/component/viash.png">
+<meta property="og:site_name" content="Viash">
 </head>
 
 <body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     <img src="../../viash.png" alt="" class="navbar-logo">
     </a>
@@ -132,46 +140,46 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">Overview</span></a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../installation/index.html" rel="" target="">
- <span class="menu-text">Installation</span></a>
+    <a class="nav-link" href="../../installation/index.html"> 
+<span class="menu-text">Installation</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../quickstart/index.html" rel="" target="">
- <span class="menu-text">Quickstart</span></a>
+    <a class="nav-link" href="../../quickstart/index.html"> 
+<span class="menu-text">Quickstart</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../guide/index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Guide</span></a>
+    <a class="nav-link active" href="../../guide/index.html" aria-current="page"> 
+<span class="menu-text">Guide</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../reference/index.html" rel="" target="">
- <span class="menu-text">Reference</span></a>
+    <a class="nav-link" href="../../reference/index.html"> 
+<span class="menu-text">Reference</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../blog/index.html" rel="" target="">
- <span class="menu-text">Blog</span></a>
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Help</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-help">    
         <li>
-    <a class="dropdown-item" href="https://github.com/viash-io/viash/issues" rel="" target=""><i class="bi bi-bug" role="img">
+    <a class="dropdown-item" href="https://github.com/viash-io/viash/issues"><i class="bi bi-bug" role="img">
 </i> 
  <span class="dropdown-text">Report a Viash issue</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/viash-io/website/issues" rel="" target=""><i class="bi bi-bug" role="img">
+    <a class="dropdown-item" href="https://github.com/viash-io/website/issues"><i class="bi bi-bug" role="img">
 </i> 
  <span class="dropdown-text">Report a website issue</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../cheatsheet/viash_cheatsheet_v1_1.pdf" rel="" target=""><i class="bi bi-card-list" role="img">
+    <a class="dropdown-item" href="../../cheatsheet/viash_cheatsheet_v1_1.pdf"><i class="bi bi-card-list" role="img">
 </i> 
  <span class="dropdown-text">Cheat sheet</span></a>
   </li>  
@@ -180,31 +188,31 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/viash-io/viash" rel="" target=""><i class="bi bi-github" role="img" aria-label="Viash GitHub">
+    <a class="nav-link" href="https://github.com/viash-io/viash"> <i class="bi bi-github" role="img" aria-label="Viash GitHub">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../guide/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../../guide/component/index.html">Component</a></li><li class="breadcrumb-item"><a href="../../guide/component/unit-testing.html">Unit testing</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../guide/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../../guide/component/index.html">Component</a></li><li class="breadcrumb-item"><a href="../../guide/component/unit-testing.html">Unit testing</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
@@ -326,7 +334,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -338,12 +346,12 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   <li><a href="#run-the-unit-test" id="toc-run-the-unit-test" class="nav-link" data-scroll-target="#run-the-unit-test">Run the unit test</a></li>
   <li><a href="#bonus-unit-testing-all-of-the-components" id="toc-bonus-unit-testing-all-of-the-components" class="nav-link" data-scroll-target="#bonus-unit-testing-all-of-the-components">Bonus: unit testing all of the components</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/viash-io/website/edit/main/guide/component/unit-testing.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/viash-io/website/blob/main/guide/component/unit-testing.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/viash-io/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/viash-io/website/edit/main/guide/component/unit-testing.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/viash-io/website/blob/main/guide/component/unit-testing.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/viash-io/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../guide/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../../guide/component/index.html">Component</a></li><li class="breadcrumb-item"><a href="../../guide/component/unit-testing.html">Unit testing</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Unit testing</h1>
 </div>
@@ -363,7 +371,9 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   </div>
   
 
+
 </header>
+
 
 <script type="text/javascript">
 let langDict = {
@@ -887,11 +897,11 @@ Important
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_bash14905033429234494546'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_bash132435374432983153'
 ====================================================================
-+/tmp/viash_test_example_bash14905033429234494546/build_executable/example_bash ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_bash132435374432983153/build_executable/example_bash ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_bash:test' with Dockerfile
-[info] Running 'docker build -t example_bash:test /tmp/viash_test_example_bash14905033429234494546/build_executable -f /tmp/viash_test_example_bash14905033429234494546/build_executable/tmp/dockerbuild-example_bash-3CNcTo/Dockerfile'
+[info] Running 'docker build -t example_bash:test /tmp/viash_test_example_bash132435374432983153/build_executable -f /tmp/viash_test_example_bash132435374432983153/build_executable/tmp/dockerbuild-example_bash-GQwmKd/Dockerfile'
 #0 building with "default" instance using docker driver
 
 #1 [internal] load build definition from Dockerfile
@@ -903,23 +913,21 @@ Important
 #2 DONE 0.0s
 
 #3 [internal] load metadata for docker.io/library/bash:4.0
-#3 DONE 0.7s
+#3 DONE 0.3s
 
-#4 [1/2] FROM docker.io/library/bash:4.0@sha256:123aff9c6aa74134047efaa20b649445969058c15c1bb7335d5e51aefe6da800
-#4 resolve docker.io/library/bash:4.0@sha256:123aff9c6aa74134047efaa20b649445969058c15c1bb7335d5e51aefe6da800 done
-#4 sha256:328c419e3d9ed25839242250912907523c86f8b828e5aed2ee23aa794e0d15d9 0B / 1.74MB 0.1s
-#4 sha256:af44b666c830ff80271c66f7fdb921fe628e53ffc7fe5bc609d7166d17713d95 0B / 345B 0.1s
-#4 sha256:123aff9c6aa74134047efaa20b649445969058c15c1bb7335d5e51aefe6da800 1.64kB / 1.64kB done
-#4 sha256:7d481f9a39a88c474d5ee639d55747c5ac7b76eeb0c94f880530b90d9d483c21 946B / 946B done
-#4 sha256:f93c74dd54b29e8020f53d836102c7fb5d1db98aa2393aa5d3857043ff53d066 5.77kB / 5.77kB done
-#4 sha256:661ff4d9561e3fd050929ee5097067c34bafc523ee60f5294a37fd08056a73ca 0B / 3.41MB 0.1s
-#4 sha256:328c419e3d9ed25839242250912907523c86f8b828e5aed2ee23aa794e0d15d9 1.74MB / 1.74MB 0.2s done
-#4 sha256:af44b666c830ff80271c66f7fdb921fe628e53ffc7fe5bc609d7166d17713d95 345B / 345B 0.2s done
-#4 sha256:661ff4d9561e3fd050929ee5097067c34bafc523ee60f5294a37fd08056a73ca 3.41MB / 3.41MB 0.1s done
-#4 extracting sha256:661ff4d9561e3fd050929ee5097067c34bafc523ee60f5294a37fd08056a73ca 0.1s done
-#4 extracting sha256:328c419e3d9ed25839242250912907523c86f8b828e5aed2ee23aa794e0d15d9 0.0s done
-#4 extracting sha256:af44b666c830ff80271c66f7fdb921fe628e53ffc7fe5bc609d7166d17713d95
-#4 extracting sha256:af44b666c830ff80271c66f7fdb921fe628e53ffc7fe5bc609d7166d17713d95 done
+#4 [1/2] FROM docker.io/library/bash:4.0@sha256:8531615c5261183fa8686a7dc9cbb5ce27a5b480ba9386fb6f66098268ce462c
+#4 resolve docker.io/library/bash:4.0@sha256:8531615c5261183fa8686a7dc9cbb5ce27a5b480ba9386fb6f66098268ce462c done
+#4 extracting sha256:4abcf20661432fb2d719aaf90656f55c287f8ca915dc1c92ec14ff61e67fbaf8
+#4 extracting sha256:4abcf20661432fb2d719aaf90656f55c287f8ca915dc1c92ec14ff61e67fbaf8 0.1s done
+#4 sha256:8531615c5261183fa8686a7dc9cbb5ce27a5b480ba9386fb6f66098268ce462c 6.94kB / 6.94kB done
+#4 sha256:8cfaa6fde1a47a95b4f5445e250ee60191b98343d523fa354ba4d7a66630e825 1.28kB / 1.28kB done
+#4 sha256:9a536605933e4f307ba10fcd141bd165b99e4a97c38791cea2d7d979f83062c0 4.86kB / 4.86kB done
+#4 sha256:4abcf20661432fb2d719aaf90656f55c287f8ca915dc1c92ec14ff61e67fbaf8 3.41MB / 3.41MB 0.1s done
+#4 sha256:4c4b5fd539319494535b6bdb3e05b541b2296770ea04298eb65cea70fd2f2fb1 0B / 1.74MB 0.2s
+#4 sha256:61ef51628e3f206a04baeb0b13fb13a660470a4568aa751ca96fc3e0b13ad51b 343B / 343B 0.0s done
+#4 sha256:4c4b5fd539319494535b6bdb3e05b541b2296770ea04298eb65cea70fd2f2fb1 1.74MB / 1.74MB 0.2s done
+#4 extracting sha256:4c4b5fd539319494535b6bdb3e05b541b2296770ea04298eb65cea70fd2f2fb1 0.1s done
+#4 extracting sha256:61ef51628e3f206a04baeb0b13fb13a660470a4568aa751ca96fc3e0b13ad51b done
 #4 DONE 0.3s
 
 #5 [2/2] RUN :
@@ -927,12 +935,12 @@ Important
 
 #6 exporting to image
 #6 exporting layers
-#6 exporting layers 0.3s done
-#6 writing image sha256:95cad5e1625a52a67552366340adbfe51d7415935e5bd0e920a7ad0a92f4ef38 done
+#6 exporting layers 0.9s done
+#6 writing image sha256:09ee18a51a1a4f310b4beaa2450966c6eadd9b1070dcbe9e8d98dea7f10d7972 done
 #6 naming to docker.io/library/example_bash:test done
-#6 DONE 0.3s
+#6 DONE 0.9s
 ====================================================================
-+/tmp/viash_test_example_bash14905033429234494546/test_test/test_executable
++/tmp/viash_test_example_bash132435374432983153/test_test/test_executable
 &gt;&gt;&gt; Create input test file
 &gt;&gt;&gt; Run executable
 Copying 'foo.txt' to 'bar.txt'.
@@ -949,11 +957,11 @@ Cleaning up temporary directory</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_csharp9204688518708818264'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_csharp2239801894187176465'
 ====================================================================
-+/tmp/viash_test_example_csharp9204688518708818264/build_executable/example_csharp ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_csharp2239801894187176465/build_executable/example_csharp ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_csharp:test' with Dockerfile
-[info] Running 'docker build -t example_csharp:test /tmp/viash_test_example_csharp9204688518708818264/build_executable -f /tmp/viash_test_example_csharp9204688518708818264/build_executable/tmp/dockerbuild-example_csharp-cfEBR3/Dockerfile'
+[info] Running 'docker build -t example_csharp:test /tmp/viash_test_example_csharp2239801894187176465/build_executable -f /tmp/viash_test_example_csharp2239801894187176465/build_executable/tmp/dockerbuild-example_csharp-g4MuuN/Dockerfile'
 #0 building with "default" instance using docker driver
 
 #1 [internal] load .dockerignore
@@ -965,81 +973,62 @@ Cleaning up temporary directory</code></pre>
 #2 DONE 0.0s
 
 #3 [internal] load metadata for ghcr.io/data-intuitive/dotnet-script:1.3.1
-#3 DONE 0.9s
+#3 DONE 0.5s
 
 #4 [1/2] FROM ghcr.io/data-intuitive/dotnet-script:1.3.1@sha256:d95bf2a2b3e095e5b02960ab4ddd4674d798a1493ed0dc5cf427c77a5ed90ed3
 #4 resolve ghcr.io/data-intuitive/dotnet-script:1.3.1@sha256:d95bf2a2b3e095e5b02960ab4ddd4674d798a1493ed0dc5cf427c77a5ed90ed3 done
-#4 sha256:df9b9388f04ad6279a7410b85cedfdcb2208c0a003da7ab5613af71079148139 0B / 2.81MB 0.1s
-#4 sha256:3ae3a38ed752842e75d1609c931b29e565b53c24229c87bf1ba64251b5f1f094 0B / 1.74MB 0.1s
-#4 sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4 0B / 31.26MB 0.1s
+#4 extracting sha256:df9b9388f04ad6279a7410b85cedfdcb2208c0a003da7ab5613af71079148139
 #4 sha256:d95bf2a2b3e095e5b02960ab4ddd4674d798a1493ed0dc5cf427c77a5ed90ed3 856B / 856B done
 #4 sha256:ae4d45b87ee640aec6f031a1695c6d814e0026ea6fb3220e3daaad90b0f09bda 2.21kB / 2.21kB done
+#4 sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4 11.53MB / 31.26MB 0.1s
+#4 sha256:2c56128c63bdf4a1d571ed930304f4eb77e8e2fde7ce03ddf6073e3df9abf8ad 0B / 8.65MB 0.1s
 #4 sha256:1102243946aeba437ebb7c7ab5559d465d660ed57a1f13888c89692401cd5bb6 7.71kB / 7.71kB done
-#4 sha256:df9b9388f04ad6279a7410b85cedfdcb2208c0a003da7ab5613af71079148139 1.05MB / 2.81MB 0.3s
-#4 sha256:3ae3a38ed752842e75d1609c931b29e565b53c24229c87bf1ba64251b5f1f094 1.74MB / 1.74MB 0.2s done
-#4 sha256:2c56128c63bdf4a1d571ed930304f4eb77e8e2fde7ce03ddf6073e3df9abf8ad 0B / 8.65MB 0.3s
+#4 sha256:df9b9388f04ad6279a7410b85cedfdcb2208c0a003da7ab5613af71079148139 2.81MB / 2.81MB 0.1s done
+#4 sha256:3ae3a38ed752842e75d1609c931b29e565b53c24229c87bf1ba64251b5f1f094 1.74MB / 1.74MB 0.1s done
 #4 extracting sha256:df9b9388f04ad6279a7410b85cedfdcb2208c0a003da7ab5613af71079148139 0.1s done
-#4 sha256:df9b9388f04ad6279a7410b85cedfdcb2208c0a003da7ab5613af71079148139 2.81MB / 2.81MB 0.3s done
-#4 sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4 3.15MB / 31.26MB 0.4s
-#4 sha256:6c2be99410893469a9e0d8f0ff537b22f651479bf64c5dcf269d2e5267e85749 0B / 20.91MB 0.4s
+#4 sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4 29.36MB / 31.26MB 0.2s
+#4 sha256:2c56128c63bdf4a1d571ed930304f4eb77e8e2fde7ce03ddf6073e3df9abf8ad 8.65MB / 8.65MB 0.2s done
+#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 0B / 105.91MB 0.2s
+#4 sha256:6c2be99410893469a9e0d8f0ff537b22f651479bf64c5dcf269d2e5267e85749 4.21MB / 20.91MB 0.2s
+#4 extracting sha256:3ae3a38ed752842e75d1609c931b29e565b53c24229c87bf1ba64251b5f1f094
+#4 sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4 31.26MB / 31.26MB 0.2s done
+#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 25.17MB / 105.91MB 0.4s
+#4 sha256:6c2be99410893469a9e0d8f0ff537b22f651479bf64c5dcf269d2e5267e85749 20.91MB / 20.91MB 0.3s done
 #4 extracting sha256:3ae3a38ed752842e75d1609c931b29e565b53c24229c87bf1ba64251b5f1f094 0.1s done
-#4 sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4 16.78MB / 31.26MB 0.6s
-#4 sha256:2c56128c63bdf4a1d571ed930304f4eb77e8e2fde7ce03ddf6073e3df9abf8ad 4.19MB / 8.65MB 0.6s
-#4 sha256:6c2be99410893469a9e0d8f0ff537b22f651479bf64c5dcf269d2e5267e85749 1.05MB / 20.91MB 0.6s
-#4 sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4 23.07MB / 31.26MB 0.7s
-#4 sha256:6c2be99410893469a9e0d8f0ff537b22f651479bf64c5dcf269d2e5267e85749 8.39MB / 20.91MB 0.7s
-#4 sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4 30.41MB / 31.26MB 0.8s
-#4 sha256:6c2be99410893469a9e0d8f0ff537b22f651479bf64c5dcf269d2e5267e85749 14.68MB / 20.91MB 0.8s
-#4 sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4 31.26MB / 31.26MB 0.8s done
-#4 sha256:6c2be99410893469a9e0d8f0ff537b22f651479bf64c5dcf269d2e5267e85749 20.91MB / 20.91MB 0.9s
-#4 extracting sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4 0.1s
-#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 0B / 105.91MB 0.9s
-#4 sha256:2c56128c63bdf4a1d571ed930304f4eb77e8e2fde7ce03ddf6073e3df9abf8ad 8.65MB / 8.65MB 1.0s done
-#4 sha256:6c2be99410893469a9e0d8f0ff537b22f651479bf64c5dcf269d2e5267e85749 20.91MB / 20.91MB 0.9s done
-#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 0B / 68.90MB 1.0s
-#4 sha256:5e733ff9c30825005ec05ee10b784276e8034171be7eeaa10d6f876fc7bb5383 0B / 12.80MB 1.0s
-#4 extracting sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4 0.5s done
-#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 7.34MB / 68.90MB 1.4s
-#4 sha256:5e733ff9c30825005ec05ee10b784276e8034171be7eeaa10d6f876fc7bb5383 10.49MB / 12.80MB 1.4s
-#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 16.78MB / 68.90MB 1.5s
-#4 sha256:5e733ff9c30825005ec05ee10b784276e8034171be7eeaa10d6f876fc7bb5383 12.80MB / 12.80MB 1.4s done
+#4 sha256:5e733ff9c30825005ec05ee10b784276e8034171be7eeaa10d6f876fc7bb5383 12.80MB / 12.80MB 0.4s
+#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 0B / 68.90MB 0.4s
+#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 36.70MB / 105.91MB 0.5s
+#4 sha256:5e733ff9c30825005ec05ee10b784276e8034171be7eeaa10d6f876fc7bb5383 12.80MB / 12.80MB 0.4s done
+#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 14.57MB / 68.90MB 0.5s
+#4 extracting sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4
+#4 sha256:16def9f17d8d9988a074a1d3ae42cb041b261068b3a455c99141bb8df243e9a4 0B / 829.24kB 0.5s
+#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 52.20MB / 105.91MB 0.6s
+#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 31.46MB / 68.90MB 0.6s
+#4 sha256:16def9f17d8d9988a074a1d3ae42cb041b261068b3a455c99141bb8df243e9a4 829.24kB / 829.24kB 0.5s done
+#4 sha256:03ac08f8f1d3c646d8f456ad0e2307b56511e692bcef7a4d67ec194ba81f59e7 0B / 103B 0.6s
+#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 67.95MB / 105.91MB 0.7s
+#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 48.23MB / 68.90MB 0.7s
+#4 sha256:03ac08f8f1d3c646d8f456ad0e2307b56511e692bcef7a4d67ec194ba81f59e7 103B / 103B 0.6s done
+#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 82.84MB / 105.91MB 0.8s
+#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 65.01MB / 68.90MB 0.8s
+#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 101.41MB / 105.91MB 0.9s
+#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 68.90MB / 68.90MB 0.9s done
+#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 105.91MB / 105.91MB 1.0s done
+#4 extracting sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4 0.6s done
 #4 extracting sha256:2c56128c63bdf4a1d571ed930304f4eb77e8e2fde7ce03ddf6073e3df9abf8ad 0.1s
-#4 sha256:16def9f17d8d9988a074a1d3ae42cb041b261068b3a455c99141bb8df243e9a4 0B / 829.24kB 1.5s
-#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 9.44MB / 105.91MB 1.6s
-#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 20.97MB / 68.90MB 1.6s
 #4 extracting sha256:2c56128c63bdf4a1d571ed930304f4eb77e8e2fde7ce03ddf6073e3df9abf8ad 0.1s done
-#4 extracting sha256:6c2be99410893469a9e0d8f0ff537b22f651479bf64c5dcf269d2e5267e85749
-#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 22.02MB / 105.91MB 1.8s
-#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 33.55MB / 68.90MB 1.8s
-#4 sha256:16def9f17d8d9988a074a1d3ae42cb041b261068b3a455c99141bb8df243e9a4 829.24kB / 829.24kB 1.7s done
-#4 sha256:03ac08f8f1d3c646d8f456ad0e2307b56511e692bcef7a4d67ec194ba81f59e7 0B / 103B 1.8s
-#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 28.31MB / 105.91MB 1.9s
-#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 38.80MB / 68.90MB 1.9s
-#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 42.99MB / 68.90MB 2.0s
+#4 extracting sha256:6c2be99410893469a9e0d8f0ff537b22f651479bf64c5dcf269d2e5267e85749 0.1s
 #4 extracting sha256:6c2be99410893469a9e0d8f0ff537b22f651479bf64c5dcf269d2e5267e85749 0.3s done
-#4 sha256:03ac08f8f1d3c646d8f456ad0e2307b56511e692bcef7a4d67ec194ba81f59e7 103B / 103B 1.9s done
-#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 48.23MB / 105.91MB 2.2s
-#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 57.67MB / 68.90MB 2.2s
-#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 54.53MB / 105.91MB 2.3s
-#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 62.91MB / 68.90MB 2.3s
-#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 67.11MB / 105.91MB 2.5s
-#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 68.90MB / 68.90MB 2.4s done
-#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 73.40MB / 105.91MB 2.6s
-#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 79.69MB / 105.91MB 2.7s
-#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 92.27MB / 105.91MB 2.9s
-#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 98.57MB / 105.91MB 3.0s
-#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 104.86MB / 105.91MB 3.1s
-#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 105.91MB / 105.91MB 3.2s done
-#4 extracting sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 0.1s
+#4 extracting sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73
 #4 extracting sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 2.2s done
 #4 extracting sha256:5e733ff9c30825005ec05ee10b784276e8034171be7eeaa10d6f876fc7bb5383
 #4 extracting sha256:5e733ff9c30825005ec05ee10b784276e8034171be7eeaa10d6f876fc7bb5383 0.3s done
-#4 extracting sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba
+#4 extracting sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 0.1s
 #4 extracting sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 0.7s done
 #4 extracting sha256:16def9f17d8d9988a074a1d3ae42cb041b261068b3a455c99141bb8df243e9a4
 #4 extracting sha256:16def9f17d8d9988a074a1d3ae42cb041b261068b3a455c99141bb8df243e9a4 0.0s done
 #4 extracting sha256:03ac08f8f1d3c646d8f456ad0e2307b56511e692bcef7a4d67ec194ba81f59e7 done
-#4 DONE 7.1s
+#4 DONE 5.7s
 
 #5 [2/2] RUN :
 #5 DONE 0.2s
@@ -1047,11 +1036,11 @@ Cleaning up temporary directory</code></pre>
 #6 exporting to image
 #6 exporting layers
 #6 exporting layers 0.5s done
-#6 writing image sha256:a244d4f735e2f1c90c4698f51aebabca76e14f1459596b70686048ec4987b838 done
+#6 writing image sha256:c4e7c98b915f5feae79b86261784c69c24f6dd647cea27e3bb3de5afb56c8760 done
 #6 naming to docker.io/library/example_csharp:test done
 #6 DONE 0.5s
 ====================================================================
-+/tmp/viash_test_example_csharp9204688518708818264/test_test/test_executable
++/tmp/viash_test_example_csharp2239801894187176465/test_test/test_executable
 &gt;&gt;&gt; Create input test file
 &gt;&gt;&gt; Run executable
 &gt;&gt;&gt; Check whether output file exists
@@ -1067,67 +1056,61 @@ Cleaning up temporary directory</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_js12549876931724887545'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_js4081275016339543402'
 ====================================================================
-+/tmp/viash_test_example_js12549876931724887545/build_executable/example_js ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_js4081275016339543402/build_executable/example_js ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_js:test' with Dockerfile
-[info] Running 'docker build -t example_js:test /tmp/viash_test_example_js12549876931724887545/build_executable -f /tmp/viash_test_example_js12549876931724887545/build_executable/tmp/dockerbuild-example_js-NLvFdi/Dockerfile'
+[info] Running 'docker build -t example_js:test /tmp/viash_test_example_js4081275016339543402/build_executable -f /tmp/viash_test_example_js4081275016339543402/build_executable/tmp/dockerbuild-example_js-WHwnAd/Dockerfile'
 #0 building with "default" instance using docker driver
 
-#1 [internal] load .dockerignore
-#1 transferring context: 2B done
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 297B done
 #1 DONE 0.0s
 
-#2 [internal] load build definition from Dockerfile
-#2 transferring dockerfile: 297B done
+#2 [internal] load .dockerignore
+#2 transferring context: 2B done
 #2 DONE 0.0s
 
-#3 [auth] library/node:pull token for registry-1.docker.io
-#3 DONE 0.0s
+#3 [internal] load metadata for docker.io/library/node:19-bullseye-slim
+#3 DONE 0.4s
 
-#4 [internal] load metadata for docker.io/library/node:19-bullseye-slim
-#4 DONE 0.9s
+#4 [1/2] FROM docker.io/library/node:19-bullseye-slim@sha256:f58f1fcf5c9ff9e3752993edb4ed6dbd35697124c85a43f3b97aa054500b0534
+#4 resolve docker.io/library/node:19-bullseye-slim@sha256:f58f1fcf5c9ff9e3752993edb4ed6dbd35697124c85a43f3b97aa054500b0534 done
+#4 sha256:f58f1fcf5c9ff9e3752993edb4ed6dbd35697124c85a43f3b97aa054500b0534 1.21kB / 1.21kB done
+#4 sha256:63b5ca0f90dbaf64465a83d46276e133eab30410f642808d158bf98928811999 1.37kB / 1.37kB done
+#4 sha256:adbc02574b521bb652d771c8ac0282c724b9fe90c001f3bab0825c32092c9036 6.84kB / 6.84kB done
+#4 sha256:f03b40093957615593f2ed142961afb6b540507e0b47e3f7626ba5e02efbbbf1 10.49MB / 31.40MB 0.1s
+#4 sha256:0bfad7312c25e414fc3d0e3640a77bd4b5c74d2118595670999afef9758cb49b 4.19kB / 4.19kB 0.1s done
+#4 sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 2.10MB / 46.62MB 0.1s
+#4 sha256:477c7ebfb8500396b86c69952acb17b909a0a63da41e03dd4046e2c809722c6e 0B / 2.76MB 0.1s
+#4 sha256:f03b40093957615593f2ed142961afb6b540507e0b47e3f7626ba5e02efbbbf1 28.31MB / 31.40MB 0.3s
+#4 sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 28.31MB / 46.62MB 0.3s
+#4 sha256:477c7ebfb8500396b86c69952acb17b909a0a63da41e03dd4046e2c809722c6e 2.76MB / 2.76MB 0.1s done
+#4 sha256:8bb4aa3e51be63d4a2e5bd30ab9cd478a916ed3c5c0212a44b96fd743e0e0f2f 450B / 450B 0.2s done
+#4 sha256:f03b40093957615593f2ed142961afb6b540507e0b47e3f7626ba5e02efbbbf1 31.40MB / 31.40MB 0.4s done
+#4 sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 42.99MB / 46.62MB 0.4s
+#4 extracting sha256:f03b40093957615593f2ed142961afb6b540507e0b47e3f7626ba5e02efbbbf1 0.1s
+#4 sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 46.62MB / 46.62MB 0.5s done
+#4 extracting sha256:f03b40093957615593f2ed142961afb6b540507e0b47e3f7626ba5e02efbbbf1 1.2s done
+#4 extracting sha256:0bfad7312c25e414fc3d0e3640a77bd4b5c74d2118595670999afef9758cb49b done
+#4 extracting sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 0.1s
+#4 extracting sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 1.9s done
+#4 extracting sha256:477c7ebfb8500396b86c69952acb17b909a0a63da41e03dd4046e2c809722c6e
+#4 extracting sha256:477c7ebfb8500396b86c69952acb17b909a0a63da41e03dd4046e2c809722c6e 0.1s done
+#4 extracting sha256:8bb4aa3e51be63d4a2e5bd30ab9cd478a916ed3c5c0212a44b96fd743e0e0f2f done
+#4 DONE 3.9s
 
-#5 [1/2] FROM docker.io/library/node:19-bullseye-slim@sha256:f58f1fcf5c9ff9e3752993edb4ed6dbd35697124c85a43f3b97aa054500b0534
-#5 resolve docker.io/library/node:19-bullseye-slim@sha256:f58f1fcf5c9ff9e3752993edb4ed6dbd35697124c85a43f3b97aa054500b0534 done
-#5 sha256:f58f1fcf5c9ff9e3752993edb4ed6dbd35697124c85a43f3b97aa054500b0534 1.21kB / 1.21kB done
-#5 sha256:63b5ca0f90dbaf64465a83d46276e133eab30410f642808d158bf98928811999 1.37kB / 1.37kB done
-#5 sha256:adbc02574b521bb652d771c8ac0282c724b9fe90c001f3bab0825c32092c9036 6.84kB / 6.84kB done
-#5 sha256:f03b40093957615593f2ed142961afb6b540507e0b47e3f7626ba5e02efbbbf1 0B / 31.40MB 0.1s
-#5 sha256:0bfad7312c25e414fc3d0e3640a77bd4b5c74d2118595670999afef9758cb49b 0B / 4.19kB 0.1s
-#5 sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 0B / 46.62MB 0.1s
-#5 sha256:f03b40093957615593f2ed142961afb6b540507e0b47e3f7626ba5e02efbbbf1 19.92MB / 31.40MB 0.2s
-#5 sha256:0bfad7312c25e414fc3d0e3640a77bd4b5c74d2118595670999afef9758cb49b 4.19kB / 4.19kB 0.2s done
-#5 sha256:f03b40093957615593f2ed142961afb6b540507e0b47e3f7626ba5e02efbbbf1 31.40MB / 31.40MB 0.3s done
-#5 sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 3.15MB / 46.62MB 0.3s
-#5 extracting sha256:f03b40093957615593f2ed142961afb6b540507e0b47e3f7626ba5e02efbbbf1 0.1s
-#5 sha256:8bb4aa3e51be63d4a2e5bd30ab9cd478a916ed3c5c0212a44b96fd743e0e0f2f 0B / 450B 0.3s
-#5 sha256:477c7ebfb8500396b86c69952acb17b909a0a63da41e03dd4046e2c809722c6e 0B / 2.76MB 0.3s
-#5 sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 9.44MB / 46.62MB 0.4s
-#5 sha256:8bb4aa3e51be63d4a2e5bd30ab9cd478a916ed3c5c0212a44b96fd743e0e0f2f 450B / 450B 0.4s done
-#5 sha256:477c7ebfb8500396b86c69952acb17b909a0a63da41e03dd4046e2c809722c6e 2.76MB / 2.76MB 0.4s done
-#5 sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 37.45MB / 46.62MB 0.7s
-#5 sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 46.14MB / 46.62MB 0.8s
-#5 sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 46.62MB / 46.62MB 0.8s done
-#5 extracting sha256:f03b40093957615593f2ed142961afb6b540507e0b47e3f7626ba5e02efbbbf1 1.2s done
-#5 extracting sha256:0bfad7312c25e414fc3d0e3640a77bd4b5c74d2118595670999afef9758cb49b done
-#5 extracting sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 0.1s
-#5 extracting sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 1.9s done
-#5 extracting sha256:477c7ebfb8500396b86c69952acb17b909a0a63da41e03dd4046e2c809722c6e 0.1s done
-#5 extracting sha256:8bb4aa3e51be63d4a2e5bd30ab9cd478a916ed3c5c0212a44b96fd743e0e0f2f done
-#5 DONE 3.9s
+#5 [2/2] RUN :
+#5 DONE 0.2s
 
-#6 [2/2] RUN :
-#6 DONE 0.1s
-
-#7 exporting to image
-#7 exporting layers
-#7 exporting layers 0.7s done
-#7 writing image sha256:65fb750cdda544fe599324231c837a167923e2477cfeee8f92ee4a9d341966ec done
-#7 naming to docker.io/library/example_js:test done
-#7 DONE 0.7s
+#6 exporting to image
+#6 exporting layers
+#6 exporting layers 0.4s done
+#6 writing image sha256:c348226170b6e6b8e87bc53caa560573de0827a629aac926da8c5fafb526e129 done
+#6 naming to docker.io/library/example_js:test done
+#6 DONE 0.4s
 ====================================================================
-+/tmp/viash_test_example_js12549876931724887545/test_test/test_executable
++/tmp/viash_test_example_js4081275016339543402/test_test/test_executable
 &gt;&gt;&gt; Create input test file
 &gt;&gt;&gt; Run executable
 &gt;&gt;&gt; Check whether output file exists
@@ -1143,61 +1126,65 @@ Cleaning up temporary directory</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_python9576958984798470706'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_python13676911061257779970'
 ====================================================================
-+/tmp/viash_test_example_python9576958984798470706/build_executable/example_python ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_python13676911061257779970/build_executable/example_python ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_python:test' with Dockerfile
-[info] Running 'docker build -t example_python:test /tmp/viash_test_example_python9576958984798470706/build_executable -f /tmp/viash_test_example_python9576958984798470706/build_executable/tmp/dockerbuild-example_python-rbDYZT/Dockerfile'
+[info] Running 'docker build -t example_python:test /tmp/viash_test_example_python13676911061257779970/build_executable -f /tmp/viash_test_example_python13676911061257779970/build_executable/tmp/dockerbuild-example_python-1xcMUq/Dockerfile'
 #0 building with "default" instance using docker driver
 
-#1 [internal] load .dockerignore
-#1 transferring context: 2B done
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 296B done
 #1 DONE 0.0s
 
-#2 [internal] load build definition from Dockerfile
-#2 transferring dockerfile: 296B done
+#2 [internal] load .dockerignore
+#2 transferring context: 2B done
 #2 DONE 0.0s
 
-#3 [internal] load metadata for docker.io/library/python:3.10-slim
-#3 DONE 0.7s
+#3 [auth] library/python:pull token for registry-1.docker.io
+#3 DONE 0.0s
 
-#4 [1/2] FROM docker.io/library/python:3.10-slim@sha256:a2c9b8dd3da225debeb156176c111752499d152b7505146c1373364766d762a4
-#4 resolve docker.io/library/python:3.10-slim@sha256:a2c9b8dd3da225debeb156176c111752499d152b7505146c1373364766d762a4 done
-#4 sha256:d3ec09d7d5ef3a09583c5e083575ec3ae20d6653729116621e9f6000305a4400 1.37kB / 1.37kB done
-#4 sha256:7bae896aa8925155e768bd1d38696963dfe4d10b466ea1473af103b78ce28a99 6.92kB / 6.92kB done
-#4 sha256:1f7ce2fa46ab3942feabee654933948821303a5a821789dddab2d8c3df59e227 17.83MB / 29.15MB 0.2s
-#4 sha256:442c5d63eafd969b755d7c8e0914319677ca8d5112a84e851b16677a4fc1d189 3.32MB / 3.32MB 0.1s done
-#4 sha256:0b479d7f68f8d93b0dd22fd1f49f66bc1bc9310c4c9c33d8d9543f1bc8f29dbe 9.44MB / 12.38MB 0.2s
-#4 sha256:a2c9b8dd3da225debeb156176c111752499d152b7505146c1373364766d762a4 1.65kB / 1.65kB done
-#4 sha256:2a12c810a227d9a912e740fc8fcce0a5cb091d1fb7c67415e00bc678d8aa8a2b 0B / 233B 0.2s
-#4 sha256:1f7ce2fa46ab3942feabee654933948821303a5a821789dddab2d8c3df59e227 29.15MB / 29.15MB 0.3s
-#4 sha256:0b479d7f68f8d93b0dd22fd1f49f66bc1bc9310c4c9c33d8d9543f1bc8f29dbe 12.38MB / 12.38MB 0.3s done
-#4 sha256:6a07a7337a539a9eb4835f93aa0a115eebe82489dc21384b38f8719686a4a345 0B / 3.16MB 0.3s
-#4 extracting sha256:1f7ce2fa46ab3942feabee654933948821303a5a821789dddab2d8c3df59e227
-#4 sha256:1f7ce2fa46ab3942feabee654933948821303a5a821789dddab2d8c3df59e227 29.15MB / 29.15MB 0.3s done
-#4 sha256:6a07a7337a539a9eb4835f93aa0a115eebe82489dc21384b38f8719686a4a345 3.16MB / 3.16MB 0.4s done
-#4 sha256:2a12c810a227d9a912e740fc8fcce0a5cb091d1fb7c67415e00bc678d8aa8a2b 233B / 233B 0.5s done
-#4 extracting sha256:1f7ce2fa46ab3942feabee654933948821303a5a821789dddab2d8c3df59e227 1.0s done
-#4 extracting sha256:442c5d63eafd969b755d7c8e0914319677ca8d5112a84e851b16677a4fc1d189
-#4 extracting sha256:442c5d63eafd969b755d7c8e0914319677ca8d5112a84e851b16677a4fc1d189 0.1s done
-#4 extracting sha256:0b479d7f68f8d93b0dd22fd1f49f66bc1bc9310c4c9c33d8d9543f1bc8f29dbe 0.1s
-#4 extracting sha256:0b479d7f68f8d93b0dd22fd1f49f66bc1bc9310c4c9c33d8d9543f1bc8f29dbe 0.4s done
-#4 extracting sha256:2a12c810a227d9a912e740fc8fcce0a5cb091d1fb7c67415e00bc678d8aa8a2b done
-#4 extracting sha256:6a07a7337a539a9eb4835f93aa0a115eebe82489dc21384b38f8719686a4a345 0.1s
-#4 extracting sha256:6a07a7337a539a9eb4835f93aa0a115eebe82489dc21384b38f8719686a4a345 0.2s done
-#4 DONE 2.4s
+#4 [internal] load metadata for docker.io/library/python:3.10-slim
+#4 DONE 0.2s
 
-#5 [2/2] RUN :
-#5 DONE 0.2s
+#5 [1/2] FROM docker.io/library/python:3.10-slim@sha256:e53bad75661571d23d9fd632d10f192b09228f31b14af1fc0be3d0142b426657
+#5 resolve docker.io/library/python:3.10-slim@sha256:e53bad75661571d23d9fd632d10f192b09228f31b14af1fc0be3d0142b426657 done
+#5 sha256:3d33b8a63beceb014fd6a32f8501986d71c7ebb093cda12ff286f45595845482 1.37kB / 1.37kB done
+#5 sha256:b6daa0c58bda0b91898f59b04719ffbd0a33768439d15f92889ff03ea4bb0746 6.94kB / 6.94kB done
+#5 sha256:c57ee5000d61345aa3ee6684794a8110328e2274d9a5ae7855969d1a26394463 7.34MB / 29.15MB 0.1s
+#5 sha256:be0f2e005f57dfa5f2f18c087285d4dade328259aa362ef5edd4d846fd6cb75c 3.51MB / 3.51MB 0.1s done
+#5 sha256:89b7dca1cbba7fdd1c19927ba7c3daa3d08f0ed798bdaeb903a32eea2ad6d804 0B / 12.38MB 0.1s
+#5 sha256:943f13f4e6d046e4e4a31ea088fffdb0fd6649cd75f0eb028ba37101ab37f0c3 0B / 243B 0.1s
+#5 sha256:e53bad75661571d23d9fd632d10f192b09228f31b14af1fc0be3d0142b426657 1.65kB / 1.65kB done
+#5 sha256:c57ee5000d61345aa3ee6684794a8110328e2274d9a5ae7855969d1a26394463 19.92MB / 29.15MB 0.2s
+#5 sha256:943f13f4e6d046e4e4a31ea088fffdb0fd6649cd75f0eb028ba37101ab37f0c3 243B / 243B 0.1s done
+#5 sha256:5d6f97d20df986c24ffad169b92028986ef8522b69e84e27506c684ec45e14d8 3.36MB / 3.36MB 0.2s done
+#5 sha256:c57ee5000d61345aa3ee6684794a8110328e2274d9a5ae7855969d1a26394463 29.15MB / 29.15MB 0.3s done
+#5 extracting sha256:c57ee5000d61345aa3ee6684794a8110328e2274d9a5ae7855969d1a26394463
+#5 sha256:89b7dca1cbba7fdd1c19927ba7c3daa3d08f0ed798bdaeb903a32eea2ad6d804 9.44MB / 12.38MB 0.5s
+#5 sha256:89b7dca1cbba7fdd1c19927ba7c3daa3d08f0ed798bdaeb903a32eea2ad6d804 12.38MB / 12.38MB 0.5s done
+#5 extracting sha256:c57ee5000d61345aa3ee6684794a8110328e2274d9a5ae7855969d1a26394463 1.1s done
+#5 extracting sha256:be0f2e005f57dfa5f2f18c087285d4dade328259aa362ef5edd4d846fd6cb75c 0.1s
+#5 extracting sha256:be0f2e005f57dfa5f2f18c087285d4dade328259aa362ef5edd4d846fd6cb75c 0.1s done
+#5 extracting sha256:89b7dca1cbba7fdd1c19927ba7c3daa3d08f0ed798bdaeb903a32eea2ad6d804
+#5 extracting sha256:89b7dca1cbba7fdd1c19927ba7c3daa3d08f0ed798bdaeb903a32eea2ad6d804 0.4s done
+#5 extracting sha256:943f13f4e6d046e4e4a31ea088fffdb0fd6649cd75f0eb028ba37101ab37f0c3
+#5 extracting sha256:943f13f4e6d046e4e4a31ea088fffdb0fd6649cd75f0eb028ba37101ab37f0c3 done
+#5 extracting sha256:5d6f97d20df986c24ffad169b92028986ef8522b69e84e27506c684ec45e14d8 0.1s
+#5 extracting sha256:5d6f97d20df986c24ffad169b92028986ef8522b69e84e27506c684ec45e14d8 0.2s done
+#5 DONE 2.4s
 
-#6 exporting to image
-#6 exporting layers
-#6 exporting layers 0.3s done
-#6 writing image sha256:1cbbb8c2ec24d0d7860354a831fd1c437ac2f6d7bba114ed7a1f9bebe0b9d411 done
-#6 naming to docker.io/library/example_python:test done
-#6 DONE 0.3s
+#6 [2/2] RUN :
+#6 DONE 0.2s
+
+#7 exporting to image
+#7 exporting layers
+#7 exporting layers 0.8s done
+#7 writing image sha256:021d5b3b5d381284babf32958f3f4de3624ea0a452ea35174960f59b229c850e done
+#7 naming to docker.io/library/example_python:test done
+#7 DONE 0.8s
 ====================================================================
-+/tmp/viash_test_example_python9576958984798470706/test_test/test_executable
++/tmp/viash_test_example_python13676911061257779970/test_test/test_executable
 Copying 'foo.txt' to 'bar.txt'.
 &gt;&gt;&gt; Create input test file
 &gt;&gt;&gt; Run executable
@@ -1214,11 +1201,11 @@ Cleaning up temporary directory</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_r6940458579061357999'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_r8788747682763404186'
 ====================================================================
-+/tmp/viash_test_example_r6940458579061357999/build_executable/example_r ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_r8788747682763404186/build_executable/example_r ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_r:test' with Dockerfile
-[info] Running 'docker build -t example_r:test /tmp/viash_test_example_r6940458579061357999/build_executable -f /tmp/viash_test_example_r6940458579061357999/build_executable/tmp/dockerbuild-example_r-AHr7ES/Dockerfile'
+[info] Running 'docker build -t example_r:test /tmp/viash_test_example_r8788747682763404186/build_executable -f /tmp/viash_test_example_r8788747682763404186/build_executable/tmp/dockerbuild-example_r-VbGLeq/Dockerfile'
 #0 building with "default" instance using docker driver
 
 #1 [internal] load .dockerignore
@@ -1229,57 +1216,58 @@ Cleaning up temporary directory</code></pre>
 #2 transferring dockerfile: 297B done
 #2 DONE 0.0s
 
-#3 [internal] load metadata for docker.io/eddelbuettel/r2u:22.04
-#3 DONE 0.5s
+#3 [auth] eddelbuettel/r2u:pull token for registry-1.docker.io
+#3 DONE 0.0s
 
-#4 [1/2] FROM docker.io/eddelbuettel/r2u:22.04@sha256:e5fce826e08a3c64a7561052ea6c9f10c2f8b4b5284eaf568087d48f34d8df8c
-#4 resolve docker.io/eddelbuettel/r2u:22.04@sha256:e5fce826e08a3c64a7561052ea6c9f10c2f8b4b5284eaf568087d48f34d8df8c done
-#4 sha256:e96e057aae67380a4ddb16c337c5c3669d97fdff69ec537f02aa2cc30d814281 10.49MB / 30.43MB 0.2s
-#4 sha256:12102b033d2ffc12a11c964580f91f33dd884bb0bd0ee46a415857a14f820cdf 1.05MB / 39.73MB 0.2s
-#4 sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3 0B / 239.80MB 0.2s
-#4 sha256:e5fce826e08a3c64a7561052ea6c9f10c2f8b4b5284eaf568087d48f34d8df8c 954B / 954B done
-#4 sha256:726569bdd868b6493b5e033e7947daf6bb94e7e46ba0fe1bc4878a7c84f275fa 5.59kB / 5.59kB done
-#4 sha256:e96e057aae67380a4ddb16c337c5c3669d97fdff69ec537f02aa2cc30d814281 16.78MB / 30.43MB 0.3s
-#4 sha256:12102b033d2ffc12a11c964580f91f33dd884bb0bd0ee46a415857a14f820cdf 10.49MB / 39.73MB 0.3s
-#4 sha256:e96e057aae67380a4ddb16c337c5c3669d97fdff69ec537f02aa2cc30d814281 26.21MB / 30.43MB 0.4s
-#4 sha256:12102b033d2ffc12a11c964580f91f33dd884bb0bd0ee46a415857a14f820cdf 25.17MB / 39.73MB 0.4s
-#4 sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3 12.85MB / 239.80MB 0.4s
-#4 sha256:e96e057aae67380a4ddb16c337c5c3669d97fdff69ec537f02aa2cc30d814281 30.43MB / 30.43MB 0.5s done
-#4 sha256:12102b033d2ffc12a11c964580f91f33dd884bb0bd0ee46a415857a14f820cdf 39.73MB / 39.73MB 0.6s
-#4 sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3 31.46MB / 239.80MB 0.6s
-#4 extracting sha256:e96e057aae67380a4ddb16c337c5c3669d97fdff69ec537f02aa2cc30d814281
-#4 sha256:12102b033d2ffc12a11c964580f91f33dd884bb0bd0ee46a415857a14f820cdf 39.73MB / 39.73MB 0.6s done
-#4 sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3 51.38MB / 239.80MB 0.8s
-#4 sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3 63.96MB / 239.80MB 1.0s
-#4 sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3 81.79MB / 239.80MB 1.2s
-#4 sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3 96.47MB / 239.80MB 1.3s
-#4 sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3 110.10MB / 239.80MB 1.4s
-#4 extracting sha256:e96e057aae67380a4ddb16c337c5c3669d97fdff69ec537f02aa2cc30d814281 1.0s done
-#4 sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3 128.97MB / 239.80MB 1.6s
-#4 extracting sha256:12102b033d2ffc12a11c964580f91f33dd884bb0bd0ee46a415857a14f820cdf
-#4 sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3 148.61MB / 239.80MB 1.7s
-#4 sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3 185.60MB / 239.80MB 1.9s
-#4 sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3 205.52MB / 239.80MB 2.0s
-#4 sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3 221.25MB / 239.80MB 2.1s
-#4 sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3 234.88MB / 239.80MB 2.2s
-#4 extracting sha256:12102b033d2ffc12a11c964580f91f33dd884bb0bd0ee46a415857a14f820cdf 0.7s done
-#4 sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3 239.80MB / 239.80MB 2.6s done
-#4 extracting sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3
-#4 extracting sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3 5.1s
-#4 extracting sha256:ea0840b10a6bb8c82d818a294e27ea8db6032c6958b554caa995e53cad09f2a3 6.0s done
-#4 DONE 10.3s
+#4 [internal] load metadata for docker.io/eddelbuettel/r2u:22.04
+#4 DONE 0.2s
 
-#5 [2/2] RUN :
-#5 DONE 0.2s
+#5 [1/2] FROM docker.io/eddelbuettel/r2u:22.04@sha256:ad84e9056a4b097c162124a62f5d3d15c86a8297d1e632810e2d591cd57ce05b
+#5 resolve docker.io/eddelbuettel/r2u:22.04@sha256:ad84e9056a4b097c162124a62f5d3d15c86a8297d1e632810e2d591cd57ce05b done
+#5 sha256:a8390eea866c5e7d3f517956431f222ee84a6a9b027dcb3216315edab56fecd5 4.19MB / 40.46MB 0.1s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 7.34MB / 239.79MB 0.1s
+#5 sha256:ad84e9056a4b097c162124a62f5d3d15c86a8297d1e632810e2d591cd57ce05b 954B / 954B done
+#5 sha256:8383e8747b1b7933dc5292b150502df14ad9db2396682efc1fc596d8af58e2b3 5.59kB / 5.59kB done
+#5 sha256:e96e057aae67380a4ddb16c337c5c3669d97fdff69ec537f02aa2cc30d814281 0B / 30.43MB 0.1s
+#5 sha256:a8390eea866c5e7d3f517956431f222ee84a6a9b027dcb3216315edab56fecd5 29.36MB / 40.46MB 0.3s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 22.02MB / 239.79MB 0.3s
+#5 sha256:e96e057aae67380a4ddb16c337c5c3669d97fdff69ec537f02aa2cc30d814281 10.49MB / 30.43MB 0.3s
+#5 sha256:a8390eea866c5e7d3f517956431f222ee84a6a9b027dcb3216315edab56fecd5 40.46MB / 40.46MB 0.4s
+#5 sha256:a8390eea866c5e7d3f517956431f222ee84a6a9b027dcb3216315edab56fecd5 40.46MB / 40.46MB 0.4s done
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 54.53MB / 239.79MB 0.6s
+#5 sha256:e96e057aae67380a4ddb16c337c5c3669d97fdff69ec537f02aa2cc30d814281 24.12MB / 30.43MB 0.6s
+#5 sha256:e96e057aae67380a4ddb16c337c5c3669d97fdff69ec537f02aa2cc30d814281 30.43MB / 30.43MB 0.7s done
+#5 extracting sha256:e96e057aae67380a4ddb16c337c5c3669d97fdff69ec537f02aa2cc30d814281
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 76.32MB / 239.79MB 0.8s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 91.23MB / 239.79MB 1.0s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 116.39MB / 239.79MB 1.2s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 141.56MB / 239.79MB 1.4s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 156.24MB / 239.79MB 1.5s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 168.82MB / 239.79MB 1.6s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 189.79MB / 239.79MB 1.8s
+#5 extracting sha256:e96e057aae67380a4ddb16c337c5c3669d97fdff69ec537f02aa2cc30d814281 1.0s done
+#5 extracting sha256:a8390eea866c5e7d3f517956431f222ee84a6a9b027dcb3216315edab56fecd5
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 202.38MB / 239.79MB 2.0s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 216.01MB / 239.79MB 2.1s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 238.03MB / 239.79MB 2.3s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 239.79MB / 239.79MB 2.7s done
+#5 extracting sha256:a8390eea866c5e7d3f517956431f222ee84a6a9b027dcb3216315edab56fecd5 0.6s done
+#5 extracting sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123
+#5 extracting sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 5.0s
+#5 extracting sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 6.0s done
+#5 DONE 10.4s
 
-#6 exporting to image
-#6 exporting layers
-#6 exporting layers 0.7s done
-#6 writing image sha256:ba333f990a0d1f050e1fb2056ccd218173fa1d773e19b734fde17a854ebf0597 done
-#6 naming to docker.io/library/example_r:test done
-#6 DONE 0.7s
+#6 [2/2] RUN :
+#6 DONE 0.2s
+
+#7 exporting to image
+#7 exporting layers
+#7 exporting layers 1.0s done
+#7 writing image sha256:2c4f55cb76647c327925c67aeb10e08de3b66932eca47a75e6b66717f0bdde6c done
+#7 naming to docker.io/library/example_r:test done
+#7 DONE 1.0s
 ====================================================================
-+/tmp/viash_test_example_r6940458579061357999/test_test/test_executable
++/tmp/viash_test_example_r8788747682763404186/test_test/test_executable
 &gt;&gt;&gt; Create input test file
 &gt;&gt;&gt; Run executable
 Copying 'foo.txt' to 'bar.txt'.
@@ -1297,120 +1285,122 @@ Cleaning up temporary directory</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_scala5563675104705558182'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_scala5080708925144587237'
 ====================================================================
-+/tmp/viash_test_example_scala5563675104705558182/build_executable/example_scala ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_scala5080708925144587237/build_executable/example_scala ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_scala:test' with Dockerfile
-[info] Running 'docker build -t example_scala:test /tmp/viash_test_example_scala5563675104705558182/build_executable -f /tmp/viash_test_example_scala5563675104705558182/build_executable/tmp/dockerbuild-example_scala-KoFXuj/Dockerfile'
+[info] Running 'docker build -t example_scala:test /tmp/viash_test_example_scala5080708925144587237/build_executable -f /tmp/viash_test_example_scala5080708925144587237/build_executable/tmp/dockerbuild-example_scala-zsxzW0/Dockerfile'
 #0 building with "default" instance using docker driver
 
-#1 [internal] load .dockerignore
-#1 transferring context: 2B done
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 333B done
 #1 DONE 0.0s
 
-#2 [internal] load build definition from Dockerfile
-#2 transferring dockerfile: 333B done
+#2 [internal] load .dockerignore
+#2 transferring context: 2B done
 #2 DONE 0.0s
 
 #3 [internal] load metadata for docker.io/sbtscala/scala-sbt:eclipse-temurin-19_36_1.7.2_2.13.10
-#3 DONE 0.6s
+#3 DONE 0.3s
 
 #4 [1/2] FROM docker.io/sbtscala/scala-sbt:eclipse-temurin-19_36_1.7.2_2.13.10@sha256:440234e283754375d5ab6bcb35e2d470f9dabeaaeb639d8c0708fac2d3707e0c
 #4 resolve docker.io/sbtscala/scala-sbt:eclipse-temurin-19_36_1.7.2_2.13.10@sha256:440234e283754375d5ab6bcb35e2d470f9dabeaaeb639d8c0708fac2d3707e0c done
-#4 sha256:76808e2ea8df2d9cac1d275426e51a2190369f706076c55ac2da3823bef0a019 10.89kB / 10.89kB done
-#4 sha256:440234e283754375d5ab6bcb35e2d470f9dabeaaeb639d8c0708fac2d3707e0c 743B / 743B done
 #4 sha256:06478611ba16efc6663ccf5f22a29c990c53aed6848bc58c54c67dc32d8aef13 3.04kB / 3.04kB done
-#4 sha256:301a8b74f71f85f3a31e9c7e7fedd5b001ead5bcf895bc2911c1d260e06bd987 0B / 30.43MB 0.1s
-#4 sha256:c5c735a83dbd58e1c83f8d52abdc51068e27c00405f53d59802d4954a6b5398a 0B / 16.99MB 0.1s
+#4 sha256:301a8b74f71f85f3a31e9c7e7fedd5b001ead5bcf895bc2911c1d260e06bd987 5.24MB / 30.43MB 0.1s
+#4 sha256:c5c735a83dbd58e1c83f8d52abdc51068e27c00405f53d59802d4954a6b5398a 7.34MB / 16.99MB 0.1s
 #4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 0B / 200.85MB 0.1s
-#4 sha256:301a8b74f71f85f3a31e9c7e7fedd5b001ead5bcf895bc2911c1d260e06bd987 26.45MB / 30.43MB 0.2s
-#4 sha256:c5c735a83dbd58e1c83f8d52abdc51068e27c00405f53d59802d4954a6b5398a 2.10MB / 16.99MB 0.2s
-#4 sha256:301a8b74f71f85f3a31e9c7e7fedd5b001ead5bcf895bc2911c1d260e06bd987 30.43MB / 30.43MB 0.2s done
-#4 sha256:c5c735a83dbd58e1c83f8d52abdc51068e27c00405f53d59802d4954a6b5398a 15.73MB / 16.99MB 0.3s
-#4 extracting sha256:301a8b74f71f85f3a31e9c7e7fedd5b001ead5bcf895bc2911c1d260e06bd987
-#4 sha256:2af8e2a543d81b57575a2e457bd1e98ffc061b15639dac3be5ff6c2702b9ea1a 0B / 175B 0.3s
-#4 sha256:c5c735a83dbd58e1c83f8d52abdc51068e27c00405f53d59802d4954a6b5398a 16.99MB / 16.99MB 0.3s done
+#4 sha256:440234e283754375d5ab6bcb35e2d470f9dabeaaeb639d8c0708fac2d3707e0c 743B / 743B done
+#4 sha256:76808e2ea8df2d9cac1d275426e51a2190369f706076c55ac2da3823bef0a019 10.89kB / 10.89kB done
+#4 sha256:301a8b74f71f85f3a31e9c7e7fedd5b001ead5bcf895bc2911c1d260e06bd987 15.73MB / 30.43MB 0.2s
+#4 sha256:c5c735a83dbd58e1c83f8d52abdc51068e27c00405f53d59802d4954a6b5398a 16.99MB / 16.99MB 0.2s done
+#4 sha256:2af8e2a543d81b57575a2e457bd1e98ffc061b15639dac3be5ff6c2702b9ea1a 0B / 175B 0.2s
+#4 sha256:301a8b74f71f85f3a31e9c7e7fedd5b001ead5bcf895bc2911c1d260e06bd987 30.43MB / 30.43MB 0.4s done
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 23.29MB / 200.85MB 0.4s
+#4 sha256:2af8e2a543d81b57575a2e457bd1e98ffc061b15639dac3be5ff6c2702b9ea1a 175B / 175B 0.3s done
+#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 5.24MB / 29.75MB 0.4s
+#4 sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 0B / 23.71MB 0.4s
 #4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 38.80MB / 200.85MB 0.5s
-#4 sha256:2af8e2a543d81b57575a2e457bd1e98ffc061b15639dac3be5ff6c2702b9ea1a 175B / 175B 0.4s done
-#4 sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 0B / 23.71MB 0.5s
-#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 0B / 29.75MB 0.5s
-#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 65.01MB / 200.85MB 0.7s
+#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 14.68MB / 29.75MB 0.5s
+#4 sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 3.15MB / 23.71MB 0.5s
+#4 extracting sha256:301a8b74f71f85f3a31e9c7e7fedd5b001ead5bcf895bc2911c1d260e06bd987
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 52.43MB / 200.85MB 0.6s
+#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 23.07MB / 29.75MB 0.6s
+#4 sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 5.24MB / 23.71MB 0.6s
+#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 26.21MB / 29.75MB 0.7s
+#4 sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 11.42MB / 23.71MB 0.7s
 #4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 78.64MB / 200.85MB 0.8s
-#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 2.10MB / 29.75MB 0.8s
-#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 95.88MB / 200.85MB 0.9s
-#4 sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 2.10MB / 23.71MB 0.9s
-#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 6.29MB / 29.75MB 0.9s
-#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 111.15MB / 200.85MB 1.0s
-#4 sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 7.34MB / 23.71MB 1.0s
-#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 12.58MB / 29.75MB 1.0s
-#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 143.65MB / 200.85MB 1.2s
-#4 sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 23.71MB / 23.71MB 1.2s done
-#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 21.47MB / 29.75MB 1.2s
-#4 sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 0B / 40.48MB 1.2s
-#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 159.59MB / 200.85MB 1.3s
-#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 29.75MB / 29.75MB 1.3s done
-#4 sha256:c9480a4b593fb5abc117a5e01c80d8495c9fd89e743757730c712545f425c9f3 0B / 183B 1.3s
-#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 175.11MB / 200.85MB 1.4s
-#4 sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 14.68MB / 40.48MB 1.4s
-#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 186.69MB / 200.85MB 1.5s
+#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 28.31MB / 29.75MB 0.8s
+#4 sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 17.83MB / 23.71MB 0.8s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 95.42MB / 200.85MB 0.9s
+#4 sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 22.02MB / 23.71MB 0.9s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 110.10MB / 200.85MB 1.0s
+#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 29.75MB / 29.75MB 0.9s done
+#4 sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 23.71MB / 23.71MB 1.0s done
+#4 sha256:c9480a4b593fb5abc117a5e01c80d8495c9fd89e743757730c712545f425c9f3 183B / 183B 1.0s
+#4 sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 0B / 40.48MB 1.0s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 126.52MB / 200.85MB 1.1s
+#4 sha256:c9480a4b593fb5abc117a5e01c80d8495c9fd89e743757730c712545f425c9f3 183B / 183B 1.0s done
+#4 sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 6.48MB / 40.48MB 1.1s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 0B / 214.15MB 1.1s
+#4 sha256:812216efaf878f5ff8086b6efdccec1cb090228107efd62db47d048c927c4f6a 4.33kB / 4.33kB 1.0s done
+#4 sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 32B / 32B 1.1s done
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 140.51MB / 200.85MB 1.2s
+#4 sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 16.78MB / 40.48MB 1.2s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 19.92MB / 214.15MB 1.3s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 157.29MB / 200.85MB 1.5s
+#4 sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 26.21MB / 40.48MB 1.5s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 44.04MB / 214.15MB 1.5s
+#4 sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 33.55MB / 40.48MB 1.6s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 175.11MB / 200.85MB 1.7s
 #4 extracting sha256:301a8b74f71f85f3a31e9c7e7fedd5b001ead5bcf895bc2911c1d260e06bd987 1.2s done
-#4 sha256:c9480a4b593fb5abc117a5e01c80d8495c9fd89e743757730c712545f425c9f3 183B / 183B 1.5s done
-#4 sha256:812216efaf878f5ff8086b6efdccec1cb090228107efd62db47d048c927c4f6a 0B / 4.33kB 1.5s
-#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 200.85MB / 200.85MB 1.6s
-#4 sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 22.02MB / 40.48MB 1.6s
+#4 sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 40.48MB / 40.48MB 1.7s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 62.91MB / 214.15MB 1.7s
+#4 sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 40.48MB / 40.48MB 1.7s done
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 74.45MB / 214.15MB 1.8s
 #4 extracting sha256:c5c735a83dbd58e1c83f8d52abdc51068e27c00405f53d59802d4954a6b5398a 0.1s
-#4 sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 37.75MB / 40.48MB 1.7s
-#4 sha256:812216efaf878f5ff8086b6efdccec1cb090228107efd62db47d048c927c4f6a 4.33kB / 4.33kB 1.7s
-#4 sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 40.48MB / 40.48MB 1.8s
-#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 200.85MB / 200.85MB 1.8s done
-#4 sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 40.48MB / 40.48MB 1.9s done
-#4 sha256:812216efaf878f5ff8086b6efdccec1cb090228107efd62db47d048c927c4f6a 4.33kB / 4.33kB 1.8s done
-#4 sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 0B / 32B 1.9s
-#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 0B / 214.15MB 1.9s
-#4 sha256:2c0021742fe2b9491f62c3d89da10492c175081bd17d77efd0f22a298c37ad64 0B / 222B 1.9s
-#4 sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 32B / 32B 2.0s done
-#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 14.68MB / 214.15MB 2.1s
-#4 sha256:2c0021742fe2b9491f62c3d89da10492c175081bd17d77efd0f22a298c37ad64 222B / 222B 2.1s done
-#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 28.31MB / 214.15MB 2.2s
-#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 65.01MB / 214.15MB 2.5s
+#4 sha256:2c0021742fe2b9491f62c3d89da10492c175081bd17d77efd0f22a298c37ad64 222B / 222B 1.7s done
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 185.60MB / 200.85MB 1.9s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 92.27MB / 214.15MB 2.0s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 200.85MB / 200.85MB 2.1s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 115.34MB / 214.15MB 2.2s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 200.85MB / 200.85MB 2.3s done
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 134.22MB / 214.15MB 2.4s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 153.09MB / 214.15MB 2.6s
 #4 extracting sha256:c5c735a83dbd58e1c83f8d52abdc51068e27c00405f53d59802d4954a6b5398a 1.0s done
-#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 89.12MB / 214.15MB 2.7s
-#4 extracting sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b
-#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 105.91MB / 214.15MB 2.8s
-#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 120.59MB / 214.15MB 2.9s
-#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 135.27MB / 214.15MB 3.0s
-#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 153.32MB / 214.15MB 3.1s
-#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 179.31MB / 214.15MB 3.3s
-#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 191.89MB / 214.15MB 3.4s
-#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 209.72MB / 214.15MB 3.5s
-#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 214.15MB / 214.15MB 3.6s done
-#4 extracting sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 2.2s done
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 183.50MB / 214.15MB 2.9s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 213.97MB / 214.15MB 3.1s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 214.15MB / 214.15MB 3.3s done
+#4 extracting sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 0.1s
+#4 extracting sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 2.0s done
+#4 extracting sha256:2af8e2a543d81b57575a2e457bd1e98ffc061b15639dac3be5ff6c2702b9ea1a
 #4 extracting sha256:2af8e2a543d81b57575a2e457bd1e98ffc061b15639dac3be5ff6c2702b9ea1a done
-#4 extracting sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a
+#4 extracting sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 0.1s
 #4 extracting sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 0.5s done
-#4 extracting sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 0.1s
+#4 extracting sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a
 #4 extracting sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 0.1s done
-#4 extracting sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb
+#4 extracting sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 0.1s
 #4 extracting sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 1.2s done
+#4 extracting sha256:c9480a4b593fb5abc117a5e01c80d8495c9fd89e743757730c712545f425c9f3
 #4 extracting sha256:c9480a4b593fb5abc117a5e01c80d8495c9fd89e743757730c712545f425c9f3 done
 #4 extracting sha256:812216efaf878f5ff8086b6efdccec1cb090228107efd62db47d048c927c4f6a done
 #4 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 done
-#4 extracting sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c
+#4 extracting sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 0.1s
 #4 extracting sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 1.6s done
+#4 extracting sha256:2c0021742fe2b9491f62c3d89da10492c175081bd17d77efd0f22a298c37ad64
 #4 extracting sha256:2c0021742fe2b9491f62c3d89da10492c175081bd17d77efd0f22a298c37ad64 done
-#4 DONE 9.5s
+#4 DONE 10.1s
 
 #5 [2/2] RUN :
 #5 DONE 0.2s
 
 #6 exporting to image
 #6 exporting layers
-#6 exporting layers 0.8s done
-#6 writing image sha256:b637830a0a4d34704ae521a357d6c07b7f819611a760fd6226bd5fdd9314dc60 done
+#6 exporting layers 1.0s done
+#6 writing image sha256:385295fa730075b9caf791352c7d200e12ad7787aaf530cb16c4c99745a2e9f4 done
 #6 naming to docker.io/library/example_scala:test done
-#6 DONE 0.8s
+#6 DONE 1.0s
 ====================================================================
-+/tmp/viash_test_example_scala5563675104705558182/test_test/test_executable
++/tmp/viash_test_example_scala5080708925144587237/test_test/test_executable
 warning: 1 deprecation
 warning: 1 deprecation (since 2.13.3)
 warning: 2 deprecations in total; re-run with -deprecation for details
@@ -1535,10 +1525,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/viash\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1548,8 +1555,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1562,6 +1578,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1605,6 +1740,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1630,6 +1766,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1687,30 +1849,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("https:\/\/viash\.io");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-      }
-    }
 });
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../guide/component/variables.html" class="pagination-link">
+      <a href="../../guide/component/variables.html" class="pagination-link  aria-label=" par="" and="" meta="" variables"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Par and meta variables</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../guide/project/index.html" class="pagination-link">
+      <a href="../../guide/project/index.html" class="pagination-link" aria-label="Project">
         <span class="nav-page-text">Project</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -1724,18 +1872,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="../../about.html">About</a>
+    <a class="nav-link" href="../../about.html">
+<p>About</p>
+</a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="../../privacy.html">Privacy Policy</a>
+    <a class="nav-link" href="../../privacy.html">
+<p>Privacy Policy</p>
+</a>
   </li>  
 </ul>
-    </div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/viash-io/website/edit/main/guide/component/unit-testing.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/viash-io/website/blob/main/guide/component/unit-testing.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/viash-io/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 
