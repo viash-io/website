@@ -368,7 +368,9 @@ That's basically what Viash can do when building for the `platform: nextflow`[^o
 
 [^other]: Other build platforms are available, as illustrated elsehwere in these pages.
 
-## VDSL3 module interface
+## How VDSL3 manages state
+
+### VDSL3 module interface
 
 VDSL3 modules are actually workflows which take one channel and emit one channel. It expects the channel events to be tuples containing an 'id' and a 'state':
 
@@ -395,7 +397,7 @@ That is, an input tuple `[id, input, ...]` will result in a tuple `[id, output, 
 For example, an input tuple `["foo", [input: file("in.txt")], "bar"]` will result in an output tuple `["foo", [output: file("out.txt")], "bar"]`.
 :::
 
-## Customizing VDSL3 modules on the fly
+### Customizing VDSL3 modules on the fly
 
 Usually, Nextflow processes are quite static objects. For example, changing its directives can be tricky. Per-sample settings are practically impossible to achieve with vanilla Nextflow.
 
