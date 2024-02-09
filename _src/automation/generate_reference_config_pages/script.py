@@ -110,7 +110,7 @@ def fudge_named_examples(this_info):
 		return this_info
 
 	examples = this_info['example']
-	print(f"examples {examples}")
+	# print(f"examples {examples}")
 	examples_orig = []
 	for example in examples:
 		ex = example.copy()
@@ -145,7 +145,7 @@ When defining a repository directly in a dependency under `.functionality.depend
 		if field['name'] == 'type' and field['description'] == "Defines the repository type. This determines how the repository will be fetched and handled.":
 			field['description'] = "Defines the repository as a locally present and available repository."
 
-	print(f"json_data after {info}")
+	# print(f"json_data after {info}")
 	return info
 
 if __name__ == "__main__":
