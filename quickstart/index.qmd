@@ -26,13 +26,14 @@ This guide assumes you've already installed [Viash](/installation), [Docker](htt
 
 ## Quickstart example project
 
-To get up and running fast, we provide a [template project](https://github.com/viash-io/viash_project_template) for you to use. It contains three components, which are combined into a Nextflow pipeline as follows:
+To get up and running fast, we provide a [template project](https://github.com/viash-io/viash_project_template) for you to use. It contains three components from the same package as well as 2 custom operators from [vsh-pipeline-operators](https://viash-hub.com/data-intuitive/vsh-pipeline-operators), which are combined into a Nextflow pipeline as follows:
 
 ```{mermaid}
-graph LR
-   A(file?.tsv) --> B[/remove_comments/]
-   B --> C[/take_column/]
-   C --> D[/combine_columns/]
+graph TD
+   A(file?.tsv) --> X[vsh_flatten] 
+   X --file1.tsv--> B1[/remove_comments/] --> C1[/take_column/] --> Y
+   X --file2.tsv--> B2[/remove_comments/] --> C2[/take_column/] --> Y
+   Y[vsh_toList] --> D[/combine_columns/]
    D --> E(output)
 ```
 
@@ -48,6 +49,11 @@ Next, clone the repository using the following command.
 git clone https://github.com/youruser/my_first_pipeline.git && cd my_first_pipeline
 ```
 
+
+:::{.callout-note}
+At the moment of writing, the branch to use should be 0_8_2.
+:::
+
 Your new repository should contain the following files:
 
 ```bash
@@ -55,20 +61,31 @@ tree my_first_pipeline
 ```
 
     .
-    ├── LICENSE.md                            License information
-    ├── README.md                             A readme.
-    ├── _viash.yaml                           Global Viash settings
-    ├── resources_test/*.tsv                  Sample files to showcase pipeline and
-    │   ├── file1.tsv                         run component unit tests.
-    │   └── file2.tsv
-    ├── src/demo                              Source directory with Viash components
-    │   ├── combine_columns
-    │   ├── remove_comments
-    │   └── take_column
-    └── workflows
-        └── demo_pipeline                     Demo Nextflow pipeline
-            ├── main.nf
-            └── nextflow.config
+    ├── CHANGELOG.md
+    ├── LICENSE.md
+    ├── README.md
+    ├── README.qmd
+    ├── _viash.yaml
+    ├── main.nf
+    ├── resources_test
+    │   ├── file1.tsv
+    │   └── file2.tsv
+    └── src
+        └── template
+            ├── combine_columns
+            │   ├── config.vsh.yaml
+            │   └── script.R
+            ├── remove_comments
+            │   ├── config.vsh.yaml
+            │   ├── script.sh
+            │   └── test.sh
+            ├── take_column
+            │   ├── config.vsh.yaml
+            │   └── script.py
+            └── workflow
+                ├── config.vsh.yaml
+                ├── main.nf
+                └── nextflow.config
 
 
 ## Step 2: Build the Viash components
@@ -85,11 +102,12 @@ viash ns build --setup cachedbuild --parallel
 ```
 </details>
 
-Once everything is built, a new **target** directory has been created containing the executables and modules grouped per platform:
+This command not only transforms the Viash components in `src/` to Nextflow modules but it also builds the containers when appropriate (starting from the Docker cache when available using the `cachedbuild` argument). Once everything is built, a new **target** directory has been created containing the executables and modules grouped per platform:
 
 ```bash
 ls -l
 ```
+
 <details>
 <summary>Output</summary>
 ```{bash echo=FALSE}
@@ -103,31 +121,35 @@ Now run the pipeline with Nextflow:
 
 ```bash
 nextflow run . \
-  -main-script workflows/demo_pipeline/main.nf \
+  -main-script template/workflow/main.nf \
   -with-docker \
   --input resources_test/file*.tsv \
   --publish_dir output
 ```
+
 <details>
 <summary>Output</summary>
 ```{bash echo=FALSE}
+# avoid ansi log for proper static output using -ansi-log false
 nextflow run . \
-  -main-script workflows/demo_pipeline/main.nf \
+  -ansi-log false \
+  -main-script target/nextflow/template/workflow/main.nf \
   -with-docker \
   --input resources_test/file*.tsv \
   --publish_dir output
 ```
 </details>
 
-This will run the three modules in sequence, with the final result result being stored in a file named **combined.combine_columns.output** in a new **temp** directory:
+This will run the different stages of the workflow , with the final result result being stored in a file named **run.combine_columns.output** in the output directory `output`:
 
 ```bash
-cat output/combined.combine_columns.output
+cat output/run.combine_columns.output
 ```
+
 <details>
 <summary>Output</summary>
 ```{bash echo=FALSE}
-cat output/combined.combine_columns.output
+cat output/run.combine_columns.output
 ```
 </details>
 

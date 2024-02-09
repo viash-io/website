@@ -1,0 +1,410 @@
+---
+title: VDSL3 principles
+order: 1
+---
+
+```{r setup, include=FALSE}
+current_dir <- getwd()
+temp_dir <- tempdir()
+dir.create(temp_dir, recursive = TRUE)
+knitr::opts_knit$set(root.dir = temp_dir)
+```
+
+:::{.callout-note}
+This section assumes knowledge of how to create and manipulate Nextflow channels using DSL2. For more information, check out the [Nextflow reference docs](https://www.nextflow.io/docs/latest/index.html) or contact [Data Intuitive](https://www.data-intuitive.com/contact) for a complete Nextflow+Viash course.
+:::
+
+## Quick recap
+
+### Nextflow channel
+
+A Nextflow [`Channel`](https://www.nextflow.io/docs/latest/channel.html#channels) object (later referred to just as channel) is in fact an implementation of the [Dataflow Programming] model. Nextflow has added a a set of [operators](https://www.nextflow.io/docs/latest/operator.html#operators) for manipulating channels (`filter`, `map`, `reduce`, ...) so that it tends more to a [Functional Reactive Programming] (FRP) model[^frp].
+
+[^frp]: Having said that, NextFlow allows one to mix functional and imperative programming to the point that a developer is able to shoot oneselve in the foot.
+
+[`Channel`]: https://www.nextflow.io/docs/latest/channel.html
+[DataFlow Programming]: https://en.wikipedia.org/wiki/Dataflow_programming
+[Functional Reactive Programming]: #frp
+
+### Functional Reactive Programming (FRP)
+
+If you're new to FRP, here is a a list of pointers that will get you started:
+
+- An excellent [Medium post](https://itnext.io/demystifying-functional-reactive-programming-67767dbe520b) from Timo Stöttner
+- The [introduction](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754) to Reactive Programming you've been missing from André Staltz.
+- A very insightful [presentation](https://www.youtube.com/watch?v=fdol03pcvMA) by Staltz where he introduces FRP from first principles (with live coding).
+
+In what follows, we will refer to channels and _streams_ in line with those authors but if you're used to working with [Rx] you would call this an observable.
+
+Using the FRP model for describing data processing workflows is not new, other initiatives have recognized that FRP is a good fit for pipeline development:
+
+- [Skitter](https://soft.vub.ac.be/~mathsaey/skitter/)
+- [Krews](https://github.com/weng-lab/krews)
+
+[Rx]: http://reactivex.io/
+
+## A critique on channels, or is it?
+
+### Illustration by means of an nf-core pipeline
+
+Let us start with an illustration of where Nextflow's implementation (and how people use it) lacks some necessary features. We start by taking a look at [one line](https://github.com/nf-core/rnaseq/blob/b89fac32650aacc86fcda9ee77e00612a1d77066/subworkflows/local/align_star/main.nf#L36) from one of the most active [nf-core] pipelines, namely [nf-core/rnaseq]:
+
+```groovy
+    ...
+        STAR_ALIGN_IGENOMES ( reads, index, gtf, star_ignore_sjdbgtf, seq_platform, seq_center )
+        ...
+```
+
+This calls a Nextflow process to align the `reads` according to a reference `index` and some other (optional) 'values'. That is, those are not really all values. As the [calling `worklow`](https://github.com/nf-core/rnaseq/blob/b89fac32650aacc86fcda9ee77e00612a1d77066/subworkflows/local/align_star/main.nf#L36) indicates:
+
+```groovy
+workflow ALIGN_STAR {
+    take:
+    reads               // channel: [ val(meta), [ reads ] ]
+    index               // channel: [ val(meta), [ index ] ]
+    gtf                 // channel: [ val(meta), [ gtf ] ]
+    star_ignore_sjdbgtf // boolean: when using pre-built STAR indices do not re-extract and use splice junctions from the GTF file 
+    seq_platform        // string : sequencing platform
+    seq_center          // string : sequencing center
+    is_aws_igenome      // boolean: whether the genome files are from AWS iGenomes
+    fasta               // channel: /path/to/fasta
+```
+
+Luckily, if a plain value rather than a channel is passed to a `process` it is automatically converted to a channel. Since `reads` can have a multiplicity larger than one (one usually employs data pipelines because of their ability to process multiple samples in parallel), also the plain values are duplicated so all these inputs end up being channels with the same amount of items or events in them.
+
+A similar issue relates to the `index` or genome reference: the pipeline allows the user to specify a genome reference (`params.star_index`) to be used for all samples. Also here, Nextflow will notice that multiple items in the `reads` channel need to be combined with 1 item in the `index` channel and will therefore automatically duplicate the `index` channel item as many times as necessary.
+
+That's a lot of magic going one, which in itself is not an issue. It becomes an issue, for instance, if we consider for instance that different samples (`reads`) would require different genome references (`index`).
+
+[nf-core]: https://github.com/nf-core/rnaseq
+[nf-core/rnaseq]: https://github.com/nf-core
+
+### Pain points
+
+#### Per-sample settings
+
+As illustrated above, a per-sample genome reference would not be possible in the way the [nf-core/rnaseq] pipeline is currently implemented. In fact, it would involve a lot of extra code to make it possible in the way the channels are used.
+
+Let us create a toy example to illustrate this conceptually:
+
+```{bash, include=FALSE}
+pwd
+cat > conventional.nf << 'HERE'
+process add {
+  input:
+    val(input1)
+    val(input2)
+  output:
+    val(output)
+  exec:
+    output = input1 + input2
+}
+ 
+process times {
+  input:
+    val(input1)
+    val(input2)
+  output:
+    val(output)
+  exec:
+    output = input1 * input2
+}
+
+workflow {
+  ch1 = Channel.from( [ 1,  2,  3 ] )
+  ch2 = times(ch1, 10)
+
+  add(ch1, ch2) | view
+}
+HERE
+```
+
+We start from a channel with 3 items: `1`, `2` and `3`. We create a second channel where these values are multiplied by 10 (making use of some of the Nextflow channel magic described earlier) and add both channels.
+
+Think about what you would expect to come out and then verify the result below.
+
+```{embed, lang="groovy"}
+conventional.nf
+```
+
+<details>
+<summary>Output</summary>
+```{bash}
+nextflow run conventional.nf -ansi-log false
+```
+</details>
+
+This document is auto-generated and may as a result (once in 3 times) return three numbers `11`, `22` and `33`. But it may as well return `21`, `32` and `13`. The reason is simple: channels are asynchronous by design and order is therefore not guaranteed.
+
+This has huge consequences for keeping track of the flow of data through the pipeline. As a result, one will often see channels contain not only _data_ but also an identifier (ID) in the form of a tuple: `[<ID>, <data> ]`.
+
+```{bash, include=FALSE}
+pwd
+cat > id.nf << 'HERE'
+process add {
+  input:
+    tuple val(id), val(input1), val(input2)
+  output:
+    tuple val(id), val(output)
+  exec:
+    output = input1 + input2
+}
+ 
+process times {
+  input:
+    tuple val(id), val(input)
+  output:
+    tuple val(id), val(output)
+  exec:
+    output = input * 10
+}
+
+workflow {
+  ch1 = Channel.from( [ [ "a", 1], [ "b", 2], [ "c", 3] ] )
+  ch2 = times(ch1)
+
+  ch1
+    | join(ch2)
+    | add
+    | view
+
+}
+HERE
+```
+
+```{embed, lang="groovy"}
+id.nf
+```
+
+When we run this script, we get the following result:
+
+<details>
+<summary>Output</summary>
+```{bash}
+nextflow run id.nf -ansi-log false
+```
+</details>
+
+This version does exactly what we want it to do, but please notice that both the API for `times` as well as `add` have changed! We can not simply keep juggling with channels if we expect them to be aligned at some point.
+
+If we apply this to the Nextflow samples from the nf-core pipelines discussed earlier, we must conclude that only by add an ID consistently will we be able to make sure that we deal with the proper content of the channels.
+
+Please note in our latest version that having both inputs for the `add` step in one channel event makes life much easier: we are sure both values correspond to the same 'sample' (i.e. have the same ID).
+
+:::{.callout-important}
+We need to pass an ID with the channel and thus at least have a tuple `[ id, <data> ]`.
+:::
+
+#### Runtime arguments
+
+Dealing with runtime arguments is an extension of the pre-sample issue discussed above: In our experience it occurs regularly that an argument of a step in the pipeline (say the cluster size for a filter) depends on:
+
+- user input, similarly to the genome reference above but then dependent on the sample,
+- an earlier step in the pipeline that for instance has performed clustering.
+
+To make things worse, maybe the cluster size has a default value an the user _can_ override it but does not necessarily have to.
+
+There are in fact three difficulties here:
+
+1. Storing the output of an ealier step so it can be picked up later
+2. Connecting the proper argument to the correct sample
+3. Making sure this argument is used for the proper step in the pipeline
+
+As argued above, doing (2) is nearly impossible in vanilla Nextflow and (1) is hard. The example of STAR alignment illustrates how (3) is performed: the 'argument' is added as an additional input (channel) to the step in the pipeline.
+
+The following 
+
+```{bash, include=FALSE}
+pwd
+cat > hash.nf << 'HERE'
+process add {
+  input:
+    // This time, input is a hashmap containing .left and .right
+    tuple val(id), val(input)
+  output:
+    tuple val(id), val(output)
+  exec:
+    output = input.left + input.right
+}
+ 
+process times {
+  input:
+    // This time, input is a hashmap containing .left and .right
+    tuple val(id), val(input)
+  output:
+    tuple val(id), val(output)
+  exec:
+    output = input.left * input.right
+}
+
+workflow {
+  ch1 =
+    Channel.from( [ [ "a", 1], [ "b", 2], [ "c", 3] ] )
+  ch2 =
+    ch1
+      | map{ id, value -> [ id, [ left: value, right: params.multiplier ] ] }
+      | times
+
+  ch1
+    | map{ id, value -> [ id, [ left: value ] ] }
+    | join( ch2 | map{ id, value -> [ id, [ right: value ] ] } )
+    | map{ id, left, right -> [ id, left + right ] }
+    | add
+    | view
+
+}
+HERE
+```
+
+```{embed, lang="groovy"}
+hash.nf
+```
+
+Please note that we add `map` operator to both channels in order to turn both input channels into a channel that contains either the `left` or the `right` key for them to be added in one more `map` operation using the `left + right` statement[^more].
+
+Also the `times` step is now extended to take into account input from the user at runtime as well. Remark that this is now very easily done.
+
+[^more]: In principle, we could return a similar hashmap from every step as well and even include the original input or logging information along with it!
+
+When we run this script
+
+```bash
+nextflow run hash.nf --multiplier 20
+```
+
+we get the following result:
+
+<details>
+<summary>Output</summary>
+```{bash}
+nextflow run hash.nf -ansi-log false --multiplier 20
+```
+</details>
+
+The second element of the tuple we refer to as the _state_. In general, it contains pointers to data, data files, arguments but it may also contains outputs from earlier steps or transcript information, etc.
+
+:::{.callout-important}
+The second element of the tuple passed through the channel is called the _state_ and contains all information we need or want to keep connected to the sample this tuple points to.
+:::
+
+Since the _state_ is part of the tuple, it is uniquely connected to the sample ID. In order to be able to pass the output from an earlier step as an argument to a later step, the output has to be a hashmap as well. The following update to the earlier script illustrates this:
+
+
+```{bash, include=FALSE}
+pwd
+cat > hash-output.nf << 'HERE'
+process add {
+  input:
+    // This time, input is a hashmap containing .left and .right
+    tuple val(id), val(input)
+  output:
+    tuple val(id), val(output)
+  exec:
+    output = [ result: input.left + input.right, left: input.left, right: input.right ]
+}
+ 
+process times {
+  input:
+    // This time, input is a hashmap containing .left and .right
+    tuple val(id), val(input)
+  output:
+    tuple val(id), val(output)
+  exec:
+    output = [ result: input.left * input.right, left: input.left, right: input.right ]
+}
+
+workflow {
+  ch1 =
+    Channel.from( [ [ "a", 1], [ "b", 2], [ "c", 3] ] )
+  ch2 =
+    ch1
+      | map{ id, value -> [ id, [ left: value, right: params.multiplier ] ] }
+      | times
+
+  ch1
+    | map{ id, value -> [ id, [ left: value ] ] }
+    | join( ch2 | map{ id, times_output -> [ id, [ right: times_output.result ] ] } )
+    | map{ id, left_map, right_map -> [ id, left_map + right_map ] }
+    | add
+    | view
+
+}
+HERE
+```
+
+```{embed, lang="groovy"}
+hash-output.nf
+```
+
+This result in:
+
+<details>
+<summary>Output</summary>
+```{bash}
+nextflow run hash-output.nf -ansi-log false --multiplier 20
+```
+</details>
+
+### Consequences
+
+The consequence of the above two major challenges when using vanilla Nextflow and their ideal solution is twofold, as illustated by the last example:
+
+1. One has to write a lot of `map` operations to tie together every step, especially using hashmaps for the output as well may make the pipeline code hard to reason about.
+2. The steps (`process` definitions) need to be aware of what can be expected to come in and what they should write out. Ideally, though, those should be simple wrappers for existing scripts that have been implemented earlier.
+
+For instance, imagine doing the above in R or Python, one would have to serialize the incoming hashmap into something readable in the script. That is probably beyond the scope of most researchers that deal with bioinformatics pipelines.
+
+### Catch-22
+
+In a sense, given the above, we find ourselves in a catch-22. Either we use vanilla Nextflow and are stuck in an environment that allows for a lot of flexibility, just not enough for slightly more complex use-cases. Or we have to start adding a lot of extra code, both in the pipeline script itself as well as all individual components[^thecase].
+
+[^thecase]: In a sense, this is already the case. When taking a look at a typical `process` definition in the [nv-core/rnaseq] repository, a lot of boilerplate code has (manually) been added to make things work.
+
+### Viash to the rescue
+
+The challenges that remain when passing tuples of the form `[ id, state ]` through the channels in a pipeline can be resolved by adding some boilerplate to the individual steps in the pipeline. But of course, we don't want to do that manually. Rather, we need to automate this so that it becomes testable and fault-tolerant.
+
+That's basically what Viash can do when building for the `platform: nextflow`[^other].
+
+[^other]: Other build platforms are available, as illustrated elsehwere in these pages.
+
+## How VDSL3 manages state
+
+### VDSL3 module interface
+
+VDSL3 modules are actually workflows which take one channel and emit one channel. It expects the channel events to be tuples containing an 'id' and a 'state':
+
+```
+[ id, state ]
+```
+
+where `id` is a unique String and `state` is a `Map[String, Object]`. The resulting channel then consists of tuples `[id, new_state]`. 
+
+**Example:**
+
+```groovy
+workflow {
+  Channel.fromList([
+    ["myid", [input: file("in.txt")]]
+  ])
+    | mymodule
+}
+```
+
+:::{.callout-note}
+If the input tuple has more than two elements, the elements after the second element are passed through to the output tuple.
+That is, an input tuple `[id, input, ...]` will result in a tuple `[id, output, ...]` after running the module.
+For example, an input tuple `["foo", [input: file("in.txt")], "bar"]` will result in an output tuple `["foo", [output: file("out.txt")], "bar"]`.
+:::
+
+### Customizing VDSL3 modules on the fly
+
+Usually, Nextflow processes are quite static objects. For example, changing its directives can be tricky. Per-sample settings are practically impossible to achieve with vanilla Nextflow.
+
+The `run()` function is a unique feature for every VDSL3 module which allows dynamically altering the behaviour of a module from within the pipeline. For example, we use it to set the `publishDir` directive to `"output/"` so the output of that step in the pipeline will be stored as output.
+
+See the [reference documentation](/reference/nextflow_vdsl3/import_module.qmd#customizing-vdsl3-modules-on-the-fly) for a complete list of arguments of `.run()`.
+
+```{r cleanup, include=FALSE}
+# unlink(temp_dir, recursive = TRUE)
+```

@@ -7,9 +7,7 @@ order: 40
 
 This guide explains how to create an example pipeline that's closer to a typical use-case of a Nextflow bioinformatics pipeline.
 
-:::{.callout-note}
-This page assumes knowledge of how to create and manipulate Nextflow channels using DSL2. For more information, check out the [Nextflow reference docs](https://www.nextflow.io/docs/latest/index.html) or contact [Data Intuitive](https://www.data-intuitive.com/contact) for a complete Nextflow+Viash course.
-:::
+Please review the [VDSL3 principles section](/guide/nextflow_vdsl3/principles.html) for the necessary background.
 
 ## Get the template project
 
@@ -24,85 +22,95 @@ Then clone the repository using the following command.
 git clone https://github.com/youruser/my_first_pipeline.git
 ```
 
-The pipeline already contains three components with which we will build the following pipeline:
+The pipeline contains three components and uses two utility components from [`vsh_utils`](https://viash-hub.com/data-intuitive/vsh_utils) with which we will build the following pipeline:
 
 ```{mermaid}
-graph LR
-   A(file?.tsv) --> B[/remove_comments/]
-   B --> C[/take_column/]
-   C --> D[/combine_columns/]
+graph TD
+   A(file?.tsv) --> X[vsh_flatten] 
+   X --file1.tsv--> B1[/remove_comments/] --> C1[/take_column/] --> Y
+   X --file2.tsv--> B2[/remove_comments/] --> C2[/take_column/] --> Y
+   Y[vsh_toList] --> D[/combine_columns/]
    D --> E(output)
 ```
 
+* `vsh_flatten` is a component to transform a Channel event containing multiple files (in this case using a glob `?`) into multiple Channel events each containing one file to operate on. It is a Viash-compatible version of the Nextflow `flatten` operator.
 * `remove_comments` is a Bash script which removes all lines starting with a `#` from a file. 
 * `take_column` is a Python script which extracts one of the columns in a TSV file. 
+* `vsh_toList` is a component/module that does the oposite as `vsh_flatten`: turn multiple Channel items into one Channel item containing a list.
 * `combine_columns` is an R script which combines multiple files into a TSV.
 
-## Build the VDSL3 modules
+## Build the VDSL3 modules and workflow
 
-First, we need to build the components into VDSL3 modules.
+First, we need to build the components into VDSL3 modules. Since Viash version 0.8.x this includes the workflows and subworkflows themselves as well since they are (or better /can/ be) stored under `src` and built to `target/`.
 
 ```{bash viash-ns-build}
 viash ns build --setup cachedbuild --parallel
 ```
 
-Once everything is built, a new **target** directory has been created containing the executables and modules grouped per platform:
+For more information about the `--setup` and `--parallel` arguments, please refer to [the reference section](/reference/cli/ns_build.html).
+
+The output of `viash ns build` tells us that
+
+1. two dependencies are fetched (from [Viash Hub](https://viash-hub.com))
+2. the locally defined components are built into Nextflow modules
+3. the locally defined worfklow `template/workflow` is built (see later)
+4. containers are built for the local modules
+
+Once `viash ns build` is finished, a new **target** directory has been created containing the executables and modules grouped per platform:
 
 ```{bash}
 tree target
 ```
 
+## Import a VDSL3 module
 
-## Importing a VDSL3 module
-
-After building a VDSL3 module from A VDSL3 module can be imported just like any other Nextflow module. 
-
-**Example:**
-
-```groovy
-include { mymodule } from 'target/nextflow/mymodule/main.nf'
-```
-
-
-## VDSL3 module interface
-
-VDSL3 modules are actually workflows which take one channel and emit one channel. It expects the channel events to be tuples containing an 'id' and a 'state': `[id, state]`, where `id` is a unique String and `state` is a `Map[String, Object]`. The resulting channel then consists of tuples `[id, new_state]`. 
-
-**Example:**
-
-```groovy
-workflow {
-  Channel.fromList([
-    ["myid", [input: file("in.txt")]]
-  ])
-    | mymodule
-}
-```
+### Viash version 0.8 and beyond
 
 :::{.callout-note}
-If the input tuple has more than two elements, the elements after the second element are passed through to the output tuple.
-That is, an input tuple `[id, input, ...]` will result in a tuple `[id, output, ...]` after running the module.
-For example, an input tuple `["foo", [input: file("in.txt")], "bar"]` will result in an output tuple `["foo", [output: file("out.txt")], "bar"]`.
+This functionality is available since Viash version 0.8.x and assumes the workflow code is encoded as a Viash component with a corresponding `config.vsh.yaml` config file.
 :::
 
+In order to use a module or subworkflow one simply has to add the module (either local or remote) to the `dependencies` slot in the Viash config file, for example:
+
+```yaml
+functionality:
+  dependencies: 
+    - name: template/combine_columns
+      repository: local
+
+  repositories:
+    - name: local
+      type: local
+```
+
+After that, the module will be `include`d automatically during the Viash build stage. For more information, please refer to [the reference](/reference/config/functionality/dependencies/).
+
+### All Viash versions
+
+As illustrated by the `tree` output above, a module can be included by pointing to its location. This approach can be used for any Nextflow module (that exposes a compatible API):
+
+```groovy
+include { remove_comments } from "./target/nextflow/template/remove_comments/main.nf"
+```
 
 ## Create a pipeline
 
-Below is a first Nextflow pipeline which uses just one VDSL3 module and with hard-coded input parameters (file1 and file2).
+### All Viash versions
+
+We can use a module in a conventional Nextflow pipeline which takes two input files (`file1` and `file2`) and removes the lines that contain comments (lines starting with `#`) from those files:
 
 ```{bash, include=FALSE}
 cat > main.nf << 'HERE'
-nextflow.enable.dsl=2
-
-include { remove_comments } from "./target/nextflow/demo/remove_comments/main.nf"
+include { remove_comments } from "./target/nextflow/template/remove_comments/main.nf"
 
 workflow {
+
   // Create a channel with two events
   // Each event contains a string (an identifier) and a file (input)
   Channel.fromList([
-    ["file1", file("resources_test/file1.tsv")],
-    ["file2", file("resources_test/file2.tsv")]
-  ])
+      ["file1", [ input: file("resources_test/file1.tsv") ] ],
+      ["file2", [ input: file("resources_test/file2.tsv") ] ]
+    ])
 
     // View channel contents
     | view { tup -> "Input: $tup" }
@@ -126,17 +134,92 @@ HERE
 main.nf
 ```
 
-<!-- TODO: refactor using the new fromState/toState args -->
+In plain English, the workflow works as follows:
 
-## Customizing VDSL3 modules on the fly
+1. Create a Channel with 2 items, corresponding to 2 input files.
+2. Specify the respective input files as corresponding to the `--input` argument: `[ input: ... ]`.
+3. Add a `view` operation for introspection of the Channel
+4. Run the `remove_comments` step and publish the results to `output/`. No additional `fromState` and `toState` arguments are specified because the defaults suffice.
+5. One more `view` to show the resulting processed Channel items.
 
-Usually, Nextflow processes are quite static objects. For example, changing its directives can be quite tricky.
+We point the reader to [the VDSL3 principles section](/guide/nextflow_vdsl3/principles.html) for more information about how data flow (aka _state_) is management in a VDSL3 workflow.
+
+### Pipeline as a component
 
 The `run()` function is a unique feature for every VDSL3 module which allows dynamically altering the behaviour of a module from within the pipeline. For example, we use it to set the `publishDir` directive to `"output/"` so the output of that step in the pipeline will be stored as output.
 
-See the [reference documentation](/reference/nextflow_vdsl3/import_module.qmd#customizing-vdsl3-modules-on-the-fly) for a complete list of arguments of `.run()`.
+:::{.callout-note}
+This functionality is available since Viash version 0.8.x.
+:::
 
+We can do the same but this time encoding the pipeline as a Viash compoment itself:
 
+```groovy
+workflow run_wf {
+  take:
+    input_ch
+
+  main:
+
+    output_ch = 
+
+      // Create a channel with two events
+      // Each event contains a string (an identifier) and a file (input)
+      Channel.fromList([
+          ["file1", [ input: file("resources_test/file1.tsv") ] ],
+          ["file2", [ input: file("resources_test/file2.tsv") ] ]
+        ])
+
+        // View channel contents
+        | view { tup -> "Input: $tup" }
+        
+        // Process the input file using the 'remove_comments' module.
+        // This removes comment lines from the input TSV.
+        | remove_comments
+
+        // View channel contents
+        | view { tup -> "Output: $tup" }
+
+  emit:
+    output_ch
+      | map{ id, state -> [ "run", state ] }
+}
+```
+
+Together with a config file like this one:
+
+```yaml
+functionality:
+  name: test
+  namespace: template
+  description: |
+    An example pipeline and project template.
+
+  arguments:
+    - name: "--output"
+      alternatives: [ "-o" ]
+      type: file
+      direction: output
+      required: true
+      description: Output TSV file
+      example: output.tsv
+
+  resources:
+    - type: nextflow_script
+      path: main.nf
+      entrypoint: run_wf
+
+  dependencies: 
+    - name: template/remove_comments
+      repository: local
+
+  repositories:
+    - name: local
+      type: local
+
+platforms:
+  - type: nextflow
+```
 
 ## Run the pipeline
 
@@ -146,6 +229,15 @@ Now run the pipeline with Nextflow:
 nextflow run . \
   -main-script main.nf
 ```
+
+<details>
+<summary>On the example data:</summary>
+```{bash}
+cat resources_test/file?.tsv
+```
+</details>
+
+This results in the following output:
 
 ```{bash}
 tree output
@@ -157,13 +249,12 @@ cat output/*
 
 ## Discussion
 
-The above example pipeline serves as the backbone for creating more advanced pipelines. However, for the sake of simplicity it contained several hardcoded elements:
+The above example pipeline serves as the backbone for creating real-life pipelines. However, for the sake of simplicity it contained several hardcoded elements that should be avoided:
 
-* Input parameters
-* Output directory
-* VDSL3 module directory
+* Input parameters should be provided as an argument to the pipeline or as part of the pipeline configuration
+* The output directory should be specified as an argument to the pipeline
 
-<!-- TODO: refactor using Viash Nxf config -->
+As illustrated [earlier](#pipeline-as-a-component) these come for free when encoding the workflow as a Viash component. One even gets parameter checks with it!
 
 
 ```{r include=FALSE}

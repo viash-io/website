@@ -56,6 +56,10 @@ def generate_page(json_data: list):
 		.replace(" Argument", "")
 	filename = topic
 
+	if topic.endswith("RepositoryWithName"):
+		json_data = patch_repository(json_data)
+		title = title.removesuffix(" With Name")
+
 	page_data = {"title": title, "data": json_data}
 
 	try:
@@ -67,10 +71,10 @@ def generate_page(json_data: list):
 		filename = config_pages_settings['structure'][filename]
 	except KeyError:
 		print(f"Could not find {filename} in the config pages settings structure")
-
-	qmd_file = output / (filename + ".qmd")
-		
-	render_jinja_page(qmd_file, page_data)
+	
+	if filename is not None:
+		qmd_file = output / (filename + ".qmd")
+		render_jinja_page(qmd_file, page_data)
 	
 def render_jinja_page(path: Path, data: dict):
 	"""Run jinja on data and write results to file."""
@@ -98,6 +102,51 @@ def replace_keywords(text: str) -> str:
 		text = text.replace(whole_match, f"[{keyword_text}]({link})")
 
 	return text
+
+def fudge_named_examples(this_info):
+	# print(f"this_info before {this_info}")
+
+	if 'example' not in this_info:
+		return this_info
+
+	examples = this_info['example']
+	# print(f"examples {examples}")
+	examples_orig = []
+	for example in examples:
+		ex = example.copy()
+		ex['description'] = "Example without `name` field in case used in `.functionality.dependencies`"
+		# strip name field from the example
+		ex['example'] = re.sub(r"^name:.*\n", "", ex['example'])
+		examples_orig.append(ex)
+
+	examples_new = []
+	for example in examples:
+		ex = example.copy()
+		ex['description'] = "Example with `name` field in case used in `.functionality.repositories`"
+		examples_new.append(ex)
+
+	this_info['example'] = examples_orig + examples_new
+	return this_info
+
+def patch_repository(info: list) -> list:
+	descr = """:::{.callout-warning}
+When defining repositories under `.functionality.repositories`, the repository definition needs a `name` field so it can be refered to from a dependency.
+
+When defining a repository directly in a dependency under `.functionality.dependencies`, the `name` field must be omitted.
+:::"""
+
+	# print(f"json_data before {info}")
+	# duplicate examples for named repositories
+	info = list(map(lambda x: fudge_named_examples(x) if x['name'] == '__this__' else x, info))
+	# add extra text to the name field
+	for field in info:
+		if field['name'] == 'name':
+			field['description'] = descr + "\n\n" + field['description']
+		if field['name'] == 'type' and field['description'] == "Defines the repository type. This determines how the repository will be fetched and handled.":
+			field['description'] = "Defines the repository as a locally present and available repository."
+
+	# print(f"json_data after {info}")
+	return info
 
 if __name__ == "__main__":
 	read_json_entries()
