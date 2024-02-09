@@ -632,17 +632,17 @@ Tip
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/main.nf <span class="at">--input</span> config.vsh.yaml <span class="at">--publish_dir</span> output/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>N E X T F L O W  ~  version 23.10.1
-Launching `target/main.nf` [awesome_swirles] DSL2 - revision: b073a51de7
+Launching `target/main.nf` [big_galileo] DSL2 - revision: bf4f2e9d1f
 [-        ] process &gt; example_bash:processWf:exam... -
 [-        ] process &gt; example_bash:publishStatesS... -
 
-executor &gt;  local (2)
-[6f/a40a53] process &gt; example_bash:processWf:exam... [100%] 1 of 1 ✔
-[88/7c7f1e] process &gt; example_bash:publishStatesS... [  0%] 0 of 1
+executor &gt;  local (1)
+[4c/b580bd] process &gt; example_bash:processWf:exam... [100%] 1 of 1 ✔
+[-        ] process &gt; example_bash:publishStatesS... -
 
 executor &gt;  local (2)
-[6f/a40a53] process &gt; example_bash:processWf:exam... [100%] 1 of 1 ✔
-[88/7c7f1e] process &gt; example_bash:publishStatesS... [100%] 1 of 1 ✔</code></pre>
+[4c/b580bd] process &gt; example_bash:processWf:exam... [100%] 1 of 1 ✔
+[d9/bae785] process &gt; example_bash:publishStatesS... [100%] 1 of 1 ✔</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
@@ -668,33 +668,33 @@ executor &gt;  local (2)
 </div>
 <p>Next, we create a YAML file <code>param_list.yaml</code> containing an <code>id</code> and an <code>input</code> value for each parameter entry.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample1</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpO6HVgf/create-a-module39773d089dc9/bash/sample1.txt</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/Rtmp2R45VS/create-a-module3915ef2fe42/bash/sample1.txt</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample2</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpO6HVgf/create-a-module39773d089dc9/bash/sample2.txt</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/Rtmp2R45VS/create-a-module3915ef2fe42/bash/sample2.txt</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample3</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpO6HVgf/create-a-module39773d089dc9/bash/sample3.txt</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/Rtmp2R45VS/create-a-module3915ef2fe42/bash/sample3.txt</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample4</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpO6HVgf/create-a-module39773d089dc9/bash/sample4.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/Rtmp2R45VS/create-a-module3915ef2fe42/bash/sample4.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can run the pipeline on the list of parameters using the <code>--param_list</code> parameter.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/main.nf <span class="at">--param_list</span> param_list.yaml <span class="at">--publish_dir</span> output2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>N E X T F L O W  ~  version 23.10.1
-Launching `target/main.nf` [lethal_shannon] DSL2 - revision: b073a51de7
+Launching `target/main.nf` [pedantic_einstein] DSL2 - revision: bf4f2e9d1f
 [-        ] process &gt; example_bash:processWf:exam... -
 [-        ] process &gt; example_bash:publishStatesS... -
 
 executor &gt;  local (4)
-[d1/78cdf8] process &gt; example_bash:processWf:exam... [  0%] 0 of 4
+[bf/881325] process &gt; example_bash:processWf:exam... [  0%] 0 of 4
 [-        ] process &gt; example_bash:publishStatesS... -
 
 executor &gt;  local (8)
-[d1/78cdf8] process &gt; example_bash:processWf:exam... [100%] 4 of 4 ✔
-[54/e9afd3] process &gt; example_bash:publishStatesS... [  0%] 0 of 4
+[7d/0b1222] process &gt; example_bash:processWf:exam... [100%] 4 of 4 ✔
+[e9/286f56] process &gt; example_bash:publishStatesS... [  0%] 0 of 4
 
 executor &gt;  local (8)
-[d1/78cdf8] process &gt; example_bash:processWf:exam... [100%] 4 of 4 ✔
-[7c/4bdff0] process &gt; example_bash:publishStatesS... [100%] 4 of 4 ✔</code></pre>
+[7d/0b1222] process &gt; example_bash:processWf:exam... [100%] 4 of 4 ✔
+[2d/a80fa3] process &gt; example_bash:publishStatesS... [100%] 4 of 4 ✔</code></pre>
 </div>
 </div>
 <p>This results in the following outputs:</p>
