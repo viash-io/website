@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -23,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -83,7 +83,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -92,6 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -111,16 +118,17 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Viash - Create a new component">
 <meta property="og:description" content="Building a reproducible Viash component.">
-<meta property="og:site-name" content="Viash">
+<meta property="og:image" content="https://viash.io/guide/component/viash.png">
+<meta property="og:site_name" content="Viash">
 </head>
 
 <body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     <img src="../../viash.png" alt="" class="navbar-logo">
     </a>
@@ -132,46 +140,46 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">Overview</span></a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../installation/index.html" rel="" target="">
- <span class="menu-text">Installation</span></a>
+    <a class="nav-link" href="../../installation/index.html"> 
+<span class="menu-text">Installation</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../quickstart/index.html" rel="" target="">
- <span class="menu-text">Quickstart</span></a>
+    <a class="nav-link" href="../../quickstart/index.html"> 
+<span class="menu-text">Quickstart</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../guide/index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Guide</span></a>
+    <a class="nav-link active" href="../../guide/index.html" aria-current="page"> 
+<span class="menu-text">Guide</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../reference/index.html" rel="" target="">
- <span class="menu-text">Reference</span></a>
+    <a class="nav-link" href="../../reference/index.html"> 
+<span class="menu-text">Reference</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../blog/index.html" rel="" target="">
- <span class="menu-text">Blog</span></a>
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Help</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-help">    
         <li>
-    <a class="dropdown-item" href="https://github.com/viash-io/viash/issues" rel="" target=""><i class="bi bi-bug" role="img">
+    <a class="dropdown-item" href="https://github.com/viash-io/viash/issues"><i class="bi bi-bug" role="img">
 </i> 
  <span class="dropdown-text">Report a Viash issue</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/viash-io/website/issues" rel="" target=""><i class="bi bi-bug" role="img">
+    <a class="dropdown-item" href="https://github.com/viash-io/website/issues"><i class="bi bi-bug" role="img">
 </i> 
  <span class="dropdown-text">Report a website issue</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../cheatsheet/viash_cheatsheet_v1_1.pdf" rel="" target=""><i class="bi bi-card-list" role="img">
+    <a class="dropdown-item" href="../../cheatsheet/viash_cheatsheet_v1_1.pdf"><i class="bi bi-card-list" role="img">
 </i> 
  <span class="dropdown-text">Cheat sheet</span></a>
   </li>  
@@ -180,31 +188,31 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/viash-io/viash" rel="" target=""><i class="bi bi-github" role="img" aria-label="Viash GitHub">
+    <a class="nav-link" href="https://github.com/viash-io/viash"> <i class="bi bi-github" role="img" aria-label="Viash GitHub">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../guide/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../../guide/component/index.html">Component</a></li><li class="breadcrumb-item"><a href="../../guide/component/create-component.html">Create a new component</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../guide/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../../guide/component/index.html">Component</a></li><li class="breadcrumb-item"><a href="../../guide/component/create-component.html">Create a new component</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
@@ -326,7 +334,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -340,12 +348,12 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   <li><a href="#displaying-the-help-text" id="toc-displaying-the-help-text" class="nav-link" data-scroll-target="#displaying-the-help-text">Displaying the help text</a></li>
   <li><a href="#running-the-executable" id="toc-running-the-executable" class="nav-link" data-scroll-target="#running-the-executable">Running the executable</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/viash-io/website/edit/main/guide/component/create-component.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/viash-io/website/blob/main/guide/component/create-component.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/viash-io/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/viash-io/website/edit/main/guide/component/create-component.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/viash-io/website/blob/main/guide/component/create-component.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/viash-io/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../guide/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../../guide/component/index.html">Component</a></li><li class="breadcrumb-item"><a href="../../guide/component/create-component.html">Create a new component</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Create a new component</h1>
 </div>
@@ -365,7 +373,9 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   </div>
   
 
+
 </header>
+
 
 <script type="text/javascript">
 let langDict = {
@@ -762,7 +772,7 @@ Arguments:
 <pre><code>[notice] Checking if Docker image is available at 'example_bash:latest'
 [warning] Could not pull from 'example_bash:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_bash:latest' with Dockerfile
-Copying '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/bash/config.vsh.yaml' to '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/bash/foo.txt'.</code></pre>
+Copying '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/bash/config.vsh.yaml' to '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/bash/foo.txt'.</code></pre>
 </div>
 </div>
 </div>
@@ -792,7 +802,7 @@ Arguments:
 <pre><code>[notice] Checking if Docker image is available at 'example_csharp:latest'
 [warning] Could not pull from 'example_csharp:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_csharp:latest' with Dockerfile
-Copying '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/csharp/config.vsh.yaml' to '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/csharp/foo.txt'.</code></pre>
+Copying '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/csharp/config.vsh.yaml' to '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/csharp/foo.txt'.</code></pre>
 </div>
 </div>
 </div>
@@ -822,7 +832,7 @@ Arguments:
 <pre><code>[notice] Checking if Docker image is available at 'example_js:latest'
 [warning] Could not pull from 'example_js:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_js:latest' with Dockerfile
-Copying '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/js/config.vsh.yaml' to '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/js/foo.txt'</code></pre>
+Copying '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/js/config.vsh.yaml' to '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/js/foo.txt'</code></pre>
 </div>
 </div>
 </div>
@@ -852,7 +862,7 @@ Arguments:
 <pre><code>[notice] Checking if Docker image is available at 'example_python:latest'
 [warning] Could not pull from 'example_python:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_python:latest' with Dockerfile
-Copying '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/python/config.vsh.yaml' to '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/python/foo.txt'.</code></pre>
+Copying '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/python/config.vsh.yaml' to '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/python/foo.txt'.</code></pre>
 </div>
 </div>
 </div>
@@ -882,7 +892,7 @@ Arguments:
 <pre><code>[notice] Checking if Docker image is available at 'example_r:latest'
 [warning] Could not pull from 'example_r:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_r:latest' with Dockerfile
-Copying '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/r/config.vsh.yaml' to '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/r/foo.txt'.
+Copying '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/r/config.vsh.yaml' to '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/r/foo.txt'.
 [1] TRUE</code></pre>
 </div>
 </div>
@@ -914,7 +924,7 @@ Arguments:
 [warning] Could not pull from 'example_scala:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_scala:latest' with Dockerfile
 warning: 1 deprecation; re-run with -deprecation for details
-Copying '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/scala/config.vsh.yaml' to '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/scala/foo.txt'.</code></pre>
+Copying '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/scala/config.vsh.yaml' to '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/scala/foo.txt'.</code></pre>
 </div>
 </div>
 </div>
@@ -1212,7 +1222,7 @@ Arguments:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_bash</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Copying '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/bash/config.vsh.yaml' to '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/bash/output.txt'.</code></pre>
+<pre><code>Copying '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/bash/config.vsh.yaml' to '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/bash/output.txt'.</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
@@ -1220,11 +1230,11 @@ Arguments:
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  428 Dec 22 19:25 config.vsh.yaml
--rw-r--r-- 1 runner docker  428 Dec 22 19:25 foo.txt
--rw-r--r-- 1 runner docker  428 Dec 22 19:27 output.txt
--rwxr-xr-x 1 runner docker  181 Dec 22 19:25 script.sh
-drwxr-xr-x 2 runner docker 4096 Dec 22 19:26 target</code></pre>
+-rw-r--r-- 1 runner docker  428 Feb  9 10:22 config.vsh.yaml
+-rw-r--r-- 1 runner docker  428 Feb  9 10:22 foo.txt
+-rw-r--r-- 1 runner docker  428 Feb  9 10:24 output.txt
+-rwxr-xr-x 1 runner docker  181 Feb  9 10:22 script.sh
+drwxr-xr-x 2 runner docker 4096 Feb  9 10:23 target</code></pre>
 </div>
 </div>
 </div>
@@ -1233,7 +1243,7 @@ drwxr-xr-x 2 runner docker 4096 Dec 22 19:26 target</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_csharp</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Copying '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/csharp/config.vsh.yaml' to '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/csharp/output.txt'.</code></pre>
+<pre><code>Copying '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/csharp/config.vsh.yaml' to '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/csharp/output.txt'.</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
@@ -1241,11 +1251,11 @@ drwxr-xr-x 2 runner docker 4096 Dec 22 19:26 target</code></pre>
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  467 Dec 22 19:25 config.vsh.yaml
--rw-r--r-- 1 runner docker  467 Dec 22 19:25 foo.txt
--rw-r--r-- 1 runner docker  467 Dec 22 19:25 output.txt
--rw-r--r-- 1 runner docker  237 Dec 22 19:25 script.csx
-drwxr-xr-x 2 runner docker 4096 Dec 22 19:27 target</code></pre>
+-rw-r--r-- 1 runner docker  467 Feb  9 10:22 config.vsh.yaml
+-rw-r--r-- 1 runner docker  467 Feb  9 10:22 foo.txt
+-rw-r--r-- 1 runner docker  467 Feb  9 10:22 output.txt
+-rw-r--r-- 1 runner docker  237 Feb  9 10:22 script.csx
+drwxr-xr-x 2 runner docker 4096 Feb  9 10:23 target</code></pre>
 </div>
 </div>
 </div>
@@ -1254,7 +1264,7 @@ drwxr-xr-x 2 runner docker 4096 Dec 22 19:27 target</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb77"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_js</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Copying '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/js/config.vsh.yaml' to '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/js/output.txt'</code></pre>
+<pre><code>Copying '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/js/config.vsh.yaml' to '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/js/output.txt'</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
@@ -1262,11 +1272,11 @@ drwxr-xr-x 2 runner docker 4096 Dec 22 19:27 target</code></pre>
 <div class="sourceCode cell-code" id="cb79"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  445 Dec 22 19:25 config.vsh.yaml
--rw-r--r-- 1 runner docker  445 Dec 22 19:26 foo.txt
--rw-r--r-- 1 runner docker  445 Dec 22 19:27 output.txt
--rwxr-xr-x 1 runner docker  282 Dec 22 19:25 script.js
-drwxr-xr-x 2 runner docker 4096 Dec 22 19:27 target</code></pre>
+-rw-r--r-- 1 runner docker  445 Feb  9 10:22 config.vsh.yaml
+-rw-r--r-- 1 runner docker  445 Feb  9 10:22 foo.txt
+-rw-r--r-- 1 runner docker  445 Feb  9 10:24 output.txt
+-rwxr-xr-x 1 runner docker  282 Feb  9 10:22 script.js
+drwxr-xr-x 2 runner docker 4096 Feb  9 10:23 target</code></pre>
 </div>
 </div>
 </div>
@@ -1275,7 +1285,7 @@ drwxr-xr-x 2 runner docker 4096 Dec 22 19:27 target</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_python</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Copying '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/python/config.vsh.yaml' to '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/python/output.txt'.</code></pre>
+<pre><code>Copying '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/python/config.vsh.yaml' to '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/python/output.txt'.</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
@@ -1283,11 +1293,11 @@ drwxr-xr-x 2 runner docker 4096 Dec 22 19:27 target</code></pre>
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  440 Dec 22 19:25 config.vsh.yaml
--rw-r--r-- 1 runner docker  440 Dec 22 19:26 foo.txt
--rw-r--r-- 1 runner docker  440 Dec 22 19:27 output.txt
--rwxr-xr-x 1 runner docker  216 Dec 22 19:25 script.py
-drwxr-xr-x 2 runner docker 4096 Dec 22 19:27 target</code></pre>
+-rw-r--r-- 1 runner docker  440 Feb  9 10:22 config.vsh.yaml
+-rw-r--r-- 1 runner docker  440 Feb  9 10:23 foo.txt
+-rw-r--r-- 1 runner docker  440 Feb  9 10:24 output.txt
+-rwxr-xr-x 1 runner docker  216 Feb  9 10:22 script.py
+drwxr-xr-x 2 runner docker 4096 Feb  9 10:23 target</code></pre>
 </div>
 </div>
 </div>
@@ -1296,7 +1306,7 @@ drwxr-xr-x 2 runner docker 4096 Dec 22 19:27 target</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_r</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Copying '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/r/config.vsh.yaml' to '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/r/output.txt'.
+<pre><code>Copying '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/r/config.vsh.yaml' to '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/r/output.txt'.
 [1] TRUE</code></pre>
 </div>
 </div>
@@ -1305,11 +1315,11 @@ drwxr-xr-x 2 runner docker 4096 Dec 22 19:27 target</code></pre>
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  435 Dec 22 19:25 config.vsh.yaml
--rw-r--r-- 1 runner docker  435 Dec 22 19:26 foo.txt
--rw-r--r-- 1 runner docker  435 Dec 22 19:27 output.txt
--rwxr-xr-x 1 runner docker  207 Dec 22 19:25 script.R
-drwxr-xr-x 2 runner docker 4096 Dec 22 19:27 target</code></pre>
+-rw-r--r-- 1 runner docker  435 Feb  9 10:22 config.vsh.yaml
+-rw-r--r-- 1 runner docker  435 Feb  9 10:23 foo.txt
+-rw-r--r-- 1 runner docker  435 Feb  9 10:24 output.txt
+-rwxr-xr-x 1 runner docker  207 Feb  9 10:22 script.R
+drwxr-xr-x 2 runner docker 4096 Feb  9 10:24 target</code></pre>
 </div>
 </div>
 </div>
@@ -1319,7 +1329,7 @@ drwxr-xr-x 2 runner docker 4096 Dec 22 19:27 target</code></pre>
 <div class="sourceCode cell-code" id="cb89"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_scala</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>warning: 1 deprecation; re-run with -deprecation for details
-Copying '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/scala/config.vsh.yaml' to '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/scala/output.txt'.</code></pre>
+Copying '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/scala/config.vsh.yaml' to '/viash_automount/tmp/RtmptCqtSN/create_new_component6b3a642a2eb2/scala/output.txt'.</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
@@ -1327,11 +1337,11 @@ Copying '/viash_automount/tmp/RtmpJQuEHo/create_new_component31a727f4ea76/scala/
 <div class="sourceCode cell-code" id="cb91"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  479 Dec 22 19:25 config.vsh.yaml
--rw-r--r-- 1 runner docker  479 Dec 22 19:26 foo.txt
--rw-r--r-- 1 runner docker  479 Dec 22 19:27 output.txt
--rw-r--r-- 1 runner docker  435 Dec 22 19:25 script.scala
-drwxr-xr-x 2 runner docker 4096 Dec 22 19:27 target</code></pre>
+-rw-r--r-- 1 runner docker  479 Feb  9 10:22 config.vsh.yaml
+-rw-r--r-- 1 runner docker  479 Feb  9 10:23 foo.txt
+-rw-r--r-- 1 runner docker  479 Feb  9 10:24 output.txt
+-rw-r--r-- 1 runner docker  435 Feb  9 10:22 script.scala
+drwxr-xr-x 2 runner docker 4096 Feb  9 10:24 target</code></pre>
 </div>
 </div>
 </div>
@@ -1424,10 +1434,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/viash\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1437,8 +1464,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1451,6 +1487,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1494,6 +1649,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1519,6 +1675,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1576,30 +1758,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("https:\/\/viash\.io");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-      }
-    }
 });
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../guide/component/index.html" class="pagination-link">
+      <a href="../../guide/component/index.html" class="pagination-link  aria-label=" component"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Component</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../guide/component/add-dependencies.html" class="pagination-link">
+      <a href="../../guide/component/add-dependencies.html" class="pagination-link" aria-label="Add dependencies">
         <span class="nav-page-text">Add dependencies</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -1613,18 +1781,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="../../about.html">About</a>
+    <a class="nav-link" href="../../about.html">
+<p>About</p>
+</a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="../../privacy.html">Privacy Policy</a>
+    <a class="nav-link" href="../../privacy.html">
+<p>Privacy Policy</p>
+</a>
   </li>  
 </ul>
-    </div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/viash-io/website/edit/main/guide/component/create-component.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/viash-io/website/blob/main/guide/component/create-component.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/viash-io/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 

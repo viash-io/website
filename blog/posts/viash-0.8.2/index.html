@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Viash Team">
-<meta name="dcterms.date" content="2020-09-01">
+<meta name="dcterms.date" content="2023-12-14">
 
-<title>Viash - Viash 0.2.0</title>
+<title>Viash - Viash 0.8.2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -121,9 +87,9 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="../../../styles.css">
-<meta property="og:title" content="Viash - Viash 0.2.0">
-<meta property="og:description" content="Autoresolve docker paths">
-<meta property="og:image" content="https://viash.io/blog/posts/viash-0.2.0/viash.png">
+<meta property="og:title" content="Viash - Viash 0.8.2">
+<meta property="og:description" content="Minor changes and bug fixes">
+<meta property="og:image" content="https://viash.io/blog/posts/viash-0.8.2/viash.png">
 <meta property="og:site_name" content="Viash">
 </head>
 
@@ -208,8 +174,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Viash 0.2.0</h1>
-            <p class="subtitle lead">Autoresolve docker paths</p>
+      <h1 class="title">Viash 0.8.2</h1>
+            <p class="subtitle lead">Minor changes and bug fixes</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">New Release</div>
               </div>
@@ -229,7 +195,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 1, 2020</p>
+        <p class="date">December 14, 2023</p>
       </div>
     </div>
     
@@ -244,20 +210,14 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#whats-new" id="toc-whats-new" class="nav-link active" data-scroll-target="#whats-new">What’s new?</a>
-  <ul class="collapse">
-  <li><a href="#changes-to-functionality-metadata" id="toc-changes-to-functionality-metadata" class="nav-link" data-scroll-target="#changes-to-functionality-metadata">Changes to functionality metadata</a></li>
-  </ul></li>
+  <li><a href="#whats-new" id="toc-whats-new" class="nav-link active" data-scroll-target="#whats-new">What’s new?</a></li>
   <li><a href="#full-changelog" id="toc-full-changelog" class="nav-link" data-scroll-target="#full-changelog">Full changelog</a>
   <ul class="collapse">
-  <li><a href="#new-features" id="toc-new-features" class="nav-link" data-scroll-target="#new-features">NEW FEATURES</a></li>
-  <li><a href="#major-changes" id="toc-major-changes" class="nav-link" data-scroll-target="#major-changes">MAJOR CHANGES</a></li>
   <li><a href="#minor-changes" id="toc-minor-changes" class="nav-link" data-scroll-target="#minor-changes">MINOR CHANGES</a></li>
   <li><a href="#bug-fixes" id="toc-bug-fixes" class="nav-link" data-scroll-target="#bug-fixes">BUG FIXES</a></li>
-  <li><a href="#internal-changes" id="toc-internal-changes" class="nav-link" data-scroll-target="#internal-changes">INTERNAL CHANGES</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/viash-io/website/edit/main/blog/posts/viash-0.2.0/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/viash-io/website/blob/main/blog/posts/viash-0.2.0/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/viash-io/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/viash-io/website/edit/main/blog/posts/viash-0.8.2/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/viash-io/website/blob/main/blog/posts/viash-0.8.2/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/viash-io/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -272,96 +232,31 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 <section id="whats-new" class="level2">
 <h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<section id="changes-to-functionality-metadata" class="level3">
-<h3 class="anchored" data-anchor-id="changes-to-functionality-metadata">Changes to functionality metadata</h3>
-<ul>
-<li>Added version attribute</li>
-</ul>
-<section id="autoresolve-docker-paths" class="level4">
-<h4 class="anchored" data-anchor-id="autoresolve-docker-paths">Autoresolve docker paths</h4>
-<p>Arguments of type: file are processed to automatically create a mount in docker. More specifically, when you pass an argument value: <code>--input /path/to/file</code>, this will be processed such that the following parameters are passed to docker:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-v</span> /path/to:/viash_automount/path/to ... <span class="at">--input</span> /viash_automount/path/to/file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If, for some reason, you need to manually specify a mount, you can do this with <code>---mount /path/to/mount:/mymount</code>.</p>
-</section>
-<section id="argument-multiplicity" class="level4">
-<h4 class="anchored" data-anchor-id="argument-multiplicity">Argument multiplicity</h4>
-<p>For all parameter types (except for <code>boolean_true</code> and <code>boolean_false</code>), you can specify <code>multiple: true</code> in order to turn this argument into an array-based argument. What this does is allow you to pass multiple values for this argument, e.g.&nbsp;<code>--input file1 --input file2 --input file3:file4:file5</code>.</p>
-<p>The default separator is <code>:</code> but this can be overridden by changing the separator by setting it to <code>multiple_sep: ","</code> (for example).</p>
-</section>
-<section id="new-format" class="level4">
-<h4 class="anchored" data-anchor-id="new-format">New format</h4>
-<p>Viash now supports placing the functionality.yaml, platform*.yaml(s) and script into a single file. For example, this could be a merged script.R:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' functionality:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'   name: r-estimate</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#'   arguments: ...</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#' platforms:</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#' - type: native</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' - type: docker</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#'   image: rocker/tidyverse</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Hello world!</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Instead of running:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run <span class="at">-f</span> functionality.yaml <span class="at">-p</span> platform_docker.yaml <span class="at">--</span> arg1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>With this format, you can now run:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run script.R                     <span class="co"># run script.R with the first platform</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run <span class="at">-P</span> docker script.R           <span class="co"># run script.R with the platform called 'docker' with the large P argument</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># use small p to override the platform with a custom yaml:</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run <span class="at">-p</span> common_resources/platform_docker.yaml script.R</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># note that any arguments for the run command (e.g. -p or -P) should come before the script.R, as script.R is considered a trailing argument.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
+<p>This release fixes a few bugs regarding dependencies and how the Nextflow platform handles Paths.</p>
 </section>
 <section id="full-changelog" class="level2">
 <h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
-<section id="new-features" class="level3">
-<h3 class="anchored" data-anchor-id="new-features">NEW FEATURES</h3>
-<ul>
-<li>Allow (optional) version attributes in <code>functionality.yaml</code> and <code>platform.yaml</code>.</li>
-<li>Allow testing a component with the <code>viash test</code> functionality. Tests are executed in a temporary directory on the specified platform. The temporary directory contains all the resource and test files.</li>
-<li><code>viash --version</code>: Add flag for printing the version of viash.</li>
-<li>Allow fetching resources from URL (http:// and https://)</li>
-<li>Allow retrieving functionality and platform YAMLs from URL.</li>
-<li>For docker containers, autoresolve path names of files. Use <code>---v path:path</code> or <code>---volume path:path</code> to manually mount a specific folder.</li>
-<li>Implement parameter multiplicity. Set <code>multiple: true</code> to denote an argument to have higher multiplicity. Run <code>./cmd --foo one --foo two --foo three:four</code> in order for multiple values to be added to the same parameter list.</li>
-<li>Added a new format for defining functionality in which the user passes the script in which the functionality and platforms are listed as yaml headers.</li>
-<li>A <code>---chown</code> flag has been added to Docker executables to automatically change the ownership of output files to the current user.</li>
-<li><code>viash ns build</code>: A command for building a whole namespace.</li>
-<li><code>NXF</code>: Join operations are now fully supported by means of <code>multiple</code>.</li>
-<li><code>NXF</code>: Modules that perform joins can take either arrays (multiple input files or the same type to be joined) or hashes (multiple input files passed using different options on the CLI). Please refer to the docs for more info.</li>
-</ul>
-</section>
-<section id="major-changes" class="level3">
-<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
-<ul>
-<li>Remove passthrough parameters.</li>
-<li>Since CLI generation is now performed in the outer script, <code>viash pimp</code> has been deprecated.</li>
-<li>Write out meta.yaml containing viash run information as well as the original <code>functionality.yaml</code> and <code>platform.yaml</code> content.</li>
-<li>Renamed <code>viash export</code> to <code>viash build</code>.</li>
-</ul>
-</section>
 <section id="minor-changes" class="level3">
 <h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
 <ul>
-<li><code>viash run</code> and <code>viash test</code>: Allow changing the temporary directory by defining <code>VIASH_TEMP</code> as a environment variable. Temporary directories are cleaned up after successful executions.</li>
-<li><code>viash run</code> and <code>viash test</code>: Exit(1) when execution or test fails.</li>
-<li><code>viash build</code>: Add -m flag for outputting metadata after build.</li>
-<li><code>viash run</code>: Required parameters can have a default value now. Produce error when a required parameter is not passed, even when a default is provided.</li>
-<li><code>NXF</code>: <em>Modules</em> are now stored under <code>target/nextflow</code> by default</li>
+<li><p><code>NextflowTestHelper</code>: Do not hardcode a version of Nextflow in the testbench, but use the version of Nextflow that is installed on the system (PR #593).</p></li>
+<li><p>GitHub Actions: Test different versions of Nextflow (22.04.5, latest, and latest-edge) (PR #593). Testing the latest Edge version of Nextflow will allow us to catch notice changes in Nextflow earlier.</p></li>
+<li><p>Updates to the documentation and templates in the Git repo (#598, PR #600):</p>
+<ul>
+<li><p>Add contributing guidelines.</p></li>
+<li><p>Add issue templates.</p></li>
+<li><p>Reworked the pull request template.</p></li>
+</ul></li>
 </ul>
 </section>
 <section id="bug-fixes" class="level3">
 <h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
 <ul>
-<li><code>NXF</code>: Correctly escape path variable when running NXF command.</li>
-<li><code>NXF</code>: Surround parameters with quotes when running NXF command.</li>
-</ul>
-</section>
-<section id="internal-changes" class="level3">
-<h3 class="anchored" data-anchor-id="internal-changes">INTERNAL CHANGES</h3>
-<ul>
-<li>Move CLI from inner script to outer script.</li>
-<li>Renamed Target to Platform</li>
-<li>Renamed Environment to Requirements</li>
+<li><p><code>config</code>: Fix the main level of a component config not enforcing strict mode and instead allowing any field to be specified (PR #585).</p></li>
+<li><p><code>dependencies</code>: Allow the user to define a local dependency with specifying <code>repository: local</code> as sugar syntax (PR #609). A local repository is the default value so it’s not required to be filled in, but allowing it with a sensible sugar syntax makes sense.</p></li>
+<li><p><code>Repositories</code>: Fix a structural issue where a repository defined directly in a <code>dependency</code> would require the <code>name</code> field to be set (PR #607). Repository variants are created with and without the <code>name</code> field. Repositories under <code>.functionality.dependencies[]</code> use repositories without the <code>name</code> field, while repositories under <code>.functionality.repositories[]</code> use repositories with the <code>name</code> field.</p></li>
+<li><p><code>NextflowPlatform</code>: Do not resolve remote paths relative to the –param_list file (PR #592).</p></li>
+<li><p><code>NextflowPlatform</code>: Allow finding <code>.build.yaml</code> file when worktree contains a directory that is a symlink (PR #611).</p></li>
 </ul>
 
 
@@ -796,7 +691,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </a>
   </li>  
 </ul>
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/viash-io/website/edit/main/blog/posts/viash-0.2.0/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/viash-io/website/blob/main/blog/posts/viash-0.2.0/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/viash-io/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/viash-io/website/edit/main/blog/posts/viash-0.8.2/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/viash-io/website/blob/main/blog/posts/viash-0.8.2/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/viash-io/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
