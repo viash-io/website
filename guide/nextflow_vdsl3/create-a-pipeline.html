@@ -421,18 +421,18 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns build <span class="at">--setup</span> cachedbuild <span class="at">--parallel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>temporaryFolder: /tmp/viash_hub_repo10763224991175333000 uri: https://viash-hub.com/data-intuitive/vsh-pipeline-operators.git
+<pre><code>temporaryFolder: /tmp/viash_hub_repo4735799558429198017 uri: https://viash-hub.com/data-intuitive/vsh-pipeline-operators.git
 Cloning into '.'...
 checkout out: List(git, checkout, tags/v0.2.0, --, .) 0 
 Exporting take_column (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/take_column
+Exporting combine_columns (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/combine_columns
 Exporting take_column (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/take_column
 Exporting remove_comments (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/remove_comments
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/template/take_column:0.2.3' with Dockerfile
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/template/combine_columns:0.2.3' with Dockerfile
+Exporting workflow (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/workflow
 Exporting remove_comments (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/remove_comments
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/template/remove_comments:0.2.3' with Dockerfile
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/template/take_column:0.2.3' with Dockerfile
-Exporting workflow (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/workflow
-Exporting combine_columns (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/combine_columns
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/template/combine_columns:0.2.3' with Dockerfile
 Exporting combine_columns (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/combine_columns
 All 7 configs built successfully</code></pre>
 </div>
@@ -648,17 +648,20 @@ Note
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> main.nf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>N E X T F L O W  ~  version 23.10.1
-Launching `main.nf` [small_lamport] DSL2 - revision: dc137fbfcf
+Launching `main.nf` [thirsty_pesquet] DSL2 - revision: dc137fbfcf
 [-        ] process &gt; remove_comments:processWf:r... -
+
+executor &gt;  local (2)
+[77/99a5b2] process &gt; remove_comments:processWf:r... [  0%] 0 of 2
 Input: [file1, [input:/home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]]
 Input: [file2, [input:/home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]]
 
 executor &gt;  local (2)
-[65/d90ae7] process &gt; remove_comments:processWf:r... [100%] 2 of 2 ✔
+[73/dce68c] process &gt; remove_comments:processWf:r... [100%] 2 of 2 ✔
 Input: [file1, [input:/home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]]
 Input: [file2, [input:/home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]]
-Output: [file1, [output:/home/runner/work/website/website/guide/_viash_project_template/work/ce/386441c75878b38faac268834b6388/file1.remove_comments.output.tsv]]
-Output: [file2, [output:/home/runner/work/website/website/guide/_viash_project_template/work/65/d90ae71ff04f8d69b5ea605d9987ce/file2.remove_comments.output.tsv]]</code></pre>
+Output: [file2, [output:/home/runner/work/website/website/guide/_viash_project_template/work/77/99a5b2b3930057f71b89ec90ae7e52/file2.remove_comments.output.tsv]]
+Output: [file1, [output:/home/runner/work/website/website/guide/_viash_project_template/work/73/dce68cf0a5d5769e2ab477106efde7/file1.remove_comments.output.tsv]]</code></pre>
 </div>
 </div>
 <details>
@@ -688,8 +691,8 @@ vier    0.444   123</code></pre>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>output
-├── file1.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/ce/386441c75878b38faac268834b6388/file1.remove_comments.output.tsv
-├── file2.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/65/d90ae71ff04f8d69b5ea605d9987ce/file2.remove_comments.output.tsv
+├── file1.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/73/dce68cf0a5d5769e2ab477106efde7/file1.remove_comments.output.tsv
+├── file2.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/77/99a5b2b3930057f71b89ec90ae7e52/file2.remove_comments.output.tsv
 ├── run.combine_columns.output
 ├── run.workflow.output.tsv
 └── run.workflow.state.yaml

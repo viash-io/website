@@ -17,7 +17,38 @@
 <width>144</width>
 </image>
 <generator>quarto-1.4.549</generator>
-<lastBuildDate>Mon, 08 Jan 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 15 Jan 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Viash 0.8.4</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.8.4/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>Fix building components with dependencies that have symlinks in their paths.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><code>dependencies</code>: Fix dependencies with paths using symlinks (PR #621). The resolution for the <code>.build.vsh</code> was changed to use the <code>toRealPath</code> previously, so dependency resolution must take account possible resolved symlinks too.</li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.8.4/</guid>
+  <pubDate>Mon, 15 Jan 2024 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Viash 0.8.3</title>
   <dc:creator>Viash Team</dc:creator>
@@ -2562,156 +2593,6 @@ font-style: inherit;">]</span></span></code></pre></div>
   <category>New Release</category>
   <guid>https://viash.io/blog/posts/viash-0.5.15/</guid>
   <pubDate>Thu, 14 Jul 2022 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.5.14</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/blog/posts/viash-0.5.14/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="whats-new" class="level2">
-<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<p>Argument groups allow for grouping arguments together by function or category, making the <code>--help</code> output a lot more clear for components with a lot of arguments.</p>
-</section>
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
-<section id="new-functionality" class="level3">
-<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
-<ul>
-<li><p><code>Functionality</code>: Allow specifying argument groups. Example:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb1-2"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  ...</span></span>
-<span id="cb1-3"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">argument_groups</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb1-4"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> First group</span></span>
-<span id="cb1-5"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">[</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">foo</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">,</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> bar</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">]</span></span>
-<span id="cb1-6"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">description</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> Description</span></span></code></pre></div></li>
-<li><p>Addition of the <code>viash_nxf_schema</code> component for converting a Viash config (for a workflow) into a nextflow schema file.</p></li>
-<li><p><code>NextflowVdsl3Platform</code>: Use <code>--param_list</code> to initialise a Nextflow channel with multiple parameter sets. Possible formats are csv, json, yaml, or simply a yaml_blob. A csv should have column names which correspond to the different arguments of this pipeline. A json or a yaml file should be a list of maps, each of which has keys corresponding to the arguments of the pipeline. A yaml blob can also be passed directly as a parameter. Inside the Nextflow pipeline code, params.param_list can also be used to directly a list of parameter sets. When passing a csv, json or yaml, relative path names are relativized to the location of the parameter file.</p>
-<p>Examples:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">nextflow</span> run <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"target/foo/bar/main.nf"</span> <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">--param_list</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'[{"id": "foo", "input": "/path/to/bar"}]'</span></span>
-<span id="cb2-2"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">nextflow</span> run <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"target/foo/bar/main.nf"</span> <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">--param_list</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"params.csv"</span> <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">--reference</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"/path/to/ref"</span></span></code></pre></div></li>
-</ul>
-</section>
-<section id="major-changes" class="level3">
-<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
-<ul>
-<li><p><code>NextflowVdsl3Platform</code>: The functionality is now slurped from a json instead of manually taking care of the formatting in Groovy.</p></li>
-<li><p><code>NextflowVdsl3Platform</code>: The <code>--help</code> is auto-generated from the config.</p></li>
-</ul>
-</section>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li><p><code>NextflowVdsl3Platform</code>: Allow both <code>--publish_dir</code> and <code>--publishDir</code> when <code>auto.publish = true</code>.</p></li>
-<li><p><code>NextflowVdsl3Platform</code>: Allow passing parameters with multiplicity &gt; 1 from Nextflow CLI.</p></li>
-<li><p><code>Main</code>: Added <code>viash --cli_export</code> which outputs the internal cli construction information to console. This is to be used to automate populating the documentation website.</p></li>
-<li><p><code>viash ns</code>: Display success and failure summary statistics, printed to stderr.</p></li>
-<li><p><code>DataObject</code>: <code>.alternatives</code> is now a <code>OneOrMore[String]</code> instead of <code>List[String]</code>, meaning you can now specify <code>{ type: string, name: "--foo", alternatives: "-f" }</code> instead of <code>{ type: string, name: "--foo", alternatives: [ "-f" ] }</code></p></li>
-<li><p><code>BashWrapper</code>: Added metadata field <code>meta_executable</code>, which is a shorthand notation for <code>meta_executable="$meta_resources_dir/$meta_functionality_name"</code></p></li>
-</ul>
-</section>
-<section id="internal-changes" class="level3">
-<h3 class="anchored" data-anchor-id="internal-changes">INTERNAL CHANGES</h3>
-<ul>
-<li><p><code>Arguments</code>: Internal naming of functionality.arguments is changed from DataObject to Arguments. Change is also applied to child classes, e.g.&nbsp;StringObject -&gt; StringArgument.</p></li>
-<li><p><code>Script</code>: Allow more control over where injected code ends up.</p></li>
-<li><p>Restructure type system to allow type-specific arguments.</p></li>
-</ul>
-</section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
-<ul>
-<li><p><code>DockerPlatform</code>: Change <code>org.opencontainers.image.version</code> annotation to <code>functionality.version</code> when set. Additionally fixed retrieving the git tag possibly returning <code>fatal: No names found, cannot describe anything.</code> or similar.</p></li>
-<li><p><code>viash config inject</code>: Fix config inject when <code>.functionality.inputs</code> or <code>.functionality.outputs</code> is used.</p></li>
-<li><p><code>BashWrapper</code>: Don’t add <code>bc</code> as dependency. Only perform integer/float min/max checks when bc is available, otherwise ignore.</p></li>
-<li><p><code>DockerPlatform</code>: Fix inputs &amp; outputs arguments being present twice.</p></li>
-<li><p><code>viash ns test</code>: Silently skip Nextflow platforms as these don’t support tests and will always fail.</p></li>
-<li><p><code>Testbenches</code>: Better capture expected error messages while running testbenches. Having these show on the console could be confusing.</p></li>
-<li><p><code>NextflowVdsl3Platform</code>: Fix issue when running multiple VDSL3 modules concurrently on the same channel.</p></li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/blog/posts/viash-0.5.14/</guid>
-  <pubDate>Thu, 30 Jun 2022 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
