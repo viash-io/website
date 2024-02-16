@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -23,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -83,7 +83,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -92,6 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -111,16 +118,17 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Viash - Unit testing">
 <meta property="og:description" content="How to ensure high quality components.">
-<meta property="og:site-name" content="Viash">
+<meta property="og:image" content="https://viash.io/guide/component/viash.png">
+<meta property="og:site_name" content="Viash">
 </head>
 
 <body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     <img src="../../viash.png" alt="" class="navbar-logo">
     </a>
@@ -132,46 +140,46 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">Overview</span></a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../installation/index.html" rel="" target="">
- <span class="menu-text">Installation</span></a>
+    <a class="nav-link" href="../../installation/index.html"> 
+<span class="menu-text">Installation</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../quickstart/index.html" rel="" target="">
- <span class="menu-text">Quickstart</span></a>
+    <a class="nav-link" href="../../quickstart/index.html"> 
+<span class="menu-text">Quickstart</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../guide/index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Guide</span></a>
+    <a class="nav-link active" href="../../guide/index.html" aria-current="page"> 
+<span class="menu-text">Guide</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../reference/index.html" rel="" target="">
- <span class="menu-text">Reference</span></a>
+    <a class="nav-link" href="../../reference/index.html"> 
+<span class="menu-text">Reference</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../blog/index.html" rel="" target="">
- <span class="menu-text">Blog</span></a>
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Help</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-help">    
         <li>
-    <a class="dropdown-item" href="https://github.com/viash-io/viash/issues" rel="" target=""><i class="bi bi-bug" role="img">
+    <a class="dropdown-item" href="https://github.com/viash-io/viash/issues"><i class="bi bi-bug" role="img">
 </i> 
  <span class="dropdown-text">Report a Viash issue</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/viash-io/website/issues" rel="" target=""><i class="bi bi-bug" role="img">
+    <a class="dropdown-item" href="https://github.com/viash-io/website/issues"><i class="bi bi-bug" role="img">
 </i> 
  <span class="dropdown-text">Report a website issue</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../cheatsheet/viash_cheatsheet_v1_1.pdf" rel="" target=""><i class="bi bi-card-list" role="img">
+    <a class="dropdown-item" href="../../cheatsheet/viash_cheatsheet_v1_1.pdf"><i class="bi bi-card-list" role="img">
 </i> 
  <span class="dropdown-text">Cheat sheet</span></a>
   </li>  
@@ -180,42 +188,38 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-version" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-version" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Version</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-version">    
-        <li>
-    <a class="dropdown-item" href="../../" rel="" target="">
- <span class="dropdown-text">Latest</span></a>
-  </li>  
     </ul>
   </li>
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/viash-io/viash" rel="" target=""><i class="bi bi-github" role="img" aria-label="Viash GitHub">
+    <a class="nav-link" href="https://github.com/viash-io/viash"> <i class="bi bi-github" role="img" aria-label="Viash GitHub">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../guide/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../../guide/component/index.html">Component</a></li><li class="breadcrumb-item"><a href="../../guide/component/unit-testing.html">Unit testing</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../guide/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../../guide/component/index.html">Component</a></li><li class="breadcrumb-item"><a href="../../guide/component/unit-testing.html">Unit testing</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
@@ -320,14 +324,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../guide/nextflow_vdsl3/introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../guide/nextflow_vdsl3/create-a-module.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Create a module</span></a>
+  <a href="../../guide/nextflow_vdsl3/create-and-use-a-module.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Create and use a module</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -343,7 +341,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -355,12 +353,12 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   <li><a href="#run-the-unit-test" id="toc-run-the-unit-test" class="nav-link" data-scroll-target="#run-the-unit-test">Run the unit test</a></li>
   <li><a href="#bonus-unit-testing-all-of-the-components" id="toc-bonus-unit-testing-all-of-the-components" class="nav-link" data-scroll-target="#bonus-unit-testing-all-of-the-components">Bonus: unit testing all of the components</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/viash-io/website/edit/main/guide/component/unit-testing.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/viash-io/website/blob/main/guide/component/unit-testing.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/viash-io/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/viash-io/website/edit/main/guide/component/unit-testing.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/viash-io/website/blob/main/guide/component/unit-testing.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/viash-io/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../guide/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../../guide/component/index.html">Component</a></li><li class="breadcrumb-item"><a href="../../guide/component/unit-testing.html">Unit testing</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Unit testing</h1>
 </div>
@@ -380,7 +378,9 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   </div>
   
 
+
 </header>
+
 
 <script type="text/javascript">
 let langDict = {
@@ -904,54 +904,49 @@ Important
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_bash10594250935843328116'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_bash7237784882267263967'
 ====================================================================
-+/tmp/viash_test_example_bash10594250935843328116/build_executable/example_bash ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_bash7237784882267263967/build_executable/example_bash ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_bash:test' with Dockerfile
-[info] Running 'docker build -t example_bash:test /tmp/viash_test_example_bash10594250935843328116/build_executable -f /tmp/viash_test_example_bash10594250935843328116/build_executable/tmp/dockerbuild-example_bash-5csgh5/Dockerfile'
-Sending build context to Docker daemon  37.38kB
+[info] Running 'docker build -t example_bash:test /tmp/viash_test_example_bash7237784882267263967/build_executable -f /tmp/viash_test_example_bash7237784882267263967/build_executable/tmp/dockerbuild-example_bash-qax87F/Dockerfile'
+#0 building with "default" instance using docker driver
 
-Step 1/6 : FROM bash:4.0
-4.0: Pulling from library/bash
-31e352740f53: Pulling fs layer
-1b0650aea956: Pulling fs layer
-89855ea57d33: Pulling fs layer
-89855ea57d33: Verifying Checksum
-89855ea57d33: Download complete
-31e352740f53: Verifying Checksum
-31e352740f53: Download complete
-31e352740f53: Pull complete
-1b0650aea956: Verifying Checksum
-1b0650aea956: Download complete
-1b0650aea956: Pull complete
-89855ea57d33: Pull complete
-Digest: sha256:c26e85bb0f14009bbc08bdc3d130c3224227c958d938b8956f21f49eaf04eb0c
-Status: Downloaded newer image for bash:4.0
- ---&gt; 39d9bdbd8acf
-Step 2/6 : ENTRYPOINT []
- ---&gt; Running in 765e4f59615b
-Removing intermediate container 765e4f59615b
- ---&gt; b620a6f4b71b
-Step 3/6 : RUN :
- ---&gt; Running in ae67f182c8c6
-Removing intermediate container ae67f182c8c6
- ---&gt; 994bf4c9de8d
-Step 4/6 : LABEL org.opencontainers.image.description="Companion container for running component example_bash"
- ---&gt; Running in ffdc54eb14c1
-Removing intermediate container ffdc54eb14c1
- ---&gt; e8620e6b2305
-Step 5/6 : LABEL org.opencontainers.image.created="2023-07-28T09:52:47Z"
- ---&gt; Running in 20f91e435a59
-Removing intermediate container 20f91e435a59
- ---&gt; 3a1ddead5020
-Step 6/6 : LABEL org.opencontainers.image.version="test"
- ---&gt; Running in a1cc32f69e53
-Removing intermediate container a1cc32f69e53
- ---&gt; 8ab6c23647f4
-Successfully built 8ab6c23647f4
-Successfully tagged example_bash:test
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 286B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 2B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/bash:4.0
+#3 DONE 0.5s
+
+#4 [1/2] FROM docker.io/library/bash:4.0@sha256:8531615c5261183fa8686a7dc9cbb5ce27a5b480ba9386fb6f66098268ce462c
+#4 resolve docker.io/library/bash:4.0@sha256:8531615c5261183fa8686a7dc9cbb5ce27a5b480ba9386fb6f66098268ce462c done
+#4 extracting sha256:4abcf20661432fb2d719aaf90656f55c287f8ca915dc1c92ec14ff61e67fbaf8
+#4 sha256:61ef51628e3f206a04baeb0b13fb13a660470a4568aa751ca96fc3e0b13ad51b 343B / 343B 0.1s done
+#4 sha256:8531615c5261183fa8686a7dc9cbb5ce27a5b480ba9386fb6f66098268ce462c 6.94kB / 6.94kB done
+#4 sha256:8cfaa6fde1a47a95b4f5445e250ee60191b98343d523fa354ba4d7a66630e825 1.28kB / 1.28kB done
+#4 sha256:9a536605933e4f307ba10fcd141bd165b99e4a97c38791cea2d7d979f83062c0 4.86kB / 4.86kB done
+#4 sha256:4abcf20661432fb2d719aaf90656f55c287f8ca915dc1c92ec14ff61e67fbaf8 3.41MB / 3.41MB 0.1s done
+#4 sha256:4c4b5fd539319494535b6bdb3e05b541b2296770ea04298eb65cea70fd2f2fb1 1.74MB / 1.74MB 0.1s done
+#4 extracting sha256:4abcf20661432fb2d719aaf90656f55c287f8ca915dc1c92ec14ff61e67fbaf8 0.1s done
+#4 extracting sha256:4c4b5fd539319494535b6bdb3e05b541b2296770ea04298eb65cea70fd2f2fb1 0.0s done
+#4 extracting sha256:61ef51628e3f206a04baeb0b13fb13a660470a4568aa751ca96fc3e0b13ad51b done
+#4 DONE 0.3s
+
+#5 [2/2] RUN :
+#5 DONE 0.2s
+
+#6 exporting to image
+#6 exporting layers
+#6 exporting layers 0.5s done
+#6 writing image sha256:c24735e9ff41d66004363ffeec89b5b5f336558672da974b264b52e142d4c89e done
+#6 naming to docker.io/library/example_bash:test done
+#6 DONE 0.5s
 ====================================================================
-+/tmp/viash_test_example_bash10594250935843328116/test_test/test_executable
++/tmp/viash_test_example_bash7237784882267263967/test_test/test_executable
 &gt;&gt;&gt; Create input test file
 &gt;&gt;&gt; Run executable
 Copying 'foo.txt' to 'bar.txt'.
@@ -959,7 +954,7 @@ Copying 'foo.txt' to 'bar.txt'.
 &gt;&gt;&gt; Check whether input and output file are the same
 &gt;&gt;&gt; Test finished successfully
 ====================================================================
-[32mSUCCESS! All 1 out of 1 test scripts succeeded![0m
+SUCCESS! All 1 out of 1 test scripts succeeded!
 Cleaning up temporary directory</code></pre>
 </div>
 </div>
@@ -968,96 +963,103 @@ Cleaning up temporary directory</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_csharp3901741913293904966'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_csharp3364033601997926286'
 ====================================================================
-+/tmp/viash_test_example_csharp3901741913293904966/build_executable/example_csharp ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_csharp3364033601997926286/build_executable/example_csharp ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_csharp:test' with Dockerfile
-[info] Running 'docker build -t example_csharp:test /tmp/viash_test_example_csharp3901741913293904966/build_executable -f /tmp/viash_test_example_csharp3901741913293904966/build_executable/tmp/dockerbuild-example_csharp-sxd4yw/Dockerfile'
-Sending build context to Docker daemon  36.86kB
+[info] Running 'docker build -t example_csharp:test /tmp/viash_test_example_csharp3364033601997926286/build_executable -f /tmp/viash_test_example_csharp3364033601997926286/build_executable/tmp/dockerbuild-example_csharp-594e6B/Dockerfile'
+#0 building with "default" instance using docker driver
 
-Step 1/6 : FROM ghcr.io/data-intuitive/dotnet-script:1.3.1
-1.3.1: Pulling from data-intuitive/dotnet-script
-df9b9388f04a: Pulling fs layer
-3ae3a38ed752: Pulling fs layer
-d772c6b09cca: Pulling fs layer
-2c56128c63bd: Pulling fs layer
-6c2be9941089: Pulling fs layer
-5a0c86bcd85d: Pulling fs layer
-5e733ff9c308: Pulling fs layer
-4937da28ea60: Pulling fs layer
-16def9f17d8d: Pulling fs layer
-03ac08f8f1d3: Pulling fs layer
-2c56128c63bd: Waiting
-6c2be9941089: Waiting
-5a0c86bcd85d: Waiting
-5e733ff9c308: Waiting
-4937da28ea60: Waiting
-16def9f17d8d: Waiting
-03ac08f8f1d3: Waiting
-df9b9388f04a: Verifying Checksum
-df9b9388f04a: Download complete
-3ae3a38ed752: Verifying Checksum
-3ae3a38ed752: Download complete
-df9b9388f04a: Pull complete
-d772c6b09cca: Verifying Checksum
-d772c6b09cca: Download complete
-3ae3a38ed752: Pull complete
-2c56128c63bd: Verifying Checksum
-2c56128c63bd: Download complete
-6c2be9941089: Verifying Checksum
-6c2be9941089: Download complete
-5e733ff9c308: Verifying Checksum
-5e733ff9c308: Download complete
-16def9f17d8d: Verifying Checksum
-16def9f17d8d: Download complete
-03ac08f8f1d3: Verifying Checksum
-03ac08f8f1d3: Download complete
-5a0c86bcd85d: Verifying Checksum
-5a0c86bcd85d: Download complete
-4937da28ea60: Verifying Checksum
-4937da28ea60: Download complete
-d772c6b09cca: Pull complete
-2c56128c63bd: Pull complete
-6c2be9941089: Pull complete
-5a0c86bcd85d: Pull complete
-5e733ff9c308: Pull complete
-4937da28ea60: Pull complete
-16def9f17d8d: Pull complete
-03ac08f8f1d3: Pull complete
-Digest: sha256:d95bf2a2b3e095e5b02960ab4ddd4674d798a1493ed0dc5cf427c77a5ed90ed3
-Status: Downloaded newer image for ghcr.io/data-intuitive/dotnet-script:1.3.1
- ---&gt; 1102243946ae
-Step 2/6 : ENTRYPOINT []
- ---&gt; Running in 829d64ed4263
-Removing intermediate container 829d64ed4263
- ---&gt; 4ba0e8403e07
-Step 3/6 : RUN :
- ---&gt; Running in bd6676fb6c32
-Removing intermediate container bd6676fb6c32
- ---&gt; 6fc0e3a1fdc6
-Step 4/6 : LABEL org.opencontainers.image.description="Companion container for running component example_csharp"
- ---&gt; Running in 536ccca678b3
-Removing intermediate container 536ccca678b3
- ---&gt; 771c36ea7465
-Step 5/6 : LABEL org.opencontainers.image.created="2023-07-28T09:53:00Z"
- ---&gt; Running in 3647102536ad
-Removing intermediate container 3647102536ad
- ---&gt; 2c3cc8382ebf
-Step 6/6 : LABEL org.opencontainers.image.version="test"
- ---&gt; Running in 868768ac5ed8
-Removing intermediate container 868768ac5ed8
- ---&gt; 7ff7f59c60ca
-Successfully built 7ff7f59c60ca
-Successfully tagged example_csharp:test
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 322B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 2B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/data-intuitive/dotnet-script:1.3.1
+#3 DONE 0.6s
+
+#4 [1/2] FROM ghcr.io/data-intuitive/dotnet-script:1.3.1@sha256:d95bf2a2b3e095e5b02960ab4ddd4674d798a1493ed0dc5cf427c77a5ed90ed3
+#4 resolve ghcr.io/data-intuitive/dotnet-script:1.3.1@sha256:d95bf2a2b3e095e5b02960ab4ddd4674d798a1493ed0dc5cf427c77a5ed90ed3 done
+#4 sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4 0B / 31.26MB 0.1s
+#4 sha256:d95bf2a2b3e095e5b02960ab4ddd4674d798a1493ed0dc5cf427c77a5ed90ed3 856B / 856B done
+#4 sha256:ae4d45b87ee640aec6f031a1695c6d814e0026ea6fb3220e3daaad90b0f09bda 2.21kB / 2.21kB done
+#4 sha256:1102243946aeba437ebb7c7ab5559d465d660ed57a1f13888c89692401cd5bb6 7.71kB / 7.71kB done
+#4 sha256:df9b9388f04ad6279a7410b85cedfdcb2208c0a003da7ab5613af71079148139 0B / 2.81MB 0.1s
+#4 sha256:3ae3a38ed752842e75d1609c931b29e565b53c24229c87bf1ba64251b5f1f094 0B / 1.74MB 0.1s
+#4 sha256:df9b9388f04ad6279a7410b85cedfdcb2208c0a003da7ab5613af71079148139 2.81MB / 2.81MB 0.2s done
+#4 sha256:3ae3a38ed752842e75d1609c931b29e565b53c24229c87bf1ba64251b5f1f094 1.05MB / 1.74MB 0.2s
+#4 extracting sha256:df9b9388f04ad6279a7410b85cedfdcb2208c0a003da7ab5613af71079148139 0.1s done
+#4 sha256:2c56128c63bdf4a1d571ed930304f4eb77e8e2fde7ce03ddf6073e3df9abf8ad 0B / 8.65MB 0.2s
+#4 sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4 10.49MB / 31.26MB 0.3s
+#4 sha256:3ae3a38ed752842e75d1609c931b29e565b53c24229c87bf1ba64251b5f1f094 1.74MB / 1.74MB 0.2s done
+#4 extracting sha256:3ae3a38ed752842e75d1609c931b29e565b53c24229c87bf1ba64251b5f1f094 0.1s done
+#4 sha256:6c2be99410893469a9e0d8f0ff537b22f651479bf64c5dcf269d2e5267e85749 0B / 20.91MB 0.3s
+#4 sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4 31.26MB / 31.26MB 0.5s done
+#4 sha256:2c56128c63bdf4a1d571ed930304f4eb77e8e2fde7ce03ddf6073e3df9abf8ad 4.19MB / 8.65MB 0.5s
+#4 sha256:6c2be99410893469a9e0d8f0ff537b22f651479bf64c5dcf269d2e5267e85749 19.92MB / 20.91MB 0.5s
+#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 0B / 105.91MB 0.5s
+#4 sha256:2c56128c63bdf4a1d571ed930304f4eb77e8e2fde7ce03ddf6073e3df9abf8ad 8.65MB / 8.65MB 0.6s done
+#4 sha256:6c2be99410893469a9e0d8f0ff537b22f651479bf64c5dcf269d2e5267e85749 20.91MB / 20.91MB 0.5s done
+#4 extracting sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4 0.1s
+#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 0B / 68.90MB 0.6s
+#4 sha256:5e733ff9c30825005ec05ee10b784276e8034171be7eeaa10d6f876fc7bb5383 0B / 12.80MB 0.6s
+#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 16.78MB / 105.91MB 0.8s
+#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 4.19MB / 68.90MB 0.8s
+#4 sha256:5e733ff9c30825005ec05ee10b784276e8034171be7eeaa10d6f876fc7bb5383 8.41MB / 12.80MB 0.8s
+#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 29.42MB / 105.91MB 0.9s
+#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 16.78MB / 68.90MB 0.9s
+#4 sha256:5e733ff9c30825005ec05ee10b784276e8034171be7eeaa10d6f876fc7bb5383 12.80MB / 12.80MB 0.8s done
+#4 sha256:16def9f17d8d9988a074a1d3ae42cb041b261068b3a455c99141bb8df243e9a4 0B / 829.24kB 0.9s
+#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 43.32MB / 105.91MB 1.0s
+#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 29.36MB / 68.90MB 1.0s
+#4 sha256:16def9f17d8d9988a074a1d3ae42cb041b261068b3a455c99141bb8df243e9a4 829.24kB / 829.24kB 0.9s done
+#4 sha256:03ac08f8f1d3c646d8f456ad0e2307b56511e692bcef7a4d67ec194ba81f59e7 0B / 103B 1.0s
+#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 66.06MB / 105.91MB 1.2s
+#4 extracting sha256:d772c6b09cca24a6ec7cb06facff8b7be509b608330bd035f91b70388a94d3b4 0.6s done
+#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 56.62MB / 68.90MB 1.2s
+#4 sha256:03ac08f8f1d3c646d8f456ad0e2307b56511e692bcef7a4d67ec194ba81f59e7 103B / 103B 1.0s done
+#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 72.35MB / 105.91MB 1.3s
+#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 60.82MB / 68.90MB 1.3s
+#4 extracting sha256:2c56128c63bdf4a1d571ed930304f4eb77e8e2fde7ce03ddf6073e3df9abf8ad
+#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 85.98MB / 105.91MB 1.4s
+#4 sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 68.90MB / 68.90MB 1.4s done
+#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 103.81MB / 105.91MB 1.5s
+#4 extracting sha256:2c56128c63bdf4a1d571ed930304f4eb77e8e2fde7ce03ddf6073e3df9abf8ad 0.2s done
+#4 extracting sha256:6c2be99410893469a9e0d8f0ff537b22f651479bf64c5dcf269d2e5267e85749
+#4 sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 105.91MB / 105.91MB 1.6s done
+#4 extracting sha256:6c2be99410893469a9e0d8f0ff537b22f651479bf64c5dcf269d2e5267e85749 0.3s done
+#4 extracting sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73
+#4 extracting sha256:5a0c86bcd85d690fae1d36f59c4041c4142835310a431e3f1b00446763d7db73 2.2s done
+#4 extracting sha256:5e733ff9c30825005ec05ee10b784276e8034171be7eeaa10d6f876fc7bb5383
+#4 extracting sha256:5e733ff9c30825005ec05ee10b784276e8034171be7eeaa10d6f876fc7bb5383 0.3s done
+#4 extracting sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 0.1s
+#4 extracting sha256:4937da28ea60b32af53a8d507ea830228a05f22a7be2ae1ef0134bcd0e3bafba 0.7s done
+#4 extracting sha256:16def9f17d8d9988a074a1d3ae42cb041b261068b3a455c99141bb8df243e9a4
+#4 extracting sha256:16def9f17d8d9988a074a1d3ae42cb041b261068b3a455c99141bb8df243e9a4 0.0s done
+#4 extracting sha256:03ac08f8f1d3c646d8f456ad0e2307b56511e692bcef7a4d67ec194ba81f59e7 done
+#4 DONE 5.9s
+
+#5 [2/2] RUN :
+#5 DONE 0.2s
+
+#6 exporting to image
+#6 exporting layers
+#6 exporting layers 1.0s done
+#6 writing image sha256:fa6aaee2094fff70403bcd2fccfd8a4f29f6f769b9f5960696f46f85c7422d4a done
+#6 naming to docker.io/library/example_csharp:test done
+#6 DONE 1.0s
 ====================================================================
-+/tmp/viash_test_example_csharp3901741913293904966/test_test/test_executable
++/tmp/viash_test_example_csharp3364033601997926286/test_test/test_executable
 &gt;&gt;&gt; Create input test file
 &gt;&gt;&gt; Run executable
 &gt;&gt;&gt; Check whether output file exists
 &gt;&gt;&gt; Check whether input and output file are the same
 &gt;&gt;&gt; Test finished successfully
 ====================================================================
-[32mSUCCESS! All 1 out of 1 test scripts succeeded![0m
+SUCCESS! All 1 out of 1 test scripts succeeded!
 Cleaning up temporary directory</code></pre>
 </div>
 </div>
@@ -1066,71 +1068,69 @@ Cleaning up temporary directory</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_js11335529274040376505'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_js5846209258977555921'
 ====================================================================
-+/tmp/viash_test_example_js11335529274040376505/build_executable/example_js ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_js5846209258977555921/build_executable/example_js ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_js:test' with Dockerfile
-[info] Running 'docker build -t example_js:test /tmp/viash_test_example_js11335529274040376505/build_executable -f /tmp/viash_test_example_js11335529274040376505/build_executable/tmp/dockerbuild-example_js-Dcqeol/Dockerfile'
-Sending build context to Docker daemon  37.38kB
+[info] Running 'docker build -t example_js:test /tmp/viash_test_example_js5846209258977555921/build_executable -f /tmp/viash_test_example_js5846209258977555921/build_executable/tmp/dockerbuild-example_js-x4e0k0/Dockerfile'
+#0 building with "default" instance using docker driver
 
-Step 1/6 : FROM node:19-bullseye-slim
-19-bullseye-slim: Pulling from library/node
-f03b40093957: Pulling fs layer
-0bfad7312c25: Pulling fs layer
-56db04c463e9: Pulling fs layer
-477c7ebfb850: Pulling fs layer
-8bb4aa3e51be: Pulling fs layer
-477c7ebfb850: Waiting
-8bb4aa3e51be: Waiting
-0bfad7312c25: Verifying Checksum
-0bfad7312c25: Download complete
-f03b40093957: Verifying Checksum
-f03b40093957: Download complete
-477c7ebfb850: Verifying Checksum
-477c7ebfb850: Download complete
-56db04c463e9: Verifying Checksum
-56db04c463e9: Download complete
-8bb4aa3e51be: Verifying Checksum
-8bb4aa3e51be: Download complete
-f03b40093957: Pull complete
-0bfad7312c25: Pull complete
-56db04c463e9: Pull complete
-477c7ebfb850: Pull complete
-8bb4aa3e51be: Pull complete
-Digest: sha256:f58f1fcf5c9ff9e3752993edb4ed6dbd35697124c85a43f3b97aa054500b0534
-Status: Downloaded newer image for node:19-bullseye-slim
- ---&gt; adbc02574b52
-Step 2/6 : ENTRYPOINT []
- ---&gt; Running in a8bd1b5ae8e1
-Removing intermediate container a8bd1b5ae8e1
- ---&gt; 66dcbd73412e
-Step 3/6 : RUN :
- ---&gt; Running in f90e6ba846a1
-Removing intermediate container f90e6ba846a1
- ---&gt; 4ba56cd4846e
-Step 4/6 : LABEL org.opencontainers.image.description="Companion container for running component example_js"
- ---&gt; Running in 282215a69e04
-Removing intermediate container 282215a69e04
- ---&gt; 03598142f8db
-Step 5/6 : LABEL org.opencontainers.image.created="2023-07-28T09:53:32Z"
- ---&gt; Running in c623955c994c
-Removing intermediate container c623955c994c
- ---&gt; d6e7fe6244f4
-Step 6/6 : LABEL org.opencontainers.image.version="test"
- ---&gt; Running in d96dc3084870
-Removing intermediate container d96dc3084870
- ---&gt; 16328e7df7ff
-Successfully built 16328e7df7ff
-Successfully tagged example_js:test
+#1 [internal] load .dockerignore
+#1 transferring context: 2B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 297B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:19-bullseye-slim
+#3 DONE 0.3s
+
+#4 [1/2] FROM docker.io/library/node:19-bullseye-slim@sha256:f58f1fcf5c9ff9e3752993edb4ed6dbd35697124c85a43f3b97aa054500b0534
+#4 resolve docker.io/library/node:19-bullseye-slim@sha256:f58f1fcf5c9ff9e3752993edb4ed6dbd35697124c85a43f3b97aa054500b0534 done
+#4 sha256:f03b40093957615593f2ed142961afb6b540507e0b47e3f7626ba5e02efbbbf1 7.34MB / 31.40MB 0.1s
+#4 sha256:0bfad7312c25e414fc3d0e3640a77bd4b5c74d2118595670999afef9758cb49b 0B / 4.19kB 0.1s
+#4 sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 0B / 46.62MB 0.1s
+#4 sha256:f58f1fcf5c9ff9e3752993edb4ed6dbd35697124c85a43f3b97aa054500b0534 1.21kB / 1.21kB done
+#4 sha256:63b5ca0f90dbaf64465a83d46276e133eab30410f642808d158bf98928811999 1.37kB / 1.37kB done
+#4 sha256:adbc02574b521bb652d771c8ac0282c724b9fe90c001f3bab0825c32092c9036 6.84kB / 6.84kB done
+#4 sha256:f03b40093957615593f2ed142961afb6b540507e0b47e3f7626ba5e02efbbbf1 23.07MB / 31.40MB 0.3s
+#4 sha256:0bfad7312c25e414fc3d0e3640a77bd4b5c74d2118595670999afef9758cb49b 4.19kB / 4.19kB 0.1s done
+#4 sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 34.60MB / 46.62MB 0.3s
+#4 sha256:477c7ebfb8500396b86c69952acb17b909a0a63da41e03dd4046e2c809722c6e 2.76MB / 2.76MB 0.2s done
+#4 sha256:8bb4aa3e51be63d4a2e5bd30ab9cd478a916ed3c5c0212a44b96fd743e0e0f2f 450B / 450B 0.3s done
+#4 sha256:f03b40093957615593f2ed142961afb6b540507e0b47e3f7626ba5e02efbbbf1 31.40MB / 31.40MB 0.4s
+#4 sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 46.62MB / 46.62MB 0.4s
+#4 extracting sha256:f03b40093957615593f2ed142961afb6b540507e0b47e3f7626ba5e02efbbbf1
+#4 sha256:f03b40093957615593f2ed142961afb6b540507e0b47e3f7626ba5e02efbbbf1 31.40MB / 31.40MB 0.4s done
+#4 sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 46.62MB / 46.62MB 0.4s done
+#4 extracting sha256:f03b40093957615593f2ed142961afb6b540507e0b47e3f7626ba5e02efbbbf1 1.2s done
+#4 extracting sha256:0bfad7312c25e414fc3d0e3640a77bd4b5c74d2118595670999afef9758cb49b done
+#4 extracting sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c
+#4 extracting sha256:56db04c463e993ac037103947cd590d52fcddcb17ad04285a0ca4c3510c0738c 1.9s done
+#4 extracting sha256:477c7ebfb8500396b86c69952acb17b909a0a63da41e03dd4046e2c809722c6e
+#4 extracting sha256:477c7ebfb8500396b86c69952acb17b909a0a63da41e03dd4046e2c809722c6e 0.1s done
+#4 extracting sha256:8bb4aa3e51be63d4a2e5bd30ab9cd478a916ed3c5c0212a44b96fd743e0e0f2f done
+#4 DONE 4.1s
+
+#5 [2/2] RUN :
+#5 DONE 0.2s
+
+#6 exporting to image
+#6 exporting layers
+#6 exporting layers 0.4s done
+#6 writing image sha256:8d5dfcd8851f24b2a3cb59e2892741e5d5c8c16134c0767bf7ec05126cbe41f6 done
+#6 naming to docker.io/library/example_js:test done
+#6 DONE 0.4s
 ====================================================================
-+/tmp/viash_test_example_js11335529274040376505/test_test/test_executable
++/tmp/viash_test_example_js5846209258977555921/test_test/test_executable
 &gt;&gt;&gt; Create input test file
 &gt;&gt;&gt; Run executable
 &gt;&gt;&gt; Check whether output file exists
 &gt;&gt;&gt; Check whether input and output file are the same
 &gt;&gt;&gt; Test finished successfully
 ====================================================================
-[32mSUCCESS! All 1 out of 1 test scripts succeeded![0m
+SUCCESS! All 1 out of 1 test scripts succeeded!
 Cleaning up temporary directory</code></pre>
 </div>
 </div>
@@ -1139,64 +1139,65 @@ Cleaning up temporary directory</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_python4244610587881794823'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_python9173344090074550387'
 ====================================================================
-+/tmp/viash_test_example_python4244610587881794823/build_executable/example_python ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_python9173344090074550387/build_executable/example_python ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_python:test' with Dockerfile
-[info] Running 'docker build -t example_python:test /tmp/viash_test_example_python4244610587881794823/build_executable -f /tmp/viash_test_example_python4244610587881794823/build_executable/tmp/dockerbuild-example_python-T4Y9Hq/Dockerfile'
-Sending build context to Docker daemon  37.38kB
+[info] Running 'docker build -t example_python:test /tmp/viash_test_example_python9173344090074550387/build_executable -f /tmp/viash_test_example_python9173344090074550387/build_executable/tmp/dockerbuild-example_python-OEOpqK/Dockerfile'
+#0 building with "default" instance using docker driver
 
-Step 1/6 : FROM python:3.10-slim
-3.10-slim: Pulling from library/python
-648e0aadf75a: Pulling fs layer
-81f178b24f84: Pulling fs layer
-bdc8959b1f25: Pulling fs layer
-552d6c178bfa: Pulling fs layer
-c21fda33f7d2: Pulling fs layer
-552d6c178bfa: Waiting
-c21fda33f7d2: Waiting
-81f178b24f84: Verifying Checksum
-81f178b24f84: Download complete
-bdc8959b1f25: Verifying Checksum
-bdc8959b1f25: Download complete
-648e0aadf75a: Verifying Checksum
-648e0aadf75a: Download complete
-552d6c178bfa: Verifying Checksum
-552d6c178bfa: Download complete
-c21fda33f7d2: Verifying Checksum
-c21fda33f7d2: Download complete
-648e0aadf75a: Pull complete
-81f178b24f84: Pull complete
-bdc8959b1f25: Pull complete
-552d6c178bfa: Pull complete
-c21fda33f7d2: Pull complete
-Digest: sha256:733f815abad0c75899a9c83168c6feb2abd2773bb5e00609d9556cbc54aa00b1
-Status: Downloaded newer image for python:3.10-slim
- ---&gt; b3ff7c1d3fdb
-Step 2/6 : ENTRYPOINT []
- ---&gt; Running in dbe21bee2360
-Removing intermediate container dbe21bee2360
- ---&gt; cbbbc48dac3b
-Step 3/6 : RUN :
- ---&gt; Running in 924cb26d5732
-Removing intermediate container 924cb26d5732
- ---&gt; 2f1a52cf5316
-Step 4/6 : LABEL org.opencontainers.image.description="Companion container for running component example_python"
- ---&gt; Running in ed9f0b856d7d
-Removing intermediate container ed9f0b856d7d
- ---&gt; e285c4f77ca4
-Step 5/6 : LABEL org.opencontainers.image.created="2023-07-28T09:53:49Z"
- ---&gt; Running in f42c92398af5
-Removing intermediate container f42c92398af5
- ---&gt; c1a7fdae005b
-Step 6/6 : LABEL org.opencontainers.image.version="test"
- ---&gt; Running in cadb70997358
-Removing intermediate container cadb70997358
- ---&gt; e45172014461
-Successfully built e45172014461
-Successfully tagged example_python:test
+#1 [internal] load .dockerignore
+#1 transferring context: 2B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 296B done
+#2 DONE 0.0s
+
+#3 [auth] library/python:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#4 [internal] load metadata for docker.io/library/python:3.10-slim
+#4 DONE 0.6s
+
+#5 [1/2] FROM docker.io/library/python:3.10-slim@sha256:4bd9a0e5da619b155a214342bb4fdc774a947fec9061016a123fa4073431c9cb
+#5 resolve docker.io/library/python:3.10-slim@sha256:4bd9a0e5da619b155a214342bb4fdc774a947fec9061016a123fa4073431c9cb done
+#5 sha256:51d1f07906b71fd60ac43c61035514996a8ad8dbfd39d4f570ac5446b064ee5d 3.51MB / 3.51MB 0.1s done
+#5 sha256:c0d8da8ab021fce179c54d4f899b83f7fdb5d5bd7ec73b737bcb3f60c00908f9 0B / 12.38MB 0.1s
+#5 sha256:ce524da9d5723ff0cc7d540777cd1202c07fad525cfada0c16924d447d482d5f 0B / 242B 0.1s
+#5 sha256:4bd9a0e5da619b155a214342bb4fdc774a947fec9061016a123fa4073431c9cb 1.65kB / 1.65kB done
+#5 sha256:4a5330e9f281d53214299d80d98198dcda3ce97ada3f3d48f2e617d43a6e15b3 1.37kB / 1.37kB done
+#5 sha256:152de85cbe2a810bdae6e2a196cad2510872df31d309a0c65bfd68f917f270d1 6.93kB / 6.93kB done
+#5 sha256:e1caac4eb9d2ec24aa3618e5992208321a92492aef5fef5eb9e470895f771c56 5.24MB / 29.12MB 0.1s
+#5 sha256:c0d8da8ab021fce179c54d4f899b83f7fdb5d5bd7ec73b737bcb3f60c00908f9 12.38MB / 12.38MB 0.2s done
+#5 sha256:ce524da9d5723ff0cc7d540777cd1202c07fad525cfada0c16924d447d482d5f 242B / 242B 0.2s done
+#5 sha256:e1caac4eb9d2ec24aa3618e5992208321a92492aef5fef5eb9e470895f771c56 22.02MB / 29.12MB 0.2s
+#5 sha256:d0d45da63dd11d6510595eb29c9614e5f3e669e38bfbf94a362ff156d81739ca 0B / 3.36MB 0.2s
+#5 sha256:e1caac4eb9d2ec24aa3618e5992208321a92492aef5fef5eb9e470895f771c56 29.12MB / 29.12MB 0.3s done
+#5 sha256:d0d45da63dd11d6510595eb29c9614e5f3e669e38bfbf94a362ff156d81739ca 3.36MB / 3.36MB 0.2s done
+#5 extracting sha256:e1caac4eb9d2ec24aa3618e5992208321a92492aef5fef5eb9e470895f771c56
+#5 extracting sha256:e1caac4eb9d2ec24aa3618e5992208321a92492aef5fef5eb9e470895f771c56 1.0s done
+#5 extracting sha256:51d1f07906b71fd60ac43c61035514996a8ad8dbfd39d4f570ac5446b064ee5d
+#5 extracting sha256:51d1f07906b71fd60ac43c61035514996a8ad8dbfd39d4f570ac5446b064ee5d 0.1s done
+#5 extracting sha256:c0d8da8ab021fce179c54d4f899b83f7fdb5d5bd7ec73b737bcb3f60c00908f9
+#5 extracting sha256:c0d8da8ab021fce179c54d4f899b83f7fdb5d5bd7ec73b737bcb3f60c00908f9 0.4s done
+#5 extracting sha256:ce524da9d5723ff0cc7d540777cd1202c07fad525cfada0c16924d447d482d5f
+#5 extracting sha256:ce524da9d5723ff0cc7d540777cd1202c07fad525cfada0c16924d447d482d5f done
+#5 extracting sha256:d0d45da63dd11d6510595eb29c9614e5f3e669e38bfbf94a362ff156d81739ca 0.1s
+#5 extracting sha256:d0d45da63dd11d6510595eb29c9614e5f3e669e38bfbf94a362ff156d81739ca 0.2s done
+#5 DONE 2.4s
+
+#6 [2/2] RUN :
+#6 DONE 0.2s
+
+#7 exporting to image
+#7 exporting layers
+#7 exporting layers 0.3s done
+#7 writing image sha256:06f08642571be627c404187256fd6586bf0216ceadaca54c5662b7c413be9d29 done
+#7 naming to docker.io/library/example_python:test done
+#7 DONE 0.3s
 ====================================================================
-+/tmp/viash_test_example_python4244610587881794823/test_test/test_executable
++/tmp/viash_test_example_python9173344090074550387/test_test/test_executable
 Copying 'foo.txt' to 'bar.txt'.
 &gt;&gt;&gt; Create input test file
 &gt;&gt;&gt; Run executable
@@ -1204,7 +1205,7 @@ Copying 'foo.txt' to 'bar.txt'.
 &gt;&gt;&gt; Check whether input and output file are the same
 &gt;&gt;&gt; Test finished successfully
 ====================================================================
-[32mSUCCESS! All 1 out of 1 test scripts succeeded![0m
+SUCCESS! All 1 out of 1 test scripts succeeded!
 Cleaning up temporary directory</code></pre>
 </div>
 </div>
@@ -1213,54 +1214,70 @@ Cleaning up temporary directory</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_r8874932501019478237'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_r12353798965322188533'
 ====================================================================
-+/tmp/viash_test_example_r8874932501019478237/build_executable/example_r ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_r12353798965322188533/build_executable/example_r ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_r:test' with Dockerfile
-[info] Running 'docker build -t example_r:test /tmp/viash_test_example_r8874932501019478237/build_executable -f /tmp/viash_test_example_r8874932501019478237/build_executable/tmp/dockerbuild-example_r-lhchjv/Dockerfile'
-Sending build context to Docker daemon  37.89kB
+[info] Running 'docker build -t example_r:test /tmp/viash_test_example_r12353798965322188533/build_executable -f /tmp/viash_test_example_r12353798965322188533/build_executable/tmp/dockerbuild-example_r-VWEbKe/Dockerfile'
+#0 building with "default" instance using docker driver
 
-Step 1/6 : FROM eddelbuettel/r2u:22.04
-22.04: Pulling from eddelbuettel/r2u
-e96e057aae67: Pulling fs layer
-4c487cbab07b: Pulling fs layer
-7a00de0f723d: Pulling fs layer
-e96e057aae67: Verifying Checksum
-e96e057aae67: Download complete
-4c487cbab07b: Verifying Checksum
-4c487cbab07b: Download complete
-7a00de0f723d: Verifying Checksum
-7a00de0f723d: Download complete
-e96e057aae67: Pull complete
-4c487cbab07b: Pull complete
-7a00de0f723d: Pull complete
-Digest: sha256:9cd35dcd5c3b1fbb4cecdf384ccb77c142410fac393e836662fbb7b5400dc614
-Status: Downloaded newer image for eddelbuettel/r2u:22.04
- ---&gt; bcc5a629ed6d
-Step 2/6 : ENTRYPOINT []
- ---&gt; Running in f0df3217ee3e
-Removing intermediate container f0df3217ee3e
- ---&gt; 35e5eea38b38
-Step 3/6 : RUN :
- ---&gt; Running in 0de2a3788137
-Removing intermediate container 0de2a3788137
- ---&gt; d75535968317
-Step 4/6 : LABEL org.opencontainers.image.description="Companion container for running component example_r"
- ---&gt; Running in 0edfa069b942
-Removing intermediate container 0edfa069b942
- ---&gt; 5c058b2a1e92
-Step 5/6 : LABEL org.opencontainers.image.created="2023-07-28T09:54:04Z"
- ---&gt; Running in 538dd647c013
-Removing intermediate container 538dd647c013
- ---&gt; 0752fe179ce1
-Step 6/6 : LABEL org.opencontainers.image.version="test"
- ---&gt; Running in ddfd65757987
-Removing intermediate container ddfd65757987
- ---&gt; da9c98b10eac
-Successfully built da9c98b10eac
-Successfully tagged example_r:test
+#1 [internal] load .dockerignore
+#1 transferring context: 2B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 297B done
+#2 DONE 0.0s
+
+#3 [auth] eddelbuettel/r2u:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#4 [internal] load metadata for docker.io/eddelbuettel/r2u:22.04
+#4 DONE 0.4s
+
+#5 [1/2] FROM docker.io/eddelbuettel/r2u:22.04@sha256:ad84e9056a4b097c162124a62f5d3d15c86a8297d1e632810e2d591cd57ce05b
+#5 resolve docker.io/eddelbuettel/r2u:22.04@sha256:ad84e9056a4b097c162124a62f5d3d15c86a8297d1e632810e2d591cd57ce05b done
+#5 sha256:8383e8747b1b7933dc5292b150502df14ad9db2396682efc1fc596d8af58e2b3 5.59kB / 5.59kB done
+#5 sha256:e96e057aae67380a4ddb16c337c5c3669d97fdff69ec537f02aa2cc30d814281 9.44MB / 30.43MB 0.1s
+#5 sha256:a8390eea866c5e7d3f517956431f222ee84a6a9b027dcb3216315edab56fecd5 0B / 40.46MB 0.1s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 0B / 239.79MB 0.1s
+#5 sha256:ad84e9056a4b097c162124a62f5d3d15c86a8297d1e632810e2d591cd57ce05b 954B / 954B done
+#5 sha256:e96e057aae67380a4ddb16c337c5c3669d97fdff69ec537f02aa2cc30d814281 27.26MB / 30.43MB 0.2s
+#5 sha256:a8390eea866c5e7d3f517956431f222ee84a6a9b027dcb3216315edab56fecd5 16.78MB / 40.46MB 0.2s
+#5 sha256:e96e057aae67380a4ddb16c337c5c3669d97fdff69ec537f02aa2cc30d814281 30.43MB / 30.43MB 0.3s done
+#5 sha256:a8390eea866c5e7d3f517956431f222ee84a6a9b027dcb3216315edab56fecd5 40.46MB / 40.46MB 0.4s done
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 41.94MB / 239.79MB 0.4s
+#5 extracting sha256:e96e057aae67380a4ddb16c337c5c3669d97fdff69ec537f02aa2cc30d814281
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 58.72MB / 239.79MB 0.6s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 72.35MB / 239.79MB 0.7s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 90.18MB / 239.79MB 0.8s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 111.15MB / 239.79MB 1.0s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 125.83MB / 239.79MB 1.1s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 159.38MB / 239.79MB 1.3s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 174.06MB / 239.79MB 1.4s
+#5 extracting sha256:e96e057aae67380a4ddb16c337c5c3669d97fdff69ec537f02aa2cc30d814281 1.1s done
+#5 extracting sha256:a8390eea866c5e7d3f517956431f222ee84a6a9b027dcb3216315edab56fecd5
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 188.74MB / 239.79MB 1.5s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 215.14MB / 239.79MB 1.7s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 231.74MB / 239.79MB 1.8s
+#5 sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 239.79MB / 239.79MB 2.2s done
+#5 extracting sha256:a8390eea866c5e7d3f517956431f222ee84a6a9b027dcb3216315edab56fecd5 0.7s done
+#5 extracting sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123
+#5 extracting sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 5.1s
+#5 extracting sha256:145fd72d096e955feaeafe260d4cf761bd088eebe134ab0c65decf838987a123 5.9s done
+#5 DONE 9.9s
+
+#6 [2/2] RUN :
+#6 DONE 0.2s
+
+#7 exporting to image
+#7 exporting layers
+#7 exporting layers 0.7s done
+#7 writing image sha256:fb62743df89e6b927a7dc8b4edc0be407250c038b09b1fae440bcdcf3e2f0cef done
+#7 naming to docker.io/library/example_r:test done
+#7 DONE 0.7s
 ====================================================================
-+/tmp/viash_test_example_r8874932501019478237/test_test/test_executable
++/tmp/viash_test_example_r12353798965322188533/test_test/test_executable
 &gt;&gt;&gt; Create input test file
 &gt;&gt;&gt; Run executable
 Copying 'foo.txt' to 'bar.txt'.
@@ -1269,7 +1286,7 @@ Copying 'foo.txt' to 'bar.txt'.
 &gt;&gt;&gt; Check whether input and output file are the same
 &gt;&gt;&gt; Test finished successfully
 ====================================================================
-[32mSUCCESS! All 1 out of 1 test scripts succeeded![0m
+SUCCESS! All 1 out of 1 test scripts succeeded!
 Cleaning up temporary directory</code></pre>
 </div>
 </div>
@@ -1278,99 +1295,118 @@ Cleaning up temporary directory</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> test config.vsh.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_scala11913901993975108547'
+<pre><code>Running tests in temporary directory: '/tmp/viash_test_example_scala12857325844975179323'
 ====================================================================
-+/tmp/viash_test_example_scala11913901993975108547/build_executable/example_scala ---verbosity 6 ---setup cachedbuild
++/tmp/viash_test_example_scala12857325844975179323/build_executable/example_scala ---verbosity 6 ---setup cachedbuild
 [notice] Building container 'example_scala:test' with Dockerfile
-[info] Running 'docker build -t example_scala:test /tmp/viash_test_example_scala11913901993975108547/build_executable -f /tmp/viash_test_example_scala11913901993975108547/build_executable/tmp/dockerbuild-example_scala-Gp7i1i/Dockerfile'
-Sending build context to Docker daemon  37.38kB
+[info] Running 'docker build -t example_scala:test /tmp/viash_test_example_scala12857325844975179323/build_executable -f /tmp/viash_test_example_scala12857325844975179323/build_executable/tmp/dockerbuild-example_scala-B4TgJb/Dockerfile'
+#0 building with "default" instance using docker driver
 
-Step 1/6 : FROM sbtscala/scala-sbt:eclipse-temurin-19_36_1.7.2_2.13.10
-eclipse-temurin-19_36_1.7.2_2.13.10: Pulling from sbtscala/scala-sbt
-301a8b74f71f: Pulling fs layer
-c5c735a83dbd: Pulling fs layer
-5fb9fa7513e6: Pulling fs layer
-2af8e2a543d8: Pulling fs layer
-14d68137d870: Pulling fs layer
-320659737461: Pulling fs layer
-1dea7716181a: Pulling fs layer
-c9480a4b593f: Pulling fs layer
-812216efaf87: Pulling fs layer
-4f4fb700ef54: Pulling fs layer
-bb7a0c6ab9c1: Pulling fs layer
-2c0021742fe2: Pulling fs layer
-2af8e2a543d8: Waiting
-14d68137d870: Waiting
-320659737461: Waiting
-1dea7716181a: Waiting
-c9480a4b593f: Waiting
-812216efaf87: Waiting
-4f4fb700ef54: Waiting
-bb7a0c6ab9c1: Waiting
-2c0021742fe2: Waiting
-c5c735a83dbd: Verifying Checksum
-c5c735a83dbd: Download complete
-301a8b74f71f: Verifying Checksum
-301a8b74f71f: Download complete
-2af8e2a543d8: Verifying Checksum
-2af8e2a543d8: Download complete
-14d68137d870: Verifying Checksum
-14d68137d870: Download complete
-320659737461: Verifying Checksum
-320659737461: Download complete
-c9480a4b593f: Verifying Checksum
-c9480a4b593f: Download complete
-1dea7716181a: Verifying Checksum
-1dea7716181a: Download complete
-5fb9fa7513e6: Verifying Checksum
-5fb9fa7513e6: Download complete
-4f4fb700ef54: Verifying Checksum
-4f4fb700ef54: Download complete
-812216efaf87: Verifying Checksum
-812216efaf87: Download complete
-2c0021742fe2: Verifying Checksum
-2c0021742fe2: Download complete
-301a8b74f71f: Pull complete
-bb7a0c6ab9c1: Verifying Checksum
-bb7a0c6ab9c1: Download complete
-c5c735a83dbd: Pull complete
-5fb9fa7513e6: Pull complete
-2af8e2a543d8: Pull complete
-14d68137d870: Pull complete
-320659737461: Pull complete
-1dea7716181a: Pull complete
-c9480a4b593f: Pull complete
-812216efaf87: Pull complete
-4f4fb700ef54: Pull complete
-bb7a0c6ab9c1: Pull complete
-2c0021742fe2: Pull complete
-Digest: sha256:440234e283754375d5ab6bcb35e2d470f9dabeaaeb639d8c0708fac2d3707e0c
-Status: Downloaded newer image for sbtscala/scala-sbt:eclipse-temurin-19_36_1.7.2_2.13.10
- ---&gt; 76808e2ea8df
-Step 2/6 : ENTRYPOINT []
- ---&gt; Running in 6915ef907231
-Removing intermediate container 6915ef907231
- ---&gt; 8a4b5c0719cc
-Step 3/6 : RUN :
- ---&gt; Running in b7c55168f1e5
-Removing intermediate container b7c55168f1e5
- ---&gt; 2ab7c36c8ca8
-Step 4/6 : LABEL org.opencontainers.image.description="Companion container for running component example_scala"
- ---&gt; Running in a3debfc29b4d
-Removing intermediate container a3debfc29b4d
- ---&gt; eb090caf7059
-Step 5/6 : LABEL org.opencontainers.image.created="2023-07-28T09:54:29Z"
- ---&gt; Running in 0369e9a88544
-Removing intermediate container 0369e9a88544
- ---&gt; 88ed2c8872c2
-Step 6/6 : LABEL org.opencontainers.image.version="test"
- ---&gt; Running in 3bc3c8b518e4
-Removing intermediate container 3bc3c8b518e4
- ---&gt; 9a8d5ab86e5a
-Successfully built 9a8d5ab86e5a
-Successfully tagged example_scala:test
+#1 [internal] load .dockerignore
+#1 transferring context: 2B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 333B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/sbtscala/scala-sbt:eclipse-temurin-19_36_1.7.2_2.13.10
+#3 DONE 0.5s
+
+#4 [1/2] FROM docker.io/sbtscala/scala-sbt:eclipse-temurin-19_36_1.7.2_2.13.10@sha256:440234e283754375d5ab6bcb35e2d470f9dabeaaeb639d8c0708fac2d3707e0c
+#4 resolve docker.io/sbtscala/scala-sbt:eclipse-temurin-19_36_1.7.2_2.13.10@sha256:440234e283754375d5ab6bcb35e2d470f9dabeaaeb639d8c0708fac2d3707e0c done
+#4 sha256:76808e2ea8df2d9cac1d275426e51a2190369f706076c55ac2da3823bef0a019 10.89kB / 10.89kB done
+#4 sha256:301a8b74f71f85f3a31e9c7e7fedd5b001ead5bcf895bc2911c1d260e06bd987 6.34MB / 30.43MB 0.1s
+#4 sha256:c5c735a83dbd58e1c83f8d52abdc51068e27c00405f53d59802d4954a6b5398a 0B / 16.99MB 0.1s
+#4 sha256:440234e283754375d5ab6bcb35e2d470f9dabeaaeb639d8c0708fac2d3707e0c 743B / 743B done
+#4 sha256:06478611ba16efc6663ccf5f22a29c990c53aed6848bc58c54c67dc32d8aef13 3.04kB / 3.04kB done
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 0B / 200.85MB 0.1s
+#4 sha256:301a8b74f71f85f3a31e9c7e7fedd5b001ead5bcf895bc2911c1d260e06bd987 24.12MB / 30.43MB 0.2s
+#4 sha256:c5c735a83dbd58e1c83f8d52abdc51068e27c00405f53d59802d4954a6b5398a 8.39MB / 16.99MB 0.2s
+#4 sha256:301a8b74f71f85f3a31e9c7e7fedd5b001ead5bcf895bc2911c1d260e06bd987 30.43MB / 30.43MB 0.3s done
+#4 sha256:c5c735a83dbd58e1c83f8d52abdc51068e27c00405f53d59802d4954a6b5398a 16.99MB / 16.99MB 0.3s done
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 15.73MB / 200.85MB 0.3s
+#4 sha256:2af8e2a543d81b57575a2e457bd1e98ffc061b15639dac3be5ff6c2702b9ea1a 0B / 175B 0.3s
+#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 0B / 29.75MB 0.3s
+#4 extracting sha256:301a8b74f71f85f3a31e9c7e7fedd5b001ead5bcf895bc2911c1d260e06bd987
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 28.31MB / 200.85MB 0.4s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 45.09MB / 200.85MB 0.6s
+#4 sha256:2af8e2a543d81b57575a2e457bd1e98ffc061b15639dac3be5ff6c2702b9ea1a 175B / 175B 0.5s done
+#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 3.15MB / 29.75MB 0.6s
+#4 sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 0B / 23.71MB 0.6s
+#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 6.29MB / 29.75MB 0.7s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 61.87MB / 200.85MB 0.8s
+#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 16.78MB / 29.75MB 0.8s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 77.59MB / 200.85MB 1.0s
+#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 29.75MB / 29.75MB 1.0s
+#4 sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 13.63MB / 23.71MB 1.0s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 91.23MB / 200.85MB 1.1s
+#4 sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 29.75MB / 29.75MB 1.0s done
+#4 sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 23.71MB / 23.71MB 1.1s
+#4 sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 3.15MB / 40.48MB 1.1s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 122.68MB / 200.85MB 1.3s
+#4 sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 23.71MB / 23.71MB 1.1s done
+#4 sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 22.02MB / 40.48MB 1.3s
+#4 sha256:c9480a4b593fb5abc117a5e01c80d8495c9fd89e743757730c712545f425c9f3 183B / 183B 1.3s done
+#4 sha256:812216efaf878f5ff8086b6efdccec1cb090228107efd62db47d048c927c4f6a 0B / 4.33kB 1.3s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 139.46MB / 200.85MB 1.4s
+#4 extracting sha256:301a8b74f71f85f3a31e9c7e7fedd5b001ead5bcf895bc2911c1d260e06bd987 1.1s done
+#4 sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 26.21MB / 40.48MB 1.4s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 156.05MB / 200.85MB 1.6s
+#4 sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 40.48MB / 40.48MB 1.6s done
+#4 sha256:812216efaf878f5ff8086b6efdccec1cb090228107efd62db47d048c927c4f6a 4.33kB / 4.33kB 1.5s done
+#4 sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 32B / 32B 1.5s done
+#4 extracting sha256:c5c735a83dbd58e1c83f8d52abdc51068e27c00405f53d59802d4954a6b5398a
+#4 sha256:2c0021742fe2b9491f62c3d89da10492c175081bd17d77efd0f22a298c37ad64 0B / 222B 1.6s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 0B / 214.15MB 1.6s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 170.92MB / 200.85MB 1.7s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 13.63MB / 214.15MB 1.7s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 185.60MB / 200.85MB 1.8s
+#4 sha256:2c0021742fe2b9491f62c3d89da10492c175081bd17d77efd0f22a298c37ad64 222B / 222B 1.8s done
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 27.26MB / 214.15MB 1.8s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 198.18MB / 200.85MB 1.9s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 42.99MB / 214.15MB 1.9s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 59.77MB / 214.15MB 2.0s
+#4 sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 200.85MB / 200.85MB 2.1s done
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 100.66MB / 214.15MB 2.3s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 114.29MB / 214.15MB 2.4s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 127.93MB / 214.15MB 2.5s
+#4 extracting sha256:c5c735a83dbd58e1c83f8d52abdc51068e27c00405f53d59802d4954a6b5398a 1.1s done
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 172.71MB / 214.15MB 2.8s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 194.49MB / 214.15MB 2.9s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 214.15MB / 214.15MB 3.1s
+#4 sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 214.15MB / 214.15MB 3.2s done
+#4 extracting sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 0.1s
+#4 extracting sha256:5fb9fa7513e6a72bf7daf0a75e97c441f1ed7ff69c8609d1c429fdf3a6dc846b 2.0s done
+#4 extracting sha256:2af8e2a543d81b57575a2e457bd1e98ffc061b15639dac3be5ff6c2702b9ea1a
+#4 extracting sha256:2af8e2a543d81b57575a2e457bd1e98ffc061b15639dac3be5ff6c2702b9ea1a done
+#4 extracting sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 0.1s
+#4 extracting sha256:14d68137d870fdc4bc849fbe5c5571ca3e6d9a7b2c5bf1c7e928ccf716dd3b4a 0.5s done
+#4 extracting sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a
+#4 extracting sha256:320659737461e071e3d809231861a7487daaa79805c57f97015ff020f34a939a 0.1s done
+#4 extracting sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb
+#4 extracting sha256:1dea7716181a505cea41832dc84691b858a8f64471cb352d8c29cec06e428aeb 1.2s done
+#4 extracting sha256:c9480a4b593fb5abc117a5e01c80d8495c9fd89e743757730c712545f425c9f3
+#4 extracting sha256:c9480a4b593fb5abc117a5e01c80d8495c9fd89e743757730c712545f425c9f3 done
+#4 extracting sha256:812216efaf878f5ff8086b6efdccec1cb090228107efd62db47d048c927c4f6a done
+#4 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 done
+#4 extracting sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 0.1s
+#4 extracting sha256:bb7a0c6ab9c129a399a3c8f034cd0de30406766d61a6694f150b4ab9e64c560c 1.6s done
+#4 extracting sha256:2c0021742fe2b9491f62c3d89da10492c175081bd17d77efd0f22a298c37ad64
+#4 extracting sha256:2c0021742fe2b9491f62c3d89da10492c175081bd17d77efd0f22a298c37ad64 done
+#4 DONE 10.1s
+
+#5 [2/2] RUN :
+#5 DONE 0.2s
+
+#6 exporting to image
+#6 exporting layers
+#6 exporting layers 0.5s done
+#6 writing image sha256:fd32492883f7e0dbcb750728f03dc2655a0072ec96fbb8f576ee4df585bddc85 done
+#6 naming to docker.io/library/example_scala:test done
+#6 DONE 0.5s
 ====================================================================
-+/tmp/viash_test_example_scala11913901993975108547/test_test/test_executable
++/tmp/viash_test_example_scala12857325844975179323/test_test/test_executable
 warning: 1 deprecation
 warning: 1 deprecation (since 2.13.3)
 warning: 2 deprecations in total; re-run with -deprecation for details
@@ -1382,7 +1418,7 @@ Copying 'foo.txt' to 'bar.txt'.
 &gt;&gt;&gt; Check whether input and output file are the same
 &gt;&gt;&gt; Test finished successfully
 ====================================================================
-[32mSUCCESS! All 1 out of 1 test scripts succeeded![0m
+SUCCESS! All 1 out of 1 test scripts succeeded!
 Cleaning up temporary directory</code></pre>
 </div>
 </div>
@@ -1415,35 +1451,9 @@ Cleaning up temporary directory</code></pre>
 </main> <!-- /main -->
 <script type="text/javascript">
 // Anything in this script block will be included on every page
-
-function createVersionLink(version) {
-  var tag = document.createElement("li");
-  var link = document.createElement("a");
-  link.setAttribute("class", "dropdown-item");
-  link.setAttribute("href", "../pr-preview/" + version.link + "/");
-  link.setAttribute("rel", "");
-  link.setAttribute("target", "");
-  tag.appendChild(link);
-  var span = document.createElement("span");
-  span.setAttribute("class", "dropdown-text");
-  link.appendChild(span);
-  span.innerHTML = version.name;
-  return tag;
-}
-
-function addVersionLinks(json) {
-  var element = document.getElementById("nav-menu-version");
-  var list = element.nextElementSibling;
-  for (var i = 0; i < json.versions.length; i++) {
-    var version = json.versions[i];
-    list.appendChild( createVersionLink(version) );
-  }
-}
-
-fetch('/pr-preview/pr-59/versions.json')
-    .then((response) => response.json())
-    .then((json) => addVersionLinks(json));
-
+  const scriptTag = document.createElement("script");
+  scriptTag.src = "/versions.js";
+  document.body.appendChild(scriptTag);
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1524,10 +1534,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/viash\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1537,8 +1564,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1551,6 +1587,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1594,6 +1749,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1619,6 +1775,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1676,30 +1858,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("https:\/\/viash\.io");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-      }
-    }
 });
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../guide/component/variables.html" class="pagination-link">
+      <a href="../../guide/component/variables.html" class="pagination-link" aria-label="Par and meta variables">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Par and meta variables</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../guide/project/index.html" class="pagination-link">
+      <a href="../../guide/project/index.html" class="pagination-link" aria-label="Project">
         <span class="nav-page-text">Project</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -1713,18 +1881,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="../../about.html">About</a>
+    <a class="nav-link" href="../../about.html">
+<p>About</p>
+</a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="../../privacy.html">Privacy Policy</a>
+    <a class="nav-link" href="../../privacy.html">
+<p>Privacy Policy</p>
+</a>
   </li>  
 </ul>
-    </div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/viash-io/website/edit/main/guide/component/unit-testing.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/viash-io/website/blob/main/guide/component/unit-testing.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/viash-io/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 

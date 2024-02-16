@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Viash - Create a module</title>
+<title>Viash - Create and use a module</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../guide/nextflow_vdsl3/create-a-pipeline.html" rel="next">
-<link href="../../guide/nextflow_vdsl3/introduction.html" rel="prev">
+<link href="../../guide/nextflow_vdsl3/index.html" rel="prev">
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -82,7 +82,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -91,6 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -108,18 +115,19 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Viash - Create a module">
+<meta property="og:title" content="Viash - Create and use a module">
 <meta property="og:description" content="">
-<meta property="og:site-name" content="Viash">
+<meta property="og:image" content="https://viash.io/guide/nextflow_vdsl3/viash.png">
+<meta property="og:site_name" content="Viash">
 </head>
 
 <body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     <img src="../../viash.png" alt="" class="navbar-logo">
     </a>
@@ -131,46 +139,46 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">Overview</span></a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../installation/index.html" rel="" target="">
- <span class="menu-text">Installation</span></a>
+    <a class="nav-link" href="../../installation/index.html"> 
+<span class="menu-text">Installation</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../quickstart/index.html" rel="" target="">
- <span class="menu-text">Quickstart</span></a>
+    <a class="nav-link" href="../../quickstart/index.html"> 
+<span class="menu-text">Quickstart</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../guide/index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Guide</span></a>
+    <a class="nav-link active" href="../../guide/index.html" aria-current="page"> 
+<span class="menu-text">Guide</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../reference/index.html" rel="" target="">
- <span class="menu-text">Reference</span></a>
+    <a class="nav-link" href="../../reference/index.html"> 
+<span class="menu-text">Reference</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../blog/index.html" rel="" target="">
- <span class="menu-text">Blog</span></a>
+    <a class="nav-link" href="../../blog/index.html"> 
+<span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Help</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-help">    
         <li>
-    <a class="dropdown-item" href="https://github.com/viash-io/viash/issues" rel="" target=""><i class="bi bi-bug" role="img">
+    <a class="dropdown-item" href="https://github.com/viash-io/viash/issues"><i class="bi bi-bug" role="img">
 </i> 
  <span class="dropdown-text">Report a Viash issue</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/viash-io/website/issues" rel="" target=""><i class="bi bi-bug" role="img">
+    <a class="dropdown-item" href="https://github.com/viash-io/website/issues"><i class="bi bi-bug" role="img">
 </i> 
  <span class="dropdown-text">Report a website issue</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../cheatsheet/viash_cheatsheet_v1_1.pdf" rel="" target=""><i class="bi bi-card-list" role="img">
+    <a class="dropdown-item" href="../../cheatsheet/viash_cheatsheet_v1_1.pdf"><i class="bi bi-card-list" role="img">
 </i> 
  <span class="dropdown-text">Cheat sheet</span></a>
   </li>  
@@ -179,42 +187,38 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-version" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-version" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Version</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-version">    
-        <li>
-    <a class="dropdown-item" href="../../" rel="" target="">
- <span class="dropdown-text">Latest</span></a>
-  </li>  
     </ul>
   </li>
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/viash-io/viash" rel="" target=""><i class="bi bi-github" role="img" aria-label="Viash GitHub">
+    <a class="nav-link" href="https://github.com/viash-io/viash"> <i class="bi bi-github" role="img" aria-label="Viash GitHub">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../guide/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../../guide/nextflow_vdsl3/index.html">Nextflow VDSL3</a></li><li class="breadcrumb-item"><a href="../../guide/nextflow_vdsl3/create-a-module.html">Create a module</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../guide/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../../guide/nextflow_vdsl3/index.html">Nextflow VDSL3</a></li><li class="breadcrumb-item"><a href="../../guide/nextflow_vdsl3/create-and-use-a-module.html">Create and use a module</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
@@ -319,14 +323,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../guide/nextflow_vdsl3/introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../guide/nextflow_vdsl3/create-a-module.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Create a module</span></a>
+  <a href="../../guide/nextflow_vdsl3/create-and-use-a-module.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Create and use a module</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -342,27 +340,26 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#build-the-vdsl3-module" id="toc-build-the-vdsl3-module" class="nav-link active" data-scroll-target="#build-the-vdsl3-module">Build the VDSL3 module</a></li>
-  <li><a href="#module-as-a-standalone-pipeline" id="toc-module-as-a-standalone-pipeline" class="nav-link" data-scroll-target="#module-as-a-standalone-pipeline">Module as a standalone pipeline</a></li>
-  <li><a href="#passing-a-parameter-list" id="toc-passing-a-parameter-list" class="nav-link" data-scroll-target="#passing-a-parameter-list">Passing a parameter list</a></li>
-  <li><a href="#module-as-part-of-a-pipeline" id="toc-module-as-part-of-a-pipeline" class="nav-link" data-scroll-target="#module-as-part-of-a-pipeline">Module as part of a pipeline</a></li>
-  <li><a href="#improvements-over-standard-nextflow-modules" id="toc-improvements-over-standard-nextflow-modules" class="nav-link" data-scroll-target="#improvements-over-standard-nextflow-modules">Improvements over standard Nextflow modules</a></li>
+  <li><a href="#generate-module" id="toc-generate-module" class="nav-link active" data-scroll-target="#generate-module">Generating a VDSL3 module</a></li>
+  <li><a href="#run-module" id="toc-run-module" class="nav-link" data-scroll-target="#run-module">Running a module as a standalone pipeline</a></li>
+  <li><a href="#param-list" id="toc-param-list" class="nav-link" data-scroll-target="#param-list">Passing a parameter list</a></li>
+  <li><a href="#include-module" id="toc-include-module" class="nav-link" data-scroll-target="#include-module">Module as part of a pipeline</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/viash-io/website/edit/main/guide/nextflow_vdsl3/create-a-module.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/viash-io/website/blob/main/guide/nextflow_vdsl3/create-a-module.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/viash-io/website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/viash-io/website/edit/main/guide/nextflow_vdsl3/create-and-use-a-module.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/viash-io/website/blob/main/guide/nextflow_vdsl3/create-and-use-a-module.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/viash-io/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../guide/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../../guide/nextflow_vdsl3/index.html">Nextflow VDSL3</a></li><li class="breadcrumb-item"><a href="../../guide/nextflow_vdsl3/create-and-use-a-module.html">Create and use a module</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Create a module</h1>
+<h1 class="title">Create and use a module</h1>
 </div>
 
 
@@ -375,7 +372,9 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
   </div>
   
 
+
 </header>
+
 
 <script type="text/javascript">
 let langDict = {
@@ -599,13 +598,9 @@ function invertDictionary(dict){
 </div>
 </div>
 </div>
-<section id="build-the-vdsl3-module" class="level2">
-<h2 class="anchored" data-anchor-id="build-the-vdsl3-module">Build the VDSL3 module</h2>
+<section id="generate-module" class="level2">
+<h2 class="anchored" data-anchor-id="generate-module">Generating a VDSL3 module</h2>
 <p>We will now turn the Viash component into a VDSL3 module. By default, the <code>viash build</code> command will select the first platform in the list of platforms. To select the <code>nextflow</code> platform, use the <code>--platform nextflow</code> argument, or <code>-p nextflow</code> for short.</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Bash</a></li></ul>
-<div class="tab-content">
-<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">-o</span> target <span class="at">-p</span> nextflow</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -620,10 +615,7 @@ function invertDictionary(dict){
 0 directories, 2 files</code></pre>
 </div>
 </div>
-</div>
-</div>
-</div>
-<p>This <code>main.nf</code> file is both a <strong>standalone Nextflow pipeline</strong> and a module which can be used as <strong>part of another pipeline</strong>.</p>
+<p>This <code>main.nf</code> file is both a <a href="#run-module">standalone Nextflow pipeline</a> and a module which can be imported as <a href="#include-module">part of another pipeline</a>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -634,30 +626,30 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You can also use the <code>viash ns build</code> command to build all of the platforms in one go. Give it a try! More information in the following section.</p>
+<p>In larger projects it’s recommended to use the <a href="../../reference/cli/ns_build.html"><code>viash ns build</code></a> command to <a href="../../guide/project/batch-processing.html">build all of the components</a> in one go. Give it a try!</p>
 </div>
 </div>
 </section>
-<section id="module-as-a-standalone-pipeline" class="level2">
-<h2 class="anchored" data-anchor-id="module-as-a-standalone-pipeline">Module as a standalone pipeline</h2>
-<p>When VDSL3 modules are used as a standalone pipeline, you need to specify the input parameters and a <code>--publish_dir</code> parameter, as Nextflow will automatically choose the parameter names of the output files.</p>
+<section id="run-module" class="level2">
+<h2 class="anchored" data-anchor-id="run-module">Running a module as a standalone pipeline</h2>
+<p>Unlike typical Nextflow modules, VDSL3 modules can actually be used as a standalone pipeline.</p>
+<p>To run a VDSL3 module as a standalone pipeline, you need to specify the input parameters and a <code>--publish_dir</code> parameter, as Nextflow will automatically choose the parameter names of the output files.</p>
 <p>You can run the executable by providing a value for <code>--input</code> and <code>--publish_dir</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/main.nf <span class="at">--input</span> config.vsh.yaml <span class="at">--publish_dir</span> output/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>N E X T F L O W  ~  version 23.04.2
-Launching `target/main.nf` [thirsty_gilbert] DSL2 - revision: 78f8de8aa6
-[-        ] process &gt; example_bash:example_bash_p... -
-input: [run, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/config.vsh.yaml]]
+<pre><code>N E X T F L O W  ~  version 23.10.1
+Launching `target/main.nf` [festering_payne] DSL2 - revision: 5a8d4ea03f
+[-        ] process &gt; example_bash:processWf:exam... -
+[-        ] process &gt; example_bash:publishStatesS... -
 
 executor &gt;  local (1)
-[e9/87d366] process &gt; example_bash:example_bash_p... [  0%] 0 of 1
-input: [run, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/config.vsh.yaml]]
+[e0/2328ae] process &gt; example_bash:processWf:exam... [  0%] 0 of 1
+[-        ] process &gt; example_bash:publishStatesS... -
 
-executor &gt;  local (1)
-[e9/87d366] process &gt; example_bash:example_bash_p... [100%] 1 of 1 ✔
-input: [run, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/config.vsh.yaml]]
-output: [run, /tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/work/e9/87d36622544e92663d80f4eb576524/run.example_bash.output.txt]</code></pre>
+executor &gt;  local (2)
+[e0/2328ae] process &gt; example_bash:processWf:exam... [100%] 1 of 1 ✔
+[c3/8512f6] process &gt; example_bash:publishStatesS... [100%] 1 of 1 ✔</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
@@ -665,16 +657,17 @@ output: [run, /tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/work/e9/87d366225
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>output
-└── run.example_bash.output.txt
+├── run.example_bash.output.txt
+└── run.example_bash.state.yaml
 
-0 directories, 1 file</code></pre>
+0 directories, 2 files</code></pre>
 </div>
 </div>
 <p>The pipeline help can be shown by passing the <code>--help</code> parameter (Output not shown).</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/main.nf <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="passing-a-parameter-list" class="level2">
-<h2 class="anchored" data-anchor-id="passing-a-parameter-list">Passing a parameter list</h2>
+<section id="param-list" class="level2">
+<h2 class="anchored" data-anchor-id="param-list">Passing a parameter list</h2>
 <p>Every VDSL3 can accept a list of parameters to populate a Nextflow channel with.</p>
 <p>For example, we create a set of input files which we want to process in parallel.</p>
 <div class="cell">
@@ -682,54 +675,33 @@ output: [run, /tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/work/e9/87d366225
 </div>
 <p>Next, we create a YAML file <code>param_list.yaml</code> containing an <code>id</code> and an <code>input</code> value for each parameter entry.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample1</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample1.txt</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpuM9Qx0/create-a-module2d4625fdb0ab/bash/sample1.txt</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample2</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample2.txt</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpuM9Qx0/create-a-module2d4625fdb0ab/bash/sample2.txt</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample3</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample3.txt</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpuM9Qx0/create-a-module2d4625fdb0ab/bash/sample3.txt</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample4</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample4.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpuM9Qx0/create-a-module2d4625fdb0ab/bash/sample4.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can run the pipeline on the list of parameters using the <code>--param_list</code> parameter.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/main.nf <span class="at">--param_list</span> param_list.yaml <span class="at">--publish_dir</span> output2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>N E X T F L O W  ~  version 23.04.2
-Launching `target/main.nf` [special_panini] DSL2 - revision: 78f8de8aa6
-[-        ] process &gt; example_bash:example_bash_p... -
-input: [sample4, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample4.txt]]
-input: [sample3, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample3.txt]]
-input: [sample2, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample2.txt]]
-input: [sample1, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample1.txt]]
-
-executor &gt;  local (3)
-[2e/c98fdf] process &gt; example_bash:example_bash_p... [  0%] 0 of 4
-input: [sample4, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample4.txt]]
-input: [sample3, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample3.txt]]
-input: [sample2, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample2.txt]]
-input: [sample1, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample1.txt]]
-output: [sample4, /tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/work/62/b321c316c7e1b5c89d948a8fb41041/sample4.example_bash.output.txt]
+<pre><code>N E X T F L O W  ~  version 23.10.1
+Launching `target/main.nf` [lonely_ampere] DSL2 - revision: 5a8d4ea03f
+[-        ] process &gt; example_bash:processWf:exam... -
+[-        ] process &gt; example_bash:publishStatesS... -
 
 executor &gt;  local (4)
-[1b/3484e8] process &gt; example_bash:example_bash_p... [100%] 4 of 4 ✔
-input: [sample4, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample4.txt]]
-input: [sample3, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample3.txt]]
-input: [sample2, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample2.txt]]
-input: [sample1, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample1.txt]]
-output: [sample4, /tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/work/62/b321c316c7e1b5c89d948a8fb41041/sample4.example_bash.output.txt]
-output: [sample3, /tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/work/36/394aa3b0e585296e37084594295299/sample3.example_bash.output.txt]
-output: [sample2, /tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/work/2e/c98fdfc35210f43e78836e11aefc86/sample2.example_bash.output.txt]
-output: [sample1, /tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/work/1b/3484e816bd71bb4e48844035a32c93/sample1.example_bash.output.txt]
+[be/f083e5] process &gt; example_bash:processWf:exam... [  0%] 0 of 4
+[-        ] process &gt; example_bash:publishStatesS... -
 
-executor &gt;  local (4)
-[1b/3484e8] process &gt; example_bash:example_bash_p... [100%] 4 of 4 ✔
-input: [sample4, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample4.txt]]
-input: [sample3, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample3.txt]]
-input: [sample2, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample2.txt]]
-input: [sample1, [output:$id.$key.output.txt, input:/tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/sample1.txt]]
-output: [sample4, /tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/work/62/b321c316c7e1b5c89d948a8fb41041/sample4.example_bash.output.txt]
-output: [sample3, /tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/work/36/394aa3b0e585296e37084594295299/sample3.example_bash.output.txt]
-output: [sample2, /tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/work/2e/c98fdfc35210f43e78836e11aefc86/sample2.example_bash.output.txt]
-output: [sample1, /tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/work/1b/3484e816bd71bb4e48844035a32c93/sample1.example_bash.output.txt]</code></pre>
+executor &gt;  local (8)
+[be/f083e5] process &gt; example_bash:processWf:exam... [100%] 4 of 4 ✔
+[b8/36f05b] process &gt; example_bash:publishStatesS... [  0%] 0 of 4
+
+executor &gt;  local (8)
+[be/f083e5] process &gt; example_bash:processWf:exam... [100%] 4 of 4 ✔
+[b8/36f05b] process &gt; example_bash:publishStatesS... [100%] 4 of 4 ✔</code></pre>
 </div>
 </div>
 <p>This results in the following outputs:</p>
@@ -738,11 +710,15 @@ output: [sample1, /tmp/RtmpwEhq8Z/create-a-modulea7266e955bb9/bash/work/1b/3484e
 <div class="cell-output cell-output-stdout">
 <pre><code>output2
 ├── sample1.example_bash.output.txt
+├── sample1.example_bash.state.yaml
 ├── sample2.example_bash.output.txt
+├── sample2.example_bash.state.yaml
 ├── sample3.example_bash.output.txt
-└── sample4.example_bash.output.txt
+├── sample3.example_bash.state.yaml
+├── sample4.example_bash.output.txt
+└── sample4.example_bash.state.yaml
 
-0 directories, 4 files</code></pre>
+0 directories, 8 files</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -759,30 +735,54 @@ Tip
 </div>
 </div>
 </section>
-<section id="module-as-part-of-a-pipeline" class="level2">
-<h2 class="anchored" data-anchor-id="module-as-part-of-a-pipeline">Module as part of a pipeline</h2>
+<section id="include-module" class="level2">
+<h2 class="anchored" data-anchor-id="include-module">Module as part of a pipeline</h2>
 <p>This module can also be used as part of a Nextflow pipeline. Below is a short preview of what this looks like.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="op">{</span> example_bash <span class="op">}</span> from <span class="st">"target/main.nf"</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Channel</span><span class="op">.</span><span class="fu">fromList</span><span class="op">([</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">[</span><span class="st">"sample1"</span><span class="op">,</span> <span class="fu">file</span><span class="op">(</span><span class="st">"sample1.txt"</span><span class="op">)],</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">[</span><span class="st">"sample2"</span><span class="op">,</span> <span class="fu">file</span><span class="op">(</span><span class="st">"sample2.txt"</span><span class="op">)],</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">[</span><span class="st">"sample3"</span><span class="op">,</span> <span class="fu">file</span><span class="op">(</span><span class="st">"sample3.txt"</span><span class="op">)]</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="op">])</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> view <span class="op">{</span> it <span class="op">-&gt;</span> <span class="st">"input: </span><span class="ss">$it</span><span class="st">"</span> <span class="op">}</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> example_bash</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> view <span class="op">{</span> it <span class="op">-&gt;</span> <span class="st">"output: </span><span class="ss">$it</span><span class="st">"</span> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> mymodule1 <span class="op">}</span> from <span class="st">'target/nextflow/mymodule1/main.nf'</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> mymodule2 <span class="op">}</span> from <span class="st">'target/nextflow/mymodule2/main.nf'</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>workflow <span class="op">{</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">Channel</span><span class="op">.</span><span class="fu">fromList</span><span class="op">([</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">[</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>      <span class="co">// a unique identifier for this tuple</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"myid"</span><span class="op">,</span> </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>      <span class="co">// the state for this tuple</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>      <span class="op">[</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>        input<span class="op">:</span> <span class="fu">file</span><span class="op">(</span><span class="st">"in.txt"</span><span class="op">),</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>        module1_k<span class="op">:</span> <span class="dv">10</span><span class="op">,</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>        module2_k<span class="op">:</span> <span class="dv">4</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>      <span class="op">]</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">]</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">])</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> mymodule1<span class="op">.</span><span class="fu">run</span><span class="op">(</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>      <span class="co">// use a hashmap to define which part of the state is used to run mymodule1</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>      fromState<span class="op">:</span> <span class="op">[</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>        input<span class="op">:</span> <span class="st">"input"</span><span class="op">,</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>        k<span class="op">:</span> <span class="st">"module1_k"</span></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>      <span class="op">],</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>      <span class="co">// use a hashmap to define how the output of mymodule1 is stored back into the state</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>      toState<span class="op">:</span> <span class="op">[</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>        module1_output<span class="op">:</span> <span class="st">"output"</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>      <span class="op">]</span></span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">)</span></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> mymodule2<span class="op">.</span><span class="fu">run</span><span class="op">(</span></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>      <span class="co">// use a closure to define which data is used to run mymodule2</span></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>      fromState<span class="op">:</span> <span class="op">{</span> id<span class="op">,</span> state <span class="op">-&gt;</span> </span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>        <span class="op">[</span></span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>          input<span class="op">:</span> state<span class="op">.</span>module1_output<span class="op">,</span></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>          k<span class="op">:</span> state<span class="op">.</span>module2_k</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>        <span class="op">]</span></span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>      <span class="op">},</span></span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>      <span class="co">// use a closure to return only the output of module2 as a new state</span></span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>      toState<span class="op">:</span> <span class="op">{</span> id<span class="op">,</span> output<span class="op">,</span> state <span class="op">-&gt;</span></span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>        output</span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>      <span class="op">},</span></span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>      auto<span class="op">:</span> <span class="op">[</span></span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>        publish<span class="op">:</span> <span class="kw">true</span></span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>      <span class="op">]</span></span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>    <span class="op">)</span></span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We will discuss building pipelines with VDSL3 modules in more detail in <a href="../../guide/nextflow_vdsl3/create-a-pipeline.html">Create a pipeline</a>.</p>
-</section>
-<section id="improvements-over-standard-nextflow-modules" class="level2">
-<h2 class="anchored" data-anchor-id="improvements-over-standard-nextflow-modules">Improvements over standard Nextflow modules</h2>
-<ul>
-<li>No need to write any Nextflow Groovy code, just your script and the Viash config.</li>
-<li>VDSL3 module are also standalone pipelines.</li>
-<li>Help documentation is automatically generated.</li>
-<li>Standardized interface for passing parameter lists.</li>
-<li>Automatically uses the Docker platform’s container.</li>
-</ul>
 
 
 </section>
@@ -790,35 +790,9 @@ Tip
 </main> <!-- /main -->
 <script type="text/javascript">
 // Anything in this script block will be included on every page
-
-function createVersionLink(version) {
-  var tag = document.createElement("li");
-  var link = document.createElement("a");
-  link.setAttribute("class", "dropdown-item");
-  link.setAttribute("href", "../pr-preview/" + version.link + "/");
-  link.setAttribute("rel", "");
-  link.setAttribute("target", "");
-  tag.appendChild(link);
-  var span = document.createElement("span");
-  span.setAttribute("class", "dropdown-text");
-  link.appendChild(span);
-  span.innerHTML = version.name;
-  return tag;
-}
-
-function addVersionLinks(json) {
-  var element = document.getElementById("nav-menu-version");
-  var list = element.nextElementSibling;
-  for (var i = 0; i < json.versions.length; i++) {
-    var version = json.versions[i];
-    list.appendChild( createVersionLink(version) );
-  }
-}
-
-fetch('/pr-preview/pr-59/versions.json')
-    .then((response) => response.json())
-    .then((json) => addVersionLinks(json));
-
+  const scriptTag = document.createElement("script");
+  scriptTag.src = "/versions.js";
+  document.body.appendChild(scriptTag);
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -899,10 +873,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/viash\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -912,8 +903,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -926,6 +926,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -969,6 +1088,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -994,6 +1114,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1051,30 +1197,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("https:\/\/viash\.io");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-      }
-    }
 });
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../guide/nextflow_vdsl3/introduction.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction</span>
+      <a href="../../guide/nextflow_vdsl3/index.html" class="pagination-link" aria-label="Nextflow VDSL3">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Nextflow VDSL3</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../guide/nextflow_vdsl3/create-a-pipeline.html" class="pagination-link">
+      <a href="../../guide/nextflow_vdsl3/create-a-pipeline.html" class="pagination-link" aria-label="Create a pipeline">
         <span class="nav-page-text">Create a pipeline</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -1088,18 +1220,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="../../about.html">About</a>
+    <a class="nav-link" href="../../about.html">
+<p>About</p>
+</a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="../../privacy.html">Privacy Policy</a>
+    <a class="nav-link" href="../../privacy.html">
+<p>Privacy Policy</p>
+</a>
   </li>  
 </ul>
-    </div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/viash-io/website/edit/main/guide/nextflow_vdsl3/create-and-use-a-module.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/viash-io/website/blob/main/guide/nextflow_vdsl3/create-and-use-a-module.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/viash-io/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 
