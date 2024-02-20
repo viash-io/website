@@ -18,6 +18,9 @@ if [ "$version" \< "0.8.2" ]; then
   cp --update=all _src/rerender_site_versions/_clone_template.qmd $folder/_includes
 fi
 
+# handle the template with its own version specified in their _viash.yaml
+patch -u -i _src/rerender_site_versions/quickstart_index.patch $folder/quickstart/index.qmd 
+
 # build
 pushd $folder
 export VIASH_VERSION=$version
