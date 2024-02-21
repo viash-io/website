@@ -297,7 +297,7 @@
       "name" : "repositories",
       "type" : "List[RepositoryWithName]",
       "niceType" : "List of RepositoryWithName",
-      "description" : "(Pre-)defines repositories that can be used as repository in dependencies.\nAllows reusing repository definitions in case it is used in multiple dependencies.",
+      "description" : "(Pre-)defines @[repositories](repository) that can be used as repository in dependencies.\nAllows reusing repository definitions in case it is used in multiple dependencies.",
       "example" : [
         {
           "example" : "repositories:\n  - name: openpipelines-bio\n    type: github\n    uri: openpipelines-bio/modules\n    tag: 0.3.0\n",
@@ -4056,7 +4056,7 @@
       "name" : "repository",
       "type" : "Either[String,Repository]",
       "niceType" : "Either\n  - String\n  - Repository",
-      "description" : "Specifies the location where the dependency component can be found.\nThis must either be a full definition of the repository or the name of a repository refenced as it is defined under functionality.repositories.\nAdditionally, the full definition can be specified as a single string where all parameters such as repository type, url, branch or tag are specified.\n",
+      "description" : "Specifies the @[repository](repository) location where the dependency component can be found.\nThis must either be a full definition of the repository or the name of a repository referenced as it is defined under functionality.repositories.\nAdditionally, the full definition can be specified as a single string where all parameters such as repository type, url, branch or tag are specified.\nOmitting the value sets the dependency as a local dependency, ie. the dependency is available in the same namespace as the component.\n",
       "default" : "Empty"
     },
     {
@@ -4082,7 +4082,13 @@
         "io.viash.functionality.dependencies.Repository",
         "io.viash.functionality.dependencies.CopyableRepo"
       ],
-      "description" : "Specifies a repository where dependency components can be found.",
+      "description" : "Specifies a repository where dependency components can be found.\n\n - @[local](repo_local)\n - @[git](repo_git)\n - @[github](repo_github)\n - @[vsh](repo_vsh)\n",
+      "example" : [
+        {
+          "example" : "repositories:\n  - name: openpipelines-bio\n    type: github\n    uri: openpipelines-bio/modules\n    tag: 0.3.0\n",
+          "format" : "yaml"
+        }
+      ],
       "subclass" : [
         "LocalRepository",
         "GitRepository",
