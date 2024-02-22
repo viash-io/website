@@ -37,6 +37,9 @@ def handle_section(lines: list[str]):
     matches = re.search(r"^# Viash ([\dx]+[\.\d+x]+) \(([\dy]{4}-[\dM]{2}-[\dd]{2})\): (.*)$", header)
     version, date, subtitle = matches.group(1, 2, 3)
 
+    version = version.replace("x", "999")
+    date = date.replace("yyyy-MM-dd", "9999-12-31")
+
     # take lines while there are lines or we encounter a
     # markdown header, process as "what's new" section
     whats_new = []

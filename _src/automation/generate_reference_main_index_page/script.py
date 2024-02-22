@@ -44,15 +44,19 @@ def generate_reference_page():
 	# Add some static pages :(
 	add_entry("Viash Config", "Config Overview", "/reference/config/index")
 	add_entry("Viash Config", "Functionality", "/reference/config/functionality/index")
+	add_entry("Viash Config", "Runners", "/reference/config/runners/index")
+	add_entry("Viash Config", "Engines", "/reference/config/engines/index")
 	add_entry("Viash Config", "Platforms", "/reference/config/platforms/index")
 	add_entry("Miscellaneous", "Project Config", "/reference/project/index")
 	add_entry("Miscellaneous", "Environment Variables", "/reference/config/environmentVariables")
 	add_entry("Miscellaneous", "Config Mods", "/reference/config_mods/index")
 	add_entry("Miscellaneous", "Viash Code Block", "/reference/viash_code_block/index")
 	
-	# Platforms are not simply contained in a main folder, grab index files. For other matches, skip the index files.
+	# Runners/Engines/Platforms are not simply contained in a main folder, grab index files. For other matches, skip the index files.
+	add_entries_from_glob('reference/config/runners/*/index.qmd', "Runners", False)
+	add_entries_from_glob('reference/config/engines/*/index.qmd', "Engines", False)
 	add_entries_from_glob('reference/config/platforms/*/index.qmd', "Platforms", False)
-	add_entries_from_glob('reference/config/platforms/docker/setup/*.qmd', "Docker Setup Requirements", True)
+	add_entries_from_glob('reference/config/engines/docker/setup/*.qmd', "Docker Setup Requirements", True)
 	add_entries_from_glob('reference/config/functionality/arguments/*.qmd', "Argument Types", True)
 	add_entries_from_glob('reference/config/functionality/resources/*.qmd', "Resource Types", True)
 	

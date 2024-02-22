@@ -21,7 +21,9 @@ functionality:
     - type: bash_script
       path: script.sh
       text: echo Hello $par_input
-platforms:
+runners:
+  - type: executable
+engines:
   - type: docker
     image: "bash:4.0"
 
@@ -35,7 +37,7 @@ platforms:
 
 Config inheritance by including YAML partials. This is useful for defining common APIs in
 separate files. `__merge__` can be used in any level of the YAML. For example,
-not just in the config but also in the functionality or any of the platforms.
+not just in the config but also in the functionality or any of the engines.
 
 
 **Example:**
@@ -43,6 +45,16 @@ not just in the config but also in the functionality or any of the platforms.
 ```yaml
 __merge__: ../api/common_interface.yaml
 ```
+
+## engines
+
+**Type**: `List of Engine`
+
+A list of engine environments to execute target artifacts in.
+
+ - [NativeEngine](/reference/config/engines/native/#)
+ - [DockerEngine](/reference/config/engines/docker/#)
+
 
 ## functionality
 
@@ -56,9 +68,22 @@ By specifying a few restrictions (e.g. mandatory arguments) and adding some desc
 
 **Type**: `List of Platform`
 
+::: {.callout-warning}
+Deprecated since 0.8.0. Planned removal at 0.9.0. Use 'engines' and 'runners' instead.
+:::
 A list of platforms to generate target artifacts for.
 
  - [Native](/reference/config/platforms/native/#)
  - [Docker](/reference/config/platforms/docker/#)
  - [Nextflow](/reference/config/platforms/nextflow/#)
+
+
+## runners
+
+**Type**: `List of Runner`
+
+A list of runners to execute target artifacts.
+
+ - [ExecutableRunner](/reference/config/runners/executable/#)
+ - [NextflowRunner](/reference/config/runners/nextflow/#)
 

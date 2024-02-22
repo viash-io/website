@@ -40,15 +40,15 @@ labels:
 Add 'lowmem' and 'lowcpu' to the default labels by using a config mod
 
 ```viash_config_mod
--c '.platforms[.type == "nextflow"].config.labels.lowmem := "memory = 4.GB";.platforms[.type == "nextflow"].config.labels.lowcpu := "cpus = 4"'
+-c '.runners[.type == "nextflow"].config.labels.lowmem := "memory = 4.GB";.runners[.type == "nextflow"].config.labels.lowcpu := "cpus = 4"'
 ```
 
 Add 'lowmem' and 'lowcpu' to the default labels by using the Viash Project file
 
 ```viash_project_file
 config_mods: |
-  .platforms[.type == "nextflow"].config.labels.lowmem := "memory = 4.GB"
-  .platforms[.type == "nextflow"].config.labels.lowcpu := "cpus = 4"
+  .runners[.type == "nextflow"].config.labels.lowmem := "memory = 4.GB"
+  .runners[.type == "nextflow"].config.labels.lowcpu := "cpus = 4"
 
 ```
 
@@ -56,7 +56,7 @@ Replace the default labels with a different set of labels by using the Viash Pro
 
 ```viash_project_file
 config_mods: |
-  .platforms[.type == "nextflow"].config.labels := { lowmem: "memory = 4.GB", lowcpu: "cpus = 4", midmem: "memory = 25.GB", midcpu: "cpus = 10", highmem: "memory = 50.GB", highcpu: "cpus = 20", vhighmem: "memory = 100.GB", vhighcpu: "cpus = 40" }
+  .runners[.type == "nextflow"].config.labels := { lowmem: "memory = 4.GB", lowcpu: "cpus = 4", midmem: "memory = 25.GB", midcpu: "cpus = 10", highmem: "memory = 50.GB", highcpu: "cpus = 20", vhighmem: "memory = 100.GB", vhighcpu: "cpus = 40" }
 
 ```
 

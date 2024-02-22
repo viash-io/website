@@ -14,14 +14,15 @@ Test a namespace containing many viash config files.
 | `--append`, `-a` | Append to tsv instead of overwrite | `Boolean` |
 | `--config_mod`, `-c` | Modify a viash config at runtime using [dynamic config modding](/reference/config_mods/#). | `List[String]` |
 | `--cpus` | The maximum number of (logical) cpus a component is allowed to use. | `Int` |
+| `--engine` | Acts as a regular expression to filter the engine ids specified in the found config files. If this is not provided, all engines will be used. If no engines are defined in a config, the native engine will be used. | `String` |
 | `--keep`, `-k` | Whether or not to keep temporary files. By default, files will be deleted if all goes well but remain when an error occurs. By specifying --keep true, the temporary files will always be retained, whereas --keep false will always delete them. The temporary directory can be overwritten by setting defining a VIASH_TEMP directory. | `String` |
 | `--memory` | The maximum amount of memory a component is allowed to allocate. Unit must be one of B, KB, MB, GB, TB or PB. | `String` |
 | `--parallel`, `-l` | Whether or not to run the process in parallel. | `Boolean` |
-| `--platform`, `-p` | Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified. | `String` |
 | `--query`, `-q` | Filter which components get selected by component and [namespace](/guide/project/structure.html#grouping-components-in-namespaces) name. Can be a regex. Example: "^mynamespace/component1\$". | `String` |
 | `--query_name` | Filter which components get selected by component name. Can be a regex. Example: "^component1". | `String` |
 | `--query_namespace`, `-n` | Filter which namespaces get selected by [namespace](/guide/project/structure.html#grouping-components-in-namespaces) name. Can be a regex. Example: "^mynamespace\$". | `String` |
-| `--setup` | Which [setup strategy](/guide/component/add-dependencies.html#step-3-rebuild-docker-image) for creating the container to use [Docker Platform only]. | `String` |
+| `--runner` | Acts as a regular expression to filter the runner ids specified in the found config files. If this is not provided, all runners will be used. If no runners are defined in a config, the executable runner will be used. | `String` |
+| `--setup` | Which [setup strategy](/guide/component/add-dependencies.html#step-3-rebuild-docker-image) for creating the container to use [Docker Engine only]. | `String` |
 | `--src`, `-s` | A source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/. | `String` |
 | `--tsv`, `-t` | Path to write a summary of the test results to. | `String` |
 | `--help`, `-h` | Show help message |  |
