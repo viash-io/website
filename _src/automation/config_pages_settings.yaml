@@ -1,15 +1,15 @@
 structure:
   'Config': ./index
-  'ProjectConfig': ../projectConfig/index
-  'Info': ./info
-  'EnvironmentVariables': ./environmentVariables
+  'PackageConfig': ../packageConfig/index
+  'BuildInfo': ./buildInfo
+  'EnvironmentVariables': ../environmentVariables/index
 
-  'Functionality': ./functionality/index
-  'Author': ./functionality/author
-  'ComputationalRequirements': ./functionality/computationalRequirements
-  'ArgumentGroup': ./functionality/argumentGroup
-  'Links': ./functionality/links
-  'References': ./project/references
+  'Functionality': ./functionality
+  'Author': ./author
+  'ComputationalRequirements': ./computationalRequirements
+  'ArgumentGroup': ./argumentGroup
+  'Links': ./links
+  'References': ./references
 
   'Platform': ./platforms/index
   'NativePlatform': ./platforms/native/index
@@ -24,15 +24,15 @@ structure:
   'ExecutableRunner': ./runners/executable/index
   'NextflowRunner': ./runners/nextflow/index
 
-  'Argument': ./functionality/arguments/index
-  'BooleanFalseArgument': ./functionality/arguments/boolean_false
-  'BooleanArgument': ./functionality/arguments/boolean
-  'BooleanTrueArgument': ./functionality/arguments/boolean_true
-  'DoubleArgument': ./functionality/arguments/double
-  'FileArgument': ./functionality/arguments/file
-  'IntegerArgument': ./functionality/arguments/integer
-  'LongArgument': ./functionality/arguments/long
-  'StringArgument': ./functionality/arguments/string
+  'Argument': ./arguments/index
+  'BooleanFalseArgument': ./arguments/boolean_false
+  'BooleanArgument': ./arguments/boolean
+  'BooleanTrueArgument': ./arguments/boolean_true
+  'DoubleArgument': ./arguments/double
+  'FileArgument': ./arguments/file
+  'IntegerArgument': ./arguments/integer
+  'LongArgument': ./arguments/long
+  'StringArgument': ./arguments/string
   
   'Requirements': ./engines/docker/setup/index
   'ApkRequirements': ./engines/docker/setup/apkRequirements
@@ -44,48 +44,41 @@ structure:
   'RubyRequirements': ./engines/docker/setup/rubyRequirements
   'YumRequirements': ./engines/docker/setup/yumRequirements
 
-  'Resource': ./functionality/resources/index
-  'CSharpScript': ./functionality/resources/cSharpScript
-  'PythonScript': ./functionality/resources/pythonScript
-  'PlainFile': ./functionality/resources/plainFile
-  'BashScript': ./functionality/resources/bashScript
-  'ScalaScript': ./functionality/resources/scalaScript
-  'NextflowScript': ./functionality/resources/nextflowScript
-  'RScript': ./functionality/resources/rScript
-  'Executable': ./functionality/resources/executable
-  'JavaScriptScript': ./functionality/resources/javaScriptScript
+  'Resource': ./resources/index
+  'CSharpScript': ./resources/cSharpScript
+  'PythonScript': ./resources/pythonScript
+  'PlainFile': ./resources/plainFile
+  'BashScript': ./resources/bashScript
+  'ScalaScript': ./resources/scalaScript
+  'NextflowScript': ./resources/nextflowScript
+  'RScript': ./resources/rScript
+  'Executable': ./resources/executable
+  'JavaScriptScript': ./resources/javaScriptScript
 
   'NextflowDirectives': ./runners/nextflow/directives
   'NextflowAuto': ./runners/nextflow/auto
   'NextflowConfig': ./runners/nextflow/config
 
-  'Dependency': ./functionality/dependencies/index
-  'Repository': ./functionality/dependencies/repository
-  'LocalRepository': ./functionality/dependencies/localRepository
-  'GitRepository': ./functionality/dependencies/gitRepository
-  'GithubRepository': ./functionality/dependencies/githubRepository
-  'ViashhubRepository': ./functionality/dependencies/viashhubRepository
-
-  'Dependency': ./functionality/dependencies/index
-  'Repository': ./functionality/repositories/index
+  'Dependency': ./dependencies/index
+  'Repository': ./repositories/index
   'LocalRepository': 
   'GitRepository': 
   'GithubRepository': 
   'ViashhubRepository': 
 
   'RepositoryWithName': 
-  'LocalRepositoryWithName': ./functionality/repositories/localRepository
-  'GitRepositoryWithName': ./functionality/repositories/gitRepository
-  'GithubRepositoryWithName': ./functionality/repositories/githubRepository
-  'ViashhubRepositoryWithName': ./functionality/repositories/viashhubRepository
+  'LocalRepositoryWithName': ./repositories/localRepository
+  'GitRepositoryWithName': ./repositories/gitRepository
+  'GithubRepositoryWithName': ./repositories/githubRepository
+  'ViashhubRepositoryWithName': ./repositories/viashhubRepository
 
 order:
   'Config': 20
   'Project': 30
 
-  'Functionality': 10
-  'Platform': 20
-  'Info': 30
+  #'Functionality': 10
+  #'Platform': 20
+  #'BuildInfo': 30
   
   'NativePlatform': 10
   'DockerPlatform': 20
@@ -98,12 +91,12 @@ keywords:
   docker_setup_strategy: /guide/component/add-dependencies.html#step-3-rebuild-docker-image
   docker_registry: /reference/config/engines/docker/#registry
   docker_tag: /reference/config/engines/docker/#tag
-  resources: /reference/config/functionality/resources/#
+  resources: /reference/config/resources/#
   unit_testing: /guide/component/unit-testing.html
   scripting_languages: /guide/component/create-component.html#create-a-script
-  argument_groups: /reference/config/functionality/#argument_groups
-  author: /reference/config/functionality/author.html
-  computational_requirements: /reference/config/functionality/computationalRequirements.html
+  argument_groups: /reference/config/#argument_groups
+  author: /reference/config/author.html
+  computational_requirements: /reference/config/computationalRequirements.html
   apk_req: /reference/config/engines/docker/setup/apkRequirements.html
   apt_req: /reference/config/engines/docker/setup/aptRequirements.html
   docker_req: /reference/config/engines/docker/setup/dockerRequirements.html
@@ -112,16 +105,16 @@ keywords:
   r_req: /reference/config/engines/docker/setup/rRequirements.html
   ruby_req: /reference/config/engines/docker/setup/rubyRequirements.html
   yum_req: /reference/config/engines/docker/setup/yumRequirements.html
-  argument: /reference/config/functionality/arguments/#
-  arg_string: /reference/config/functionality/arguments/string.html
-  arg_file: /reference/config/functionality/arguments/file.html
-  arg_integer: /reference/config/functionality/arguments/integer.html
-  arg_double: /reference/config/functionality/arguments/double.html
-  arg_float: /reference/config/functionality/arguments/float.html
-  arg_boolean: /reference/config/functionality/arguments/boolean.html
-  arg_boolean_true: /reference/config/functionality/arguments/boolean_true.html
-  arg_boolean_false: /reference/config/functionality/arguments/boolean_false.html
-  functionality: /reference/config/functionality/#
+  argument: /reference/config/arguments/#
+  arg_string: /reference/config/arguments/string.html
+  arg_file: /reference/config/arguments/file.html
+  arg_integer: /reference/config/arguments/integer.html
+  arg_double: /reference/config/arguments/double.html
+  arg_float: /reference/config/arguments/float.html
+  arg_boolean: /reference/config/arguments/boolean.html
+  arg_boolean_true: /reference/config/arguments/boolean_true.html
+  arg_boolean_false: /reference/config/arguments/boolean_false.html
+  functionality: /reference/config/functionality.html
   platform_native: /reference/config/platforms/native/#
   platform_docker: /reference/config/platforms/docker/#
   platform_nextflow: /reference/config/platforms/nextflow/#
@@ -134,8 +127,8 @@ keywords:
   nextflow_runner: /reference/config/runners/nextflow/#
   project_config: /reference/projectConfig/#
 
-  repository: /reference/config/functionality/repositories/#
-  repo_local: /reference/config/functionality/repositories/localRepository.html
-  repo_git: /reference/config/functionality/repositories/gitRepository.html
-  repo_github: /reference/config/functionality/repositories/githubRepository.html
-  repo_vsh: /reference/config/functionality/repositories/viashhubRepository.html
+  repository: /reference/config/repositories/#
+  repo_local: /reference/config/repositories/localRepository.html
+  repo_git: /reference/config/repositories/gitRepository.html
+  repo_github: /reference/config/repositories/githubRepository.html
+  repo_vsh: /reference/config/repositories/viashhubRepository.html
