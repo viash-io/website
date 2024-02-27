@@ -1,0 +1,2567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Viash</title>
+<link>https://viash.io/blog/</link>
+<atom:link href="https://viash.io/blog/index.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<image>
+<url>https://viash.io/viash.png</url>
+<title>Viash</title>
+<link>https://viash.io/blog/</link>
+<height>38</height>
+<width>144</width>
+</image>
+<generator>quarto-1.4.550</generator>
+<lastBuildDate>Wed, 21 Feb 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Viash 0.8.5</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.8.5/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>Fix a bug when building a test docker container which requires a test resource. Additional improvements for the website documentation and support for the latest version of Nextflow are added.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>nextflow runner</code>: Fix an issue with current nextflow-latest (24.01.0-edge) where our supporting library passes a GString instead of a String and results in a type mismatch (PR #640).</p></li>
+<li><p><code>test resources</code>: Make non-script test resources available during building of a docker container for <code>viash test</code> (PR #652).</p></li>
+</ul>
+</section>
+<section id="documentation" class="level3">
+<h3 class="anchored" data-anchor-id="documentation">DOCUMENTATION</h3>
+<ul>
+<li><code>repositories</code>: Improve the repository documentation with links and a overview table with links (PR #643).</li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.8.5/</guid>
+  <pubDate>Wed, 21 Feb 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.8.4</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.8.4/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>Fix building components with dependencies that have symlinks in their paths.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><code>dependencies</code>: Fix dependencies with paths using symlinks (PR #621). The resolution for the <code>.build.vsh</code> was changed to use the <code>toRealPath</code> previously, so dependency resolution must take account possible resolved symlinks too.</li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.8.4/</guid>
+  <pubDate>Mon, 15 Jan 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.8.3</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.8.3/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>Fix some edge cases and improve usability.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>NextflowPlatform</code>: properly resolve paths when a nextflow workflow has another nextflow workflow as dependency and the worktree contains a directory that is a symlink (PR #614).</p></li>
+<li><p><code>Main</code>: Fixes a bug added by #294 which causes Viash to print a stacktrace instead of a helpful error message when <code>viash</code> is run without any arguments (#617, PR #618). Thanks <span class="citation" data-cites="mberacochea">@mberacochea</span> for pointing out this oversight!</p></li>
+<li><p><code>Dependency</code>: When an alias is defined, pass the alias as a key to the <code>.run()</code> function (#601, PR #606).</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.8.3/</guid>
+  <pubDate>Mon, 08 Jan 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.8.2</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.8.2/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This release fixes a few bugs regarding dependencies and how the Nextflow platform handles Paths.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>NextflowTestHelper</code>: Do not hardcode a version of Nextflow in the testbench, but use the version of Nextflow that is installed on the system (PR #593).</p></li>
+<li><p>GitHub Actions: Test different versions of Nextflow (22.04.5, latest, and latest-edge) (PR #593). Testing the latest Edge version of Nextflow will allow us to catch notice changes in Nextflow earlier.</p></li>
+<li><p>Updates to the documentation and templates in the Git repo (#598, PR #600):</p>
+<ul>
+<li><p>Add contributing guidelines.</p></li>
+<li><p>Add issue templates.</p></li>
+<li><p>Reworked the pull request template.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>config</code>: Fix the main level of a component config not enforcing strict mode and instead allowing any field to be specified (PR #585).</p></li>
+<li><p><code>dependencies</code>: Allow the user to define a local dependency with specifying <code>repository: local</code> as sugar syntax (PR #609). A local repository is the default value so it’s not required to be filled in, but allowing it with a sensible sugar syntax makes sense.</p></li>
+<li><p><code>Repositories</code>: Fix a structural issue where a repository defined directly in a <code>dependency</code> would require the <code>name</code> field to be set (PR #607). Repository variants are created with and without the <code>name</code> field. Repositories under <code>.functionality.dependencies[]</code> use repositories without the <code>name</code> field, while repositories under <code>.functionality.repositories[]</code> use repositories with the <code>name</code> field.</p></li>
+<li><p><code>NextflowPlatform</code>: Do not resolve remote paths relative to the –param_list file (PR #592).</p></li>
+<li><p><code>NextflowPlatform</code>: Allow finding <code>.build.yaml</code> file when worktree contains a directory that is a symlink (PR #611).</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.8.2/</guid>
+  <pubDate>Thu, 14 Dec 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.8.1</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.8.1/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This release fixes a bug in the Nextflow platform where calling a workflow with the <code>.run()</code> function without specifying the <code>fromState</code> argument would result in an error when the input channel contained tuples with more than two elements.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<p><code>NextflowPlatform</code>: Fix error when using <code>.run()</code> without using <code>fromState</code> and the input channel holds tuples with more than two elements (PR #587).</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.8.1/</guid>
+  <pubDate>Mon, 20 Nov 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.8.0</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.8.0/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>Nextflow workflows definitions are picked up by Viash and assembled into a functional Nextflow workflow, reducing the amount of boilerplate code needed to be written by the user. It also adds a new <code>runIf</code> argument to the <code>NextflowPlatform</code> which allows for conditional execution of modules. We added new ‘dependencies’ functionality to allow for more advanced functionality to be offloaded and re-used in components and workflows.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="breaking-changes" class="level3">
+<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
+<ul>
+<li><p><code>NextflowPlatform</code>: Changed the default value of <code>auto.simplifyOutput</code> from <code>true</code> to <code>false</code> (#522, PR #518). With <code>simplifyOutput</code> set to <code>true</code>, the resulting Map could be simplified into a <code>File</code> or a <code>List[File]</code> depending on the number of outputs. To replicate the previous behaviour, add the following config mod to <code>_viash.yaml</code>:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">config_mods</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">: </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="cb1-2">  .platforms[.type == 'nextflow'].auto.simplifyOutput := true</span></code></pre></div></li>
+<li><p><code>VDSL3Helper.nf</code>: Removed from the Viash jar file (PR #518). Its functions have been moved to <code>WorkflowHelper.nf</code>.</p></li>
+<li><p><code>DataflowHelper.nf</code>: Added deprecation warning to functions from this file (PR #518).</p></li>
+<li><p><code>preprocessInputs()</code> in <code>WorkflowHelper.nf</code>: Added deprecation warning to <code>preprocessInputs()</code> because this function causes a synchronisation event (PR #518).</p></li>
+<li><p><code>author.props</code>: Removed deprecated <code>props</code> field (PR #536). Deprecated since 0.7.4.</p></li>
+</ul>
+</section>
+<section id="new-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
+<ul>
+<li><p><code>dependencies</code>: Add <code>dependencies</code> and <code>repositories</code> to <code>functionality</code> (PR #509). The new functionality allows specifying dependencies and where to retrieve (repositories) them in a component, and subsequentially allows advanced functionality to be offloaded and re-used in scripts and projects. This is alike e.g.&nbsp;<code>npm</code>, <code>pip</code> and many others. A big difference is that we aim to provide the needed boilerplate code to ease the usage of the dependencies in scripts, workflows and pipelines. Note that the dependency is required to be a built Viash component or project and not a random file or code project found externally. This is needed to provide the necessary background information to correctly link dependencies into a component.</p></li>
+<li><p><code>NextflowScript</code> &amp; <code>NextflowPlatform</code>: Merged code for merging the <code>main.nf</code> files for VDSL3 components and wrapped Nextflow workflows (PR #518). By aligning the codebase for these two, wrapped Nextflow workflows are more similar to VDSL3 components. For example, you can override the behaviour of a wrapped Nextflow workflow using the <code>.run()</code> method. Status of a workflows <code>.run()</code> arguments:</p>
+<ul>
+<li>Works as intended: <code>auto.simplifyInput</code>, <code>auto.simplifyOutput</code>, <code>fromState</code>, <code>toState</code>, <code>map</code>, <code>mapData</code>, <code>mapPassthrough</code>, <code>filter</code>, <code>auto.publish = "state"</code></li>
+<li>Does not work (yet): <code>auto.transcript</code>, <code>auto.publish = true</code>, <code>directives</code>, <code>debug</code>.</li>
+</ul>
+<p>In a next PR, each of the dependencies will have their values overridden by the arguments of the <code>.run</code>.</p></li>
+<li><p><code>NextflowPlatform</code>: The data passed to the input of a component and produced as output by the component are now validated against the arguments defined in the Viash config (PR #518).</p></li>
+<li><p><code>NextflowPlatform</code>: Use <code>stageAs</code> to allow duplicate filenames to be used automatigically (PR #518).</p></li>
+<li><p><code>NextflowPlatform</code>: When wrapping Nextflow workflows, throw an error if the IDs of the output channel doesn’t match the IDs of the input channel (PR #518). If they don’t, the workflow should store the original ID of the input tuple in the in the <code>_meta.join_id</code> field inside the state as follows: Example input event: <code>["id", [input: file(...)]]</code>, Example output event: <code>["newid", [output: file(...), _meta: [join_id: "id"]]]</code></p></li>
+<li><p><code>NextflowPlatform</code>: Added new <code>.run()</code> argument <code>runIf</code> - a function that determines whether the module should be run or not (PR #553). If the <code>runIf</code> closure evaluates to <code>true</code>, then the module will be run. Otherwise it will be passed through without running.</p></li>
+</ul>
+</section>
+<section id="major-changes" class="level3">
+<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
+<ul>
+<li><p><code>WorkflowHelper.nf</code>: The workflow helper was split into different helper files for each of the helper functions (PR #518). For now, these helper files are pasted together to recreate the <code>WorkflowHelper.nf</code>. In Viash development environments, don’t forget to run <code>./configure</code> to start using the updated Makefile.</p></li>
+<li><p><code>NextflowPlatform</code>: Set default tag to <code>"$id"</code> (#521, PR #518).</p></li>
+<li><p><code>NextflowPlatform</code>: Refactoring of helper functions (PR #557).</p>
+<ul>
+<li>Cleaned up <code>processConfig()</code>: Removed support for <code>functionality.inputs</code> and <code>functionality.outputs</code></li>
+<li>Cleaned up <code>processConfig()</code>: Removed support for <code>.functionality.argument_groups[].argument</code> containing a list of argument ids as opposed to the arguments themselves.</li>
+<li>Rewrote <code>--param_list</code> parser.</li>
+<li>Removed unused function <code>applyConfig()</code> and <code>applyConfigToOneParamSet()</code>.</li>
+<li>Refactored <code>channelFromParams()</code> to make use of new helper functions.</li>
+<li>Removed deprecated <code>paramsToChannel()</code>, <code>paramsToList()</code>, <code>viashChannel()</code>.</li>
+<li>Deprecated <code>preprocessInputs()</code> – use the wrapped Viash Nextflow functionality instead.</li>
+<li>Refactored <code>preprocessInputs()</code> to make use of new helper functions.</li>
+<li>Deprecated run arguments <code>map</code>, <code>mapData</code>, <code>mapPassthrough</code>, <code>renameKeys</code>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>NextflowPlatform</code>: Throw error when unexpected keys are passed to the <code>.run()</code> method (#512, PR #518).</p></li>
+<li><p><code>NextflowPlatform</code>: Use <code>moduleDir</code> instead of <code>projectDir</code> to determine the resource directory.</p></li>
+<li><p><code>NextflowPlatform</code>: Rename internal VDSL3 variables to be more consistent with regular Viash component variables and avoid naming clashes (PR #553).</p></li>
+</ul>
+</section>
+<section id="documentation" class="level3">
+<h3 class="anchored" data-anchor-id="documentation">DOCUMENTATION</h3>
+<ul>
+<li>Minor fixes to VDSL3 reference documentation (PR #508).</li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>WorkflowHelper.nf</code>: Only set default values of output files which are <strong>not already set</strong>, and if the output file argument is <strong>not required</strong> (PR #514).</p></li>
+<li><p><code>NextflowPlatform</code>: When using <code>fromState</code> and <code>toState</code>, do not throw an error when the state or output is missing an optional argument (PR #515).</p></li>
+<li><p><code>export cli_autocomplete</code>: Fix output script format and hide <code>--loglevel</code> and <code>--colorize</code> (PR #544). Masked arguments are usable but might not be very useful to always display in help messages.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.8.0/</guid>
+  <pubDate>Mon, 23 Oct 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.7.5</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.7.5/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This release contains minor breaking change due to deprecated or outdated functionality being removed.</p>
+<p>New functionality includes:</p>
+<ul>
+<li><p>Export a JSON schema for the Viash config with <code>viash export json_schema</code></p></li>
+<li><p>Export a Bash or Zsh autocomplete script with <code>viash export cli_autocomplete</code></p></li>
+<li><p>Nextflow VDSL3 modules now have a <code>fromState</code> and <code>toState</code> argument to allow for better control of the data that gets passed to the module and how the state is managed in a Nextflow workflow.</p></li>
+</ul>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="breaking-changes" class="level3">
+<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
+<ul>
+<li><p><code>viash export cli_schema</code>: Added <code>--format yaml/json</code> argument, default format is now a YAML (PR #448).</p></li>
+<li><p><code>viash export config_schema</code>: Added <code>--format yaml/json</code> argument, default format is now a YAML (PR #448).</p></li>
+<li><p><code>NextflowLegacyPlatform</code>: Removed deprecated code (PR #469).</p></li>
+<li><p><code>viash_*</code>: Remove legacy viash_build, viash_test and viash_push components (PR #470).</p></li>
+<li><p><code>ComputationalRequirements</code>, <code>Functionality</code>, <code>DockerPlatform</code>, <code>DockerRequirements</code>: Remove documentation of removed fields (PR #477).</p></li>
+</ul>
+</section>
+<section id="new-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
+<ul>
+<li><p><code>viash export json_schema</code>: Export a json schema derived from the class reflections and annotations already used by the <code>config_schema</code> (PR #446).</p></li>
+<li><p><code>viash export config_schema</code>: Output <code>default</code> values of member fields (PR #446).</p></li>
+<li><p><code>CI</code>: Test support for different Java versions on GitHub Actions (PR #456). Focussing on LTS releases starting from 11, so this is 11 and 17. Also test latest Java version, currently 20.</p></li>
+<li><p><code>viash test</code> and <code>viash ns test</code>: add <code>--setup</code> argument to determine the docker build strategy before a component is tested (PR #451).</p></li>
+<li><p><code>viash export cli_autocomplete</code>: Export a Bash or Zsh autocomplete script (PR #465 &amp; #482).</p></li>
+<li><p><code>help message</code>: Print the relevant help message of (sub-)command when <code>--help</code> is given as an argument instead of only printing the help message when it is the leading argument and otherwise silently disregarding it (initially added in PR #472, replaced by PR #496). This is a new feature implemented in Scallop 5.0.0.</p></li>
+<li><p><code>Logging</code>: Add a Logger helper class (PR #485 &amp; #490). Allows manually enabling or disabling colorizing TTY output by using <code>--colorize</code>. Add provisions for adding debugging or trace code which is not outputted by default. Changing logging level can be changed with <code>--loglevel</code>. These CLI arguments are currently hidden.</p></li>
+<li><p><code>NextflowPlatform</code>: Nextflow VDSL3 modules now have a <code>fromState</code> and <code>toState</code> argument to allow for better control of the data that gets passed to the module and how the state is managed in a Nextflow workflow (#479, PR #501).</p></li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>PythonScript</code>: Pass <code>-B</code> to Python to avoid creating <code>*.pyc</code> and <code>*.pyo</code> files on importing helper functions (PR #442).</p></li>
+<li><p><code>viash config</code>: Special double values now support <code>+.inf</code>, <code>-.inf</code> or <code>.nan</code> values (PR #446 and PR #450). The stringified versions <code>"+.inf"</code>, <code>"-.inf"</code> or <code>".nan"</code> are supported as well. This is in line with the yaml spec.</p></li>
+<li><p><code>system environment variables</code>: Add wrapper around <code>sys.env</code> and provide access to specific variables (PR #457). Has advantages for documentation output and testbenches.</p></li>
+<li><p><code>testbench</code>: Added some minor testbenches to tackle missing coverage (PR #459, #486, #488, #489, #492 &amp; #494).</p></li>
+<li><p><code>viash export config_schema</code>: Simplify file structure (PR #464).</p></li>
+<li><p><code>helpers.Format</code>: Add a helper for the Format helper object (PR #466).</p></li>
+<li><p><code>testbench</code>: Use config deriver to create config variants for testing (PR #498). This reduces the amount of config files that need to be maintained.</p></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>viash config</code>: Validate Viash config Yaml files better and try to give a more informative error message back to the user instead of a stack trace (PR #443).</p></li>
+<li><p><code>viash ns build</code>: Fix the error summary when a setup or push failure occurs. These conditions were not displayed and could cause confusion (PR #447).</p></li>
+<li><p><code>testbench</code>: Fix the viash version switch test bench not working for newer Java versions (PR #452).</p></li>
+<li><p><code>malformed input exception</code>: Capture MalformedInputExceptions when thrown by reading files with invalid Ascii characters when unsupported by Java (PR #458).</p></li>
+<li><p><code>viash project file parsing</code>: Give a more informative message when the viash project file fails to parse correctly (PR #475).</p></li>
+<li><p><code>DockerPlatform</code>: Fix issue when mounting an input or output folder containing spaces (PR #484).</p></li>
+<li><p><code>Config mod</code>: Fix a config mod where the filter should execute multiple deletes (PR #503).</p></li>
+</ul>
+</section>
+<section id="documentation" class="level3">
+<h3 class="anchored" data-anchor-id="documentation">DOCUMENTATION</h3>
+<ul>
+<li><code>NextflowPlatform</code>: Add documentation for the usage and arguments of a VDSL3 module (PR #501).</li>
+</ul>
+</section>
+<section id="internal-changes" class="level3">
+<h3 class="anchored" data-anchor-id="internal-changes">INTERNAL CHANGES</h3>
+<ul>
+<li><p><code>NextflowVDSL3Platform</code>: Renamed to <code>NextflowPlatform</code> (PR #469).</p></li>
+<li><p>Rename mentions of <code>NextFlow</code> to <code>Nextflow</code> (PR #476).</p></li>
+<li><p><code>Reference static pages</code>: Move <code>.qmd</code> files from the website to a local folder here; <code>docs/reference</code> (PR #504). This way we can track behaviour changes that need to be documented locally.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.7.5/</guid>
+  <pubDate>Fri, 11 Aug 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.7.4</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.7.4/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>Some small fixes and consistency improvements. A few Quality of Life improvements were made e.g.&nbsp;to override the Docker <code>entrypoint</code> when working with Nextflow and providing default labels when building a Nextflow workflow.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="new-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
+<ul>
+<li><p>Add default labels in Nextflow config files that set default values for cpu and memory settings (PR #412). Values are more or less logarithmically spaced (1, 2, 5, 10, …).</p></li>
+<li><p><code>Author</code>: Added <code>info</code> field to authors. Deprecated <code>props</code> field (PR #423).</p></li>
+<li><p><code>viash config view</code> and <code>viash ns list</code>: Set the <code>.info.output</code> path when a platform argument is provided.</p></li>
+<li><p><code>viash ns exec</code>: Added two more fields:</p>
+<ul>
+<li><code>{output}</code>: path to the destination directory when building the component</li>
+<li><code>{abs-output}</code>: absolute path to the destination directory when building the component</li>
+</ul></li>
+<li><p><code>DockerPlatform</code>: Add <code>entrypoint</code> and <code>cmd</code> parameters to the docker platform config that allows overriding the default docker container settings (PR #432).</p></li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>Nextflow VDSL3</code>:</p>
+<ul>
+<li>Add profiles to the Nextflow Config file when the main script is a <code>NextflowScript</code> (#408).</li>
+<li>Add a <code>script</code> parameter in Nextflow Config file to add a single string or list of strings to the <code>nextflow.config</code> (PR #430).</li>
+</ul></li>
+<li><p><code>Scripts</code>: Remove the <code>entrypoint</code> parameter for all script types except <code>NextflowScript</code> (#409). All these scripts had to check individually whether the parameter was unset, now it can be done in the <code>Script</code> apply method.</p></li>
+<li><p><code>schema export</code>:</p>
+<ul>
+<li>Restructure Nextflow-Directives, -Auto and -Config into a <code>nextflowParameters</code> group (PR #412). Previously only NextflowDirectives was exposed.</li>
+<li>Restructure the format to group authors &amp; computational requirements together with functionality (PR #426).</li>
+<li>Restructure the Viash Config and Project Config pages under a <code>config</code> category (PR #426).</li>
+<li>Add references in Functionality and Nextflow VDSL3 to the new documentation pages (PR #426).</li>
+<li>Add description and/or examples for platforms and requirements (PR #428).</li>
+</ul></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>viash config inject</code>: Fix an empty line being added at the script start for each time <code>viash config inject</code> was run (#377).</p></li>
+<li><p><code>WorkflowHelper</code>: Fixed an issue where passing a remote file URI (for example <code>http://</code> or <code>s3://</code>) as <code>param_list</code> caused <code>No such file</code> errors.</p></li>
+<li><p><code>BashWrapper</code>: Fix escaping of the included script where a line starting with a pipe character with optional leading spaces is stripped of the leading spaces and pipe character. This was quite unlikely to happen except when <code>viash config inject</code> was called on a Nextflow Script, which lead to no real config code being injected however workflows were getting corrupted. (#421)</p></li>
+<li><p><code>Deprecation testbench</code>: Add missing classes to be checked (PR #426).</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.7.4/</guid>
+  <pubDate>Wed, 31 May 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.7.3</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.7.3/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>Fix minor issues in the documentation and with the way parent paths of resources are printed a config view.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>DockerPlatform</code>: Fixed example in documentation for the <code>namespace_separator</code> parameter (PR #396).</p></li>
+<li><p><code>viash config view</code>: Resource parent paths should be directories and not file (PR #398).</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.7.3/</guid>
+  <pubDate>Wed, 19 Apr 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.7.2</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.7.2/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This update adds functionality to resolve paths starting with a slash as relative to the project directory, improves handling of info metadata in the config, and fixes to the operator precedence of config mods.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="new-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
+<ul>
+<li><p>Resolve resource and merge paths starting with a slash (<code>/</code>) as relative to the project directory (PR #380). To define absolute paths (which is not recommended anyway), prefix the path with the <code>file://</code> protocol. Examples:</p>
+<ul>
+<li><code>/foo</code> is a file or directory called <code>foo</code> in the current project directory.</li>
+<li><code>file:/foo</code> is a file or directory called <code>foo</code> in the system root.</li>
+</ul></li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><code>viash config view</code>: Do not modify (e.g.&nbsp;strip empty fields) of the <code>.functionality.info</code> and <code>.functionality.arguments[].info</code> fields (#386).</li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><code>ConfigMods</code>: Fix operator precedence issues with conditions in the config mod parsers (PR #390).</li>
+</ul>
+</section>
+<section id="internal-changes" class="level3">
+<h3 class="anchored" data-anchor-id="internal-changes">INTERNAL CHANGES</h3>
+<ul>
+<li><p>Clean up unused code (PR #380).</p></li>
+<li><p>Move circe encoders/decoders for File and Path from <code>io.viash.functionality.arguments</code> to <code>io.viash.helpers.circe</code> (PR #380).</p></li>
+<li><p>Store the project root directory (that is, the directory of the <code>_viash.yaml</code>) in a ViashProject object (PR #380).</p></li>
+<li><p>Tests: Reworked language tests to be grouped in their own subfolder and split off the bash language test from the general <code>testbash</code> folder (PR #381).</p></li>
+<li><p>Tests: Add additional language tests for <code>viash config inject</code> (PR #381).</p></li>
+<li><p>Tests: Added test for <code>io.viash.helpers.IO</code> (PR #380).</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.7.2/</guid>
+  <pubDate>Mon, 17 Apr 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.7.1</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.7.1/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This is a minor release which improves caching in VDSL3 components and changes the formats of the schema files for the Viash config and CLI.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><code>DataflowHelper</code>: Add assertions and <code>def</code>s.</li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>VDSL3</code>: Only the first two elements from an event in a channel are now passed to a process. This avoids calculating cache entries based on arguments that are not used by the process, causing false-negative cache misses.</p></li>
+<li><p><code>config_schema</code>:</p>
+<ul>
+<li>Correct some incorrect markdown tags.</li>
+<li>Add project config.</li>
+<li>Correct documentation/markdown tags to the correct order.</li>
+<li>Add summary description and example for ‘resource’ and ‘argument’, to be used on the reference website.</li>
+<li>Add documentation for the Nextflow directives.</li>
+</ul></li>
+<li><p><code>cli_schema</code>: Correct documentation/markdown tags to the correct order.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.7.1/</guid>
+  <pubDate>Wed, 08 Mar 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.7.0</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.7.0/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<ul>
+<li><p>Default namespace separator has been changed from <code>_</code> to <code>/</code>. This means Docker images will be named <code>&lt;Registry&gt;/&lt;Organization&gt;/&lt;Namespace&gt;/&lt;Name&gt;</code> by default. For example, <code>ghcr.io/openpipelines-bio/mapping/cellranger_count</code> instead of <code>ghcr.io/openpipelines-bio/mapping_cellranger_count</code>.</p></li>
+<li><p>Removed deprecated code of unused functionality to simplify code.</p>
+<ul>
+<li>Shorthand notation for specitying input/output arguments</li>
+<li>Shorthand notation for specifying Docker requirements</li>
+<li>Legacy Nextflow platform</li>
+</ul></li>
+<li><p>Improvements in VDSL3 and the Nextflow Workflow Helper to make behaviour more predictable and fixing some bugs in the meantime. Run the following to get access to the updated helpers:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">WF_DIR</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"src/wf_utils"</span></span>
+<span id="cb1-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[[</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-d</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$WF_DIR</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]]</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">||</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mkdir</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-p</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$WF_DIR</span></span>
+<span id="cb1-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">viash</span> export resource platforms/nextflow/ProfilesHelper.config <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$WF_DIR</span>/ProfilesHelper.config</span>
+<span id="cb1-4"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">viash</span> export resource platforms/nextflow/WorkflowHelper.nf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$WF_DIR</span>/WorkflowHelper.nf</span>
+<span id="cb1-5"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">viash</span> export resource platforms/nextflow/DataflowHelper.nf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$WF_DIR</span>/DataflowHelper.nf</span></code></pre></div></li>
+<li><p>Improvements to test benches and several bug fixes.</p></li>
+</ul>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="breaking-changes" class="level3">
+<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
+<ul>
+<li><p>Viash config: Previously deprecated fields are now removed.</p>
+<ul>
+<li><code>functionality.inputs</code>: Use <code>arguments</code> or <code>argument_groups</code> instead.</li>
+<li><code>functionality.outputs</code>: Use <code>arguments</code> or <code>argument_groups</code> instead.</li>
+<li><code>functionality.tests</code>: Use <code>test_resources</code> instead. No functional difference.</li>
+<li><code>functionality.enabled</code>: Use <code>status: enabled</code> instead.</li>
+<li><code>functionality.requirements.n_proc</code>: Use <code>cpus</code> instead.</li>
+<li><code>platforms.DockerPlatform.privileged</code>: Add a <code>--privileged</code> flag in <code>run_args</code> instead.</li>
+<li><code>platforms.DockerPlatform.apk</code>: Use <code>setup: [{ type: apk, packages: ... }]</code> instead.</li>
+<li><code>platforms.DockerPlatform.apt</code>: Use <code>setup: [{ type: apt, packages: ... }]</code> instead.</li>
+<li><code>platforms.DockerPlatform.yum</code>: Use <code>setup: [{ type: yum, packages: ... }]</code> instead.</li>
+<li><code>platforms.DockerPlatform.r</code>: Use <code>setup: [{ type: r, packages: ... }]</code> instead.</li>
+<li><code>platforms.DockerPlatform.python</code>: Use <code>setup: [{ type: python, packages: ... }]</code> instead.</li>
+<li><code>platforms.DockerPlatform.docker</code>: Use <code>setup: [{ type: docker, run: ... }]</code> instead.</li>
+<li><code>platforms.DockerPlatform.docker.setup.resources</code>: Use <code>setup: [{ type: docker, copy: ... }]</code> instead.</li>
+<li><code>platforms.NextflowLegacy</code>: Use the Nextflow VDSL3 platform instead.</li>
+<li><code>functionality.ArgumentGroups</code>: No longer supports strings referring to arguments in the <code>arguments:</code> section. Instead directly put the arguments inside the argument groups.</li>
+</ul></li>
+<li><p><code>viash_install</code>: The bootstrap script has been reworked in line with the project config introduced in 0.6.4:</p>
+<ul>
+<li>The default location for installing the Viash executable is now <code>./viash</code> (was: <code>bin/viash</code>).</li>
+<li>The new <code>viash_install</code> support <code>--output</code> and <code>--tag</code>.</li>
+<li>The various settings that existed in <code>viash_install</code> (organisation, tag, …) are moved to the project config.</li>
+</ul>
+<p>Please note that this new <code>viash_install</code> bootstrap script can be run from the CLI using:</p>
+<pre><code>curl -fsSL dl.viash.io | bash</code></pre>
+<p>The old <code>get.viash.io</code> is still available but points to the version 0.6.7 version of this component and is deprecated.</p></li>
+<li><p><code>WorkflowHelper</code>: <code>paramsToList</code>, <code>paramsToChannel</code> and <code>viashChannel</code> are now deprecated and will be removed in a future release.</p></li>
+<li><p><code>viash (ns) build</code>: Change the default value of the namespace separator in a Docker platform from <code>_</code> to <code>/</code>. Add <code>".platforms[.type == 'docker'].namespace_separator := '_'"</code> to the project config <code>_viash.yaml</code> to revert to the previous behaviour.</p></li>
+</ul>
+</section>
+<section id="major-changes" class="level3">
+<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
+<ul>
+<li><code>VDSL3</code>: now uses the newly implemented <code>channelFromParams</code> and <code>preprocessInputs</code> instead of <code>viashChannel</code>.</li>
+</ul>
+</section>
+<section id="new-features" class="level3">
+<h3 class="anchored" data-anchor-id="new-features">NEW FEATURES</h3>
+<ul>
+<li><code>WorkflowHelper</code>: Added <code>preprocessInputs</code> and <code>channelFromParams</code> to replace <code>paramsToList</code>, <code>paramsToChannel</code> and <code>viashChannel</code>. This refactor allows processing parameters that are already in a Channel using <code>preprocessInputs</code>, which is necessary when passing parameters from a workflow to a subworkflow in a Nextflow pipeline.</li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>Main</code>: Capture build, setup and push errors and output an exit code.</p></li>
+<li><p><code>File downloading</code>: Add check to pre-emptively catch file errors (e.g.&nbsp;404).</p></li>
+<li><p><code>Scala</code>: Updated to Scala 2.13 and updated several dependencies.</p></li>
+<li><p><code>Main</code>: Improve <code>match</code> completeness in some edge cases and throw exceptions where needed.</p></li>
+<li><p><code>Changelog</code>: Reformat the changelog to a more structured format. For every release, there is now a date, title, and summary. This both improves the changelog itself but can then also be used to postprocess the CHANGELOG programmatically.</p></li>
+<li><p><code>VDSL3</code>: Add a default value for <code>id</code> when running a VDSL3 module as a standalone pipeline.</p></li>
+<li><p><code>TestBenches</code>:</p>
+<ul>
+<li>Verify switching of Viash versions</li>
+<li>Prepare ConfigDeriver by copying base resources to the targetFolder. Use cases so far showed that it’s always required and it simplifies the usage.</li>
+<li>Remove some old &amp; unmaintained IntelliJ Idea <code>editor-fold</code> tags. Given that the testbenches were split up, these were broken but also no longer needed.</li>
+<li>Add 2 testbenches for computational requirements when running <code>viash run</code> or <code>viash test</code>.</li>
+<li>Added tests for different values for the <code>--id</code> and <code>--param_list</code> parameters of VDSL3 modules.</li>
+</ul></li>
+<li><p><code>viash test</code>: Use <code>test</code> as a random tag during testing, instead of <code>test</code> plus a random string.</p></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>WorkflowHelper</code>: fixed where passing a relative path as <code>--param_list</code> would cause incorrect resolving of input files.</p></li>
+<li><p><code>Testbenches</code>: Fix GitTest testbench to correctly increment temporary folder naming and dispose them after the test finishes.</p></li>
+<li><p><code>viash xxx url</code>: Fix passing a url to viash as the config file to process. Add a short testbench to test principle functionality.</p></li>
+<li><p><code>Testbenches</code>: Simplify <code>testr</code> container.</p></li>
+<li><p><code>Main</code>: Improve error reporting to the user in some cases where files or folders can’t be found. Depending on the thrown exception, more or less context was given.</p></li>
+<li><p><code>VDSL3</code>: Create parent directory of output files before starting the script.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.7.0/</guid>
+  <pubDate>Tue, 28 Feb 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.6.7</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.6.7/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>Another minor release which contains several quality of life improvements for the Nextflow VDSL3 platform, as well as automated warnings for deprecated functionality.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>NextflowPlatform</code>: Create directories during a stub run when output path is a nested directory (PR #314).</p></li>
+<li><p>Automatically generate a warning for deprecated parameters while parsing a .viash.yaml configuration file using the inline documentation deprecation annotations.</p></li>
+<li><p>Add a “planned removal” field in the deprecation annotations.</p></li>
+<li><p>Add testbenches to verify proper formatting of the deprecation versions and compare current version to the planned removal version so no deprecated parameters get to stick around beyond what was planned.</p></li>
+<li><p><code>NextflowPlatform</code>: Nextflow processes are created lazily; that is, only when running a Nextflow workflow (PR #321).</p></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><code>NextflowPlatform</code>: Automatically split Viash config strings into strings of length 65000 since the JVM has a limit (65536) on the length of string constants (PR #323).</li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.6.7/</guid>
+  <pubDate>Wed, 14 Dec 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.6.6</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.6.6/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This release fixes an issue where stderr was being redirected to stdout.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li>Don’t redirect stderr to stdout when switching Viash versions (#312).</li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.6.6/</guid>
+  <pubDate>Tue, 06 Dec 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.6.5</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.6.5/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>A small update which fixes an issue with <code>viash ns list</code> that was introduced in Viash 0.6.3.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><code>viash ns list</code>: When the <code>-p &lt;platform&gt;</code> is defined, filter the output by that platform.</li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.6.5/</guid>
+  <pubDate>Fri, 02 Dec 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.6.4</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.6.4/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This release adds features related to managing Viash projects and allows for better runtime introspection of Nextflow VDSL3 modules.</p>
+<p>The most notable changes are:</p>
+<ul>
+<li><p>You can switch versions of Viash using the <code>VIASH_VERSION</code> environment variable! Example:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">VIASH_VERSION</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>0.6.0 <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">viash</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--version</span></span></code></pre></div>
+<p>More importantly, you can specify the version of Viash you want in a project config. See below for more info.</p></li>
+<li><p>Introducing Viash project config files as an experimental feature. It allows storing project-related settings in a <code>_viash.yaml</code> config file which you should store at the root of your repository. Example:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">viash_version</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.6.4</span></span>
+<span id="cb2-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">source</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> src</span></span>
+<span id="cb2-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">target</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> target</span></span>
+<span id="cb2-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">config_mods</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">: </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="cb2-5">  .platforms[.type == 'docker'].target_registry := 'ghcr.io'</span>
+<span id="cb2-6">  .platforms[.type == 'docker'].target_organization := 'viash-io'</span>
+<span id="cb2-7">  .platforms[.type == 'docker'].namespace_separator := '/'</span>
+<span id="cb2-8">  .platforms[.type == 'docker'].target_image_source := 'https://github.com/viash-io/viash'</span></code></pre></div></li>
+<li><p>It’s now possible to specify in which order Viash will merge Viash configs. Example:</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb3-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> foo</span></span>
+<span id="cb3-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb3-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__merge__</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> obj_input.yaml</span></span>
+<span id="cb3-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--one"</span></span>
+<span id="cb3-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__merge__</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> obj_input.yaml</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span>
+<span id="cb3-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--two"</span></span>
+<span id="cb3-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__merge__</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">obj_input.yaml</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> .</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span>
+<span id="cb3-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">     </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--three"</span></span></code></pre></div></li>
+</ul>
+<p>Please take note of the following breaking changes:</p>
+<ul>
+<li><p>Passing non-existent paths to a Viash component will cause the component to generate an error when no file or folder is found. Set <code>must_exist</code> to <code>false</code> to revert to the previous behaviour.</p></li>
+<li><p>The arguments <code>--write_meta/-w</code> and <code>--meta/-m</code> no longer exist, because every <code>viash build/run/test</code> run will generate a <code>.config.vsh.yaml</code> meta file.</p></li>
+</ul>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="breaking-changes" class="level3">
+<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
+<ul>
+<li><p>Config: Viash configs whose filenames start with a <code>.</code> are ignored (PR #291).</p></li>
+<li><p><code>viash build</code>: <code>--write_meta/-m</code> and <code>--meta/-m</code> arguments have been removed. Instead, the <code>.config.vsh.yaml</code> file is always created when building Viash components (PR #293).</p></li>
+<li><p><code>FileArgument</code>: Default setting of <code>must_exist</code> was changed from <code>false</code> to <code>true</code>. As such, the component will throw an error by default if an input file or output file is missing (PR #295).</p></li>
+<li><p>Config merging: <code>__inherits__</code> has been renamed to <code>__merge__</code>.</p></li>
+</ul>
+</section>
+<section id="new-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
+<ul>
+<li><p>You can switch versions of Viash using the <code>VIASH_VERSION</code> environment variable (PR #304)! Example:</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">VIASH_VERSION</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>0.6.0 <span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">viash</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--version</span></span></code></pre></div></li>
+<li><p>Traceability: Running <code>viash build</code> and <code>viash test</code> creates a <code>.config.vsh.yaml</code> file by default, which contains the processed config of the component. As a side effect, this allows for reading in the <code>.config.vsh.yaml</code> from within the component to learn more about the component being tested (PR #291 and PR #293).</p></li>
+<li><p><code>FileArgument</code>: Added <code>create_parent</code> option, which will check if the directory of an output file exists and create it if necessary (PR #295).</p></li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>viash run</code>, <code>viash test</code>: When running or testing a component, Viash will add an extension to the temporary file that is created. Before: <code>/tmp/viash-run-wdckjnce</code>, now: <code>/tmp/viash-run-wdckjnce.py</code> (PR #302).</p></li>
+<li><p>NextflowPlatform: Add <code>DataflowHelper.nf</code> as a retrievable resource in Viash (PR #301).</p></li>
+<li><p>NextflowPlatform: During a stubrun, argument requirements are turned off and the <code>publishDir</code>, <code>cpus</code>, <code>memory</code>, and <code>label</code> directives are also removed from the process (PR #301).</p></li>
+<li><p><code>NextflowPlatform</code>: Added a <code>filter</code> processing argument to filter the incoming channel after the <code>map</code>, <code>mapData</code>, <code>mapId</code> and <code>mapPassthrough</code> have been applied (PR #296).</p></li>
+<li><p><code>NextflowPlatform</code>: Added the Viash config to the Nextflow module for later introspection (PR #296). For example:</p>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb5-1">include <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span> foo <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span> from <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">$targetDir</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">/path/foo/main.nf"</span></span>
+<span id="cb5-2"></span>
+<span id="cb5-3">foo<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">run</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>filter<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span> tup <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span></span>
+<span id="cb5-4">  <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">def</span> preferredNormalization <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> foo<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>config<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>functionality<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>info<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>preferred_normalization</span>
+<span id="cb5-5">  tup<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>normalization_id <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> preferredNormalization</span>
+<span id="cb5-6"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">})</span></span></code></pre></div>
+<h3 id="bug-fixes" class="anchored">BUG FIXES</h3></li>
+<li><p><code>BashWrapper</code>: Don’t overwrite meta values when trailing arguments are provided (PR #295).</p></li>
+</ul>
+</section>
+<section id="experimental-features" class="level3">
+<h3 class="anchored" data-anchor-id="experimental-features">EXPERIMENTAL FEATURES</h3>
+<ul>
+<li><p>Viash Project: Viash will automatically search for a <code>_viash.yaml</code> file in the directory of a component and its parent directories (PR #294).</p>
+<p>Contents of <code>_viash.yaml</code>:</p>
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">source</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> src</span></span>
+<span id="cb6-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">target</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> target</span></span>
+<span id="cb6-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">config_mods</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">: </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="cb6-4">  .platforms[.type == 'docker'].target_registry := 'ghcr.io'</span>
+<span id="cb6-5">  .platforms[.type == 'docker'].target_organization := 'viash-io'</span>
+<span id="cb6-6">  .platforms[.type == 'docker'].namespace_separator := '/'</span>
+<span id="cb6-7">  .platforms[.type == 'docker'].target_image_source := 'https://github.com/viash-io/viash'</span></code></pre></div></li>
+<li><p>Config merging: Allow specifying the order in which Viash will merge configs (PR #289). If <code>.</code> is not in the list of inherited objects, it will be added at the end.</p>
+<p>Contents of <code>config.vsh.yaml</code>:</p>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb7-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> foo</span></span>
+<span id="cb7-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb7-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__merge__</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> obj_input.yaml</span></span>
+<span id="cb7-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--one"</span></span>
+<span id="cb7-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__merge__</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> obj_input.yaml</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span>
+<span id="cb7-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--two"</span></span>
+<span id="cb7-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__merge__</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">obj_input.yaml</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> .</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span>
+<span id="cb7-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--three"</span></span></code></pre></div>
+<p>Contents of <code>obj_input.yaml</code>:</p>
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb8-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> --input</span></span>
+<span id="cb8-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">description</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> A h5ad file</span></span></code></pre></div>
+<p>Output of <code>viash config view config.vsh.yaml</code> (stripped irrelevant bits):</p>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb9-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb9-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"file"</span></span>
+<span id="cb9-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--one"</span></span>
+<span id="cb9-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">description</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A h5ad file"</span></span>
+<span id="cb9-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"file"</span></span>
+<span id="cb9-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--input"</span></span>
+<span id="cb9-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">description</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A h5ad file"</span></span>
+<span id="cb9-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"file"</span></span>
+<span id="cb9-10"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--three"</span></span>
+<span id="cb9-11"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">description</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A h5ad file"</span></span></code></pre></div></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.6.4/</guid>
+  <pubDate>Wed, 30 Nov 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.6.3</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.6.3/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This release features contains mostly quality of life improvements and some experimental functionality. Most notably:</p>
+<ul>
+<li><p><code>viash ns list</code> now only returns a config just once instead of once per platform.</p></li>
+<li><p>A functionality’s info field can contain any data structures. An <code>.info</code> field was added to arguments as well.</p></li>
+<li><p>Bug fixes for using Viash with podman, Nextflow&gt;=22.10 and R&lt;4.0.</p></li>
+<li><p>Experimental support for inheriting from config partials.</p></li>
+</ul>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="major-changes" class="level3">
+<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
+<ul>
+<li><p><code>Config</code>: Made major internal changes w.r.t. how config files are read and at which point a platform (native, docker, nextflow) is applied to the functionality script. The only visible side effect is that <code>viash ns list</code> will output each config only once instead of multiple times.</p></li>
+<li><p><code>Functionality</code>: Structured annotation can be added to a functionality and its arguments using the <code>info</code> field. Example:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> foo</span></span>
+<span id="cb1-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">info</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">site</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> https://abc.xyz</span></span>
+<span id="cb1-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tags</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> one</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> two</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> three </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span>
+<span id="cb1-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> --foo</span></span>
+<span id="cb1-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> string</span></span>
+<span id="cb1-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">info</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-10"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">foo</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> bar</span></span>
+<span id="cb1-11"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">a</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-12"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">b</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-13"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">            c</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>BashWrapper</code>: Allow printing the executor command by adding <code>---verbose ---verbose</code> to a <code>viash run</code> or an executable.</p></li>
+<li><p><code>Testbenches</code>: Rework <code>MainBuildAuxiliaryNativeParameterCheck</code> to create stimulus files and loop over the file from bash instead of looping natively. This prevents creating thousands of new processes which would only test a single parameter. Note this still calls the main script for each stimulus separately, but that was the case anyway, only much much worse.</p></li>
+<li><p><code>Testbenches</code>: Split some grouped test benches into slightly smaller test benches that group tested functionality better.</p></li>
+<li><p><code>Annotations</code>: Complete the config schema annotations. Make sure all arguments are documented. Added an annotation <code>internalFunctionality</code> and <code>undocumented</code> for arguments that should not be documented. Added a testbench that verifies that all arguments are in fact annotated, skipping those that are not in the class constructor. Adds a hierarchy field in the <code>__this__</code> member to list the relation of the own and parent classes.</p></li>
+<li><p><code>Testbenches</code>: Add exit code to helper method <code>testMainWithStdErr</code>.</p></li>
+<li><p><code>Testbenches</code>: Add testbench to verify viash underscore components (viash_build, viash_install, viash_push, viash_skeleton, viash_test).</p></li>
+<li><p><code>Testbenches</code>: Update viash underscore component tests to use <code>$meta_executable</code>.</p></li>
+<li><p><code>viash ns exec</code>: Allow choosing whether the <code>{platform}</code> field should be filled in, based on the <code>--apply_platform</code> parameter.</p></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>DockerPlatform</code>: Remove duplicate auto-mounts (#257).</p></li>
+<li><p><code>Underscore component tests</code>: Fix tests for <code>viash_skeleton</code> and <code>viash_test</code> components.</p></li>
+<li><p><code>NextflowVDSL3Platform</code>: Fix ‘Module scriptPath has not been defined yet’ error when Nextflow&gt;=22.10 (#269).</p></li>
+<li><p><code>config inject</code>: Doesn’t work when <code>must_exist == true</code> (#273).</p></li>
+<li><p><code>RScript</code>: Fix compatibility issue where the new character escaping in <code>r_script</code> required R&gt;=4.0 (#275). Escaping is now handled without using the new <code>r'(foo)'</code> notation.</p></li>
+</ul>
+</section>
+<section id="deprecation" class="level3">
+<h3 class="anchored" data-anchor-id="deprecation">DEPRECATION</h3>
+<ul>
+<li><p><code>DockerRequirements</code>: The <code>resources:</code> setting has been deprecated and will be removed in Viash 0.7.0. Please use <code>copy:</code> instead.</p></li>
+<li><p><code>DockerRequirements</code>: The <code>privileged:</code> setting has been deprecated and will be removed in Viash 0.7.0. Please use <code>run_args: "--privileged"</code> instead.</p></li>
+</ul>
+</section>
+<section id="experimental-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="experimental-functionality">EXPERIMENTAL FUNCTIONALITY</h3>
+<ul>
+<li><p><code>Config</code>: Any part of a Viash config can use inheritance to fill data (PR #271). For example: Contents of <code>src/test/config.vsh.yaml</code>:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__inherits__</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> ../api/base.yaml</span></span>
+<span id="cb2-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb2-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> test</span></span>
+<span id="cb2-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">resources</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb2-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> bash_script</span></span>
+<span id="cb2-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">path</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> script.sh</span></span>
+<span id="cb2-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">      text</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">: </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="cb2-8">        echo Copying $par_input to $par_output</span>
+<span id="cb2-9">        cp $par_input $par_output</span></code></pre></div>
+<p>Contents of <code>src/api/base.yaml</code>:</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb3-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb3-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--input"</span></span>
+<span id="cb3-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb3-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--output"</span></span>
+<span id="cb3-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb3-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">direction</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> output</span></span></code></pre></div>
+<p>The resulting yaml will be:</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb4-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> test</span></span>
+<span id="cb4-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb4-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--input"</span></span>
+<span id="cb4-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb4-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--output"</span></span>
+<span id="cb4-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb4-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">direction</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> output</span></span>
+<span id="cb4-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">resources</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb4-10"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> bash_script</span></span>
+<span id="cb4-11"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">path</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> script.sh</span></span>
+<span id="cb4-12"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">      text</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">: </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="cb4-13">        echo Copying $par_input to $par_output</span>
+<span id="cb4-14">        cp $par_input $par_output</span></code></pre></div></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.6.3/</guid>
+  <pubDate>Wed, 09 Nov 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.6.2</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.6.2/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This is a quick release to push two bug fixes related to security and being able to run Nextflow with optional output files.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>Git</code>: Strip credentials from remote repositories when retrieving the path.</p></li>
+<li><p><code>VDSL3</code>: Allow optional output files to be <code>null</code>.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.6.2/</guid>
+  <pubDate>Tue, 11 Oct 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.6.1</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.6.1/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This release contains mostly minor improvements of functionality released in Viash 0.6.0. Most notably:</p>
+<ul>
+<li><p>Support was added for <code>type: long</code> arguments</p></li>
+<li><p><code>meta["n_proc"]</code> has been renamed to <code>meta["cpus"]</code>. <code>meta["cpus"]</code> is now an integer, whereas <code>meta["memory_*"]</code> are now longs.</p></li>
+<li><p><code>viash ns exec</code> is able to recognise <code>{platform}</code> and <code>{namespace}</code> fields.</p></li>
+<li><p>And various bug fixes and improvements to documentation and unit testing.</p></li>
+</ul>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="breaking-changes" class="level3">
+<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
+<ul>
+<li><p>Deprecated usage <code>resources_dir</code> variable inside scripts, use <code>meta["resources_dir"]</code> instead (or <code>$meta_resources_dir</code> in Bash, or <code>meta$resources_dir</code> in R).</p></li>
+<li><p>Deprecated <code>meta["n_proc"]</code> in favour for <code>meta["cpus"]</code>.</p></li>
+</ul>
+</section>
+<section id="new-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
+<ul>
+<li><p><code>viash ns exec</code>: Added two more fields:</p>
+<ul>
+<li><code>{platform}</code>: the platform name (if applicable)</li>
+<li><code>{namespace}</code>: the namespace of the component</li>
+</ul></li>
+<li><p><code>LongArgument</code>: Added support for 64-bit integers with <code>type: long</code> as opposed to <code>type: integer</code> which are 32-bit integers.</p></li>
+</ul>
+</section>
+<section id="major-changes" class="level3">
+<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
+<ul>
+<li>Allow passing integers/doubles/booleans to string parameters (#225). Removed the ‘Version’ helper class.</li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>meta["cpus"]</code> is now an integer, <code>meta["memory_*"]</code> are now longs (#224).</p></li>
+<li><p><code>DockerPlatform</code>: Only store author names in the authors metadata.</p></li>
+<li><p><code>NextflowPlatform</code>: Only store author names in the authors metadata.</p></li>
+<li><p><code>Argument[_]</code>: Turn <code>multiple_sep</code> from <code>Char</code> into <code>String</code>.</p></li>
+</ul>
+</section>
+<section id="internal-changes" class="level3">
+<h3 class="anchored" data-anchor-id="internal-changes">INTERNAL CHANGES</h3>
+<ul>
+<li><p>All <code>meta[...]</code> variables are now processed similar to <code>Argument[_]</code>s, instead of using custom code to convert object types and detect Docker mounts.</p></li>
+<li><p><code>Escaper</code>: Make more generic Escaper helper class.</p></li>
+</ul>
+</section>
+<section id="documentation" class="level3">
+<h3 class="anchored" data-anchor-id="documentation">DOCUMENTATION</h3>
+<ul>
+<li><p>Hardcoded URLs pointing to viash.io in the documentation annotations were replaced with a new keyword system.</p></li>
+<li><p>Replaced references to “DSL” with “Dynamic Config Modding” in the <code>--help</code> output.</p></li>
+<li><p>Added an example for Ruby based Docker setups.</p></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>viash ns</code>: Reverse exit code outputs, was returning 1 when everything was OK and 0 when errors were detected (PR #227).</p></li>
+<li><p><code>viash config inject</code>: Fix processing of arguments when argument groups are defined (#231).</p></li>
+<li><p>Fixed a few typos in the CLI.</p></li>
+<li><p>Fixed the formatting of <code>ns exec</code> documentation.</p></li>
+<li><p><code>VDSL3</code>: Fix stub functionality.</p></li>
+<li><p><code>VDSL3</code>: Fix error during error message.</p></li>
+<li><p><code>viash test</code>: Fix issue where <code>VIASH_TEMP</code> could not be a relative directory when running <code>viash test</code> (#242).</p></li>
+<li><p><code>BashScript</code>, <code>CSharpScript</code>, <code>JavaScriptScript</code>, <code>PythonScript</code>, <code>RScript</code>, <code>ScalaScript</code>: Fix quoting issues of certain characters (#113).</p></li>
+</ul>
+</section>
+<section id="deprecation" class="level3">
+<h3 class="anchored" data-anchor-id="deprecation">DEPRECATION</h3>
+<ul>
+<li><code>NextflowPlatform</code>: Deprecate <code>--param_list_format</code> parameter.</li>
+</ul>
+</section>
+<section id="testing" class="level3">
+<h3 class="anchored" data-anchor-id="testing">TESTING</h3>
+<ul>
+<li><p><code>BashScript</code>, <code>CSharpScript</code>, <code>JavaScriptScript</code>, <code>PythonScript</code>, <code>RScript</code>, <code>ScalaScript</code>: Implement more rigorous testing of which characters are escaped.</p></li>
+<li><p><code>BashWrapper</code>: Escape usage of <code>multiple_sep</code>. This fixes various checks and transformations not working when when <code>multiple_sep</code> is set to <code>";"</code> (#235).</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.6.1/</guid>
+  <pubDate>Mon, 03 Oct 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Viash 0.6.0</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.6.0/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>The first (major) release this year! The biggest changes are:</p>
+<ul>
+<li><p>Nextflow VDSL3 is now the default Nextflow platform, whereas the legacy Nextflow platform has been deprecated.</p></li>
+<li><p>Support for tracking memory and cpu requirements more elegantly.</p></li>
+<li><p>Grouping arguments in groups more concisely.</p></li>
+<li><p>The addition of a <code>viash ns exec</code> command, to be able to execute commands on Viash components more easily.</p></li>
+</ul>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="breaking-changes" class="level3">
+<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
+<ul>
+<li><p><code>NextflowPlatform</code>: <code>variant: vdsl3</code> is now the default NextflowPlatform. <code>variant: legacy</code> has been deprecated.</p></li>
+<li><p><code>Functionality</code>: Fields <code>.inputs</code> and <code>.outputs</code> has been deprecated. Please use <code>.argument_groups</code> instead (#186). Before:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">inputs</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--foo"</span></span>
+<span id="cb1-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">outputs</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb1-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--bar"</span></span></code></pre></div>
+<p>Now:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb2-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">argument_groups</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb2-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Inputs</span></span>
+<span id="cb2-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb2-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--foo"</span></span>
+<span id="cb2-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb2-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Outputs</span></span>
+<span id="cb2-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb2-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--bar"</span></span>
+<span id="cb2-10"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb2-11"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">direction</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> output</span></span></code></pre></div></li>
+<li><p>Passing strings to an argument group’s arguments has been deprecated. Please simply copy the argument itself into the argument group (#186). Before:</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb3-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb3-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--foo"</span></span>
+<span id="cb3-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb3-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--bar"</span></span>
+<span id="cb3-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb3-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">direction</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> output</span></span>
+<span id="cb3-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">argument_groups</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb3-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Inputs</span></span>
+<span id="cb3-10"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> foo </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span>
+<span id="cb3-11"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Outputs</span></span>
+<span id="cb3-12"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> bar </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span></code></pre></div>
+<p>Now:</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb4-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">argument_groups</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb4-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Inputs</span></span>
+<span id="cb4-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb4-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--foo"</span></span>
+<span id="cb4-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb4-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Outputs</span></span>
+<span id="cb4-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb4-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"--bar"</span></span>
+<span id="cb4-10"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> file</span></span>
+<span id="cb4-11"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">direction</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> output</span></span></code></pre></div></li>
+</ul>
+</section>
+<section id="new-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
+<ul>
+<li><p>Allow setting the number of processes and memory limit from within the Viash config, as well as a list of required commands. Example:</p>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb5-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> foo</span></span>
+<span id="cb5-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">requirements</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb5-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cpus</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span></span>
+<span id="cb5-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">memory</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> 10GB</span></span>
+<span id="cb5-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">commands</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> bash</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> r</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">,</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> perl </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]</span></span></code></pre></div>
+<p>You can override the default requirements at runtime:</p>
+<ul>
+<li><code>./foo ---cpus 4 ---memory 100PB</code> (for NativePlatform or DockerPlatform)</li>
+<li>By adding <code>process.cpus = 4</code> and <code>process.memory "100 PB"</code> to a nextflow.config (for NextflowPlatform)</li>
+</ul>
+<p>This results the following meta variables to be injected into a script:</p>
+<ul>
+<li><code>meta_cpus</code> (in Bash) or <code>meta["cpus"]</code> (in any other language): Number of processes the script is allowed to spawn.</li>
+<li><code>meta_memory_b</code> (in Bash) or <code>meta["memory_b"]</code> (in any other language): Amount of memory the script is allowed to allocate, in bytes.</li>
+<li><code>meta_memory_kb</code> (in Bash) or <code>meta["memory_kb"]</code> (in any other language): Same but in kilobytes, rounded up.</li>
+<li><code>meta_memory_mb</code> (in Bash) or <code>meta["memory_mb"]</code> (in any other language): Same but in megabytes, rounded up.</li>
+<li><code>meta_memory_gb</code> (in Bash) or <code>meta["memory_gb"]</code> (in any other language): Same but in gigabytes, rounded up.</li>
+<li><code>meta_memory_tb</code> (in Bash) or <code>meta["memory_tb"]</code> (in any other language): Same but in terabytes, rounded up.</li>
+<li><code>meta_memory_pb</code> (in Bash) or <code>meta["memory_pb"]</code> (in any other language): Same but in petabytes, rounded up.</li>
+</ul></li>
+<li><p><code>viash ns exec</code>: Added a command for executing arbitrary commands for all found Viash components. The syntax of this command is inspired by <code>find . -exec echo {} \;</code>.</p>
+<p>The following fields are automatically replaced:</p>
+<ul>
+<li><code>{}</code> | <code>{path}</code>: path to the config file</li>
+<li><code>{abs-path}</code>: absolute path to the config file</li>
+<li><code>{dir}</code>: path to the parent directory of the config file</li>
+<li><code>{abs-dir}</code>: absolute path to the directory of the config file</li>
+<li><code>{main-script}</code>: path to the main script (if any)</li>
+<li><code>{abs-main-script}</code>: absolute path to the main script (if any)</li>
+<li><code>{functionality-name}</code>: name of the component</li>
+</ul>
+<p>A command suffixed by <code>\;</code> (or nothing) will execute one command for each of the Viash components, whereas a command suffixed by <code>+</code> will execute one command for all Viash components.</p></li>
+<li><p><code>ConfigMod</code>: Added a <code>del(...)</code> config mod to be able to delete a value from the yaml. Example: <code>del(.functionality.version)</code>.</p></li>
+</ul>
+</section>
+<section id="major-changes" class="level3">
+<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
+<ul>
+<li><p><code>Folder structure</code>: Adjusted the folder structure to correctly reflect the the namespace change of viash from <code>com.dataintuitive.viash</code> to <code>io.viash</code>.</p></li>
+<li><p><code>Functionality</code>: Reworked the <code>enabled</code> field from boolean to a <code>status</code> field which can have the following statusses: <code>enabled</code>, <code>disabled</code> and <code>deprecated</code>. When parsing a config file which has the <code>status</code> field set to <code>deprecated</code> a warning message is displayed on stderr. Backwards for <code>enabled</code> is provided where <code>enabled: true</code> =&gt; <code>status: enabled</code> and <code>enabled: false</code> =&gt; <code>status: false</code>. The <code>enabled</code> field is marked deprecated.</p></li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>Resources</code>: Handle edge case when no resources are specified in the <code>vsh.yaml</code> config file and display a warning message.</p></li>
+<li><p><code>BashWrapper</code>: Add a warning when an argument containing flags (e.g.&nbsp;<code>--foo</code>) is not recognized and will be handled as a positional argument as this is likely a mistake.</p></li>
+<li><p><code>Functionality</code>: Add check to verify there are no double argument names or short names in the config <code>vsh.yaml</code> declarations.</p></li>
+<li><p><code>BashWrapper</code>: Add check to verify a parameter isn’t declared twice on the CLI, except in the case <code>multiple: true</code> is declared as then it’s a valid use case.</p></li>
+<li><p><code>BashWrapper</code>: For int min/max checking: use native bash functionality so there is no dependency to <code>bc</code>. For double min/max checking: add fallback code to use <code>awk</code> in case <code>bc</code> is not present on the system (most likely to happen when running tests in a docker container).</p></li>
+<li><p><code>viash ns list/viash config view</code>: Allow viewing the post-processed argument groups by passing the <code>--parse_argument_groups</code> parameter.</p></li>
+</ul>
+</section>
+<section id="testing" class="level3">
+<h3 class="anchored" data-anchor-id="testing">TESTING</h3>
+<ul>
+<li><p><code>ConfigMod</code>: Added unit tests for condition config mods.</p></li>
+<li><p><code>MainTestDockerSuite</code>: Derive config alternatives from the base <code>vsh.yaml</code> instead of adding the changes in separate files. This both reduces file clutter and prevents having to change several files when there are updates in the config format.</p></li>
+<li><p><code>GitTest</code>: Added unit tests for Git helper (PR #216).</p></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>csharp_script</code>, <code>javascript_script</code>, <code>python_script</code>, <code>r_script</code>, <code>scala_script</code>: Make meta fields for <code>memory</code> and <code>cpus</code> optional.</p></li>
+<li><p><code>NextflowVdsl3Platform</code>: Don’t generate an error when <code>--publish_dir</code> is not defined and <code>-profile no_publish</code> is used.</p></li>
+<li><p><code>Viash run</code>: Viash now properly returns the exit code from the executed script.</p></li>
+<li><p><code>Git</code>: Fix incorrect metadata when git repository is empty (PR #216).</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.6.0/</guid>
+  <pubDate>Wed, 07 Sep 2022 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
