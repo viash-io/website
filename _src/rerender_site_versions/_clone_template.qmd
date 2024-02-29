@@ -1,0 +1,33 @@
+
+```{r setup, include=FALSE}
+repo_path <- system("git rev-parse --show-toplevel", intern = TRUE)
+proj_dir <- paste0(repo_path, "/guide/_viash_project_template")
+branch <- "v0.2"
+hash <- "ffa7b1bee3fb192bec568a772b44c6b527cd941b"
+if (!dir.exists(proj_dir)) {
+  processx::run(
+    "git",
+    c(
+        "clone",
+        "--single-branch",
+        "--branch", branch,
+        "https://github.com/viash-io/viash_project_template.git",
+        basename(proj_dir)
+    ),
+    wd = dirname(proj_dir)
+  )
+  processx::run(
+    "git", 
+    c("reset", "--hard", hash),
+    wd = proj_dir
+  )
+} else {
+  processx::run(
+    "git", 
+    c("reset", "--hard", hash),
+    wd = proj_dir
+  )
+}
+knitr::opts_knit$set(root.dir = proj_dir)
+```
+
