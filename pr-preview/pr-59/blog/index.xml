@@ -17,7 +17,45 @@
 <width>144</width>
 </image>
 <generator>quarto-1.4.550</generator>
-<lastBuildDate>Mon, 15 Jan 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 21 Feb 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Viash 0.8.5</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.8.5/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>Fix a bug when building a test docker container which requires a test resource. Additional improvements for the website documentation and support for the latest version of Nextflow are added.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>nextflow runner</code>: Fix an issue with current nextflow-latest (24.01.0-edge) where our supporting library passes a GString instead of a String and results in a type mismatch (PR #640).</p></li>
+<li><p><code>test resources</code>: Make non-script test resources available during building of a docker container for <code>viash test</code> (PR #652).</p></li>
+</ul>
+</section>
+<section id="documentation" class="level3">
+<h3 class="anchored" data-anchor-id="documentation">DOCUMENTATION</h3>
+<ul>
+<li><code>repositories</code>: Improve the repository documentation with links and a overview table with links (PR #643).</li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.8.5/</guid>
+  <pubDate>Wed, 21 Feb 2024 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Viash 0.8.4</title>
   <dc:creator>Viash Team</dc:creator>
@@ -2524,75 +2562,6 @@ font-style: inherit;">]</span></span></code></pre></div>
   <category>New Release</category>
   <guid>https://viash.io/blog/posts/viash-0.6.0/</guid>
   <pubDate>Wed, 07 Sep 2022 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.5.15</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/blog/posts/viash-0.5.15/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="whats-new" class="level2">
-<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<p>This release introduces testbenches and new default argument groups: <code>Inputs</code>, <code>Outputs</code> and <code>Arguments</code>.</p>
-</section>
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
-<section id="breaking-changes" class="level3">
-<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
-<ul>
-<li><code>WorkflowHelper::helpMessage</code>: Now only takes one argument, namely the config.</li>
-</ul>
-</section>
-<section id="major-changes" class="level3">
-<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
-<ul>
-<li><code>Namespace</code>: Changed the namespace of viash from <code>com.dataintuitive.viash</code> to <code>io.viash</code>.</li>
-</ul>
-</section>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li><p><code>Testbenches</code>: Add a testbench framework to test lots of character sequences, single or repeating to be tested in the yaml config. This can be used to later extend to other tests.</p></li>
-<li><p><code>Testbenches::vdsl3</code>: Add testbenches to verify functionality:</p>
-<ul>
-<li>Vdsl3’s <code>param_list</code> (<code>yamlblob</code>, <code>yaml</code>, <code>json</code>, <code>csv</code>).</li>
-<li>Nextflow’s own <code>params-file</code>.</li>
-<li>Vdsl3’s recalculating resource file paths to be relative to the <code>param_list</code> file instead of the workflow file (only available for <code>yaml</code>, <code>json</code>, <code>csv</code>).</li>
-<li>Vdsl3’s wrapping of modules to run these as a separate workflow automagically out of the box.</li>
-</ul></li>
-<li><p><code>Main</code>: Added <code>viash --schema_export</code> which outputs a schema of the Viash config file to console. This is to be used to automate populating the documentation website.</p></li>
-<li><p><code>Helper</code>: Split help message by argument group.</p></li>
-<li><p><code>Helper</code>: Remove unneeded arguments.</p></li>
-<li><p><code>Functionality</code>: Add default groups <code>Inputs</code>, <code>Outputs</code> and <code>Arguments</code> for all arguments missing from user-defined <code>argument_groups</code>.</p></li>
-<li><p><code>WorkflowHelper::helpMessage</code>: Rewrite to bring on par with Viash’s help message.</p></li>
-<li><p><code>BooleanArguments</code>: Renamed internal class names for BooleanArguments to be better in line with how they are named in the config yaml. <code>BooleanArgumentRegular</code> -&gt; <code>BooleanArgument</code> (in line with <code>boolean</code>) <code>BooleanArgumentTrue</code> -&gt; <code>BooleanTrueArgument</code> (in line with <code>boolean_true</code>) <code>BooleanArgumentFalse</code> -&gt; <code>BooleanFalseArgument</code> (in line with <code>boolean_false</code>)</p></li>
-</ul>
-</section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
-<ul>
-<li><p><code>NextflowVdsl3Platform</code>: Change how <code>--id</code> is processed when a VDSL3 module is called from the CLI.</p></li>
-<li><p><code>NextflowVdsl3Platform</code>: Fix error when param_list is <code>null</code>.</p></li>
-<li><p><code>NextflowVdsl3Platform</code>: Fix error when optional, multiple arguments are set to <code>null</code>.</p></li>
-<li><p><code>Testbenches</code>: Better capture expected error messages while running testbenches again. Code changes right before previous release re-introduced some of the messages.</p></li>
-<li><p><code>NextflowVdsl3Platform</code>: Fix issue where optional parameters aren’t removed when <code>.run(args: [optarg: null])</code>.</p></li>
-<li><p><code>WorkflowHelper::readCsv</code>: Treat empty values as undefined instead of throwing an error.</p></li>
-<li><p><code>NextflowVdsl3Platform</code>: Use <code>$NXF_TEMP</code> or <code>$VIASH_TEMP</code> as temporary directory if the container engine is not set to <code>docker</code>, <code>podman</code> or <code>charlieengine</code>, else set to <code>/tmp</code>.</p></li>
-<li><p><code>Resources</code>: When adding a resource folder, allow a trailing <code>/</code> at the end of the path. Previously this caused the target folder to be erased and the content of the resource folder to be written directly into the target folder.</p></li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/blog/posts/viash-0.5.15/</guid>
-  <pubDate>Thu, 14 Jul 2022 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
