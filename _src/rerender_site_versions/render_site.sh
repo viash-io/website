@@ -30,4 +30,4 @@ quarto render
 popd
 
 # copy results
-cp -r $folder/_site _site/versioned/$2
+cp -r $folder/_site _versioned/$2
