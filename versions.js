@@ -28,16 +28,21 @@ function createLatestLink() {
   return tag;
 }
 
-function addVersionLinks(json) {
-  var element = document.getElementById("nav-menu-version");
-  var list = element.nextElementSibling;
+function setVersionLinks(json) {
+  // Populate the version drowdown
+  var dropdownElement = document.getElementById("nav-menu-version");
+  var list = dropdownElement.nextElementSibling;
   list.appendChild( createLatestLink() );
   for (var i = 0; i < json.versions.length; i++) {
     var version = json.versions[i];
     list.appendChild( createVersionLink(version) );
   }
+
+  // Alter the navbar logo link to point to the root
+  var navbarElements = document.getElementsByClassName("navbar-brand");
+  navbarElements[0].setAttribute("href", "/");
 }
 
 fetch('/versions.json')
     .then((response) => response.json())
-    .then((json) => addVersionLinks(json));
+    .then((json) => setVersionLinks(json));
