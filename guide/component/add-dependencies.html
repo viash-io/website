@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -949,7 +949,7 @@ ENTRYPOINT []
 RUN apk add --no-cache curl wget
 
 LABEL org.opencontainers.image.description="Companion container for running component example_bash_with_setup"
-LABEL org.opencontainers.image.created="2024-02-29T11:46:13Z"</code></pre>
+LABEL org.opencontainers.image.created="2024-03-14T14:35:20Z"</code></pre>
 </div>
 </div>
 </div>
@@ -965,7 +965,7 @@ ENTRYPOINT []
 RUN apk add --no-cache curl wget
 
 LABEL org.opencontainers.image.description="Companion container for running component example_csharp_with_setup"
-LABEL org.opencontainers.image.created="2024-02-29T11:46:19Z"</code></pre>
+LABEL org.opencontainers.image.created="2024-03-14T14:35:27Z"</code></pre>
 </div>
 </div>
 </div>
@@ -983,7 +983,7 @@ RUN apt-get update &amp;&amp; \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component example_js_with_setup"
-LABEL org.opencontainers.image.created="2024-02-29T11:46:31Z"</code></pre>
+LABEL org.opencontainers.image.created="2024-03-14T14:35:40Z"</code></pre>
 </div>
 </div>
 </div>
@@ -1004,7 +1004,7 @@ RUN pip install --upgrade pip &amp;&amp; \
   pip install --upgrade --no-cache-dir "anndata"
 
 LABEL org.opencontainers.image.description="Companion container for running component example_python_with_setup"
-LABEL org.opencontainers.image.created="2024-02-29T11:46:45Z"</code></pre>
+LABEL org.opencontainers.image.created="2024-03-14T14:35:54Z"</code></pre>
 </div>
 </div>
 </div>
@@ -1025,7 +1025,7 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_cran(c("tidyverse"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component example_r_with_setup"
-LABEL org.opencontainers.image.created="2024-02-29T11:47:12Z"</code></pre>
+LABEL org.opencontainers.image.created="2024-03-14T14:36:22Z"</code></pre>
 </div>
 </div>
 </div>
@@ -1043,7 +1043,7 @@ RUN apt-get update &amp;&amp; \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component example_scala_with_setup"
-LABEL org.opencontainers.image.created="2024-02-29T11:47:45Z"</code></pre>
+LABEL org.opencontainers.image.created="2024-03-14T14:36:59Z"</code></pre>
 </div>
 </div>
 </div>
@@ -1244,6 +1244,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
           // target, if specified
           link.setAttribute("target", "_blank");
           if (link.getAttribute("rel") === null) {
@@ -1285,7 +1290,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
