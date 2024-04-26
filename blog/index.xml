@@ -16,8 +16,59 @@
 <height>38</height>
 <width>144</width>
 </image>
-<generator>quarto-1.4.551</generator>
-<lastBuildDate>Wed, 21 Feb 2024 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.4.553</generator>
+<lastBuildDate>Fri, 26 Apr 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Viash 0.8.6</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.8.6/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>Fix some issues in some edge cases. Add options for testing in a CI environment. Given that these options are not meant for general use, they are hidden from the help message. Some improvements are made to run in Nextflow Fusion.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="documentation" class="level3">
+<h3 class="anchored" data-anchor-id="documentation">DOCUMENTATION</h3>
+<ul>
+<li><p><code>docker setup strategy</code>: Fix inconsistencies in the documentation (PR #657).</p></li>
+<li><p><code>repositories</code>: Fix <code>uri</code> -&gt; <code>repo</code> in the repositories documentation (PR #682).</p></li>
+</ul>
+</section>
+<section id="new-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
+<ul>
+<li><p><code>viash test</code> and <code>viash ns test</code>: Add a hidden <code>--dry_run</code> option to build the tests without executing them (PR #676).</p></li>
+<li><p><code>viash test</code> and <code>viash ns test</code>: Add a hidden <code>--deterministic_working directory</code> argument to use a fixed directory path (PR #683).</p></li>
+<li><p><code>component names</code>: Verify that component namespace and name combinations are unique (PR #685).</p></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>NextflowPlatform</code>: Fix publishing state for output arguments with <code>multiple: true</code> (#638, PR #639).</p></li>
+<li><p><code>Executable</code>: Check whether a multiple output file argument contains a wildcard (PR #639).</p></li>
+<li><p><code>NextflowPlatform</code>: Fix a possible cause of concurrency issues (PR #669).</p></li>
+<li><p><code>Resources</code>: Fix an issue where if the first resource is not a script, the resource is silently dropped (PR #670).</p></li>
+<li><p><code>Docker automount</code>: Prevent adding a trailing slash to an automounted folder (PR #673).</p></li>
+<li><p><code>NextflowPlatform</code>: Change the at-runtime generated nextflow process from an in-memory to an on-disk temporary file, which should cause less issues with Nextflow Fusion (PR #681).</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.8.6/</guid>
+  <pubDate>Fri, 26 Apr 2024 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Viash 0.8.5</title>
   <dc:creator>Viash Team</dc:creator>
@@ -37,7 +88,7 @@
 <section id="bug-fixes" class="level3">
 <h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
 <ul>
-<li><p><code>nextflow runner</code>: Fix an issue with current nextflow-latest (24.01.0-edge) where our supporting library passes a GString instead of a String and results in a type mismatch (PR #640).</p></li>
+<li><p><code>NextflowPlatform</code>: Fix an issue with current nextflow-latest (24.01.0-edge) where our supporting library passes a GString instead of a String and results in a type mismatch (PR #640).</p></li>
 <li><p><code>test resources</code>: Make non-script test resources available during building of a docker container for <code>viash test</code> (PR #652).</p></li>
 </ul>
 </section>
@@ -1993,575 +2044,6 @@ font-style: inherit;">|</span></span>
   <category>New Release</category>
   <guid>https://viash.io/blog/posts/viash-0.6.1/</guid>
   <pubDate>Mon, 03 Oct 2022 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.6.0</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/blog/posts/viash-0.6.0/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="whats-new" class="level2">
-<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<p>The first (major) release this year! The biggest changes are:</p>
-<ul>
-<li><p>Nextflow VDSL3 is now the default Nextflow platform, whereas the legacy Nextflow platform has been deprecated.</p></li>
-<li><p>Support for tracking memory and cpu requirements more elegantly.</p></li>
-<li><p>Grouping arguments in groups more concisely.</p></li>
-<li><p>The addition of a <code>viash ns exec</code> command, to be able to execute commands on Viash components more easily.</p></li>
-</ul>
-</section>
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
-<section id="breaking-changes" class="level3">
-<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
-<ul>
-<li><p><code>NextflowPlatform</code>: <code>variant: vdsl3</code> is now the default NextflowPlatform. <code>variant: legacy</code> has been deprecated.</p></li>
-<li><p><code>Functionality</code>: Fields <code>.inputs</code> and <code>.outputs</code> has been deprecated. Please use <code>.argument_groups</code> instead (#186). Before:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb1-2"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">inputs</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb1-3"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"--foo"</span></span>
-<span id="cb1-4"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">outputs</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb1-5"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"--bar"</span></span></code></pre></div>
-<p>Now:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb2-2"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">argument_groups</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb2-3"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> Inputs</span></span>
-<span id="cb2-4"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb2-5"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">        </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"--foo"</span></span>
-<span id="cb2-6"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> file</span></span>
-<span id="cb2-7"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> Outputs</span></span>
-<span id="cb2-8"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb2-9"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">        </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"--bar"</span></span>
-<span id="cb2-10"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> file</span></span>
-<span id="cb2-11"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">direction</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> output</span></span></code></pre></div></li>
-<li><p>Passing strings to an argument group’s arguments has been deprecated. Please simply copy the argument itself into the argument group (#186). Before:</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb3-2"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb3-3"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"--foo"</span></span>
-<span id="cb3-4"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> file</span></span>
-<span id="cb3-5"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"--bar"</span></span>
-<span id="cb3-6"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> file</span></span>
-<span id="cb3-7"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">direction</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> output</span></span>
-<span id="cb3-8"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">argument_groups</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb3-9"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> Inputs</span></span>
-<span id="cb3-10"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">[</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> foo </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">]</span></span>
-<span id="cb3-11"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> Outputs</span></span>
-<span id="cb3-12"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">[</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> bar </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">]</span></span></code></pre></div>
-<p>Now:</p>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb4-2"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">argument_groups</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb4-3"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> Inputs</span></span>
-<span id="cb4-4"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb4-5"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">        </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"--foo"</span></span>
-<span id="cb4-6"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> file</span></span>
-<span id="cb4-7"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> Outputs</span></span>
-<span id="cb4-8"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">arguments</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb4-9"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">        </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"--bar"</span></span>
-<span id="cb4-10"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> file</span></span>
-<span id="cb4-11"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">direction</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> output</span></span></code></pre></div></li>
-</ul>
-</section>
-<section id="new-functionality" class="level3">
-<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
-<ul>
-<li><p>Allow setting the number of processes and memory limit from within the Viash config, as well as a list of required commands. Example:</p>
-<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">functionality</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb5-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> foo</span></span>
-<span id="cb5-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">requirements</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span></span>
-<span id="cb5-4"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">cpus</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span></span>
-<span id="cb5-5"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">memory</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> 10GB</span></span>
-<span id="cb5-6"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">commands</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">[</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> bash</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">,</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> r</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">,</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> perl </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">]</span></span></code></pre></div>
-<p>You can override the default requirements at runtime:</p>
-<ul>
-<li><code>./foo ---cpus 4 ---memory 100PB</code> (for NativePlatform or DockerPlatform)</li>
-<li>By adding <code>process.cpus = 4</code> and <code>process.memory "100 PB"</code> to a nextflow.config (for NextflowPlatform)</li>
-</ul>
-<p>This results the following meta variables to be injected into a script:</p>
-<ul>
-<li><code>meta_cpus</code> (in Bash) or <code>meta["cpus"]</code> (in any other language): Number of processes the script is allowed to spawn.</li>
-<li><code>meta_memory_b</code> (in Bash) or <code>meta["memory_b"]</code> (in any other language): Amount of memory the script is allowed to allocate, in bytes.</li>
-<li><code>meta_memory_kb</code> (in Bash) or <code>meta["memory_kb"]</code> (in any other language): Same but in kilobytes, rounded up.</li>
-<li><code>meta_memory_mb</code> (in Bash) or <code>meta["memory_mb"]</code> (in any other language): Same but in megabytes, rounded up.</li>
-<li><code>meta_memory_gb</code> (in Bash) or <code>meta["memory_gb"]</code> (in any other language): Same but in gigabytes, rounded up.</li>
-<li><code>meta_memory_tb</code> (in Bash) or <code>meta["memory_tb"]</code> (in any other language): Same but in terabytes, rounded up.</li>
-<li><code>meta_memory_pb</code> (in Bash) or <code>meta["memory_pb"]</code> (in any other language): Same but in petabytes, rounded up.</li>
-</ul></li>
-<li><p><code>viash ns exec</code>: Added a command for executing arbitrary commands for all found Viash components. The syntax of this command is inspired by <code>find . -exec echo {} \;</code>.</p>
-<p>The following fields are automatically replaced:</p>
-<ul>
-<li><code>{}</code> | <code>{path}</code>: path to the config file</li>
-<li><code>{abs-path}</code>: absolute path to the config file</li>
-<li><code>{dir}</code>: path to the parent directory of the config file</li>
-<li><code>{abs-dir}</code>: absolute path to the directory of the config file</li>
-<li><code>{main-script}</code>: path to the main script (if any)</li>
-<li><code>{abs-main-script}</code>: absolute path to the main script (if any)</li>
-<li><code>{functionality-name}</code>: name of the component</li>
-</ul>
-<p>A command suffixed by <code>\;</code> (or nothing) will execute one command for each of the Viash components, whereas a command suffixed by <code>+</code> will execute one command for all Viash components.</p></li>
-<li><p><code>ConfigMod</code>: Added a <code>del(...)</code> config mod to be able to delete a value from the yaml. Example: <code>del(.functionality.version)</code>.</p></li>
-</ul>
-</section>
-<section id="major-changes" class="level3">
-<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
-<ul>
-<li><p><code>Folder structure</code>: Adjusted the folder structure to correctly reflect the the namespace change of viash from <code>com.dataintuitive.viash</code> to <code>io.viash</code>.</p></li>
-<li><p><code>Functionality</code>: Reworked the <code>enabled</code> field from boolean to a <code>status</code> field which can have the following statusses: <code>enabled</code>, <code>disabled</code> and <code>deprecated</code>. When parsing a config file which has the <code>status</code> field set to <code>deprecated</code> a warning message is displayed on stderr. Backwards for <code>enabled</code> is provided where <code>enabled: true</code> =&gt; <code>status: enabled</code> and <code>enabled: false</code> =&gt; <code>status: false</code>. The <code>enabled</code> field is marked deprecated.</p></li>
-</ul>
-</section>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li><p><code>Resources</code>: Handle edge case when no resources are specified in the <code>vsh.yaml</code> config file and display a warning message.</p></li>
-<li><p><code>BashWrapper</code>: Add a warning when an argument containing flags (e.g.&nbsp;<code>--foo</code>) is not recognized and will be handled as a positional argument as this is likely a mistake.</p></li>
-<li><p><code>Functionality</code>: Add check to verify there are no double argument names or short names in the config <code>vsh.yaml</code> declarations.</p></li>
-<li><p><code>BashWrapper</code>: Add check to verify a parameter isn’t declared twice on the CLI, except in the case <code>multiple: true</code> is declared as then it’s a valid use case.</p></li>
-<li><p><code>BashWrapper</code>: For int min/max checking: use native bash functionality so there is no dependency to <code>bc</code>. For double min/max checking: add fallback code to use <code>awk</code> in case <code>bc</code> is not present on the system (most likely to happen when running tests in a docker container).</p></li>
-<li><p><code>viash ns list/viash config view</code>: Allow viewing the post-processed argument groups by passing the <code>--parse_argument_groups</code> parameter.</p></li>
-</ul>
-</section>
-<section id="testing" class="level3">
-<h3 class="anchored" data-anchor-id="testing">TESTING</h3>
-<ul>
-<li><p><code>ConfigMod</code>: Added unit tests for condition config mods.</p></li>
-<li><p><code>MainTestDockerSuite</code>: Derive config alternatives from the base <code>vsh.yaml</code> instead of adding the changes in separate files. This both reduces file clutter and prevents having to change several files when there are updates in the config format.</p></li>
-<li><p><code>GitTest</code>: Added unit tests for Git helper (PR #216).</p></li>
-</ul>
-</section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
-<ul>
-<li><p><code>csharp_script</code>, <code>javascript_script</code>, <code>python_script</code>, <code>r_script</code>, <code>scala_script</code>: Make meta fields for <code>memory</code> and <code>cpus</code> optional.</p></li>
-<li><p><code>NextflowVdsl3Platform</code>: Don’t generate an error when <code>--publish_dir</code> is not defined and <code>-profile no_publish</code> is used.</p></li>
-<li><p><code>Viash run</code>: Viash now properly returns the exit code from the executed script.</p></li>
-<li><p><code>Git</code>: Fix incorrect metadata when git repository is empty (PR #216).</p></li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/blog/posts/viash-0.6.0/</guid>
-  <pubDate>Wed, 07 Sep 2022 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
