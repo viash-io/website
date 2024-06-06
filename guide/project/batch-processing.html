@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -393,19 +393,19 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>temporaryFolder: /tmp/viash_hub_repo9869457084723667414 uri: https://viash-hub.com/data-intuitive/vsh-pipeline-operators.git
+<pre><code>temporaryFolder: /tmp/viash_hub_repo15352501635851992273 uri: https://viash-hub.com/data-intuitive/vsh-pipeline-operators.git
 Cloning into '.'...
 checkout out: List(git, checkout, tags/v0.2.0, --, .) 0 
 Exporting take_column (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/take_column
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/template/take_column:0.2.3' with Dockerfile
 Exporting take_column (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/take_column
+Exporting remove_comments (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/remove_comments
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/template/remove_comments:0.2.3' with Dockerfile
+Exporting remove_comments (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/remove_comments
 Exporting combine_columns (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/combine_columns
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/template/combine_columns:0.2.3' with Dockerfile
 Exporting combine_columns (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/combine_columns
 Exporting workflow (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/workflow
-Exporting remove_comments (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/remove_comments
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/template/remove_comments:0.2.3' with Dockerfile
-Exporting remove_comments (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/remove_comments
 All 7 configs built successfully</code></pre>
 </div>
 </div>
@@ -427,24 +427,24 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>temporaryFolder: /tmp/viash_hub_repo9919183132029239349 uri: https://viash-hub.com/data-intuitive/vsh-pipeline-operators.git
+<pre><code>temporaryFolder: /tmp/viash_hub_repo9763579536868861128 uri: https://viash-hub.com/data-intuitive/vsh-pipeline-operators.git
 Cloning into '.'...
 checkout out: List(git, checkout, tags/v0.2.0, --, .) 0 
-The working directory for the namespace tests is /tmp/viash_ns_test7387663730750949194
+The working directory for the namespace tests is /tmp/viash_ns_test2516687799453361302
            namespace        functionality             platform            test_name exit_code duration               result
             template          take_column               docker                start                                        
             template          take_column               docker     build_executable         0        0              SUCCESS
             template          take_column               docker                tests        -1        0              MISSING
 no tests found
 ====================================================================
-            template      combine_columns               docker                start                                        
-            template      combine_columns               docker     build_executable         0        0              SUCCESS
-            template      combine_columns               docker                tests        -1        0              MISSING
-no tests found
-====================================================================
             template      remove_comments               docker                start                                        
             template      remove_comments               docker     build_executable         0        0              SUCCESS
             template      remove_comments               docker              test.sh         0        1              SUCCESS
+            template      combine_columns               docker                start                                        
+            template      combine_columns               docker     build_executable         0        0              SUCCESS
+no tests found            template      combine_columns               docker                tests        -1        0              MISSING
+
+====================================================================
 Not all configs built and tested successfully
   2/6 tests missing
   4/6 configs built and tested successfully</code></pre>
@@ -462,7 +462,7 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>temporaryFolder: /tmp/viash_hub_repo1830959361921060331 uri: https://viash-hub.com/data-intuitive/vsh-pipeline-operators.git
+<pre><code>temporaryFolder: /tmp/viash_hub_repo8955763087952739020 uri: https://viash-hub.com/data-intuitive/vsh-pipeline-operators.git
 Cloning into '.'...
 checkout out: List(git, checkout, tags/v0.2.0, --, .) 0 
 - functionality:
@@ -493,6 +493,7 @@ checkout out: List(git, checkout, tags/v0.2.0, --, .) 0
       multiple_sep: ":"
       dest: "par"
     - type: "integer"
+All 4 configs parsed successfully
       name: "--column"
       default:
       - 2
@@ -575,6 +576,110 @@ checkout out: List(git, checkout, tags/v0.2.0, --, .) 0
     container: "docker"
   info:
     config: "/home/runner/work/website/website/guide/_viash_project_template/src/template/take_column/config.vsh.yaml"
+    viash_version: "0.8.4"
+    git_commit: "e51a8b31beca2e3c1c043951c3e679d8f14fc8c7"
+    git_remote: "https://github.com/viash-io/viash_project_template.git"
+    git_tag: "v0.2.3"
+- functionality:
+    name: "remove_comments"
+    namespace: "template"
+    version: "0.2.3"
+    arguments:
+    - type: "file"
+      name: "--input"
+      alternatives:
+      - "-i"
+      example:
+      - "file.tsv"
+      must_exist: true
+      create_parent: true
+      required: true
+      direction: "input"
+      multiple: false
+      multiple_sep: ":"
+      dest: "par"
+    - type: "file"
+      name: "--output"
+      alternatives:
+      - "-o"
+      example:
+      - "file.tsv"
+      must_exist: true
+      create_parent: true
+      required: true
+      direction: "output"
+      multiple: false
+      multiple_sep: ":"
+      dest: "par"
+    resources:
+    - type: "bash_script"
+      path: "script.sh"
+      is_executable: true
+      parent: "file:/home/runner/work/website/website/guide/_viash_project_template/src/template/remove_comments/"
+    test_resources:
+    - type: "bash_script"
+      path: "test.sh"
+      is_executable: true
+      parent: "file:/home/runner/work/website/website/guide/_viash_project_template/src/template/remove_comments/"
+    status: "enabled"
+    set_wd_to_resources_dir: false
+  platforms:
+  - type: "docker"
+    id: "docker"
+    image: "ubuntu:20.04"
+    target_organization: "viash-io/viash_project_template"
+    target_registry: "ghcr.io"
+    namespace_separator: "/"
+    resolve_volume: "Automatic"
+    chown: true
+    setup_strategy: "ifneedbepullelsecachedbuild"
+    target_image_source: "https://github.com/viash-io/viash_project_template"
+    entrypoint: []
+  - type: "nextflow"
+    id: "nextflow"
+    directives:
+      tag: "$id"
+    auto:
+      simplifyInput: true
+      simplifyOutput: false
+      transcript: false
+      publish: false
+    config:
+      labels:
+        mem1gb: "memory = 1.GB"
+        mem2gb: "memory = 2.GB"
+        mem4gb: "memory = 4.GB"
+        mem8gb: "memory = 8.GB"
+        mem16gb: "memory = 16.GB"
+        mem32gb: "memory = 32.GB"
+        mem64gb: "memory = 64.GB"
+        mem128gb: "memory = 128.GB"
+        mem256gb: "memory = 256.GB"
+        mem512gb: "memory = 512.GB"
+        mem1tb: "memory = 1.TB"
+        mem2tb: "memory = 2.TB"
+        mem4tb: "memory = 4.TB"
+        mem8tb: "memory = 8.TB"
+        mem16tb: "memory = 16.TB"
+        mem32tb: "memory = 32.TB"
+        mem64tb: "memory = 64.TB"
+        mem128tb: "memory = 128.TB"
+        mem256tb: "memory = 256.TB"
+        mem512tb: "memory = 512.TB"
+        cpu1: "cpus = 1"
+        cpu2: "cpus = 2"
+        cpu5: "cpus = 5"
+        cpu10: "cpus = 10"
+        cpu20: "cpus = 20"
+        cpu50: "cpus = 50"
+        cpu100: "cpus = 100"
+        cpu200: "cpus = 200"
+        cpu500: "cpus = 500"
+        cpu1000: "cpus = 1000"
+    debug: false
+    container: "docker"
+  info:
+    config: "/home/runner/work/website/website/guide/_viash_project_template/src/template/remove_comments/config.vsh.yaml"
     viash_version: "0.8.4"
     git_commit: "e51a8b31beca2e3c1c043951c3e679d8f14fc8c7"
     git_remote: "https://github.com/viash-io/viash_project_template.git"
@@ -721,7 +826,6 @@ checkout out: List(git, checkout, tags/v0.2.0, --, .) 0
       direction: "output"
       multiple: false
       multiple_sep: ":"
-All 4 configs parsed successfully
       dest: "par"
     resources:
     - type: "nextflow_script"
@@ -788,8 +892,8 @@ All 4 configs parsed successfully
         name: ""
         repo: "data-intuitive/vsh-pipeline-operators"
         tag: "v0.2.0"
-        localPath: "/tmp/viash_hub_repo1830959361921060331"
-      foundConfigPath: "/tmp/viash_hub_repo1830959361921060331/target/nextflow/join/vsh_toList/.config.vsh.yaml"
+        localPath: "/tmp/viash_hub_repo8955763087952739020"
+      foundConfigPath: "/tmp/viash_hub_repo8955763087952739020/target/nextflow/join/vsh_toList/.config.vsh.yaml"
       configInfo:
         functionalityName: "vsh_toList"
         git_remote: "git@viash-hub.com:data-intuitive/vsh-pipeline-operators.git"
@@ -859,110 +963,6 @@ All 4 configs parsed successfully
     viash_version: "0.8.4"
     git_commit: "e51a8b31beca2e3c1c043951c3e679d8f14fc8c7"
     git_remote: "https://github.com/viash-io/viash_project_template.git"
-    git_tag: "v0.2.3"
-- functionality:
-    name: "remove_comments"
-    namespace: "template"
-    version: "0.2.3"
-    arguments:
-    - type: "file"
-      name: "--input"
-      alternatives:
-      - "-i"
-      example:
-      - "file.tsv"
-      must_exist: true
-      create_parent: true
-      required: true
-      direction: "input"
-      multiple: false
-      multiple_sep: ":"
-      dest: "par"
-    - type: "file"
-      name: "--output"
-      alternatives:
-      - "-o"
-      example:
-      - "file.tsv"
-      must_exist: true
-      create_parent: true
-      required: true
-      direction: "output"
-      multiple: false
-      multiple_sep: ":"
-      dest: "par"
-    resources:
-    - type: "bash_script"
-      path: "script.sh"
-      is_executable: true
-      parent: "file:/home/runner/work/website/website/guide/_viash_project_template/src/template/remove_comments/"
-    test_resources:
-    - type: "bash_script"
-      path: "test.sh"
-      is_executable: true
-      parent: "file:/home/runner/work/website/website/guide/_viash_project_template/src/template/remove_comments/"
-    status: "enabled"
-    set_wd_to_resources_dir: false
-  platforms:
-  - type: "docker"
-    id: "docker"
-    image: "ubuntu:20.04"
-    target_organization: "viash-io/viash_project_template"
-    target_registry: "ghcr.io"
-    namespace_separator: "/"
-    resolve_volume: "Automatic"
-    chown: true
-    setup_strategy: "ifneedbepullelsecachedbuild"
-    target_image_source: "https://github.com/viash-io/viash_project_template"
-    entrypoint: []
-  - type: "nextflow"
-    id: "nextflow"
-    directives:
-      tag: "$id"
-    auto:
-      simplifyInput: true
-      simplifyOutput: false
-      transcript: false
-      publish: false
-    config:
-      labels:
-        mem1gb: "memory = 1.GB"
-        mem2gb: "memory = 2.GB"
-        mem4gb: "memory = 4.GB"
-        mem8gb: "memory = 8.GB"
-        mem16gb: "memory = 16.GB"
-        mem32gb: "memory = 32.GB"
-        mem64gb: "memory = 64.GB"
-        mem128gb: "memory = 128.GB"
-        mem256gb: "memory = 256.GB"
-        mem512gb: "memory = 512.GB"
-        mem1tb: "memory = 1.TB"
-        mem2tb: "memory = 2.TB"
-        mem4tb: "memory = 4.TB"
-        mem8tb: "memory = 8.TB"
-        mem16tb: "memory = 16.TB"
-        mem32tb: "memory = 32.TB"
-        mem64tb: "memory = 64.TB"
-        mem128tb: "memory = 128.TB"
-        mem256tb: "memory = 256.TB"
-        mem512tb: "memory = 512.TB"
-        cpu1: "cpus = 1"
-        cpu2: "cpus = 2"
-        cpu5: "cpus = 5"
-        cpu10: "cpus = 10"
-        cpu20: "cpus = 20"
-        cpu50: "cpus = 50"
-        cpu100: "cpus = 100"
-        cpu200: "cpus = 200"
-        cpu500: "cpus = 500"
-        cpu1000: "cpus = 1000"
-    debug: false
-    container: "docker"
-  info:
-    config: "/home/runner/work/website/website/guide/_viash_project_template/src/template/remove_comments/config.vsh.yaml"
-    viash_version: "0.8.4"
-    git_commit: "e51a8b31beca2e3c1c043951c3e679d8f14fc8c7"
-    git_remote: "https://github.com/viash-io/viash_project_template.git"
     git_tag: "v0.2.3"</code></pre>
 </div>
 </div>
@@ -982,25 +982,25 @@ Output
   Exit code: 0
 
   Output:
++ echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/remove_comments/config.vsh.yaml
+Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/take_column/config.vsh.yaml
+
+  Exit code: 0Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/remove_comments/config.vsh.yaml
+
+
+
+  Output:
 + echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/combine_columns/config.vsh.yaml
   Exit code: 0
 
   Output:
 + echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/workflow/config.vsh.yaml
-Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/take_column/config.vsh.yaml
-
 Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/combine_columns/config.vsh.yaml
 
   Exit code: 0
 
   Output:
-+ echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/remove_comments/config.vsh.yaml
-Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/workflow/config.vsh.yaml
-
-  Exit code: 0
-
-  Output:
-Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/remove_comments/config.vsh.yaml</code></pre>
+Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/workflow/config.vsh.yaml</code></pre>
 </div>
 </div>
 </details>
@@ -1022,15 +1022,15 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>temporaryFolder: /tmp/viash_hub_repo15088958281935947669 uri: https://viash-hub.com/data-intuitive/vsh-pipeline-operators.git
+<pre><code>temporaryFolder: /tmp/viash_hub_repo16171824180598559357 uri: https://viash-hub.com/data-intuitive/vsh-pipeline-operators.git
 Cloning into '.'...
 checkout out: List(git, checkout, tags/v0.2.0, --, .) 0 
-The working directory for the namespace tests is /tmp/viash_ns_test672154267701711657
+The working directory for the namespace tests is /tmp/viash_ns_test6479271217561828594
            namespace        functionality             platform            test_name exit_code duration               result
+            template      remove_comments               docker                start                                        
             template          take_column               docker                start                                        
             template      combine_columns               docker                start                                        
-            template      remove_comments               docker                start                                        
-            template      combine_columns               docker     build_executable         0        0              SUCCESS
+            template      combine_columns               docker     build_executable         0        1              SUCCESS
             template      combine_columns               docker                tests        -1        0              MISSING
 no tests found
 ====================================================================
