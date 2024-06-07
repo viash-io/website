@@ -9,12 +9,24 @@ order: {{order}}
 
 {% if not d.name == "__this__" %}
 ## {{d.name|replace("`__merge__", "\_\_merge\_\_")}}{# Replace fixes __merge__ being rendered bold and coming before __this__ when sorted #}
-{% if "Option of " in d.niceType %}
-**Type**: `{{d.niceType|replace("Option of ", "")}}`
-{% elif "OneOrMore of " in d.niceType %}
-**Type**: `{{d.niceType|replace("OneOrMore of ", "")}}` / `List of {{d.niceType|replace("OneOrMore of ", "")}}`
+{% set niceType = d.niceType|replace("Option of ", "") -%}
+{% if "OneOrMore of " in niceType -%}
+{% set oneormore = true -%}
+{% set niceType = niceType|replace("OneOrMore of ", "") -%}
+{% endif -%}
+{% if "Either\n" in niceType -%}
+{% set either = true -%}
+{% set niceType = niceType|replace("Either\n  - ", "") -%}
+{% set niceList = niceType.split("\n  - ") -%}
+{% endif -%}
+{% if oneormore and either %}
+**Type**: `{{niceList[0]}}` / `{{niceList[1]}}` / `List of {{niceList[0]}}` / `List of {{niceList[1]}}`
+{% elif oneormore %}
+**Type**: `{{niceType}}` / `List of {{niceType}}`
+{% elif either %}
+**Type**: `{{niceList[0]}}` / `{{niceList[1]}}`
 {% else %}
-**Type**: `{{d.niceType}}`
+**Type**: `{{niceType}}`
 {% endif %}
 {%- if d.default is defined %}
 **Default**: `{{d.default}}`
