@@ -772,7 +772,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </section>
 <section id="cache" class="level2">
 <h2 class="anchored" data-anchor-id="cache">cache</h2>
-<p><strong>Type</strong>: <code>Either   - Boolean   - String</code></p>
+<p><strong>Type</strong>: <code>Boolean</code> / <code>String</code></p>
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>The <code>cache</code> directive allows you to store the process results to a local cache. When the cache is enabled and the pipeline is launched with the resume option, any following attempt to execute the process, along with the same inputs, will cause the process execution to be skipped, producing the stored data as the actual results.</p>
 <p>The caching feature generates a unique key by indexing the process script and inputs. This key is used to identify univocally the outputs produced by the process execution.</p>
@@ -799,7 +799,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </section>
 <section id="container" class="level2">
 <h2 class="anchored" data-anchor-id="container">container</h2>
-<p><strong>Type</strong>: <code>Either   - Map of String to String   - String</code></p>
+<p><strong>Type</strong>: <code>Map of String to String</code> / <code>String</code></p>
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>The <code>container</code> directive allows you to execute the process script in a Docker container.</p>
 <p>It requires the Docker daemon to be running in machine where the pipeline is executed, i.e.&nbsp;the local machine when using the local executor or the cluster nodes when the pipeline is deployed through a grid executor.</p>
@@ -824,7 +824,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </section>
 <section id="cpus" class="level2">
 <h2 class="anchored" data-anchor-id="cpus">cpus</h2>
-<p><strong>Type</strong>: <code>Either   - Int   - String</code></p>
+<p><strong>Type</strong>: <code>Int</code> / <code>String</code></p>
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>The <code>cpus</code> directive allows you to define the number of (logical) CPU required by the process’ task.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#cpus"><code>cpus</code></a>.</p>
@@ -846,7 +846,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </section>
 <section id="echo" class="level2">
 <h2 class="anchored" data-anchor-id="echo">echo</h2>
-<p><strong>Type</strong>: <code>Either   - Boolean   - String</code></p>
+<p><strong>Type</strong>: <code>Boolean</code> / <code>String</code></p>
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>By default the stdout produced by the commands executed in all processes is ignored. By setting the <code>echo</code> directive to true, you can forward the process stdout to the current top running process stdout file, showing it in the shell terminal.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#echo"><code>echo</code></a>.</p>
@@ -980,7 +980,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </section>
 <section id="maxerrors" class="level2">
 <h2 class="anchored" data-anchor-id="maxerrors">maxErrors</h2>
-<p><strong>Type</strong>: <code>Either   - String   - Int</code></p>
+<p><strong>Type</strong>: <code>String</code> / <code>Int</code></p>
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>The <code>maxErrors</code> directive allows you to specify the maximum number of times a process can fail when using the <code>retry</code> error strategy. By default this directive is disabled.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#maxerrors"><code>maxErrors</code></a>.</p>
@@ -990,7 +990,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </section>
 <section id="maxforks" class="level2">
 <h2 class="anchored" data-anchor-id="maxforks">maxForks</h2>
-<p><strong>Type</strong>: <code>Either   - String   - Int</code></p>
+<p><strong>Type</strong>: <code>String</code> / <code>Int</code></p>
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>The <code>maxForks</code> directive allows you to define the maximum number of process instances that can be executed in parallel. By default this value is equals to the number of CPU cores available minus 1.</p>
 <p>If you want to execute a process in a sequential manner, set this directive to one.</p>
@@ -1001,7 +1001,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </section>
 <section id="maxretries" class="level2">
 <h2 class="anchored" data-anchor-id="maxretries">maxRetries</h2>
-<p><strong>Type</strong>: <code>Either   - String   - Int</code></p>
+<p><strong>Type</strong>: <code>String</code> / <code>Int</code></p>
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>The <code>maxRetries</code> directive allows you to define the maximum number of times a process instance can be re-submitted in case of failure. This value is applied only when using the retry error strategy. By default only one retry is allowed.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#maxretries"><code>maxRetries</code></a>.</p>
@@ -1057,7 +1057,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </section>
 <section id="publishdir" class="level2">
 <h2 class="anchored" data-anchor-id="publishdir">publishDir</h2>
-<p><strong>Type</strong>: <code>Either   - String   - Map of String to String</code> / <code>List of Either   - String   - Map of String to String</code></p>
+<p><strong>Type</strong>: <code>String</code> / <code>Map of String to String</code> / <code>List of String</code> / <code>List of Map of String to String</code></p>
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>The <code>publishDir</code> directive allows you to publish the process output files to a specified folder.</p>
 <p>Viash implements this directive as a plain string or a map. The allowed keywords for the map are: <code>path</code>, <code>mode</code>, <code>overwrite</code>, <code>pattern</code>, <code>saveAs</code>, <code>enabled</code>. The <code>path</code> key and value are required. The allowed values for <code>mode</code> are: <code>symlink</code>, <code>rellink</code>, <code>link</code>, <code>copy</code>, <code>copyNoFollow</code>, <code>move</code>.</p>
@@ -1083,7 +1083,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </section>
 <section id="scratch" class="level2">
 <h2 class="anchored" data-anchor-id="scratch">scratch</h2>
-<p><strong>Type</strong>: <code>Either   - Boolean   - String</code></p>
+<p><strong>Type</strong>: <code>Boolean</code> / <code>String</code></p>
 <p><strong>Default</strong>: <code>Empty</code></p>
 <p>The <code>scratch</code> directive allows you to execute the process in a temporary folder that is local to the execution node.</p>
 <p>See <a href="https://www.nextflow.io/docs/latest/process.html#scratch"><code>scratch</code></a>.</p>
