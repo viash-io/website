@@ -34,8 +34,8 @@ def handle_section(lines: list[str]):
 
     # take first line and process as header
     header = lines.pop(0)
-    matches = re.search(r"^# Viash ([\dx]+[\.\d+x]+) \(([\dy]{4}-[\dM]{2}-[\dd]{2})\): (.*)$", header)
-    version, date, subtitle = matches.group(1, 2, 3)
+    matches = re.search(r"^# Viash (?P<version>[\dx]+[\.\d+x]+(-\w+)?) \((?P<date>[\dy]{4}-[\dM]{2}-[\dd]{2})\): (?P<subtitle>.*)$", header)
+    version, date, subtitle = matches.group("version", "date", "subtitle")
 
     version = version.replace("x", "999")
     date = date.replace("yyyy-MM-dd", "9999-12-31")
