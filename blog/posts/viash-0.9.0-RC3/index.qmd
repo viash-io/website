@@ -1,0 +1,41 @@
+---
+title: "Viash 0.9.0-RC3"
+subtitle: "Various bug fixes and minor improvements"
+date: "2024-04-26"
+categories: [ New Release ]
+author: Viash Team
+---
+
+## What's new?
+
+Mainly fixes for code changes from previous release candidates. Some additional minor fixes and QoL improvements are included.
+
+## Full changelog
+
+### BREAKING CHANGES
+
+* `computational requirements`: Use 1000-base units instead of 1024-base units for memory (PR #686). Additionally, the memory units `kib`, `mib`, `gib`, `tib`, and `pib` are added to support 1024-base definitions.
+
+### MINOR CHANGES
+
+* `error message`: Improve the error message when using an invalid field in the config (#PR #662). The error message now includes the field names that are not valid if that happens to be the case or otherwise a more general error message.
+
+* `config mods`: Improve the displayed error message when a config mod could not be applied because of an invalid path (PR #672).
+
+### BUG FIXES
+
+* `export json_schema`: Fix minor inconsistencies and make the strict schema stricter by adapting to what Viash will effectively return (PR #666).
+
+* `deprecation & removal warning`: Improve the displayed warning where a deprecated or removed field could display a double '.' when it field was located at the root level (PR #671).
+
+* `resource path`: Don't finalize the `path` field of a resource until it's written as part of building a component (PR #668).
+
+* `requirements`: Improve the error message when a Python or R requirement uses a single quote in the `.script` field (PR #675).
+
+* `viash test`: Fix Docker id between build and test components not being consistent when using a custom Docker registry (PR #679).
+
+* `MainNSBuildNativeSuite`: Capture the error message when reading the configs so we can capture the expected warning message (PR #688).
+  While almost all tests were already cleanly capturing their expected warning/error messages, this one was still remaining, resulting in warnings being shown in the output.
+
+* `runners & engines`: When applying a filter on empty runners or engines, the fallback default `native engine` and `executable runner` respectively are set before applying the filter (PR #691).
+

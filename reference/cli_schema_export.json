@@ -9,9 +9,17 @@
     ],
     "opts" : [
       {
-        "name" : "platform",
-        "short" : "p",
-        "descr" : "Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.",
+        "name" : "runner",
+        "descr" : "Specifies which runner amongst those specified in the config to use. If this is not provided, the first runner will be used. If no runners are defined in the config, the executable runner will be used.",
+        "required" : false,
+        "argName" : "arg",
+        "hidden" : false,
+        "type" : "String",
+        "optType" : "opt"
+      },
+      {
+        "name" : "engine",
+        "descr" : "A regex to determine which engines amongst those specified in the config to use. If this is not provided, all engines will be used. If no engines are defined in the config, the native engine will be used.",
         "required" : false,
         "argName" : "arg",
         "hidden" : false,
@@ -20,7 +28,7 @@
       },
       {
         "name" : "config",
-        "descr" : "A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.",
+        "descr" : "A viash config file (example: `config.vsh.yaml`). This argument can also be a script with the config as a header.",
         "default" : "config.vsh.yaml",
         "required" : true,
         "hidden" : false,
@@ -107,9 +115,17 @@
     ],
     "opts" : [
       {
-        "name" : "platform",
-        "short" : "p",
-        "descr" : "Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.",
+        "name" : "runner",
+        "descr" : "Specifies which runner amongst those specified in the config to use. If this is not provided, the first runner will be used. If no runners are defined in the config, the executable runner will be used.",
+        "required" : false,
+        "argName" : "arg",
+        "hidden" : false,
+        "type" : "String",
+        "optType" : "opt"
+      },
+      {
+        "name" : "engine",
+        "descr" : "A regex to determine which engines amongst those specified in the config to use. If this is not provided, all engines will be used. If no engines are defined in the config, the native engine will be used.",
         "required" : false,
         "argName" : "arg",
         "hidden" : false,
@@ -118,7 +134,7 @@
       },
       {
         "name" : "config",
-        "descr" : "A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.",
+        "descr" : "A viash config file (example: `config.vsh.yaml`). This argument can also be a script with the config as a header.",
         "default" : "config.vsh.yaml",
         "required" : true,
         "hidden" : false,
@@ -180,7 +196,7 @@
       {
         "name" : "setup",
         "short" : "s",
-        "descr" : "Which @[setup strategy](docker_setup_strategy) for creating the container to use [Docker Platform only].",
+        "descr" : "Which @[setup strategy](docker_setup_strategy) for creating the container to use [Docker Engine only].",
         "required" : false,
         "argName" : "arg",
         "hidden" : false,
@@ -189,7 +205,7 @@
       },
       {
         "name" : "push",
-        "descr" : "Whether or not to push the container to a Docker registry [Docker Platform only].",
+        "descr" : "Whether or not to push the container to a Docker registry [Docker Engine only].",
         "default" : "false",
         "required" : false,
         "argName" : "arg",
@@ -209,9 +225,17 @@
     ],
     "opts" : [
       {
-        "name" : "platform",
-        "short" : "p",
-        "descr" : "Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.",
+        "name" : "runner",
+        "descr" : "Specifies which runner amongst those specified in the config to use. If this is not provided, the first runner will be used. If no runners are defined in the config, the executable runner will be used.",
+        "required" : false,
+        "argName" : "arg",
+        "hidden" : false,
+        "type" : "String",
+        "optType" : "opt"
+      },
+      {
+        "name" : "engine",
+        "descr" : "A regex to determine which engines amongst those specified in the config to use. If this is not provided, all engines will be used. If no engines are defined in the config, the native engine will be used.",
         "required" : false,
         "argName" : "arg",
         "hidden" : false,
@@ -220,7 +244,7 @@
       },
       {
         "name" : "config",
-        "descr" : "A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.",
+        "descr" : "A viash config file (example: `config.vsh.yaml`). This argument can also be a script with the config as a header.",
         "default" : "config.vsh.yaml",
         "required" : true,
         "hidden" : false,
@@ -299,7 +323,7 @@
       {
         "name" : "setup",
         "short" : "s",
-        "descr" : "Which @[setup strategy](docker_setup_strategy) for creating the container to use [Docker Platform only].",
+        "descr" : "Which @[setup strategy](docker_setup_strategy) for creating the container to use [Docker Engine only].",
         "required" : false,
         "argName" : "arg",
         "hidden" : false,
@@ -378,9 +402,17 @@
             "optType" : "opt"
           },
           {
-            "name" : "platform",
-            "short" : "p",
-            "descr" : "Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.",
+            "name" : "runner",
+            "descr" : "Acts as a regular expression to filter the runner ids specified in the found config files. If this is not provided, all runners will be used. If no runners are defined in a config, the executable runner will be used.",
+            "required" : false,
+            "argName" : "arg",
+            "hidden" : false,
+            "type" : "String",
+            "optType" : "opt"
+          },
+          {
+            "name" : "engine",
+            "descr" : "Acts as a regular expression to filter the engine ids specified in the found config files. If this is not provided, all engines will be used. If no engines are defined in a config, the native engine will be used.",
             "required" : false,
             "argName" : "arg",
             "hidden" : false,
@@ -451,7 +483,7 @@
           },
           {
             "name" : "setup",
-            "descr" : "Which @[setup strategy](docker_setup_strategy) for creating the container to use [Docker Platform only].",
+            "descr" : "Which @[setup strategy](docker_setup_strategy) for creating the container to use [Docker Engine only].",
             "required" : false,
             "argName" : "arg",
             "hidden" : false,
@@ -460,7 +492,7 @@
           },
           {
             "name" : "push",
-            "descr" : "Whether or not to push the container to a Docker registry [Docker Platform only].",
+            "descr" : "Whether or not to push the container to a Docker registry [Docker Engine only].",
             "default" : "false",
             "required" : false,
             "argName" : "arg",
@@ -471,7 +503,7 @@
           {
             "name" : "flatten",
             "short" : "f",
-            "descr" : "Flatten the target builds, handy for building one platform to a bin directory.",
+            "descr" : "Flatten the target builds, handy for building one runner/engine to a bin directory.",
             "default" : "false",
             "required" : false,
             "argName" : "arg",
@@ -529,9 +561,17 @@
             "optType" : "opt"
           },
           {
-            "name" : "platform",
-            "short" : "p",
-            "descr" : "Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.",
+            "name" : "runner",
+            "descr" : "Acts as a regular expression to filter the runner ids specified in the found config files. If this is not provided, all runners will be used. If no runners are defined in a config, the executable runner will be used.",
+            "required" : false,
+            "argName" : "arg",
+            "hidden" : false,
+            "type" : "String",
+            "optType" : "opt"
+          },
+          {
+            "name" : "engine",
+            "descr" : "Acts as a regular expression to filter the engine ids specified in the found config files. If this is not provided, all engines will be used. If no engines are defined in a config, the native engine will be used.",
             "required" : false,
             "argName" : "arg",
             "hidden" : false,
@@ -620,7 +660,7 @@
           },
           {
             "name" : "setup",
-            "descr" : "Which @[setup strategy](docker_setup_strategy) for creating the container to use [Docker Platform only].",
+            "descr" : "Which @[setup strategy](docker_setup_strategy) for creating the container to use [Docker Engine only].",
             "required" : false,
             "argName" : "arg",
             "hidden" : false,
@@ -717,9 +757,17 @@
             "optType" : "opt"
           },
           {
-            "name" : "platform",
-            "short" : "p",
-            "descr" : "Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.",
+            "name" : "runner",
+            "descr" : "Acts as a regular expression to filter the runner ids specified in the found config files. If this is not provided, all runners will be used. If no runners are defined in a config, the executable runner will be used.",
+            "required" : false,
+            "argName" : "arg",
+            "hidden" : false,
+            "type" : "String",
+            "optType" : "opt"
+          },
+          {
+            "name" : "engine",
+            "descr" : "Acts as a regular expression to filter the engine ids specified in the found config files. If this is not provided, all engines will be used. If no engines are defined in a config, the native engine will be used.",
             "required" : false,
             "argName" : "arg",
             "hidden" : false,
@@ -795,7 +843,7 @@
           },
           {
             "name" : "parse_argument_groups",
-            "descr" : "Whether or not to postprocess each component's @[argument groups](argument_groups).",
+            "descr" : "DEPRECATED. This is now always enabled. Whether or not to postprocess each component's @[argument groups](argument_groups).",
             "default" : "false",
             "required" : false,
             "argName" : "arg",
@@ -808,7 +856,7 @@
       {
         "name" : "exec",
         "bannerCommand" : "viash ns exec",
-        "bannerDescription" : "Execute a command for all found Viash components.\nThe syntax of this command is inspired by `find . -exec echo {} \\;`.\n\nThe following fields are automatically replaced:  \n\n * `{}` | `{path}`: path to the config file\n * `{abs-path}`: absolute path to the config file\n * `{dir}`: path to the parent directory of the config file\n * `{abs-dir}`: absolute path to the directory of the config file\n * `{main-script}`: path to the main script (if any)\n * `{abs-main-script}`: absolute path to the main script (if any)\n * `{functionality-name}`: name of the component\n * `{namespace}`: namespace of the component\n * `{platform}`: selected platform id (only when --apply_platform is used)\n * `{output}`: path to the destination directory when building the component\n * `{abs-output}`: absolute path to the destination directory when building the component\n\nA command suffixed by `\\;` (or nothing) will execute one command for each\nof the Viash components, whereas a command suffixed by `+` will execute one\ncommand for all Viash components.",
+        "bannerDescription" : "Execute a command for all found Viash components.\nThe syntax of this command is inspired by `find . -exec echo {} \\;`.\n\nThe following fields are automatically replaced:  \n\n * `{}` | `{path}`: path to the config file\n * `{abs-path}`: absolute path to the config file\n * `{dir}`: path to the parent directory of the config file\n * `{abs-dir}`: absolute path to the directory of the config file\n * `{main-script}`: path to the main script (if any)\n * `{abs-main-script}`: absolute path to the main script (if any)\n * `{name}`: name of the component\n * `{functionality-name}`: name of the component (deprecated)\n * `{namespace}`: namespace of the component\n * `{runner}`: selected runner id (only when --apply_runner is used)\n * `{engine}`: selected engine id (only when --apply_engine is used)\n * `{output}`: path to the destination directory when building the component\n * `{abs-output}`: absolute path to the destination directory when building the component\n\nA command suffixed by `\\;` (or nothing) will execute one command for each\nof the Viash components, whereas a command suffixed by `+` will execute one\ncommand for all Viash components.",
         "bannerUsage" : "viash ns exec 'echo {path} \\\\;'\nviash ns exec 'chmod +x {main-script} +'",
         "subcommands" : [
         ],
@@ -853,9 +901,17 @@
             "optType" : "opt"
           },
           {
-            "name" : "platform",
-            "short" : "p",
-            "descr" : "Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.",
+            "name" : "runner",
+            "descr" : "Acts as a regular expression to filter the runner ids specified in the found config files. If this is not provided, all runners will be used. If no runners are defined in a config, the executable runner will be used.",
+            "required" : false,
+            "argName" : "arg",
+            "hidden" : false,
+            "type" : "String",
+            "optType" : "opt"
+          },
+          {
+            "name" : "engine",
+            "descr" : "Acts as a regular expression to filter the engine ids specified in the found config files. If this is not provided, all engines will be used. If no engines are defined in a config, the native engine will be used.",
             "required" : false,
             "argName" : "arg",
             "hidden" : false,
@@ -915,9 +971,20 @@
             "optType" : "choice"
           },
           {
-            "name" : "apply_platform",
-            "short" : "a",
-            "descr" : "Fills in the {platform} and {output} field by applying each platform to the\nconfig separately. Note that this results in the provided command being applied\nonce for every platform that matches the --platform regex.",
+            "name" : "apply_runner",
+            "short" : "r",
+            "descr" : "Fills in the {runner} and {output} field by applying each runner to the \nconfig separately. Note that this results in the provided command being applied\nonce for every runner that matches the --runner regex.",
+            "default" : "false",
+            "required" : false,
+            "argName" : "arg",
+            "hidden" : false,
+            "type" : "Boolean",
+            "optType" : "opt"
+          },
+          {
+            "name" : "apply_engine",
+            "short" : "e",
+            "descr" : "Fills in the {engine} and {output} field by applying each engine to the \nconfig separately. Note that this results in the provided command being applied\nonce for every engine that matches the --engine regex.",
             "default" : "false",
             "required" : false,
             "argName" : "arg",
@@ -962,9 +1029,17 @@
         ],
         "opts" : [
           {
-            "name" : "platform",
-            "short" : "p",
-            "descr" : "Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.",
+            "name" : "runner",
+            "descr" : "Specifies which runner amongst those specified in the config to use. If this is not provided, the first runner will be used. If no runners are defined in the config, the executable runner will be used.",
+            "required" : false,
+            "argName" : "arg",
+            "hidden" : false,
+            "type" : "String",
+            "optType" : "opt"
+          },
+          {
+            "name" : "engine",
+            "descr" : "A regex to determine which engines amongst those specified in the config to use. If this is not provided, all engines will be used. If no engines are defined in the config, the native engine will be used.",
             "required" : false,
             "argName" : "arg",
             "hidden" : false,
@@ -973,7 +1048,7 @@
           },
           {
             "name" : "config",
-            "descr" : "A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.",
+            "descr" : "A viash config file (example: `config.vsh.yaml`). This argument can also be a script with the config as a header.",
             "default" : "config.vsh.yaml",
             "required" : true,
             "hidden" : false,
@@ -1038,7 +1113,7 @@
           },
           {
             "name" : "parse_argument_groups",
-            "descr" : "Whether or not to postprocess each component's @[argument groups](argument_groups).",
+            "descr" : "DEPRECATED. This is now always enabled. Whether or not to postprocess each component's @[argument groups](argument_groups).",
             "default" : "false",
             "required" : false,
             "argName" : "arg",
@@ -1057,9 +1132,17 @@
         ],
         "opts" : [
           {
-            "name" : "platform",
-            "short" : "p",
-            "descr" : "Specifies which platform amongst those specified in the config to use. If this is not provided, the first platform will be used. If no platforms are defined in the config, the native platform will be used. In addition, the path to a platform yaml file can also be specified.",
+            "name" : "runner",
+            "descr" : "Specifies which runner amongst those specified in the config to use. If this is not provided, the first runner will be used. If no runners are defined in the config, the executable runner will be used.",
+            "required" : false,
+            "argName" : "arg",
+            "hidden" : false,
+            "type" : "String",
+            "optType" : "opt"
+          },
+          {
+            "name" : "engine",
+            "descr" : "A regex to determine which engines amongst those specified in the config to use. If this is not provided, all engines will be used. If no engines are defined in the config, the native engine will be used.",
             "required" : false,
             "argName" : "arg",
             "hidden" : false,
@@ -1068,7 +1151,7 @@
           },
           {
             "name" : "config",
-            "descr" : "A viash config file (example: config.vsh.yaml). This argument can also be a script with the config as a header.",
+            "descr" : "A viash config file (example: `config.vsh.yaml`). This argument can also be a script with the config as a header.",
             "default" : "config.vsh.yaml",
             "required" : true,
             "hidden" : false,

@@ -11,6 +11,8 @@ Run a Viash component on a Nextflow backend engine.
 ```yaml
 runners:
   - type: nextflow
+    directives:
+      label: [lowcpu, midmem]
 
 ```
 
@@ -19,19 +21,19 @@ runners:
 **Type**: `NextflowAuto`
 
 **Default**: `simplifyInput: true
-simplifyOutput: true
+simplifyOutput: false
 transcript: false
 publish: false
 `
 
-[Automated processing flags](/reference/config/runners/nextflow/auto.html) which can be toggled on or off:
+[Automated processing flags](/reference/config/platforms/nextflow/auto.html) which can be toggled on or off:
 
 | Flag | Description | Default |
 |---|---------|----|
 | `simplifyInput` | If `true`, an input tuple only containing only a single File (e.g. `["foo", file("in.h5ad")]`) is automatically transformed to a map (i.e. `["foo", [ input: file("in.h5ad") ] ]`). | `true` |
-| `simplifyOutput` | If `true`, an output tuple containing a map with a File (e.g. `["foo", [ output: file("out.h5ad") ] ]`) is automatically transformed to a map (i.e. `["foo", file("out.h5ad")]`). | `true` |
+| `simplifyOutput` | If `true`, an output tuple containing a map with a File (e.g. `["foo", [ output: file("out.h5ad") ] ]`) is automatically transformed to a map (i.e. `["foo", file("out.h5ad")]`). | `false` |
 | `transcript` | If `true`, the module's transcripts from `work/` are automatically published to `params.transcriptDir`. If not defined, `params.publishDir + "/_transcripts"` will be used. Will throw an error if neither are defined. | `false` |
-| `publish` | If `true`, the module's outputs are automatically published to `params.publishDir`.  Will throw an error if `params.publishDir` is not defined. | `false` |
+| `publish` | If `true`, the module's outputs are automatically published to `params.publishDir`. If equal to `"state"`, also a `.state.yaml` file will be published in the publish dir. Will throw an error if `params.publishDir` is not defined. | `false` |
 
 
 
@@ -48,7 +50,7 @@ auto:
 
 **Default**: `A series of default labels to specify memory and cpu constraints`
 
-Allows tweaking how the [Nextflow Config](/reference/config/runners/nextflow/config.html) file is generated.
+Allows tweaking how the [Nextflow Config](/reference/config/platforms/nextflow/config.html) file is generated.
 
 ## container
 
@@ -72,7 +74,7 @@ Whether or not to print debug messages.
 
 **Default**: `Empty`
 
-[Directives](/reference/config/runners/nextflow/directives.html) are optional settings that affect the execution of the process. These mostly match up with the Nextflow counterparts.  
+[Directives](/reference/config/platforms/nextflow/directives.html) are optional settings that affect the execution of the process. These mostly match up with the Nextflow counterparts.  
 
 
 **Example:**

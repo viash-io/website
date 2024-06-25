@@ -1,0 +1,478 @@
+---
+title: "Functionality"
+search: true
+---
+
+::: {.callout-warning}
+Deprecated since 0.9.0. Planned removal at 0.10.0. Functionality level is deprecated, all functionality fields are now located on the top level of the config file.
+:::
+The functionality-part of the config file describes the behaviour of the script in terms of arguments and resources.
+By specifying a few restrictions (e.g. mandatory arguments) and adding some descriptions, Viash will automatically generate a stylish command-line interface for you.
+
+
+## argument_groups
+
+**Type**: `List of ArgumentGroup`
+
+**Default**: `Empty`
+
+A grouping of the [arguments](/reference/config/arguments/#), used to display the help message.
+
+ - `name: foo`, the name of the argument group. 
+ - `description: Description of foo`, a description of the argument group. Multiline descriptions are supported.
+ - `arguments: [arg1, arg2, ...]`, list of the arguments.
+
+
+
+**Examples:**
+
+```yaml
+argument_groups:
+  - name: "Input"
+    arguments:
+      - name: "--id"
+        type: string
+        required: true
+      - name: "--input"
+        type: file
+        required: true
+  - name: "Output"
+    arguments:
+      - name: "--output"
+        type: file
+        direction: output
+        required: true
+      - name: "--output_optional"
+        type: file
+        direction: output
+
+```
+
+This results in the following output when calling the component with the `--help` argument:
+
+```bash
+component_name
+
+  Input:
+      --id
+          type: string
+
+      --input
+          type: file
+
+  Output:
+      --output
+          type: file
+
+      --optional_output
+          type: file
+
+```
+
+## arguments
+
+**Type**: `List of Argument`
+
+**Default**: `Empty`
+
+A list of [arguments](/reference/config/arguments/#) for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:  
+
+ - [string](/reference/config/arguments/string.html)
+ - [file](/reference/config/arguments/file.html)
+ - [integer](/reference/config/arguments/integer.html)
+ - [double](/reference/config/arguments/double.html)
+ - [boolean](/reference/config/arguments/boolean.html)
+ - [boolean_true](/reference/config/arguments/boolean_true.html)
+ - [boolean_false](/reference/config/arguments/boolean_false.html)
+
+
+**Example:**
+
+```yaml
+arguments:
+  - name: --foo
+    type: file
+    alternatives: [-f]
+    description: Description of foo
+    default: "/foo/bar"
+    must_exist: true
+    direction: output
+    required: false
+    multiple: true
+    multiple_sep: ";"
+  - name: --bar
+    type: string
+
+```
+
+## authors
+
+**Type**: `List of Author`
+
+**Default**: `Empty`
+
+A list of [authors](/reference/config/author.html). An author must at least have a name, but can also have a list of roles, an e-mail address, and a map of custom properties.
+
+Suggested values for roles are:
+ 
+| Role | Abbrev. | Description |
+|------|---------|-------------|
+| maintainer | mnt | for the maintainer of the code. Ideally, exactly one maintainer is specified. |
+| author | aut | for persons who have made substantial contributions to the software. |
+| contributor | ctb| for persons who have made smaller contributions (such as code patches).
+| datacontributor | dtc | for persons or organisations that contributed data sets for the software
+| copyrightholder | cph | for all copyright holders. This is a legal concept so should use the legal name of an institution or corporate body.
+| funder | fnd | for persons or organizations that furnished financial support for the development of the software
+
+The [full list of roles](https://www.loc.gov/marc/relators/relaterm.html) is extremely comprehensive.
+
+
+**Example:**
+
+```yaml
+authors:
+  - name: Jane Doe
+    role: [author, maintainer]
+    email: jane@doe.com
+    info:
+      github: janedoe
+      twitter: janedoe
+      orcid: XXAABBCCXX
+      groups: [ one, two, three ]
+  - name: Tim Farbe
+    roles: [author]
+    email: tim@far.be
+
+```
+
+## dependencies
+
+**Type**: `List of Dependency`
+
+**Default**: `Empty`
+
+Allows listing Viash components required by this Viash component
+
+**Examples:**
+
+Full specification of a repository
+
+```yaml
+dependencies:
+  - name: qc/multiqc
+    repository: 
+      type: github
+      uri: openpipelines-bio/modules
+      tag: 0.3.0
+
+```
+
+Full specification of a repository using sugar syntax
+
+```yaml
+dependencies:
+  - name: qc/multiqc
+    repository: "github://openpipelines-bio/modules:0.3.0"
+
+```
+
+Reference to a repository fully specified under 'repositories'
+
+```yaml
+dependencies:
+  - name: qc/multiqc
+    repository: "openpipelines-bio"
+
+```
+
+## description
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+A description of the component. This will be displayed with `--help`.
+
+**Example:**
+
+```yaml
+description: |
+  This component performs function Y and Z.
+  It is possible to make this a multiline string.
+
+```
+
+## info
+
+**Type**: `Json`
+
+**Default**: `Empty`
+
+Structured information. Can be any shape: a string, vector, map or even nested map.
+
+**Example:**
+
+```yaml
+info:
+  twitter: wizzkid
+  classes: [ one, two, three ]
+```
+
+## keywords
+
+**Type**: `List of String`
+
+**Default**: `Empty`
+
+The keywords of the components.
+
+**Example:**
+
+```yaml
+keywords: [ bioinformatics, genomics ]
+```
+
+## license
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+The license of the package.
+
+:::{.callout-note}
+When the `license` field is left empty in a component's `.functionality` configuration, the value of `.version` in the [project config](/reference/projectConfig/#) will be copied during build.
+:::
+
+
+
+**Example:**
+
+```yaml
+license: MIT
+```
+
+## links
+
+**Type**: `Links`
+
+**Default**: `Empty`
+
+External links of the component.
+
+**Example:**
+
+```yaml
+links:
+  repository: "https://github.com/viash-io/viash"
+  docker_registry: "https://ghcr.io"
+  homepage: "https://viash.io"
+  documentation: "https://viash.io/reference/"
+  issue_tracker: "https://github.com/viash-io/viash/issues"
+
+```
+
+## name
+
+**Type**: `String`
+
+Name of the component and the filename of the executable when built with `viash build`.
+
+**Example:**
+
+```yaml
+name: this_is_my_component
+```
+
+## namespace
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+Namespace this component is a part of. See the [Namespaces guide](/guide/project/structure.html#grouping-components-in-namespaces) for more information on namespaces.
+
+**Example:**
+
+```yaml
+namespace: fancy_components
+```
+
+## organization
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+The organization of the package.
+
+:::{.callout-note}
+When the `organization` field is left empty in a component's `.functionality` configuration, the value of `.version` in the [project config](/reference/projectConfig/#) will be copied during build.
+:::
+
+
+
+**Example:**
+
+```yaml
+organization: viash-io
+```
+
+## references
+
+**Type**: `References`
+
+**Default**: `Empty`
+
+References to external resources related to the component.
+
+**Example:**
+
+```yaml
+references:
+  doi: 10.1000/xx.123456.789
+  bibtex: |
+    @article{foo,
+      title={Foo},
+      author={Bar},
+      journal={Baz},
+      year={2024}
+    }
+
+```
+
+## repositories
+
+**Type**: `List of RepositoryWithName`
+
+**Default**: `Empty`
+
+(Pre-)defines [repositories](/reference/config/repositories/#) that can be used as repository in dependencies.
+Allows reusing repository definitions in case it is used in multiple dependencies.
+
+:::{.callout-note}
+Any repositories defined under `.repositories` in the [project config](/reference/projectConfig/#) will be prepended to the repositories defined in a component's [configuration](/reference/config/functionality.html) of the `.functionality.repositories` field.
+:::
+
+
+
+**Example:**
+
+```yaml
+repositories:
+  - name: openpipelines-bio
+    type: github
+    uri: openpipelines-bio/modules
+    tag: 0.3.0
+
+```
+
+## requirements
+
+**Type**: `ComputationalRequirements`
+
+**Default**: `Empty`
+
+[Computational requirements](/reference/config/computationalRequirements.html) related to running the component. 
+`cpus` specifies the maximum number of (logical) cpus a component is allowed to use., whereas
+`memory` specifies the maximum amount of memory a component is allowed to allicate. Memory units must be
+in B, KB, MB, GB, TB or PB for SI units (1000-base), or KiB, MiB, GiB, TiB or PiB for binary IEC units (1024-base).
+
+**Example:**
+
+```yaml
+requirements:
+  cpus: 5
+  memory: 10GB
+
+```
+
+## resources
+
+**Type**: `List of Resource`
+
+**Default**: `Empty`
+
+[Resources](/reference/config/resources/#) are files that support the component. The first resource should be [a script](/guide/component/create-component.html#create-a-script) that will be executed when the functionality is run. Additional resources will be copied to the same directory.
+
+Common properties:
+
+ * type: `file` / `r_script` / `python_script` / `bash_script` / `javascript_script` / `scala_script` / `csharp_script`, specifies the type of the resource. The first resource cannot be of type `file`. When the type is not specified, the default type is simply `file`.
+ * dest: filename, the resulting name of the resource.  From within a script, the file can be accessed at `meta["resources_dir"] + "/" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter.
+ * path: `path/to/file`, the path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`.
+ * text: ...multiline text..., the content of the resulting file specified as a string. Mutually exclusive with `path`.
+ * is_executable: `true` / `false`, whether the resulting resource file should be made executable.
+
+
+**Example:**
+
+```yaml
+resources:
+  - type: r_script
+    path: script.R
+  - type: file
+    path: resource1.txt
+
+```
+
+## status
+
+**Type**: `Status`
+
+**Default**: `Enabled`
+
+Allows setting a component to active, deprecated or disabled.
+
+## test_resources
+
+**Type**: `List of Resource`
+
+**Default**: `Empty`
+
+One or more [scripts](/guide/component/create-component.html#create-a-script) to be used to test the component behaviour when `viash test` is invoked. Additional files of type `file` will be made available only during testing. Each test script should expect no command-line inputs, be platform-independent, and return an exit code >0 when unexpected behaviour occurs during testing. See [Unit Testing](/guide/component/unit-testing.html) for more info.
+
+**Example:**
+
+```yaml
+test_resources:
+  - type: bash_script
+    path: tests/test1.sh
+  - type: r_script
+    path: tests/test2.R
+  - path: resource1.txt
+
+```
+
+## usage
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+A description on how to use the component. This will be displayed with `--help` under the 'Usage:' section.
+
+**Example:**
+
+```yaml
+usage: Place the executable in a directory containing TSV files and run it
+```
+
+## version
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+Version of the component. This field will be used to version the executable and the Docker container.
+
+:::{.callout-note}
+When the `version` field is left empty in a component's `.functionality` configuration, the value of `.version` in the [project config](/reference/projectConfig/#) will be copied during build.
+:::
+
+
+
+**Example:**
+
+```yaml
+version: 0.8
+```

@@ -1,0 +1,216 @@
+---
+title: "Long"
+search: true
+---
+
+An `long` type argument has a numeric value without decimal points.
+
+**Example:**
+
+```yaml
+arguments:
+  - name: --core_amount
+    type: long
+    default: 16
+    description: Amount of CPU cores to use
+    alternatives: ["-c"]
+
+```
+
+## alternatives
+
+**Type**: `String` / `List of String`
+
+**Default**: `Empty`
+
+List of alternative format variations for this argument.
+
+## choices
+
+**Type**: `List of Long`
+
+**Default**: `Empty`
+
+Limit the amount of valid values for this argument to those set in this list. When set and a value not present in the list is provided, an error will be produced.
+
+**Example:**
+
+```yaml
+- name: --values
+  type: long
+  choices: [1024, 2048, 4096]
+
+```
+
+## default
+
+**Type**: `Long` / `List of Long`
+
+**Default**: `Empty`
+
+The default value when no argument value is provided. This will not work if the [`required`](#required) property is enabled.
+
+**Example:**
+
+```yaml
+- name: --my_long
+  type: long
+  default: 100
+
+```
+
+## description
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+A description of the argument. This will be displayed with `--help`.
+
+## example
+
+**Type**: `Long` / `List of Long`
+
+**Default**: `Empty`
+
+An example value for this argument. If no [`default`](#default) property was specified, this will be used for that purpose.
+
+**Example:**
+
+```yaml
+- name: --my_long
+  type: long
+  example: 100
+
+```
+
+## info
+
+**Type**: `Json`
+
+**Default**: `Empty`
+
+Structured information. Can be any shape: a string, vector, map or even nested map.
+
+**Example:**
+
+```yaml
+info:
+  category: cat1
+  labels: [one, two, three]
+```
+
+## max
+
+**Type**: `Long`
+
+**Default**: `Empty`
+
+Maximum allowed value for this argument. If set and the provided value is higher than the maximum, an error will be produced. Can be combined with [`min`](#min) to clamp values.
+
+**Example:**
+
+```yaml
+- name: --my_long
+  type: long
+  max: 150
+
+```
+
+## min
+
+**Type**: `Long`
+
+**Default**: `Empty`
+
+Minimum allowed value for this argument. If set and the provided value is lower than the minimum, an error will be produced. Can be combined with [`max`](#max) to clamp values.
+
+**Example:**
+
+```yaml
+- name: --my_long
+  type: long
+  min: 50
+
+```
+
+## multiple
+
+**Type**: `Boolean`
+
+**Default**: `False`
+
+Treat the argument value as an array. Arrays can be passed using the delimiter `--foo=1:2:3` or by providing the same argument multiple times `--foo 1 --foo 2`. You can use a custom delimiter by using the [`multiple_sep`](#multiple_sep) property. `false` by default.
+
+**Examples:**
+
+```yaml
+- name: --my_long
+  type: long
+  multiple: true
+
+```
+
+Here's an example of how to use this:
+
+```bash
+my_component --my_long=10:80:152
+```
+
+## multiple_sep
+
+**Type**: `String`
+
+**Default**: `;`
+
+The delimiter character for providing [`multiple`](#multiple) values. `:` by default.
+
+**Examples:**
+
+```yaml
+- name: --my_long
+  type: long
+  multiple: true
+  multiple_sep: ";"
+
+```
+
+Here's an example of how to use this:
+
+```bash
+my_component --my_long=10:80:152
+```
+
+## name
+
+**Type**: `String`
+
+The name of the argument. Can be in the formats `--foo`, `-f` or `foo`. The number of dashes determines how values can be passed:  
+
+  - `--foo` is a long option, which can be passed with `executable_name --foo=value` or `executable_name --foo value`
+  - `-f` is a short option, which can be passed with `executable_name -f value`
+  - `foo` is an argument, which can be passed with `executable_name value`  
+
+
+## required
+
+**Type**: `Boolean`
+
+**Default**: `False`
+
+Make the value for this argument required. If set to `true`, an error will be produced if no value was provided. `false` by default.
+
+**Example:**
+
+```yaml
+- name: --my_long
+  type: long
+  required: true
+
+```
+
+## type
+
+**Type**: `String`
+
+Specifies the type of the argument.

@@ -1,0 +1,82 @@
+---
+title: "Dependency"
+search: true
+---
+
+Specifies a Viash component (script or executable) that should be made available for the code defined in the component.
+The dependency components are collected and copied to the output folder during the Viash build step.
+
+
+**Examples:**
+
+Definition of dependency with a fully defined repository
+
+```yaml
+name: qc/multiqc
+repository: 
+  type: github
+  repo: openpipelines-bio/modules
+  tag: 0.3.0
+
+```
+
+Definition of a dependency with a repository using sugar syntax.
+
+```yaml
+name: qc/multiqc
+repository: "github://openpipelines-bio/modules:0.3.0"
+
+```
+
+Definition of a dependency with a repository defined as 'openpipelines-bio' under `.repositories`.
+
+```yaml
+name: qc/multiqc
+repository: "openpipelines-bio"
+
+```
+
+Definition of a local dependency. This dependency is present in the current code base and will be built when `viash ns build` is run.
+
+```yaml
+name: qc/multiqc
+
+```
+
+## alias
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+An alternative name for the dependency component. This can include a namespace if so needed.
+
+**Example:**
+
+```yaml
+alias: my_alias
+```
+
+## name
+
+**Type**: `String`
+
+The full name of the dependency component. This should include the namespace.
+
+**Example:**
+
+```yaml
+name: "my_namespace/component"
+```
+
+## repository
+
+**Type**: `Either String or Repository`
+
+**Default**: `Empty`
+
+Specifies the [repository](/reference/config/repositories/#) location where the dependency component can be found.
+This must either be a full definition of the repository or the name of a repository referenced as it is defined under repositories.
+Additionally, the full definition can be specified as a single string where all parameters such as repository type, url, branch or tag are specified.
+Omitting the value sets the dependency as a local dependency, ie. the dependency is available in the same namespace as the component.
+

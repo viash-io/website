@@ -1,0 +1,35 @@
+---
+title: "Viash 0.9.0-RC5"
+subtitle: "Improvements for CI"
+date: "2024-06-13"
+categories: [ New Release ]
+author: Viash Team
+---
+
+## What's new?
+
+Dependencies now use `vsh` as the default organization level. This means that the organization level is now optional in the `repo` field of the dependencies.
+Improved how the docker image name is generated to be more predictable.
+
+## Full changelog
+
+### MINOR CHANGES
+
+* `resources_test`: This field is removed again from the `_viash.yaml` as it was decided to impliment this temporary functionality using the `info` field (PR #711).
+
+* `docker_engine`: Deprecate `registry`, `organization` and `tag` fields in the `docker_engine` (PR #712). Currently these are hardly ever used and instead the `image` field is used to specify the full image name.
+
+* `docker_engine`: Add `target_package` field to the `docker_engine` (PR #712). This field, together with the `target_organization` is used to specify the full built container image name. The fields use proper fallback for the values set in the component config and package config.
+
+* `organization`: Remove the `organization` field from the component config (PR #712). The value is now directly used by the `docker_engine` as a fallback from the `target_organization` field.
+
+### BUG FIXES
+
+* `build_info`: Correctly set the `.build_info.executable` to `main.nf` when building a component with a Nextflow runner (PR #720).
+
+* `vsh organization`: ViashHub repositories now use `vsh` as the default organization (PR #718).
+  Instead of having to specify `repo: vsh/repo_name`, you can now just specify `repo: repo_name`, which is now also the prefered way.
+
+* `testbenches`: Add a testbench to verify dependencies in dependencies from scratch (PR #721).
+  The components are built from scratch and the dependencies are resolved from the local repositories.
+

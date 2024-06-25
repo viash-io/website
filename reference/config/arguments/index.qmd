@@ -1,0 +1,34 @@
+---
+title: "Argument"
+search: true
+---
+
+For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:  
+
+ - [string](/reference/config/arguments/string.html)
+ - [file](/reference/config/arguments/file.html)
+ - [integer](/reference/config/arguments/integer.html)
+ - [double](/reference/config/arguments/double.html)
+ - [boolean](/reference/config/arguments/boolean.html)
+ - [boolean_true](/reference/config/arguments/boolean_true.html)
+ - [boolean_false](/reference/config/arguments/boolean_false.html)
+
+
+**Example:**
+
+```yaml
+arguments:
+  - name: --foo
+    type: file
+    alternatives: [-f]
+    description: Description of foo
+    default: "/foo/bar"
+    must_exist: true
+    direction: output
+    required: false
+    multiple: true
+    multiple_sep: ";"
+  - name: --bar
+    type: string
+
+```

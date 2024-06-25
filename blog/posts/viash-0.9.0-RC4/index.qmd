@@ -1,0 +1,33 @@
+---
+title: "Viash 0.9.0-RC4"
+subtitle: "Improvements for CI"
+date: "2024-05-29"
+categories: [ New Release ]
+author: Viash Team
+---
+
+## What's new?
+
+These are mainly improvements for issues highlighted by running Viash in a CI environment.
+Additionally, implemented a proper way of caching dependency repositories. The cache is stored under `~/.viash/repositories`.
+
+## Full changelog
+
+### NEW FUNCTIONALITY
+
+* `dependencies`: GitHub and ViashHub repositories now get properly cached (PR #699).
+  The cache is stored in the `~/.viash/repositories` directory using sparse-checkout to only fetch the necessary files.
+  During a build, the cache is checked for the repository and if it is found and still up-to-date, the repository is not cloned again and instead the cache is copied to a temporary folder where the files are checked out from the sparse-checkout.
+
+* `resources_test`: Add a `resources_test` field to the `_viash.yaml` to specify resources that are needed during testing (PR #709).
+  Currently it is up to the user or CI to make sure these resources are available in the `resources_test` directory during testing.
+
+### BUG FIXES
+
+`dependencies`: Fix resolving of dependencies of dependencies (PR #701). The stricter build config was now lacking the necessary information to resolve dependencies of dependencies.
+  We added it back as `.build_info.dependencies` in a more structured, anonymized way.
+
+`dependencies`: Fix the `name` field of repositories possibly being outputted in the build config (PR #703).
+
+`symlinks`: Allow following of symlinks when finding configs (PR #704). This improves symlink functionality for `viash ns ...` and dependency resolving.
+

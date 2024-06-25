@@ -21,9 +21,7 @@ engines:
 
 ## cmd
 
-**Type**: `Either
-  - String
-  - List of String`
+**Type**: `Either String or List of String`
 
 **Default**: `Empty`
 
@@ -45,9 +43,7 @@ cmd: "echo $HOME"
 
 ## entrypoint
 
-**Type**: `Either
-  - String
-  - List of String`
+**Type**: `Either String or List of String`
 
 **Default**: `[]`
 
@@ -123,7 +119,10 @@ namespace_separator: "_"
 
 **Default**: `Empty`
 
-Name of a container's [organization](https://docs.docker.com/docker-hub/orgs/).
+::: {.callout-warning}
+Deprecated since 0.9.0. Planned removal at 0.10.0. Use the full container name in `image` instead.
+:::
+Name of a start container's [organization](https://docs.docker.com/docker-hub/orgs/).
 
 ## registry
 
@@ -131,7 +130,10 @@ Name of a container's [organization](https://docs.docker.com/docker-hub/orgs/).
 
 **Default**: `Empty`
 
-The URL to the a [custom Docker registry](https://docs.docker.com/registry/)
+::: {.callout-warning}
+Deprecated since 0.9.0. Planned removal at 0.10.0. Use the full container name in `image` instead.
+:::
+The URL to the a [custom Docker registry](https://docs.docker.com/registry/) where the start container is located.
 
 **Example:**
 
@@ -165,6 +167,9 @@ The order in which these dependencies are specified determines the order in whic
 
 **Default**: `Empty`
 
+::: {.callout-warning}
+Deprecated since 0.9.0. Planned removal at 0.10.0. Use the full container name in `image` instead.
+:::
 Specify a Docker image based on its tag.
 
 **Example:**
@@ -213,6 +218,20 @@ The organization set in the resulting image. Advanced usage only.
 
 ```yaml
 target_organization: viash-io
+```
+
+## target_package
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+The package name set in the resulting image. Advanced usage only.
+
+**Example:**
+
+```yaml
+target_package: tools
 ```
 
 ## target_registry
