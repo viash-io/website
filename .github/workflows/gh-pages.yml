@@ -68,6 +68,10 @@ jobs:
 
           quarto render
 
+      - name: Add previous versions of the website to the rendered pages
+        run: |
+          cp -r _versioned _site/versioned
+
       - name: Deploy 🚀
         if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@v4

@@ -4,9 +4,6 @@ search: true
 order: 20
 ---
 
-::: {.callout-warning}
-Deprecated since 0.8.0. Planned removal at 0.9.0. Use 'engines' and 'runners' instead.
-:::
 Run a Viash component on a Docker backend platform.
 By specifying which dependencies your component needs, users will be able to build a docker container from scratch using the setup flag, or pull it from a docker repository.
 
@@ -29,10 +26,6 @@ platforms:
 
 **Default**: `True`
 
-::: {.callout-warning}
-Deprecated since 0.8.0. 
-Removed since 0.8.0. Compability not provided with the Runners functionality.
-:::
 In Linux, files created by a Docker container will be owned by `root`. With `chown: true`, Viash will automatically change the ownership of output files (arguments with `type: file` and `direction: output`) to the user running the Viash command after execution of the component. Default value: `true`.
 
 **Example:**
@@ -43,9 +36,7 @@ chown: false
 
 ## cmd
 
-**Type**: `Either
-  - String
-  - List of String`
+**Type**: `String` / `List of String`
 
 **Default**: `Empty`
 
@@ -67,9 +58,7 @@ cmd: "echo $HOME"
 
 ## entrypoint
 
-**Type**: `Either
-  - String
-  - List of String`
+**Type**: `String` / `List of String`
 
 **Default**: `[]`
 
@@ -198,14 +187,14 @@ Add [docker run](https://docs.docker.com/engine/reference/run/) arguments.
 
 A list of requirements for installing the following types of packages:
 
- - [apt](/reference/config/engines/docker/setup/aptRequirements.html)
- - [apk](/reference/config/engines/docker/setup/apkRequirements.html)
- - [Docker setup instructions](/reference/config/engines/docker/setup/dockerRequirements.html)
- - [JavaScript](/reference/config/engines/docker/setup/javascriptRequirements.html)
- - [Python](/reference/config/engines/docker/setup/pythonRequirements.html)
- - [R](/reference/config/engines/docker/setup/rRequirements.html)
- - [Ruby](/reference/config/engines/docker/setup/rubyRequirements.html)
- - [yum](/reference/config/engines/docker/setup/yumRequirements.html)
+ - [apt](/reference/config/platforms/docker/setup/aptRequirements.html)
+ - [apk](/reference/config/platforms/docker/setup/apkRequirements.html)
+ - [Docker setup instructions](/reference/config/platforms/docker/setup/dockerRequirements.html)
+ - [JavaScript](/reference/config/platforms/docker/setup/javascriptRequirements.html)
+ - [Python](/reference/config/platforms/docker/setup/pythonRequirements.html)
+ - [R](/reference/config/platforms/docker/setup/rRequirements.html)
+ - [Ruby](/reference/config/platforms/docker/setup/rubyRequirements.html)
+ - [yum](/reference/config/platforms/docker/setup/yumRequirements.html)
 
 The order in which these dependencies are specified determines the order in which they will be installed.
 
@@ -224,14 +213,14 @@ The Docker setup strategy to use when building a container.
 | `alwayscachedbuild` / `cachedbuild` / `cb` | Always build the image from the dockerfile, with caching enabled.
 | `ifneedbebuild` |  Build the image if it does not exist locally.
 | `ifneedbecachedbuild` | Build the image with caching enabled if it does not exist locally, with caching enabled.
-| `alwayspull` / `pull` / `p` |  Try to pull the container from [Docker Hub](https://hub.docker.com) or the [specified docker registry](/reference/config/engines/docker/#registry).
-| `alwayspullelsebuild` / `pullelsebuild` |  Try to pull the image from a registry and build it if it doesn't exist.
-| `alwayspullelsecachedbuild` / `pullelsecachedbuild` |  Try to pull the image from a registry and build it with caching if it doesn't exist.
+| `alwayspull` / `pull` / `p` |  Try to pull the container from [Docker Hub](https://hub.docker.com) or the [specified docker registry](/reference/config/platforms/docker/#registry).
+| `alwayspullelsebuild` / `pullelsebuild` |  Try to pull the image from a registry and build it if it does not exist.
+| `alwayspullelsecachedbuild` / `pullelsecachedbuild` |  Try to pull the image from a registry and build it with caching if it does not exist.
 | `ifneedbepull` |  If the image does not exist locally, pull the image.
-| `ifneedbepullelsebuild` |  If the image does not exist locally, pull the image. If the image does exist, build it.
-| `ifneedbepullelsecachedbuild` | If the image does not exist locally, pull the image. If the image does exist, build it with caching enabled.
-| `push` | Push the container to [Docker Hub](https://hub.docker.com)  or the [specified docker registry](/reference/config/engines/docker/#registry).
-| `pushifnotpresent` | Push the container to [Docker Hub](https://hub.docker.com) or the [specified docker registry](/reference/config/engines/docker/#registry) if the [tag](/reference/config/engines/docker/#tag) does not exist yet.
+| `ifneedbepullelsebuild` |  Do nothing if the image exists locally. Else, try to pull the image from a registry. Otherwise build the image from scratch.
+| `ifneedbepullelsecachedbuild` | Do nothing if the image exists locally. Else, try to pull the image from a registry. Otherwise build the image with caching enabled.
+| `push` | Push the container to [Docker Hub](https://hub.docker.com)  or the [specified docker registry](/reference/config/platforms/docker/#registry).
+| `pushifnotpresent` | Push the container to [Docker Hub](https://hub.docker.com) or the [specified docker registry](/reference/config/platforms/docker/#registry) if the [tag](/reference/config/platforms/docker/#tag) does not exist yet.
 | `donothing` / `meh` | Do not build or pull anything.
 
 
