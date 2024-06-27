@@ -428,16 +428,16 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns build <span class="at">--setup</span> cachedbuild <span class="at">--parallel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>temporaryFolder: /tmp/viash_hub_repo11289225560580543253 uri: https://viash-hub.com/data-intuitive/vsh-pipeline-operators.git
+<pre><code>temporaryFolder: /tmp/viash_hub_repo3787190116439068903 uri: https://viash-hub.com/data-intuitive/vsh-pipeline-operators.git
 Cloning into '.'...
 checkout out: List(git, checkout, tags/v0.2.0, --, .) 0 
-Exporting combine_columns (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/combine_columns
 Exporting remove_comments (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/remove_comments
-Exporting take_column (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/take_column
 Exporting combine_columns (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/combine_columns
+Exporting combine_columns (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/combine_columns
+Exporting take_column (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/take_column
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/template/combine_columns:0.2.3' with Dockerfile
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/template/take_column:0.2.3' with Dockerfile
 [notice] Building container 'ghcr.io/viash-io/viash_project_template/template/remove_comments:0.2.3' with Dockerfile
+[notice] Building container 'ghcr.io/viash-io/viash_project_template/template/take_column:0.2.3' with Dockerfile
 Exporting workflow (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/workflow
 Exporting remove_comments (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/remove_comments
 Exporting take_column (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/take_column
@@ -657,23 +657,25 @@ Note
 <pre><code>
  N E X T F L O W   ~  version 24.04.2
 
-Launching `main.nf` [insane_perlman] DSL2 - revision: dc137fbfcf
+Launching `main.nf` [compassionate_curie] DSL2 - revision: dc137fbfcf
+
+[-        ] rem…Wf:remove_comments_process -
 
 [-        ] rem…Wf:remove_comments_process -
 Input: [file1, [input:/home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]]
 Input: [file2, [input:/home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]]
 
 executor &gt;  local (2)
-[ea/eef39b] rem…e_comments_process (file2) | 0 of 2
+[89/dc3d7c] rem…e_comments_process (file2) | 0 of 2
 Input: [file1, [input:/home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]]
 Input: [file2, [input:/home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]]
 
 executor &gt;  local (2)
-[ea/eef39b] rem…e_comments_process (file2) | 2 of 2 ✔
+[89/dc3d7c] rem…e_comments_process (file2) | 2 of 2 ✔
 Input: [file1, [input:/home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]]
 Input: [file2, [input:/home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]]
-Output: [file1, [output:/home/runner/work/website/website/guide/_viash_project_template/work/79/18bec9c2358a74420943a94ecfe357/file1.remove_comments.output.tsv]]
-Output: [file2, [output:/home/runner/work/website/website/guide/_viash_project_template/work/ea/eef39bb4ed8f3f8b5e5439ecf4fe8f/file2.remove_comments.output.tsv]]</code></pre>
+Output: [file1, [output:/home/runner/work/website/website/guide/_viash_project_template/work/85/0088fcf5bdda453b298417841f0b93/file1.remove_comments.output.tsv]]
+Output: [file2, [output:/home/runner/work/website/website/guide/_viash_project_template/work/89/dc3d7c4ef3debea46a822e13a16f93/file2.remove_comments.output.tsv]]</code></pre>
 </div>
 </div>
 <details>
@@ -703,8 +705,8 @@ vier    0.444   123</code></pre>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>output
-├── file1.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/79/18bec9c2358a74420943a94ecfe357/file1.remove_comments.output.tsv
-├── file2.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/ea/eef39bb4ed8f3f8b5e5439ecf4fe8f/file2.remove_comments.output.tsv
+├── file1.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/85/0088fcf5bdda453b298417841f0b93/file1.remove_comments.output.tsv
+├── file2.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/89/dc3d7c4ef3debea46a822e13a16f93/file2.remove_comments.output.tsv
 ├── run.combine_columns.output
 ├── run.workflow.output.tsv
 └── run.workflow.state.yaml
