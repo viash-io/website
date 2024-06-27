@@ -70,6 +70,7 @@ jobs:
 
       - name: Add previous versions of the website to the rendered pages
         run: |
+          mkdir -p ./_site/versioned
           find ./_versioned -name '*.tar.xz' -exec tar -Jxf {} -C ./_site/versioned/ \;
 
       - name: Deploy 🚀
