@@ -264,11 +264,86 @@ function guessOS() {
 </header>
 
 
+<script type="text/javascript">
+let langDict = {
+  'linux': "Linux",
+  'macos': "macOS",
+  'windows': "Windows",
+};
+
+let invertedLangDict = invertDictionary(langDict);
+
+document.addEventListener("DOMContentLoaded", function() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    let os = 'linux';
+
+    if (urlParams.has('os')){
+        os = urlParams.get('os');
+    }
+
+    changeTabSelections(os);
+
+    var tabs = document.querySelectorAll('[role="tab"]');
+    
+    for(var i = 0; i < tabs.length; i++) {
+        tab = tabs[i];
+        if (tab.textContent in invertedLangDict) {
+            tab.addEventListener('click', onTabClicked);
+        }
+    }
+
+});
+
+function changeTabSelections(os) {
+    var tabs = document.querySelectorAll('[role="tab"]');
+    var tab_panels = document.querySelectorAll('[role="tabpanel"]');
+
+    // Disable all tab panels
+    for(var i = 0; i < tab_panels.length; i++) {
+        panel = tab_panels[i];
+        panel.classList.remove('active')
+    }
+
+    // Iterate over all tabs
+    for(var i = 0; i < tabs.length; i++) {
+        tab = tabs[i];
+
+        // Disable all tabs
+        tab.classList.remove('active');
+
+        // If the tab is the chosen os
+        if (tab.textContent == langDict[os]) {
+            // Mark it active
+            tab.classList.add('active');
+            // Find the linked tab panel and make it active
+            var linked_panel = tab.getAttribute('aria-controls')
+            var panel = document.getElementById(linked_panel);
+            panel.classList.add('active');
+        }
+    }
+
+}
+
+function onTabClicked(event) {
+    changeTabSelections(invertedLangDict[event.srcElement.textContent]);
+}
+
+function invertDictionary(dict){
+    var ret = {};
+    for(var key in dict){
+        ret[dict[key]] = key;
+    }
+    return ret;
+}
+
+</script>
 <div class="grid step column-page-right">
 <section id="step-1" class="level2 g-col-lg-3 g-col-12">
 <h2 data-anchor-id="step-1">Step 1</h2>
-<section id="install-viash" class="level4 fw-light">
-<h4 class="fw-light" data-anchor-id="install-viash">Install Viash</h4>
+<section id="install-requirements" class="level4 fw-light">
+<h4 class="fw-light" data-anchor-id="install-requirements">Install Requirements</h4>
 </section>
 </section>
 <div class="g-col-lg-9 g-col-12">
@@ -276,8 +351,6 @@ function guessOS() {
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Linux</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">macOS</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Windows</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<section id="requirements" class="level3">
-<h3 data-anchor-id="requirements">Requirements</h3>
 <p>Viash is developed in <a href="https://www.scala-lang.org/">Scala</a>, so you’ll need to install a Java SE platform, either from <a href="https://www.oracle.com/java/technologies/downloads/">Oracle</a>, or <a href="https://openjdk.org/projects/jdk/">OpenJDK</a>. The minimum required version is Java 11, but we recommend Java 17 or 21 (all of these are Long Time Support versions).</p>
 <p>You can run the following command to check if you have Java installed:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -303,25 +376,15 @@ Tip
 <p>If you get an error <code>Docker daemon does not seem to be running</code> when executing a docker container, you may need to run <code>sudo systemctl start docker --now</code> to start the docker service. To add the current user to the <code>docker</code> group, run <code>sudo usermod -aG docker $USER</code> and re-login to apply the change.</p>
 </div>
 </div>
-</section>
-<section id="installing-viash" class="level3">
-<h3 data-anchor-id="installing-viash">Installing Viash</h3>
-<p>To install Viash to a <code>bin</code> folder in your current directory, run the following command to download and run the install script:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-qO-</span> dl.viash.io <span class="kw">|</span> <span class="fu">bash</span><span class="kw">;</span> <span class="fu">mv</span> viash <span class="va">$HOME</span>/bin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>To verify your installation, run the following command:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<section id="requirements-1" class="level3">
-<h3 data-anchor-id="requirements-1">Requirements</h3>
 <p>Viash is developed in <a href="https://www.scala-lang.org/">Scala</a>, so you’ll need to install a Java SE platform, either from <a href="https://www.oracle.com/java/technologies/downloads/">Oracle</a>, or <a href="https://openjdk.org/projects/jdk/">OpenJDK</a>. The minimum required version is Java 11, but we recommend Java 17 or 21 (all of these are Long Time Support versions).</p>
 <p>You can run the following command to check if you have Java installed:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To install Java, first install Homebrew:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/bin/bash</span> <span class="at">-c</span> <span class="st">"</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="va">)</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/bin/bash</span> <span class="at">-c</span> <span class="st">"</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="va">)</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Next install Java 17 by running:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install openjdk@17</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install openjdk@17</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -336,21 +399,8 @@ Tip
 </div>
 </div>
 <p>To get the most out of Viash, you’ll also need to install <a href="https://docs.docker.com/desktop/mac/install/">Docker</a> and <a href="https://www.nextflow.io/">Nextflow</a>.</p>
-</section>
-<section id="installing-viash-1" class="level3">
-<h3 data-anchor-id="installing-viash-1">Installing Viash</h3>
-<p>To install Viash to a <code>bin</code> folder in your current directory, run the following command to download and run the install script:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> dl.viash.io <span class="kw">|</span> <span class="fu">bash</span><span class="kw">;</span> <span class="fu">mv</span> viash <span class="va">$HOME</span>/bin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>To verify your installation, run the following command:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<section id="requirements-2" class="level3">
-<h3 data-anchor-id="requirements-2">Requirements</h3>
-</section>
-<section id="setting-up-wsl2" class="level3">
-<h3 data-anchor-id="setting-up-wsl2">Setting up WSL2</h3>
 <p>Viash doesn’t support Windows natively, but <a href="https://docs.microsoft.com/en-us/windows/wsl/about">Windows Subsystem for Linux 2</a> can be used instead. Follow the instructions below to get everything ready to use Viash:</p>
 <ol type="1">
 <li>Install WSL2 by following the <a href="https://docs.microsoft.com/en-us/windows/wsl/install">instructions provided by Microsoft</a>. This will install the default distro, <strong>Ubuntu</strong>.</li>
@@ -358,17 +408,17 @@ Tip
 <li>Open <strong>Ubuntu</strong> from the <strong>Start</strong> menu to start up WSL2.</li>
 <li>Run the following command in the Ubuntu terminal to upgrade Ubuntu and its packages to the newest version:</li>
 </ol>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt-get upgrade <span class="at">-y</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt-get upgrade <span class="at">-y</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="5" type="1">
 <li>Run this command to check if docker is working correctly:</li>
 </ol>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run hello-world</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run hello-world</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If this doesn’t work, read the <a href="https://docs.docker.com/desktop/windows/wsl/">Docker WSL2 instructions</a> again, you might have missed a step or forgot to reboot your system.</p>
 <ol start="6" type="1">
 <li>Viash is developed in <a href="https://www.scala-lang.org/">Scala</a>, so you’ll need to install a Java SE platform, either from <a href="https://www.oracle.com/java/technologies/downloads/">Oracle</a>, or <a href="https://openjdk.org/projects/jdk/">OpenJDK</a>. The minimum required version is Java 11, but we recommend Java 17 or 21 (all of these are Long Time Support versions).</li>
 </ol>
 <p>Install the Viash dependencies by executing this command:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install <span class="at">-y</span> openjdk-17-jdk unzip zip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install <span class="at">-y</span> openjdk-17-jdk unzip zip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -385,14 +435,6 @@ Note
 <ol start="7" type="1">
 <li>Install <a href="https://www.nextflow.io/">Nextflow</a>.</li>
 </ol>
-</section>
-<section id="installing-viash-2" class="level3">
-<h3 data-anchor-id="installing-viash-2">Installing Viash</h3>
-<p>To install Viash to a <code>bin</code> folder in your current directory, run the following command to download and run the install script:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-qO-</span> dl.viash.io <span class="kw">|</span> <span class="fu">bash</span><span class="kw">;</span> <span class="fu">mv</span> viash <span class="va">$HOME</span>/bin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>To verify your installation, run the following command:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
 </div>
 </div>
 </div>
@@ -401,6 +443,39 @@ Note
 <div class="grid step column-page-right">
 <section id="step-2" class="level2 g-col-lg-3 g-col-12">
 <h2 data-anchor-id="step-2">Step 2</h2>
+<section id="install-viash" class="level4 fw-light">
+<h4 class="fw-light" data-anchor-id="install-viash">Install Viash</h4>
+</section>
+</section>
+<div class="g-col-lg-9 g-col-12">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Linux</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">macOS</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">Windows</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>To install Viash to a <code>bin</code> folder in your current directory, run the following command to download and run the install script:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-qO-</span> dl.viash.io <span class="kw">|</span> <span class="fu">bash</span><span class="kw">;</span> <span class="fu">mv</span> viash <span class="va">$HOME</span>/bin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To verify your installation, run the following command:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>To install Viash to a <code>bin</code> folder in your current directory, run the following command to download and run the install script:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> dl.viash.io <span class="kw">|</span> <span class="fu">bash</span><span class="kw">;</span> <span class="fu">mv</span> viash <span class="va">$HOME</span>/bin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To verify your installation, run the following command:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p>To install Viash to a <code>bin</code> folder in your current directory, run the following command to download and run the install script:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-qO-</span> dl.viash.io <span class="kw">|</span> <span class="fu">bash</span><span class="kw">;</span> <span class="fu">mv</span> viash <span class="va">$HOME</span>/bin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To verify your installation, run the following command:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid step column-page-right">
+<section id="step-3" class="level2 g-col-lg-3 g-col-12">
+<h2 data-anchor-id="step-3">Step 3</h2>
 <section id="use-the-quickstart" class="level4 fw-light">
 <h4 class="fw-light" data-anchor-id="use-the-quickstart">Use the Quickstart</h4>
 <!-- #### Choose your preferred<br/>scripting language{.fw-light} -->
