@@ -13,11 +13,13 @@ aliases:
   - /getting-started/installation.html
 ---
 
+{{< include ../_includes/_os_chooser.qmd >}}
+
 ::: {.grid .step .column-page-right}
 ::: {.g-col-lg-3 .g-col-12}
 ## Step 1 
 
-#### Install Viash {.fw-light}
+#### Install Requirements {.fw-light}
 :::
 
 ::: {.g-col-lg-9 .g-col-12}
@@ -25,82 +27,67 @@ aliases:
 ::: {.panel-tabset}
 ## Linux
 
-### Requirements
+Viash is developed in [Scala](https://www.scala-lang.org/), so you'll need to install a Java SE platform, either from [Oracle](https://www.oracle.com/java/technologies/downloads/), or [OpenJDK](https://openjdk.org/projects/jdk/). The minimum required version is Java 11, but we recommend Java 17 or 21 (all of these are Long Time Support versions).
 
-Viash is developed in [Scala](https://www.scala-lang.org/), so you'll need to install [Java 8](https://www.oracle.com/java/technologies/downloads/#java8-linux), [OpenJDK 8](https://openjdk.org/install/) or a later version.  
 You can run the following command to check if you have Java installed:
 
 ```bash
 java -version
 ```
 
-:::{.callout-note}
-Java version "1.8.x" and "8" are the same release.
+To install Java, we encourage to use your distribution's package manager;
+```bash
+# for Debian/Ubuntu
+sudo apt-get update
+sudo apt-get install openjdk-17-jdk
+```
+
+```bash
+# for RHEL/Fedora
+sudo yum install java-17-openjdk-devel
+```
+
+```bash
+# for Arch
+sudo pacman -Syy jdk17-openjdk
+```
+
+To get the most out of Viash, you'll also need to install [Docker](https://docs.docker.com/engine/install/) and [Nextflow](https://www.nextflow.io/).
+
+:::{.callout-tip}
+If you get an error `Docker daemon does not seem to be running` when executing a docker container, you may need to run `sudo systemctl start docker --now` to start the docker service.
+To add the current user to the `docker` group, run `sudo usermod -aG docker $USER` and re-login to apply the change.
 :::
 
-To get the most out of Viash, you'll also need to install [Docker](https://docs.docker.com/desktop/linux/install/) and [Nextflow](https://www.nextflow.io/).
-
-### Installing Viash
-
-To install Viash to a `bin` folder in your PATH, run the following command to download and run the install script:
-
-```bash
-wget -qO- dl.viash.io | bash
-```
-
-```bash
-sudo mv viash /usr/local/bin
-```
-
-To verify your installation, run the following command:
-
-```bash
-viash --help
-```
 
 ## macOS
 
-### Requirements
+Viash is developed in [Scala](https://www.scala-lang.org/), so you'll need to install a Java SE platform, either from [Oracle](https://www.oracle.com/java/technologies/downloads/), or [OpenJDK](https://openjdk.org/projects/jdk/). The minimum required version is Java 11, but we recommend Java 17 or 21 (all of these are Long Time Support versions).
 
-Viash is developed in [Scala](https://www.scala-lang.org/), so you'll need to install [Java 8](https://www.oracle.com/java/technologies/downloads/#java8-mac), [OpenJDK 8](https://openjdk.org/install/) or a later version.  
 You can run the following command to check if you have Java installed:
 
 ```bash
 java -version
 ```
 
-:::{.callout-note}
-Java version "1.8.x" and "8" are the same release.
+To install Java, first install Homebrew:
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Next install Java 17 by running:
+```bash
+brew install openjdk@17
+```
+
+:::{.callout-tip}
+Note that brew may call out that you may want to create a symlink or adjust your PATH.
+Please take the appropriate steps as is suitable for your case.
 :::
 
 To get the most out of Viash, you'll also need to install [Docker](https://docs.docker.com/desktop/mac/install/) and [Nextflow](https://www.nextflow.io/).
 
-### Installing Viash
-
-To install Viash to a `bin` folder in your PATH, run the following command to download and run the install script:
-
-```bash
-wget -qO- dl.viash.io | bash
-```
-
-```bash
-sudo mv viash /usr/local/bin
-```
-
-To verify your installation, run the following command:
-
-```bash
-viash --help
-```
-
 ## Windows
-
-
-### Requirements
-
-
-
-### Setting up WSL2
 
 Viash doesn't support Windows natively, but [Windows Subsystem for Linux 2](https://docs.microsoft.com/en-us/windows/wsl/about) can be used instead. Follow the instructions below to get everything ready to use Viash:
 
@@ -121,28 +108,70 @@ docker run hello-world
 
 If this doesn't work, read the [Docker WSL2 instructions](https://docs.docker.com/desktop/windows/wsl/) again, you might have missed a step or forgot to reboot your system. 
 
-6. Viash is developed in [Scala](https://www.scala-lang.org/), so you'll need to install [Java 8](https://www.oracle.com/java/technologies/downloads/#java8-windows), [OpenJDK 8](https://openjdk.org/install/) or a later version. Install the Viash dependencies by executing this command:
+6. Viash is developed in [Scala](https://www.scala-lang.org/), so you'll need to install a Java SE platform, either from [Oracle](https://www.oracle.com/java/technologies/downloads/), or [OpenJDK](https://openjdk.org/projects/jdk/). The minimum required version is Java 11, but we recommend Java 17 or 21 (all of these are Long Time Support versions).
+
+Install the Viash dependencies by executing this command:
 
 ```bash
-sudo apt-get install -y openjdk-12-jdk unzip zip
+sudo apt-get install -y openjdk-17-jdk unzip zip
 ```
 
 :::{.callout-note}
-You can choose to install `default-jdk` instead of the more explicit `openjdk-12-jdk`. However, the [Nextflow target platform](/reference/config/platforms/nextflow/) only supports Java version 8 to 12 at this point in time, so keep that in mind.
+You can choose to install `default-jdk` instead of the more explicit `openjdk-17-jdk`. 
 :::
 
 7. Install [Nextflow](https://www.nextflow.io/).
 
-### Installing Viash
+:::
 
-To install Viash to a `bin` folder in your PATH, run the following command to download and run the install script:
+:::
+:::
+
+::: {.grid .step .column-page-right}
+::: {.g-col-lg-3 .g-col-12}
+## Step 2 
+
+#### Install Viash {.fw-light}
+:::
+
+::: {.g-col-lg-9 .g-col-12}
+
+::: {.panel-tabset}
+
+## Linux
+
+To install Viash to a `bin` folder in your current directory, run the following command to download and run the install script:
 
 ```bash
-wget -qO- dl.viash.io | bash
+wget -qO- dl.viash.io | bash; mv viash $HOME/bin
 ```
 
+To verify your installation, run the following command:
+
 ```bash
-sudo mv viash /usr/local/bin
+viash --help
+```
+
+## macOS
+
+To install Viash to a `bin` folder in your current directory, run the following command to download and run the install script:
+
+```bash
+curl -fsSL dl.viash.io | bash; mv viash $HOME/bin
+```
+
+To verify your installation, run the following command:
+
+```bash
+viash --help
+```
+
+## Windows
+
+To install Viash to a `bin` folder in your current directory, run the following command to download and run the install script:
+
+```bash
+wget -qO- dl.viash.io | bash; mv viash $HOME/bin
 ```
 
 To verify your installation, run the following command:
@@ -158,7 +187,7 @@ viash --help
 
 ::: {.grid .step .column-page-right}
 ::: {.g-col-lg-3 .g-col-12}
-## Step 2 
+## Step 3 
 
 #### Use the Quickstart{.fw-light}
 <!-- #### Choose your preferred<br/>scripting language{.fw-light} -->
