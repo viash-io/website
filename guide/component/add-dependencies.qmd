@@ -18,13 +18,13 @@ on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
 # create tempdir with modified files
 add_setup <- function(...) {
   function(config) {
-    config$functionality$name <-
-      paste0(config$functionality$name, "_with_setup")
-    config$platforms <- map(config$platforms, function(platform) {
-      if (platform$type == "docker") {
-        platform$setup <- list(...)
+    config$name <-
+      paste0(config$name, "_with_setup")
+    config$engines <- map(config$engines, function(engine) {
+      if (engine$type == "docker") {
+        engine$setup <- list(...)
       }
-      platform
+      engine
     })
     config
   }
@@ -104,7 +104,7 @@ for (i in seq_len(nrow(langs))) {
     |Build the executable:
     |
     |```{bash}
-    |viash build config.vsh.yaml --platform docker --output target
+    |viash build config.vsh.yaml --engine docker --output target
     |```
     |
     |Build the Docker image:
@@ -129,7 +129,7 @@ pwalk(langs, function(id, label, config_path, script_path, ...) {
     "## {% label %}
     |
     |```bash
-    |viash build config.vsh.yaml --platform docker --output target --setup cachedbuild
+    |viash build config.vsh.yaml --engine docker --output target --setup cachedbuild
     |```
     |", 
     .dir = paste0(temp_dir, "/", id)
@@ -242,7 +242,7 @@ pwalk(langs, function(id, label, config_path, script_path, ...) {
     |
     |```bash
     |viash build config.vsh.yaml \
-    |  --platform docker \
+    |  --engine docker \
     |  --output target \
     |  --setup cachedbuild
     |```

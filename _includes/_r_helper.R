@@ -68,8 +68,14 @@ run_quarto <- function(src_qmd, wdir, engine = "knitr") {
       "render", file_qmd,
       "--to", "markdown",
       "--output", "-"
-    )
+    ),
+    echo=FALSE,
+    error_on_status = FALSE
   )
+
+ if (out$status != 0) {
+    stop(out$stderr)
+  }
 
   # strip header
   paste0(out$stdout, "\n") %>%

@@ -1,21 +1,22 @@
-functionality:
-  name: example_bash
-  description: A minimal example component.
-  arguments:
-    - type: file
-      name: --input
-      example: file.txt
-      required: true
-    - type: file
-      name: --output
-      direction: output
-      example: output.txt
-      required: true
-  resources:
-    - type: bash_script
-      path: script.sh
-platforms:
+name: example_bash
+description: A minimal example component.
+arguments:
+  - type: file
+    name: --input
+    example: file.txt
+    required: true
+  - type: file
+    name: --output
+    direction: output
+    example: output.txt
+    required: true
+resources:
+  - type: bash_script
+    path: script.sh
+engines:
   - type: docker
     image: "bash:4.0"
   - type: native
+runners:
+  - type: executable
   - type: nextflow
