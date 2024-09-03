@@ -1,0 +1,77 @@
+```{=html}
+<script type="text/javascript">
+let langDict = {
+  'linux': "Linux",
+  'macos': "macOS",
+  'windows': "Windows",
+};
+
+let invertedLangDict = invertDictionary(langDict);
+
+document.addEventListener("DOMContentLoaded", function() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    let os = 'linux';
+
+    if (urlParams.has('os')){
+        os = urlParams.get('os');
+    }
+
+    changeTabSelections(os);
+
+    var tabs = document.querySelectorAll('[role="tab"]');
+    
+    for(var i = 0; i < tabs.length; i++) {
+        tab = tabs[i];
+        if (tab.textContent in invertedLangDict) {
+            tab.addEventListener('click', onTabClicked);
+        }
+    }
+
+});
+
+function changeTabSelections(os) {
+    var tabs = document.querySelectorAll('[role="tab"]');
+    var tab_panels = document.querySelectorAll('[role="tabpanel"]');
+
+    // Disable all tab panels
+    for(var i = 0; i < tab_panels.length; i++) {
+        panel = tab_panels[i];
+        panel.classList.remove('active')
+    }
+
+    // Iterate over all tabs
+    for(var i = 0; i < tabs.length; i++) {
+        tab = tabs[i];
+
+        // Disable all tabs
+        tab.classList.remove('active');
+
+        // If the tab is the chosen os
+        if (tab.textContent == langDict[os]) {
+            // Mark it active
+            tab.classList.add('active');
+            // Find the linked tab panel and make it active
+            var linked_panel = tab.getAttribute('aria-controls')
+            var panel = document.getElementById(linked_panel);
+            panel.classList.add('active');
+        }
+    }
+
+}
+
+function onTabClicked(event) {
+    changeTabSelections(invertedLangDict[event.srcElement.textContent]);
+}
+
+function invertDictionary(dict){
+    var ret = {};
+    for(var key in dict){
+        ret[dict[key]] = key;
+    }
+    return ret;
+}
+
+</script>
+```
