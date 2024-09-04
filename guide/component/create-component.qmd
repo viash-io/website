@@ -30,11 +30,13 @@ pwalk(langs, function(id, label, example_config, example_script, config_path, sc
 })
 ```
 
-A Viash component can be translated into one or more platforms: Native, Docker, Nextflow. Each of these platforms result in a different artifact:
+A Viash component can be translated into one or more engines: Native, Docker; and one or more runners: Executable, Nextflow. Each of these engines and runners result in a different artifact:
 
-* [Native platform](/reference/config/platforms/native/#): a single executable is generated which runs natively on the host system. This assumes all dependencies are already installed by the user and is therefore not reproducible. Requirements: Bash.
-* [Docker platform](/reference/config/platforms/docker/#): a single executable is generated but it runs inside a Docker container instead. The Docker platform specification can help you install custom dependencies and will take care of auto-mounting input/output files. Requirements: Bash, Docker.
-* [Nextflow platform](/reference/config/platforms/nextflow/#): a Nextflow module which can be used as a standalone workflow or as a module in a larger workflow. Requirements: Nextflow and a containerization engine (e.g. Docker, Singularity, Podman).
+* [Native engine](/reference/config/engines/native/#): a single executable is generated which runs natively on the host system. This assumes all dependencies are already installed by the user and is therefore not reproducible. Requirements: Bash.
+* [Docker engine](/reference/config/engines/docker/#): a single executable is generated but it runs inside a Docker container instead. The Docker platform specification can help you install custom dependencies and will take care of auto-mounting input/output files. Requirements: Bash, Docker.
+
+* [Executable runner](/reference/config/runners/executable/#): 
+* [Nextflow runner](/reference/config/runners/nextflow/#): a Nextflow module which can be used as a standalone workflow or as a module in a larger workflow. Requirements: Nextflow and a containerization engine (e.g. Docker, Singularity, Podman).
 
 Below we will create our first Viash component using any of the languages natively supported by Viash. 
 
@@ -100,7 +102,8 @@ Here's a breakdown of the different sections:
 
 ## Run the component
 
-That's it! With these two steps, you created your first component. 
+That's it! With these two steps, you created your first component.
+
 Next, you can use the [`viash run`](/reference/cli/run.qmd) command to test whether it actually works as intended.
 
 ::: {.panel-tabset}
@@ -140,14 +143,14 @@ viash run config.vsh.yaml \
 
 We will now turn the Viash component into an executable.
 
+Use the [viash build](/reference/cli/build.qmd) command to generate an executable.
+
 ::: {.panel-tabset}
 ```{r echo=FALSE, output="asis"}
 
 pwalk(langs, function(id, label, config_path, script_path, ...) {
   qrt(
     "## {% label %}
-    |
-    |Use the [viash build](/reference/cli/build.qmd) command to generate an executable:
     |
     |```{bash build-example}
     |viash build config.vsh.yaml --output target
