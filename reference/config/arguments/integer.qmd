@@ -65,7 +65,15 @@ The default value when no argument value is provided. This will not work if the 
 
 **Default**: `Empty`
 
-A description of the argument. This will be displayed with `--help`.
+A description of the argument. This is only used for documentation. Multiline descriptions are supported.
+
+**Example:**
+
+```yaml
+description: |
+  A (multiline) description of the purpose of
+  this argument.
+```
 
 ## example
 
@@ -98,6 +106,20 @@ Structured information. Can be any shape: a string, vector, map or even nested m
 info:
   category: cat1
   labels: [one, two, three]
+```
+
+## label
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+A clean version of the argument's name. This is only used for documentation.
+
+**Example:**
+
+```yaml
+label: "My argument"
 ```
 
 ## max
@@ -207,6 +229,20 @@ Make the value for this argument required. If set to `true`, an error will be pr
   type: integer
   required: true
 
+```
+
+## summary
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+A one-sentence summary of the argument. This is only used for documentation.
+
+**Example:**
+
+```yaml
+summary: "This argument sets XYZ."
 ```
 
 ## type

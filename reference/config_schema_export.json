@@ -16,6 +16,20 @@
       ]
     },
     {
+      "name" : "label",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A clean version of the component's name. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "label: \"My component\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
       "name" : "license",
       "type" : "Option[String]",
       "niceType" : "Option of String",
@@ -103,16 +117,17 @@
       "default" : "Empty"
     },
     {
-      "name" : "namespace",
+      "name" : "summary",
       "type" : "Option[String]",
       "niceType" : "Option of String",
-      "description" : "Namespace this component is a part of. See the @[Namespaces guide](namespace) for more information on namespaces.",
+      "description" : "A one-sentence summary of the component. This is only used for documentation.",
       "example" : [
         {
-          "example" : "namespace: fancy_components",
+          "example" : "summary: \"A component for performing XYZ\"",
           "format" : "yaml"
         }
       ],
+      "since" : "Viash 0.9.0",
       "default" : "Empty"
     },
     {
@@ -170,7 +185,7 @@
       "name" : "description",
       "type" : "Option[String]",
       "niceType" : "Option of String",
-      "description" : "A description of the component. This will be displayed with `--help`.",
+      "description" : "A description of the component. This is only used for documentation. Multiline descriptions are supported.",
       "example" : [
         {
           "example" : "description: |\n  This component performs function Y and Z.\n  It is possible to make this a multiline string.\n",
@@ -320,6 +335,26 @@
       ],
       "since" : "Viash 0.6.3",
       "default" : "Empty"
+    },
+    {
+      "name" : "namespace",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Namespace this component is a part of. See the @[Namespaces guide](namespace) for more information on namespaces.",
+      "example" : [
+        {
+          "example" : "namespace: fancy_components",
+          "format" : "yaml"
+        }
+      ],
+      "default" : "Empty"
+    },
+    {
+      "name" : "arguments",
+      "type" : "List[Argument]",
+      "niceType" : "List of Argument",
+      "description" : "A list of @[arguments](argument) for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:  \n\n - @[string](arg_string)\n - @[file](arg_file)\n - @[integer](arg_integer)\n - @[double](arg_double)\n - @[boolean](arg_boolean)\n - @[boolean_true](arg_boolean_true)\n - @[boolean_false](arg_boolean_false)\n",
+      "default" : "Empty"
     }
   ],
   [
@@ -384,27 +419,14 @@
       "name" : "description",
       "type" : "Option[String]",
       "niceType" : "Option of String",
-      "description" : "A description of the package.",
+      "description" : "A description of the package. This is only used for documentation. Multiline descriptions are supported.",
       "example" : [
         {
-          "example" : "description: My package",
+          "example" : "description: |\n  A (multiline) description of the purpose of this package\n  and the components it contains.",
           "format" : "yaml"
         }
       ],
       "since" : "Viash 0.9.0",
-      "default" : "Empty"
-    },
-    {
-      "name" : "viash_version",
-      "type" : "Option[String]",
-      "niceType" : "Option of String",
-      "description" : "Which version of Viash to use.",
-      "example" : [
-        {
-          "example" : "viash_versions: 0.6.4",
-          "format" : "yaml"
-        }
-      ],
       "default" : "Empty"
     },
     {
@@ -515,6 +537,47 @@
           "format" : "yaml"
         }
       ],
+      "default" : "Empty"
+    },
+    {
+      "name" : "summary",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A one-sentence summary of the package. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "summary: \"This package is used for XYZ.\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
+      "name" : "viash_version",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Which version of Viash to use.",
+      "example" : [
+        {
+          "example" : "viash_versions: 0.6.4",
+          "format" : "yaml"
+        }
+      ],
+      "default" : "Empty"
+    },
+    {
+      "name" : "label",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A clean version of the package name. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "label: \"My package\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
       "default" : "Empty"
     },
     {
@@ -962,7 +1025,7 @@
       "description" : "Author metadata.",
       "example" : [
         {
-          "example" : "name: Jane Doe\nrole: [author, maintainer]\nemail: jane@doe.com\ninfo:\n  github: janedoe\n  twitter: janedoe\n  orcid: XXAABBCCXX\n  groups: [ one, two, three ]\n",
+          "example" : "authors:\n- name: Jane Doe\n  role: [author, maintainer]\n  email: jane@doe.com\n  info:\n    github: janedoe\n    twitter: janedoe\n    orcid: XXAABBCCXX\n    groups: [ one, two, three ]\n",
           "format" : "yaml"
         }
       ],
@@ -1018,6 +1081,12 @@
         "io.viash.config.ComputationalRequirements"
       ],
       "description" : "Computational requirements related to running the component.",
+      "example" : [
+        {
+          "example" : "requirements:\n  cpus: 5\n  memory: 10GB\n",
+          "format" : "yaml"
+        }
+      ],
       "since" : "Viash 0.6.0"
     },
     {
@@ -1068,7 +1137,13 @@
       "hierarchy" : [
         "io.viash.config.ArgumentGroup"
       ],
-      "description" : "A grouping of the @[arguments](argument), used to display the help message."
+      "description" : "A grouping of the @[arguments](argument), used to display the help message.",
+      "example" : [
+        {
+          "example" : "argument_groups:\n  - name: \"Input\"\n    arguments:\n      - name: \"--id\"\n        type: string\n        required: true\n      - name: \"--input\"\n        type: file\n        required: true\n  - name: \"Output\"\n    arguments:\n      - name: \"--output\"\n        type: file\n        direction: output\n        required: true\n      - name: \"--output_optional\"\n        type: file\n        direction: output\n",
+          "format" : "yaml"
+        }
+      ]
     },
     {
       "name" : "name",
@@ -1080,14 +1155,55 @@
       "name" : "description",
       "type" : "Option[String]",
       "niceType" : "Option of String",
-      "description" : "Description of foo`, a description of the argument group. Multiline descriptions are supported.",
+      "description" : "A description of the argument group. This is only used for documentation. Multiline descriptions are supported.",
+      "example" : [
+        {
+          "example" : "description: |\n  A (multiline) description of the purpose of the arguments\n  in this argument group.",
+          "format" : "yaml"
+        }
+      ],
+      "default" : "Empty"
+    },
+    {
+      "name" : "label",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A clean version of the argument group's name. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "label: \"My argument group\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
+      "name" : "summary",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A one-sentence summary of the argument group. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "summary: \"Arguments related to functionality XYZ\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
       "default" : "Empty"
     },
     {
       "name" : "arguments",
       "type" : "List[Argument]",
       "niceType" : "List of Argument",
-      "description" : "List of arguments."
+      "description" : "A list of @[arguments](argument) for this component. For each argument, a type and a name must be specified. Depending on the type of argument, different properties can be set. See these reference pages per type for more information:  \n\n - @[string](arg_string)\n - @[file](arg_file)\n - @[integer](arg_integer)\n - @[double](arg_double)\n - @[boolean](arg_boolean)\n - @[boolean_true](arg_boolean_true)\n - @[boolean_false](arg_boolean_false)\n",
+      "example" : [
+        {
+          "example" : "arguments:\n  - name: --foo\n    type: file\n    alternatives: [-f]\n    description: Description of foo\n    default: \"/foo/bar\"\n    must_exist: true\n    direction: output\n    required: false\n    multiple: true\n    multiple_sep: \";\"\n  - name: --bar\n    type: string\n",
+          "format" : "yaml"
+        }
+      ],
+      "default" : "Empty"
     }
   ],
   [
@@ -1101,7 +1217,7 @@
       "description" : "Links to external resources related to the component.",
       "example" : [
         {
-          "example" : "repository: \"https://github.com/viash-io/viash\"\ndocker_registry: \"https://ghcr.io\"\nhomepage: \"https://viash.io\"\ndocumentation: \"https://viash.io/reference/\"\nissue_tracker: \"https://github.com/viash-io/viash/issues\"\n",
+          "example" : "links:\n  repository: \"https://github.com/viash-io/viash\"\n  docker_registry: \"https://ghcr.io\"\n  homepage: \"https://viash.io\"\n  documentation: \"https://viash.io/reference/\"\n  issue_tracker: \"https://github.com/viash-io/viash/issues\"\n",
           "format" : "yaml"
         }
       ],
@@ -1181,10 +1297,10 @@
       "hierarchy" : [
         "io.viash.config.References"
       ],
-      "description" : "References to external resources related to the component.",
+      "description" : "A list of scholarly sources or publications relevant to the tools or analysis defined in the component. This is important for attribution, scientific reproducibility and transparency.",
       "example" : [
         {
-          "example" : "doi: 10.1000/xx.123456.789\nbibtex: |\n  @article{foo,\n    title={Foo},\n    author={Bar},\n    journal={Baz},\n    year={2024}\n  }\n",
+          "example" : "references:\n  doi: 10.1000/xx.123456.789\n  bibtex: |\n    @article{foo,\n      title={Foo},\n      author={Bar},\n      journal={Baz},\n      year={2024}\n    }\n",
           "format" : "yaml"
         }
       ],
@@ -1225,7 +1341,7 @@
       "hierarchy" : [
         "io.viash.runners.Runner"
       ],
-      "description" : "A list of runners to generate target artifacts for.\n\n * @[Executable](executable_runner)\n * @[Nextflow](nextflow_runner)\n",
+      "description" : "A list of runners to generate target artifacts for.\n\nA runner is what will be used to call using input parameters, execute the component, and afterwards use the output results.\n\n * @[Executable](executable_runner)\n * @[Nextflow](nextflow_runner)\n",
       "example" : [
         {
           "example" : "runners:\n  - type: executable\n  - type: nextflow\n",
@@ -1428,7 +1544,7 @@
       "hierarchy" : [
         "io.viash.engines.Engine"
       ],
-      "description" : "A list of engines to generate target artifacts for.\n\n * @[Docker](docker_engine)\n * @[Native](native_engine)\n",
+      "description" : "A list of engines to generate target artifacts for.\n\nAn engine is the underlying environment that will be used to run the component.\n\n * @[Docker](docker_engine)\n * @[Native](native_engine)\n",
       "example" : [
         {
           "example" : "engines:\n  - type: docker\n    image: \"bash:4.0\"\n  - type: native\n",
@@ -3005,6 +3121,20 @@
       "description" : "The name of the argument. Can be in the formats `--trim`, `-t` or `trim`. The number of dashes determines how values can be passed:  \n\n  - `--trim` is a long option, which can be passed with `executable_name --trim`\n  - `-t` is a short option, which can be passed with `executable_name -t`\n  - `trim` is an argument, which can be passed with `executable_name trim`  \n"
     },
     {
+      "name" : "label",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A clean version of the argument's name. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "label: \"My argument\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
       "name" : "info",
       "type" : "Json",
       "niceType" : "Json",
@@ -3045,10 +3175,30 @@
       "default" : "Empty"
     },
     {
+      "name" : "summary",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A one-sentence summary of the argument. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "summary: \"This argument sets XYZ.\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
       "name" : "description",
       "type" : "Option[String]",
       "niceType" : "Option of String",
-      "description" : "A description of the argument. This will be displayed with `--help`.",
+      "description" : "A description of the argument. This is only used for documentation. Multiline descriptions are supported.",
+      "example" : [
+        {
+          "example" : "description: |\n  A (multiline) description of the purpose of\n  this argument.",
+          "format" : "yaml"
+        }
+      ],
       "default" : "Empty"
     },
     {
@@ -3142,6 +3292,20 @@
       "description" : "The name of the argument. Can be in the formats `--silent`, `-s` or `silent`. The number of dashes determines how values can be passed:  \n\n  - `--silent` is a long option, which can be passed with `executable_name --silent`\n  - `-s` is a short option, which can be passed with `executable_name -s`\n  - `silent` is an argument, which can be passed with `executable_name silent`  \n"
     },
     {
+      "name" : "label",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A clean version of the argument's name. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "label: \"My argument\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
       "name" : "info",
       "type" : "Json",
       "niceType" : "Json",
@@ -3156,10 +3320,30 @@
       "default" : "Empty"
     },
     {
+      "name" : "summary",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A one-sentence summary of the argument. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "summary: \"This argument sets XYZ.\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
       "name" : "description",
       "type" : "Option[String]",
       "niceType" : "Option of String",
-      "description" : "A description of the argument. This will be displayed with `--help`.",
+      "description" : "A description of the argument. This is only used for documentation. Multiline descriptions are supported.",
+      "example" : [
+        {
+          "example" : "description: |\n  A (multiline) description of the purpose of\n  this argument.",
+          "format" : "yaml"
+        }
+      ],
       "default" : "Empty"
     },
     {
@@ -3204,6 +3388,20 @@
       "description" : "The name of the argument. Can be in the formats `--no-log`, `-n` or `no-log`. The number of dashes determines how values can be passed:  \n\n  - `--no-log` is a long option, which can be passed with `executable_name --no-log`\n  - `-n` is a short option, which can be passed with `executable_name -n`\n  - `no-log` is an argument, which can be passed with `executable_name no-log`  \n"
     },
     {
+      "name" : "label",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A clean version of the argument's name. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "label: \"My argument\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
       "name" : "info",
       "type" : "Json",
       "niceType" : "Json",
@@ -3218,10 +3416,30 @@
       "default" : "Empty"
     },
     {
+      "name" : "summary",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A one-sentence summary of the argument. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "summary: \"This argument sets XYZ.\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
       "name" : "description",
       "type" : "Option[String]",
       "niceType" : "Option of String",
-      "description" : "A description of the argument. This will be displayed with `--help`.",
+      "description" : "A description of the argument. This is only used for documentation. Multiline descriptions are supported.",
+      "example" : [
+        {
+          "example" : "description: |\n  A (multiline) description of the purpose of\n  this argument.",
+          "format" : "yaml"
+        }
+      ],
       "default" : "Empty"
     },
     {
@@ -3263,6 +3481,20 @@
       "type" : "String",
       "niceType" : "String",
       "description" : "The name of the argument. Can be in the formats `--foo`, `-f` or `foo`. The number of dashes determines how values can be passed:  \n\n  - `--foo` is a long option, which can be passed with `executable_name --foo=value` or `executable_name --foo value`\n  - `-f` is a short option, which can be passed with `executable_name -f value`\n  - `foo` is an argument, which can be passed with `executable_name value`  \n"
+    },
+    {
+      "name" : "label",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A clean version of the argument's name. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "label: \"My argument\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
     },
     {
       "name" : "info",
@@ -3318,10 +3550,30 @@
       "default" : "Empty"
     },
     {
+      "name" : "summary",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A one-sentence summary of the argument. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "summary: \"This argument sets XYZ.\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
       "name" : "description",
       "type" : "Option[String]",
       "niceType" : "Option of String",
-      "description" : "A description of the argument. This will be displayed with `--help`.",
+      "description" : "A description of the argument. This is only used for documentation. Multiline descriptions are supported.",
+      "example" : [
+        {
+          "example" : "description: |\n  A (multiline) description of the purpose of\n  this argument.",
+          "format" : "yaml"
+        }
+      ],
       "default" : "Empty"
     },
     {
@@ -3440,6 +3692,20 @@
       "default" : "True"
     },
     {
+      "name" : "label",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A clean version of the argument's name. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "label: \"My argument\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
       "name" : "direction",
       "type" : "Direction",
       "niceType" : "Direction",
@@ -3506,10 +3772,30 @@
       "default" : "Empty"
     },
     {
+      "name" : "summary",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A one-sentence summary of the argument. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "summary: \"This argument sets XYZ.\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
       "name" : "description",
       "type" : "Option[String]",
       "niceType" : "Option of String",
-      "description" : "A description of the argument. This will be displayed with `--help`.",
+      "description" : "A description of the argument. This is only used for documentation. Multiline descriptions are supported.",
+      "example" : [
+        {
+          "example" : "description: |\n  A (multiline) description of the purpose of\n  this argument.",
+          "format" : "yaml"
+        }
+      ],
       "default" : "Empty"
     },
     {
@@ -3615,6 +3901,20 @@
       "default" : "Empty"
     },
     {
+      "name" : "label",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A clean version of the argument's name. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "label: \"My argument\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
       "name" : "info",
       "type" : "Json",
       "niceType" : "Json",
@@ -3668,10 +3968,30 @@
       "default" : "Empty"
     },
     {
+      "name" : "summary",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A one-sentence summary of the argument. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "summary: \"This argument sets XYZ.\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
       "name" : "description",
       "type" : "Option[String]",
       "niceType" : "Option of String",
-      "description" : "A description of the argument. This will be displayed with `--help`.",
+      "description" : "A description of the argument. This is only used for documentation. Multiline descriptions are supported.",
+      "example" : [
+        {
+          "example" : "description: |\n  A (multiline) description of the purpose of\n  this argument.",
+          "format" : "yaml"
+        }
+      ],
       "default" : "Empty"
     },
     {
@@ -3791,6 +4111,20 @@
       "default" : "Empty"
     },
     {
+      "name" : "label",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A clean version of the argument's name. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "label: \"My argument\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
       "name" : "info",
       "type" : "Json",
       "niceType" : "Json",
@@ -3844,10 +4178,30 @@
       "default" : "Empty"
     },
     {
+      "name" : "summary",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A one-sentence summary of the argument. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "summary: \"This argument sets XYZ.\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
       "name" : "description",
       "type" : "Option[String]",
       "niceType" : "Option of String",
-      "description" : "A description of the argument. This will be displayed with `--help`.",
+      "description" : "A description of the argument. This is only used for documentation. Multiline descriptions are supported.",
+      "example" : [
+        {
+          "example" : "description: |\n  A (multiline) description of the purpose of\n  this argument.",
+          "format" : "yaml"
+        }
+      ],
       "default" : "Empty"
     },
     {
@@ -3966,6 +4320,20 @@
       "default" : "Empty"
     },
     {
+      "name" : "label",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A clean version of the argument's name. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "label: \"My argument\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
       "name" : "info",
       "type" : "Json",
       "niceType" : "Json",
@@ -4006,10 +4374,30 @@
       "default" : "Empty"
     },
     {
+      "name" : "summary",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "A one-sentence summary of the argument. This is only used for documentation.",
+      "example" : [
+        {
+          "example" : "summary: \"This argument sets XYZ.\"",
+          "format" : "yaml"
+        }
+      ],
+      "since" : "Viash 0.9.0",
+      "default" : "Empty"
+    },
+    {
       "name" : "description",
       "type" : "Option[String]",
       "niceType" : "Option of String",
-      "description" : "A description of the argument. This will be displayed with `--help`.",
+      "description" : "A description of the argument. This is only used for documentation. Multiline descriptions are supported.",
+      "example" : [
+        {
+          "example" : "description: |\n  A (multiline) description of the purpose of\n  this argument.",
+          "format" : "yaml"
+        }
+      ],
       "default" : "Empty"
     },
     {
@@ -5217,22 +5605,22 @@
       "description" : "Specifies a Viash component (script or executable) that should be made available for the code defined in the component.\nThe dependency components are collected and copied to the output folder during the Viash build step.\n",
       "example" : [
         {
-          "example" : "name: qc/multiqc\nrepository: \n  type: github\n  repo: openpipelines-bio/modules\n  tag: 0.3.0\n",
+          "example" : "dependencies:\n  - name: qc/multiqc\n    repository: \n      type: github\n      repo: openpipelines-bio/modules\n      tag: 0.3.0\n",
           "format" : "yaml",
           "description" : "Definition of dependency with a fully defined repository"
         },
         {
-          "example" : "name: qc/multiqc\nrepository: \"github://openpipelines-bio/modules:0.3.0\"\n",
+          "example" : "dependencies:\n  - name: qc/multiqc\n    repository: \"github://openpipelines-bio/modules:0.3.0\"\n",
           "format" : "yaml",
           "description" : "Definition of a dependency with a repository using sugar syntax."
         },
         {
-          "example" : "name: qc/multiqc\nrepository: \"openpipelines-bio\"\n",
+          "example" : "dependencies:\n  - name: qc/multiqc\n    repository: \"openpipelines-bio\"\n",
           "format" : "yaml",
           "description" : "Definition of a dependency with a repository defined as 'openpipelines-bio' under `.repositories`."
         },
         {
-          "example" : "name: qc/multiqc\n",
+          "example" : "dependencies:\n  - name: qc/multiqc\n",
           "format" : "yaml",
           "description" : "Definition of a local dependency. This dependency is present in the current code base and will be built when `viash ns build` is run."
         }
@@ -5284,7 +5672,13 @@
       "example" : [
         {
           "example" : "repositories:\n  - name: openpipelines-bio\n    type: github\n    repo: openpipelines-bio/modules\n    tag: 0.3.0\n",
-          "format" : "yaml"
+          "format" : "yaml",
+          "description" : "Definition of a repository in the component config or package config."
+        },
+        {
+          "example" : "dependencies:\n  - name: qc/multiqc\n    repository: \n      type: github\n      repo: openpipelines-bio/modules\n      tag: 0.3.0\n",
+          "format" : "yaml",
+          "description" : "Definition of dependency with a fully defined repository"
         }
       ],
       "subclass" : [

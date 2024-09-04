@@ -13,34 +13,38 @@ The dependency components are collected and copied to the output folder during t
 Definition of dependency with a fully defined repository
 
 ```yaml
-name: qc/multiqc
-repository: 
-  type: github
-  repo: openpipelines-bio/modules
-  tag: 0.3.0
+dependencies:
+  - name: qc/multiqc
+    repository: 
+      type: github
+      repo: openpipelines-bio/modules
+      tag: 0.3.0
 
 ```
 
 Definition of a dependency with a repository using sugar syntax.
 
 ```yaml
-name: qc/multiqc
-repository: "github://openpipelines-bio/modules:0.3.0"
+dependencies:
+  - name: qc/multiqc
+    repository: "github://openpipelines-bio/modules:0.3.0"
 
 ```
 
 Definition of a dependency with a repository defined as 'openpipelines-bio' under `.repositories`.
 
 ```yaml
-name: qc/multiqc
-repository: "openpipelines-bio"
+dependencies:
+  - name: qc/multiqc
+    repository: "openpipelines-bio"
 
 ```
 
 Definition of a local dependency. This dependency is present in the current code base and will be built when `viash ns build` is run.
 
 ```yaml
-name: qc/multiqc
+dependencies:
+  - name: qc/multiqc
 
 ```
 
