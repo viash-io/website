@@ -377,41 +377,31 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </header>
 
 
-<p>A <code>_viash.yaml</code> file in the root of the package repository is called a <a href="../../reference/packageConfig">Viash package config</a>. It allows defining project-wide settings such as the location of the Viash components, which Viash version to use and more.</p>
+<p>A <code>_viash.yaml</code> file in the root of the package repository is called a <a href="../../reference/packageConfig">Viash package config</a>. It allows defining project-wide settings such as the location of the Viash components and which Viash version to use.</p>
 <section id="example-package-config" class="level2">
 <h2 class="anchored" data-anchor-id="example-package-config">Example package config</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># project settings</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> project_template</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">organization</span><span class="kw">:</span><span class="at"> viash-io</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.3.0</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># metadata</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  This is a project template for viash projects.</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">keywords</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">viash</span><span class="kw">,</span><span class="at"> template</span><span class="kw">]</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">license</span><span class="kw">:</span><span class="at"> GPL-3.0</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">links</span><span class="kw">:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">repository</span><span class="kw">:</span><span class="at"> https://github.com/viash-io/viash_project_template</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">issue_tracker</span><span class="kw">:</span><span class="at"> https://github.com/viash-io/viash_project_template/issues</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">docker_registry</span><span class="kw">:</span><span class="at"> ghcr.io</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># authors:</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#   - name: Alice</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#     roles: [author, maintainer]</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   - name: Bob</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#     roles: [author]</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># settings</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">viash_version</span><span class="kw">:</span><span class="at"> 0.9.0-RC6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">viash_version</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.8.4</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span><span class="kw">:</span><span class="at"> src</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">target</span><span class="kw">:</span><span class="at"> target</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">config_mods</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  .functionality.version := '0.2.3'</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  .platforms[.type == 'docker'].target_registry := 'ghcr.io'</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  .platforms[.type == 'docker'].target_organization := 'viash-io/viash_project_template'</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  .platforms[.type == 'docker'].target_image_source := 'https://github.com/viash-io/viash_project_template'</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  .platforms[.type == 'nextflow'].directives.tag := '$id'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="viash-version" class="level2">
 <h2 class="anchored" data-anchor-id="viash-version">Viash version</h2>
 <p>Pinning the version of Viash used in your project is essential to ensure reproducibility thereof across multiple systems. In doing so, all Viash commands will be run using that version of Viash.</p>
 <p>Example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'viash_version: "0.9.0"'</span> <span class="op">&gt;</span> _viash.yaml</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'viash_version: "0.6.0"'</span> <span class="op">&gt;</span> _viash.yaml</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>viash 0.9.0 (c) 2020 Data Intuitive</code></pre>
+<pre><code>viash 0.6.0 (c) 2020 Data Intuitive</code></pre>
 </div>
 </div>
 </section>
@@ -428,13 +418,15 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>Viash allows for rewriting component configuration files using <a href="../../reference/config_mods">config mods</a>. Config mods allow making changes to the config mods on the fly.</p>
 <p>The template project contains these default config mods:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">config_mods</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  .version := 'dev'</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  .argument_groups[true].arguments[.multiple == true].multiple_sep := ":"</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  .runners[.type == 'nextflow'].directives.tag := '$id'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  .functionality.version := 'dev'</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  .engines[.type == 'docker'].target_registry := 'ghcr.io'</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  .engines[.type == 'docker'].target_organization := 'viash-io/viash_project_template'</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  .engines[.type == 'docker'].target_image_source := 'https://github.com/viash-io/viash_project_template'</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  .runners[.type == 'nextflow'].directives.tag := '$id'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This has the following effects:</p>
 <ul>
 <li><p>Set the version of any components to <code>'dev'</code>.</p></li>
-<li><p>Overrides the default multiple seperator <code>;</code> and sets it to <code>:</code>.</p></li>
+<li><p>Fills the registry, organisation and image sources fields of the <a href="../../reference/config/engines/docker/#">Docker engine</a>.</p></li>
 <li><p>Adds a default directive to the <a href="../../reference/config/runners/nextflow/#">Nextflow runner</a>.</p></li>
 </ul>
 
