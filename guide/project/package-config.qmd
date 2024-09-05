@@ -5,7 +5,7 @@ order: 20
 
 {{< include ../../_includes/_clone_template.qmd >}}
 
-A `_viash.yaml` file in the root of the package repository is called a [Viash package config](/reference/packageConfig). It allows defining project-wide settings such as the location of the Viash components and which Viash version to use.
+A `_viash.yaml` file in the root of the package repository is called a [Viash package config](/reference/packageConfig). It allows defining project-wide settings such as the location of the Viash components, which Viash version to use and more.
 
 ## Example package config
 
@@ -25,7 +25,7 @@ Pinning the version of Viash used in your project is essential to ensure reprodu
 Example:
 
 ```{bash}
-echo 'viash_version: "0.6.0"' > _viash.yaml
+echo 'viash_version: "0.9.0"' > _viash.yaml
 
 viash --version
 ```
@@ -52,10 +52,8 @@ The template project contains these default config mods:
 
 ```yaml
 config_mods: |
-  .functionality.version := 'dev'
-  .engines[.type == 'docker'].target_registry := 'ghcr.io'
-  .engines[.type == 'docker'].target_organization := 'viash-io/viash_project_template'
-  .engines[.type == 'docker'].target_image_source := 'https://github.com/viash-io/viash_project_template'
+  .version := 'dev'
+  .argument_groups[true].arguments[.multiple == true].multiple_sep := ":"
   .runners[.type == 'nextflow'].directives.tag := '$id'
 ```
 
@@ -63,6 +61,6 @@ This has the following effects:
 
 * Set the version of any components to `'dev'`.
 
-* Fills the registry, organisation and image sources fields of the [Docker engine](/reference/config/engines/docker/#).
+* Overrides the default multiple seperator `;` and sets it to `:`.
 
 * Adds a default directive to the [Nextflow runner](/reference/config/runners/nextflow/#).
