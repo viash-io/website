@@ -646,22 +646,22 @@ Tip
 <div class="cell-output cell-output-stdout">
 <pre><code> N E X T F L O W   ~  version 24.04.4
 
-Launching `target/main.nf` [fabulous_khorana] DSL2 - revision: 699907d3a7
+Launching `target/main.nf` [romantic_lumiere] DSL2 - revision: 75cdcf595e
 
 [-        ] exa…essWf:example_bash_process -
 [-        ] exa…SimpleWf:publishStatesProc -
 
 executor &gt;  local (1)
-[bd/ab04e0] exa…example_bash_process (run) | 0 of 1
+[a2/a37b13] exa…example_bash_process (run) | 0 of 1
 [-        ] exa…SimpleWf:publishStatesProc -
 
 executor &gt;  local (2)
-[bd/ab04e0] exa…example_bash_process (run) | 1 of 1 ✔
-[b5/e748b2] exa…Wf:publishStatesProc (run) | 0 of 1
+[a2/a37b13] exa…example_bash_process (run) | 1 of 1 ✔
+[0c/c80de4] exa…Wf:publishStatesProc (run) | 1 of 1 ✔
 
 executor &gt;  local (2)
-[bd/ab04e0] exa…example_bash_process (run) | 1 of 1 ✔
-[b5/e748b2] exa…Wf:publishStatesProc (run) | 1 of 1 ✔</code></pre>
+[a2/a37b13] exa…example_bash_process (run) | 1 of 1 ✔
+[0c/c80de4] exa…Wf:publishStatesProc (run) | 1 of 1 ✔</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
@@ -687,39 +687,41 @@ executor &gt;  local (2)
 </div>
 <p>Next, we create a YAML file <code>param_list.yaml</code> containing an <code>id</code> and an <code>input</code> value for each parameter entry.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample1</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpxAeeuG/create-a-modulead6f1178f7b7/bash/sample1.txt</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpwladUW/create-a-modulead937772438b/bash/sample1.txt</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample2</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpxAeeuG/create-a-modulead6f1178f7b7/bash/sample2.txt</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpwladUW/create-a-modulead937772438b/bash/sample2.txt</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample3</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpxAeeuG/create-a-modulead6f1178f7b7/bash/sample3.txt</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpwladUW/create-a-modulead937772438b/bash/sample3.txt</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample4</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpxAeeuG/create-a-modulead6f1178f7b7/bash/sample4.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpwladUW/create-a-modulead937772438b/bash/sample4.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can run the pipeline on the list of parameters using the <code>--param_list</code> parameter.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/main.nf <span class="at">--param_list</span> param_list.yaml <span class="at">--publish_dir</span> output2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> N E X T F L O W   ~  version 24.04.4
 
-Launching `target/main.nf` [sharp_brenner] DSL2 - revision: 699907d3a7
+Launching `target/main.nf` [extravagant_wright] DSL2 - revision: 75cdcf595e
+
+[-        ] exa…essWf:example_bash_process -
 
 [-        ] exa…essWf:example_bash_process -
 [-        ] exa…SimpleWf:publishStatesProc -
 
-executor &gt;  local (2)
-[bd/972d9f] exa…ple_bash_process (sample2) | 0 of 4
-[-        ] exa…SimpleWf:publishStatesProc -
-
 executor &gt;  local (4)
-[b0/bd5643] exa…ple_bash_process (sample3) | 4 of 4 ✔
+[32/659235] exa…ple_bash_process (sample4) | 0 of 4
 [-        ] exa…SimpleWf:publishStatesProc -
 
 executor &gt;  local (8)
-[b0/bd5643] exa…ple_bash_process (sample3) | 4 of 4 ✔
-[24/40cec0] exa…ublishStatesProc (sample2) | 4 of 4 ✔
+[6a/7b04f7] exa…ple_bash_process (sample3) | 4 of 4 ✔
+[62/e9f533] exa…ublishStatesProc (sample1) | 0 of 4
 
 executor &gt;  local (8)
-[b0/bd5643] exa…ple_bash_process (sample3) | 4 of 4 ✔
-[24/40cec0] exa…ublishStatesProc (sample2) | 4 of 4 ✔</code></pre>
+[6a/7b04f7] exa…ple_bash_process (sample3) | 4 of 4 ✔
+[39/6b45e0] exa…ublishStatesProc (sample4) | 4 of 4 ✔
+
+executor &gt;  local (8)
+[6a/7b04f7] exa…ple_bash_process (sample3) | 4 of 4 ✔
+[39/6b45e0] exa…ublishStatesProc (sample4) | 4 of 4 ✔</code></pre>
 </div>
 </div>
 <p>This results in the following outputs:</p>

@@ -286,19 +286,6 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>First create a new repository by clicking the “Use this template” button. If you can’t see the “Use this template” button, log into GitHub first.</p>
 <p>Next, clone the repository using the following command.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/youruser/my_first_pipeline.git <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> my_first_pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>At the moment of writing, the branch to use should be <code>main</code>.</p>
-</div>
-</div>
 <p>Your new repository should contain the following files:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> my_first_pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>.
@@ -338,16 +325,16 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Exporting remove_comments (template) =nextflow=&gt; target/nextflow/template/remove_comments
-Exporting remove_comments (template) =executable=&gt; target/executable/template/remove_comments
-Exporting combine_columns (template) =executable=&gt; target/executable/template/combine_columns
-Exporting workflow (template) =nextflow=&gt; target/nextflow/template/workflow
-[notice] Building container 'ghcr.io/viash-io/project_template/template/remove_comments:dev' with Dockerfile
-[notice] Building container 'ghcr.io/viash-io/project_template/template/combine_columns:dev' with Dockerfile
+<pre><code>Exporting combine_columns (template) =executable=&gt; target/executable/template/combine_columns
+Exporting remove_comments (template) =nextflow=&gt; target/nextflow/template/remove_comments
 Exporting take_column (template) =executable=&gt; target/executable/template/take_column
-Exporting combine_columns (template) =nextflow=&gt; target/nextflow/template/combine_columns
-[notice] Building container 'ghcr.io/viash-io/project_template/template/take_column:dev' with Dockerfile
+Exporting remove_comments (template) =executable=&gt; target/executable/template/remove_comments
+[notice] Building container 'ghcr.io/viash-io/project_template/template/remove_comments:0.3.0' with Dockerfile
+[notice] Building container 'ghcr.io/viash-io/project_template/template/combine_columns:0.3.0' with Dockerfile
+[notice] Building container 'ghcr.io/viash-io/project_template/template/take_column:0.3.0' with Dockerfile
+Exporting workflow (template) =nextflow=&gt; target/nextflow/template/workflow
 Exporting take_column (template) =nextflow=&gt; target/nextflow/template/take_column
+Exporting combine_columns (template) =nextflow=&gt; target/nextflow/template/combine_columns
 All 7 configs built successfully</code></pre>
 </div>
 </div>
@@ -361,16 +348,16 @@ Output
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>total 80
--rw-r--r-- 1 runner docker  1483 Sep  5 09:19 CHANGELOG.md
--rw-r--r-- 1 runner docker 32219 Sep  5 09:19 LICENSE.md
--rw-r--r-- 1 runner docker 12142 Sep  5 09:19 README.md
--rw-r--r-- 1 runner docker  7840 Sep  5 09:19 README.qmd
--rw-r--r-- 1 runner docker   511 Sep  5 09:20 _viash.yaml
--rw-r--r-- 1 runner docker   245 Sep  5 09:19 main.nf
--rw-r--r-- 1 runner docker   222 Sep  5 09:19 nextflow.config
-drwxr-xr-x 2 runner docker  4096 Sep  5 09:19 resources_test
-drwxr-xr-x 3 runner docker  4096 Sep  5 09:19 src
-drwxr-xr-x 4 runner docker  4096 Sep  5 09:19 target</code></pre>
+-rw-r--r-- 1 runner docker  1482 Sep  5 13:25 CHANGELOG.md
+-rw-r--r-- 1 runner docker 32219 Sep  5 13:25 LICENSE.md
+-rw-r--r-- 1 runner docker 12142 Sep  5 13:25 README.md
+-rw-r--r-- 1 runner docker  7840 Sep  5 13:25 README.qmd
+-rw-r--r-- 1 runner docker   512 Sep  5 13:27 _viash.yaml
+-rw-r--r-- 1 runner docker   245 Sep  5 13:25 main.nf
+-rw-r--r-- 1 runner docker   222 Sep  5 13:25 nextflow.config
+drwxr-xr-x 2 runner docker  4096 Sep  5 13:25 resources_test
+drwxr-xr-x 3 runner docker  4096 Sep  5 13:25 src
+drwxr-xr-x 4 runner docker  4096 Sep  5 13:25 target</code></pre>
 </div>
 </div>
 </details>
@@ -390,11 +377,11 @@ Output
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>N E X T F L O W  ~  version 24.04.4
-Launching `target/nextflow/template/workflow/main.nf` [jolly_sanger] DSL2 - revision: 55ee990e9a
-[e2/2a60ad] Submitted process &gt; workflow:run_wf:remove_comments:processWf:remove_comments_process (run)
-[b4/c6954e] Submitted process &gt; workflow:run_wf:take_column:processWf:take_column_process (run)
-[a0/db6470] Submitted process &gt; workflow:run_wf:combine_columns:processWf:combine_columns_process (combined)
-[5b/eab84b] Submitted process &gt; workflow:publishStatesSimpleWf:publishStatesProc (combined)</code></pre>
+Launching `target/nextflow/template/workflow/main.nf` [furious_babbage] DSL2 - revision: 45d6e681b4
+[42/df66da] Submitted process &gt; workflow:run_wf:remove_comments:processWf:remove_comments_process (run)
+[f9/56e5a3] Submitted process &gt; workflow:run_wf:take_column:processWf:take_column_process (run)
+[2a/280c2b] Submitted process &gt; workflow:run_wf:combine_columns:processWf:combine_columns_process (combined)
+[55/1cdaba] Submitted process &gt; workflow:publishStatesSimpleWf:publishStatesProc (combined)</code></pre>
 </div>
 </div>
 </details>
