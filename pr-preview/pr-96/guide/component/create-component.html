@@ -465,8 +465,8 @@ function invertDictionary(dict){
 <p>A Viash component can be translated into one or more engines: Native, Docker; and one or more runners: Executable, Nextflow. Each of these engines and runners result in a different artifact:</p>
 <ul>
 <li><p><a href="../../reference/config/engines/native/#">Native engine</a>: a single executable is generated which runs natively on the host system. This assumes all dependencies are already installed by the user and is therefore not reproducible. Requirements: Bash.</p></li>
-<li><p><a href="../../reference/config/engines/docker/#">Docker engine</a>: a single executable is generated but it runs inside a Docker container instead. The Docker platform specification can help you install custom dependencies and will take care of auto-mounting input/output files. Requirements: Bash, Docker.</p></li>
-<li><p><a href="../../reference/config/runners/executable/#">Executable runner</a>:</p></li>
+<li><p><a href="../../reference/config/engines/docker/#">Docker engine</a>: a single executable is generated but it runs inside a Docker container instead. The Docker engine specification can help you install custom dependencies and will take care of auto-mounting input/output files. Requirements: Bash, Docker.</p></li>
+<li><p><a href="../../reference/config/runners/executable/#">Executable runner</a>: a bash script is generated and can be run directly. The executable runner supports both the native and docker engine.</p></li>
 <li><p><a href="../../reference/config/runners/nextflow/#">Nextflow runner</a>: a Nextflow module which can be used as a standalone workflow or as a module in a larger workflow. Requirements: Nextflow and a containerization engine (e.g.&nbsp;Docker, Singularity, Podman).</p></li>
 </ul>
 <p>Below we will create our first Viash component using any of the languages natively supported by Viash.</p>
@@ -587,165 +587,170 @@ Note
 </section>
 <section id="create-a-config" class="level2">
 <h2 class="anchored" data-anchor-id="create-a-config">Create a config</h2>
-<p>A <a href="../../reference/config/#">Viash config file</a> is a YAML file that describes the functionality of a component and the platform(s) it targets.</p>
+<p>A <a href="../../reference/config/#">Viash config file</a> is a YAML file that describes the functionality of a component as well as the engine(s) and runner(s) it targets.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Bash</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">C#</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">JavaScript</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-4" role="tab" aria-controls="tabset-2-4" aria-selected="false">Python</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-5" role="tab" aria-controls="tabset-2-5" aria-selected="false">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-6" role="tab" aria-controls="tabset-2-6" aria-selected="false">Scala</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <p>Create a file named <code>config.vsh.yaml</code> and add the contents below based on your chosen scripting language.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> example_bash</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">description</span><span class="kw">:</span><span class="at"> A minimal example component.</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">arguments</span><span class="kw">:</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --input</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> file.txt</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --output</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> output.txt</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> bash_script</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.sh</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"bash:4.0"</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> native</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> nextflow</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> example_bash</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> A minimal example component.</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">arguments</span><span class="kw">:</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --input</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">example</span><span class="kw">:</span><span class="at"> file.txt</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --output</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">example</span><span class="kw">:</span><span class="at"> output.txt</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> bash_script</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.sh</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">engines</span><span class="kw">:</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"bash:4.0"</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> native</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="fu">runners</span><span class="kw">:</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> executable</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> nextflow</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <p>Create a file named <code>config.vsh.yaml</code> and add the contents below based on your chosen scripting language.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> example_csharp</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">description</span><span class="kw">:</span><span class="at"> A minimal example component.</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">arguments</span><span class="kw">:</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --input</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> file.txt</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --output</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> output.txt</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> csharp_script</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.csx</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"ghcr.io/data-intuitive/dotnet-script:1.3.1"</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> native</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> nextflow</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> example_csharp</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> A minimal example component.</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">arguments</span><span class="kw">:</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --input</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">example</span><span class="kw">:</span><span class="at"> file.txt</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --output</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">example</span><span class="kw">:</span><span class="at"> output.txt</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> csharp_script</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.csx</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">engines</span><span class="kw">:</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"ghcr.io/data-intuitive/dotnet-script:1.3.1"</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> native</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">runners</span><span class="kw">:</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> executable</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> nextflow</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
 <p>Create a file named <code>config.vsh.yaml</code> and add the contents below based on your chosen scripting language.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> example_js</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">description</span><span class="kw">:</span><span class="at"> A minimal example component.</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">arguments</span><span class="kw">:</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --input</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> file.txt</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --output</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> output.txt</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> javascript_script</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.js</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"node:19-bullseye-slim"</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> native</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> nextflow</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> example_js</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> A minimal example component.</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">arguments</span><span class="kw">:</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --input</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">example</span><span class="kw">:</span><span class="at"> file.txt</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --output</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">example</span><span class="kw">:</span><span class="at"> output.txt</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> javascript_script</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.js</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="fu">engines</span><span class="kw">:</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"node:19-bullseye-slim"</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> native</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="fu">runners</span><span class="kw">:</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> executable</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> nextflow</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="tabset-2-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-4-tab">
 <p>Create a file named <code>config.vsh.yaml</code> and add the contents below based on your chosen scripting language.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> example_python</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">description</span><span class="kw">:</span><span class="at"> A minimal example component.</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">arguments</span><span class="kw">:</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --input</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> file.txt</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --output</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> output.txt</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> python_script</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.py</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"python:3.10-slim"</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> native</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> nextflow</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> example_python</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> A minimal example component.</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">arguments</span><span class="kw">:</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --input</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">example</span><span class="kw">:</span><span class="at"> file.txt</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --output</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">example</span><span class="kw">:</span><span class="at"> output.txt</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> python_script</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.py</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="fu">engines</span><span class="kw">:</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"python:3.10-slim"</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> native</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="fu">runners</span><span class="kw">:</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> executable</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> nextflow</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="tabset-2-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-5-tab">
 <p>Create a file named <code>config.vsh.yaml</code> and add the contents below based on your chosen scripting language.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> example_r</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">description</span><span class="kw">:</span><span class="at"> A minimal example component.</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">arguments</span><span class="kw">:</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --input</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> file.txt</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --output</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> output.txt</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> r_script</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.R</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"eddelbuettel/r2u:22.04"</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> native</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> nextflow</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> example_r</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> A minimal example component.</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">arguments</span><span class="kw">:</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --input</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">example</span><span class="kw">:</span><span class="at"> file.txt</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --output</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">example</span><span class="kw">:</span><span class="at"> output.txt</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> r_script</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.R</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="fu">engines</span><span class="kw">:</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"eddelbuettel/r2u:22.04"</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> native</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="fu">runners</span><span class="kw">:</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> executable</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> nextflow</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="tabset-2-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-6-tab">
 <p>Create a file named <code>config.vsh.yaml</code> and add the contents below based on your chosen scripting language.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functionality</span><span class="kw">:</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> example_scala</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">description</span><span class="kw">:</span><span class="at"> A minimal example component.</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">arguments</span><span class="kw">:</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --input</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> file.txt</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --output</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">example</span><span class="kw">:</span><span class="at"> output.txt</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> scala_script</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.scala</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="fu">platforms</span><span class="kw">:</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"sbtscala/scala-sbt:eclipse-temurin-19_36_1.7.2_2.13.10"</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> native</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> nextflow</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> example_scala</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> A minimal example component.</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">arguments</span><span class="kw">:</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --input</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">example</span><span class="kw">:</span><span class="at"> file.txt</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> file</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> --output</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> output</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">example</span><span class="kw">:</span><span class="at"> output.txt</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> scala_script</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">path</span><span class="kw">:</span><span class="at"> script.scala</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="fu">engines</span><span class="kw">:</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> docker</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> </span><span class="st">"sbtscala/scala-sbt:eclipse-temurin-19_36_1.7.2_2.13.10"</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> native</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="fu">runners</span><span class="kw">:</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> executable</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> nextflow</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 <p>Here’s a breakdown of the different sections:</p>
 <ul>
-<li><code>functionality</code>: A description of what the component does.
-<ul>
 <li><code>name</code>: The name of the component.</li>
+<li><code>description</code>: A description of what the component does</li>
 <li><code>arguments</code>: The input and output parameters of the script.</li>
 <li><code>resources</code>: References to all necessary files and folders to make the component work.</li>
-</ul></li>
-<li><code>platforms</code>: Lists which platforms a component can target (i.e.&nbsp;Native, Docker or Nextflow).</li>
+<li><code>engines</code>: Lists which engines a component can target (i.e.&nbsp;Native or Docker).</li>
+<li><code>runners</code>: Lists which runners a component can utilize (i.e.&nbsp;Executable or Nextflow).</li>
 </ul>
 </section>
 <section id="run-the-component" class="level2">
@@ -760,12 +765,7 @@ Note
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">--</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-example_bash
+<pre><code>example_bash
 
 A minimal example component.
 
@@ -783,15 +783,10 @@ Arguments:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">--</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> foo.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-[notice] Checking if Docker image is available at 'example_bash:latest'
+<pre><code>[notice] Checking if Docker image is available at 'example_bash:latest'
 [warning] Could not pull from 'example_bash:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_bash:latest' with Dockerfile
-Copying '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/bash/config.vsh.yaml' to '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/bash/foo.txt'.</code></pre>
+Copying '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/bash/config.vsh.yaml' to '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/bash/foo.txt'.</code></pre>
 </div>
 </div>
 </div>
@@ -800,12 +795,7 @@ Copying '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/bash/c
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">--</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-example_csharp
+<pre><code>example_csharp
 
 A minimal example component.
 
@@ -823,15 +813,10 @@ Arguments:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">--</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> foo.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-[notice] Checking if Docker image is available at 'example_csharp:latest'
+<pre><code>[notice] Checking if Docker image is available at 'example_csharp:latest'
 [warning] Could not pull from 'example_csharp:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_csharp:latest' with Dockerfile
-Copying '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/csharp/config.vsh.yaml' to '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/csharp/foo.txt'.</code></pre>
+Copying '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/csharp/config.vsh.yaml' to '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/csharp/foo.txt'.</code></pre>
 </div>
 </div>
 </div>
@@ -840,12 +825,7 @@ Copying '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/csharp
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">--</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-example_js
+<pre><code>example_js
 
 A minimal example component.
 
@@ -863,15 +843,10 @@ Arguments:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">--</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> foo.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-[notice] Checking if Docker image is available at 'example_js:latest'
+<pre><code>[notice] Checking if Docker image is available at 'example_js:latest'
 [warning] Could not pull from 'example_js:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_js:latest' with Dockerfile
-Copying '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/js/config.vsh.yaml' to '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/js/foo.txt'</code></pre>
+Copying '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/js/config.vsh.yaml' to '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/js/foo.txt'</code></pre>
 </div>
 </div>
 </div>
@@ -880,12 +855,7 @@ Copying '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/js/con
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">--</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-example_python
+<pre><code>example_python
 
 A minimal example component.
 
@@ -903,15 +873,10 @@ Arguments:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">--</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> foo.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-[notice] Checking if Docker image is available at 'example_python:latest'
+<pre><code>[notice] Checking if Docker image is available at 'example_python:latest'
 [warning] Could not pull from 'example_python:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_python:latest' with Dockerfile
-Copying '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/python/config.vsh.yaml' to '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/python/foo.txt'.</code></pre>
+Copying '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/python/config.vsh.yaml' to '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/python/foo.txt'.</code></pre>
 </div>
 </div>
 </div>
@@ -920,12 +885,7 @@ Copying '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/python
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">--</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-example_r
+<pre><code>example_r
 
 A minimal example component.
 
@@ -943,15 +903,10 @@ Arguments:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">--</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> foo.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-[notice] Checking if Docker image is available at 'example_r:latest'
+<pre><code>[notice] Checking if Docker image is available at 'example_r:latest'
 [warning] Could not pull from 'example_r:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_r:latest' with Dockerfile
-Copying '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/r/config.vsh.yaml' to '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/r/foo.txt'.
+Copying '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/r/config.vsh.yaml' to '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/r/foo.txt'.
 [1] TRUE</code></pre>
 </div>
 </div>
@@ -961,12 +916,7 @@ Copying '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/r/conf
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">--</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-example_scala
+<pre><code>example_scala
 
 A minimal example component.
 
@@ -984,16 +934,11 @@ Arguments:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> run config.vsh.yaml <span class="at">--</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> foo.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-[notice] Checking if Docker image is available at 'example_scala:latest'
+<pre><code>[notice] Checking if Docker image is available at 'example_scala:latest'
 [warning] Could not pull from 'example_scala:latest'. Docker image doesn't exist or is not accessible.
 [notice] Building container 'example_scala:latest' with Dockerfile
 warning: 1 deprecation; re-run with -deprecation for details
-Copying '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/scala/config.vsh.yaml' to '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/scala/foo.txt'.</code></pre>
+Copying '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/scala/config.vsh.yaml' to '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/scala/foo.txt'.</code></pre>
 </div>
 </div>
 </div>
@@ -1031,17 +976,10 @@ Note
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">--output</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.</code></pre>
-</div>
 </div>
 <p>This will generate an executable in the <code>target/</code> directory:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>.
 ├── config.vsh.yaml
@@ -1056,18 +994,11 @@ Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecat
 </div>
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">--output</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">--output</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will generate an executable in the <code>target/</code> directory:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>.
 ├── config.vsh.yaml
@@ -1082,18 +1013,11 @@ Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecat
 </div>
 <div id="tabset-4-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-3-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">--output</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">--output</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will generate an executable in the <code>target/</code> directory:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>.
 ├── config.vsh.yaml
@@ -1108,18 +1032,11 @@ Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecat
 </div>
 <div id="tabset-4-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-4-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">--output</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">--output</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will generate an executable in the <code>target/</code> directory:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>.
 ├── config.vsh.yaml
@@ -1134,18 +1051,11 @@ Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecat
 </div>
 <div id="tabset-4-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-5-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">--output</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">--output</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will generate an executable in the <code>target/</code> directory:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>.
 ├── config.vsh.yaml
@@ -1160,18 +1070,11 @@ Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecat
 </div>
 <div id="tabset-4-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-6-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">--output</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Warning: DockerPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NativePlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: NextflowPlatform is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: Functionality is deprecated: Functionality level is deprecated, all functionality fields are now located on the top level of the config file. Deprecated since 0.9.0, planned removal 0.10.0.
-Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecated since 0.9.0, planned removal 0.10.0.</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> build config.vsh.yaml <span class="at">--output</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will generate an executable in the <code>target/</code> directory:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>.
 ├── config.vsh.yaml
@@ -1196,7 +1099,7 @@ Warning: .platforms is deprecated: Use 'engines' and 'runners' instead. Deprecat
 <div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
 <p>To display its documentation, run the executable with just the <code>--help</code> argument:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_bash</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_bash</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>example_bash
 
@@ -1216,7 +1119,7 @@ Arguments:
 <div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
 <p>To display its documentation, run the executable with just the <code>--help</code> argument:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_csharp</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_csharp</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>example_csharp
 
@@ -1236,7 +1139,7 @@ Arguments:
 <div id="tabset-5-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-3-tab">
 <p>To display its documentation, run the executable with just the <code>--help</code> argument:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_js</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_js</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>example_js
 
@@ -1256,7 +1159,7 @@ Arguments:
 <div id="tabset-5-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-4-tab">
 <p>To display its documentation, run the executable with just the <code>--help</code> argument:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_python</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_python</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>example_python
 
@@ -1276,7 +1179,7 @@ Arguments:
 <div id="tabset-5-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-5-tab">
 <p>To display its documentation, run the executable with just the <code>--help</code> argument:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_r</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_r</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>example_r
 
@@ -1296,7 +1199,7 @@ Arguments:
 <div id="tabset-5-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-6-tab">
 <p>To display its documentation, run the executable with just the <code>--help</code> argument:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_scala</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_scala</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>example_scala
 
@@ -1326,128 +1229,128 @@ Arguments:
 <div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
 <p>You can run the executable by providing a value for <code>--input</code> and <code>--output</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_bash</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_bash</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Copying '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/bash/config.vsh.yaml' to '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/bash/output.txt'.</code></pre>
+<pre><code>Copying '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/bash/config.vsh.yaml' to '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/bash/output.txt'.</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  428 Sep  5 13:47 config.vsh.yaml
--rw-r--r-- 1 runner docker  428 Sep  5 13:47 foo.txt
--rw-r--r-- 1 runner docker  428 Sep  5 13:49 output.txt
--rwxr-xr-x 1 runner docker  181 Sep  5 13:47 script.sh
-drwxr-xr-x 2 runner docker 4096 Sep  5 13:49 target</code></pre>
+-rw-r--r-- 1 runner docker  411 Sep  5 15:29 config.vsh.yaml
+-rw-r--r-- 1 runner docker  411 Sep  5 15:30 foo.txt
+-rw-r--r-- 1 runner docker  411 Sep  5 15:32 output.txt
+-rwxr-xr-x 1 runner docker  181 Sep  5 15:29 script.sh
+drwxr-xr-x 2 runner docker 4096 Sep  5 15:31 target</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
 <p>You can run the executable by providing a value for <code>--input</code> and <code>--output</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_csharp</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_csharp</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Copying '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/csharp/config.vsh.yaml' to '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/csharp/output.txt'.</code></pre>
+<pre><code>Copying '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/csharp/config.vsh.yaml' to '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/csharp/output.txt'.</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  467 Sep  5 13:47 config.vsh.yaml
--rw-r--r-- 1 runner docker  467 Sep  5 13:47 foo.txt
--rw-r--r-- 1 runner docker  467 Sep  5 13:47 output.txt
--rw-r--r-- 1 runner docker  237 Sep  5 13:47 script.csx
-drwxr-xr-x 2 runner docker 4096 Sep  5 13:49 target</code></pre>
+-rw-r--r-- 1 runner docker  450 Sep  5 15:29 config.vsh.yaml
+-rw-r--r-- 1 runner docker  450 Sep  5 15:29 foo.txt
+-rw-r--r-- 1 runner docker  450 Sep  5 15:29 output.txt
+-rw-r--r-- 1 runner docker  237 Sep  5 15:29 script.csx
+drwxr-xr-x 2 runner docker 4096 Sep  5 15:31 target</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-6-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-3-tab">
 <p>You can run the executable by providing a value for <code>--input</code> and <code>--output</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_js</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_js</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Copying '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/js/config.vsh.yaml' to '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/js/output.txt'</code></pre>
+<pre><code>Copying '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/js/config.vsh.yaml' to '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/js/output.txt'</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  445 Sep  5 13:47 config.vsh.yaml
--rw-r--r-- 1 runner docker  445 Sep  5 13:48 foo.txt
--rw-r--r-- 1 runner docker  445 Sep  5 13:50 output.txt
--rwxr-xr-x 1 runner docker  282 Sep  5 13:47 script.js
-drwxr-xr-x 2 runner docker 4096 Sep  5 13:49 target</code></pre>
+-rw-r--r-- 1 runner docker  428 Sep  5 15:29 config.vsh.yaml
+-rw-r--r-- 1 runner docker  428 Sep  5 15:30 foo.txt
+-rw-r--r-- 1 runner docker  428 Sep  5 15:32 output.txt
+-rwxr-xr-x 1 runner docker  282 Sep  5 15:29 script.js
+drwxr-xr-x 2 runner docker 4096 Sep  5 15:31 target</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-6-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-4-tab">
 <p>You can run the executable by providing a value for <code>--input</code> and <code>--output</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_python</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_python</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Copying '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/python/config.vsh.yaml' to '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/python/output.txt'.</code></pre>
+<pre><code>Copying '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/python/config.vsh.yaml' to '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/python/output.txt'.</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  440 Sep  5 13:47 config.vsh.yaml
--rw-r--r-- 1 runner docker  440 Sep  5 13:48 foo.txt
--rw-r--r-- 1 runner docker  440 Sep  5 13:50 output.txt
--rwxr-xr-x 1 runner docker  216 Sep  5 13:47 script.py
-drwxr-xr-x 2 runner docker 4096 Sep  5 13:49 target</code></pre>
+-rw-r--r-- 1 runner docker  423 Sep  5 15:29 config.vsh.yaml
+-rw-r--r-- 1 runner docker  423 Sep  5 15:30 foo.txt
+-rw-r--r-- 1 runner docker  423 Sep  5 15:32 output.txt
+-rwxr-xr-x 1 runner docker  216 Sep  5 15:29 script.py
+drwxr-xr-x 2 runner docker 4096 Sep  5 15:31 target</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-6-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-5-tab">
 <p>You can run the executable by providing a value for <code>--input</code> and <code>--output</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_r</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_r</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Copying '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/r/config.vsh.yaml' to '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/r/output.txt'.
+<pre><code>Copying '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/r/config.vsh.yaml' to '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/r/output.txt'.
 [1] TRUE</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  435 Sep  5 13:47 config.vsh.yaml
--rw-r--r-- 1 runner docker  435 Sep  5 13:48 foo.txt
--rw-r--r-- 1 runner docker  435 Sep  5 13:50 output.txt
--rwxr-xr-x 1 runner docker  207 Sep  5 13:47 script.R
-drwxr-xr-x 2 runner docker 4096 Sep  5 13:49 target</code></pre>
+-rw-r--r-- 1 runner docker  418 Sep  5 15:29 config.vsh.yaml
+-rw-r--r-- 1 runner docker  418 Sep  5 15:31 foo.txt
+-rw-r--r-- 1 runner docker  418 Sep  5 15:32 output.txt
+-rwxr-xr-x 1 runner docker  207 Sep  5 15:29 script.R
+drwxr-xr-x 2 runner docker 4096 Sep  5 15:32 target</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-6-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-6-tab">
 <p>You can run the executable by providing a value for <code>--input</code> and <code>--output</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_scala</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="ex">target/example_scala</span> <span class="at">--input</span> config.vsh.yaml <span class="at">--output</span> output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>warning: 1 deprecation; re-run with -deprecation for details
-Copying '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/scala/config.vsh.yaml' to '/viash_automount/tmp/Rtmpqwal5Z/create_new_component68dc3f7921ab/scala/output.txt'.</code></pre>
+Copying '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/scala/config.vsh.yaml' to '/viash_automount/tmp/Rtmpv2pD1k/create_new_component68cd654b96a9/scala/output.txt'.</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 20
--rw-r--r-- 1 runner docker  479 Sep  5 13:47 config.vsh.yaml
--rw-r--r-- 1 runner docker  479 Sep  5 13:49 foo.txt
--rw-r--r-- 1 runner docker  479 Sep  5 13:50 output.txt
--rw-r--r-- 1 runner docker  435 Sep  5 13:47 script.scala
-drwxr-xr-x 2 runner docker 4096 Sep  5 13:49 target</code></pre>
+-rw-r--r-- 1 runner docker  462 Sep  5 15:29 config.vsh.yaml
+-rw-r--r-- 1 runner docker  462 Sep  5 15:31 foo.txt
+-rw-r--r-- 1 runner docker  462 Sep  5 15:32 output.txt
+-rw-r--r-- 1 runner docker  435 Sep  5 15:29 script.scala
+drwxr-xr-x 2 runner docker 4096 Sep  5 15:32 target</code></pre>
 </div>
 </div>
 </div>
