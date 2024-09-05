@@ -52,10 +52,8 @@ The template project contains these default config mods:
 
 ```yaml
 config_mods: |
-  .functionality.version := 'dev'
-  .engines[.type == 'docker'].target_registry := 'ghcr.io'
-  .engines[.type == 'docker'].target_organization := 'viash-io/viash_project_template'
-  .engines[.type == 'docker'].target_image_source := 'https://github.com/viash-io/viash_project_template'
+  .version := 'dev'
+  .argument_groups[true].arguments[.multiple == true].multiple_sep := ":"
   .runners[.type == 'nextflow'].directives.tag := '$id'
 ```
 
@@ -63,6 +61,6 @@ This has the following effects:
 
 * Set the version of any components to `'dev'`.
 
-* Fills the registry, organisation and image sources fields of the [Docker engine](/reference/config/engines/docker/#).
+* Overrides the default multiple seperator `;` and sets it to `:`.
 
 * Adds a default directive to the [Nextflow runner](/reference/config/runners/nextflow/#).
