@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.54">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -179,7 +179,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
  <span class="dropdown-text">Report a website issue</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../cheatsheet/viash_cheatsheet_v1_1.pdf"><i class="bi bi-card-list" role="img">
+    <a class="dropdown-item" href="../cheatsheet/viash_cheatsheet_v1_2.pdf"><i class="bi bi-card-list" role="img">
 </i> 
  <span class="dropdown-text">Cheat sheet</span></a>
   </li>  
@@ -286,19 +286,6 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>First create a new repository by clicking the “Use this template” button. If you can’t see the “Use this template” button, log into GitHub first.</p>
 <p>Next, clone the repository using the following command.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/youruser/my_first_pipeline.git <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> my_first_pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>At the moment of writing, the branch to use should be 0_8_2.</p>
-</div>
-</div>
 <p>Your new repository should contain the following files:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> my_first_pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>.
@@ -338,19 +325,16 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>temporaryFolder: /tmp/viash_hub_repo2349719231821046986 uri: https://viash-hub.com/data-intuitive/vsh-pipeline-operators.git
-Cloning into '.'...
-checkout out: List(git, checkout, tags/v0.2.0, --, .) 0 
-Exporting combine_columns (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/combine_columns
-Exporting remove_comments (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/remove_comments
-Exporting combine_columns (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/combine_columns
-Exporting remove_comments (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/remove_comments
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/template/remove_comments:0.2.3' with Dockerfile
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/template/combine_columns:0.2.3' with Dockerfile
-Exporting workflow (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/workflow
-Exporting take_column (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/take_column
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/template/take_column:0.2.3' with Dockerfile
-Exporting take_column (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/take_column
+<pre><code>Exporting remove_comments (template) =nextflow=&gt; target/nextflow/template/remove_comments
+Exporting combine_columns (template) =executable=&gt; target/executable/template/combine_columns
+Exporting remove_comments (template) =executable=&gt; target/executable/template/remove_comments
+Exporting workflow (template) =nextflow=&gt; target/nextflow/template/workflow
+[notice] Building container 'ghcr.io/viash-io/project_template/template/combine_columns:0.3.0' with Dockerfile
+[notice] Building container 'ghcr.io/viash-io/project_template/template/remove_comments:0.3.0' with Dockerfile
+Exporting take_column (template) =executable=&gt; target/executable/template/take_column
+Exporting take_column (template) =nextflow=&gt; target/nextflow/template/take_column
+[notice] Building container 'ghcr.io/viash-io/project_template/template/take_column:0.3.0' with Dockerfile
+Exporting combine_columns (template) =nextflow=&gt; target/nextflow/template/combine_columns
 All 7 configs built successfully</code></pre>
 </div>
 </div>
@@ -363,17 +347,17 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>total 68
--rw-r--r-- 1 runner docker  1020 Jul 16 19:10 CHANGELOG.md
--rw-r--r-- 1 runner docker 32219 Jul 16 19:10 LICENSE.md
--rw-r--r-- 1 runner docker  1094 Jul 16 19:10 README.md
--rw-r--r-- 1 runner docker  1125 Jul 16 19:10 README.qmd
--rw-r--r-- 1 runner docker   417 Jul 16 19:10 _viash.yaml
--rw-r--r-- 1 runner docker   245 Jul 16 19:10 main.nf
--rw-r--r-- 1 runner docker   222 Jul 16 19:10 nextflow.config
-drwxr-xr-x 2 runner docker  4096 Jul 16 19:10 resources_test
-drwxr-xr-x 3 runner docker  4096 Jul 16 19:10 src
-drwxr-xr-x 5 runner docker  4096 Jul 16 19:10 target</code></pre>
+<pre><code>total 80
+-rw-r--r-- 1 runner docker  1482 Sep  6 22:24 CHANGELOG.md
+-rw-r--r-- 1 runner docker 32219 Sep  6 22:24 LICENSE.md
+-rw-r--r-- 1 runner docker 12142 Sep  6 22:24 README.md
+-rw-r--r-- 1 runner docker  7840 Sep  6 22:24 README.qmd
+-rw-r--r-- 1 runner docker   512 Sep  6 22:26 _viash.yaml
+-rw-r--r-- 1 runner docker   245 Sep  6 22:24 main.nf
+-rw-r--r-- 1 runner docker   222 Sep  6 22:24 nextflow.config
+drwxr-xr-x 2 runner docker  4096 Sep  6 22:24 resources_test
+drwxr-xr-x 3 runner docker  4096 Sep  6 22:24 src
+drwxr-xr-x 4 runner docker  4096 Sep  6 22:24 target</code></pre>
 </div>
 </div>
 </details>
@@ -392,17 +376,17 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>N E X T F L O W  ~  version 24.04.3
-Launching `target/nextflow/template/workflow/main.nf` [friendly_visvesvaraya] DSL2 - revision: 729ac0cf40
-[db/eb1877] Submitted process &gt; workflow:run_wf:remove_comments:processWf:remove_comments_process (run)
-[ac/4c46f9] Submitted process &gt; workflow:run_wf:take_column:processWf:take_column_process (run)
-[4e/9fdf2b] Submitted process &gt; workflow:run_wf:combine_columns:processWf:combine_columns_process (run)
-[4b/e1c7f2] Submitted process &gt; workflow:publishStatesSimpleWf:publishStatesProc (run)</code></pre>
+<pre><code>N E X T F L O W  ~  version 24.04.4
+Launching `target/nextflow/template/workflow/main.nf` [condescending_koch] DSL2 - revision: 45d6e681b4
+[fe/671114] Submitted process &gt; workflow:run_wf:remove_comments:processWf:remove_comments_process (run)
+[18/8d73b7] Submitted process &gt; workflow:run_wf:take_column:processWf:take_column_process (run)
+[0f/93f775] Submitted process &gt; workflow:run_wf:combine_columns:processWf:combine_columns_process (combined)
+[93/2fa613] Submitted process &gt; workflow:publishStatesSimpleWf:publishStatesProc (combined)</code></pre>
 </div>
 </div>
 </details>
-<p>This will run the different stages of the workflow , with the final result result being stored in a file named <strong>run.combine_columns.output</strong> in the output directory <code>output</code>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> output/run.combine_columns.output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will run the different stages of the workflow , with the final result result being stored in a file named <strong>combined.workflow.output.tsv</strong> in the output directory <code>output</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> output/combined.workflow.output.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <details>
 <summary>
 Output
