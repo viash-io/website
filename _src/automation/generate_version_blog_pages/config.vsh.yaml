@@ -1,28 +1,29 @@
-functionality:
-  name: generate_version_blog_pages
-  description: |
-    The script takes a changelog.md file and splits it into multiple quarto pages
-    Some formatting is expected to extract titles, version number, etc.
-  arguments:
-    - name: "--input"
-      type: file
-      alternatives: "-i"
-      direction: input
-      description: The changelog.md to use as input
-      required: true
-      must_exist: true
-    - name: "--output"
-      type: file
-      alternatives: "-o"
-      direction: output
-      description: Base path to use to store the pages, should match 'blog/posts'
-  resources:
-    - type: python_script
-      path: script.py
-    - path: template_blog_page.j2.qmd
-  test_resources:
-    - type: bash_script
-      path: test.sh
-    - path: test_changelog.md
-platforms:
+name: generate_version_blog_pages
+description: |
+  The script takes a changelog.md file and splits it into multiple quarto pages
+  Some formatting is expected to extract titles, version number, etc.
+arguments:
+  - name: "--input"
+    type: file
+    alternatives: "-i"
+    direction: input
+    description: The changelog.md to use as input
+    required: true
+    must_exist: true
+  - name: "--output"
+    type: file
+    alternatives: "-o"
+    direction: output
+    description: Base path to use to store the pages, should match 'blog/posts'
+resources:
+  - type: python_script
+    path: script.py
+  - path: template_blog_page.j2.qmd
+test_resources:
+  - type: bash_script
+    path: test.sh
+  - path: test_changelog.md
+engines:
   - type: native
+runners:
+  - type: executable

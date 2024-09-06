@@ -1,21 +1,22 @@
-functionality:
-  name: example_python
-  description: A minimal example component.
-  arguments:
-    - type: file
-      name: --input
-      example: file.txt
-      required: true
-    - type: file
-      name: --output
-      direction: output
-      example: output.txt
-      required: true
-  resources:
-    - type: python_script
-      path: script.py
-platforms:
+name: example_python
+description: A minimal example component.
+arguments:
+  - type: file
+    name: --input
+    example: file.txt
+    required: true
+  - type: file
+    name: --output
+    direction: output
+    example: output.txt
+    required: true
+resources:
+  - type: python_script
+    path: script.py
+engines:
   - type: docker
     image: "python:3.10-slim"
   - type: native
+runners:
+  - type: executable
   - type: nextflow

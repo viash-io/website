@@ -11,14 +11,17 @@ List a namespace containing many viash config files.
 
 | Argument | Description | Type |
 |-|:----|-:
+| `config` | Filter which component get selected by specifying the config path. | `String` |
 | `--config_mod`, `-c` | Modify a viash config at runtime using [dynamic config modding](/reference/config_mods/#). | `List[String]` |
+| `--engine` | Acts as a regular expression to filter the engine ids specified in the found config files. If this is not provided, all engines will be used. If no engines are defined in a config, the native engine will be used. | `String` |
 | `--format`, `-f` | Which output format to use. | `String` |
 | `--parallel`, `-l` | Whether or not to run the process in parallel. | `Boolean` |
-| `--parse_argument_groups` | Whether or not to postprocess each component's [argument groups](/reference/config/functionality/#argument_groups). | `Boolean` |
-| `--platform`, `-p` | Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified. | `String` |
+| `--parse_argument_groups` | DEPRECATED. This is now always enabled. Whether or not to postprocess each component's [argument groups](/reference/config/#argument_groups). | `Boolean` |
+| `--platform`, `-p` | Deprecated. Use --runner and --engine instead. Acts as a regular expression to filter the platform ids specified in the found config files. If this is not provided, all platforms will be used. If no platforms are defined in a config, the native platform will be used. In addition, the path to a platform yaml file can also be specified. | `String` |
 | `--query`, `-q` | Filter which components get selected by component and [namespace](/guide/project/structure.html#grouping-components-in-namespaces) name. Can be a regex. Example: "^mynamespace/component1\$". | `String` |
 | `--query_name` | Filter which components get selected by component name. Can be a regex. Example: "^component1". | `String` |
 | `--query_namespace`, `-n` | Filter which namespaces get selected by [namespace](/guide/project/structure.html#grouping-components-in-namespaces) name. Can be a regex. Example: "^mynamespace\$". | `String` |
+| `--runner` | Acts as a regular expression to filter the runner ids specified in the found config files. If this is not provided, all runners will be used. If no runners are defined in a config, the executable runner will be used. | `String` |
 | `--src`, `-s` | A source directory containing viash config files, possibly structured in a hierarchical folder structure. Default: src/. | `String` |
 | `--help`, `-h` | Show help message |  |
 

@@ -1,0 +1,277 @@
+---
+title: "Docker Engine"
+search: true
+---
+
+Run a Viash component on a Docker backend engine.
+By specifying which dependencies your component needs, users will be able to build a docker container from scratch using the setup flag, or pull it from a docker repository.
+
+
+**Example:**
+
+```yaml
+engines:
+  - type: docker
+    image: "bash:4.0"
+    setup:
+      - type: apt
+        packages: [ curl ]
+
+```
+
+## cmd
+
+**Type**: `Either String or List of String`
+
+**Default**: `Empty`
+
+Set the default command being executed when running the Docker container.
+
+**Examples:**
+
+Set CMD using the exec format, which is the prefered form.
+
+```yaml
+cmd: ["echo", "$HOME"]
+```
+
+Set CMD using the shell format.
+
+```yaml
+cmd: "echo $HOME"
+```
+
+## entrypoint
+
+**Type**: `Either String or List of String`
+
+**Default**: `[]`
+
+Override the entrypoint of the base container. Default set `ENTRYPOINT []`.
+
+**Examples:**
+
+Disable the default override.
+
+```yaml
+entrypoint: 
+```
+
+Entrypoint of the container in the exec format, which is the prefered form.
+
+```yaml
+entrypoint: ["top", "-b"]
+```
+
+Entrypoint of the container in the shell format.
+
+```yaml
+entrypoint: "top -b"
+```
+
+## id
+
+**Type**: `String`
+
+**Default**: `docker`
+
+Name of the engine. As with all engines, you can give a engine a different name. By specifying `id: foo`, you can target this engine (only) by specifying `...` in any of the Viash commands.
+
+**Examples:**
+
+```yaml
+id: foo
+```
+
+```yaml
+id: foo
+```
+
+## image
+
+**Type**: `String`
+
+The base container to start from. You can also add the tag here if you wish.
+
+**Example:**
+
+```yaml
+image: "bash:4.0"
+```
+
+## namespace_separator
+
+**Type**: `String`
+
+**Default**: `/`
+
+The separator between the namespace and the name of the component, used for determining the image name. Default: `"/"`.
+
+**Example:**
+
+```yaml
+namespace_separator: "_"
+```
+
+## organization
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+::: {.callout-warning}
+Deprecated since 0.9.0. Planned removal at 0.10.0. Use the full container name in `image` instead.
+:::
+Name of a start container's [organization](https://docs.docker.com/docker-hub/orgs/).
+
+## registry
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+::: {.callout-warning}
+Deprecated since 0.9.0. Planned removal at 0.10.0. Use the full container name in `image` instead.
+:::
+The URL to the a [custom Docker registry](https://docs.docker.com/registry/) where the start container is located.
+
+**Example:**
+
+```yaml
+registry: https://my-docker-registry.org
+```
+
+## setup
+
+**Type**: `List of Requirements`
+
+**Default**: `Empty`
+
+A list of requirements for installing the following types of packages:
+
+ - [apt](/reference/config/engines/docker/setup/aptRequirements.html)
+ - [apk](/reference/config/engines/docker/setup/apkRequirements.html)
+ - [Docker setup instructions](/reference/config/engines/docker/setup/dockerRequirements.html)
+ - [JavaScript](/reference/config/engines/docker/setup/javascriptRequirements.html)
+ - [Python](/reference/config/engines/docker/setup/pythonRequirements.html)
+ - [R](/reference/config/engines/docker/setup/rRequirements.html)
+ - [Ruby](/reference/config/engines/docker/setup/rubyRequirements.html)
+ - [yum](/reference/config/engines/docker/setup/yumRequirements.html)
+
+The order in which these dependencies are specified determines the order in which they will be installed.
+
+
+## tag
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+::: {.callout-warning}
+Deprecated since 0.9.0. Planned removal at 0.10.0. Use the full container name in `image` instead.
+:::
+Specify a Docker image based on its tag.
+
+**Example:**
+
+```yaml
+tag: 4.0
+```
+
+## target_image
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+If anything is specified in the setup section, running the `---setup` will result in an image with the name of `<target_image>:<version>`. If nothing is specified in the `setup` section, simply `image` will be used. Advanced usage only.
+
+**Example:**
+
+```yaml
+target_image: myfoo
+```
+
+## target_image_source
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+The source of the target image. This is used for defining labels in the dockerfile.
+
+**Example:**
+
+```yaml
+target_image_source: https://github.com/foo/bar
+```
+
+## target_organization
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+The organization set in the resulting image. Advanced usage only.
+
+**Example:**
+
+```yaml
+target_organization: viash-io
+```
+
+## target_package
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+The package name set in the resulting image. Advanced usage only.
+
+**Example:**
+
+```yaml
+target_package: tools
+```
+
+## target_registry
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+The URL where the resulting image will be pushed to. Advanced usage only.
+
+**Example:**
+
+```yaml
+target_registry: https://my-docker-registry.org
+```
+
+## target_tag
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+The tag the resulting image gets. Advanced usage only.
+
+**Example:**
+
+```yaml
+target_tag: 0.5.0
+```
+
+## test_setup
+
+**Type**: `List of Requirements`
+
+**Default**: `Empty`
+
+Additional requirements specific for running unit tests.
+
+## type
+
+**Type**: `String`
+
+Specifies the type of the engine.

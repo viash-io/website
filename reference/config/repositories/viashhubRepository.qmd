@@ -1,0 +1,113 @@
+---
+title: "Viashhub Repository"
+search: true
+---
+
+A Viash-Hub repository where remote dependency components can be found.
+
+**Examples:**
+
+Example without `name` field in case used in `.dependencies`
+
+```yaml
+type: vsh
+repo: biobox
+tag: 0.1.0
+
+```
+
+Example without `name` field in case used in `.dependencies`
+
+```yaml
+type: vsh
+repo: openpipelines-bio/openpipeline
+tag: 0.8.0
+
+```
+
+Example without `name` field in case used in `.dependencies`
+
+```yaml
+type: vsh
+repo: openpipelines-bio/openpipeline
+tag: 0.7.1
+path: src/test/resources/testns
+
+```
+
+Example with `name` field in case used in `.repositories`
+
+```yaml
+name: biobox
+type: vsh
+repo: biobox
+tag: 0.1.0
+
+```
+
+Example with `name` field in case used in `.repositories`
+
+```yaml
+name: openpipeline
+type: vsh
+repo: openpipelines-bio/openpipeline
+tag: 0.8.0
+
+```
+
+Example with `name` field in case used in `.repositories`
+
+```yaml
+name: viash-testns
+type: vsh
+repo: openpipelines-bio/openpipeline
+tag: 0.7.1
+path: src/test/resources/testns
+
+```
+
+## name
+
+**Type**: `String`
+
+:::{.callout-warning}
+When defining repositories under `.repositories`, the repository definition needs a `name` field so it can be refered to from a dependency.
+
+When defining a repository directly in a dependency under `.dependencies`, the `name` field must be omitted.
+:::
+
+The identifier used to refer to this repository from dependencies.
+
+## path
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+Defines a subfolder of the repository to use as base to look for the dependency components.
+
+## repo
+
+**Type**: `String`
+
+The name of the Viash-Hub repository.
+
+**Example:**
+
+```yaml
+repo: openpipelines-bio/openpipeline
+```
+
+## tag
+
+**Type**: `String`
+
+**Default**: `Empty`
+
+Defines which version of the dependency component to use. Typically this can be a specific tag, branch or commit hash.
+
+## type
+
+**Type**: `String`
+
+Defines the repository as a Viash-Hub repository.

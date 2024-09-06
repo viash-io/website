@@ -1,74 +1,98 @@
 structure:
   'Config': ./index
-  'Project': ../project/index
-  'Info': ./info
-  'EnvironmentVariables': ./environmentVariables
+  'PackageConfig': ../packageConfig/index
+  'BuildInfo': ./buildInfo
+  'EnvironmentVariables': ../environmentVariables/index
 
-  'Functionality': ./functionality/index
-  'Author': ./functionality/author
-  'ComputationalRequirements': ./functionality/computationalRequirements
-  'ArgumentGroup': ./functionality/argumentGroup
+  'Functionality': ./deprecated/functionality
+  'Author': ./author
+  'ComputationalRequirements': ./computationalRequirements
+  'ArgumentGroup': ./argumentGroup
+  'Links': ./links
+  'References': ./references
 
-  'Platform': ./platforms/index
-  'NativePlatform': ./platforms/native/index
-  'DockerPlatform': ./platforms/docker/index
-  'NextflowPlatform': ./platforms/nextflow/index
+  'Platform': ./deprecated/platforms/index
+  'NativePlatform': ./deprecated/platforms/native/index
+  'DockerPlatform': ./deprecated/platforms/docker/index
+  'NextflowPlatform': ./deprecated/platforms/nextflow/index
 
-  'Argument': ./functionality/arguments/index
-  'BooleanFalseArgument': ./functionality/arguments/boolean_false
-  'BooleanArgument': ./functionality/arguments/boolean
-  'BooleanTrueArgument': ./functionality/arguments/boolean_true
-  'DoubleArgument': ./functionality/arguments/double
-  'FileArgument': ./functionality/arguments/file
-  'IntegerArgument': ./functionality/arguments/integer
-  'LongArgument': ./functionality/arguments/long
-  'StringArgument': ./functionality/arguments/string
+  'Engine': ./engines/index
+  'NativeEngine': ./engines/native/index
+  'DockerEngine': ./engines/docker/index
+
+  'Runner': ./runners/index
+  'ExecutableRunner': ./runners/executable/index
+  'NextflowRunner': ./runners/nextflow/index
+
+  'Argument': ./arguments/index
+  'BooleanFalseArgument': ./arguments/boolean_false
+  'BooleanArgument': ./arguments/boolean
+  'BooleanTrueArgument': ./arguments/boolean_true
+  'DoubleArgument': ./arguments/double
+  'FileArgument': ./arguments/file
+  'IntegerArgument': ./arguments/integer
+  'LongArgument': ./arguments/long
+  'StringArgument': ./arguments/string
   
-  'Requirements': ./platforms/docker/setup/index
-  'ApkRequirements': ./platforms/docker/setup/apkRequirements
-  'AptRequirements': ./platforms/docker/setup/aptRequirements
-  'DockerRequirements': ./platforms/docker/setup/dockerRequirements
-  'JavaScriptRequirements': ./platforms/docker/setup/javascriptRequirements
-  'PythonRequirements': ./platforms/docker/setup/pythonRequirements
-  'RRequirements': ./platforms/docker/setup/rRequirements
-  'RubyRequirements': ./platforms/docker/setup/rubyRequirements
-  'YumRequirements': ./platforms/docker/setup/yumRequirements
+  'Requirements': ./engines/docker/setup/index
+  'ApkRequirements': ./engines/docker/setup/apkRequirements
+  'AptRequirements': ./engines/docker/setup/aptRequirements
+  'DockerRequirements': ./engines/docker/setup/dockerRequirements
+  'JavaScriptRequirements': ./engines/docker/setup/javascriptRequirements
+  'PythonRequirements': ./engines/docker/setup/pythonRequirements
+  'RRequirements': ./engines/docker/setup/rRequirements
+  'RubyRequirements': ./engines/docker/setup/rubyRequirements
+  'YumRequirements': ./engines/docker/setup/yumRequirements
 
-  'Resource': ./functionality/resources/index
-  'CSharpScript': ./functionality/resources/cSharpScript
-  'PythonScript': ./functionality/resources/pythonScript
-  'PlainFile': ./functionality/resources/plainFile
-  'BashScript': ./functionality/resources/bashScript
-  'ScalaScript': ./functionality/resources/scalaScript
-  'NextflowScript': ./functionality/resources/nextflowScript
-  'RScript': ./functionality/resources/rScript
-  'Executable': ./functionality/resources/executable
-  'JavaScriptScript': ./functionality/resources/javaScriptScript
+  'Resource': ./resources/index
+  'CSharpScript': ./resources/cSharpScript
+  'PythonScript': ./resources/pythonScript
+  'PlainFile': ./resources/plainFile
+  'BashScript': ./resources/bashScript
+  'ScalaScript': ./resources/scalaScript
+  'NextflowScript': ./resources/nextflowScript
+  'RScript': ./resources/rScript
+  'Executable': ./resources/executable
+  'JavaScriptScript': ./resources/javaScriptScript
 
-  'NextflowDirectives': ./platforms/nextflow/directives
-  'NextflowAuto': ./platforms/nextflow/auto
-  'NextflowConfig': ./platforms/nextflow/config
+  'NextflowDirectives': ./runners/nextflow/directives
+  'NextflowAuto': ./runners/nextflow/auto
+  'NextflowConfig': ./runners/nextflow/config
 
-  'Dependency': ./functionality/dependencies/index
-  'Repository': ./functionality/repositories/index
+  'Dependency': ./dependencies/index
+  'Repository': ./repositories/index
   'LocalRepository': 
   'GitRepository': 
   'GithubRepository': 
   'ViashhubRepository': 
 
   'RepositoryWithName': 
-  'LocalRepositoryWithName': ./functionality/repositories/localRepository
-  'GitRepositoryWithName': ./functionality/repositories/gitRepository
-  'GithubRepositoryWithName': ./functionality/repositories/githubRepository
-  'ViashhubRepositoryWithName': ./functionality/repositories/viashhubRepository
+  'LocalRepositoryWithName': ./repositories/localRepository
+  'GitRepositoryWithName': ./repositories/gitRepository
+  'GithubRepositoryWithName': ./repositories/githubRepository
+  'ViashhubRepositoryWithName': ./repositories/viashhubRepository
 
 order:
   'Config': 20
   'Project': 30
 
-  'Functionality': 10
-  'Platform': 20
-  'Info': 30
+  #'Functionality': 10
+  #'Platform': 20
+  #'BuildInfo': 30
+
+  'Argument': 10
+  'ArgumentGroup': 20
+  'Author': 30
+  'ComputationalRequirements': 40
+  'Dependency': 50
+  'Engine': 60
+  'Links': 70
+  'References': 80
+  'Repository': 90
+  'Resource': 100
+  'Runner': 110
+  'BuildInfo': 190
+  'Deprecated': 200 # We don't have a index page for this yet?
   
   'NativePlatform': 10
   'DockerPlatform': 20
@@ -79,41 +103,47 @@ keywords:
   namespace: /guide/project/structure.html#grouping-components-in-namespaces
   config_mod: /reference/config_mods/#
   docker_setup_strategy: /guide/component/add-dependencies.html#step-3-rebuild-docker-image
-  docker_registry: /reference/config/platforms/docker/#registry
-  docker_tag: /reference/config/platforms/docker/#tag
-  resources: /reference/config/functionality/resources/#
+  docker_registry: /reference/config/engines/docker/#registry
+  docker_tag: /reference/config/engines/docker/#tag
+  resources: /reference/config/resources/#
   unit_testing: /guide/component/unit-testing.html
   scripting_languages: /guide/component/create-component.html#create-a-script
-  argument_groups: /reference/config/functionality/#argument_groups
-  author: /reference/config/functionality/author.html
-  computational_requirements: /reference/config/functionality/computationalRequirements.html
-  apk_req: /reference/config/platforms/docker/setup/apkRequirements.html
-  apt_req: /reference/config/platforms/docker/setup/aptRequirements.html
-  docker_req: /reference/config/platforms/docker/setup/dockerRequirements.html
-  javascript_req: /reference/config/platforms/docker/setup/javascriptRequirements.html
-  python_req: /reference/config/platforms/docker/setup/pythonRequirements.html
-  r_req: /reference/config/platforms/docker/setup/rRequirements.html
-  ruby_req: /reference/config/platforms/docker/setup/rubyRequirements.html
-  yum_req: /reference/config/platforms/docker/setup/yumRequirements.html
-  argument: /reference/config/functionality/arguments/#
-  arg_string: /reference/config/functionality/arguments/string.html
-  arg_file: /reference/config/functionality/arguments/file.html
-  arg_integer: /reference/config/functionality/arguments/integer.html
-  arg_double: /reference/config/functionality/arguments/double.html
-  arg_float: /reference/config/functionality/arguments/float.html
-  arg_boolean: /reference/config/functionality/arguments/boolean.html
-  arg_boolean_true: /reference/config/functionality/arguments/boolean_true.html
-  arg_boolean_false: /reference/config/functionality/arguments/boolean_false.html
-  functionality: /reference/config/functionality/#
-  platform_native: /reference/config/platforms/native/#
-  platform_docker: /reference/config/platforms/docker/#
-  platform_nextflow: /reference/config/platforms/nextflow/#
-  nextflow_directives: /reference/config/platforms/nextflow/directives.html
-  nextflow_auto: /reference/config/platforms/nextflow/auto.html
-  nextflow_config: /reference/config/platforms/nextflow/config.html
+  argument_groups: /reference/config/#argument_groups
+  author: /reference/config/author.html
+  computational_requirements: /reference/config/computationalRequirements.html
+  apk_req: /reference/config/engines/docker/setup/apkRequirements.html
+  apt_req: /reference/config/engines/docker/setup/aptRequirements.html
+  docker_req: /reference/config/engines/docker/setup/dockerRequirements.html
+  javascript_req: /reference/config/engines/docker/setup/javascriptRequirements.html
+  python_req: /reference/config/engines/docker/setup/pythonRequirements.html
+  r_req: /reference/config/engines/docker/setup/rRequirements.html
+  ruby_req: /reference/config/engines/docker/setup/rubyRequirements.html
+  yum_req: /reference/config/engines/docker/setup/yumRequirements.html
+  argument: /reference/config/arguments/#
+  arg_string: /reference/config/arguments/string.html
+  arg_file: /reference/config/arguments/file.html
+  arg_integer: /reference/config/arguments/integer.html
+  arg_double: /reference/config/arguments/double.html
+  arg_float: /reference/config/arguments/float.html
+  arg_boolean: /reference/config/arguments/boolean.html
+  arg_boolean_true: /reference/config/arguments/boolean_true.html
+  arg_boolean_false: /reference/config/arguments/boolean_false.html
+  functionality: /reference/config/deprecated/functionality.html
+  platform_native: /reference/config/deprecated/platforms/native/#
+  platform_docker: /reference/config/deprecated/platforms/docker/#
+  platform_nextflow: /reference/config/deprecated/platforms/nextflow/#
+  nextflow_directives: /reference/config/runners/nextflow/directives.html
+  nextflow_auto: /reference/config/runners/nextflow/auto.html
+  nextflow_config: /reference/config/runners/nextflow/config.html
+  native_engine: /reference/config/engines/native/#
+  docker_engine: /reference/config/engines/docker/#
+  executable_runner: /reference/config/runners/executable/#
+  nextflow_runner: /reference/config/runners/nextflow/#
+  config: /reference/config/#
+  package_config: /reference/packageConfig/#
 
-  repository: /reference/config/functionality/repositories/#
-  repo_local: /reference/config/functionality/repositories/localRepository.html
-  repo_git: /reference/config/functionality/repositories/gitRepository.html
-  repo_github: /reference/config/functionality/repositories/githubRepository.html
-  repo_vsh: /reference/config/functionality/repositories/viashhubRepository.html
+  repository: /reference/config/repositories/#
+  repo_local: /reference/config/repositories/localRepository.html
+  repo_git: /reference/config/repositories/gitRepository.html
+  repo_github: /reference/config/repositories/githubRepository.html
+  repo_vsh: /reference/config/repositories/viashhubRepository.html
