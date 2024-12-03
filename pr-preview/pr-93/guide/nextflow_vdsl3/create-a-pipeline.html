@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-ba2a9488542ebe93bd3948b375a1f1ff.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -180,7 +180,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
  <span class="dropdown-text">Report a website issue</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../cheatsheet/viash_cheatsheet_v1_1.pdf"><i class="bi bi-card-list" role="img">
+    <a class="dropdown-item" href="../../cheatsheet/viash_cheatsheet_v1_2.pdf"><i class="bi bi-card-list" role="img">
 </i> 
  <span class="dropdown-text">Cheat sheet</span></a>
   </li>  
@@ -302,8 +302,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../guide/project/project-config.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Project config</span></a>
+  <a href="../../guide/project/package-config.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Package config</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -428,19 +428,16 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">viash</span> ns build <span class="at">--setup</span> cachedbuild <span class="at">--parallel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>temporaryFolder: /tmp/viash_hub_repo16549315029510421422 uri: https://viash-hub.com/data-intuitive/vsh-pipeline-operators.git
-Cloning into '.'...
-checkout out: List(git, checkout, tags/v0.2.0, --, .) 0 
-Exporting combine_columns (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/combine_columns
-Exporting combine_columns (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/combine_columns
-Exporting take_column (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/take_column
-Exporting remove_comments (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/remove_comments
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/template/take_column:0.2.3' with Dockerfile
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/template/combine_columns:0.2.3' with Dockerfile
-Exporting workflow (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/workflow
-Exporting remove_comments (template) =docker=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/docker/template/remove_comments
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/template/remove_comments:0.2.3' with Dockerfile
-Exporting take_column (template) =nextflow=&gt; /home/runner/work/website/website/guide/_viash_project_template/target/nextflow/template/take_column
+<pre><code>Exporting remove_comments (template) =executable=&gt; target/executable/template/remove_comments
+Exporting remove_comments (template) =nextflow=&gt; target/nextflow/template/remove_comments
+Exporting workflow (template) =nextflow=&gt; target/nextflow/template/workflow
+Exporting take_column (template) =executable=&gt; target/executable/template/take_column
+[notice] Building container 'ghcr.io/viash-io/project_template/template/remove_comments:0.3.0' with Dockerfile
+[notice] Building container 'ghcr.io/viash-io/project_template/template/take_column:0.3.0' with Dockerfile
+Exporting combine_columns (template) =executable=&gt; target/executable/template/combine_columns
+Exporting combine_columns (template) =nextflow=&gt; target/nextflow/template/combine_columns
+[notice] Building container 'ghcr.io/viash-io/project_template/template/combine_columns:0.3.0' with Dockerfile
+Exporting take_column (template) =nextflow=&gt; target/nextflow/template/take_column
 All 7 configs built successfully</code></pre>
 </div>
 </div>
@@ -457,17 +454,7 @@ All 7 configs built successfully</code></pre>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> target</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>target
-├── dependencies
-│&nbsp;&nbsp; └── vsh
-│&nbsp;&nbsp;     └── data-intuitive
-│&nbsp;&nbsp;         └── vsh-pipeline-operators
-│&nbsp;&nbsp;             └── v0.2.0
-│&nbsp;&nbsp;                 └── nextflow
-│&nbsp;&nbsp;                     └── join
-│&nbsp;&nbsp;                         └── vsh_toList
-│&nbsp;&nbsp;                             ├── main.nf
-│&nbsp;&nbsp;                             └── nextflow.config
-├── docker
+├── executable
 │&nbsp;&nbsp; └── template
 │&nbsp;&nbsp;     ├── combine_columns
 │&nbsp;&nbsp;     │&nbsp;&nbsp; └── combine_columns
@@ -490,7 +477,7 @@ All 7 configs built successfully</code></pre>
             ├── main.nf
             └── nextflow.config
 
-19 directories, 13 files</code></pre>
+11 directories, 11 files</code></pre>
 </div>
 </div>
 </section>
@@ -520,7 +507,7 @@ Note
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">repositories</span><span class="kw">:</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> local</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> local</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>After that, the module will be <code>include</code>d automatically during the Viash build stage. For more information, please refer to <a href="../../reference/config/functionality/dependencies/">the reference</a>.</p>
+<p>After that, the module will be <code>include</code>d automatically during the Viash build stage. For more information, please refer to <a href="../../reference/config/dependencies/">the reference</a>.</p>
 </section>
 <section id="all-viash-versions" class="level3">
 <h3 class="anchored" data-anchor-id="all-viash-versions">All Viash versions</h3>
@@ -655,25 +642,29 @@ Note
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-main-script</span> main.nf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
- N E X T F L O W   ~  version 24.04.3
+ N E X T F L O W   ~  version 24.10.2
 
-Launching `main.nf` [hopeful_faraday] DSL2 - revision: dc137fbfcf
+Launching `main.nf` [high_bhabha] DSL2 - revision: dc137fbfcf
 
 [-        ] rem…Wf:remove_comments_process -
+
+[-        ] rem…Wf:remove_comments_process | 0 of 1
 Input: [file1, [input:/home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]]
 Input: [file2, [input:/home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]]
 
 executor &gt;  local (2)
-[fe/98daaa] rem…e_comments_process (file1) | 0 of 2
+[d3/18e8b3] rem…e_comments_process (file1) | 2 of 2 ✔
 Input: [file1, [input:/home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]]
 Input: [file2, [input:/home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]]
+Output: [file2, [output:/home/runner/work/website/website/guide/_viash_project_template/work/ad/2c87e949512c3b8923ca4035ec2f13/file2.remove_comments.output.tsv]]
+Output: [file1, [output:/home/runner/work/website/website/guide/_viash_project_template/work/d3/18e8b32ca5fae999355fe6bbe41d3d/file1.remove_comments.output.tsv]]
 
 executor &gt;  local (2)
-[fe/98daaa] rem…e_comments_process (file1) | 2 of 2 ✔
+[d3/18e8b3] rem…e_comments_process (file1) | 2 of 2 ✔
 Input: [file1, [input:/home/runner/work/website/website/guide/_viash_project_template/resources_test/file1.tsv]]
 Input: [file2, [input:/home/runner/work/website/website/guide/_viash_project_template/resources_test/file2.tsv]]
-Output: [file2, [output:/home/runner/work/website/website/guide/_viash_project_template/work/22/194cabf777abd958cbd471aa62bb89/file2.remove_comments.output.tsv]]
-Output: [file1, [output:/home/runner/work/website/website/guide/_viash_project_template/work/fe/98daaaeadd7f7b83ea0cf3b405a2e1/file1.remove_comments.output.tsv]]</code></pre>
+Output: [file2, [output:/home/runner/work/website/website/guide/_viash_project_template/work/ad/2c87e949512c3b8923ca4035ec2f13/file2.remove_comments.output.tsv]]
+Output: [file1, [output:/home/runner/work/website/website/guide/_viash_project_template/work/d3/18e8b32ca5fae999355fe6bbe41d3d/file1.remove_comments.output.tsv]]</code></pre>
 </div>
 </div>
 <details>
@@ -703,8 +694,8 @@ vier    0.444   123</code></pre>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>output
-├── file1.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/fe/98daaaeadd7f7b83ea0cf3b405a2e1/file1.remove_comments.output.tsv
-└── file2.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/22/194cabf777abd958cbd471aa62bb89/file2.remove_comments.output.tsv
+├── file1.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/d3/18e8b32ca5fae999355fe6bbe41d3d/file1.remove_comments.output.tsv
+└── file2.remove_comments.output.tsv -&gt; /home/runner/work/website/website/guide/_viash_project_template/work/ad/2c87e949512c3b8923ca4035ec2f13/file2.remove_comments.output.tsv
 
 0 directories, 2 files</code></pre>
 </div>
@@ -824,8 +815,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -941,7 +930,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

@@ -16,8 +16,122 @@
 <height>38</height>
 <width>144</width>
 </image>
-<generator>quarto-1.5.55</generator>
-<lastBuildDate>Fri, 26 Apr 2024 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.6.39</generator>
+<lastBuildDate>Tue, 03 Sep 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Viash 0.9.0</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.9.0/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This release restructures the introduces changes to the Viash config: - The <code>platforms</code> field is split into <code>runners</code> and <code>engines</code> - The <code>.functionality</code> layer has been removed from the config and all fields have been moved to the top layer</p>
+<p>Changes are made to sanitize the built config output and include additional relevant meta data. The default <code>multiple_sep</code> has been changed from <code>:</code> to <code>;</code> to avoid conflicts with paths like <code>s3://foo/bar</code>.</p>
+<p>Implemented a proper way of caching dependency repositories. The cache is stored under <code>~/.viash/repositories</code>.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="breaking-changes" class="level3">
+<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
+<ul>
+<li><p><code>runners</code> and <code>engines</code>: The usage of <code>platforms</code> is deprecated and instead these are split into <code>runners</code> and <code>engines</code> (PR #510). The <code>platforms</code> field is still supported but will be removed in a future release. In brief, the <code>native platform</code> became a <code>native engine</code> and <code>docker platform</code> became a <code>docker engine</code>. Additionally, the <code>native platform</code> and <code>docker platform</code> became a <code>executable runner</code>, <code>nextflow platform</code> became a <code>nextflow runner</code>. The fields of <code>docker platform</code> is split between <code>docker engine</code> and <code>docker runner</code>: <code>port</code>, <code>workdir</code>, <code>setup_strategy</code>, and <code>run_args</code> (set to <code>docker_run_args</code>) are captured by the <code>runner</code> as they define how the component is run. The other fields are captured by the <code>engine</code> as they define the environment in which the component is run. One exception is <code>chown</code> which is rarely set to false and is now always enabled.</p></li>
+<li><p><code>arguments</code>: Merge arguments into argument_groups during a json decode prepare step (PR #574). The <code>--parse_argument_groups</code> option from <code>ns list</code> and <code>config view</code> is deprecated as it is now always enabled.</p></li>
+<li><p><code>arguments</code>: Change default <code>multiple_sep</code> from <code>:</code> to <code>;</code> to avoid conflicts with paths like <code>s3://foo/bar</code> (PR #645). The previous behaviour of using <code>multiple_sep: ":"</code> can be achieved by adding a config mod to the <code>_viash.yaml</code>:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">config_mods</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">: </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="cb1-2">  .functionality.argument_groups[true].arguments[.multiple == true].multiple_sep := ":"</span></code></pre></div></li>
+<li><p><code>functionality</code>: Remove the <code>functionality</code> layer from the config and move all fields to the top layer (PR #649).</p></li>
+<li><p><code>computational requirements</code>: Use 1000-base units instead of 1024-base units for memory (PR #686). Additionally, the memory units <code>kib</code>, <code>mib</code>, <code>gib</code>, <code>tib</code>, and <code>pib</code> are added to support 1024-base definitions.</p></li>
+<li><p><code>NextflowEngine</code>: Swap the order of execution of <code>runIf</code> and <code>filter</code> when calling <code>.run()</code>. This means that <code>runIf</code> is now executed before <code>filter</code> (PR #660).</p></li>
+</ul>
+</section>
+<section id="new-functionality" class="level3">
+<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
+<ul>
+<li><p><code>export json_schema</code>: Add a <code>--strict</code> option to output a subset of the schema representing the internal structure of the Viash config (PR #564).</p></li>
+<li><p><code>config view</code> and <code>ns list</code>: Do not output internal functionality fields (#564). Additionally, add a validation that no internal fields are present when reading a Viash config file.</p></li>
+<li><p><code>project config</code>: Add fields in the project config to specify default values for component config fields (PR #612). This allows for a more DRY approach to defining the same values for multiple components.</p></li>
+<li><p><code>dependencies</code>: GitHub and ViashHub repositories now get properly cached (PR #699). The cache is stored in the <code>~/.viash/repositories</code> directory using sparse-checkout to only fetch the necessary files. During a build, the cache is checked for the repository and if it is found and still up-to-date, the repository is not cloned again and instead the cache is copied to a temporary folder where the files are checked out from the sparse-checkout.</p></li>
+<li><p><code>ExecutableRunner</code>: Add a <code>---docker_image_id</code> flag to view the Docker image ID of a built executable (PR #741).</p></li>
+<li><p><code>viash ns query</code>: Add a query filter that allows selecting a single component by its path in a namespace environment (PR #744).</p></li>
+<li><p><code>config schema</code>: Add <code>label</code> &amp; <code>summary</code> fields for Config, PackageConfig, argument groups, and all argument types (PR #743).</p></li>
+<li><p><code>NextflowEngine</code>: Added <code>runIf</code> functionality to <code>runEach</code> (PR #660).</p></li>
+</ul>
+</section>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><p><code>testbenches</code>: Add testbenches for local dependencies (PR #565).</p></li>
+<li><p><code>testbenches</code>: Refactor testbenches helper functions to uniformize them (PR #565).</p></li>
+<li><p><code>logging</code>: Preserve log order of StdOut and StdErr messages during reading configs in namespaces (PR #571).</p></li>
+<li><p><code>Java 21 support</code>: Update Scala to 2.13.12 and update dependencies (PR #602).</p></li>
+<li><p><code>project config</code>: Output the project config under the default name <code>ProjectConfig</code> instead of <code>Project</code> during schema export (PR #631). This is now important as the project config is now part of the component config. Previously this was overridden as the class name was <code>ViashProject</code> which was less descriptive.</p></li>
+<li><p><code>package config</code>: Renamed <code>project config</code> to <code>package config</code> (PR #636). Now that we start using the config more, we came to the conclusion that “package” was better suited than “project”.</p></li>
+<li><p><code>ns exec</code>: Added an extra field <code>{name}</code> to replace <code>{functionality-name}</code> (PR #649). No immediate removal of the old field is planned, but it is deprecated.</p></li>
+<li><p><code>BashWrapper</code>: Added meta-data field <code>meta_name</code> as a replacement for <code>meta_functionality_name</code> (PR #649). No immediate removal of the old field is planned, but it is deprecated.</p></li>
+<li><p><code>error message</code>: Improve the error message when using an invalid field in the config (#PR #662). The error message now includes the field names that are not valid if that happens to be the case or otherwise a more general error message.</p></li>
+<li><p><code>config mods</code>: Improve the displayed error message when a config mod could not be applied because of an invalid path (PR #672).</p></li>
+<li><p><code>docker_engine</code>: Deprecate <code>registry</code>, <code>organization</code> and <code>tag</code> fields in the <code>docker_engine</code> (PR #712). Currently these are hardly ever used and instead the <code>image</code> field is used to specify the full image name.</p></li>
+<li><p><code>docker_engine</code>: Add <code>target_package</code> field to the <code>docker_engine</code> (PR #712). This field, together with the <code>target_organization</code> is used to specify the full built container image name. The fields use proper fallback for the values set in the component config and package config.</p></li>
+<li><p><code>organization</code>: Remove the <code>organization</code> field from the component config (PR #712). The value is now directly used by the <code>docker_engine</code> as a fallback from the <code>target_organization</code> field.</p></li>
+<li><p><code>ExecutableRunner</code>: Add parameter <code>docker_automount_prefix</code> to allow for a custom prefix for automounted folders (PR #739).</p></li>
+<li><p><code>ExecutableRunner</code>: Make Docker runtime arguments configurable via the <code>---docker_run_args</code> argument (PR #740).</p></li>
+<li><p><code>export json_schema</code>: Add <code>arguments</code> field to the <code>Config</code> schema (PR #755). Only for the non-strict version, the strict version of the viash config has these values merged into <code>argument_groups</code>.</p></li>
+<li><p><code>scala</code>: Update Scala to 2.13.14 (PR #764).</p></li>
+<li><p><code>NextflowEngine</code>: Also parse <code>${id}</code> and <code>${key}</code> aside from <code>$id</code> and <code>$key</code> as identifier placeholders for filenames (PR #756).</p></li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>__merge__</code>: Handle invalid yaml during merging (PR #570). There was not enough error handling during this operation. Switched to the more advanced <code>Convert.textToJson</code> helper method.</p></li>
+<li><p><code>config</code>: Anonymize paths in the config when outputting the config (PR #625).</p></li>
+<li><p><code>schema</code>: Don’t require undocumented fields to set default values and add the <code>links</code> and <code>reference</code> fields to functionality as they were not meant only to be in the project config (PR #636).</p></li>
+<li><p><code>export json_schema</code>: Fix minor inconsistencies and make the strict schema stricter by adapting to what Viash will effectively return (PR #666).</p></li>
+<li><p><code>deprecation &amp; removal warning</code>: Improve the displayed warning where a deprecated or removed field could display a double ‘.’ when it field was located at the root level (PR #671).</p></li>
+<li><p><code>resource path</code>: Don’t finalize the <code>path</code> field of a resource until it’s written as part of building a component (PR #668).</p></li>
+<li><p><code>requirements</code>: Improve the error message when a Python or R requirement uses a single quote in the <code>.script</code> field (PR #675).</p></li>
+<li><p><code>viash test</code>: Fix Docker id between build and test components not being consistent when using a custom Docker registry (PR #679).</p></li>
+<li><p><code>MainNSBuildNativeSuite</code>: Capture the error message when reading the configs so we can capture the expected warning message (PR #688). While almost all tests were already cleanly capturing their expected warning/error messages, this one was still remaining, resulting in warnings being shown in the output.</p></li>
+<li><p><code>runners &amp; engines</code>: When applying a filter on empty runners or engines, the fallback default <code>native engine</code> and <code>executable runner</code> respectively are set before applying the filter (PR #691).</p></li>
+<li><p><code>dependencies</code>: Fix resolving of dependencies of dependencies (PR #701). The stricter build config was now lacking the necessary information to resolve dependencies of dependencies. We added it back as <code>.build_info.dependencies</code> in a more structured, anonymized way.</p></li>
+<li><p><code>dependencies</code>: Fix the <code>name</code> field of repositories possibly being outputted in the build config (PR #703).</p></li>
+<li><p><code>symlinks</code>: Allow following of symlinks when finding configs (PR #704). This improves symlink functionality for <code>viash ns ...</code> and dependency resolving.</p></li>
+<li><p><code>build_info</code>: Correctly set the <code>.build_info.executable</code> to <code>main.nf</code> when building a component with a Nextflow runner (PR #720).</p></li>
+<li><p><code>vsh organization</code>: ViashHub repositories now use <code>vsh</code> as the default organization (PR #718). Instead of having to specify <code>repo: vsh/repo_name</code>, you can now just specify <code>repo: repo_name</code>, which is now also the prefered way.</p></li>
+<li><p><code>testbenches</code>: Add a testbench to verify dependencies in dependencies from scratch (PR #721). The components are built from scratch and the dependencies are resolved from the local repositories.</p></li>
+<li><p><code>docker_engine</code>: Fix a bug in how the namespace separator is handled (PR #722).</p></li>
+<li><p><code>platforms</code>: Re-introduce the <code>--platform</code> and <code>--apply_platform</code> arguments to improve backwards compatibility (PR #725). When the argument is used, a deprecation warning message is printed on stderr. Cannot be used together with <code>--engine</code> or <code>--runner</code> and/or <code>--apply_engine</code> or <code>--apply_runner</code>.</p></li>
+<li><p><code>nextflow_runner</code>: Fix refactoring error in the <code>findStates()</code> helper function (PR #733).</p></li>
+<li><p><code>viash ns exec</code>: Fix “relative fields” outputting absolute paths (PR# 737). Additionally, improve path resolution when using the <code>--src</code> argument.</p></li>
+<li><p><code>viash ns</code>: Fix viash tripping over its toes when it encounters multiple failed configs (PR #761). A dummy config was used as a placeholder, but it always used the name <code>failed</code>, so duplicate config names were generated, which we check for nowadays.</p></li>
+<li><p><code>bashwrapper</code>: Fix an issue where running <code>viash test</code> which builds the test docker container would ignore test failures but subsequential runs would work correctly (PR #754).</p></li>
+<li><p><code>NextflowEngine</code>: Fix escaping of odd filename containing special characters (PR #756). Filenames containing a <code>$</code> character caused Bash to try to interpret it as a variable.</p></li>
+<li><p><code>json schema</code>: Fix repositories types with name incorrectly adding <code>withname</code> as type (PR #768).</p></li>
+<li><p><code>json schema</code>: Change the ‘$schema’ field to ‘http://’ instead of ‘https://’ (PR #768). (Some?) Json validators use this value as a token and not as a URL.</p></li>
+<li><p><code>viash test</code>: Fix an issue where the tests would not copy package config settings to determine the docker image name (PR #767).</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.9.0/</guid>
+  <pubDate>Tue, 03 Sep 2024 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Viash 0.8.6</title>
   <dc:creator>Viash Team</dc:creator>
@@ -322,6 +436,7 @@ font-style: inherit;">|</span></span>
 <h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
 <ul>
 <li><p><code>NextflowPlatform</code>: Throw error when unexpected keys are passed to the <code>.run()</code> method (#512, PR #518).</p></li>
+<li><p><code>Testbenches</code>: Add testbenches for the new <code>dependencies</code> functionality and other small coverage improvements (PR #524).</p></li>
 <li><p><code>NextflowPlatform</code>: Use <code>moduleDir</code> instead of <code>projectDir</code> to determine the resource directory.</p></li>
 <li><p><code>NextflowPlatform</code>: Rename internal VDSL3 variables to be more consistent with regular Viash component variables and avoid naming clashes (PR #553).</p></li>
 </ul>
@@ -2052,111 +2167,6 @@ font-style: inherit;">|</span></span>
   <category>New Release</category>
   <guid>https://viash.io/blog/posts/viash-0.6.2/</guid>
   <pubDate>Tue, 11 Oct 2022 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.6.1</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/blog/posts/viash-0.6.1/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="whats-new" class="level2">
-<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<p>This release contains mostly minor improvements of functionality released in Viash 0.6.0. Most notably:</p>
-<ul>
-<li><p>Support was added for <code>type: long</code> arguments</p></li>
-<li><p><code>meta["n_proc"]</code> has been renamed to <code>meta["cpus"]</code>. <code>meta["cpus"]</code> is now an integer, whereas <code>meta["memory_*"]</code> are now longs.</p></li>
-<li><p><code>viash ns exec</code> is able to recognise <code>{platform}</code> and <code>{namespace}</code> fields.</p></li>
-<li><p>And various bug fixes and improvements to documentation and unit testing.</p></li>
-</ul>
-</section>
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
-<section id="breaking-changes" class="level3">
-<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
-<ul>
-<li><p>Deprecated usage <code>resources_dir</code> variable inside scripts, use <code>meta["resources_dir"]</code> instead (or <code>$meta_resources_dir</code> in Bash, or <code>meta$resources_dir</code> in R).</p></li>
-<li><p>Deprecated <code>meta["n_proc"]</code> in favour for <code>meta["cpus"]</code>.</p></li>
-</ul>
-</section>
-<section id="new-functionality" class="level3">
-<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
-<ul>
-<li><p><code>viash ns exec</code>: Added two more fields:</p>
-<ul>
-<li><code>{platform}</code>: the platform name (if applicable)</li>
-<li><code>{namespace}</code>: the namespace of the component</li>
-</ul></li>
-<li><p><code>LongArgument</code>: Added support for 64-bit integers with <code>type: long</code> as opposed to <code>type: integer</code> which are 32-bit integers.</p></li>
-</ul>
-</section>
-<section id="major-changes" class="level3">
-<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
-<ul>
-<li>Allow passing integers/doubles/booleans to string parameters (#225). Removed the ‘Version’ helper class.</li>
-</ul>
-</section>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li><p><code>meta["cpus"]</code> is now an integer, <code>meta["memory_*"]</code> are now longs (#224).</p></li>
-<li><p><code>DockerPlatform</code>: Only store author names in the authors metadata.</p></li>
-<li><p><code>NextflowPlatform</code>: Only store author names in the authors metadata.</p></li>
-<li><p><code>Argument[_]</code>: Turn <code>multiple_sep</code> from <code>Char</code> into <code>String</code>.</p></li>
-</ul>
-</section>
-<section id="internal-changes" class="level3">
-<h3 class="anchored" data-anchor-id="internal-changes">INTERNAL CHANGES</h3>
-<ul>
-<li><p>All <code>meta[...]</code> variables are now processed similar to <code>Argument[_]</code>s, instead of using custom code to convert object types and detect Docker mounts.</p></li>
-<li><p><code>Escaper</code>: Make more generic Escaper helper class.</p></li>
-</ul>
-</section>
-<section id="documentation" class="level3">
-<h3 class="anchored" data-anchor-id="documentation">DOCUMENTATION</h3>
-<ul>
-<li><p>Hardcoded URLs pointing to viash.io in the documentation annotations were replaced with a new keyword system.</p></li>
-<li><p>Replaced references to “DSL” with “Dynamic Config Modding” in the <code>--help</code> output.</p></li>
-<li><p>Added an example for Ruby based Docker setups.</p></li>
-</ul>
-</section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
-<ul>
-<li><p><code>viash ns</code>: Reverse exit code outputs, was returning 1 when everything was OK and 0 when errors were detected (PR #227).</p></li>
-<li><p><code>viash config inject</code>: Fix processing of arguments when argument groups are defined (#231).</p></li>
-<li><p>Fixed a few typos in the CLI.</p></li>
-<li><p>Fixed the formatting of <code>ns exec</code> documentation.</p></li>
-<li><p><code>VDSL3</code>: Fix stub functionality.</p></li>
-<li><p><code>VDSL3</code>: Fix error during error message.</p></li>
-<li><p><code>viash test</code>: Fix issue where <code>VIASH_TEMP</code> could not be a relative directory when running <code>viash test</code> (#242).</p></li>
-<li><p><code>BashScript</code>, <code>CSharpScript</code>, <code>JavaScriptScript</code>, <code>PythonScript</code>, <code>RScript</code>, <code>ScalaScript</code>: Fix quoting issues of certain characters (#113).</p></li>
-</ul>
-</section>
-<section id="deprecation" class="level3">
-<h3 class="anchored" data-anchor-id="deprecation">DEPRECATION</h3>
-<ul>
-<li><code>NextflowPlatform</code>: Deprecate <code>--param_list_format</code> parameter.</li>
-</ul>
-</section>
-<section id="testing" class="level3">
-<h3 class="anchored" data-anchor-id="testing">TESTING</h3>
-<ul>
-<li><p><code>BashScript</code>, <code>CSharpScript</code>, <code>JavaScriptScript</code>, <code>PythonScript</code>, <code>RScript</code>, <code>ScalaScript</code>: Implement more rigorous testing of which characters are escaped.</p></li>
-<li><p><code>BashWrapper</code>: Escape usage of <code>multiple_sep</code>. This fixes various checks and transformations not working when when <code>multiple_sep</code> is set to <code>";"</code> (#235).</p></li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/blog/posts/viash-0.6.1/</guid>
-  <pubDate>Mon, 03 Oct 2022 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
