@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-ba2a9488542ebe93bd3948b375a1f1ff.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-08d9fbb9557b6de0e371d0b16f6f4611.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -393,13 +393,13 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Exporting workflow (template) =nextflow=&gt; target/nextflow/template/workflow
-Exporting combine_columns (template) =executable=&gt; target/executable/template/combine_columns
+<pre><code>Exporting combine_columns (template) =executable=&gt; target/executable/template/combine_columns
 [notice] Building container 'ghcr.io/viash-io/project_template/template/combine_columns:0.3.0' with Dockerfile
 Exporting combine_columns (template) =nextflow=&gt; target/nextflow/template/combine_columns
 Exporting remove_comments (template) =executable=&gt; target/executable/template/remove_comments
 [notice] Building container 'ghcr.io/viash-io/project_template/template/remove_comments:0.3.0' with Dockerfile
 Exporting remove_comments (template) =nextflow=&gt; target/nextflow/template/remove_comments
+Exporting workflow (template) =nextflow=&gt; target/nextflow/template/workflow
 Exporting take_column (template) =executable=&gt; target/executable/template/take_column
 [notice] Building container 'ghcr.io/viash-io/project_template/template/take_column:0.3.0' with Dockerfile
 Exporting take_column (template) =nextflow=&gt; target/nextflow/template/take_column
@@ -424,14 +424,14 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>           namespace                 name               runner               engine            test_name exit_code duration               result
+<pre><code>The working directory for the namespace tests is /tmp/viash_ns_test12462009289048903287
+           namespace                 name               runner               engine            test_name exit_code duration               result
             template      combine_columns           executable               docker                start                                        
-The working directory for the namespace tests is /tmp/viash_ns_test8271307986417587278
-            template      combine_columns           executable               docker     build_executable         0       11              SUCCESS
+            template      combine_columns           executable               docker     build_executable         0        9              SUCCESS
             template      combine_columns           executable               docker               test.R         0        2              SUCCESS
             template      remove_comments           executable               docker                start                                        
             template      remove_comments           executable               docker     build_executable         0        0              SUCCESS
-            template      remove_comments           executable               docker              test.sh         0        2              SUCCESS
+            template      remove_comments           executable               docker              test.sh         0        1              SUCCESS
             template          take_column           executable               docker                start                                        
             template          take_column           executable               docker     build_executable         0        0              SUCCESS
             template          take_column           executable               docker              test.py         0        2              SUCCESS
@@ -450,161 +450,13 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>- name: "workflow"All 4 configs parsed successfully
-
+<pre><code>- name: "combine_columns"
   namespace: "template"
   version: "0.3.0"
   argument_groups:
   - name: "Arguments"
     arguments:
-    - type: "file"
-      name: "--input"
-      alternatives:
-      - "-i"
-      description: "Input TSV file"
-      example:
-      - "resources_test/file1.tsv"
-      must_exist: true
-      create_parent: true
-      required: true
-      direction: "input"
-      multiple: false
-      multiple_sep: ";"
-    - type: "integer"
-      name: "--column"
-      description: "The column index to extract from the TSV input file"
-      default:
-      - 2
-      required: false
-      direction: "input"
-      multiple: false
-      multiple_sep: ";"
-    - type: "file"
-      name: "--output"
-      alternatives:
-      - "-o"
-      description: "Output TSV file"
-      example:
-      - "output.tsv"
-      must_exist: true
-      create_parent: true
-      required: true
-      direction: "output"
-      multiple: false
-      multiple_sep: ";"
-  resources:
-  - type: "nextflow_script"
-    path: "main.nf"
-    is_executable: true
-    entrypoint: "run_wf"
-  description: "An example pipeline and project template.\n\nMultiple TSV files can\
-    \ be input, each with a 'column' identifier that\nshould be extracted. All extracted\
-    \ columns are then collated again.\n"
-  status: "enabled"
-  dependencies:
-  - name: "template/combine_columns"
-    repository:
-      type: "local"
-  - name: "template/remove_comments"
-    repository:
-      type: "local"
-  - name: "template/take_column"
-    repository:
-      type: "local"
-  license: "GPL-3.0"
-  links:
-    repository: "https://github.com/viash-io/viash_project_template"
-    docker_registry: "ghcr.io"
-  runners:
-  - type: "nextflow"
-    id: "nextflow"
-    directives:
-      tag: "$id"
-    auto:
-      simplifyInput: true
-      simplifyOutput: false
-      transcript: false
-      publish: false
-    config:
-      labels:
-        mem1gb: "memory = 1000000000.B"
-        mem2gb: "memory = 2000000000.B"
-        mem5gb: "memory = 5000000000.B"
-        mem10gb: "memory = 10000000000.B"
-        mem20gb: "memory = 20000000000.B"
-        mem50gb: "memory = 50000000000.B"
-        mem100gb: "memory = 100000000000.B"
-        mem200gb: "memory = 200000000000.B"
-        mem500gb: "memory = 500000000000.B"
-        mem1tb: "memory = 1000000000000.B"
-        mem2tb: "memory = 2000000000000.B"
-        mem5tb: "memory = 5000000000000.B"
-        mem10tb: "memory = 10000000000000.B"
-        mem20tb: "memory = 20000000000000.B"
-        mem50tb: "memory = 50000000000000.B"
-        mem100tb: "memory = 100000000000000.B"
-        mem200tb: "memory = 200000000000000.B"
-        mem500tb: "memory = 500000000000000.B"
-        mem1gib: "memory = 1073741824.B"
-        mem2gib: "memory = 2147483648.B"
-        mem4gib: "memory = 4294967296.B"
-        mem8gib: "memory = 8589934592.B"
-        mem16gib: "memory = 17179869184.B"
-        mem32gib: "memory = 34359738368.B"
-        mem64gib: "memory = 68719476736.B"
-        mem128gib: "memory = 137438953472.B"
-        mem256gib: "memory = 274877906944.B"
-        mem512gib: "memory = 549755813888.B"
-        mem1tib: "memory = 1099511627776.B"
-        mem2tib: "memory = 2199023255552.B"
-        mem4tib: "memory = 4398046511104.B"
-        mem8tib: "memory = 8796093022208.B"
-        mem16tib: "memory = 17592186044416.B"
-        mem32tib: "memory = 35184372088832.B"
-        mem64tib: "memory = 70368744177664.B"
-        mem128tib: "memory = 140737488355328.B"
-        mem256tib: "memory = 281474976710656.B"
-        mem512tib: "memory = 562949953421312.B"
-        cpu1: "cpus = 1"
-        cpu2: "cpus = 2"
-        cpu5: "cpus = 5"
-        cpu10: "cpus = 10"
-        cpu20: "cpus = 20"
-        cpu50: "cpus = 50"
-        cpu100: "cpus = 100"
-        cpu200: "cpus = 200"
-        cpu500: "cpus = 500"
-        cpu1000: "cpus = 1000"
-    debug: false
-    container: "docker"
-  build_info:
-    config: "src/template/workflow/config.vsh.yaml"
-    viash_version: "0.9.0-RC6"
-    git_commit: "74d131952d15d22058d664a3eec7c8dc754bc57e"
-    git_remote: "https://github.com/viash-io/viash_project_template.git"
-    git_tag: "v0.3.0"
-  package_config:
-    name: "project_template"
-    version: "0.3.0"
-    description: "This is a project template for viash projects.\n"
-    viash_version: "0.9.0-RC6"
-    source: "src"
-    target: "target"
-    keywords:
-    - "viash"
-    - "template"
-    license: "GPL-3.0"
-    organization: "viash-io"
-    links:
-      repository: "https://github.com/viash-io/viash_project_template"
-      docker_registry: "ghcr.io"
-      issue_tracker: "https://github.com/viash-io/viash_project_template/issues"
-- name: "combine_columns"
-  namespace: "template"
-  version: "0.3.0"
-  argument_groups:
-  - name: "Arguments"
-    arguments:
+All 4 configs parsed successfully
     - type: "file"
       name: "--input"
       alternatives:
@@ -883,6 +735,154 @@ Output
       repository: "https://github.com/viash-io/viash_project_template"
       docker_registry: "ghcr.io"
       issue_tracker: "https://github.com/viash-io/viash_project_template/issues"
+- name: "workflow"
+  namespace: "template"
+  version: "0.3.0"
+  argument_groups:
+  - name: "Arguments"
+    arguments:
+    - type: "file"
+      name: "--input"
+      alternatives:
+      - "-i"
+      description: "Input TSV file"
+      example:
+      - "resources_test/file1.tsv"
+      must_exist: true
+      create_parent: true
+      required: true
+      direction: "input"
+      multiple: false
+      multiple_sep: ";"
+    - type: "integer"
+      name: "--column"
+      description: "The column index to extract from the TSV input file"
+      default:
+      - 2
+      required: false
+      direction: "input"
+      multiple: false
+      multiple_sep: ";"
+    - type: "file"
+      name: "--output"
+      alternatives:
+      - "-o"
+      description: "Output TSV file"
+      example:
+      - "output.tsv"
+      must_exist: true
+      create_parent: true
+      required: true
+      direction: "output"
+      multiple: false
+      multiple_sep: ";"
+  resources:
+  - type: "nextflow_script"
+    path: "main.nf"
+    is_executable: true
+    entrypoint: "run_wf"
+  description: "An example pipeline and project template.\n\nMultiple TSV files can\
+    \ be input, each with a 'column' identifier that\nshould be extracted. All extracted\
+    \ columns are then collated again.\n"
+  status: "enabled"
+  dependencies:
+  - name: "template/combine_columns"
+    repository:
+      type: "local"
+  - name: "template/remove_comments"
+    repository:
+      type: "local"
+  - name: "template/take_column"
+    repository:
+      type: "local"
+  license: "GPL-3.0"
+  links:
+    repository: "https://github.com/viash-io/viash_project_template"
+    docker_registry: "ghcr.io"
+  runners:
+  - type: "nextflow"
+    id: "nextflow"
+    directives:
+      tag: "$id"
+    auto:
+      simplifyInput: true
+      simplifyOutput: false
+      transcript: false
+      publish: false
+    config:
+      labels:
+        mem1gb: "memory = 1000000000.B"
+        mem2gb: "memory = 2000000000.B"
+        mem5gb: "memory = 5000000000.B"
+        mem10gb: "memory = 10000000000.B"
+        mem20gb: "memory = 20000000000.B"
+        mem50gb: "memory = 50000000000.B"
+        mem100gb: "memory = 100000000000.B"
+        mem200gb: "memory = 200000000000.B"
+        mem500gb: "memory = 500000000000.B"
+        mem1tb: "memory = 1000000000000.B"
+        mem2tb: "memory = 2000000000000.B"
+        mem5tb: "memory = 5000000000000.B"
+        mem10tb: "memory = 10000000000000.B"
+        mem20tb: "memory = 20000000000000.B"
+        mem50tb: "memory = 50000000000000.B"
+        mem100tb: "memory = 100000000000000.B"
+        mem200tb: "memory = 200000000000000.B"
+        mem500tb: "memory = 500000000000000.B"
+        mem1gib: "memory = 1073741824.B"
+        mem2gib: "memory = 2147483648.B"
+        mem4gib: "memory = 4294967296.B"
+        mem8gib: "memory = 8589934592.B"
+        mem16gib: "memory = 17179869184.B"
+        mem32gib: "memory = 34359738368.B"
+        mem64gib: "memory = 68719476736.B"
+        mem128gib: "memory = 137438953472.B"
+        mem256gib: "memory = 274877906944.B"
+        mem512gib: "memory = 549755813888.B"
+        mem1tib: "memory = 1099511627776.B"
+        mem2tib: "memory = 2199023255552.B"
+        mem4tib: "memory = 4398046511104.B"
+        mem8tib: "memory = 8796093022208.B"
+        mem16tib: "memory = 17592186044416.B"
+        mem32tib: "memory = 35184372088832.B"
+        mem64tib: "memory = 70368744177664.B"
+        mem128tib: "memory = 140737488355328.B"
+        mem256tib: "memory = 281474976710656.B"
+        mem512tib: "memory = 562949953421312.B"
+        cpu1: "cpus = 1"
+        cpu2: "cpus = 2"
+        cpu5: "cpus = 5"
+        cpu10: "cpus = 10"
+        cpu20: "cpus = 20"
+        cpu50: "cpus = 50"
+        cpu100: "cpus = 100"
+        cpu200: "cpus = 200"
+        cpu500: "cpus = 500"
+        cpu1000: "cpus = 1000"
+    debug: false
+    container: "docker"
+  build_info:
+    config: "src/template/workflow/config.vsh.yaml"
+    viash_version: "0.9.0-RC6"
+    git_commit: "74d131952d15d22058d664a3eec7c8dc754bc57e"
+    git_remote: "https://github.com/viash-io/viash_project_template.git"
+    git_tag: "v0.3.0"
+  package_config:
+    name: "project_template"
+    version: "0.3.0"
+    description: "This is a project template for viash projects.\n"
+    viash_version: "0.9.0-RC6"
+    source: "src"
+    target: "target"
+    keywords:
+    - "viash"
+    - "template"
+    license: "GPL-3.0"
+    organization: "viash-io"
+    links:
+      repository: "https://github.com/viash-io/viash_project_template"
+      docker_registry: "ghcr.io"
+      issue_tracker: "https://github.com/viash-io/viash_project_template/issues"
 - name: "take_column"
   namespace: "template"
   version: "0.3.0"
@@ -1051,29 +1051,30 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>+ echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/workflow/config.vsh.yaml
-  Exit code: 0
-
-  Output:
-+ echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/combine_columns/config.vsh.yaml
-Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/workflow/config.vsh.yaml
-
+<pre><code>+ echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/combine_columns/config.vsh.yaml
   Exit code: 0
 
   Output:
 + echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/remove_comments/config.vsh.yaml
 Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/combine_columns/config.vsh.yaml
+  Exit code: 0
 
+
+  Output:
+Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/remove_comments/config.vsh.yaml
+
++ echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/workflow/config.vsh.yaml
   Exit code: 0
 
   Output:
 + echo Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/take_column/config.vsh.yaml
-Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/remove_comments/config.vsh.yaml
+Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/workflow/config.vsh.yaml
+
+Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/take_column/config.vsh.yaml
 
   Exit code: 0
 
-  Output:
-Hello /home/runner/work/website/website/guide/_viash_project_template/src/template/take_column/config.vsh.yaml</code></pre>
+  Output:</code></pre>
 </div>
 </div>
 </details>
@@ -1095,19 +1096,19 @@ Output
 </summary>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>           namespace                 name               runner               engine            test_name exit_code duration               result
-The working directory for the namespace tests is /tmp/viash_ns_test3839984700364166446
+<pre><code>The working directory for the namespace tests is /tmp/viash_ns_test1973052600674903393
+           namespace                 name               runner               engine            test_name exit_code duration               result
+            template          take_column           executable               docker                start                                        
             template      combine_columns           executable               docker                start                                        
             template      remove_comments           executable               docker                start                                        
-            template          take_column           executable               docker                start                                        
-            template      remove_comments           executable               docker     build_executable         0        1              SUCCESS
-            template      remove_comments           executable               docker              test.sh         0        2              SUCCESS
-            template          take_column           executable               docker     build_executable         0        1              SUCCESS
-            template          take_column           executable               docker              test.py         0        3              SUCCESS
-            template      combine_columns           executable               docker     build_executable         0        1              SUCCESS
-            template      combine_columns           executable               docker               test.R         1        3                ERROR
+            template      remove_comments           executable               docker     build_executable         0        0              SUCCESS
+            template      remove_comments           executable               docker              test.sh         0        1              SUCCESS
+            template          take_column           executable               docker     build_executable         0        0              SUCCESS
+            template          take_column           executable               docker              test.py         0        2              SUCCESS
+            template      combine_columns           executable               docker     build_executable         0        0              SUCCESS
+            template      combine_columns           executable               docker               test.R         1        2                ERROR
 ====================================================================
-+/tmp/viash_ns_test3839984700364166446/template_combine_columns/test_test/test_executable
++/tmp/viash_ns_test1973052600674903393/template_combine_columns/test_test/test_executable
 Generating test data
 [1] "Running combine_columns\n"
 Checking results
