@@ -208,6 +208,14 @@
       "default" : "Empty"
     },
     {
+      "name" : "scope",
+      "type" : "Either[ScopeEnum,Scope]",
+      "niceType" : "Either ScopeEnum or Scope",
+      "description" : "Defines the scope of the component.\n`test`: only available during testing; components aren't published.\n`private`: only meant for internal use within a workflow or other component.\n`public`: core component or workflow meant for general use.",
+      "since" : "Viash 0.9.1",
+      "default" : "public"
+    },
+    {
       "name" : "info",
       "type" : "Json",
       "niceType" : "Json",
@@ -695,6 +703,7 @@
       "type" : "EnvironmentVariables",
       "niceType" : "EnvironmentVariables",
       "hierarchy" : [
+        "io.viash.helpers.SysEnvCC",
         "io.viash.helpers.SysEnvTrait"
       ],
       "description" : "Viash checks several environment variables during operation."
@@ -1336,6 +1345,29 @@
   [
     {
       "name" : "__this__",
+      "type" : "Scope",
+      "niceType" : "Scope",
+      "hierarchy" : [
+        "io.viash.config.Scope"
+      ],
+      "description" : "Defines the scope of the component.\n`test`: only available during testing; components aren't published.\n`private`: only meant for internal use within a workflow or other component.\n`public`: core component or workflow meant for general use."
+    },
+    {
+      "name" : "image",
+      "type" : "ScopeEnum",
+      "niceType" : "ScopeEnum",
+      "description" : "test: image is only used during testing and is transient\nprivate: image is published in the registry\npublic: image is published in the registry"
+    },
+    {
+      "name" : "target",
+      "type" : "ScopeEnum",
+      "niceType" : "ScopeEnum",
+      "description" : "test: target folder is only used during testing and is transient\nprivate: target folder can be published in target/private or target/dependencies/private\npublic: target is published in target/executable or target/nextflow"
+    }
+  ],
+  [
+    {
+      "name" : "__this__",
       "type" : "Runner",
       "niceType" : "Runner",
       "hierarchy" : [
@@ -1352,6 +1384,24 @@
         "ExecutableRunner",
         "NextflowRunner"
       ]
+    },
+    {
+      "name" : "id",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Id of the runner.",
+      "example" : [
+        {
+          "example" : "id: foo",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "type",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Specifies the type of the runner."
     }
   ],
   [
@@ -1555,6 +1605,24 @@
         "DockerEngine",
         "NativeEngine"
       ]
+    },
+    {
+      "name" : "id",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Id of the engine.",
+      "example" : [
+        {
+          "example" : "id: foo",
+          "format" : "yaml"
+        }
+      ]
+    },
+    {
+      "name" : "type",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Specifies the type of the engine."
     }
   ],
   [
@@ -1734,6 +1802,26 @@
       "default" : "Empty"
     },
     {
+      "name" : "cmd",
+      "type" : "Option[Either[String,List[String]]]",
+      "niceType" : "Option of Either String or List of String",
+      "description" : "Set the default command being executed when running the Docker container.",
+      "example" : [
+        {
+          "example" : "cmd: [\"echo\", \"$HOME\"]",
+          "format" : "yaml",
+          "description" : "Set CMD using the exec format, which is the prefered form."
+        },
+        {
+          "example" : "cmd: \"echo $HOME\"",
+          "format" : "yaml",
+          "description" : "Set CMD using the shell format."
+        }
+      ],
+      "since" : "Viash 0.7.4",
+      "default" : "Empty"
+    },
+    {
       "name" : "id",
       "type" : "String",
       "niceType" : "String",
@@ -1787,26 +1875,6 @@
       "type" : "List[Requirements]",
       "niceType" : "List of Requirements",
       "description" : "A list of requirements for installing the following types of packages:\n\n - @[apt](apt_req)\n - @[apk](apk_req)\n - @[Docker setup instructions](docker_req)\n - @[JavaScript](javascript_req)\n - @[Python](python_req)\n - @[R](r_req)\n - @[Ruby](ruby_req)\n - @[yum](yum_req)\n\nThe order in which these dependencies are specified determines the order in which they will be installed.\n",
-      "default" : "Empty"
-    },
-    {
-      "name" : "cmd",
-      "type" : "Option[Either[String,List[String]]]",
-      "niceType" : "Option of Either String or List of String",
-      "description" : "Set the default command being executed when running the Docker container.",
-      "example" : [
-        {
-          "example" : "cmd: [\"echo\", \"$HOME\"]",
-          "format" : "yaml",
-          "description" : "Set CMD using the exec format, which is the prefered form."
-        },
-        {
-          "example" : "cmd: \"echo $HOME\"",
-          "format" : "yaml",
-          "description" : "Set CMD using the shell format."
-        }
-      ],
-      "since" : "Viash 0.7.4",
       "default" : "Empty"
     },
     {
@@ -1877,10 +1945,16 @@
         "removal" : "0.10.0"
       },
       "subclass" : [
-        "NativePlatform",
         "DockerPlatform",
+        "NativePlatform",
         "NextflowPlatform"
       ]
+    },
+    {
+      "name" : "type",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Specifies the type of the platform."
     }
   ],
   [
@@ -2339,6 +2413,12 @@
         "RubyRequirements",
         "YumRequirements"
       ]
+    },
+    {
+      "name" : "type",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Specifies the type of the requirement specification."
     }
   ],
   [
@@ -2672,6 +2752,19 @@
       "default" : "Empty"
     },
     {
+      "name" : "url",
+      "type" : "OneOrMore[String]",
+      "niceType" : "OneOrMore of String",
+      "description" : "Specifies which packages to install using a generic URI.",
+      "example" : [
+        {
+          "example" : "url: [ https://github.com/some_org/some_pkg/zipball/master ]",
+          "format" : "yaml"
+        }
+      ],
+      "default" : "Empty"
+    },
+    {
       "name" : "pip",
       "type" : "OneOrMore[String]",
       "niceType" : "OneOrMore of String",
@@ -2725,19 +2818,6 @@
       "example" : [
         {
           "example" : "packages: [ numpy ]",
-          "format" : "yaml"
-        }
-      ],
-      "default" : "Empty"
-    },
-    {
-      "name" : "url",
-      "type" : "OneOrMore[String]",
-      "niceType" : "OneOrMore of String",
-      "description" : "Specifies which packages to install using a generic URI.",
-      "example" : [
-        {
-          "example" : "url: [ https://github.com/some_org/some_pkg/zipball/master ]",
           "format" : "yaml"
         }
       ],
@@ -2934,6 +3014,19 @@
       "default" : "Empty"
     },
     {
+      "name" : "warnings_as_errors",
+      "type" : "Boolean",
+      "niceType" : "Boolean",
+      "description" : "Specifies whether to treat warnings as errors. Default: true.",
+      "example" : [
+        {
+          "example" : "warnings_as_errors: true",
+          "format" : "yaml"
+        }
+      ],
+      "default" : "True"
+    },
+    {
       "name" : "svn",
       "type" : "OneOrMore[String]",
       "niceType" : "OneOrMore of String",
@@ -2966,7 +3059,7 @@
       "description" : "Specifies a code block to run as part of the build.",
       "example" : [
         {
-          "example" : "script: |\n  cat(\"Running custom code\n\")\n  install.packages(\"anndata\")",
+          "example" : "script: |\n  cat(\"Running custom code\\n\")\n  install.packages(\"anndata\")",
           "format" : "yaml"
         }
       ],
@@ -3076,14 +3169,20 @@
       ],
       "subclass" : [
         "BooleanArgument",
-        "BooleanTrueArgument",
         "BooleanFalseArgument",
+        "BooleanTrueArgument",
         "DoubleArgument",
         "FileArgument",
         "IntegerArgument",
         "LongArgument",
         "StringArgument"
       ]
+    },
+    {
+      "name" : "type",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Specifies the type of the argument."
     }
   ],
   [
@@ -3736,7 +3835,7 @@
       "name" : "must_exist",
       "type" : "Boolean",
       "niceType" : "Boolean",
-      "description" : "Checks whether the file or folder exists. For input files, this check will happen before the execution of the script, while for output files the check will happen afterwards.",
+      "description" : "Checks whether the file or folder exists. For input files, this check will happen\nbefore the execution of the script, while for output files the check will happen afterwards.",
       "example" : [
         {
           "example" : "- name: --my_file\n  type: file\n  must_exist: true\n",
@@ -4482,6 +4581,40 @@
         "RScript",
         "ScalaScript"
       ]
+    },
+    {
+      "name" : "path",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "The path of the input file. Can be a relative or an absolute path, or a URI. Mutually exclusive with `text`.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "text",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "The content of the resulting file specified as a string. Mutually exclusive with `path`.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "is_executable",
+      "type" : "Option[Boolean]",
+      "niceType" : "Option of Boolean",
+      "description" : "Whether the resulting resource file should be made executable.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "type",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Specifies the type of the resource. The first resource cannot be of type `file`. When the type is not specified, the default type is simply `file`."
+    },
+    {
+      "name" : "dest",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Resulting filename of the resource. From within a script, the file can be accessed at `meta[\"resources_dir\"] + \"/\" + dest`. If unspecified, `dest` will be set to the basename of the `path` parameter.",
+      "default" : "Empty"
     }
   ],
   [
@@ -5682,11 +5815,31 @@
         }
       ],
       "subclass" : [
-        "LocalRepository",
         "GitRepository",
         "GithubRepository",
+        "LocalRepository",
         "ViashhubRepository"
       ]
+    },
+    {
+      "name" : "path",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines a subfolder of the repository to use as base to look for the dependency components.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "tag",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines which version of the dependency component to use. Typically this can be a specific tag, branch or commit hash.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "type",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Defines the repository type. This determines how the repository will be fetched and handled."
     }
   ],
   [
@@ -5932,11 +6085,37 @@
       ],
       "description" : "Specifies a repository where dependency components can be found.",
       "subclass" : [
-        "LocalRepositoryWithName",
         "GitRepositoryWithName",
         "GithubRepositoryWithName",
+        "LocalRepositoryWithName",
         "ViashhubRepositoryWithName"
       ]
+    },
+    {
+      "name" : "name",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "The identifier used to refer to this repository from dependencies."
+    },
+    {
+      "name" : "path",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines a subfolder of the repository to use as base to look for the dependency components.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "tag",
+      "type" : "Option[String]",
+      "niceType" : "Option of String",
+      "description" : "Defines which version of the dependency component to use. Typically this can be a specific tag, branch or commit hash.",
+      "default" : "Empty"
+    },
+    {
+      "name" : "type",
+      "type" : "String",
+      "niceType" : "String",
+      "description" : "Defines the repository type. This determines how the repository will be fetched and handled."
     }
   ],
   [
