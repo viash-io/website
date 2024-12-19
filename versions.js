@@ -63,6 +63,22 @@ function setVersionLinks(json) {
   // Alter the navbar logo link to point to the root
   var navbarElements = document.getElementsByClassName("navbar-brand");
   navbarElements[0].setAttribute("href", "/");
+
+  // Alter the version dropdown to show the displayed version
+  var url = window.location.pathname;
+  var urlParts = url.split("/");
+  var versionPath = "";
+  if (urlParts.length > 3 && urlParts[1] == "versioned") {
+    versionPath = urlParts[2];
+  }
+  for (var i = 0; i < json.versions.length; i++) {
+    var version = json.versions[i];
+    if (version.link == versionPath) {
+      var dropdownElement = document.getElementById("nav-menu-version");
+      dropdownElement.innerHTML = version.name;
+      break;
+    }
+  }
 }
 
 fetch('/versions.json')
