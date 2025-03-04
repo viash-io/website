@@ -646,29 +646,28 @@ Tip
 <div class="cell-output cell-output-stdout">
 <pre><code> N E X T F L O W   ~  version 24.10.4
 
-Launching `target/main.nf` [crazy_kowalevski] DSL2 - revision: 63a1c06062
+Launching `target/main.nf` [admiring_solvay] DSL2 - revision: 1b175ef087
 
 [-        ] exa…essWf:example_bash_process -
-[-        ] exa…sSimpleWf:publishFilesProc -
 
 [-        ] exa…essWf:example_bash_process | 0 of 1
 [-        ] exa…sSimpleWf:publishFilesProc -
 [-        ] exa…SimpleWf:publishStatesProc -
 
-executor &gt;  local (2)
-[fb/49dd28] exa…example_bash_process (run) | 1 of 1 ✔
-[ba/2ea7b9] exa…eWf:publishFilesProc (run) | 0 of 1
+executor &gt;  local (1)
+[1b/f77b51] exa…example_bash_process (run) | 1 of 1 ✔
+[-        ] exa…sSimpleWf:publishFilesProc -
 [-        ] exa…SimpleWf:publishStatesProc -
 
 executor &gt;  local (3)
-[fb/49dd28] exa…example_bash_process (run) | 1 of 1 ✔
-[ba/2ea7b9] exa…eWf:publishFilesProc (run) | 1 of 1 ✔
-[5d/20049b] exa…Wf:publishStatesProc (run) | 1 of 1 ✔
+[1b/f77b51] exa…example_bash_process (run) | 1 of 1 ✔
+[e0/fe7217] exa…eWf:publishFilesProc (run) | 1 of 1 ✔
+[1d/b87888] exa…Wf:publishStatesProc (run) | 1 of 1 ✔
 
 executor &gt;  local (3)
-[fb/49dd28] exa…example_bash_process (run) | 1 of 1 ✔
-[ba/2ea7b9] exa…eWf:publishFilesProc (run) | 1 of 1 ✔
-[5d/20049b] exa…Wf:publishStatesProc (run) | 1 of 1 ✔</code></pre>
+[1b/f77b51] exa…example_bash_process (run) | 1 of 1 ✔
+[e0/fe7217] exa…eWf:publishFilesProc (run) | 1 of 1 ✔
+[1d/b87888] exa…Wf:publishStatesProc (run) | 1 of 1 ✔</code></pre>
 </div>
 </div>
 <p>This results in the following output:</p>
@@ -694,43 +693,44 @@ executor &gt;  local (3)
 </div>
 <p>Next, we create a YAML file <code>param_list.yaml</code> containing an <code>id</code> and an <code>input</code> value for each parameter entry.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample1</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpoaI6DW/create-a-module392424b82c53/bash/sample1.txt</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpjsiGSY/create-a-module39143c2578db/bash/sample1.txt</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample2</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpoaI6DW/create-a-module392424b82c53/bash/sample2.txt</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpjsiGSY/create-a-module39143c2578db/bash/sample2.txt</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample3</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpoaI6DW/create-a-module392424b82c53/bash/sample3.txt</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpjsiGSY/create-a-module39143c2578db/bash/sample3.txt</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> sample4</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpoaI6DW/create-a-module392424b82c53/bash/sample4.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">input</span><span class="kw">:</span><span class="at"> /tmp/RtmpjsiGSY/create-a-module39143c2578db/bash/sample4.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can run the pipeline on the list of parameters using the <code>--param_list</code> parameter.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run target/main.nf <span class="at">--param_list</span> param_list.yaml <span class="at">--publish_dir</span> output2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> N E X T F L O W   ~  version 24.10.4
 
-Launching `target/main.nf` [boring_kare] DSL2 - revision: 63a1c06062
+Launching `target/main.nf` [drunk_leakey] DSL2 - revision: 1b175ef087
 
 [-        ] exa…essWf:example_bash_process -
 [-        ] exa…sSimpleWf:publishFilesProc -
 [-        ] exa…SimpleWf:publishStatesProc -
 
-[-        ] exa…essWf:example_bash_process | 0 of 2
+executor &gt;  local (1)
+[77/ae2630] exa…ple_bash_process (sample1) | 0 of 4
 [-        ] exa…sSimpleWf:publishFilesProc -
 [-        ] exa…SimpleWf:publishStatesProc -
 
 executor &gt;  local (4)
-[c0/bcbd89] exa…ple_bash_process (sample1) | 0 of 4
+[a6/25ee98] exa…ple_bash_process (sample4) | 4 of 4 ✔
 [-        ] exa…sSimpleWf:publishFilesProc -
 [-        ] exa…SimpleWf:publishStatesProc -
 
-executor &gt;  local (11)
-[a4/f9499d] exa…ple_bash_process (sample2) | 4 of 4 ✔
-[1a/808016] exa…publishFilesProc (sample2) | 3 of 4
-[42/7f1e02] exa…ublishStatesProc (sample2) | 0 of 4
+executor &gt;  local (12)
+[a6/25ee98] exa…ple_bash_process (sample4) | 4 of 4 ✔
+[95/8a8a81] exa…publishFilesProc (sample4) | 4 of 4 ✔
+[b7/e10aea] exa…ublishStatesProc (sample1) | 3 of 4
 
 executor &gt;  local (12)
-[a4/f9499d] exa…ple_bash_process (sample2) | 4 of 4 ✔
-[2e/746de6] exa…publishFilesProc (sample3) | 4 of 4 ✔
-[1e/af59b8] exa…ublishStatesProc (sample1) | 4 of 4 ✔</code></pre>
+[a6/25ee98] exa…ple_bash_process (sample4) | 4 of 4 ✔
+[95/8a8a81] exa…publishFilesProc (sample4) | 4 of 4 ✔
+[9c/82b997] exa…ublishStatesProc (sample3) | 4 of 4 ✔</code></pre>
 </div>
 </div>
 <p>This results in the following outputs:</p>
