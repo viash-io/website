@@ -9,8 +9,19 @@ function createVersionLink(version) {
   var span = document.createElement("span");
   span.setAttribute("class", "dropdown-text");
   link.appendChild(span);
-  span.innerHTML = version.name;
+  span.innerHTML = versionName(version);
   return tag;
+}
+
+function versionName(version) {
+  if (version.name) {
+    return version.name;
+  }
+  var name = "Viash " + version.version;
+  if (version.version == "latest") {
+    name += " (latest)";
+  }
+  return name;
 }
 
 function versionClick(version) {
@@ -41,8 +52,6 @@ function versionClick(version) {
   // Otherwise, redirect to the fallback URL
   fetch (newUrl)
     .then((response) => {
-      // console.log("response");
-      // console.log(response);
       if (response.ok) {
         window.location.href = newUrl;
       } else {
@@ -75,7 +84,8 @@ function setVersionLinks(json) {
     var version = json.versions[i];
     if (version.link == versionPath) {
       var dropdownElement = document.getElementById("nav-menu-version");
-      dropdownElement.innerHTML = version.name;
+      var versionName = versionName(version);
+      dropdownElement.innerHTML = versionName;
       break;
     }
   }
