@@ -1,39 +1,47 @@
-function createVersionLink(version) {
+function createVersionLink(version, json) {
   var tag = document.createElement("li");
   var link = document.createElement("a");
   link.setAttribute("class", "dropdown-item");
   link.setAttribute("rel", "");
   link.setAttribute("target", "");
-  link.addEventListener("click", function() { versionClick(version.link) });
+  link.addEventListener("click", function() {
+    versionClick(versionLink(version, json))
+  });
   tag.appendChild(link);
   var span = document.createElement("span");
   span.setAttribute("class", "dropdown-text");
   link.appendChild(span);
-  span.innerHTML = versionName(version);
+  span.innerHTML = versionName(version, json);
   return tag;
 }
 
-function versionName(version) {
+function versionName(version, json) {
   if (version.name) {
     return version.name;
   }
   var name = "Viash " + version.version;
-  if (version.version == "latest") {
+  if (version.version === json["latest"]) {
     name += " (latest)";
   }
   return name;
 }
 
+function versionLink(version, json) {
+  if (version.link) {
+    return version.link;
+  }
+  if (version.version === json["latest"]) {
+    return "";
+  }
+  return version.version;
+}
+
 function versionClick(version) {
-  // console.log("versionClick " + version);
   var url = window.location.pathname;
   var urlParts = url.split("/");
   console.log(urlParts);
-  if (urlParts.length > 2 && urlParts[1] == "versioned") {
-    // console.log("versioned " + url);
+  if (urlParts.length > 2 && urlParts[1] === "versioned") {
     urlParts.splice(1, 2);
-  } else {
-    // console.log("not versioned " + url);
   }
 
   var newUrl;
@@ -66,7 +74,7 @@ function setVersionLinks(json) {
   var list = dropdownElement.nextElementSibling;
   for (var i = 0; i < json.versions.length; i++) {
     var version = json.versions[i];
-    list.appendChild( createVersionLink(version) );
+    list.appendChild( createVersionLink(version, json) );
   }
 
   // Alter the navbar logo link to point to the root
@@ -76,15 +84,13 @@ function setVersionLinks(json) {
   // Alter the version dropdown to show the displayed version
   var url = window.location.pathname;
   var urlParts = url.split("/");
-  var versionPath = "";
-  if (urlParts.length > 3 && urlParts[1] == "versioned") {
-    versionPath = urlParts[2];
-  }
+  const versionPath = urlParts.length > 3 && urlParts[1] === "versioned" ? urlParts[2] : "";
   for (var i = 0; i < json.versions.length; i++) {
-    var version = json.versions[i];
-    if (version.link == versionPath) {
-      var dropdownElement = document.getElementById("nav-menu-version");
-      var versionName = versionName(version);
+    const version = json.versions[i];
+    const versionLink = versionLink(version, json);
+    if (link === versionPath) {
+      const dropdownElement = document.getElementById("nav-menu-version");
+      const versionName = versionName(version, json);
       dropdownElement.innerHTML = versionName;
       break;
     }
