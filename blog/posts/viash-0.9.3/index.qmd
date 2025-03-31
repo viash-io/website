@@ -1,0 +1,22 @@
+---
+title: "Viash 0.9.3"
+subtitle: "Support upcoming version of Nextflow"
+date: "2025-03-31"
+categories: [ New Release ]
+author: Viash Team
+---
+
+## What's new?
+
+The upcoming release of Nextflow introduces a new class for loading scripts and renamed the old class.
+This release supports this change by using reflection to detect the available class.
+
+## Full changelog
+
+### BUG FIXES
+
+* `NextflowRunner`: ScriptParser was renamed to ScriptLoaderV1 in Nextflow 25.02.0-edge (PR #812). This fix uses reflection
+  to detect whether ScriptParser exists -- if not the ScriptLoaderFactory is used instead.
+
+* `NextflowRunner`: Make sure scripts are generated with the right extension (PR #815).
+
