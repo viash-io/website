@@ -26,15 +26,14 @@ This guide assumes you've already installed [Viash](/installation), [Docker](htt
 
 ## Quickstart example project
 
-To get up and running fast, we provide a [template project](https://github.com/viash-io/viash_project_template) for you to use. It contains three components from the same package as well as 2 custom operators from [vsh-pipeline-operators](https://viash-hub.com/data-intuitive/vsh-pipeline-operators), which are combined into a Nextflow pipeline as follows:
+To get up and running fast, we provide a [template project](https://github.com/viash-io/viash_project_template) for you to use. It contains three components from the same package which are combined into a Nextflow pipeline as follows:
 
 ```{mermaid}
 graph TD
-   A(file?.tsv) --> X[vsh_flatten] 
-   X --file1.tsv--> B1[/remove_comments/] --> C1[/take_column/] --> Y
-   X --file2.tsv--> B2[/remove_comments/] --> C2[/take_column/] --> Y
-   Y[vsh_toList] --> D[/combine_columns/]
-   D --> E(output)
+   input1(file1.tsv) --> B1[/remove_comments/] --> C1[/take_column/] --> Y
+   input2(file2.tsv)--> B2[/remove_comments/] --> C2[/take_column/] --> Y
+   Y[combine] --> D[/combine_columns/]
+   D --> output(output.tsv)
 ```
 
 This pipeline takes one or more TSV files as input and stores its output in an output folder.
@@ -85,7 +84,7 @@ tree my_first_pipeline
 
 ## Step 2: Build the Viash components
 
-With Viash you can turn the components in `src/` into Dockerized Nextflow modules by running:
+With Viash you can turn the components in `src/` into (Dockerized) Nextflow modules by running:
 
 ```bash
 viash ns build --setup cachedbuild --parallel
