@@ -420,7 +420,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <p>The data flow of channels (and later processes) can be visualised as shown in <strong>?@fig-dataflow</strong>.</p>
 <section id="a-note-on-nextflow-groovy-syntax" class="level3">
 <h3 class="anchored" data-anchor-id="a-note-on-nextflow-groovy-syntax">A note on Nextflow / Groovy syntax</h3>
-<p>Nextflow is a DSL on top of the Groovy programming language, so you can use whatever Groovy code to manipulate <code>Channel</code> events in however way you like<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>Nextflow is a DSL on top of the Groovy programming language, so you can use whatever Groovy code to manipulate <code>Channel</code> events in however way you like[^well].</p>
 <ul>
 <li><code>[ 1, 2, 3 ]</code>: A list of integers</li>
 <li><code>[ a: 1, b: 2, c: 3 ]</code>: A hash map (dictionary, named list)</li>
@@ -428,7 +428,20 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <li><code>{ it.trim() }</code>: The same anonymous function with the implicit variable <code>it</code></li>
 <li><code>a ? b : c</code>: If <code>a</code> then <code>b</code> else <code>c</code></li>
 </ul>
-<p>Here is a <a href="http://www.cheat-sheets.org/saved-copy/rc015-groovy_online.pdf">cheat sheet</a> on Groovy syntax.</p>
+<p><del>Here is a <a href="http://www.cheat-sheets.org/saved-copy/rc015-groovy_online.pdf">cheat sheet</a> on Groovy syntax.</del></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There is at least one exception with consequences for how VDSL3’s API is defined: function overloading is not available in Nextflow code.</p>
+</div>
+</div>
 </section>
 <section id="running-the-pipeline" class="level3">
 <h3 class="anchored" data-anchor-id="running-the-pipeline">Running the pipeline</h3>
@@ -439,7 +452,7 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <pre><code>
  N E X T F L O W   ~  version 25.04.3
 
-Launching `workflows/200-first_nextflow_pipeline/main.nf` [extravagant_mahavira] DSL2 - revision: af1a33d92d
+Launching `workflows/200-first_nextflow_pipeline/main.nf` [voluminous_meitner] DSL2 - revision: af1a33d92d
 
 a
 b
@@ -452,13 +465,7 @@ d</code></pre>
 </section>
 </section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>Actually, there is at least one exception we’ve bumped into with consequences for how VDSL3’s API is defined: function overloading is not available in Nextflow code.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script type="text/javascript">
 // Anything in this script block will be included on every page
   const scriptTag = document.createElement("script");
