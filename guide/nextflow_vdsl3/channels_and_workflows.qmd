@@ -13,10 +13,10 @@ knitr::opts_chunk$set(
 
 Nextflow DSL2 borrows some elements from event-driven functional programming. As a matter of fact, one could argue that Nextflow's [`Channel`] concept being strictly speaking an example of the [DataFlow Programming Model] can in fact be regarded as an implementation of a (albeit limited) [Functional Reactive Programming] library.
 
-Contents of `guide/nextflow_vdsl3/workflows/200-first_nextflow_pipeline/main.nf`:
+Contents of `main.nf`:
 
 ```{embed, lang="groovy"}
-guide/nextflow_vdsl3/workflows/200-first_nextflow_pipeline/main.nf
+workflows/200-first_nextflow_pipeline/main.nf
 ```
 
 This workflow consists of three steps:
@@ -34,14 +34,14 @@ Quite a lot is going on in these 3 lines of code. Before we dissect this in deta
 Below you can see an illustration of how an empty `channel` can be created and how events can be _put_ on that `channel`. The technical term for _putting_ events on the `channel` is `bind`.
 
 ```{embed, lang="groovy"}
-guide/nextflow_vdsl3/workflows/201-first_nextflow_pipeline_revisited/main.nf
+workflows/201-first_nextflow_pipeline_revisited/main.nf
 ```
 
 This pipeline definition does exactly the same as our previous example and just aims to describe what is happening under the hood. The `Channel.fromList()` used in the first example is an illustration of a [`Channel` factory method](https://www.nextflow.io/docs/latest/channel.html#channel-factory).
 
 The data flow of channels (and later processes) can be visualised as shown in @fig-dataflow.
 
-```{swirly echo=FALSE, label="fig-dataflow", fig.cap="The data flow of `guide/nextflow_vdsl3/workflows/200-first_nextflow_pipeline/main.nf`."}
+```{swirly echo=FALSE, label="fig-dataflow", fig.cap="The data flow of `main.nf`."}
 -a-b-c-d----------|
 a := " a "
 b := "   b"
