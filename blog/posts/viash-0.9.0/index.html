@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -70,14 +70,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../favicon.png" rel="icon" type="image/png">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-dec7a862833b7f814d9fd09d0aaf5920.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-df42552e779b7baf9b2e3f220dc7f88a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -137,7 +138,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../../viash.png" alt="" class="navbar-logo">
+    <img src="../../../viash.png" alt="" class="navbar-logo light-content">
+    <img src="../../../viash.png" alt="" class="navbar-logo dark-content">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -289,8 +291,8 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
 <li><p><code>runners</code> and <code>engines</code>: The usage of <code>platforms</code> is deprecated and instead these are split into <code>runners</code> and <code>engines</code> (PR #510). The <code>platforms</code> field is still supported but will be removed in a future release. In brief, the <code>native platform</code> became a <code>native engine</code> and <code>docker platform</code> became a <code>docker engine</code>. Additionally, the <code>native platform</code> and <code>docker platform</code> became a <code>executable runner</code>, <code>nextflow platform</code> became a <code>nextflow runner</code>. The fields of <code>docker platform</code> is split between <code>docker engine</code> and <code>docker runner</code>: <code>port</code>, <code>workdir</code>, <code>setup_strategy</code>, and <code>run_args</code> (set to <code>docker_run_args</code>) are captured by the <code>runner</code> as they define how the component is run. The other fields are captured by the <code>engine</code> as they define the environment in which the component is run. One exception is <code>chown</code> which is rarely set to false and is now always enabled.</p></li>
 <li><p><code>arguments</code>: Merge arguments into argument_groups during a json decode prepare step (PR #574). The <code>--parse_argument_groups</code> option from <code>ns list</code> and <code>config view</code> is deprecated as it is now always enabled.</p></li>
 <li><p><code>arguments</code>: Change default <code>multiple_sep</code> from <code>:</code> to <code>;</code> to avoid conflicts with paths like <code>s3://foo/bar</code> (PR #645). The previous behaviour of using <code>multiple_sep: ":"</code> can be achieved by adding a config mod to the <code>_viash.yaml</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">config_mods</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  .functionality.argument_groups[true].arguments[.multiple == true].multiple_sep := ":"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">config_mods</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  .functionality.argument_groups[true].arguments[.multiple == true].multiple_sep := ":"</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p><code>functionality</code>: Remove the <code>functionality</code> layer from the config and move all fields to the top layer (PR #649).</p></li>
 <li><p><code>computational requirements</code>: Use 1000-base units instead of 1024-base units for memory (PR #686). Additionally, the memory units <code>kib</code>, <code>mib</code>, <code>gib</code>, <code>tib</code>, and <code>pib</code> are added to support 1024-base definitions.</p></li>
 <li><p><code>NextflowEngine</code>: Swap the order of execution of <code>runIf</code> and <code>filter</code> when calling <code>.run()</code>. This means that <code>runIf</code> is now executed before <code>filter</code> (PR #660).</p></li>
@@ -425,13 +427,14 @@ gtag('config', 'G-GDS2XT0DDG', { 'anonymize_ip': true});
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

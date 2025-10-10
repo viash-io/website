@@ -16,8 +16,45 @@
 <height>38</height>
 <width>144</width>
 </image>
-<generator>quarto-1.7.31</generator>
-<lastBuildDate>Thu, 24 Apr 2025 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.8.25</generator>
+<lastBuildDate>Mon, 06 Oct 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Viash 0.9.5</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.9.5/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>This is a hotfix release to support internal CI usage and testing. There is no functionality change for regular users.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="minor-changes" class="level3">
+<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
+<ul>
+<li><code>Vsh repository</code>: Add support for overriding host resolving (PR #854). This is meant for internal usage and testing and will be replaced in the near future.</li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><code>Dependencies</code>: Fix an issue where deeply nested dependencies are not resolvable if they require a local dependency (PR #838). This solves a build issue, some issues still remain with running components with such dependencies.</li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.9.5/</guid>
+  <pubDate>Mon, 06 Oct 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Viash 0.9.4</title>
   <dc:creator>Viash Team</dc:creator>
@@ -255,7 +292,7 @@
 <li><p><code>runners</code> and <code>engines</code>: The usage of <code>platforms</code> is deprecated and instead these are split into <code>runners</code> and <code>engines</code> (PR #510). The <code>platforms</code> field is still supported but will be removed in a future release. In brief, the <code>native platform</code> became a <code>native engine</code> and <code>docker platform</code> became a <code>docker engine</code>. Additionally, the <code>native platform</code> and <code>docker platform</code> became a <code>executable runner</code>, <code>nextflow platform</code> became a <code>nextflow runner</code>. The fields of <code>docker platform</code> is split between <code>docker engine</code> and <code>docker runner</code>: <code>port</code>, <code>workdir</code>, <code>setup_strategy</code>, and <code>run_args</code> (set to <code>docker_run_args</code>) are captured by the <code>runner</code> as they define how the component is run. The other fields are captured by the <code>engine</code> as they define the environment in which the component is run. One exception is <code>chown</code> which is rarely set to false and is now always enabled.</p></li>
 <li><p><code>arguments</code>: Merge arguments into argument_groups during a json decode prepare step (PR #574). The <code>--parse_argument_groups</code> option from <code>ns list</code> and <code>config view</code> is deprecated as it is now always enabled.</p></li>
 <li><p><code>arguments</code>: Change default <code>multiple_sep</code> from <code>:</code> to <code>;</code> to avoid conflicts with paths like <code>s3://foo/bar</code> (PR #645). The previous behaviour of using <code>multiple_sep: ":"</code> can be achieved by adding a config mod to the <code>_viash.yaml</code>:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">config_mods</span><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -263,7 +300,7 @@ font-weight: bold;
 font-style: inherit;">: </span><span class="ch" style="color: #20794D;
 background-color: null;
 font-style: inherit;">|</span></span>
-<span id="cb1-2">  .functionality.argument_groups[true].arguments[.multiple == true].multiple_sep := ":"</span></code></pre></div></li>
+<span id="cb1-2">  .functionality.argument_groups[true].arguments[.multiple == true].multiple_sep := ":"</span></code></pre></div></div></li>
 <li><p><code>functionality</code>: Remove the <code>functionality</code> layer from the config and move all fields to the top layer (PR #649).</p></li>
 <li><p><code>computational requirements</code>: Use 1000-base units instead of 1024-base units for memory (PR #686). Additionally, the memory units <code>kib</code>, <code>mib</code>, <code>gib</code>, <code>tib</code>, and <code>pib</code> are added to support 1024-base definitions.</p></li>
 <li><p><code>NextflowEngine</code>: Swap the order of execution of <code>runIf</code> and <code>filter</code> when calling <code>.run()</code>. This means that <code>runIf</code> is now executed before <code>filter</code> (PR #660).</p></li>
@@ -595,7 +632,7 @@ font-style: inherit;">|</span></span>
 <h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
 <ul>
 <li><p><code>NextflowPlatform</code>: Changed the default value of <code>auto.simplifyOutput</code> from <code>true</code> to <code>false</code> (#522, PR #518). With <code>simplifyOutput</code> set to <code>true</code>, the resulting Map could be simplified into a <code>File</code> or a <code>List[File]</code> depending on the number of outputs. To replicate the previous behaviour, add the following config mod to <code>_viash.yaml</code>:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">config_mods</span><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -603,7 +640,7 @@ font-weight: bold;
 font-style: inherit;">: </span><span class="ch" style="color: #20794D;
 background-color: null;
 font-style: inherit;">|</span></span>
-<span id="cb1-2">  .platforms[.type == 'nextflow'].auto.simplifyOutput := true</span></code></pre></div></li>
+<span id="cb1-2">  .platforms[.type == 'nextflow'].auto.simplifyOutput := true</span></code></pre></div></div></li>
 <li><p><code>VDSL3Helper.nf</code>: Removed from the Viash jar file (PR #518). Its functions have been moved to <code>WorkflowHelper.nf</code>.</p></li>
 <li><p><code>DataflowHelper.nf</code>: Added deprecation warning to functions from this file (PR #518).</p></li>
 <li><p><code>preprocessInputs()</code> in <code>WorkflowHelper.nf</code>: Added deprecation warning to <code>preprocessInputs()</code> because this function causes a synchronisation event (PR #518).</p></li>
@@ -971,166 +1008,6 @@ font-style: inherit;">|</span></span>
   <category>New Release</category>
   <guid>https://viash.io/blog/posts/viash-0.7.1/</guid>
   <pubDate>Wed, 08 Mar 2023 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.7.0</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/blog/posts/viash-0.7.0/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="whats-new" class="level2">
-<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<ul>
-<li><p>Default namespace separator has been changed from <code>_</code> to <code>/</code>. This means Docker images will be named <code>&lt;Registry&gt;/&lt;Organization&gt;/&lt;Namespace&gt;/&lt;Name&gt;</code> by default. For example, <code>ghcr.io/openpipelines-bio/mapping/cellranger_count</code> instead of <code>ghcr.io/openpipelines-bio/mapping_cellranger_count</code>.</p></li>
-<li><p>Removed deprecated code of unused functionality to simplify code.</p>
-<ul>
-<li>Shorthand notation for specitying input/output arguments</li>
-<li>Shorthand notation for specifying Docker requirements</li>
-<li>Legacy Nextflow platform</li>
-</ul></li>
-<li><p>Improvements in VDSL3 and the Nextflow Workflow Helper to make behaviour more predictable and fixing some bugs in the meantime. Run the following to get access to the updated helpers:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">WF_DIR</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"src/wf_utils"</span></span>
-<span id="cb1-2"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">[[</span> <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">-d</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">$WF_DIR</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">]]</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">||</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mkdir</span> <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">-p</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">$WF_DIR</span></span>
-<span id="cb1-3"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">viash</span> export resource platforms/nextflow/ProfilesHelper.config <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">$WF_DIR</span>/ProfilesHelper.config</span>
-<span id="cb1-4"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">viash</span> export resource platforms/nextflow/WorkflowHelper.nf <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">$WF_DIR</span>/WorkflowHelper.nf</span>
-<span id="cb1-5"><span class="ex" style="color: null;
-background-color: null;
-font-style: inherit;">viash</span> export resource platforms/nextflow/DataflowHelper.nf <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">$WF_DIR</span>/DataflowHelper.nf</span></code></pre></div></li>
-<li><p>Improvements to test benches and several bug fixes.</p></li>
-</ul>
-</section>
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
-<section id="breaking-changes" class="level3">
-<h3 class="anchored" data-anchor-id="breaking-changes">BREAKING CHANGES</h3>
-<ul>
-<li><p>Viash config: Previously deprecated fields are now removed.</p>
-<ul>
-<li><code>functionality.inputs</code>: Use <code>arguments</code> or <code>argument_groups</code> instead.</li>
-<li><code>functionality.outputs</code>: Use <code>arguments</code> or <code>argument_groups</code> instead.</li>
-<li><code>functionality.tests</code>: Use <code>test_resources</code> instead. No functional difference.</li>
-<li><code>functionality.enabled</code>: Use <code>status: enabled</code> instead.</li>
-<li><code>functionality.requirements.n_proc</code>: Use <code>cpus</code> instead.</li>
-<li><code>platforms.DockerPlatform.privileged</code>: Add a <code>--privileged</code> flag in <code>run_args</code> instead.</li>
-<li><code>platforms.DockerPlatform.apk</code>: Use <code>setup: [{ type: apk, packages: ... }]</code> instead.</li>
-<li><code>platforms.DockerPlatform.apt</code>: Use <code>setup: [{ type: apt, packages: ... }]</code> instead.</li>
-<li><code>platforms.DockerPlatform.yum</code>: Use <code>setup: [{ type: yum, packages: ... }]</code> instead.</li>
-<li><code>platforms.DockerPlatform.r</code>: Use <code>setup: [{ type: r, packages: ... }]</code> instead.</li>
-<li><code>platforms.DockerPlatform.python</code>: Use <code>setup: [{ type: python, packages: ... }]</code> instead.</li>
-<li><code>platforms.DockerPlatform.docker</code>: Use <code>setup: [{ type: docker, run: ... }]</code> instead.</li>
-<li><code>platforms.DockerPlatform.docker.setup.resources</code>: Use <code>setup: [{ type: docker, copy: ... }]</code> instead.</li>
-<li><code>platforms.NextflowLegacy</code>: Use the Nextflow VDSL3 platform instead.</li>
-<li><code>functionality.ArgumentGroups</code>: No longer supports strings referring to arguments in the <code>arguments:</code> section. Instead directly put the arguments inside the argument groups.</li>
-</ul></li>
-<li><p><code>viash_install</code>: The bootstrap script has been reworked in line with the project config introduced in 0.6.4:</p>
-<ul>
-<li>The default location for installing the Viash executable is now <code>./viash</code> (was: <code>bin/viash</code>).</li>
-<li>The new <code>viash_install</code> support <code>--output</code> and <code>--tag</code>.</li>
-<li>The various settings that existed in <code>viash_install</code> (organisation, tag, …) are moved to the project config.</li>
-</ul>
-<p>Please note that this new <code>viash_install</code> bootstrap script can be run from the CLI using:</p>
-<pre><code>curl -fsSL dl.viash.io | bash</code></pre>
-<p>The old <code>get.viash.io</code> is still available but points to the version 0.6.7 version of this component and is deprecated.</p></li>
-<li><p><code>WorkflowHelper</code>: <code>paramsToList</code>, <code>paramsToChannel</code> and <code>viashChannel</code> are now deprecated and will be removed in a future release.</p></li>
-<li><p><code>viash (ns) build</code>: Change the default value of the namespace separator in a Docker platform from <code>_</code> to <code>/</code>. Add <code>".platforms[.type == 'docker'].namespace_separator := '_'"</code> to the project config <code>_viash.yaml</code> to revert to the previous behaviour.</p></li>
-</ul>
-</section>
-<section id="major-changes" class="level3">
-<h3 class="anchored" data-anchor-id="major-changes">MAJOR CHANGES</h3>
-<ul>
-<li><code>VDSL3</code>: now uses the newly implemented <code>channelFromParams</code> and <code>preprocessInputs</code> instead of <code>viashChannel</code>.</li>
-</ul>
-</section>
-<section id="new-features" class="level3">
-<h3 class="anchored" data-anchor-id="new-features">NEW FEATURES</h3>
-<ul>
-<li><code>WorkflowHelper</code>: Added <code>preprocessInputs</code> and <code>channelFromParams</code> to replace <code>paramsToList</code>, <code>paramsToChannel</code> and <code>viashChannel</code>. This refactor allows processing parameters that are already in a Channel using <code>preprocessInputs</code>, which is necessary when passing parameters from a workflow to a subworkflow in a Nextflow pipeline.</li>
-</ul>
-</section>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li><p><code>Main</code>: Capture build, setup and push errors and output an exit code.</p></li>
-<li><p><code>File downloading</code>: Add check to pre-emptively catch file errors (e.g.&nbsp;404).</p></li>
-<li><p><code>Scala</code>: Updated to Scala 2.13 and updated several dependencies.</p></li>
-<li><p><code>Main</code>: Improve <code>match</code> completeness in some edge cases and throw exceptions where needed.</p></li>
-<li><p><code>Changelog</code>: Reformat the changelog to a more structured format. For every release, there is now a date, title, and summary. This both improves the changelog itself but can then also be used to postprocess the CHANGELOG programmatically.</p></li>
-<li><p><code>VDSL3</code>: Add a default value for <code>id</code> when running a VDSL3 module as a standalone pipeline.</p></li>
-<li><p><code>TestBenches</code>:</p>
-<ul>
-<li>Verify switching of Viash versions</li>
-<li>Prepare ConfigDeriver by copying base resources to the targetFolder. Use cases so far showed that it’s always required and it simplifies the usage.</li>
-<li>Remove some old &amp; unmaintained IntelliJ Idea <code>editor-fold</code> tags. Given that the testbenches were split up, these were broken but also no longer needed.</li>
-<li>Add 2 testbenches for computational requirements when running <code>viash run</code> or <code>viash test</code>.</li>
-<li>Added tests for different values for the <code>--id</code> and <code>--param_list</code> parameters of VDSL3 modules.</li>
-</ul></li>
-<li><p><code>viash test</code>: Use <code>test</code> as a random tag during testing, instead of <code>test</code> plus a random string.</p></li>
-</ul>
-</section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
-<ul>
-<li><p><code>WorkflowHelper</code>: fixed where passing a relative path as <code>--param_list</code> would cause incorrect resolving of input files.</p></li>
-<li><p><code>Testbenches</code>: Fix GitTest testbench to correctly increment temporary folder naming and dispose them after the test finishes.</p></li>
-<li><p><code>viash xxx url</code>: Fix passing a url to viash as the config file to process. Add a short testbench to test principle functionality.</p></li>
-<li><p><code>Testbenches</code>: Simplify <code>testr</code> container.</p></li>
-<li><p><code>Main</code>: Improve error reporting to the user in some cases where files or folders can’t be found. Depending on the thrown exception, more or less context was given.</p></li>
-<li><p><code>VDSL3</code>: Create parent directory of output files before starting the script.</p></li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/blog/posts/viash-0.7.0/</guid>
-  <pubDate>Tue, 28 Feb 2023 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
