@@ -5,6 +5,7 @@ This is the website repo for [viash.io](https://viash.io).
 ## Requirements
 
 [Quarto](https://quarto.org/docs/get-started/), R 4.2 and Python 3.10.
+We also need the 'tree' util to be present.
 
 ## First setup
 
