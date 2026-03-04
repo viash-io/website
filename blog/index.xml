@@ -16,8 +16,42 @@
 <height>38</height>
 <width>144</width>
 </image>
-<generator>quarto-1.8.25</generator>
-<lastBuildDate>Fri, 10 Oct 2025 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.8.27</generator>
+<lastBuildDate>Tue, 03 Mar 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Viash 0.9.7</title>
+  <dc:creator>Viash Team</dc:creator>
+  <link>https://viash.io/blog/posts/viash-0.9.7/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="whats-new" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
+<p>Fix a few issues with how Viash interacts with Nextflow and fix an issue with dependency resolving.</p>
+</section>
+<section id="full-changelog" class="level2">
+<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
+<ul>
+<li><p><code>NextflowRunner</code>: Fix <code>readCsv</code> failing on S3 paths with Nextflow 25.10.x (PR #864). The <code>BufferedReader.ready()</code> method returns false for S3 streams when no data is pre-buffered, which broke compatibility with AWS SDK v2 used in Nextflow 25.10.x.</p></li>
+<li><p><code>Nextflowrunner</code>: fix publishing of directories when the output file name template contains a trailing slash (PR #867).</p></li>
+<li><p><code>Logging</code>: Reduce log level for fetching repositories from info to debug (PR #871).</p></li>
+<li><p><code>Dependencies</code>: Fix an edge case during dependency resolving (PR #870). Local dependencies of dependencies of local dependencies were resolved incorrectly and resulted in a wrongly resolved destination path.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>New Release</category>
+  <guid>https://viash.io/blog/posts/viash-0.9.7/</guid>
+  <pubDate>Tue, 03 Mar 2026 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Viash 0.9.6</title>
   <dc:creator>Viash Team</dc:creator>
@@ -935,64 +969,6 @@ font-style: inherit;">|</span></span>
   <category>New Release</category>
   <guid>https://viash.io/blog/posts/viash-0.7.3/</guid>
   <pubDate>Wed, 19 Apr 2023 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Viash 0.7.2</title>
-  <dc:creator>Viash Team</dc:creator>
-  <link>https://viash.io/blog/posts/viash-0.7.2/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="whats-new" class="level2">
-<h2 class="anchored" data-anchor-id="whats-new">What’s new?</h2>
-<p>This update adds functionality to resolve paths starting with a slash as relative to the project directory, improves handling of info metadata in the config, and fixes to the operator precedence of config mods.</p>
-</section>
-<section id="full-changelog" class="level2">
-<h2 class="anchored" data-anchor-id="full-changelog">Full changelog</h2>
-<section id="new-functionality" class="level3">
-<h3 class="anchored" data-anchor-id="new-functionality">NEW FUNCTIONALITY</h3>
-<ul>
-<li><p>Resolve resource and merge paths starting with a slash (<code>/</code>) as relative to the project directory (PR #380). To define absolute paths (which is not recommended anyway), prefix the path with the <code>file://</code> protocol. Examples:</p>
-<ul>
-<li><code>/foo</code> is a file or directory called <code>foo</code> in the current project directory.</li>
-<li><code>file:/foo</code> is a file or directory called <code>foo</code> in the system root.</li>
-</ul></li>
-</ul>
-</section>
-<section id="minor-changes" class="level3">
-<h3 class="anchored" data-anchor-id="minor-changes">MINOR CHANGES</h3>
-<ul>
-<li><code>viash config view</code>: Do not modify (e.g.&nbsp;strip empty fields) of the <code>.functionality.info</code> and <code>.functionality.arguments[].info</code> fields (#386).</li>
-</ul>
-</section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">BUG FIXES</h3>
-<ul>
-<li><code>ConfigMods</code>: Fix operator precedence issues with conditions in the config mod parsers (PR #390).</li>
-</ul>
-</section>
-<section id="internal-changes" class="level3">
-<h3 class="anchored" data-anchor-id="internal-changes">INTERNAL CHANGES</h3>
-<ul>
-<li><p>Clean up unused code (PR #380).</p></li>
-<li><p>Move circe encoders/decoders for File and Path from <code>io.viash.functionality.arguments</code> to <code>io.viash.helpers.circe</code> (PR #380).</p></li>
-<li><p>Store the project root directory (that is, the directory of the <code>_viash.yaml</code>) in a ViashProject object (PR #380).</p></li>
-<li><p>Tests: Reworked language tests to be grouped in their own subfolder and split off the bash language test from the general <code>testbash</code> folder (PR #381).</p></li>
-<li><p>Tests: Add additional language tests for <code>viash config inject</code> (PR #381).</p></li>
-<li><p>Tests: Added test for <code>io.viash.helpers.IO</code> (PR #380).</p></li>
-</ul>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>New Release</category>
-  <guid>https://viash.io/blog/posts/viash-0.7.2/</guid>
-  <pubDate>Mon, 17 Apr 2023 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
