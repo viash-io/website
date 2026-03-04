@@ -1,12 +1,12 @@
 #!/bin/bash
 
+source renv/python/virtualenvs/renv-python-3.13/bin/activate
+export PYTHONPATH="$(pwd)/renv/python/virtualenvs/renv-python-3.13/lib/python3.13/site-packages:${PYTHONPATH}"
 
 echo "Creating blog posts"
 viash run _src/automation/generate_version_blog_pages/config.vsh.yaml -- \
   --input ../viash/CHANGELOG.md \
   --output blog/posts
-
-source renv/python/virtualenvs/renv-python-3.10/bin/activate
 
 echo "Removing reference subfolders but leaving top level files in place"
 rm -rf ./reference/*/

@@ -1,0 +1,24 @@
+---
+title: "Viash 0.9.7"
+subtitle: "Bug fix release"
+date: "2026-03-03"
+categories: [ New Release ]
+author: Viash Team
+---
+
+## What's new?
+
+Fix a few issues with how Viash interacts with Nextflow and fix an issue with dependency resolving.
+
+## Full changelog
+
+### BUG FIXES
+
+* `NextflowRunner`: Fix `readCsv` failing on S3 paths with Nextflow 25.10.x (PR #864). The `BufferedReader.ready()` method returns false for S3 streams when no data is pre-buffered, which broke compatibility with AWS SDK v2 used in Nextflow 25.10.x.
+
+* `Nextflowrunner`: fix publishing of directories when the output file name template contains a trailing slash (PR #867).
+
+* `Logging`: Reduce log level for fetching repositories from info to debug (PR #871).
+
+* `Dependencies`: Fix an edge case during dependency resolving (PR #870). Local dependencies of dependencies of local dependencies were resolved incorrectly and resulted in a wrongly resolved destination path.
+
