@@ -87,11 +87,11 @@ function setVersionLinks(json) {
   const versionPath = urlParts.length > 3 && urlParts[1] === "versioned" ? urlParts[2] : "";
   for (var i = 0; i < json.versions.length; i++) {
     const version = json.versions[i];
-    const versionLink = versionLink(version, json);
+    const link = versionLink(version, json);
     if (link === versionPath) {
       const dropdownElement = document.getElementById("nav-menu-version");
-      const versionName = versionName(version, json);
-      dropdownElement.innerHTML = versionName;
+      const name = versionName(version, json);
+      dropdownElement.innerHTML = name;
       break;
     }
   }
