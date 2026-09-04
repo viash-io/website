@@ -1,7 +1,7 @@
 #!/bin/bash
 
-source renv/python/virtualenvs/renv-python-3.13/bin/activate
-export PYTHONPATH="$(pwd)/renv/python/virtualenvs/renv-python-3.13/lib/python3.13/site-packages:${PYTHONPATH}"
+source renv/python/virtualenvs/renv-python-3.14/bin/activate
+export PYTHONPATH="$(pwd)/renv/python/virtualenvs/renv-python-3.14/lib/python3.14/site-packages:${PYTHONPATH}"
 
 echo "Creating blog posts"
 viash run _src/automation/generate_version_blog_pages/config.vsh.yaml -- \
