@@ -4,7 +4,7 @@ This is the website repo for [viash.io](https://viash.io).
 
 ## Requirements
 
-[Quarto](https://quarto.org/docs/get-started/), R 4.2 and Python 3.10.
+[Quarto](https://quarto.org/docs/get-started/), R 4.6 and Python 3.14.
 
 ## First setup
 
@@ -20,7 +20,7 @@ Rscript -e 'renv::restore()'
 ## Local preview
 
 ```sh
-source renv/python/virtualenvs/renv-python-3.10/bin/activate
+source renv/python/virtualenvs/renv-python-3.14/bin/activate
 quarto preview
 ```
 
@@ -35,7 +35,7 @@ renv::use_python()
 ```
 
 ```sh
-source renv/python/virtualenvs/renv-python-3.10/bin/activate
+source renv/python/virtualenvs/renv-python-3.14/bin/activate
 ```
 
 ```r

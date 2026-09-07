@@ -23,7 +23,7 @@ jobs:
       # need to get more space for docker images
       - uses: data-intuitive/reclaim-the-bytes@v2
         
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Replace Docker with podman
         run: |
@@ -37,15 +37,17 @@ jobs:
 
       - uses: r-lib/actions/setup-r@v2
         with:
-          r-version: "4.4"
+          r-version: "4.6"
           use-public-rspm: true
 
-      # - uses: actions/setup-python@v4
-      #   with:
-      #     python-version: "3.10"
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
 
-      - uses: nf-core/setup-nextflow@v2
-      
+      - uses: nf-core/setup-nextflow@v3
+        with:
+          version: "25.10.7"
+
       - uses: viash-io/viash-actions/setup@v6
 
       - name: Install dependencies via renv restore
@@ -60,8 +62,6 @@ jobs:
       - name: Render with Quarto
         shell: bash -l {0}  
         run: |
-          # source renv/python/virtualenvs/renv-python-3.10/bin/activate
-
           # environment variable that enables docker image pruning
           # between different pages to save on disk space
           export PRUNE_IMAGES=true
