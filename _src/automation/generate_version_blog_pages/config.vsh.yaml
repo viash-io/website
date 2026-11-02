@@ -1,14 +1,15 @@
 name: generate_version_blog_pages
 description: |
-  The script takes a changelog.md file and splits it into multiple quarto pages
+  The script takes one or more changelog.md files and splits them into multiple quarto pages
   Some formatting is expected to extract titles, version number, etc.
 arguments:
   - name: "--input"
     type: file
     alternatives: "-i"
     direction: input
-    description: The changelog.md to use as input
+    description: The changelog.md file(s) to use as input, e.g. one file per minor version
     required: true
+    multiple: true
     must_exist: true
   - name: "--output"
     type: file

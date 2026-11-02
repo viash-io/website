@@ -4,8 +4,13 @@ source renv/python/virtualenvs/renv-python-3.14/bin/activate
 export PYTHONPATH="$(pwd)/renv/python/virtualenvs/renv-python-3.14/lib/python3.14/site-packages:${PYTHONPATH}"
 
 echo "Creating blog posts"
+if [ -d ../viash/CHANGELOGS ]; then
+  changelogs=(../viash/CHANGELOGS/CHANGELOG_*.md)
+else
+  changelogs=(../viash/CHANGELOG.md)
+fi
 viash run _src/automation/generate_version_blog_pages/config.vsh.yaml -- \
-  --input ../viash/CHANGELOG.md \
+  --input "$(IFS=';'; echo "${changelogs[*]}")" \
   --output blog/posts
 
 echo "Removing reference subfolders but leaving top level files in place"
