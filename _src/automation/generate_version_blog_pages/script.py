@@ -4,7 +4,7 @@ import jinja2
 
 ## VIASH START
 par = {
-    'input': '../viash/CHANGELOG.md',
+    'input': sorted(str(p) for p in Path('../viash/CHANGELOGS').glob('CHANGELOG_*.md')) or ['../viash/CHANGELOG.md'],
     'output': 'blog/posts'
 }
 meta = {
@@ -84,8 +84,10 @@ def load_log(changelog_path: str):
         buff.append(line)
 
     # end by processing remaining buffer
-    handle_section(buff)
+    if buff:
+        handle_section(buff)
 
 
 if __name__ == "__main__":
-    load_log(par['input'])
+    for changelog in par['input']:
+        load_log(changelog)

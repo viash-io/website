@@ -61,6 +61,10 @@ def generate_page(json_data: list):
 		json_data = patch_repository(json_data)
 		title = title.removesuffix(" With Name")
 
+	if topic.endswith("PackageWithName"):
+		json_data = patch_package(json_data)
+		title = title.removesuffix(" With Name")
+
 	page_data = {"title": title, "data": json_data}
 
 	try:
@@ -124,6 +128,10 @@ def inject_project_config_copying_notes(class_name: str, parameter_name: str, te
 			note = "Any repositories defined under `.repositories` in the @[package config](package_config) will be prepended to the repositories defined in a component's @[configuration](config) of the `.repositories` field."
 		case "PackageConfig.repositories":
 			note = "Any repositories defined under `.repositories` in the project config will be prepended to the list of repositories defined in a component's `.repositories` field."
+		case "Config.packages":
+			note = "Any packages defined under `.packages` in the @[package config](package_config) will be prepended to the packages defined in a component's @[configuration](config) of the `.packages` field."
+		case "PackageConfig.packages":
+			note = "Any packages defined under `.packages` in the project config will be prepended to the list of packages defined in a component's `.packages` field."
 		case "Links.repository" | "Links.docker_registry":
 			note = f"When the `{parameter_name}` field is left empty in a component's `.links` @[configuration](config), the value of `.links.repository` in the @[package config](package_config) will be copied during build."
 
@@ -132,7 +140,7 @@ def inject_project_config_copying_notes(class_name: str, parameter_name: str, te
 
 	return text
 
-def fudge_named_examples(this_info):
+def fudge_named_examples(this_info, parent2):
 	# print(f"this_info before {this_info}")
 
 	if 'example' not in this_info:
@@ -151,7 +159,7 @@ def fudge_named_examples(this_info):
 	examples_new = []
 	for example in examples:
 		ex = example.copy()
-		ex['description'] = "Example with `name` field in case used in `.repositories`"
+		ex['description'] = f"Example with `name` field in case used in `.{parent2}`"
 		examples_new.append(ex)
 
 	this_info['example'] = examples_orig + examples_new
@@ -166,13 +174,33 @@ When defining a repository directly in a dependency under `.dependencies`, the `
 
 	# print(f"json_data before {info}")
 	# duplicate examples for named repositories
-	info = list(map(lambda x: fudge_named_examples(x) if x['name'] == '__this__' else x, info))
+	info = list(map(lambda x: fudge_named_examples(x, 'repositories') if x['name'] == '__this__' else x, info))
 	# add extra text to the name field
 	for field in info:
 		if field['name'] == 'name':
 			field['description'] = descr + "\n\n" + field['description']
 		if field['name'] == 'type' and field['description'] == "Defines the repository type. This determines how the repository will be fetched and handled.":
 			field['description'] = "Defines the repository as a locally present and available repository."
+
+	# print(f"json_data after {info}")
+	return info
+
+def patch_package(info: list) -> list:
+	descr = """:::{.callout-warning}
+When defining packages under `.packages`, the package definition needs a `name` field so it can be refered to from a dependency.
+
+When defining a package directly in a dependency under `.dependencies`, the `name` field must be omitted.
+:::"""
+
+	# print(f"json_data before {info}")
+	# duplicate examples for named packages
+	info = list(map(lambda x: fudge_named_examples(x, 'packages') if x['name'] == '__this__' else x, info))
+	# add extra text to the name field
+	for field in info:
+		if field['name'] == 'name':
+			field['description'] = descr + "\n\n" + field['description']
+		if field['name'] == 'type' and field['description'] == "Defines the package type. This determines how the package will be fetched and handled.":
+			field['description'] = "Defines the package as a locally present and available package."
 
 	# print(f"json_data after {info}")
 	return info
